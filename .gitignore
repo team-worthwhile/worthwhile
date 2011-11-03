@@ -1,0 +1,9 @@
+# tex stuff
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.make
+*.fls

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Sample Action Set"
+            visible="true"
+            id="org.xtext.example.mydsl.plugin.actionSet">
+         <menu
+               label="Sample &amp;Menu"
+               id="sampleMenu">
+            <separator
+                  name="sampleGroup">
+            </separator>
+         </menu>
+         <action
+               label="&amp;Sample Action"
+               icon="icons/sample.gif"
+               class="org.xtext.example.mydsl.plugin.actions.StartInterpreterAction"
+               tooltip="Hello, Eclipse world"
+               menubarPath="sampleMenu/sampleGroup"
+               toolbarPath="sampleGroup"
+               id="org.xtext.example.mydsl.plugin.actions.StartInterpreterAction">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.xtext.example.mydsl.plugin.launching.WorthWhileLaunchConfigurationDelegate"
+            id="org.xtext.example.mydsl.plugin.launching.worthwhile"
+            modes="run,debug"
+            name="WorthWhile Prototype">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.xtext.example.mydsl.plugin.AbstractLaunchConfigurationTabGroup1"
+            id="org.xtext.example.mydsl.plugin.launchConfigurationTabGroup1"
+            type="org.xtext.example.mydsl.plugin.launching.worthwhile">
+      </launchConfigurationTabGroup>
+   </extension>
+
+</plugin>

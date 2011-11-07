@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: WorthWhile Prototype Plugin
+Bundle-SymbolicName: org.xtext.example.mydsl.plugin; singleton:=true
+Bundle-Version: 1.0.0.0
+Require-Bundle: org.eclipse.ui,
+ org.xtext.example.mydsl;bundle-version="1.0.0",
+ org.eclipse.debug.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.debug.core,
+ org.eclipse.debug.core.model

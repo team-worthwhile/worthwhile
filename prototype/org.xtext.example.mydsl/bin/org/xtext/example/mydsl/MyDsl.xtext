@@ -1,0 +1,19 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model:
+	statements+=Statement*;
+	
+Statement:
+	Greeting | WhileStatement;
+
+WhileStatement:
+	'while' expr=Expression '{' statements+=Statement* '}';
+	
+Expression:
+	{Expression}
+	'true';
+	
+Greeting:
+	'Hello' name=ID '!';

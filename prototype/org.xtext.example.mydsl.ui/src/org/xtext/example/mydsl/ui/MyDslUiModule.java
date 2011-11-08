@@ -5,6 +5,9 @@ package org.xtext.example.mydsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
+import de.itemis.xtext.typesystem.ITypesystem;
+import org.xtext.example.mydsl.typesystem.*;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
@@ -12,4 +15,8 @@ public class MyDslUiModule extends org.xtext.example.mydsl.ui.AbstractMyDslUiMod
 	public MyDslUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
+	
+	public Class<? extends ITypesystem> bindITypesystem() {
+	    return ExprTypesystem.class;
+	  }
 }

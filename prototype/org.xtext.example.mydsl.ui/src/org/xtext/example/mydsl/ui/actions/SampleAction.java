@@ -1,11 +1,19 @@
-package org.xtext.example.mydsl.plugin.actions;
+package org.xtext.example.mydsl.ui.actions;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.xtext.example.mydsl.interpreter.*;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.xtext.example.mydsl.interpreter.ExprModelInterpreter;
+import org.xtext.example.mydsl.myDsl.Model;
+import com.google.inject.Inject;
+
+import de.itemis.xtext.typesystem.ITypesystem;
 
 /**
  * Our sample action implements workbench action delegate.
@@ -15,13 +23,16 @@ import org.xtext.example.mydsl.interpreter.*;
  * delegated to it.
  * @see IWorkbenchWindowActionDelegate
  */
-public class StartInterpreterAction implements IWorkbenchWindowActionDelegate {
+public class SampleAction implements IWorkbenchWindowActionDelegate {
 	private IWorkbenchWindow window;
 	/**
 	 * The constructor.
 	 */
-	public StartInterpreterAction() {
+	public SampleAction() {
 	}
+
+	@Inject
+	private ITypesystem ts;
 
 	/**
 	 * The action has been activated. The argument of the
@@ -32,11 +43,26 @@ public class StartInterpreterAction implements IWorkbenchWindowActionDelegate {
 	public void run(IAction action) {
 		// ExprModelInterpreter int = new ExprModelInterpreter();
 		
-		MessageDialog.openInformation(
-			window.getShell(),
-			"WorthWhile Prototype Plugin",
-			"Hello, Eclipse world");
-	}
+		IWorkbenchPart part = window.getPartService().getActivePart();
+		
+		if (part instanceof XtextEditor) {
+			XtextEditor editor = (XtextEditor)part;
+			//ExprModelInterpreter int = new ExprModelInterpreter();
+			editor.getDocument().readOnly(new IUnitOfWork<IStatus, XtextResource>() {
+
+				@Override
+				public IStatus exec(XtextResource state) throws Exception {
+					// TODO Auto-generated method stub
+					@SuppressWarnings("unused")
+					ExprModelInterpreter interpreter = new ExprModelInterpreter();
+					interpreter.runModel((Model)(state.getParseResult().getRootASTElement()), ts);
+
+					return null;
+				}
+				
+				}
+			);};
+		}
 
 	/**
 	 * Selection in the workbench has been changed. We 

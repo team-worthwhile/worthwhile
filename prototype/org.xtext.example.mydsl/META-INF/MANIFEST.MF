@@ -26,11 +26,13 @@ Import-Package: org.apache.log4j,
  org.eclipse.xtext.xtend2.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.xtext.example.mydsl,
- org.xtext.example.mydsl.services,
+ org.xtext.example.mydsl.interpreter,
  org.xtext.example.mydsl.myDsl,
  org.xtext.example.mydsl.myDsl.impl,
  org.xtext.example.mydsl.myDsl.util,
- org.xtext.example.mydsl.serializer,
  org.xtext.example.mydsl.parser.antlr,
  org.xtext.example.mydsl.parser.antlr.internal,
+ org.xtext.example.mydsl.serializer,
+ org.xtext.example.mydsl.services,
+ org.xtext.example.mydsl.typesystem,
  org.xtext.example.mydsl.validation

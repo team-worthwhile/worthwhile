@@ -28,5 +28,20 @@
             modes="run,debug">
       </shortcut>
    </extension>
+   <extension
+         point="org.eclipse.debug.core.breakpoints">
+      <breakpoint
+            class="org.xtext.example.mydsl.plugin.breakpoints.LineBreakpoint"
+            id="org.xtext.example.mydsl.plugin.lineBreakpoint"
+            markerType="org.xtext.example.mydsl.plugin.MyDslBreakpointMarker">
+      </breakpoint>
+   </extension>
+   <extension
+         id="MyDslBreakpointMarker"
+         point="org.eclipse.core.resources.markers">
+         
+         <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
+         
+   </extension>
 
 </plugin>

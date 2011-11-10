@@ -1,0 +1,63 @@
+\section{Zielbestimmung}%
+
+\textbf{TODO:} Bisher nur aus der Pr"asentation: Umformulierungen vornehmen besonders bei den Punkten, die nicht Muss-Kriterien sind.%
+
+\textbf{TODO:} Nachverfolgbarkeit der Anforderungen: Jeder funktionalen Anforderung muss eine Zielbestimmung zuzuordnen sein $\Rightarrow$ evtl. Zielbestimmungen erg"anzen%
+
+\subsection{\siehe Interpreter}%
+
+Erm"oglicht die (schrittweise) Ausf"uhrung eines \siehe Programms und die Inspektion des aktuellen \siehe Programmzustands durch den Benutzer.%
+
+\begin{description}%
+    \item[Wunsch] Benutzer kann den Programmzustand w"ahrend der Ausf"uhrung "andern%
+    \item[Wunsch] Auswertung von benutzerdefinierten \siehe Ausdr"ucken "uber Programmzustand%
+\end{description}%
+
+\subsection{\siehe Run-time checker}%
+
+Erlaubt die Pr"ufung von \siehe Zusicherungen in Programmen eines konkreten Programmdurchlaufs zur Laufzeit.%
+
+\begin{description}%
+    \item [Muss] Auswertung der im Programm eingebetteten (quantorenfreien) \siehe Annotationen; R"uckmeldung im Fehlerfall "uber die grafische Benutzeroberfl"ache%
+    \item [Soll] Auswertung von Formeln mit \siehe Quantoren "uber eingeschr"ankten Bereich%
+    \item [Wunsch] Auswertung von Formeln mit Quantoren mit Hilfe eines \siehe Beweisers (Dabei wird der aktuelle Zustand des Programmes dem Beweiser "ubergeben.)%
+\end{description}%
+
+\subsection{Grafische Benutzeroberfl"ache}%
+
+Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) \siehe Module des Werkzeugs.%
+
+\begin{description}%
+    \item [Muss] Sprache des Benutzeroberfläche: Englisch%
+    \item [Abgrenzung] nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse des Programms durch den Benutzer zutr"aglich sind%
+    \item [Wunsch] Es sollen zur besseren Lesbarkeit \siehe Unicode-Symbole f"ur \siehe logische Operatoren angezeigt werden.%
+    \item [Wunsch] Verwaltung von alternativen \siehe Beweisverpflichtungen (\_axiom; in Funktionen: \_requires, \_ensures)%
+\end{description}%
+
+\subsection{\siehe WHILE-Sprache}%
+
+\begin{description}%
+    \item [Muss] Umfang der WHILE-Sprache wie vorgestellt, zus"atzlich: Arrays%
+    \item [Wunsch] Methodenaufrufe%
+    \item [Abgrenzung] nur $\mathbb{Z}$, Boolean und Arrays als Datentypen. Keine Strings, Gleitkommazahlen, Pointer usw.%
+    \item [Abgrenzung] kein \siehe Heap%
+    \item [Abgrenzung] keine \siehe Nebenl"aufigkeit%
+\end{description}%
+
+\subsection{Annotationssprache}%
+
+\begin{description}%
+    \item [Muss] Spezifikationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%
+    \item [Muss] Syntax und Semantik von Ausdr"ucken werden aus der Programmiersprache "ubernommen (soweit m"oglich).%
+    \item [Muss] Zusicherungen erlauben Aussagen der \siehe Pr"adikatenlogik.%
+    \item [Muss] Grundlegende Annotationen: \_assert, \_assume%
+    \item [Soll] syntactic sugar f"ur \siehe Vor-/Nachbedingungen, \siehe (In)varianten, \siehe globale Annahmen%
+    \item [Wunsch] M"oglichkeit, verschiedene (getrennte) Vor-/Nachbedingungen anzugeben%
+\end{description}%
+
+\subsection{Dokumentation und Beispielsammlung}%
+
+\begin{description}%
+    \item [Muss] Dokumentation f"ur die verwendete Programmier- und Annotationssprache%
+    \item [Muss] Mitgelieferte Sammlung von Beispielprogrammen%
+\end{description}%

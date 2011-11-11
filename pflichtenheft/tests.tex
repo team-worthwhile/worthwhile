@@ -1,0 +1,138 @@
+\section{Globale Testfälle und Testszenarien}
+
+\begin{reqlist}{T}
+	\req{01}{Randfälle korrekter Programme}{
+		\testspec
+		{Korrektes Verhalten des Parsers, Interpreters und Beweisers bei Programmen, die der Sprachspezifikation entsprechen, aber gewisse Randfälle darstellen.}
+		{Die Entwicklungsumgebung ist gestartet, kein Programm ist geladen}
+		{
+			\begin{enumerate}
+				\item Öffnen des Testprogramms:
+					\begin{reqlist}{T}
+						\req{01a}{Leeres Programm}{Das leere Programm, d.h. die Datei enthält keine Anweisungen (aber eventuell Leerzeilen)}
+						\req{01b}{Verschachteltes Programm}{Ein Testprogramm mit verschachtelten Schleifen und If-Abfragen bis zu einer Schachtelungstiefe von 1000. Die Abfragen und Schleifen sind so gestaltet, dass alle Anweisungen erreichbar sind. Das Programm enthält keine Zusicherungen.}
+						\req{01c}{Langes Programm}{Ein Testprogramm ohne If-Abfragen, Schleifen und Zusicherungen, aber mit mehr als 10.000 Anweisungszeilen.}
+					\end{reqlist}
+				\item Ausführen des Programms durch entsprechenden Befehl
+				\item Verifizieren des Programms durch entsprechenden Befehl
+			\end{enumerate}
+		}
+		{
+			\begin{enumerate}
+				\item Der Interpreter wird ohne Fehlermeldung beendet.
+				\item Das Verifizieren des Programms schlägt nicht fehl (entweder wird Erfolg zurückgemeldet oder eine Warnung wegen fehlender Zusicherungen ausgegeben).
+			\end{enumerate}	
+		}
+	}
+	
+	\req{02}{Fehlerhafte Programme}{
+		\testspec
+		{Korrektes Verhalten des Parsers, Interpreters und Beweisers bei Programmen, die nicht der Sprachspezifikation entsprechen}
+		{Die Entwicklungsumgebung ist gestartet, kein Programm ist geladen}
+		{
+			\begin{enumerate}
+				\item Öffnen des Testprogramms:
+					\begin{reqlist}{T}
+						\req{02a}{Falsch geschriebene/nicht existierende Schlüsselwörter}{Es werden in einem korrekten Programm Schlüsselwörter gegen andere Wörter, die keine Schlüsselwörter sind, ausgetauscht.}
+						\req{02b}{Fehlender Leerraum}{Es werden in einem korrekten Programm Leerzeichen gelöscht, sodass das resultierende Programm nicht mehr der Sprachspezifikation entspricht.}
+						\req{02c}{Fehlende/überflüssige Operanden}{Es wird eine binäre mathematische oder logische Operation mit nur einem Operanden oder eine unäre mathematische oder logische Operation mit zwei Operanden aufgerufen.}
+						\req{02d}{Operanden vom falschen Typ}{Es wird eine mathematische oder logische Operation mit Operanden aufgerufen, die nicht dem von der Operation geforderten Typ entsprechen.}
+						\req{02e}{Ungültige Parameter bei Methodenaufruf}{In einem Methodenaufruf werden Parameter übergeben, die in Anzahl und/oder Typ nicht der Methodensignatur entsprechen.}	
+						\req{02f}{Fehlerhafter Methodenaufruf}{Es wird versucht, eine nicht deklarierte Methode aufzurufen.}
+						\req{02g}{Verwenden nicht deklarierter Variablen}{Es wird versucht, eine Variable zu verwenden, die nicht deklariert wurde. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation das Deklarieren der Variablen vor ihrer Verwendung vorschreibt.}}
+						\req{02h}{Unerlaubte Typkonvertierung}{Es wird versucht, einer Variable einen Wert zuzuweisen, der nicht ihrem Typ entspricht. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}
+					\end{reqlist}
+				\item Ausführen des Programms durch entsprechenden Befehl
+				\item Verifizieren des Programms durch entsprechenden Befehl
+			\end{enumerate}
+		}
+		{
+			\begin{enumerate}
+				\item Die fehlerhafte Stelle wird im Editorfenster markiert.
+				\item In der Fehlerliste wird eine Fehlerbeschreibung angezeigt.
+				\item Durch Doppelklick auf den Eintrag in der Fehlerliste springt der Cursor an die fehlerhafte Stelle im Programm
+				\item Beim Versuch, das Programm auszuführen, wird eine (allgemeine oder spezifische) Fehlermeldung ausgegeben.
+				\item Beim Versuch, das Programm zu verifizieren, wird eine (allgemeine oder spezifische) Fehlermeldung ausgegeben.
+			\end{enumerate}	
+		}
+	}
+	
+	\req{03}{Syntaxhervorhebung im Editor}{
+		\testspec{Korrekte Syntaxhervorhebung im Editor}
+		{keine}
+		{\begin{enumerate}
+			\item Es wird ein Programm geladen, das alle definierten Sprachkonstrukte mindestens einmal enthält.
+		\end{enumerate}}
+		{
+		\begin{enumerate}
+			\item Es werden alle in der Sprache definierten Elemente (Schlüsselwörter, Funktions- und Variablennamen, Kommentare, Zahlen) gemäß den Einstellungen in der Entwicklungsumgebung hervorgehoben.
+		\end{enumerate}
+		}
+	}
+	
+	\req{04}{Debuggen eines Programms}{
+		\testspec{Korrektes Verhalten des Interpreters bei Ausführung der Debug-Operationen}
+		{Es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
+		{\begin{enumerate}
+			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Haltepunkte gesetzt.
+			\item Der Interpreter wird über den entsprechenden Befehl im Debug-Modus gestartet.
+			\item Nach Anhalten des Programms am Breakpoint werden mehrmals hintereinander der Einzelschritt-Befehl und der Überspringen-Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Methodenaufrufe befinden.
+			\item Es wird einer der folgenden Schritte ausgeführt (der Testfall muss zweimal durchgeführt werden, damit beide Schritte abgedeckt werden):
+			\begin{enumerate}
+			\item Der Programmablauf wird durch entsprechenden Befehl abgebrochen.
+			\item Der Programmablauf wird durch entsprechenden Befehl fortgesetzt.			
+			\end{enumerate}
+			\item Wie oben, allerdings wird der Interpreter im Ausführungsmodus gestartet.
+		\end{enumerate}}
+		{\begin{enumerate}
+			\item Die Haltepunkte werden im Editor und in der Haltepunktübersicht angezeigt.
+			\item Nach Ausführen des Programms im Debug-Modus hält der Interpreter vor der Zeile, die den ersten Haltepunkt enthält.
+			\item Bei Ausführung des Einzelschritt-Befehls führt der Interpreter den nächsten Befehl aus, wobei er in Methodenaufrufe hineinspringt.
+			\item Bei Ausführung des Überspringen-Befehls führt der Interpreter den nächsten Befehl aus, wobei er nicht in Methodenaufrufe springt.
+			\item Bei Ausführung des Abbruchbefehls wird der Programmablauf sofort abgebrochen.
+			\item Bei Ausführung des Fortsetzen-Befehls führt der Interpreter das Programm bis zum nächsten Haltepunkt bzw. bis zum Programmende aus.
+			\item Nach Ausführen des Programms im Ausführungsmodus ignoriert der Interpreter die Haltepunkte und führt das Programm bis zum Ende aus.
+			\item Bei Ausführung im Debug- und Ausführungsmodus verhält sich das Programm gleich (beispielsweise in Bezug auf Terminierung des Programmablaufs).
+		\end{enumerate}}
+	}
+	
+	\req{05}{Ansprechbarkeit der Benutzeroberfläche}{
+		\testspec{Ansprechbarkeit der Benutzeroberfläche bei Ausführung eines Programms}
+		{Es ist ein Programm geladen, das der Sprachspezifikation entspricht und eine Endlosschleife enthält.}
+		{\begin{enumerate}
+			\item Der Benutzer startet den Interpreter.	
+			\item Während der Interpreter läuft, bricht der Benutzer das Programm durch entsprechenden Befehl ab.
+		\end{enumerate}}
+		{\begin{enumerate}
+			\item Der Interpreter reagiert in weniger als einer Sekunde auf den Befehl und bricht das Programm ab.
+		\end{enumerate}}
+	}
+	
+	\req{06}{Ändern von Variablenwerten während des Programmablaufs}{
+		\testspec{Korrekte Auswirkung der Änderung von Variablenwerten}
+		{Es ist ein Programm geladen; mehrere Haltepunkte sind im Programm gesetzt.}
+		{\begin{enumerate}
+			\item Der Benutzer startet den Interpreter im Debug-Modus.	
+			\item Nach Halt des Interpreters gibt der Benutzer im Fenster zur Ausdrucksauswertung einige Ausdrücke ein, darunter sowohl gültige als auch ungültige (Syntaxfehler, nicht deklarierte Variablen etc.).
+			\item Der Benutzer ändert im Variablenfenster die Werte von Variablen so, dass der Programmablauf dadurch beeinflusst wird (beispielsweise: Schleife wird abgebrochen).
+			\item Der Benutzer setzt die Programmausführung fort.
+		\end{enumerate}}
+		{\begin{enumerate}
+			\item Die Ausdrücke werden korrekt ausgewertet; für nicht auswertbare Ausdrücke wird eine aussagekräftige Fehlermeldung angezeigt.
+			\item Nach Änderung der Variablenwerte werden die Werte der Ausdrücke im Ausdrucksfenster aktualisiert.
+			\item Beim Fortsetzen der Programmausführung werden die neuen Variablenwerte übernommen und das Programm entsprechend ausgeführt.
+		\end{enumerate}}
+	}
+	
+\end{reqlist}
+
+==== Für die GUI ====
+
+  - alle Optionseinstellungen überprüfen
+  - korrekte Speicherung der Optionseinstellungen überprüfen
+
+==== Für das Verbindungsmodul zum Beweiser (statische Analyse) ====
+  - Ein Programm mit allen Annotationen
+  - Verschachtelte Schleifen
+  - Rekursion
+  - Funktionsaufrufe in Annotationen

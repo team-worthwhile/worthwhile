@@ -14,13 +14,13 @@
 						\req{01c}{Langes Programm}{Ein Testprogramm ohne If-Abfragen, Schleifen und Zusicherungen, aber mit mehr als 10.000 Anweisungszeilen.}
 					\end{reqlist}
 				\item Ausführen des Programms durch den entsprechenden Befehl
-				\item Verifizieren des Programms durch den entsprechenden Befehl
+				\item Überprüfen des Programms durch den entsprechenden Befehl
 			\end{enumerate}
 		}
 		{
 			\begin{enumerate}
 				\item Der Interpreter wird ohne Fehlermeldung beendet.
-				\item Das Verifizieren des Programms schlägt nicht fehl (entweder wird Erfolg zurückgemeldet oder eine Warnung wegen fehlender Zusicherungen ausgegeben).
+				\item Das Überprüfen des Programms schlägt nicht fehl (entweder wird Erfolg zurückgemeldet oder eine Warnung wegen fehlender Zusicherungen ausgegeben).
 			\end{enumerate}	
 		}
 	}
@@ -43,7 +43,7 @@
 						\req{02h}{Unerlaubte Typkonvertierung}{Es wird versucht, einer Variable einen Wert zuzuweisen, der nicht ihrem Typ entspricht. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}
 					\end{reqlist}
 				\item Ausführen des Programms durch den entsprechenden Befehl
-				\item Verifizieren des Programms durch den entsprechenden Befehl
+				\item Überprüfen des Programms durch den entsprechenden Befehl
 			\end{enumerate}
 		}
 		{
@@ -52,7 +52,7 @@
 				\item In der Fehlerliste wird eine Fehlerbeschreibung angezeigt.
 				\item Durch Doppelklick auf den Eintrag in der Fehlerliste springt der Cursor an die fehlerhafte Stelle im Programm.
 				\item Beim Versuch, das Programm auszuführen, wird eine (allgemeine oder spezifische) Fehlermeldung ausgegeben.
-				\item Beim Versuch, das Programm zu verifizieren, wird eine (allgemeine oder spezifische) Fehlermeldung ausgegeben.
+				\item Beim Versuch, das Programm zu überprüfen, wird eine (allgemeine oder spezifische) Fehlermeldung ausgegeben.
 			\end{enumerate}	
 		}
 	}
@@ -124,15 +124,45 @@
 		\end{enumerate}}
 	}
 	
+	\req{07}{Korrekte Speicherung der Optionen}{
+		\testspec{Korrektes Speichern und Laden der Optionen in der GUI}
+		{Die GUI ist geöffnet.}
+		{\begin{enumerate}
+			\item Der Benutzer öffnet eine Datei.
+			\item Der Benutzer setzt einen Haltepunkt in der Datei.
+			\item Der Benutzer öffnet den Einstellungsdialog und verändert alle Einstellungen so, dass sie nicht den Standardeinstellungen entsprechen.
+			\item Der Benutzer beendet die GUI und startet sie erneut.
+			\item Der Benutzer öffnet den Einstellungsdialog.
+		\end{enumerate}}
+		{\begin{enumerate}
+			\item Nach dem erneuten Starten der GUI werden die beim Beenden geöffneten Dateien erneut geladen.
+			\item Der gesetzte Haltepunkt ist vorhanden.
+			\item Die Einstellungen im Einstellungsdialog entsprechen den vorher getroffenen Einstellungen, weichen also insbesondere von den Standardeinstellungen ab.
+		\end{enumerate}}
+	}
+	
+	\req{08}{Testen des Überprüfers}{
+		\testspec
+		{Korrektes Funktionieren der Schnittstelle zum Überprüfer}
+		{Die Entwicklungsumgebung ist gestartet und es ist kein Programm geladen.}
+		{
+			\begin{enumerate}
+				\item Öffnen des Testprogramms:
+					\begin{reqlist}{T}
+						\req{08a}{Testprogramm für Annotationen}{Ein Programm, welches je mindestens eine Annotation jedes Annotationstyps enthält.}
+						\req{08b}{Programm mit verschachtelten Schleifen}{Ein Testprogramm mit mehreren ineinander verschachtelten \texttt{while}-Schleifen.}
+						\req{08c}{Rekursives Programm}{Ein Programm, das entweder eine Methode enthält, die sich selbst aufruft, oder mehrere Methoden, die einander zyklisch aufrufen.}
+						\req{08d}{Funktionsaufrufe in Annotationen}{Ein Programm, das eine Annotation enthält, die einen Funktionsaufruf enthält.}
+					\end{reqlist}
+				\item Überprüfen des Programms durch den entsprechenden Befehl
+			\end{enumerate}
+		}
+		{
+			\begin{enumerate}
+				\item Der Überprüfer wird ordnungsgemäß ausgeführt und gibt insbesondere keine Fehlermeldung bezüglich der Programmsyntax zurück.
+				\item Der Überprüfungsvorgang liefert das (für das jeweilige Testprogramm) korrekte Ergebnis zurück.
+			\end{enumerate}	
+		}
+	}
+	
 \end{reqlist}
-
-==== Für die GUI ====
-
-  - alle Optionseinstellungen überprüfen
-  - korrekte Speicherung der Optionseinstellungen überprüfen
-
-==== Für das Verbindungsmodul zum Beweiser (statische Analyse) ====
-  - Ein Programm mit allen Annotationen
-  - Verschachtelte Schleifen
-  - Rekursion
-  - Funktionsaufrufe in Annotationen

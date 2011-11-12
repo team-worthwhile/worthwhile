@@ -10,17 +10,23 @@ Ermöglicht die (schrittweise) Ausführung eines \see Programms und die Inspekti
 
 \begin{description}%
     \item[Wunsch] Benutzer kann den Programmzustand w"ahrend der Ausf"uhrung "andern%
-    \item[Wunsch] Auswertung von benutzerdefinierten \see Ausdr"ucken "uber Programmzustand%
+    \item[Wunsch] Auswertung von benutzerdefinierten \see Ausdr"ucken "uber dem Programmzustand%
 \end{description}%
 
 \subsection{\see Run-time checker}%
 
-Erlaubt die Pr"ufung von \see Zusicherungen in Programmen eines konkreten Programmdurchlaufs zur Laufzeit.%
+Erlaubt die Pr"ufung von \see Zusicherungen in Programmen f"ur einen konkreten Programmdurchlauf, d.h.\ zur Laufzeit.%
 
 \begin{description}%
-    \item [Muss] Auswertung der im Programm eingebetteten (quantorenfreien) \see Annotationen; R"uckmeldung im Fehlerfall "uber die grafische Benutzeroberfl"ache%
+    \item [Muss] Auswertung der im Programm eingebetteten (quantorenfreien) \see Annotationen%
+        \begin{itemize}%
+            \item R"uckmeldung im Fehlerfall "uber die grafische Benutzeroberfl"ache%
+        \end{itemize}%
     \item [Soll] Auswertung von Formeln mit \see Quantoren "uber eingeschr"ankten Bereich%
-    \item [Wunsch] Auswertung von Formeln mit Quantoren mit Hilfe eines \see Beweisers (Dabei wird der aktuelle Zustand des Programmes dem Beweiser "ubergeben.)%
+    \item [Wunsch] Auswertung von Formeln mit Quantoren mit Hilfe eines \see Beweisers%
+        \begin{itemize}%
+            \item Der aktuelle Programmzustand wird dazu dem Beweiser "ubergeben.%
+        \end{itemize}%
 \end{description}%
 
 \subsection{Grafische Benutzeroberfl"ache}%
@@ -31,7 +37,7 @@ Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von 
     \item [Muss] Sprache des Benutzeroberfläche: Englisch%
     \item [Abgrenzung] nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse des Programms durch den Benutzer zutr"aglich sind%
     \item [Wunsch] Es sollen zur besseren Lesbarkeit \see Unicode-Symbole f"ur \see logische Operatoren angezeigt werden.%
-    \item [Wunsch] Verwaltung von alternativen \see Beweisverpflichtungen (\_axiom; in Funktionen: \_requires, \_ensures)%
+    \item [Wunsch] Verwaltung von alternativen \see Beweisverpflichtungen (\textup{\_axiom} sowie speziell f"ur Funktionen \textup{\_requires} und \textup{\_ensures})%
 \end{description}%
 
 \subsection{\see WHILE-Sprache}%
@@ -39,7 +45,7 @@ Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von 
 \begin{description}%
     \item [Muss] Umfang der WHILE-Sprache wie vorgestellt, zus"atzlich: Arrays%
     \item [Wunsch] Methodenaufrufe%
-    \item [Abgrenzung] nur $\mathbb{Z}$, Boolean und Arrays als Datentypen. Keine Strings, Gleitkommazahlen, Pointer usw.%
+    \item [Abgrenzung] nur Ganzzahlen (Integer), Wahrheitswerte (Boolean) und Arrays von Integer bzw.\ Boolean als Datentypen. Keine Strings, Gleitkommazahlen, Pointer usw.%
     \item [Abgrenzung] kein \see Heap%
     \item [Abgrenzung] keine \see Nebenl"aufigkeit%
 \end{description}%
@@ -50,7 +56,7 @@ Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von 
     \item [Muss] Spezifikationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%
     \item [Muss] Syntax und Semantik von Ausdr"ucken werden aus der Programmiersprache "ubernommen (soweit m"oglich).%
     \item [Muss] Zusicherungen erlauben Aussagen der \see Pr"adikatenlogik.%
-    \item [Muss] Grundlegende Annotationen: \_assert, \_assume%
+    \item [Muss] Grundlegende Annotationen: \textup{\_assert} und \textup{\_assume}%
     \item [Soll] syntactic sugar f"ur \see Vor-/Nachbedingungen, \see (In)varianten, \see globale Annahmen%
     \item [Wunsch] M"oglichkeit, verschiedene (getrennte) Vor-/Nachbedingungen anzugeben%
 \end{description}%

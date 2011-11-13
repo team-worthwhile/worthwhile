@@ -33,7 +33,6 @@
 \title{Pflichtenheft zu Worthwhile}
 \parindent 0pt
 
-\usepackage{ae}               % Almost european, virtual T1-Font
 \usepackage{vmargin}          % Adjust margins in a simple way
 \usepackage{fancyhdr}         % Define simple headings
 \usepackage{subfigure}

@@ -4,18 +4,18 @@
 
 \textbf{TODO:} Nachverfolgbarkeit der Anforderungen: Jeder funktionalen Anforderung muss eine Zielbestimmung zuzuordnen sein $\Rightarrow$ evtl. Zielbestimmungen erg"anzen%
 
-\subsection{\see Interpreter}%
+\subsection{Interpreter}%
 
-Ermöglicht die (schrittweise) Ausführung eines \see Programms und die Inspektion des aktuellen \see Programmzustands durch den Benutzer.%
+Der \see Interpreter ermöglicht die (schrittweise) Ausführung eines \see Programms und die Inspektion des aktuellen \see Programmzustands durch den Benutzer.%
 
 \begin{description}%
     \item[Wunsch] Benutzer kann den Programmzustand w"ahrend der Ausf"uhrung "andern%
     \item[Wunsch] Auswertung von benutzerdefinierten \see Ausdr"ucken "uber dem Programmzustand%
 \end{description}%
 
-\subsection{\see Run-time checker}%
+\subsection{Run-time checker}%
 
-Erlaubt die Pr"ufung von \see Zusicherungen in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
+Der \see Run-time checker erlaubt die Pr"ufung von \see Zusicherungen in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
 
 \begin{description}%
     \item [Muss] Auswertung der im Programm eingebetteten (quantorenfreien) \see Annotationen%
@@ -31,7 +31,7 @@ Erlaubt die Pr"ufung von \see Zusicherungen in Programmen f"ur einen konkreten P
 
 \subsection{Grafische Benutzeroberfl"ache}%
 
-Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) \see Module des Werkzeugs.%
+Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) \see Module des Werkzeugs.%
 
 \begin{description}%
     \item [Muss] Sprache des Benutzeroberfläche: Englisch%
@@ -40,7 +40,9 @@ Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von 
     \item [Wunsch] Verwaltung von alternativen \see Beweisverpflichtungen (\texttt{\_axiom} sowie speziell f"ur Funktionen \texttt{\_requires} und \texttt{\_ensures})%
 \end{description}%
 
-\subsection{\see WHILE-Sprache}%
+\subsection{WHILE-Sprache}%
+
+Die vom Worthwhile-Interpreter erkannte Programmiersprache ist eine \see WHILE-Sprache.%
 
 \begin{description}%
     \item [Muss] Umfang der WHILE-Sprache wie vorgestellt, zus"atzlich: Arrays%
@@ -51,6 +53,8 @@ Dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von 
 \end{description}%
 
 \subsection{Annotationssprache}%
+
+In der \see Annotationssprache werden die vom Beweiser gepr"uften WHILE-Programme spezifiziert. Zu einer Spezifikation geh"oren sowohl Zusicherungen als auch Invarianten.%
 
 \begin{description}%
     \item [Muss] Spezifikationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%

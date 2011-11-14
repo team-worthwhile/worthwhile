@@ -1,38 +1,26 @@
 \section{Funktionale Anforderungen}
+
 \subsection{WHILE-Sprache}
+
 Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden definierten WHILE-Sprache genügen.
-
 \begin{reqlist}{FW}
-
     \req{010}{Variablen}{Der Benutzer hat die Möglichkeit, Variablen zu deklarieren und ihnen einen Wert zuzuweisen. Als Variablentypen werden ??-Bit-Ganzzahlen und Wahrheitswerte (Booleans) unterstützt, weiterhin Arrays von Variablen eines Typs.}
-	
 	\req{020}{Verzweigungen}{Die Sprache unterstützt ein Verzweigungskonstrukt (\glqq{}if\grqq{}), mit dem ein Codepfad nur bei erfüllter Bedingung ausgeführt wird.}
-
 	\req{030}{Schleifen}{Die Sprache unterstützt das Sprachkonstrukt der While-Schleife, mit der ein Codepfad ausgeführt wird, solange eine Bedinung erfüllt ist. Die Bedingung wird dabei vor jedem Schleifendurchlauf überprüft.}
-
 	\req{040}{Mathematische und logische Operatoren}{Die Sprache unterstützt die gängigen mathematischen Operatoren $+$ (Addition), $-$ (Subtraktion), $*$ (Multiplikation), $/$ (Ganzzahlige Division), \^{ } (Potenz) und $\%$ (Modulus) sowie die logischen Operatoren $\wedge$ (Und), $\vee$ (Oder) und $\neg$ (Nicht). Es werden außerdem die Vergleichsoperatoren $=$, $\ne$, $<$, $>$, $\leq$ und $\geq$ unterstützt. Zusätzlich werden die Booleschen Konstanten \texttt{true} (wahr) und \texttt{false} (falsch) unterstützt.}
-
 	\req{050}{Funktionen}{Die Sprache unterstützt die Definition und das Aufrufen benutzerdefinierter Funktionen. Eine Funktion kann optional Parameter entgegennehmen und hat einen Rückgabewert eines bestimmten Typs.}
-
 	\req{060}{Kommentare}{Die Sprache unterstützt Kommentare, die dem Benutzer zum Verständnis des Codes dienen und vom Interpreter ignoriert werden.}
-
 \end{reqlist}
 
 \subsection{Annotiationssprache}
 
 \begin{reqlist}{FA}
 	\req{010}{Zusicherungen (Assertions)}{Die Annotationssprache lässt die Angabe von Zusicherungen zu, die vom Laufzeitprüfer oder vom Beweiser überprüft werden sollen.}
-
 	\req{020}{Annahmen}{Die Annotationssprache lässt die Angabe von Annahmen zu, die bei der Überprüfung von Aussagen im selben Gültigkeitsbereich als wahr vorausgesetzt werden.}
-
 	\req{030}{Axiome}{Die Annotationssprache lässt die Angabe von Axiomen (globalen Annahmen) zu, die in allen Gültigkeitsbereichen als wahr vorausgesetzt werden.}
-
 	\req{040}{Invarianten}{Die Sprache lässt die Angabe von Aussagen über Schleifeninvarianten zu.}
-
 	\req{050}{Vor- und Nachbedingungen}{Die Sprache lässt die Angabe von Vor- und Nachbedingungen für Methoden zu. Dabei werden Vorbedingungen als Annahmen behandelt, die in der gesamten Methode gelten, und Nachbedingungen als Zusicherungen, die bei Beendigung der Funktion erfüllt sein müssen.}
-
 	\req{060}{Quantifizierte Boolesche Formeln}{Aussagen und Annahmen können als quantifizierte Boolesche Formeln mit den Quantoren $\forall$ und $\exists$ formuliert werden. Dabei wird die Syntax von unquantifizierten Booleschen Ausdrücken aus der While-Sprache unterstützt und um die Angabe von Quantoren erweitert.}
-
 \end{reqlist}
 
 \subsection{GUI}
@@ -40,9 +28,7 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 \subsubsection{Editor-Funktionen}
 
 Die GUI stellt einen Editor f\"{u}r die spezifizierte \see WHILE-Sprache zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
-
 \begin{reqlist}{FG}
-
     \req{010}{Syntaxhervorhebung}{Im eingegebenen Programmcode werden Elemente wie Schl\"{u}sselw\"{o}rter, Zahlen und Wahrheitswerte farblich hervorgehoben.}
     \req{020}{Fehlerkorrektur bei der Eingabe}{Syntaxfehler werden direkt nach der Eingabe markiert.}
     \req{030}{Codevervollst\"{a}ndigung}{Der Benutzer hat die M\"{o}glichkeit, sich an der Cursorposition eine Liste von verf\"{u}gbaren Syntaxelementen anzeigen zu lassen.}
@@ -52,79 +38,54 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see WHILE-Sprache zur Ver
     \req{070}{Breakpoint-\"{U}bersicht}{Auflistung aller gesetzten Breakpoints in einem separaten Fenster mit der M\"{o}glichkeit, diese dort zu l\"{o}schen.}
     \req{080}{Fehler\"{u}bersicht}{In einem separaten Fenster wird eine \"{U}bersicht aller Syntaxfehler mit einer Fehlerbeschreibung angezeigt. Aus dieser Liste kann der Benutzer den Editor an der Fehlerposition aufrufen.}
     \req{090}{Programmausf"uhrung}{Der Benutzer kann den Interpreter aus der GUI heraus starten, wobei die Wahl zwischen dem Debug- und dem Ausf\"{u}hrungsmodus besteht.}
-
 \end{reqlist}
 
 
 \subsubsection{Debugger-Funktionen}
 
-
 \begin{reqlist}{FG}
-
     \req{100}{Codemarkierung}{Bei pausierter Programmausf"uhrung wird die Codezeile mit der n\"{a}chsten Anweisung markiert.}
     \req{110}{Ausdrucksauswertung}{Der Benutzer kann eine Liste von Ausdr\"{u}cken angeben, die bei jeder Pausierung einer Programmausf"uhrung ausgewertet werden und deren Auswertung in einem Teilbereich der GUI angezeigt werden.}
     \req{120}{Variablenansicht}{In einem separaten Fenster werden bei pausierter Programmausf"uhrung die Werte aller Variablen im aktuellen G\"{u}ltigkeitsbereich angezeigt. Der Benutzer kann die Werte dieser Variablen \"{a}ndern. Nach \"{A}nderung einer Variablen werden zugeh\"{o}rige Fenster (z.~B.\ Ausdrucksauswertung) aktualisiert.}
-
-
 \end{reqlist}
 
 \subsection{Interpreter/Debugger}
 
 Der \see Interpreter kann ein \see Programm in einem von zwei verschiedenen Modi ausf"{u}hren:
-
 \begin{itemize}
-
   \item
      \begin{reqlist}{FI}
         \req{010}{Debug-Modus}{Hier wird das Programm schrittweise ausgef\"{u}hrt und bei Erreichen eines Breakpoints die Programmausf\"{u}hrung pausiert.}
      \end{reqlist}
 
-
   \item
     \begin{reqlist}{FI}
         \req{020}{Ausf\"{u}hrungsmodus}{Hier wird das Programm ausgef\"{u}hrt, ohne dass der Benutzer die M\"{o}glichkeit zur Pausierung der Programmausf"uhrung hat.}
     \end{reqlist}
-
 \end{itemize}
 
 \begin{reqlist}{FI}
-
     \req{030}{Abbruch einer Programmausf"uhrung}{Ein laufendes oder pausiertes Programm kann jederzeit abgebrochen werden, womit der Interpreter in den Zustand vor Ausf\"{u}hrung des Programms zur"uckversetzt wird.}
-
 \end{reqlist}%
 
-Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im
-Debug-Modus unterbrochen, sind folgende Debugger-Funktionen
-verf"ugbar.%
+Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unterbrochen, sind folgende Debugger-Funktionen verf"ugbar.%
 
 \begin{reqlist}{FI}%
-
     \req{040}{Einzelschritt}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Methodenaufruf war, wird im n"achsten Schritt mit der ersten Anweisung der aufgerufenen Methode fortgefahren.}
-
     \req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Methodenaufruf war, wird die aufgerufene Methode entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
-
     \req{060}{Ausdrucksauswertung}{Der Interpreter kann bei pausierter Programmausf"uhrung einen Ausdruck interpretieren und auswerten, der im aktuellen Zustand des Programms g\"{u}ltig ist. Syntaxfehler in einem Ausdruck werden erkannt und ausgegeben.}
-
 \end{reqlist}
 
 \subsection{Dokumentation zur Programmier- und Annotationssprache}%
 
 \begin{reqlist}{FD}
-
-\req{010}{Hilfe}
-{Der Benutzer kann die Dokumentation zur Programmiersprache aus der Entwicklungsumgebung heraus über einen Befehl aufrufen.}
-\req{020}{Kontextsensitive Hilfe }
-{Der Benutzer kann die Dokumentation zu einem gerade ausgewählten Element der Programmier- oder Annotationssprache über einen Befehl aufrufen.}
-\req{030}{Laden von Beispielprogrammen aus der Dokumentation heraus }
-{Der Benutzer kann ein in der Hilfe gezeigtes Beispielprogramm direkt aus dem Hilfefenster in den Editor laden, um es dort auszuführen.}
-
+    \req{010}{Hilfe}{Der Benutzer kann die Dokumentation zur Programmiersprache aus der Entwicklungsumgebung heraus über einen Befehl aufrufen.}
+    \req{020}{Kontextsensitive Hilfe}{Der Benutzer kann die Dokumentation zu einem gerade ausgewählten Element der Programmier- oder Annotationssprache über einen Befehl aufrufen.}
+    \req{030}{Laden von Beispielprogrammen aus der Dokumentation heraus}{Der Benutzer kann ein in der Hilfe gezeigtes Beispielprogramm direkt aus dem Hilfefenster in den Editor laden, um es dort auszuführen.}
 \end{reqlist}
 
 \subsection{Beispielprogramme}%
 
 \begin{reqlist}{FB}
-
-\req{010}{Aufruf der Beispielsammlung }
-{Der Benutzer kann eine Liste der mitgelieferten Beispielprogramme aufrufen. Nach Auswahl eines Beispielprogramms lädt die Entwicklungsumgebung dieses Programm.}
-
+    \req{010}{Aufruf der Beispielsammlung}{Der Benutzer kann eine Liste der mitgelieferten Beispielprogramme aufrufen. Nach Auswahl eines Beispielprogramms lädt die Entwicklungsumgebung dieses Programm.}
 \end{reqlist}

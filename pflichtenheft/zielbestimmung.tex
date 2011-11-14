@@ -45,11 +45,12 @@ Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten 
 Die vom Worthwhile-Interpreter erkannte Programmiersprache ist eine \see WHILE-Sprache.%
 
 \begin{description}%
-    \item [Muss] Umfang der WHILE-Sprache wie vorgestellt, zus"atzlich: Arrays%
-    \item [Wunsch] Methodenaufrufe%
-    \item [Abgrenzung] nur Ganzzahlen (Integer), Wahrheitswerte (Boolean) und Arrays von Integer bzw.\ Boolean als Datentypen. Keine Strings, Gleitkommazahlen, Pointer usw.%
-    \item [Abgrenzung] kein \see Heap%
-    \item [Abgrenzung] keine \see Nebenl"aufigkeit%
+    \item [Muss] Grundlegende Sprachkonstrukte: \texttt{if}-Anweisungen und \texttt{while}-Schleifen%
+    \item [Muss] Variablen mit Ganzzahlen (\texttt{Integer}), Wahrheitswerten (\texttt{Boolean}) sowie Arrays von \texttt{Integer} und \texttt{Boolean} als Datentypen%
+    \item [Wunsch] Definition und Aufruf von eigenen Funktionen%
+    \item [Abgrenzung] Weder Strings, Gleitkommazahlen, Pointer noch eigene Datentypen%
+    \item [Abgrenzung] Kein \see Heap%
+    \item [Abgrenzung] Keine \see Nebenl"aufigkeit%
 \end{description}%
 
 \subsection{Annotationssprache}%
@@ -69,5 +70,5 @@ In der \see Annotationssprache werden die vom Beweiser gepr"uften WHILE-Programm
 
 \begin{description}%
     \item [Muss] Dokumentation f"ur die verwendete Programmier- und Annotationssprache%
-    \item [Muss] Mitgelieferte Sammlung von Beispielprogrammen%
+    \item [Muss] Mitgelieferte Sammlung von kommentierten und spezifizierten Beispielprogrammen zur Verdeutlichung der Funktionalit"at von \textit{Worthwhile}%
 \end{description}%

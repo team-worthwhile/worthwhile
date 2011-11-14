@@ -1,0 +1,62 @@
+<mockup version="1.0" skin="sketch" measuredW="1077" measuredH="625" mockupW="845" mockupH="600">
+  <controls>
+    <control controlID="53" controlTypeID="com.balsamiq.mockups::TitleWindow" x="232" y="25" w="845" h="600" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bottomheight>24</bottomheight>
+        <close>true</close>
+        <dragger>false</dragger>
+        <maximizeRestore>true</maximizeRestore>
+        <minimize>true</minimize>
+        <text>Test.ww%20%u2013%20WorthWhile</text>
+        <topheight>26</topheight>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="54" controlTypeID="com.balsamiq.mockups::MenuBar" x="232" y="46" w="845" h="29" measuredW="246" measuredH="29" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>File%2C%20Edit%2C%20Run%2CView%2C%20Help</text>
+      </controlProperties>
+    </control>
+    <control controlID="56" controlTypeID="com.balsamiq.mockups::TextArea" x="232" y="104" w="646" h="347" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>01%20%20Integer%20i%3B%0A02%20%0A03%20while%20%28i%20%3C%2010%29%20%7B%0A04%09%09j%20%3A%3D%20i%20+%201%3B%0A05%20%20%20%20%20%20%20%20%20%20%20if%20%28i%20%3E%203%29%20%7B%0A06%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20//%20we%20feel%20fancy%20today%2C%20so%20set%20b%20to%20true%21%0A07%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20b%20%3A%3D%20true%3B%0A08%20%20%20%20%20%20%20%20%20%20%7D%09%0A09%20%7D%0A10%0A11%20_assert%28i%20%3E%205%29%0A12%0A13%20function%20doSomeStuff%28Integer%20j%29%20%7B%0A14%09%20%20%20%20%20%20%20_requires%28j%20%3E%200%29%3B%0A15%20%20%20%20%20%20%20%20%20%20%09j%20%3D%20j%5Ej%3B%0A16%20%20%7D</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="59" controlTypeID="com.balsamiq.mockups::TabBar" x="232" y="451" w="646" h="152" measuredW="506" measuredH="100" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <selectedIndex>0</selectedIndex>
+        <text>Parser%20Errors%2C%20Interpreter%20Output%2C%20Verification%20Results%2C%20Breakpoints</text>
+        <value>0</value>
+        <verticalScrollbar>false</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="60" controlTypeID="com.balsamiq.mockups::DataGrid" x="232" y="474" w="646" h="129" measuredW="262" measuredH="85" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Error%20type%2C%20File%20%5E%2C%20Line%0AUndeclared%20variable%3A%20j%2C%20Test.ww%2C%204%0A%22%7D%22%20expected%2C%20Test.ww%2C%209</text>
+        <value>0</value>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="70" controlTypeID="com.balsamiq.mockups::ButtonBar" x="247" y="75" w="-1" h="-1" measuredW="114" measuredH="29" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Run%2C%20Verify</text>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::ButtonBar" x="376" y="74" w="172" h="29" measuredW="417" measuredH="29" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Run%20in%20Debug%20Mode%2C%20Single-Step%2C%20Continue%20to%20Breakpoint</text>
+      </controlProperties>
+    </control>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::TitleWindow" x="878" y="104" w="199" h="499" measuredW="450" measuredH="400" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Help</text>
+      </controlProperties>
+    </control>
+    <control controlID="74" controlTypeID="com.balsamiq.mockups::Paragraph" x="893" y="134" w="169" h="435" measuredW="200" measuredH="140" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Chambray%20vegan%20scenester%20sartorial%20you%20%5Bprobably%20haven%27t%20heard%20of%20them%5D.%20%0A%20%0AShoreditch%20leggings%20brunch%20bicycle%20rights%20freegan%2C%20helvetica%20viral.%20Butcher%20american%20apparel%20pitchfork%20fanny%20pack%208-bit%20put%20a%20bird%20on%20it%20blog%2C%20cred%20trust%20fund%20etsy%20wolf.%20Tofu%20scenester%20synth%2C%20raw%20denim%20chambray%20terry%20richardson%20twee.%20Aesthetic%20farm-to-table%20leggings%2C%20single-origin%20_coffee_%20seitan%20portland%20raw%20denim%20%5Bfreegan%5D%20brunch%20*locavore*%20next%20level%20beard%20tofu%20butcher%20hoodie.%20%0A%20%0ABicycle%20rights%20yr%20banh%20mi%20high%20life%20wes%20anderson%20quinoa%20seitan%20stumptown.%20Yr%20dreamcatcher%20high%20life%2C%20wes%20anderson%20letterpress%20banksy%20%5Bmustache%5D%20artisan%20you%20probably%20haven%27t%20heard%20of%20them%20viral%20pitchfork.</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

@@ -3,10 +3,10 @@
 
 % coordinates for the bg shape on the titlepage
 \newcommand{\diameter}{20}
-\newcommand{\xone}{-15}
-\newcommand{\xtwo}{160}
+\newcommand{\xone}{-30}
+\newcommand{\xtwo}{150}
 \newcommand{\yone}{15}
-\newcommand{\ytwo}{-253}
+\newcommand{\ytwo}{-265}
 
 \begin{titlepage}
 % bg shape
@@ -20,17 +20,17 @@
  arc (270:180:\diameter pt)
 	-- (\xone mm, \yone mm);
 \end{tikzpicture}
-	\begin{textblock}{10}[0,0](4,2.5)
+
+	\begin{textblock}{10}[0,0](1.7,1)
 		\includegraphics[width=.3\textwidth]{images/kit_logo_de_4c_positiv.pdf}
 	\end{textblock}
 	\changefont{phv}{m}{n}	% helvetica	
-	\vspace*{3.5cm}
 	\begin{center}
 		\fontsize{45}{50}\selectfont
-  \textsc{Worthwhile} \\
-  \textsc{Pflichtenheft}
-
-	\vfill
+        \vfill
+        \textsc{Worthwhile} \\
+        \textsc{Pflichtenheft}
+        \vfill
 		\LARGE
 		PSE WS 11/12
   \vfill

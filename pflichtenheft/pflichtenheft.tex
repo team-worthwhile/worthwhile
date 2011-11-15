@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage{fullpage}
 \usepackage{amssymb}
 \usepackage{url}                % URLs
@@ -27,6 +28,10 @@
 
 \author{PSE-Projekt 4 Team 2}
 \title{Pflichtenheft zu Worthwhile}
+
+\setcounter{tocdepth}{1} % make TOC fit on one page
+
+\hyphenation{Worth-while}
 
 \newcommand{\reqtype}{}
 \newenvironment{reqlist}[1]{\begin{description} \renewcommand{\reqtype}{#1}}{\end{description}}

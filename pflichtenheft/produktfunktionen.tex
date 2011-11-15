@@ -29,10 +29,12 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 
 Die GUI stellt einen Editor f\"{u}r die spezifizierte \see WHILE-Sprache zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
 \begin{reqlist}{FG}
+    % TODO FG010 bis FG040 sind Funktionen, die uns nur Eclipse bieten
+    %      kann, FG040 ist vielleicht nicht einmal dann direkh gegeben
     \req{010}{Syntaxhervorhebung}{Im eingegebenen Programmcode werden Elemente wie Schl\"{u}sselw\"{o}rter, Zahlen und Wahrheitswerte farblich hervorgehoben.}
     \req{020}{Fehlerkorrektur bei der Eingabe}{Syntaxfehler werden direkt nach der Eingabe markiert.}
     \req{030}{Codevervollst\"{a}ndigung}{Der Benutzer hat die M\"{o}glichkeit, sich an der Cursorposition eine Liste von verf\"{u}gbaren Syntaxelementen anzeigen zu lassen.}
-    \req{040}{\textbf{TODO:} Quick Fixes}{Liste mit Korrekturvorschl\"{a}gen f\"{u}r Syntaxfehler und -warnungen unter dem Cursor}
+    \req{040}{Quick Fixes}{Liste mit Korrekturvorschl\"{a}gen f\"{u}r Syntaxfehler und -warnungen unter dem Cursor}
     \req{050}{Unicode-Unterst\"{u}tzung}{Die Verwendung von Unicode-Symbolen f"{u}r logische Operatoren und Quantoren wird unterst"{u}tzt. Dabei soll die Eingabe solcher Symbole durch die grafische Benutzeroberfl"ache erleichtert werden.}
     \req{060}{Breakpoints}{Setzen und L\"{o}schen von Breakpoints durch Klick auf die Randspalte im Editor}
     \req{070}{Breakpoint-\"{U}bersicht}{Auflistung aller gesetzten Breakpoints in einem separaten Fenster mit der M\"{o}glichkeit, diese dort zu l\"{o}schen.}

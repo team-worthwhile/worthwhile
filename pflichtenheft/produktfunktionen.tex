@@ -41,10 +41,12 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 Die GUI stellt einen Editor f\"{u}r die spezifizierte \see WHILE-Sprache zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
 
 % TODO Musskriterien
+% TODO Nummerierung
 	\begin{reqlist}{FG}
 		\req{060}{Breakpoints}{Setzen und L\"{o}schen von Breakpoints durch Klick auf die Randspalte im Editor}
 		\req{070}{Breakpoint-\"{U}bersicht}{Auflistung aller gesetzten Breakpoints in einem separaten Fenster mit der M\"{o}glichkeit, diese dort zu l\"{o}schen.}
 		\req{090}{Programmausf"uhrung}{Der Benutzer kann den Interpreter aus der GUI heraus starten, wobei die Wahl zwischen dem Debug- und dem Ausf\"{u}hrungsmodus besteht.}
+		\req{999}{Aufrufen des Beweisers}{Es existiert eine Funktion um das Programm vom Beweiser überprüfen zu lassen.}
 	\end{reqlist}
 % TODO Sollkriterien
 	\begin{reqlist}{FG}
@@ -68,6 +70,14 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see WHILE-Sprache zur Ver
 		\req{120}{Variablenansicht}{In einem separaten Fenster werden bei pausierter Programmausf"uhrung die Werte aller Variablen im aktuellen G\"{u}ltigkeitsbereich angezeigt. Der Benutzer kann die Werte dieser Variablen \"{a}ndern. Nach \"{A}nderung einer Variablen werden zugeh\"{o}rige Fenster (z.~B.\ Ausdrucksauswertung) aktualisiert.}
 	\end{reqlist}
 
+\subsubsection{Beweiser-Funktionen}
+	\begin{reqlist}{FG}
+% TODO Gleicher Punkt wie oben bei Editorfunktionen
+% TODO Nummerierung
+		\req{999}{Aufrufen des Beweisers}{Das Programm des Benutzers lässt sich mithilfe eines Beweisers (Z3) auf Richtigkeit überprüfen.}
+
+		\req{999}{Ergebnisse des Beweisers}{Nach Beendigung des Beweisers gibt das Programm das entsprechende Ergebnis auf dem Bildschirm aus. Die mögliche Angabe eines Gegenbeispiels wird übersetzt und die entsprechende Annotation im Code kenntlich gemacht. Eine mögliche Fehlerstelle wird ebenfalls im Code markiert.}
+	\end{reqlist}
 
 \subsection{Interpreter/Debugger}
 
@@ -105,6 +115,13 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unt
 			\req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Methodenaufruf war, wird die aufgerufene Methode entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
 		\end{reqlist}
 
+\subsection{Beweiser}%
+
+	Der Beweiser wird eingesetzt um das Programm in WHILE-Sprache mithilfe spezieller Formeln (Annahmen, Zusicherungen, etc.) auf Richtigkeit zu überprüfen.
+
+	\begin{reqlist}{FP}
+		\req{010}{Abbruch des Beweisvorgangs}{Der Benutzer soll in der Lage sein einen gestarteten Beweisvorgang abzubrechen.}
+	\end{reqlist}
 
 \subsection{Dokumentation zur Programmier- und Annotationssprache}%
 

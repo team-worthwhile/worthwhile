@@ -4,54 +4,54 @@
 
 \subsection{Interpreter}%
 
-Der \see Interpreter ermöglicht die (schrittweise) Ausführung eines \see Programms und die Inspektion des aktuellen \see Programmzustands durch den Benutzer.%
+Der \see{Interpreter} ermöglicht die (schrittweise) Ausführung eines Programms und die Inspektion des aktuellen Programmzustands durch den Benutzer.%
 
 \begin{description}%
     \item[Wunsch] Der Benutzer kann den Programmzustand w"ahrend der Ausf"uhrung "andern.%
-    \item[Wunsch] Während eines Programmdurchlaufs können benutzerdefinierte \see Ausdr"ucke "uber dem Programmzustand ausgewertet werden.%
+    \item[Wunsch] Während eines Programmdurchlaufs können benutzerdefinierte Ausdr"ucke "uber dem Programmzustand ausgewertet werden.%
 \end{description}%
 
-\subsection{Run-time checker}%
+\subsection{Run-time-checker}%
 
-Der \see Run-time checker erlaubt die Pr"ufung von \see Zusicherungen in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
+Der \see{Run-time-checker} erlaubt die Pr"ufung von \see{Zusicherungen} in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
 
 \begin{description}%
-    \item [Muss] Die im Programm eingebetteten (quantorenfreien) \see Annotationen werden ausgewertet. Im Fehlerfall erfolgt die Rückmeldung "uber die grafische Benutzeroberfl"ache.
-    \item [Soll] Formeln mit \see Quantoren "uber einem eingeschr"ankten Bereich werden ausgewertet.%
-    \item [Wunsch] Unbeschränkte Formeln mit Quantoren werden mit Hilfe eines \see Beweisers ausgewertet. Der aktuelle Programmzustand wird dazu dem Beweiser "ubergeben.
+    \item [Muss] Die im Programm eingebetteten (quantorenfreien) \see{Annotationen} werden ausgewertet. Im Fehlerfall erfolgt die Rückmeldung "uber die grafische Benutzeroberfl"ache.
+    \item [Soll] Formeln mit Quantoren "uber einem eingeschr"ankten Bereich werden ausgewertet.%
+    \item [Wunsch] Unbeschränkte Formeln mit Quantoren werden mit Hilfe eines \see{Beweisers} ausgewertet. Der aktuelle Programmzustand wird dazu dem Beweiser "ubergeben.
 \end{description}%
 
 \subsection{Grafische Benutzeroberfl"ache}%
 
-Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) \see Module des Werkzeugs.%
+Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) Module des Werkzeugs.%
 
 \begin{description}%
     \item [Muss] Die Sprache der Benutzeroberfläche ist Englisch.%
     \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse des Programms durch den Benutzer zutr"aglich sind.%
-    \item [Wunsch] Es werden zur besseren Lesbarkeit \see Unicode-Symbole f"ur \see logische Operatoren und Quantoren angezeigt.%
+    \item [Wunsch] Es werden zur besseren Lesbarkeit Unicode-Symbole f"ur logische Operatoren und Quantoren angezeigt.%
 \end{description}%
 
 \subsection{WHILE-Sprache}%
 
-Die vom \textit{Worthwhile}-Interpreter erkannte Programmiersprache ist eine \see WHILE-Sprache.%
+Die vom \textit{Worthwhile}-Interpreter erkannte Programmiersprache ist eine \see{WHILE-Sprache}.
 
 \begin{description}%
-    \item [Muss] Grundlegende Sprachkonstrukte: \texttt{if}-Anweisungen und \texttt{while}-Schleifen%
+    \item [Muss] Grundlegende Sprachkonstrukte: \texttt{if}-Anweisungen und \texttt{while}-Schleifen
     \item [Muss] Variablen mit Ganzzahlen~(\texttt{Integer}), Wahrheitswerten~(\texttt{Boolean}) sowie Arrays von \texttt{Integer} und \texttt{Boolean} als Datentypen%
     \item [Wunsch] Definition und Aufruf von eigenen Funktionen%
     \item [Abgrenzung] Weder Strings, Gleitkommazahlen, Zeiger noch eigene Datentypen%
-    \item [Abgrenzung] Kein \see Heap%
-    \item [Abgrenzung] Keine \see Nebenl"aufigkeit%
+    \item [Abgrenzung] Kein Heap%
+    \item [Abgrenzung] Keine Nebenl"aufigkeit%
 \end{description}%
 
 \subsection{Annotationssprache}%
 
-In der \see Annotationssprache werden die vom Beweiser gepr"uften WHILE-Programme spezifiziert. Zu einer Spezifikation geh"oren sowohl Zusicherungen als auch Invarianten.%
+In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Programme spezifiziert. Zu einer Spezifikation geh"oren sowohl Zusicherungen als auch Invarianten.%
 
 \begin{description}%
     \item [Muss] Spezifikationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%
     \item [Muss] Syntax und Semantik von Ausdr"ucken werden, soweit m"oglich, aus der Programmiersprache "ubernommen.%
-    \item [Muss] Zusicherungen erlauben Aussagen der \see Pr"adikatenlogik "uber den Zustand einer Programmausf"uhrung.%
+    \item [Muss] Zusicherungen erlauben Aussagen der \see{Prädikatenlogik} "uber den Zustand einer Programmausf"uhrung.%
     \item [Muss] Grundlegende Annotationen: \texttt{\_assert} f"ur Zusicherungen und \texttt{\_assume} f"ur Voraussetzungen%
     \item [Soll] Spezielle Syntax~("`syntactic sugar"'), um die Verst"andlichkeit von Annotationen zu verbessern und ihre Formulierung intuitiver zu gestalten:%
         \begin{itemize}%

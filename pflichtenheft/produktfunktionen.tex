@@ -20,7 +20,7 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 	\req{030}{Axiome}{Die Annotationssprache lässt die Angabe von Axiomen (globalen Annahmen) zu, die in allen Gültigkeitsbereichen als wahr vorausgesetzt werden.}
 	\req{040}{Invarianten}{Die Sprache lässt die Angabe von Aussagen über Schleifeninvarianten zu.}
 	\req{050}{Vor- und Nachbedingungen}{Die Sprache lässt die Angabe von Vor- und Nachbedingungen für Methoden zu. Dabei werden Vorbedingungen als Annahmen behandelt, die in der gesamten Methode gelten, und Nachbedingungen als Zusicherungen, die bei Beendigung der Funktion erfüllt sein müssen.}
-	\req{060}{Quantifizierte Boolesche Formeln}{Aussagen und Annahmen können als quantifizierte Boolesche Formeln mit den Quantoren $\forall$ und $\exists$ formuliert werden. Dabei wird die Syntax von unquantifizierten Booleschen Ausdrücken aus der WHILE-Sprache unterstützt und um die Angabe von Quantoren erweitert.}
+	\req{060}{Prädikatenlogische Formeln}{Aussagen und Annahmen können als prädikatenlogische Formeln erster Stufe mit den Quantoren $\forall$ und $\exists$ formuliert werden. Dabei wird die Syntax von Ausdrücken aus der WHILE-Sprache übernommen und um die Angabe von Quantoren erweitert.}
 \end{reqlist}
 
 \subsection{GUI}
@@ -69,7 +69,7 @@ Der \see Interpreter kann ein \see Programm in einem von zwei verschiedenen Modi
     \req{030}{Abbruch einer Programmausf"uhrung}{Ein laufendes oder pausiertes Programm kann jederzeit abgebrochen werden, womit der Interpreter in den Zustand vor Ausf\"{u}hrung des Programms zur"uckversetzt wird.}
 \end{reqlist}%
 
-Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unterbrochen, sind folgende Debugger-Funktionen verf"ugbar.%
+Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unterbrochen, sind folgende Debugger-Funktionen verf"ugbar:%
 
 \begin{reqlist}{FI}%
     \req{040}{Einzelschritt}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Methodenaufruf war, wird im n"achsten Schritt mit der ersten Anweisung der aufgerufenen Methode fortgefahren.}

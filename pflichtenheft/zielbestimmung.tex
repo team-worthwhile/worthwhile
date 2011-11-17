@@ -29,8 +29,6 @@ Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten 
     \item [Muss] Die Sprache der Benutzeroberfläche ist Englisch.%
     \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse des Programms durch den Benutzer zutr"aglich sind.%
     \item [Wunsch] Es werden zur besseren Lesbarkeit \see Unicode-Symbole f"ur \see logische Operatoren und Quantoren angezeigt.%
-    % TODO GUI?
-    \item [Wunsch] Verwaltung von alternativen \see Beweisverpflichtungen~(\texttt{\_axiom} sowie speziell f"ur Funktionen \texttt{\_requires} und \texttt{\_ensures})%
 \end{description}%
 
 \subsection{WHILE-Sprache}%
@@ -57,9 +55,9 @@ In der \see Annotationssprache werden die vom Beweiser gepr"uften WHILE-Programm
     \item [Muss] Grundlegende Annotationen: \texttt{\_assert} f"ur Zusicherungen und \texttt{\_assume} f"ur Voraussetzungen%
     \item [Soll] Spezielle Syntax~("`syntactic sugar"'), um die Verst"andlichkeit von Annotationen zu verbessern und ihre Formulierung intuitiver zu gestalten:%
         \begin{itemize}%
-            \item \texttt{\_requires} und \texttt{\_ensures} f"ur \see Vor- und Nachbedingungen an Funktionen%
-            \item \texttt{\_invariant} f"ur \see (In-)Varianten an Schleifen%
-            \item \texttt{\_axiom} f"ur \see globale Annahmen in Programmspezifikationen%
+            \item Vor- und Nachbedingungen an Funktionen%
+            \item (In-)Varianten an Schleifen%
+            \item Globale Annahmen in Programmspezifikationen%
         \end{itemize}%
     \item [Wunsch] M"oglichkeit, mehrere Vor- und Nachbedingungen f"ur eine Funktion anzugeben%
 \end{description}%

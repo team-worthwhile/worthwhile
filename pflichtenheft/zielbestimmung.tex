@@ -17,8 +17,8 @@ Der \see{Run-time-checker} erlaubt die Pr"ufung von \see{Zusicherungen} in Progr
 
 \begin{description}%
     \item [Muss] Die im Programm eingebetteten (quantorenfreien) \see{Annotationen} werden ausgewertet. Im Fehlerfall erfolgt die Rückmeldung "uber die grafische Benutzeroberfl"ache.
-    \item [Soll] Formeln mit Quantoren "uber einem eingeschr"ankten Bereich werden ausgewertet.%
-    \item [Wunsch] Unbeschränkte Formeln mit Quantoren werden mit Hilfe eines \see{Beweisers} ausgewertet. Der aktuelle Programmzustand wird dazu dem Beweiser "ubergeben.
+    \item [Soll] Eingebettete Formeln mit Quantoren "uber einem eingeschr"ankten Bereich werden ausgewertet.%
+    \item [Wunsch] Eingebettete Formeln mit Quantoren über uneingeschränkten Bereichen werden mit Hilfe eines \see{Beweisers} ausgewertet. Der aktuelle Programmzustand wird dazu dem Beweiser "ubergeben.
 \end{description}%
 
 \subsection{Grafische Benutzeroberfl"ache}%
@@ -27,7 +27,7 @@ Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten 
 
 \begin{description}%
     \item [Muss] Die Sprache der Benutzeroberfläche ist Englisch.%
-    \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse des Programms durch den Benutzer zutr"aglich sind.%
+    \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse eines Programms durch den Benutzer zutr"aglich sind.%
     \item [Wunsch] Es werden zur besseren Lesbarkeit Unicode-Symbole f"ur logische Operatoren und Quantoren angezeigt.%
 \end{description}%
 
@@ -52,7 +52,7 @@ In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Program
     \item [Muss] Spezifikationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%
     \item [Muss] Syntax und Semantik von Ausdr"ucken werden, soweit m"oglich, aus der Programmiersprache "ubernommen.%
     \item [Muss] Zusicherungen erlauben Aussagen der \see{Prädikatenlogik} "uber den Zustand einer Programmausf"uhrung.%
-    \item [Muss] Grundlegende Annotationen: \texttt{\_assert} f"ur Zusicherungen und \texttt{\_assume} f"ur Voraussetzungen%
+    \item [Muss] Grundlegende Annotationen: Zusicherungen (Assertions) und Voraussetzungen (Assumptions)%
     \item [Soll] Spezielle Syntax~("`syntactic sugar"'), um die Verst"andlichkeit von Annotationen zu verbessern und ihre Formulierung intuitiver zu gestalten:%
         \begin{itemize}%
             \item Vor- und Nachbedingungen an Funktionen%

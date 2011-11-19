@@ -9,7 +9,7 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 	    	\req{010}{Variablen}{Der Benutzer hat die Möglichkeit, Variablen zu deklarieren und ihnen einen Wert zuzuweisen. Als Variablentypen werden Ganzzahlen und Wahrheitswerte (Booleans) unterstützt, weiterhin Arrays von Variablen eines Typs.}
 		\req{020}{Bedingte Anweisungen}{Die Sprache unterstützt bedingte Anweisungen, mit denen ein Codeabschnitt nur bei erfüllter Bedingung ausgeführt wird.}
 		\req{030}{Schleifen}{Die Sprache unterstützt das Sprachkonstrukt der \texttt{while}-Schleife, mit der ein Codepfad ausgeführt wird, solange eine Bedinung erfüllt ist. Die Bedingung wird dabei vor jedem Schleifendurchlauf überprüft.}
-		\req{040}{Mathematische und logische Operatoren}{Die Sprache unterstützt die gängigen mathematischen Operatoren $+$~(Addition), $-$~(Subtraktion), $*$~(Multiplikation), $/$~(Ganzzahlige Division), \^{ }~(Potenz) und $\%$~(Modulus) sowie die logischen Operatoren $\wedge$~(Und), $\vee$~(Oder) und $\neg$~(Nicht). Es werden außerdem die Vergleichsoperatoren $=$, $\ne$, $<$, $>$, $\leq$ und $\geq$ unterstützt. Zusätzlich werden die Booleschen Konstanten \texttt{true}~(wahr) und \texttt{false}~(falsch) unterstützt.}
+		\req{040}{Mathematische und logische Operatoren}{Die Sprache unterstützt die gängigen mathematischen Operatoren $+$~(Addition), $-$~(Subtraktion), $*$~(Multiplikation), $/$~(Ganzzahlige Division), \^{ }~(Potenz) und $\%$~(Modulo) sowie die logischen Operatoren $\wedge$~(Konjunktion), $\vee$~(Disjunktion) und $\neg$~(Negation). Es werden außerdem die Vergleichsoperatoren $=$, $\ne$, $<$, $>$, $\leq$ und $\geq$ unterstützt. Zusätzlich werden die Booleschen Konstanten \texttt{true}~(wahr) und \texttt{false}~(falsch) unterstützt.}
 		\req{060}{Kommentare}{Die Sprache unterstützt Kommentare, die dem Benutzer zum Verständnis des Codes dienen und vom Interpreter ignoriert werden.}
 	\end{reqlist}
 % TODO Sollkriterien
@@ -22,13 +22,13 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 
 % TODO Musskriterien
 	\begin{reqlist}{FA}
-		\req{010}{Zusicherungen (Assertions)}{Die Annotationssprache lässt die Angabe von Zusicherungen zu, die vom Laufzeitprüfer oder vom Beweiser überprüft werden sollen.}
+		\req{010}{Zusicherungen (Assertions)}{Die Annotationssprache lässt die Angabe von Zusicherungen zu, die vom Run-time-checker oder vom Beweiser überprüft werden sollen.}
 		\req{020}{Annahmen}{Die Annotationssprache lässt die Angabe von Annahmen zu, die bei der Überprüfung von Aussagen im selben Gültigkeitsbereich als wahr vorausgesetzt werden.}
 		\req{060}{Prädikatenlogische Formeln}{Aussagen und Annahmen können als prädikatenlogische Formeln erster Stufe mit den Quantoren $\forall$ und $\exists$ formuliert werden. Dabei wird die Syntax von Ausdrücken aus der WHILE-Sprache übernommen und um die Angabe von Quantoren erweitert.}
 	\end{reqlist}
 % TODO Sollkriterien
 	\begin{reqlist}{FA}
-		\req{030}{Axiome}{Die Annotationssprache lässt die Angabe von Axiomen (globalen Annahmen) zu, die in allen Gültigkeitsbereichen als wahr vorausgesetzt werden.}
+		\req{030}{Axiome}{Die Annotationssprache lässt die Angabe von Axiomen (globale Annahmen) zu, die in allen Gültigkeitsbereichen als wahr vorausgesetzt werden.}
 		\req{040}{Invarianten}{Die Sprache lässt die Angabe von Aussagen über Schleifeninvarianten zu.}
 		\req{050}{Vor- und Nachbedingungen}{Die Sprache lässt die Angabe von Vor- und Nachbedingungen für Methoden zu. Dabei werden Vorbedingungen als Annahmen behandelt, die in der gesamten Methode gelten, und Nachbedingungen als Zusicherungen, die bei Beendigung der Funktion erfüllt sein müssen.}
 	\end{reqlist}
@@ -114,7 +114,7 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unt
 	Der Beweiser wird eingesetzt, um das Programm in WHILE-Sprache mithilfe spezieller Formeln (Annahmen, Zusicherungen, etc.) auf Richtigkeit zu überprüfen.
 
 	\begin{reqlist}{FP}
-		\req{010}{Abbruch des Beweisvorgangs}{Der Benutzer soll in der Lage sein einen gestarteten Beweisvorgang abzubrechen.}
+		\req{010}{Abbruch des Beweisvorgangs}{Der Benutzer soll in der Lage sein, einen gestarteten Beweisvorgang abzubrechen.}
 	\end{reqlist}
 
 \subsection{Dokumentation zur Programmier- und Annotationssprache}%

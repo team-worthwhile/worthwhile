@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.xtext.example.mydsl.ui.MyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.xtext.example.mydsl.ui.MyDslExecutableExtensionFactory:org.xtext.example.mydsl.ui.editor.MyExtendedEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="mydsl"
@@ -265,5 +265,40 @@
         </adapter>
      </factory>
   </extension>
+  <extension
+        point="org.eclipse.debug.ui.debugModelPresentations">
+     <debugModelPresentation
+           class="org.xtext.example.mydsl.ui.DebugModelPresentation1"
+           id="org.xtext.example.mydsl.ui.debugModelPresentation1">
+     </debugModelPresentation>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editorActions">
+     <editorContribution
+           id="org.xtext.example.mydsl.ui.editorContribution1"
+           targetID="org.xtext.example.mydsl.MyDsl">
+        <action
+              actionID="RulerDoubleClick"
+              class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+              id="org.xtext.example.mydsl.ui.action1"
+              label="label"
+              style="push">
+        </action>
+     </editorContribution>
+  </extension>
+    <extension
+         id="MyDslBreakpointMarker"
+         point="org.eclipse.core.resources.markers">
+         
+         <super type="org.eclipse.debug.core.lineBreakpointMarker"/>
+         
+   </extension>
+    <extension
+          point="org.eclipse.core.filebuffers.annotationModelCreation">
+       <factory
+             class="org.xtext.example.mydsl.ui.AnnotationModelFactory1"
+             extensions="mydsl">
+       </factory>
+    </extension>
 
 </plugin>

@@ -11,9 +11,9 @@ Der \see{Interpreter} ermöglicht die (schrittweise) Ausführung eines Programms
     \item[Wunsch] Während eines Programmdurchlaufs können benutzerdefinierte Ausdr"ucke "uber dem Programmzustand ausgewertet werden.%
 \end{description}%
 
-\subsection{Run-time-Checker}%
+\subsection{Run-time-""Checker}%
 
-Der \see{Run-time-Checker} erlaubt die Pr"ufung von \see{Zusicherungen} in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
+Der \see{Run-time-""Checker} erlaubt die Pr"ufung von \see{Zusicherungen} in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
 
 \begin{description}%
     \item [Muss] Die im Programm eingebetteten (quantorenfreien) \see{Annotationen} werden ausgewertet. Im Fehlerfall erfolgt die Rückmeldung "uber die grafische Benutzeroberfl"ache.
@@ -28,15 +28,15 @@ Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten 
 \begin{description}%
     \item [Muss] Die Sprache der Benutzeroberfläche ist Englisch.%
     \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse eines Programms durch den Benutzer zutr"aglich sind.%
-    \item [Wunsch] Es werden zur besseren Lesbarkeit Unicode-Symbole f"ur logische Operatoren und Quantoren angezeigt.%
+    \item [Wunsch] Es werden zur besseren Lesbarkeit Unicode-""Symbole f"ur logische Operatoren und Quantoren angezeigt.%
 \end{description}%
 
-\subsection{WHILE-Sprache}%
+\subsection{WHILE-""Sprache}%
 
-Die vom \textit{Worthwhile}-Interpreter erkannte Programmiersprache ist eine \see{WHILE-Sprache}.
+Die vom \textit{Worthwhile}-""Interpreter erkannte Programmiersprache ist eine \see{WHILE-""Sprache}.
 
 \begin{description}%
-    \item [Muss] Grundlegende Sprachkonstrukte: \texttt{if}-Anweisungen und \texttt{while}-Schleifen
+    \item [Muss] Grundlegende Sprachkonstrukte: \texttt{if}-""Anweisungen und \texttt{while}-""Schleifen
     \item [Muss] Variablen mit Ganzzahlen~(\texttt{Integer}), Wahrheitswerten~(\texttt{Boolean}) sowie Arrays von \texttt{Integer} und \texttt{Boolean} als Datentypen%
     \item [Wunsch] Definition und Aufruf von eigenen Funktionen%
     \item [Abgrenzung] Weder Strings, Gleitkommazahlen, Zeiger noch eigene Datentypen%
@@ -46,7 +46,7 @@ Die vom \textit{Worthwhile}-Interpreter erkannte Programmiersprache ist eine \se
 
 \subsection{Annotationssprache}%
 
-In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Programme spezifiziert und die Zusicherungen für den Run-time-Checker formuliert.%
+In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-""Programme spezifiziert und die Zusicherungen für den Run-time-""Checker formuliert.%
 
 \begin{description}%
     \item [Muss] Annotationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%
@@ -68,7 +68,7 @@ Die Schnittstelle zwischen \textit{Worthwhile} und dem Beweiser ist zuständig f
 
 \begin{description}%
     \item [Muss] Übersetzung eines Programms und seiner Spezifikation in eine vom Beweiser überprüfbare prädikatenlogische Formel
-    \item [Muss] Übersetzung von Modellen, welche der Beweiser für die Nichterfülltheit einer Spezifikation liefert, in Aufrufe des spezifizierten WHILE-Programms%
+    \item [Muss] Übersetzung von Modellen, welche der Beweiser für die Nichterfülltheit einer Spezifikation liefert, in Aufrufe des spezifizierten WHILE-""Programms%
     \item [Muss] Aufrufen des Beweisers
     \item [Muss] Behandlung von Fehlermeldungen des Beweisers, welche die prädikatenlogische Übersetzung einer Spezifikation betreffen%
     \item [Abgrenzung] Keine automatische Findung von Schleifeninvarianten

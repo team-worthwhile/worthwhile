@@ -71,12 +71,12 @@
 	}
 	
 	\req{04}{Debuggen eines Programms}{
-		\testspec{Korrektes Verhalten des Interpreters bei Ausführung der Debug-Operationen}
+		\testspec{Korrektes Verhalten des Interpreters bei Ausführung der Debug-""Operationen}
 		{Es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
 		{\begin{enumerate}
 			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Haltepunkte gesetzt.
-			\item Der Interpreter wird über den entsprechenden Befehl im Debug-Modus gestartet.
-			\item Nach Anhalten des Programms an einem Haltepunkt werden mehrmals hintereinander der Einzelschritt-Befehl und der Überspringen-Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Funktionsaufrufe befinden.
+			\item Der Interpreter wird über den entsprechenden Befehl im Debug-""Modus gestartet.
+			\item Nach Anhalten des Programms an einem Haltepunkt werden mehrmals hintereinander der Einzelschritt-""Befehl und der Überspringen-""Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Funktionsaufrufe befinden.
 			\item Es wird einer der folgenden Schritte ausgeführt (der Testfall muss zweimal durchgeführt werden, damit beide Schritte abgedeckt werden):
 			\begin{enumerate}
 			\item Der Programmablauf wird durch den entsprechenden Befehl abgebrochen.
@@ -86,11 +86,11 @@
 		\end{enumerate}}
 		{\begin{enumerate}
 			\item Die Haltepunkte werden im Editor und in der Haltepunktübersicht angezeigt.
-			\item Nach Ausführen des Programms im Debug-Modus hält der Interpreter vor der Zeile, die den ersten Haltepunkt enthält.
-			\item Bei Ausführung des Einzelschritt-Befehls führt der Interpreter den nächsten Befehl aus, wobei er in Funktionsaufrufe springt.
-			\item Bei Ausführung des Überspringen-Befehls führt der Interpreter den nächsten Befehl aus, wobei er nicht in Funktionsaufrufe springt.
+			\item Nach Ausführen des Programms im Debug-""Modus hält der Interpreter vor der Zeile, die den ersten Haltepunkt enthält.
+			\item Bei Ausführung des Einzelschritt-""Befehls führt der Interpreter den nächsten Befehl aus, wobei er in Funktionsaufrufe springt.
+			\item Bei Ausführung des Überspringen-""Befehls führt der Interpreter den nächsten Befehl aus, wobei er nicht in Funktionsaufrufe springt.
 			\item Bei Ausführung des Abbruchbefehls wird der Programmablauf sofort abgebrochen.
-			\item Bei Ausführung des Fortsetzen-Befehls führt der Interpreter das Programm bis zum nächsten Haltepunkt bzw. bis zum Programmende aus.
+			\item Bei Ausführung des Fortsetzen-""Befehls führt der Interpreter das Programm bis zum nächsten Haltepunkt bzw. bis zum Programmende aus.
 			\item Nach Ausführen des Programms im Ausführungsmodus ignoriert der Interpreter die Haltepunkte und führt das Programm bis zum Ende aus.
 			\item Bei Ausführung im Debug- und Ausführungsmodus verhält sich das Programm gleich (beispielsweise in Bezug auf Terminierung des Programmablaufs).
 		\end{enumerate}}
@@ -112,7 +112,7 @@
 		\testspec{Korrekte Auswirkung der Änderung von Variablenwerten}
 		{Es ist ein Programm geladen und mehrere Haltepunkte sind im Programm gesetzt.}
 		{\begin{enumerate}
-			\item Der Benutzer startet den Interpreter im Debug-Modus.	
+			\item Der Benutzer startet den Interpreter im Debug-""Modus.	
 			\item Nach Halt des Interpreters an einem der Haltepunkte gibt der Benutzer im Fenster zur Ausdrucksauswertung einige Ausdrücke ein, darunter sowohl gültige als auch ungültige (Syntaxfehler, nicht deklarierte Variablen etc.).
 			\item Der Benutzer ändert im Variablenfenster die Werte von Variablen so, dass der Programmablauf dadurch beeinflusst wird (zum Beispiel Abbruch einer Schleife).
 			\item Der Benutzer setzt die Programmausführung fort.
@@ -150,7 +150,7 @@
 				\item Öffnen des Testprogramms:
 					\begin{reqlist}{T}
 						\req{08a}{Testprogramm für Annotationen}{Ein Programm, welches je mindestens eine Annotation jedes Annotationstyps enthält.}
-						\req{08b}{Programm mit verschachtelten Schleifen}{Ein Testprogramm mit mehreren ineinander verschachtelten \texttt{while}-Schleifen.}
+						\req{08b}{Programm mit verschachtelten Schleifen}{Ein Testprogramm mit mehreren ineinander verschachtelten \texttt{while}-""Schleifen.}
 						\req{08c}{Rekursives Programm}{Ein Programm, das entweder eine Funktion enthält, die sich selbst aufruft, oder mehrere Funktionen, die einander zyklisch aufrufen.}
 						\req{08d}{Funktionsaufrufe in Annotationen}{Ein Programm, das eine Annotation enthält, die einen Funktionsaufruf enthält.}
 					\end{reqlist}

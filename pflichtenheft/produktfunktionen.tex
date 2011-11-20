@@ -1,14 +1,14 @@
 \section{Funktionale Anforderungen}
 
-\subsection{WHILE-Sprache}
+\subsection{WHILE-""Sprache}
 
-Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden definierten WHILE-Sprache genügen.
+Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden definierten WHILE-""Sprache genügen.
 % TODO Die Kriterien sind in jedem Abschnitt jeweils nach absteigender Priorität geordnet; dabei sind Musskriterien unbedingt einzuhalten, Sollkriterien wünschenswert und Wunschkriterien optionale Verbesserungen.
 % TODO Musskriterien
 	\begin{reqlist}{FW}
 	    	\req{010}{Variablen}{Der Benutzer hat die Möglichkeit, Variablen zu deklarieren und ihnen einen Wert zuzuweisen. Als Variablentypen werden Ganzzahlen und Wahrheitswerte (Booleans) unterstützt, weiterhin Arrays von Variablen eines Typs.}
 		\req{020}{Bedingte Anweisungen}{Die Sprache unterstützt bedingte Anweisungen, mit denen ein Codeabschnitt nur bei erfüllter Bedingung ausgeführt wird.}
-		\req{030}{Schleifen}{Die Sprache unterstützt das Sprachkonstrukt der \texttt{while}-Schleife, mit der ein Codepfad ausgeführt wird, solange eine Bedinung erfüllt ist. Die Bedingung wird dabei vor jedem Schleifendurchlauf überprüft.}
+		\req{030}{Schleifen}{Die Sprache unterstützt das Sprachkonstrukt der \texttt{while}-""Schleife, mit der ein Codepfad ausgeführt wird, solange eine Bedinung erfüllt ist. Die Bedingung wird dabei vor jedem Schleifendurchlauf überprüft.}
 		\req{040}{Mathematische und logische Operatoren}{Die Sprache unterstützt die gängigen mathematischen Operatoren $+$~(Addition), $-$~(Subtraktion), $*$~(Multiplikation), $/$~(Ganzzahlige Division), \^{ }~(Potenz) und $\%$~(Modulo) sowie die logischen Operatoren $\wedge$~(Konjunktion), $\vee$~(Disjunktion) und $\neg$~(Negation). Es werden außerdem die Vergleichsoperatoren $=$, $\ne$, $<$, $>$, $\leq$ und $\geq$ unterstützt. Zusätzlich werden die Booleschen Konstanten \texttt{true}~(wahr) und \texttt{false}~(falsch) unterstützt.}
 		\req{060}{Kommentare}{Die Sprache unterstützt Kommentare, die dem Benutzer zum Verständnis des Codes dienen und vom Interpreter ignoriert werden.}
 	\end{reqlist}
@@ -22,9 +22,9 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 
 % TODO Musskriterien
 	\begin{reqlist}{FA}
-		\req{010}{Zusicherungen}{Die Annotationssprache lässt die Angabe von Zusicherungen zu, die vom Run-time-Checker oder vom Beweiser überprüft werden sollen.}
+		\req{010}{Zusicherungen}{Die Annotationssprache lässt die Angabe von Zusicherungen zu, die vom Run-time-""Checker oder vom Beweiser überprüft werden sollen.}
 		\req{020}{Annahmen}{Die Annotationssprache lässt die Angabe von Annahmen zu, die bei der Überprüfung von Aussagen im selben Gültigkeitsbereich als wahr vorausgesetzt werden.}
-		\req{060}{Prädikatenlogische Formeln}{Aussagen und Annahmen können als prädikatenlogische Formeln erster Stufe mit den Quantoren $\forall$~(Allquantor) und $\exists$~(Existenzquantor) formuliert werden. Dabei wird die Syntax von Ausdrücken aus der WHILE-Sprache übernommen und um die Angabe von Quantoren erweitert.}
+		\req{060}{Prädikatenlogische Formeln}{Aussagen und Annahmen können als prädikatenlogische Formeln erster Stufe mit den Quantoren $\forall$~(Allquantor) und $\exists$~(Existenzquantor) formuliert werden. Dabei wird die Syntax von Ausdrücken aus der WHILE-""Sprache übernommen und um die Angabe von Quantoren erweitert.}
 	\end{reqlist}
 % TODO Sollkriterien
 	\begin{reqlist}{FA}
@@ -38,15 +38,15 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 % TODO Nummerierung
 \begin{reqlist}{FG}
 		\req{060}{Breakpoints}{Der Benutzer kann Breakpoints direkt im Editor setzen und löschen.}
-		\req{070}{Breakpoint-\"{U}bersicht}{Die GUI listet in einem separaten Fenster alle gesetzten Breakpoints auf. Der Benutzer kann direkt in diesem Fenster Breakpoints editieren und löschen.}
+		\req{070}{Breakpoint-""\"{U}bersicht}{Die GUI listet in einem separaten Fenster alle gesetzten Breakpoints auf. Der Benutzer kann direkt in diesem Fenster Breakpoints editieren und löschen.}
 		\req{080}{Fehler\"{u}bersicht}{In einem separaten Fenster wird eine \"{U}bersicht aller Parserfehler mit einer Fehlerbeschreibung angezeigt. Aus dieser Liste kann der Benutzer den Editor an der Fehlerposition aufrufen.}
 		\req{090}{Programmausf"uhrung}{Der Benutzer kann den Interpreter aus der GUI heraus starten, wobei die Wahl zwischen dem Debug- und dem Ausf\"{u}hrungsmodus besteht.}
-		\req{130}{Beweiseraufruf}{Es existiert ein GUI-Befehl, um die Programmspezifikation vom Beweiser überprüfen zu lassen.}
+		\req{130}{Beweiseraufruf}{Es existiert ein GUI-""Befehl, um die Programmspezifikation vom Beweiser überprüfen zu lassen.}
 \end{reqlist}
 
-\subsubsection{Editor-Funktionen}
+\subsubsection{Editor-""Funktionen}
 
-Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-Sprache} zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
+Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-""Sprache} zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
 
 % TODO Musskriterien
 	\begin{reqlist}{FG}
@@ -54,7 +54,7 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-Sprache} zur Ve
 	\end{reqlist}
 % TODO Sollkriterien
 	\begin{reqlist}{FG}
-		\req{050}{Unicode-Unterst\"{u}tzung}{Die Verwendung von Unicode-Symbolen f"{u}r logische Operatoren und Quantoren wird unterst"{u}tzt. Dabei soll die Eingabe solcher Symbole durch die grafische Benutzeroberfl"ache erleichtert werden.}
+		\req{050}{Unicode-""Unterst\"{u}tzung}{Die Verwendung von Unicode-""Symbolen f"{u}r logische Operatoren und Quantoren wird unterst"{u}tzt. Dabei soll die Eingabe solcher Symbole durch die grafische Benutzeroberfl"ache erleichtert werden.}
 	\end{reqlist}
 % TODO Wunschkriterien
 	\begin{reqlist}{FG}
@@ -63,7 +63,7 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-Sprache} zur Ve
 		\req{030}{Codevervollst\"{a}ndigung}{Der Benutzer hat die M\"{o}glichkeit, sich an der Cursorposition eine Liste von verf\"{u}gbaren Syntaxelementen anzeigen zu lassen.}
 	\end{reqlist}
 
-\subsubsection{Debugger-Funktionen}
+\subsubsection{Debugger-""Funktionen}
 
 % TODO Musskriterien
 	\begin{reqlist}{FG}
@@ -82,7 +82,7 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-Sprache} zur Ve
 	\begin{itemize}
 		\item
 		\begin{reqlist}{FI}
-		\req{010}{Debug-Modus}{Hier wird das Programm schrittweise ausgef\"{u}hrt und bei Erreichen eines Breakpoints die Programmausf\"{u}hrung pausiert.}
+		\req{010}{Debug-""Modus}{Hier wird das Programm schrittweise ausgef\"{u}hrt und bei Erreichen eines Breakpoints die Programmausf\"{u}hrung pausiert.}
 		\end{reqlist}
 
 		\item
@@ -95,7 +95,7 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-Sprache} zur Ve
 		\req{030}{Abbruch einer Programmausf"uhrung}{Ein laufendes oder pausiertes Programm kann jederzeit abgebrochen werden, womit der Interpreter in den Zustand vor Ausf\"{u}hrung des Programms zur"uckversetzt wird.}
 	\end{reqlist}%
 
-Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unterbrochen, sind folgende Debugger-Funktionen verf"ugbar:%
+Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-""Modus unterbrochen, sind folgende Debugger-""Funktionen verf"ugbar:%
 
 	\begin{reqlist}{FI}%
 		\req{040}{Einzelschritt}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird im n"achsten Schritt mit der ersten Anweisung der aufgerufenen Funktion fortgefahren.}
@@ -109,9 +109,9 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unt
 			\req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird die aufgerufene Funktion entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
 		\end{reqlist}
 
-\subsection{Run-time-Checker}%
+\subsection{Run-time-""Checker}%
 
-Zur Prüfung von Annotationen durch den Run-time-Checker gibt der Programmzustand die festen Belegungen der in den Annotationsaussagen referenzierten Variablen vor.%
+Zur Prüfung von Annotationen durch den Run-time-""Checker gibt der Programmzustand die festen Belegungen der in den Annotationsaussagen referenzierten Variablen vor.%
 
 \begin{reqlist}{FR}%
     \req{010}{Prüfung von Zusicherungen}{Eine Zusicherung ist genau dann erfüllt, wenn ihre Aussage über den Programmzustand wahr ist.}%

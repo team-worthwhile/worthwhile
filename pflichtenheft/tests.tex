@@ -9,7 +9,7 @@
 			\begin{enumerate}
 				\item Öffnen des Testprogramms:
 					\begin{reqlist}{T}
-						\req{01a}{Leeres Programm}{Das leere Programm, d.~h.\ die Datei enthält keine Anweisungen (aber eventuell Leerzeilen)}
+						\req{01a}{Leeres Programm}{Das leere Programm, d.~h.\ die Datei enthält keine Anweisungen (aber eventuell Leerzeilen oder Kommentare)}
 						\req{01b}{Verschachteltes Programm}{Ein Testprogramm mit verschachtelten Schleifen und bedingten Anweisungen bis zu einer Schachtelungstiefe von 1000. Die Abfragen und Schleifen sind so gestaltet, dass alle Anweisungen erreichbar sind. Das Programm enthält keine Zusicherungen.}
 						\req{01c}{Langes Programm}{Ein Testprogramm ohne bedingte Anweisungen, Schleifen und Zusicherungen, aber mit mehr als 10.000 Anweisungszeilen.}
 					\end{reqlist}
@@ -38,7 +38,7 @@
 						\req{02c}{Fehlende/überflüssige Operanden}{Es wird eine binäre mathematische oder logische Operation mit nur einem Operanden oder eine unäre mathematische oder logische Operation mit zwei Operanden aufgerufen.}
 						\req{02d}{Operanden vom falschen Typ}{Es wird eine mathematische oder logische Operation mit Operanden aufgerufen, die nicht dem von der Operation geforderten Typ entsprechen. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}
 						\req{02e}{Ungültige Parameter bei Funktionsaufruf}{In einem Funktionsaufruf werden Parameter übergeben, die in Anzahl und/oder Typ nicht der Funktionssignatur entsprechen. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}	
-						\req{02f}{Fehlerhafter Funktionsaufruf}{Es wird versucht, eine nicht deklarierte Funktion aufzurufen.}
+						\req{02f}{Aufrufen nicht deklarierter Funktionen}{Es wird versucht, eine Funktion aufzurufen, die nicht deklariert wurde.}
 						\req{02g}{Verwenden nicht deklarierter Variablen}{Es wird versucht, eine Variable zu verwenden, die nicht deklariert wurde. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation das Deklarieren der Variablen vor ihrer Verwendung vorschreibt.}}
 						\req{02h}{Unerlaubte Typkonvertierung}{Es wird versucht, einer Variable einen Wert zuzuweisen, der nicht ihrem Typ entspricht. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}
 					\end{reqlist}

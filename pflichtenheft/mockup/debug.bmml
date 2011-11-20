@@ -17,7 +17,7 @@
         <text>File%2C%20Edit%2C%20Run%2CView%2C%20Help</text>
       </controlProperties>
     </control>
-    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextArea" x="60" y="112" w="519" h="376" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="-1">
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::TextArea" x="60" y="146" w="519" h="342" measuredW="200" measuredH="140" zOrder="2" locked="false" isInGroup="-1">
       <controlProperties>
         <text>01%20%20Integer%20i%3B%0A02%20Boolean%20b%3B%0A03%20b%20%3D%20true%3B%0A04%20%0A05%20while%20%28i%20%3C%2010%29%20%7B%0A06%09%09j%20%3A%3D%20i%20+%201%3B%0A07%0A08%0A09%20_assert%28i%20%3E%205%29%0A10%0A11%20function%20doSomeStuff%28int%20j%29%20%7B%0A12%20%20%20%09%09j%20%3D%20j%5Ej%0A13%20%20%7D</text>
         <verticalScrollbar>true</verticalScrollbar>
@@ -38,8 +38,8 @@
     </control>
     <control controlID="5" controlTypeID="com.balsamiq.mockups::RoundButton" x="43" y="195" w="17" h="17" measuredW="32" measuredH="32" zOrder="5" locked="false" isInGroup="-1">
       <controlProperties>
-        <borderColor>13576743</borderColor>
-        <color>13576743</color>
+        <borderColor>2848996</borderColor>
+        <color>2848996</color>
         <icon>CircleIcon%7Cxsmall</icon>
       </controlProperties>
     </control>
@@ -48,13 +48,13 @@
         <icon>RightArrowIcon%7Cxsmall</icon>
       </controlProperties>
     </control>
-    <control controlID="8" controlTypeID="com.balsamiq.mockups::DataGrid" x="579" y="139" w="301" h="261" measuredW="159" measuredH="115" zOrder="8" locked="false" isInGroup="-1">
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::DataGrid" x="579" y="170" w="301" h="230" measuredW="159" measuredH="115" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
         <borderStyle>square</borderStyle>
         <text>Type%20%5E%2C%20Name%2C%20Value%0AInteger%2C%20i%2C%2010%0AInteger%2C%20j%2C%205%0ABoolean%2C%20b%2C%20true</text>
       </controlProperties>
     </control>
-    <control controlID="9" controlTypeID="com.balsamiq.mockups::TabBar" x="579" y="112" w="301" h="288" measuredW="240" measuredH="100" zOrder="7" locked="false" isInGroup="-1">
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TabBar" x="579" y="146" w="301" h="254" measuredW="240" measuredH="100" zOrder="7" locked="false" isInGroup="-1">
       <controlProperties>
         <selectedIndex>0</selectedIndex>
         <text>Variables%2C%20Expressions</text>
@@ -87,5 +87,15 @@
       </controlProperties>
     </control>
     <control controlID="14" controlTypeID="com.balsamiq.mockups::TextInput" x="654" y="602" w="141" h="-1" measuredW="79" measuredH="27" zOrder="13" locked="false" isInGroup="-1"/>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::ButtonBar" x="46" y="113" w="-1" h="-1" measuredW="114" measuredH="29" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Run%2C%20Verify</text>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::ButtonBar" x="175" y="112" w="172" h="29" measuredW="417" measuredH="29" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Run%20in%20Debug%20Mode%2C%20Single-Step%2C%20Continue%20to%20Breakpoint</text>
+      </controlProperties>
+    </control>
   </controls>
 </mockup>

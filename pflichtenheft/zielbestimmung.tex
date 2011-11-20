@@ -46,7 +46,7 @@ Die vom \textit{Worthwhile}-Interpreter erkannte Programmiersprache ist eine \se
 
 \subsection{Annotationssprache}%
 
-In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Programme spezifiziert. Zu einer Spezifikation geh"oren sowohl Zusicherungen als auch Invarianten.%
+In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Programme spezifiziert und die Zusicherungen für den Run-time-Checker formuliert.%
 
 \begin{description}%
     \item [Muss] Spezifikationen sind im Quelltext des Programms eingebettet, aber durch spezielle Syntax klar vom Programm getrennt.%
@@ -56,7 +56,7 @@ In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Program
     \item [Soll] Spezielle Syntax~("`syntactic sugar"'), um die Verst"andlichkeit von Annotationen zu verbessern und ihre Formulierung intuitiver zu gestalten:%
         \begin{itemize}%
             \item Vor- und Nachbedingungen an Funktionen%
-            \item (In-)Varianten an Schleifen%
+            \item Invarianten an Schleifen%
             \item Globale Annahmen in Programmspezifikationen%
         \end{itemize}%
     \item [Wunsch] M"oglichkeit, mehrere Vor- und Nachbedingungen f"ur eine Funktion anzugeben%
@@ -66,7 +66,9 @@ In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Program
 
 \begin{description}%
     \item [Muss] Übersetzung eines Programms und seiner Spezifikation in eine vom Beweiser überprüfbare prädikatenlogische Formel
+    \item [Muss] Übersetzung von Modellen, welche der Beweiser für die Nichterfülltheit einer Spezifikation liefert, in Aufrufe des spezifizierten WHILE-Programms%
     \item [Muss] Aufrufen des Beweisers
+    \item [Muss] Behandlung von Fehlermeldungen des Beweisers, welche die prädikatenlogische Übersetzung einer Spezifikation betreffen%
     \item [Abgrenzung] Keine automatische Findung von Schleifeninvarianten
 \end{description}%
 

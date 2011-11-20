@@ -34,44 +34,6 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 	\end{reqlist}
 
 
-\subsection{GUI}
-% TODO Nummerierung
-\begin{reqlist}{FG}
-		\req{060}{Breakpoints}{Der Benutzer kann Breakpoints direkt im Editor setzen und löschen.}
-		\req{070}{Breakpoint-""\"{U}bersicht}{Die GUI listet in einem separaten Fenster alle gesetzten Breakpoints auf. Der Benutzer kann direkt in diesem Fenster Breakpoints editieren und löschen.}
-		\req{080}{Fehler\"{u}bersicht}{In einem separaten Fenster wird eine \"{U}bersicht aller Parserfehler mit einer Fehlerbeschreibung angezeigt. Aus dieser Liste kann der Benutzer den Editor an der Fehlerposition aufrufen.}
-		\req{090}{Programmausf"uhrung}{Der Benutzer kann den Interpreter aus der GUI heraus starten, wobei die Wahl zwischen dem Debug- und dem Ausf\"{u}hrungsmodus besteht.}
-		\req{130}{Beweiseraufruf}{Es existiert ein GUI-""Befehl, um die Programmspezifikation vom Beweiser überprüfen zu lassen.}
-\end{reqlist}
-
-\subsubsection{Editor-""Funktionen}
-
-Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-""Sprache} zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
-
-% TODO Musskriterien
-	\begin{reqlist}{FG}
-		\req{140}{Ergebnisse des Beweisers}{Nach Beendigung des Beweisers gibt das Programm das entsprechende Ergebnis auf dem Bildschirm aus. Die mögliche Angabe eines Gegenbeispiels wird übersetzt und die entsprechende Annotation im Code kenntlich gemacht. Eine mögliche Fehlerstelle wird ebenfalls im Code markiert.}
-	\end{reqlist}
-% TODO Sollkriterien
-	\begin{reqlist}{FG}
-		\req{050}{Unicode-""Unterst\"{u}tzung}{Die Verwendung von Unicode-""Symbolen f"{u}r logische Operatoren und Quantoren wird unterst"{u}tzt. Dabei soll die Eingabe solcher Symbole durch die grafische Benutzeroberfl"ache erleichtert werden.}
-	\end{reqlist}
-% TODO Wunschkriterien
-	\begin{reqlist}{FG}
-		\req{010}{Syntaxhervorhebung}{Im eingegebenen Programmcode werden Elemente wie Schl\"{u}sselw\"{o}rter, Zahlen und Wahrheitswerte farblich hervorgehoben.}
-		\req{020}{Fehlerkorrektur bei der Eingabe}{Parserfehler werden direkt nach der Eingabe markiert.}
-		\req{030}{Codevervollst\"{a}ndigung}{Der Benutzer hat die M\"{o}glichkeit, sich an der Cursorposition eine Liste von verf\"{u}gbaren Syntaxelementen anzeigen zu lassen.}
-	\end{reqlist}
-
-\subsubsection{Debugger-""Funktionen}
-
-% TODO Musskriterien
-	\begin{reqlist}{FG}
-		\req{100}{Codemarkierung}{Bei pausierter Programmausf"uhrung wird die Codezeile mit der n\"{a}chsten Anweisung markiert.}
-		\req{110}{Ausdrucksauswertung}{Der Benutzer kann eine Liste von Ausdr\"{u}cken angeben, die bei jeder Pausierung einer Programmausf"uhrung ausgewertet werden und deren Auswertung in einem Teilbereich der GUI angezeigt werden.}
-		\req{120}{Variablenansicht}{In einem separaten Fenster werden bei pausierter Programmausf"uhrung die Werte aller Variablen im aktuellen G\"{u}ltigkeitsbereich angezeigt. Der Benutzer kann die Werte dieser Variablen \"{a}ndern. Nach \"{A}nderung einer Variablen werden zugeh\"{o}rige Fenster (z.~B.\ Ausdrucksauswertung) aktualisiert.}
-	\end{reqlist}
-
 
 \subsection{Interpreter}
 
@@ -125,6 +87,44 @@ Zur Prüfung von Annotationen durch den Run-time-""Checker gibt der Programmzust
 		\req{010}{Abbruch des Beweisvorgangs}{Der Benutzer soll in der Lage sein, einen gestarteten Beweisvorgang abzubrechen.}
         \req{020}{Vor- und Nachbedingungen}{Vorbedingungen für Funktionen werden als Annahmen behandelt, die in der gesamten Funktion gelten, und Nachbedingungen als Zusicherungen, die bei Beendigung der Funktion erfüllt sein müssen.}%
         \req{030}{Invarianten}{Invarianten für Schleifen werden als Zusicherungen behandelt, die nach jedem Schleifendurchlauf erfüllt sein müssen.}%
+	\end{reqlist}
+
+\subsection{GUI}
+% TODO Nummerierung
+\begin{reqlist}{FG}
+		\req{060}{Breakpoints}{Der Benutzer kann Breakpoints direkt im Editor setzen und löschen.}
+		\req{070}{Breakpoint-""\"{U}bersicht}{Die GUI listet in einem separaten Fenster alle gesetzten Breakpoints auf. Der Benutzer kann direkt in diesem Fenster Breakpoints editieren und löschen.}
+		\req{080}{Fehler\"{u}bersicht}{In einem separaten Fenster wird eine \"{U}bersicht aller Parserfehler mit einer Fehlerbeschreibung angezeigt. Aus dieser Liste kann der Benutzer den Editor an der Fehlerposition aufrufen.}
+		\req{090}{Programmausf"uhrung}{Der Benutzer kann den Interpreter aus der GUI heraus starten, wobei die Wahl zwischen dem Debug- und dem Ausf\"{u}hrungsmodus besteht.}
+		\req{130}{Beweiseraufruf}{Es existiert ein GUI-""Befehl, um die Programmspezifikation vom Beweiser überprüfen zu lassen.}
+\end{reqlist}
+
+\subsubsection{Editor-""Funktionen}
+
+Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-""Sprache} zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
+
+% TODO Musskriterien
+	\begin{reqlist}{FG}
+		\req{140}{Ergebnisse des Beweisers}{Nach Beendigung des Beweisers gibt das Programm das entsprechende Ergebnis auf dem Bildschirm aus. Die mögliche Angabe eines Gegenbeispiels wird übersetzt und die entsprechende Annotation im Code kenntlich gemacht. Eine mögliche Fehlerstelle wird ebenfalls im Code markiert.}
+	\end{reqlist}
+% TODO Sollkriterien
+	\begin{reqlist}{FG}
+		\req{050}{Unicode-""Unterst\"{u}tzung}{Die Verwendung von Unicode-""Symbolen f"{u}r logische Operatoren und Quantoren wird unterst"{u}tzt. Dabei soll die Eingabe solcher Symbole durch die grafische Benutzeroberfl"ache erleichtert werden.}
+	\end{reqlist}
+% TODO Wunschkriterien
+	\begin{reqlist}{FG}
+		\req{010}{Syntaxhervorhebung}{Im eingegebenen Programmcode werden Elemente wie Schl\"{u}sselw\"{o}rter, Zahlen und Wahrheitswerte farblich hervorgehoben.}
+		\req{020}{Fehlerkorrektur bei der Eingabe}{Parserfehler werden direkt nach der Eingabe markiert.}
+		\req{030}{Codevervollst\"{a}ndigung}{Der Benutzer hat die M\"{o}glichkeit, sich an der Cursorposition eine Liste von verf\"{u}gbaren Syntaxelementen anzeigen zu lassen.}
+	\end{reqlist}
+
+\subsubsection{Debugger-""Funktionen}
+
+% TODO Musskriterien
+	\begin{reqlist}{FG}
+		\req{100}{Codemarkierung}{Bei pausierter Programmausf"uhrung wird die Codezeile mit der n\"{a}chsten Anweisung markiert.}
+		\req{110}{Ausdrucksauswertung}{Der Benutzer kann eine Liste von Ausdr\"{u}cken angeben, die bei jeder Pausierung einer Programmausf"uhrung ausgewertet werden und deren Auswertung in einem Teilbereich der GUI angezeigt werden.}
+		\req{120}{Variablenansicht}{In einem separaten Fenster werden bei pausierter Programmausf"uhrung die Werte aller Variablen im aktuellen G\"{u}ltigkeitsbereich angezeigt. Der Benutzer kann die Werte dieser Variablen \"{a}ndern. Nach \"{A}nderung einer Variablen werden zugeh\"{o}rige Fenster (z.~B.\ Ausdrucksauswertung) aktualisiert.}
 	\end{reqlist}
 
 \subsection{Dokumentation zur Programmier- und Annotationssprache}%

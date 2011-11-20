@@ -2,35 +2,6 @@
 
 % TODO Nachverfolgbarkeit der Anforderungen: Jeder funktionalen Anforderung muss eine Zielbestimmung zuzuordnen sein $\Rightarrow$ evtl. Zielbestimmungen ergänzen
 
-\subsection{Interpreter}%
-
-Der \see{Interpreter} ermöglicht die (schrittweise) Ausführung eines Programms und die Inspektion des aktuellen Programmzustands durch den Benutzer.%
-
-\begin{description}%
-    \item[Wunsch] Der Benutzer kann den Programmzustand w"ahrend der Ausf"uhrung "andern.%
-    \item[Wunsch] Während eines Programmdurchlaufs können benutzerdefinierte Ausdr"ucke "uber dem Programmzustand ausgewertet werden.%
-\end{description}%
-
-\subsection{Run-time-""Checker}%
-
-Der \see{Run-time-""Checker} erlaubt die Pr"ufung von \see{Zusicherungen} in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
-
-\begin{description}%
-    \item [Muss] Die im Programm eingebetteten (quantorenfreien) \see{Annotationen} werden ausgewertet. Im Fehlerfall erfolgt die Rückmeldung "uber die grafische Benutzeroberfl"ache.
-    \item [Soll] Eingebettete Formeln mit Quantoren "uber einem eingeschr"ankten Bereich werden ausgewertet.%
-    \item [Wunsch] Eingebettete Formeln mit Quantoren über uneingeschränkten Bereichen werden mit Hilfe eines \see{Beweisers} ausgewertet.
-\end{description}%
-
-\subsection{Grafische Benutzeroberfl"ache}%
-
-Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) Module des Werkzeugs.%
-
-\begin{description}%
-    \item [Muss] Die Sprache der Benutzeroberfläche ist Englisch.%
-    \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse eines Programms durch den Benutzer zutr"aglich sind.%
-    \item [Wunsch] Es werden zur besseren Lesbarkeit Unicode-""Symbole f"ur logische Operatoren und Quantoren angezeigt.%
-\end{description}%
-
 \subsection{WHILE-""Sprache}%
 
 Die vom \textit{Worthwhile}-""Interpreter erkannte Programmiersprache ist eine \see{WHILE-""Sprache}.
@@ -62,6 +33,25 @@ In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-""Progr
     \item [Wunsch] M"oglichkeit, mehrere Vor- und Nachbedingungen f"ur eine Funktion anzugeben%
 \end{description}%
 
+\subsection{Interpreter}%
+
+Der \see{Interpreter} ermöglicht die (schrittweise) Ausführung eines Programms und die Inspektion des aktuellen Programmzustands durch den Benutzer.%
+
+\begin{description}%
+    \item[Wunsch] Der Benutzer kann den Programmzustand w"ahrend der Ausf"uhrung "andern.%
+    \item[Wunsch] Während eines Programmdurchlaufs können benutzerdefinierte Ausdr"ucke "uber dem Programmzustand ausgewertet werden.%
+\end{description}%
+
+\subsection{Run-time-""Checker}%
+
+Der \see{Run-time-""Checker} erlaubt die Pr"ufung von \see{Zusicherungen} in Programmen f"ur einen konkreten Programmdurchlauf, d.~h.\ zur Laufzeit.%
+
+\begin{description}%
+    \item [Muss] Die im Programm eingebetteten (quantorenfreien) \see{Annotationen} werden ausgewertet. Im Fehlerfall erfolgt die Rückmeldung "uber die grafische Benutzeroberfl"ache.
+    \item [Soll] Eingebettete Formeln mit Quantoren "uber einem eingeschr"ankten Bereich werden ausgewertet.%
+    \item [Wunsch] Eingebettete Formeln mit Quantoren über uneingeschränkten Bereichen werden mit Hilfe eines \see{Beweisers} ausgewertet.
+\end{description}%
+
 \subsection{Beweiserschnittstelle}%
 
 Die Schnittstelle zwischen \textit{Worthwhile} und dem Beweiser ist zuständig für die Formulierung der Behauptung, dass ein Programm seine Spezifikation erfüllt, als Eingabe für den Beweiser. Außerdem muss sie bei einem Spezifikationsfehler den gescheiterten Beweisversuch, welcher vom Beweiser als Ausgabe geliefert wird, als Gegenbeispiel formulieren. Nicht erfolgreiche Beweisversuche können sowohl Folge unzureichender Annahmen als auch fehlerhafter Implementierungen sein.%
@@ -72,6 +62,16 @@ Die Schnittstelle zwischen \textit{Worthwhile} und dem Beweiser ist zuständig f
     \item [Muss] Aufrufen des Beweisers
     \item [Muss] Behandlung von Fehlermeldungen des Beweisers, welche die prädikatenlogische Übersetzung einer Spezifikation betreffen%
     \item [Abgrenzung] Keine automatische Findung von Schleifeninvarianten
+\end{description}%
+
+\subsection{Grafische Benutzeroberfl"ache}%
+
+Die grafische Benutzeroberfl"ache dient zur Steuerung der einzelnen Komponenten des Systems sowie der Anzeige von R"uckmeldungen der (externen) Module des Werkzeugs.%
+
+\begin{description}%
+    \item [Muss] Die Sprache der Benutzeroberfläche ist Englisch.%
+    \item [Abgrenzung] Die Benutzeroberfläche enthält nur Optionen und Funktionen, die der besseren oder einfacheren Eingabe und Analyse eines Programms durch den Benutzer zutr"aglich sind.%
+    \item [Wunsch] Es werden zur besseren Lesbarkeit Unicode-""Symbole f"ur logische Operatoren und Quantoren angezeigt.%
 \end{description}%
 
 \subsection{Dokumentation und Beispielsammlung}%

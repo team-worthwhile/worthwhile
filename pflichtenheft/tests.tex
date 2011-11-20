@@ -74,9 +74,9 @@
 		\testspec{Korrektes Verhalten des Interpreters bei Ausführung der Debug-""Operationen}
 		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
 		{\begin{enumerate}
-			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Haltepunkte gesetzt.
+			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Breakpoints gesetzt.
 			\item Der Interpreter wird über den entsprechenden Befehl im Debug-""Modus gestartet.
-			\item Nach Anhalten des Programms an einem Haltepunkt werden mehrmals hintereinander der Einzelschritt-""Befehl und der Überspringen-""Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Funktionsaufrufe befinden.
+			\item Nach Anhalten des Programms an einem Breakpoint werden mehrmals hintereinander der Einzelschritt-""Befehl und der Überspringen-""Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Funktionsaufrufe befinden.
 			\item Es wird einer der folgenden Schritte ausgeführt (der Testfall muss zweimal durchgeführt werden, damit beide Schritte abgedeckt werden):
 			\begin{enumerate}
 			\item Der Programmablauf wird durch den entsprechenden Befehl abgebrochen.
@@ -85,13 +85,13 @@
 			\item Wie oben, allerdings wird der Interpreter im Ausführungsmodus gestartet.
 		\end{enumerate}}
 		{\begin{enumerate}
-			\item Die Haltepunkte werden im Editor und in der Haltepunktübersicht angezeigt.
-			\item Nach Ausführen des Programms im Debug-""Modus hält der Interpreter vor der Zeile, die den ersten Haltepunkt enthält.
+			\item Die Breakpoints werden im Editor und in der Breakpoint-Übersicht angezeigt.
+			\item Nach Ausführen des Programms im Debug-""Modus hält der Interpreter vor der Zeile, die den ersten Breakpoint enthält.
 			\item Bei Ausführung des Einzelschritt-""Befehls führt der Interpreter den nächsten Befehl aus, wobei er in Funktionsaufrufe springt.
 			\item Bei Ausführung des Überspringen-""Befehls führt der Interpreter den nächsten Befehl aus, wobei er nicht in Funktionsaufrufe springt.
 			\item Bei Ausführung des Abbruchbefehls wird der Programmablauf sofort abgebrochen.
-			\item Bei Ausführung des Fortsetzen-""Befehls führt der Interpreter das Programm bis zum nächsten Haltepunkt bzw.\ bis zum Programmende aus.
-			\item Nach Ausführen des Programms im Ausführungsmodus ignoriert der Interpreter die Haltepunkte und führt das Programm bis zum Ende aus.
+			\item Bei Ausführung des Fortsetzen-""Befehls führt der Interpreter das Programm bis zum nächsten Breakpoint bzw.\ bis zum Programmende aus.
+			\item Nach Ausführen des Programms im Ausführungsmodus ignoriert der Interpreter die Breakpoints und führt das Programm bis zum Ende aus.
 			\item Bei Ausführung im Debug- und Ausführungsmodus verhält sich das Programm gleich (beispielsweise in Bezug auf Terminierung des Programmablaufs).
 		\end{enumerate}}
 	}
@@ -110,10 +110,10 @@
 	
 	\req{06}{Ändern von Variablenwerten während der Ausführung eines Programms}{
 		\testspec{Korrekte Auswirkung der Änderung von Variablenwerten}
-		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, für das mehrere Haltepunkte gesetzt sind.}
+		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, für das mehrere Breakpoints gesetzt sind.}
 		{\begin{enumerate}
 			\item Der Benutzer startet den Interpreter im Debug-""Modus.	
-			\item Nach Halt des Interpreters an einem der Haltepunkte gibt der Benutzer im Fenster zur Ausdrucksauswertung einige Ausdrücke ein, darunter sowohl gültige als auch ungültige (Syntaxfehler, nicht deklarierte Variablen etc.).
+			\item Nach Halt des Interpreters an einem der Breakpoints gibt der Benutzer im Fenster zur Ausdrucksauswertung einige Ausdrücke ein, darunter sowohl gültige als auch ungültige (Syntaxfehler, nicht deklarierte Variablen etc.).
 			\item Der Benutzer ändert im Variablenfenster die Werte von Variablen so, dass der Programmablauf dadurch beeinflusst wird (zum Beispiel Abbruch einer Schleife).
 			\item Der Benutzer setzt die Programmausführung fort.
 		\end{enumerate}}
@@ -129,14 +129,14 @@
 		{Die Entwicklungsumgebung ist gestartet.}
 		{\begin{enumerate}
 			\item Der Benutzer öffnet eine Datei.
-			\item Der Benutzer setzt einen Haltepunkt in der Datei.
+			\item Der Benutzer setzt einen Breakpoint in der Datei.
 			\item Der Benutzer öffnet den Einstellungsdialog und verändert alle Einstellungen so, dass sie nicht den Standardeinstellungen entsprechen.
 			\item Der Benutzer beendet die GUI und startet sie erneut.
 			\item Der Benutzer öffnet den Einstellungsdialog.
 		\end{enumerate}}
 		{\begin{enumerate}
 			\item Nach dem erneuten Starten der GUI werden die beim Beenden geöffneten Dateien erneut geladen.
-			\item Der gesetzte Haltepunkt ist vorhanden.
+			\item Der gesetzte Breakpoint ist vorhanden.
 			\item Die Einstellungen im Einstellungsdialog entsprechen den vorher getroffenen Einstellungen, weichen also insbesondere von den Standardeinstellungen ab.
 		\end{enumerate}}
 	}

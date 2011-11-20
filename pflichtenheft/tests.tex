@@ -28,7 +28,7 @@
 	\req{02}{Fehlerhafte Programme}{
 		\testspec
 		{Korrektes Verhalten des Parsers, Interpreters und Beweisers bei Programmen, die nicht der Sprachspezifikation entsprechen}
-		{Die Entwicklungsumgebung ist gestartet und es ist kein Programm geladen.}
+		{Die GUI ist gestartet und es ist kein Programm geladen.}
 		{
 			\begin{enumerate}
 				\item Öffnen des Testprogramms:
@@ -59,22 +59,22 @@
 	
 	\req{03}{Syntaxhervorhebung im Editor}{
 		\testspec{Korrekte Syntaxhervorhebung im Editor}
-		{Die Entwicklungsumgebung ist gestartet.}
+		{Die GUI ist gestartet.}
 		{\begin{enumerate}
 			\item Es wird ein Programm geladen, das alle definierten Sprachkonstrukte mindestens einmal enthält.
 		\end{enumerate}}
 		{
 		\begin{enumerate}
-			\item Es werden alle in der Sprache definierten Elemente~(Schlüsselwörter, Funktions- und Variablennamen, Kommentare, Zahlen) gemäß den Einstellungen in der Entwicklungsumgebung hervorgehoben.
+			\item Es werden alle in der Sprache definierten Elemente~(Schlüsselwörter, Funktions- und Variablennamen, Kommentare, Zahlen) gemäß den Einstellungen im Editor hervorgehoben.
 		\end{enumerate}
 		}
 	}
 	
 	\req{04}{Debuggen eines Programms}{
 		\testspec{Korrektes Verhalten des Interpreters bei Ausführung der Debug-""Operationen}
-		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
+		{Die GUI ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
 		{\begin{enumerate}
-			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Breakpoints gesetzt.
+			\item Mittels des entsprechenden Befehls in der GUI werden ein oder mehrere Breakpoints gesetzt.
 			\item Der Interpreter wird über den entsprechenden Befehl im Debug-""Modus gestartet.
 			\item Nach Anhalten des Programms an einem Breakpoint werden mehrmals hintereinander der Einzelschritt-""Befehl und der Überspringen-""Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Funktionsaufrufe befinden.
 			\item Es wird einer der folgenden Schritte ausgeführt (der Testfall muss zweimal durchgeführt werden, damit beide Schritte abgedeckt werden):
@@ -98,7 +98,7 @@
 	
 	\req{05}{Ansprechbarkeit der Benutzeroberfläche}{
 		\testspec{Ansprechbarkeit der Benutzeroberfläche bei Ausführung eines Programms}
-		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und eine Endlosschleife enthält.}
+		{Die GUI ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und eine Endlosschleife enthält.}
 		{\begin{enumerate}
 			\item Der Benutzer startet den Interpreter.	
 			\item Während der Interpreter läuft, bricht der Benutzer das Programm durch den entsprechenden Befehl ab.
@@ -110,7 +110,7 @@
 	
 	\req{06}{Ändern von Variablenwerten während der Ausführung eines Programms}{
 		\testspec{Korrekte Auswirkung der Änderung von Variablenwerten}
-		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, für das mehrere Breakpoints gesetzt sind.}
+		{Die GUI ist gestartet und es ist ein Programm geladen, für das mehrere Breakpoints gesetzt sind.}
 		{\begin{enumerate}
 			\item Der Benutzer startet den Interpreter im Debug-""Modus.	
 			\item Nach Halt des Interpreters an einem der Breakpoints gibt der Benutzer im Fenster zur Ausdrucksauswertung einige Ausdrücke ein, darunter sowohl gültige als auch ungültige (Syntaxfehler, nicht deklarierte Variablen etc.).
@@ -126,7 +126,7 @@
 	
 	\req{07}{Korrekte Speicherung der Optionen}{
 		\testspec{Korrektes Speichern und Laden der Optionen in der GUI}
-		{Die Entwicklungsumgebung ist gestartet.}
+		{Die GUI ist gestartet.}
 		{\begin{enumerate}
 			\item Der Benutzer öffnet eine Datei.
 			\item Der Benutzer setzt einen Breakpoint in der Datei.
@@ -144,7 +144,7 @@
 	\req{08}{Testen des Überprüfers}{
 		\testspec
 		{Korrektes Funktionieren der Schnittstelle zum Überprüfer}
-		{Die Entwicklungsumgebung ist gestartet und es ist kein Programm geladen.}
+		{Die GUI ist gestartet und es ist kein Programm geladen.}
 		{
 			\begin{enumerate}
 				\item Öffnen des Testprogramms:

@@ -30,7 +30,7 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 	\begin{reqlist}{FA}
 		\req{030}{Axiome}{Die Annotationssprache lässt die Angabe von Axiomen (globale Annahmen) zu, die in allen Gültigkeitsbereichen als wahr vorausgesetzt werden.}
 		\req{040}{Invarianten}{Die Sprache lässt die Angabe von Aussagen über Schleifeninvarianten zu.}
-		\req{050}{Vor- und Nachbedingungen}{Die Sprache lässt die Angabe von Vor- und Nachbedingungen für Methoden zu.}%
+		\req{050}{Vor- und Nachbedingungen}{Die Sprache lässt die Angabe von Vor- und Nachbedingungen für Funktionen zu.}%
 	\end{reqlist}
 
 
@@ -98,7 +98,7 @@ Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-Sprache} zur Ve
 Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unterbrochen, sind folgende Debugger-Funktionen verf"ugbar:%
 
 	\begin{reqlist}{FI}%
-		\req{040}{Einzelschritt}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Methodenaufruf war, wird im n"achsten Schritt mit der ersten Anweisung der aufgerufenen Methode fortgefahren.}
+		\req{040}{Einzelschritt}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird im n"achsten Schritt mit der ersten Anweisung der aufgerufenen Funktion fortgefahren.}
 	\end{reqlist}
 % TODO Sollkriterien
 	\begin{reqlist}{FI}
@@ -106,7 +106,7 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unt
 	\end{reqlist}
 % TODO Wunschkriterien
 		\begin{reqlist}{FI}
-			\req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Methodenaufruf war, wird die aufgerufene Methode entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
+			\req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird die aufgerufene Funktion entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
 		\end{reqlist}
 
 \subsection{Beweiserschnittstelle}%

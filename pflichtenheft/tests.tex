@@ -37,8 +37,8 @@
 						\req{02b}{Fehlender Leerraum}{Es werden in einem korrekten Programm Leerzeichen so gelöscht, dass das resultierende Programm nicht mehr der Sprachspezifikation entspricht.}
 						\req{02c}{Fehlende/überflüssige Operanden}{Es wird eine binäre mathematische oder logische Operation mit nur einem Operanden oder eine unäre mathematische oder logische Operation mit zwei Operanden aufgerufen.}
 						\req{02d}{Operanden vom falschen Typ}{Es wird eine mathematische oder logische Operation mit Operanden aufgerufen, die nicht dem von der Operation geforderten Typ entsprechen. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}
-						\req{02e}{Ungültige Parameter bei Methodenaufruf}{In einem Methodenaufruf werden Parameter übergeben, die in Anzahl und/oder Typ nicht der Methodensignatur entsprechen. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}	
-						\req{02f}{Fehlerhafter Methodenaufruf}{Es wird versucht, eine nicht deklarierte Methode aufzurufen.}
+						\req{02e}{Ungültige Parameter bei Funktionsaufruf}{In einem Funktionsaufruf werden Parameter übergeben, die in Anzahl und/oder Typ nicht der Funktionssignatur entsprechen. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}	
+						\req{02f}{Fehlerhafter Funktionsaufruf}{Es wird versucht, eine nicht deklarierte Funktion aufzurufen.}
 						\req{02g}{Verwenden nicht deklarierter Variablen}{Es wird versucht, eine Variable zu verwenden, die nicht deklariert wurde. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation das Deklarieren der Variablen vor ihrer Verwendung vorschreibt.}}
 						\req{02h}{Unerlaubte Typkonvertierung}{Es wird versucht, einer Variable einen Wert zuzuweisen, der nicht ihrem Typ entspricht. \\ \emph{Dieser Testfall findet nur Anwendung, wenn die Sprachspezifikation eine automatische Typkonvertierung von Variablen nicht erlaubt.}}
 					\end{reqlist}
@@ -76,7 +76,7 @@
 		{\begin{enumerate}
 			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Haltepunkte gesetzt.
 			\item Der Interpreter wird über den entsprechenden Befehl im Debug-Modus gestartet.
-			\item Nach Anhalten des Programms an einem Haltepunkt werden mehrmals hintereinander der Einzelschritt-Befehl und der Überspringen-Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Methodenaufrufe befinden.
+			\item Nach Anhalten des Programms an einem Haltepunkt werden mehrmals hintereinander der Einzelschritt-Befehl und der Überspringen-Befehl ausgeführt. Dabei sollen beide Befehle auch in Zeilen ausgeführt werden, in denen sich Funktionsaufrufe befinden.
 			\item Es wird einer der folgenden Schritte ausgeführt (der Testfall muss zweimal durchgeführt werden, damit beide Schritte abgedeckt werden):
 			\begin{enumerate}
 			\item Der Programmablauf wird durch den entsprechenden Befehl abgebrochen.
@@ -87,8 +87,8 @@
 		{\begin{enumerate}
 			\item Die Haltepunkte werden im Editor und in der Haltepunktübersicht angezeigt.
 			\item Nach Ausführen des Programms im Debug-Modus hält der Interpreter vor der Zeile, die den ersten Haltepunkt enthält.
-			\item Bei Ausführung des Einzelschritt-Befehls führt der Interpreter den nächsten Befehl aus, wobei er in Methodenaufrufe springt.
-			\item Bei Ausführung des Überspringen-Befehls führt der Interpreter den nächsten Befehl aus, wobei er nicht in Methodenaufrufe springt.
+			\item Bei Ausführung des Einzelschritt-Befehls führt der Interpreter den nächsten Befehl aus, wobei er in Funktionsaufrufe springt.
+			\item Bei Ausführung des Überspringen-Befehls führt der Interpreter den nächsten Befehl aus, wobei er nicht in Funktionsaufrufe springt.
 			\item Bei Ausführung des Abbruchbefehls wird der Programmablauf sofort abgebrochen.
 			\item Bei Ausführung des Fortsetzen-Befehls führt der Interpreter das Programm bis zum nächsten Haltepunkt bzw. bis zum Programmende aus.
 			\item Nach Ausführen des Programms im Ausführungsmodus ignoriert der Interpreter die Haltepunkte und führt das Programm bis zum Ende aus.
@@ -151,7 +151,7 @@
 					\begin{reqlist}{T}
 						\req{08a}{Testprogramm für Annotationen}{Ein Programm, welches je mindestens eine Annotation jedes Annotationstyps enthält.}
 						\req{08b}{Programm mit verschachtelten Schleifen}{Ein Testprogramm mit mehreren ineinander verschachtelten \texttt{while}-Schleifen.}
-						\req{08c}{Rekursives Programm}{Ein Programm, das entweder eine Methode enthält, die sich selbst aufruft, oder mehrere Methoden, die einander zyklisch aufrufen.}
+						\req{08c}{Rekursives Programm}{Ein Programm, das entweder eine Funktion enthält, die sich selbst aufruft, oder mehrere Funktionen, die einander zyklisch aufrufen.}
 						\req{08d}{Funktionsaufrufe in Annotationen}{Ein Programm, das eine Annotation enthält, die einen Funktionsaufruf enthält.}
 					\end{reqlist}
 				\item Überprüfen des Programms durch den entsprechenden Befehl

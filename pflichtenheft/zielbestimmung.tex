@@ -64,6 +64,8 @@ In der \see{Annotationssprache} werden die vom Beweiser gepr"uften WHILE-Program
 
 \subsection{Beweiserschnittstelle}%
 
+Die Schnittstelle zwischen \textit{Worthwhile} und dem Beweiser ist zuständig für die Formulierung der Behauptung, dass ein Programm seine Spezifikation erfüllt, als Eingabe für den Beweiser. Außerdem muss sie bei einem Spezifikationsfehler den gescheiterten Beweisversuch, welcher vom Beweiser als Ausgabe geliefert wird, als Gegenbeispiel formulieren. Nicht erfolgreiche Beweisversuche können sowohl Folge unzureichender Annahmen als auch fehlerhafter Implementierungen sein.%
+
 \begin{description}%
     \item [Muss] Übersetzung eines Programms und seiner Spezifikation in eine vom Beweiser überprüfbare prädikatenlogische Formel
     \item [Muss] Übersetzung von Modellen, welche der Beweiser für die Nichterfülltheit einer Spezifikation liefert, in Aufrufe des spezifizierten WHILE-Programms%

@@ -63,13 +63,7 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-""Modus u
 
 	\begin{reqlist}{FI}%
 		\req{040}{Einzelschritt}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird im n"achsten Schritt mit der ersten Anweisung der aufgerufenen Funktion fortgefahren.}
-	\end{reqlist}
-% TODO Sollkriterien
-	\begin{reqlist}{FI}
 		\req{060}{Ausdrucksauswertung}{Der Interpreter kann bei pausierter Programmausf"uhrung einen Ausdruck interpretieren und auswerten, der im aktuellen Zustand des Programms g\"{u}ltig ist. Parserfehler in einem Ausdruck werden erkannt und ausgegeben.}
-	\end{reqlist}
-% TODO Wunschkriterien
-		\begin{reqlist}{FI}
 			\req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird die aufgerufene Funktion entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
 		\end{reqlist}
 
@@ -78,10 +72,27 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-""Modus u
 Zur Prüfung von Annotationen durch den Run-time-""Checker gibt der Programmzustand die festen Belegungen der in den Annotationsaussagen referenzierten Variablen vor.%
 
 \begin{reqlist}{FR}%
-    \req{010}{Prüfung von Zusicherungen}{Eine Zusicherung ist genau dann erfüllt, wenn ihre Aussage über den Programmzustand wahr ist.}%
+    \req{010}{Prüfung von Zusicherungen}{Der Run-time-""Checker kann im Programm eingebettete Zusicherungen zur Laufzeit überprüfen. Eine Zusicherung ist genau dann erfüllt, wenn ihre Aussage über den Programmzustand wahr ist.}%
     \req{020}{Prüfung von Annahmen}{Annahmen werden als Zusicherungen ausgewertet.}%
-    \req{030}{Prüfung von Aussagen über uneingeschränktem Bereich}{Wenn Formeln über uneingeschränktem Definitionsbereich ausgewertet werden, werden diese dem Beweiser zusammen mit der Programmspezifikation und dem -zustand übergeben.}%
-\end{reqlist}%
+\end{reqlist}
+
+In beiden Fällen gibt es mehrere Möglichkeiten der Auswertung:
+
+\begin{itemize}
+		\item
+		\begin{reqlist}{FR}%    
+	    \req{030}{Prüfung von unquantifizierten Formeln}{Aussagen, die keine Quantoren enthalten, kann der Run-time-""Checker selbst überprüfen.}%
+	    \end{reqlist}%
+	    \item
+	    \begin{reqlist}{FR}%  
+       \req{030}{Prüfung von quantifizierten Formeln über eingeschränktem Bereich}{Formeln über eingeschränktem Definitionsbereich kann der Run-time-""Checker ebenfalls selbst überprüfen.}%
+       \end{reqlist}%
+       
+       \item
+       \begin{reqlist}{FR}%  
+    	\req{030}{Prüfung von quantifizierten Formeln über uneingeschränktem Bereich}{Wenn Formeln über uneingeschränktem Definitionsbereich ausgewertet werden, werden diese dem Beweiser zusammen mit der Programmspezifikation und dem -zustand übergeben.}%
+	\end{reqlist}%
+\end{itemize}
 
 \subsection{Beweiserschnittstelle}%
 
@@ -94,46 +105,33 @@ Zur Prüfung von Annotationen durch den Run-time-""Checker gibt der Programmzust
 \subsection{Grafische Benutzeroberfläche (GUI)}
 % TODO Nummerierung
 \begin{reqlist}{FG}
-		\req{060}{Breakpoints}{Der Benutzer kann Breakpoints direkt im Editor setzen und löschen.}
-		\req{070}{Breakpoint-""\"{U}bersicht}{Die GUI listet in einem separaten Fenster alle gesetzten Breakpoints auf. Der Benutzer kann direkt in diesem Fenster Breakpoints editieren und löschen.}
 		\req{090}{Programmausf"uhrung}{Der Benutzer kann den Interpreter aus der GUI heraus starten, wobei die Wahl zwischen dem Debug- und dem Ausf\"{u}hrungsmodus besteht.}
 		\req{130}{Beweiseraufruf}{Es existiert ein GUI-""Befehl, um die Programmspezifikation vom Beweiser überprüfen zu lassen.}
-% TODO Musskriterien
+		\req{060}{Breakpoints}{Der Benutzer kann Breakpoints direkt im Editor setzen und löschen.}
+		\req{080}{Fehler\"{u}bersicht}{In einem separaten Fenster wird eine \"{U}bersicht aller Parserfehler mit einer Fehlerbeschreibung angezeigt. Aus dieser Liste kann der Benutzer den Editor an der Fehlerposition aufrufen.}
+		\req{070}{Breakpoint-""\"{U}bersicht}{Die GUI listet in einem separaten Fenster alle gesetzten Breakpoints auf. Der Benutzer kann direkt in diesem Fenster Breakpoints editieren und löschen.}
 		\req{010}{Hilfe}{Der Benutzer kann die Dokumentation zur Programmiersprache aus der Entwicklungsumgebung heraus über einen Befehl aufrufen.}
 	    \req{010}{Aufruf der Beispielsammlung}{Der Benutzer kann eine Liste der mitgelieferten Beispielprogramme aufrufen. Nach Auswahl eines Beispielprogramms lädt die Entwicklungsumgebung dieses Programm.}
-% TODO Sollkriterien
-		\req{080}{Fehler\"{u}bersicht}{In einem separaten Fenster wird eine \"{U}bersicht aller Parserfehler mit einer Fehlerbeschreibung angezeigt. Aus dieser Liste kann der Benutzer den Editor an der Fehlerposition aufrufen.}
-\end{reqlist}
-% TODO Wunschkriterien
-\begin{reqlist}{FG}
+	    \req{030}{Laden von Beispielprogrammen aus der Dokumentation heraus}{Der Benutzer kann ein in der Hilfe gezeigtes Beispielprogramm direkt aus dem Hilfefenster in den Editor laden, um es dort auszuführen.}
 		\req{020}{Kontextsensitive Hilfe}{Der Benutzer kann die Dokumentation zu einem gerade ausgewählten Element der Programmier- oder Annotationssprache über einen Befehl aufrufen.}
-		\req{030}{Laden von Beispielprogrammen aus der Dokumentation heraus}{Der Benutzer kann ein in der Hilfe gezeigtes Beispielprogramm direkt aus dem Hilfefenster in den Editor laden, um es dort auszuführen.}
 \end{reqlist}
 
 \subsubsection{Editor-""Funktionen}
 
 Die GUI stellt einen Editor f\"{u}r die spezifizierte \see{WHILE-""Sprache} zur Verf\"{u}gung. Folgende Funktionen unterst\"{u}tzen den Benutzer bei der Eingabe des Programmcodes:
 
-% TODO Musskriterien
 	\begin{reqlist}{FG}
 		\req{140}{Ergebnisse des Beweisers}{Nach Beendigung des Beweisers gibt das Programm das entsprechende Ergebnis auf dem Bildschirm aus. Die mögliche Angabe eines Gegenbeispiels wird übersetzt und die entsprechende Annotation im Code kenntlich gemacht. Eine mögliche Fehlerstelle wird ebenfalls im Code markiert.}
-	\end{reqlist}
-% TODO Sollkriterien
-	\begin{reqlist}{FG}
 		\req{050}{Unicode-""Unterst\"{u}tzung}{Die Verwendung von Unicode-""Symbolen f"{u}r logische Operatoren und Quantoren wird unterst"{u}tzt. Dabei soll die Eingabe solcher Symbole durch die grafische Benutzeroberfl"ache erleichtert werden.}
-	\end{reqlist}
-% TODO Wunschkriterien
-	\begin{reqlist}{FG}
 		\req{010}{Syntaxhervorhebung}{Im eingegebenen Programmcode werden Elemente wie Schl\"{u}sselw\"{o}rter, Zahlen und Wahrheitswerte farblich hervorgehoben.}
-		\req{020}{Fehlerkorrektur bei der Eingabe}{Parserfehler werden direkt nach der Eingabe markiert.}
+		\req{020}{Fehlerkorrektur bei der Eingabe}{Parserfehler werden direkt nach der Eingabe an der zugehörigen Position im Editor markiert.}
 		\req{030}{Codevervollst\"{a}ndigung}{Der Benutzer hat die M\"{o}glichkeit, sich an der Cursorposition eine Liste von verf\"{u}gbaren Syntaxelementen anzeigen zu lassen.}
 	\end{reqlist}
 
 \subsubsection{Debugger-""Funktionen}
 
-% TODO Musskriterien
 	\begin{reqlist}{FG}
+		\req{120}{Variablenansicht}{In einem separaten Fenster werden bei pausierter Programmausf"uhrung die Werte aller Variablen im aktuellen G\"{u}ltigkeitsbereich angezeigt. Der Benutzer kann die Werte dieser Variablen \"{a}ndern. Nach \"{A}nderung einer Variablen werden zugeh\"{o}rige Fenster (z.~B.\ Ausdrucksauswertung) aktualisiert.}
 		\req{100}{Codemarkierung}{Bei pausierter Programmausf"uhrung wird die Codezeile mit der n\"{a}chsten Anweisung markiert.}
 		\req{110}{Ausdrucksauswertung}{Der Benutzer kann eine Liste von Ausdr\"{u}cken angeben, die bei jeder Pausierung einer Programmausf"uhrung ausgewertet werden und deren Auswertung in einem Teilbereich der GUI angezeigt werden.}
-		\req{120}{Variablenansicht}{In einem separaten Fenster werden bei pausierter Programmausf"uhrung die Werte aller Variablen im aktuellen G\"{u}ltigkeitsbereich angezeigt. Der Benutzer kann die Werte dieser Variablen \"{a}ndern. Nach \"{A}nderung einer Variablen werden zugeh\"{o}rige Fenster (z.~B.\ Ausdrucksauswertung) aktualisiert.}
 	\end{reqlist}

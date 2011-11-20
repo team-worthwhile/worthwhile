@@ -301,4 +301,30 @@
        </factory>
     </extension>
 
+<extension point="org.eclipse.ui.popupMenus">
+   <viewerContribution
+     targetID="org.xtext.example.mydsl.MyDsl.RulerContext"
+     id="example.RulerPopupActions">
+       <action
+         label="Enable Breakpoint"
+         class="org.eclipse.debug.ui.actions.RulerEnableDisableBreakpointActionDelegate"
+         menubarPath="additions"
+         id="example.rulerContextMenu.toggleBreakpointAction">
+       </action>
+   </viewerContribution>
+   </extension>
+
+<extension point="org.eclipse.ui.popupMenus">
+     <viewerContribution id="org.xtext.example.mydsl.ui.RulerPopupActions"
+                targetID="org.xtext.example.mydsl.MyDsl.RulerContext">
+
+      <action
+           id="org.xtext.example.mydsl.toggleBreakpointAction" label="Toggle Breakpoint"
+           class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+           menubarPath="additions">
+     </action>
+</viewerContribution>   
+</extension>
+
+
 </plugin>

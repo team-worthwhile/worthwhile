@@ -17,7 +17,7 @@ public class MyExtendedEditor extends XtextEditor {
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
 		// TODO Auto-generated method stub
 		super.rulerContextMenuAboutToShow(menu);
-		menu.appendToGroup("debug", new ToggleBreakpointAction(this, null, this.getVerticalRuler()));
+		// menu.appendToGroup("debug", new ToggleBreakpointAction(this, null, this.getVerticalRuler()));
 		menu.add(new IAction() {
 
 			@Override

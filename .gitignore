@@ -7,3 +7,5 @@
 *.toc
 *.make
 *.fls
+# pdfs
+pflichtenheft.pdf

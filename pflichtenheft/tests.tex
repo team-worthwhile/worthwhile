@@ -59,7 +59,7 @@
 	
 	\req{03}{Syntaxhervorhebung im Editor}{
 		\testspec{Korrekte Syntaxhervorhebung im Editor}
-		{keine}
+		{Die Entwicklungsumgebung ist gestartet.}
 		{\begin{enumerate}
 			\item Es wird ein Programm geladen, das alle definierten Sprachkonstrukte mindestens einmal enthält.
 		\end{enumerate}}
@@ -72,7 +72,7 @@
 	
 	\req{04}{Debuggen eines Programms}{
 		\testspec{Korrektes Verhalten des Interpreters bei Ausführung der Debug-""Operationen}
-		{Es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
+		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und alle definierten Sprachkonstrukte mindestens einmal enthält.}
 		{\begin{enumerate}
 			\item Mittels des entsprechenden Befehls in der Entwicklungsumgebung werden ein oder mehrere Haltepunkte gesetzt.
 			\item Der Interpreter wird über den entsprechenden Befehl im Debug-""Modus gestartet.
@@ -98,7 +98,7 @@
 	
 	\req{05}{Ansprechbarkeit der Benutzeroberfläche}{
 		\testspec{Ansprechbarkeit der Benutzeroberfläche bei Ausführung eines Programms}
-		{Es ist ein Programm geladen, das der Sprachspezifikation entspricht und eine Endlosschleife enthält.}
+		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, das der Sprachspezifikation entspricht und eine Endlosschleife enthält.}
 		{\begin{enumerate}
 			\item Der Benutzer startet den Interpreter.	
 			\item Während der Interpreter läuft, bricht der Benutzer das Programm durch den entsprechenden Befehl ab.
@@ -110,7 +110,7 @@
 	
 	\req{06}{Ändern von Variablenwerten während der Ausführung eines Programms}{
 		\testspec{Korrekte Auswirkung der Änderung von Variablenwerten}
-		{Es ist ein Programm geladen und mehrere Haltepunkte sind im Programm gesetzt.}
+		{Die Entwicklungsumgebung ist gestartet und es ist ein Programm geladen, für das mehrere Haltepunkte gesetzt sind.}
 		{\begin{enumerate}
 			\item Der Benutzer startet den Interpreter im Debug-""Modus.	
 			\item Nach Halt des Interpreters an einem der Haltepunkte gibt der Benutzer im Fenster zur Ausdrucksauswertung einige Ausdrücke ein, darunter sowohl gültige als auch ungültige (Syntaxfehler, nicht deklarierte Variablen etc.).
@@ -126,7 +126,7 @@
 	
 	\req{07}{Korrekte Speicherung der Optionen}{
 		\testspec{Korrektes Speichern und Laden der Optionen in der GUI}
-		{Die GUI ist geöffnet.}
+		{Die Entwicklungsumgebung ist gestartet.}
 		{\begin{enumerate}
 			\item Der Benutzer öffnet eine Datei.
 			\item Der Benutzer setzt einen Haltepunkt in der Datei.

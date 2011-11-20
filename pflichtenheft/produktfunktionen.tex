@@ -109,6 +109,16 @@ Ist eine Programmausf"uhrung nach Erreichen eines Breakpoints im Debug-Modus unt
 			\req{050}{\"{U}berspringen}{Die n\"{a}chste Anweisung wird ausgef\"{u}hrt und anschlie"send wird die Ausf\"{u}hrung des Programms pausiert. Wenn die ausgef"uhrte Anweisung ein Funktionsaufruf war, wird die aufgerufene Funktion entweder bis zum Erreichen eines Breakpoints oder einschlie"slich des R"ucksprungs ausgef"uhrt.}
 		\end{reqlist}
 
+\subsection{Run-time-Checker}%
+
+Zur Prüfung von Annotationen durch den Run-time-Checker gibt der Programmzustand die festen Belegungen der in den Annotationsaussagen referenzierten Variablen vor.%
+
+\begin{reqlist}{FR}%
+    \req{010}{Prüfung von Zusicherungen}{Eine Zusicherung ist genau dann erfüllt, wenn ihre Aussage über den Programmzustand wahr ist.}%
+    \req{020}{Prüfung von Annahmen}{Annahmen werden als Zusicherungen ausgewertet.}%
+    \req{030}{Prüfung von Aussagen über uneingeschränktem Bereich}{Wenn Formeln über uneingeschränktem Definitionsbereich ausgewertet werden, werden diese dem Beweiser zusammen mit der Programmspezifikation und dem -zustand übergeben.}%
+\end{reqlist}%
+
 \subsection{Beweiserschnittstelle}%
 
 	\begin{reqlist}{FP}

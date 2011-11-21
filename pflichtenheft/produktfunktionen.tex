@@ -40,8 +40,10 @@ Ein vom Benutzer eingegebenes Programm muss den Spezifikationen der im folgenden
 \subsection{Interpreter}
 
 % TODO Musskriterien
-    \req{005}{Breakpoints}{Der Benutzer kann Stellen im Programm definieren, an denen die Ausführung im Debug-Modus anhält.}
-    \req{007}{Conditional Breakpoints}{Breakpoints kann eine Bedingung zugeordnet werden, die beim Erreichen des Breakpoints überprüft wird. Wird die Bedingung bei dieser Überprüfung nicht erfüllt, wird die Programmausführung durch den Breakpoint nicht unterbrochen.}
+    \begin{reqlist}{FI}
+        \req{005}{Breakpoints}{Der Benutzer kann Stellen im Programm definieren, an denen die Ausführung im Debug-Modus anhält.}
+        \req{007}{Conditional Breakpoints}{Breakpoints kann eine Bedingung zugeordnet werden, die beim Erreichen des Breakpoints überprüft wird. Wird die Bedingung bei dieser Überprüfung nicht erfüllt, wird die Programmausführung durch den Breakpoint nicht unterbrochen.}
+    \end{reqlist}
 
 	Der \see{Interpreter} kann ein Programm in einem von zwei verschiedenen Modi ausf"{u}hren:
 

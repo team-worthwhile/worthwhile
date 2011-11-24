@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Model#getFunctions <em>Functions</em>}</li>
  * </ul>
  * </p>
  *
@@ -42,5 +43,21 @@ public interface Model extends EObject
    * @generated
    */
   EList<Statement> getStatements();
+
+  /**
+   * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.FunctionDeclaration}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Functions</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Functions</em>' containment reference list.
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getModel_Functions()
+   * @model containment="true"
+   * @generated
+   */
+  EList<FunctionDeclaration> getFunctions();
 
 } // Model

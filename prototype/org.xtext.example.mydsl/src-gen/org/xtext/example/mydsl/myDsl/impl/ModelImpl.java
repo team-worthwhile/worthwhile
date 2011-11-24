@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.example.mydsl.myDsl.FunctionDeclaration;
 import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Statement;
@@ -31,6 +32,7 @@ import org.xtext.example.mydsl.myDsl.Statement;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ModelImpl#getFunctions <em>Functions</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,6 +49,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected EList<Statement> statements;
+
+  /**
+   * The cached value of the '{@link #getFunctions() <em>Functions</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFunctions()
+   * @generated
+   * @ordered
+   */
+  protected EList<FunctionDeclaration> functions;
 
   /**
    * <!-- begin-user-doc -->
@@ -88,6 +100,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<FunctionDeclaration> getFunctions()
+  {
+    if (functions == null)
+    {
+      functions = new EObjectContainmentEList<FunctionDeclaration>(FunctionDeclaration.class, this, MyDslPackage.MODEL__FUNCTIONS);
+    }
+    return functions;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -95,6 +121,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case MyDslPackage.MODEL__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.MODEL__FUNCTIONS:
+        return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -111,6 +139,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case MyDslPackage.MODEL__STATEMENTS:
         return getStatements();
+      case MyDslPackage.MODEL__FUNCTIONS:
+        return getFunctions();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -130,6 +160,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         getStatements().clear();
         getStatements().addAll((Collection<? extends Statement>)newValue);
         return;
+      case MyDslPackage.MODEL__FUNCTIONS:
+        getFunctions().clear();
+        getFunctions().addAll((Collection<? extends FunctionDeclaration>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -147,6 +181,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case MyDslPackage.MODEL__STATEMENTS:
         getStatements().clear();
         return;
+      case MyDslPackage.MODEL__FUNCTIONS:
+        getFunctions().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -163,6 +200,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case MyDslPackage.MODEL__STATEMENTS:
         return statements != null && !statements.isEmpty();
+      case MyDslPackage.MODEL__FUNCTIONS:
+        return functions != null && !functions.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -1,8 +1,6 @@
 package org.xtext.example.mydsl.interpreter;
 
 import org.eclipse.emf.ecore.EObject;
-import org.xtext.example.mydsl.myDsl.Greeting;
-import org.xtext.example.mydsl.myDsl.WhileStatement;
 
 import de.itemis.interpreter.ExecutionContext;
 import de.itemis.interpreter.InterpreterException;
@@ -18,24 +16,6 @@ public class MyDslStatementExecutor extends AbstractMyDslStatementExecutor {
 		// Hier kommen nachher die Breakpoints rein
 		System.out.println("MyDslStatementExecutor.execute(, " + statement.toString() + ")'");
 		super.execute(statement, parentLog);
-	}
-
-	@Override
-	protected void executeWhileStatement(WhileStatement s, LogEntry log)
-			throws InterpreterException {
-		
-			System.out.println("Simulating a while loop ...");
-			
-			for (int i = 0; i < 5; i++) {
-				ctx.getExecutor().execute(s.getStatements(), log);
-			}
-	}
-
-	@Override
-	protected void executeGreeting(Greeting s, LogEntry log)
-			throws InterpreterException {
-		
-			System.out.println("I hereby execute the greeting 'Hello, " + s.getName() + "!'");
 	}
 
 	public MyDslStatementExecutor(ExecutionContext ctx) {

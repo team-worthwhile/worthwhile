@@ -7,8 +7,6 @@ package org.xtext.example.mydsl.myDsl.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
@@ -21,7 +19,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  *
  * @generated
  */
-public class ExpressionImpl extends MinimalEObjectImpl.Container implements Expression
+public class ExpressionImpl extends ExprImpl implements Expression
 {
   /**
    * <!-- begin-user-doc -->

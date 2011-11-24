@@ -20,10 +20,11 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.common.types,
  de.itemis.xtext.typesystem;bundle-version="1.0.0",
  de.itemis.xtext.typesystem.dsl;bundle-version="1.0.0"
-Import-Package: org.apache.log4j,
- org.apache.commons.logging,
+Import-Package: org.apache.commons.logging,
+ org.apache.log4j,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xtend2.lib
+ org.eclipse.xtext.xtend2.lib,
+ org.xtext.example.mydsl.myDsl
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.xtext.example.mydsl,
  org.xtext.example.mydsl.interpreter,
@@ -35,4 +36,8 @@ Export-Package: org.xtext.example.mydsl,
  org.xtext.example.mydsl.serializer,
  org.xtext.example.mydsl.services,
  org.xtext.example.mydsl.typesystem,
- org.xtext.example.mydsl.validation
+ org.xtext.example.mydsl.validation,
+ org.xtext.example.mydsl.scoping,
+ org.xtext.example.mydsl.generator,
+ org.xtext.example.mydsl.formatting
+

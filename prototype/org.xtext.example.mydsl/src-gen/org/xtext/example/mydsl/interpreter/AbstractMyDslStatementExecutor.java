@@ -23,13 +23,48 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 		LogEntry localLog = log( statement, parentLog );
 	
 		
+		if ( statement instanceof Block ) {
+			executeBlock( (Block)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof NoOp ) {
+			executeNoOp( (NoOp)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof ReturnStatement ) {
+			executeReturnStatement( (ReturnStatement)statement, localLog );
+			return;
+		}
+		
 		if ( statement instanceof WhileStatement ) {
 			executeWhileStatement( (WhileStatement)statement, localLog );
 			return;
 		}
 		
-		if ( statement instanceof Greeting ) {
-			executeGreeting( (Greeting)statement, localLog );
+		if ( statement instanceof IfStatement ) {
+			executeIfStatement( (IfStatement)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof FunctionCall ) {
+			executeFunctionCall( (FunctionCall)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof Annotation ) {
+			executeAnnotation( (Annotation)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof VariableDeclaration ) {
+			executeVariableDeclaration( (VariableDeclaration)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof Assignment ) {
+			executeAssignment( (Assignment)statement, localLog );
 			return;
 		}
 		
@@ -40,12 +75,40 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 
 	
 	
+	protected void executeBlock( Block s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeBlock not implemented");
+	} 
+	
+	protected void executeNoOp( NoOp s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeNoOp not implemented");
+	} 
+	
+	protected void executeReturnStatement( ReturnStatement s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeReturnStatement not implemented");
+	} 
+	
 	protected void executeWhileStatement( WhileStatement s, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(s, "method executeWhileStatement not implemented");
 	} 
 	
-	protected void executeGreeting( Greeting s, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(s, "method executeGreeting not implemented");
+	protected void executeIfStatement( IfStatement s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeIfStatement not implemented");
+	} 
+	
+	protected void executeFunctionCall( FunctionCall s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeFunctionCall not implemented");
+	} 
+	
+	protected void executeAnnotation( Annotation s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeAnnotation not implemented");
+	} 
+	
+	protected void executeVariableDeclaration( VariableDeclaration s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeVariableDeclaration not implemented");
+	} 
+	
+	protected void executeAssignment( Assignment s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeAssignment not implemented");
 	} 
 	
 

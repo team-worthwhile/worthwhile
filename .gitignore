@@ -9,6 +9,3 @@
 *.fls
 # pdfs
 pflichtenheft.pdf
-# java stuff
-src-gen/
-bin/

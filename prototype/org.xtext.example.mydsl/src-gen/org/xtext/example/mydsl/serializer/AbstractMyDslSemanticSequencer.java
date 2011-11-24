@@ -33,7 +33,6 @@ import org.xtext.example.mydsl.myDsl.LessOrEqualComparisonType;
 import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.Multi;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.NoOp;
 import org.xtext.example.mydsl.myDsl.NumberLiteral;
 import org.xtext.example.mydsl.myDsl.Parameter;
 import org.xtext.example.mydsl.myDsl.Plus;
@@ -226,13 +225,6 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
-			case MyDslPackage.NO_OP:
-				if(context == grammarAccess.getNoOpRule() ||
-				   context == grammarAccess.getStatementRule()) {
-					sequence_Statement(context, (NoOp) semanticObject); 
-					return; 
-				}
-				else break;
 			case MyDslPackage.NUMBER_LITERAL:
 				if(context == grammarAccess.getAdditionRule() ||
 				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
@@ -324,6 +316,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (left=Addition_Plus_1_0 right=Multiplication)
+	 *
+	 * Features:
+	 *    left[1, 1]
+	 *    right[1, 1]
 	 */
 	protected void sequence_Addition(EObject context, Plus semanticObject) {
 		if(errorAcceptor != null) {
@@ -343,6 +339,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     baseType=PrimitiveType
+	 *
+	 * Features:
+	 *    baseType[1, 1]
 	 */
 	protected void sequence_ArrayType(EObject context, ArrayType semanticObject) {
 		if(errorAcceptor != null) {
@@ -359,6 +358,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (variable=ID value=Expr)
+	 *
+	 * Features:
+	 *    variable[1, 1]
+	 *    value[1, 1]
 	 */
 	protected void sequence_Assignment(EObject context, Assignment semanticObject) {
 		if(errorAcceptor != null) {
@@ -378,6 +381,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     value=INT
+	 *
+	 * Features:
+	 *    value[1, 1]
 	 */
 	protected void sequence_Atomic(EObject context, NumberLiteral semanticObject) {
 		if(errorAcceptor != null) {
@@ -394,6 +400,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (symbol=[Symbol|ID] (actuals+=Expr? actuals+=Expr*)?)
+	 *
+	 * Features:
+	 *    symbol[1, 1]
+	 *    actuals[0, *]
 	 */
 	protected void sequence_Atomic(EObject context, SymbolRef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -403,6 +413,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (statements+=Statement*)
+	 *
+	 * Features:
+	 *    statements[0, *]
 	 */
 	protected void sequence_Block(EObject context, Block semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -412,6 +425,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {EqualComparisonType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_ComparisonType(EObject context, EqualComparisonType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -421,6 +436,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {GreaterComparisonType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_ComparisonType(EObject context, GreaterComparisonType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -430,6 +447,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {GreaterOrEqualComparisonType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_ComparisonType(EObject context, GreaterOrEqualComparisonType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -439,6 +458,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {LessComparisonType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_ComparisonType(EObject context, LessComparisonType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -448,6 +469,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {LessOrEqualComparisonType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_ComparisonType(EObject context, LessOrEqualComparisonType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -457,6 +480,11 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (left=Comparison_Equals_1_0 type=ComparisonType right=Addition)
+	 *
+	 * Features:
+	 *    left[1, 1]
+	 *    type[1, 1]
+	 *    right[1, 1]
 	 */
 	protected void sequence_Comparison(EObject context, Equals semanticObject) {
 		if(errorAcceptor != null) {
@@ -479,6 +507,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {FalseLiteral}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Expr(EObject context, FalseLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -488,6 +518,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {TrueLiteral}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Expr(EObject context, TrueLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -497,6 +529,12 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (returnType=Type name=ID (params+=Parameter params+=Parameter*)? body=Block)
+	 *
+	 * Features:
+	 *    returnType[1, 1]
+	 *    name[1, 1]
+	 *    params[0, *]
+	 *    body[1, 1]
 	 */
 	protected void sequence_FunctionDeclaration(EObject context, FunctionDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -506,6 +544,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (statements+=Statement | functions+=FunctionDeclaration)*
+	 *
+	 * Features:
+	 *    statements[0, *]
+	 *    functions[0, *]
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -515,6 +557,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (left=Multiplication_Multi_1_0 right=PostfixOperators)
+	 *
+	 * Features:
+	 *    left[1, 1]
+	 *    right[1, 1]
 	 */
 	protected void sequence_Multiplication(EObject context, Multi semanticObject) {
 		if(errorAcceptor != null) {
@@ -534,6 +580,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (type=Type name=ID)
+	 *
+	 * Features:
+	 *    type[1, 1]
+	 *    name[1, 1]
 	 */
 	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
 		if(errorAcceptor != null) {
@@ -553,6 +603,10 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (expr=PostfixOperators_ArrayAccess_1_0 index=Expr)
+	 *
+	 * Features:
+	 *    expr[1, 1]
+	 *    index[1, 1]
 	 */
 	protected void sequence_PostfixOperators(EObject context, ArrayAccess semanticObject) {
 		if(errorAcceptor != null) {
@@ -572,6 +626,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     returnExpr=Expr
+	 *
+	 * Features:
+	 *    returnExpr[1, 1]
 	 */
 	protected void sequence_ReturnStatement(EObject context, ReturnStatement semanticObject) {
 		if(errorAcceptor != null) {
@@ -588,6 +645,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {Annotation}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Statement(EObject context, Annotation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -597,6 +656,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {FunctionCall}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Statement(EObject context, FunctionCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -606,6 +667,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {IfStatement}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Statement(EObject context, IfStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -614,16 +677,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     {NoOp}
-	 */
-	protected void sequence_Statement(EObject context, NoOp semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
 	 *     {WhileStatement}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Statement(EObject context, WhileStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -633,6 +689,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {BoolType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Type(EObject context, BoolType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -642,6 +700,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     {IntType}
+	 *
+	 * Features:
 	 */
 	protected void sequence_Type(EObject context, IntType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -651,6 +711,11 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (type=Type name=ID initialValue=Expr)
+	 *
+	 * Features:
+	 *    type[1, 1]
+	 *    name[1, 1]
+	 *    initialValue[1, 1]
 	 */
 	protected void sequence_VariableDeclaration(EObject context, VariableDeclaration semanticObject) {
 		if(errorAcceptor != null) {

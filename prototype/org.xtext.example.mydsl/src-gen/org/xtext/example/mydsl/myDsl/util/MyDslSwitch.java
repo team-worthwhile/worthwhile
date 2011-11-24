@@ -97,14 +97,6 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.NO_OP:
-      {
-        NoOp noOp = (NoOp)theEObject;
-        T result = caseNoOp(noOp);
-        if (result == null) result = caseStatement(noOp);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.RETURN_STATEMENT:
       {
         ReturnStatement returnStatement = (ReturnStatement)theEObject;
@@ -417,22 +409,6 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStatement(Statement object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>No Op</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>No Op</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseNoOp(NoOp object)
   {
     return null;
   }

@@ -51,18 +51,18 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLineFeedLfKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cStatementsStatementParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
-		private final Keyword cLineFeedLfKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cStatementsStatementParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
+		//// Override the whitespace rules since we do not allow newlines to count as whitespace.
+		//// terminal WS : (' '|'\t'|'\r')+;
 		//// A block consists of multiple statement enclosed in curly brackets.
 		//Block:
-		//	{Block} "{" "\n"? statements+=Statement* "\n"? "}";
+		//	{Block} "{" statements+=Statement* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{Block} "{" "\n"? statements+=Statement* "\n"? "}"
+		//{Block} "{" statements+=Statement* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{Block}
@@ -71,104 +71,61 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//"\n"?
-		public Keyword getLineFeedLfKeyword_2() { return cLineFeedLfKeyword_2; }
-
 		//statements+=Statement*
-		public Assignment getStatementsAssignment_3() { return cStatementsAssignment_3; }
+		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
 
 		//Statement
-		public RuleCall getStatementsStatementParserRuleCall_3_0() { return cStatementsStatementParserRuleCall_3_0; }
-
-		//"\n"?
-		public Keyword getLineFeedLfKeyword_4() { return cLineFeedLfKeyword_4; }
+		public RuleCall getStatementsStatementParserRuleCall_2_0() { return cStatementsStatementParserRuleCall_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Alternatives cAlternatives_0_0 = (Alternatives)cGroup_0.eContents().get(0);
-		private final RuleCall cVariableDeclarationParserRuleCall_0_0_0 = (RuleCall)cAlternatives_0_0.eContents().get(0);
-		private final RuleCall cAssignmentParserRuleCall_0_0_1 = (RuleCall)cAlternatives_0_0.eContents().get(1);
-		private final RuleCall cBlockParserRuleCall_0_0_2 = (RuleCall)cAlternatives_0_0.eContents().get(2);
-		private final RuleCall cAnnotationParserRuleCall_0_0_3 = (RuleCall)cAlternatives_0_0.eContents().get(3);
-		private final RuleCall cFunctionCallParserRuleCall_0_0_4 = (RuleCall)cAlternatives_0_0.eContents().get(4);
-		private final RuleCall cIfStatementParserRuleCall_0_0_5 = (RuleCall)cAlternatives_0_0.eContents().get(5);
-		private final RuleCall cWhileStatementParserRuleCall_0_0_6 = (RuleCall)cAlternatives_0_0.eContents().get(6);
-		private final RuleCall cReturnStatementParserRuleCall_0_0_7 = (RuleCall)cAlternatives_0_0.eContents().get(7);
-		private final Keyword cLineFeedLfKeyword_0_1 = (Keyword)cGroup_0.eContents().get(1);
-		private final RuleCall cNoOpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVariableDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cAssignmentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cBlockParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cAnnotationParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cFunctionCallParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cIfStatementParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cWhileStatementParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cReturnStatementParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//// A statement is everything that can be executed in the program.
 		//Statement:
-		//	(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement |
-		//	ReturnStatement) "\n" | NoOp;
+		//	VariableDeclaration // ('\n' | MyEof) 
+		//	| Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement;
 		public ParserRule getRule() { return rule; }
 
-		//(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement)
-		//"\n" | NoOp
+		//VariableDeclaration // ('\n' | MyEof) 
+		//| Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement)
-		//"\n"
-		public Group getGroup_0() { return cGroup_0; }
-
-		//VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement
-		public Alternatives getAlternatives_0_0() { return cAlternatives_0_0; }
-
 		//VariableDeclaration
-		public RuleCall getVariableDeclarationParserRuleCall_0_0_0() { return cVariableDeclarationParserRuleCall_0_0_0; }
+		public RuleCall getVariableDeclarationParserRuleCall_0() { return cVariableDeclarationParserRuleCall_0; }
 
 		//Assignment
-		public RuleCall getAssignmentParserRuleCall_0_0_1() { return cAssignmentParserRuleCall_0_0_1; }
+		public RuleCall getAssignmentParserRuleCall_1() { return cAssignmentParserRuleCall_1; }
 
 		//Block
-		public RuleCall getBlockParserRuleCall_0_0_2() { return cBlockParserRuleCall_0_0_2; }
+		public RuleCall getBlockParserRuleCall_2() { return cBlockParserRuleCall_2; }
 
 		//Annotation
-		public RuleCall getAnnotationParserRuleCall_0_0_3() { return cAnnotationParserRuleCall_0_0_3; }
+		public RuleCall getAnnotationParserRuleCall_3() { return cAnnotationParserRuleCall_3; }
 
 		//FunctionCall
-		public RuleCall getFunctionCallParserRuleCall_0_0_4() { return cFunctionCallParserRuleCall_0_0_4; }
+		public RuleCall getFunctionCallParserRuleCall_4() { return cFunctionCallParserRuleCall_4; }
 
 		//IfStatement
-		public RuleCall getIfStatementParserRuleCall_0_0_5() { return cIfStatementParserRuleCall_0_0_5; }
+		public RuleCall getIfStatementParserRuleCall_5() { return cIfStatementParserRuleCall_5; }
 
 		//WhileStatement
-		public RuleCall getWhileStatementParserRuleCall_0_0_6() { return cWhileStatementParserRuleCall_0_0_6; }
+		public RuleCall getWhileStatementParserRuleCall_6() { return cWhileStatementParserRuleCall_6; }
 
 		//ReturnStatement
-		public RuleCall getReturnStatementParserRuleCall_0_0_7() { return cReturnStatementParserRuleCall_0_0_7; }
-
-		//"\n"
-		public Keyword getLineFeedLfKeyword_0_1() { return cLineFeedLfKeyword_0_1; }
-
-		//NoOp
-		public RuleCall getNoOpParserRuleCall_1() { return cNoOpParserRuleCall_1; }
-	}
-
-	public class NoOpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NoOp");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cNoOpAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLineFeedLfKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//NoOp:
-		//	{NoOp} "\n";
-		public ParserRule getRule() { return rule; }
-
-		//{NoOp} "\n"
-		public Group getGroup() { return cGroup; }
-
-		//{NoOp}
-		public Action getNoOpAction_0() { return cNoOpAction_0; }
-
-		//"\n"
-		public Keyword getLineFeedLfKeyword_1() { return cLineFeedLfKeyword_1; }
+		public RuleCall getReturnStatementParserRuleCall_7() { return cReturnStatementParserRuleCall_7; }
 	}
 
 	public class ReturnStatementElements extends AbstractParserRuleElementFinder {
@@ -178,7 +135,9 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cReturnExprAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cReturnExprExprParserRuleCall_1_0 = (RuleCall)cReturnExprAssignment_1.eContents().get(0);
 		
-		//// A return statement returns a value from a function.
+		/// *NoOp:
+		//	{NoOp}
+		//;* / // A return statement returns a value from a function.
 		//ReturnStatement:
 		//	"return" returnExpr=Expr;
 		public ParserRule getRule() { return rule; }
@@ -1057,10 +1016,9 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	private ModelElements pModel;
-	private TerminalRule tWS;
 	private BlockElements pBlock;
 	private StatementElements pStatement;
-	private NoOpElements pNoOp;
+	private TerminalRule tMyEof;
 	private ReturnStatementElements pReturnStatement;
 	private WhileStatementElements pWhileStatement;
 	private IfStatementElements pIfStatement;
@@ -1124,15 +1082,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Override the whitespace rules since we do not allow newlines to count as whitespace.
-	//terminal WS:
-	//	(" " | "\t" | "\r")+;
-	public TerminalRule getWSRule() {
-		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
-	} 
-
+	//// terminal WS : (' '|'\t'|'\r')+;
 	//// A block consists of multiple statement enclosed in curly brackets.
 	//Block:
-	//	{Block} "{" "\n"? statements+=Statement* "\n"? "}";
+	//	{Block} "{" statements+=Statement* "}";
 	public BlockElements getBlockAccess() {
 		return (pBlock != null) ? pBlock : (pBlock = new BlockElements());
 	}
@@ -1143,8 +1096,8 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// A statement is everything that can be executed in the program.
 	//Statement:
-	//	(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement |
-	//	ReturnStatement) "\n" | NoOp;
+	//	VariableDeclaration // ('\n' | MyEof) 
+	//	| Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement;
 	public StatementElements getStatementAccess() {
 		return (pStatement != null) ? pStatement : (pStatement = new StatementElements());
 	}
@@ -1153,17 +1106,15 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getStatementAccess().getRule();
 	}
 
-	//NoOp:
-	//	{NoOp} "\n";
-	public NoOpElements getNoOpAccess() {
-		return (pNoOp != null) ? pNoOp : (pNoOp = new NoOpElements());
-	}
-	
-	public ParserRule getNoOpRule() {
-		return getNoOpAccess().getRule();
-	}
+	//terminal MyEof:
+	//	EOF;
+	public TerminalRule getMyEofRule() {
+		return (tMyEof != null) ? tMyEof : (tMyEof = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "MyEof"));
+	} 
 
-	//// A return statement returns a value from a function.
+	/// *NoOp:
+	//	{NoOp}
+	//;* / // A return statement returns a value from a function.
 	//ReturnStatement:
 	//	"return" returnExpr=Expr;
 	public ReturnStatementElements getReturnStatementAccess() {
@@ -1504,6 +1455,12 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
+	} 
+
+	//terminal WS:
+	//	(" " | "\t" | "\r" | "\n")+;
+	public TerminalRule getWSRule() {
+		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:

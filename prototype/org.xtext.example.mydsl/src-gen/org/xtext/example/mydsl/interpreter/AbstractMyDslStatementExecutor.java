@@ -28,11 +28,6 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 			return;
 		}
 		
-		if ( statement instanceof NoOp ) {
-			executeNoOp( (NoOp)statement, localLog );
-			return;
-		}
-		
 		if ( statement instanceof ReturnStatement ) {
 			executeReturnStatement( (ReturnStatement)statement, localLog );
 			return;
@@ -77,10 +72,6 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 	
 	protected void executeBlock( Block s, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(s, "method executeBlock not implemented");
-	} 
-	
-	protected void executeNoOp( NoOp s, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(s, "method executeNoOp not implemented");
 	} 
 	
 	protected void executeReturnStatement( ReturnStatement s, LogEntry log )  throws InterpreterException {

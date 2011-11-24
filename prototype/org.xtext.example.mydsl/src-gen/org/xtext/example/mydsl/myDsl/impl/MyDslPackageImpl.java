@@ -37,7 +37,6 @@ import org.xtext.example.mydsl.myDsl.Model;
 import org.xtext.example.mydsl.myDsl.Multi;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.NoOp;
 import org.xtext.example.mydsl.myDsl.NumberLiteral;
 import org.xtext.example.mydsl.myDsl.Parameter;
 import org.xtext.example.mydsl.myDsl.Plus;
@@ -79,13 +78,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass statementEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass noOpEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -432,16 +424,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
   public EClass getStatement()
   {
     return statementEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getNoOp()
-  {
-    return noOpEClass;
   }
 
   /**
@@ -1053,8 +1035,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     statementEClass = createEClass(STATEMENT);
 
-    noOpEClass = createEClass(NO_OP);
-
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__RETURN_EXPR);
 
@@ -1175,7 +1155,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     // Add supertypes to classes
     blockEClass.getESuperTypes().add(this.getStatement());
-    noOpEClass.getESuperTypes().add(this.getStatement());
     returnStatementEClass.getESuperTypes().add(this.getStatement());
     whileStatementEClass.getESuperTypes().add(this.getStatement());
     ifStatementEClass.getESuperTypes().add(this.getStatement());
@@ -1213,8 +1192,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getBlock_Statements(), this.getStatement(), null, "statements", null, 0, -1, Block.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(noOpEClass, NoOp.class, "NoOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_ReturnExpr(), this.getExpr(), null, "returnExpr", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

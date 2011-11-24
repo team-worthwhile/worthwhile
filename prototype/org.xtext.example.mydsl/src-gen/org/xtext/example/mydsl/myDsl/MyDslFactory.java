@@ -53,15 +53,6 @@ public interface MyDslFactory extends EFactory
   Statement createStatement();
 
   /**
-   * Returns a new object of class '<em>No Op</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>No Op</em>'.
-   * @generated
-   */
-  NoOp createNoOp();
-
-  /**
    * Returns a new object of class '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

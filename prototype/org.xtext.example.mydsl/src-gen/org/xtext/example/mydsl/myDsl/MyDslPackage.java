@@ -144,25 +144,6 @@ public interface MyDslPackage extends EPackage
   int BLOCK_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.NoOpImpl <em>No Op</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.NoOpImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getNoOp()
-   * @generated
-   */
-  int NO_OP = 3;
-
-  /**
-   * The number of structural features of the '<em>No Op</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int NO_OP_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -170,7 +151,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getReturnStatement()
    * @generated
    */
-  int RETURN_STATEMENT = 4;
+  int RETURN_STATEMENT = 3;
 
   /**
    * The feature id for the '<em><b>Return Expr</b></em>' containment reference.
@@ -198,7 +179,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getWhileStatement()
    * @generated
    */
-  int WHILE_STATEMENT = 5;
+  int WHILE_STATEMENT = 4;
 
   /**
    * The number of structural features of the '<em>While Statement</em>' class.
@@ -217,7 +198,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getIfStatement()
    * @generated
    */
-  int IF_STATEMENT = 6;
+  int IF_STATEMENT = 5;
 
   /**
    * The number of structural features of the '<em>If Statement</em>' class.
@@ -236,7 +217,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFunctionDeclaration()
    * @generated
    */
-  int FUNCTION_DECLARATION = 7;
+  int FUNCTION_DECLARATION = 6;
 
   /**
    * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -291,7 +272,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbol()
    * @generated
    */
-  int SYMBOL = 8;
+  int SYMBOL = 7;
 
   /**
    * The number of structural features of the '<em>Symbol</em>' class.
@@ -310,7 +291,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getType()
    * @generated
    */
-  int TYPE = 9;
+  int TYPE = 8;
 
   /**
    * The number of structural features of the '<em>Type</em>' class.
@@ -329,7 +310,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPrimitiveType()
    * @generated
    */
-  int PRIMITIVE_TYPE = 10;
+  int PRIMITIVE_TYPE = 9;
 
   /**
    * The number of structural features of the '<em>Primitive Type</em>' class.
@@ -348,7 +329,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getIntType()
    * @generated
    */
-  int INT_TYPE = 11;
+  int INT_TYPE = 10;
 
   /**
    * The number of structural features of the '<em>Int Type</em>' class.
@@ -367,7 +348,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBoolType()
    * @generated
    */
-  int BOOL_TYPE = 12;
+  int BOOL_TYPE = 11;
 
   /**
    * The number of structural features of the '<em>Bool Type</em>' class.
@@ -386,7 +367,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArrayType()
    * @generated
    */
-  int ARRAY_TYPE = 13;
+  int ARRAY_TYPE = 12;
 
   /**
    * The feature id for the '<em><b>Base Type</b></em>' containment reference.
@@ -414,7 +395,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 14;
+  int FUNCTION_CALL = 13;
 
   /**
    * The number of structural features of the '<em>Function Call</em>' class.
@@ -433,7 +414,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAnnotation()
    * @generated
    */
-  int ANNOTATION = 15;
+  int ANNOTATION = 14;
 
   /**
    * The number of structural features of the '<em>Annotation</em>' class.
@@ -452,7 +433,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getVariableDeclaration()
    * @generated
    */
-  int VARIABLE_DECLARATION = 16;
+  int VARIABLE_DECLARATION = 15;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -498,7 +479,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 17;
+  int ASSIGNMENT = 16;
 
   /**
    * The feature id for the '<em><b>Variable</b></em>' attribute.
@@ -535,7 +516,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getExpr()
    * @generated
    */
-  int EXPR = 18;
+  int EXPR = 17;
 
   /**
    * The number of structural features of the '<em>Expr</em>' class.
@@ -554,7 +535,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 19;
+  int EXPRESSION = 18;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -573,7 +554,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getComparisonType()
    * @generated
    */
-  int COMPARISON_TYPE = 20;
+  int COMPARISON_TYPE = 19;
 
   /**
    * The number of structural features of the '<em>Comparison Type</em>' class.
@@ -592,7 +573,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLessComparisonType()
    * @generated
    */
-  int LESS_COMPARISON_TYPE = 21;
+  int LESS_COMPARISON_TYPE = 20;
 
   /**
    * The number of structural features of the '<em>Less Comparison Type</em>' class.
@@ -611,7 +592,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getLessOrEqualComparisonType()
    * @generated
    */
-  int LESS_OR_EQUAL_COMPARISON_TYPE = 22;
+  int LESS_OR_EQUAL_COMPARISON_TYPE = 21;
 
   /**
    * The number of structural features of the '<em>Less Or Equal Comparison Type</em>' class.
@@ -630,7 +611,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEqualComparisonType()
    * @generated
    */
-  int EQUAL_COMPARISON_TYPE = 23;
+  int EQUAL_COMPARISON_TYPE = 22;
 
   /**
    * The number of structural features of the '<em>Equal Comparison Type</em>' class.
@@ -649,7 +630,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGreaterOrEqualComparisonType()
    * @generated
    */
-  int GREATER_OR_EQUAL_COMPARISON_TYPE = 24;
+  int GREATER_OR_EQUAL_COMPARISON_TYPE = 23;
 
   /**
    * The number of structural features of the '<em>Greater Or Equal Comparison Type</em>' class.
@@ -668,7 +649,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGreaterComparisonType()
    * @generated
    */
-  int GREATER_COMPARISON_TYPE = 25;
+  int GREATER_COMPARISON_TYPE = 24;
 
   /**
    * The number of structural features of the '<em>Greater Comparison Type</em>' class.
@@ -687,7 +668,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 26;
+  int BOOLEAN_LITERAL = 25;
 
   /**
    * The number of structural features of the '<em>Boolean Literal</em>' class.
@@ -706,7 +687,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFalseLiteral()
    * @generated
    */
-  int FALSE_LITERAL = 27;
+  int FALSE_LITERAL = 26;
 
   /**
    * The number of structural features of the '<em>False Literal</em>' class.
@@ -725,7 +706,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTrueLiteral()
    * @generated
    */
-  int TRUE_LITERAL = 28;
+  int TRUE_LITERAL = 27;
 
   /**
    * The number of structural features of the '<em>True Literal</em>' class.
@@ -744,7 +725,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 29;
+  int PARAMETER = 28;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -781,7 +762,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEquals()
    * @generated
    */
-  int EQUALS = 30;
+  int EQUALS = 29;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -827,7 +808,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 31;
+  int PLUS = 30;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -864,7 +845,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMulti()
    * @generated
    */
-  int MULTI = 32;
+  int MULTI = 31;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -901,7 +882,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArrayAccess()
    * @generated
    */
-  int ARRAY_ACCESS = 33;
+  int ARRAY_ACCESS = 32;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -938,7 +919,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbolRef()
    * @generated
    */
-  int SYMBOL_REF = 34;
+  int SYMBOL_REF = 33;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' reference.
@@ -975,7 +956,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getNumberLiteral()
    * @generated
    */
-  int NUMBER_LITERAL = 35;
+  int NUMBER_LITERAL = 34;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1058,16 +1039,6 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getStatement();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.NoOp <em>No Op</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>No Op</em>'.
-   * @see org.xtext.example.mydsl.myDsl.NoOp
-   * @generated
-   */
-  EClass getNoOp();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ReturnStatement <em>Return Statement</em>}'.
@@ -1740,16 +1711,6 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EClass STATEMENT = eINSTANCE.getStatement();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.NoOpImpl <em>No Op</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.NoOpImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getNoOp()
-     * @generated
-     */
-    EClass NO_OP = eINSTANCE.getNoOp();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ReturnStatementImpl <em>Return Statement</em>}' class.

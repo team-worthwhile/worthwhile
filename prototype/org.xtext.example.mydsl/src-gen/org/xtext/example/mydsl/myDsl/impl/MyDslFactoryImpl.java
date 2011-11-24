@@ -70,7 +70,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.MODEL: return createModel();
       case MyDslPackage.BLOCK: return createBlock();
       case MyDslPackage.STATEMENT: return createStatement();
-      case MyDslPackage.NO_OP: return createNoOp();
       case MyDslPackage.RETURN_STATEMENT: return createReturnStatement();
       case MyDslPackage.WHILE_STATEMENT: return createWhileStatement();
       case MyDslPackage.IF_STATEMENT: return createIfStatement();
@@ -139,17 +138,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     StatementImpl statement = new StatementImpl();
     return statement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NoOp createNoOp()
-  {
-    NoOpImpl noOp = new NoOpImpl();
-    return noOp;
   }
 
   /**

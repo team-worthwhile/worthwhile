@@ -7,21 +7,26 @@ Model:
 	(statements+=Statement | functions+=FunctionDeclaration)*;
 	
 // Override the whitespace rules since we do not allow newlines to count as whitespace.
-terminal WS : (' '|'\t'|'\r')+;
+// terminal WS : (' '|'\t'|'\r')+;
 
 // A block consists of multiple statement enclosed in curly brackets.
 Block:
-	{Block} '{' ('\n')? (statements+=Statement)* ('\n')? '}'
+	{Block} '{' (statements+=Statement)* '}'
 ;
 
 // A statement is everything that can be executed in the program.
 Statement:
-	((VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement) '\n') |  NoOp
+	(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement ) // ('\n' | MyEof) 
 ;
 
-NoOp:
-	{NoOp} '\n'
+terminal MyEof:
+	EOF
 ;
+
+
+/*NoOp:
+	{NoOp}
+;*/
 
 // A return statement returns a value from a function.
 ReturnStatement:

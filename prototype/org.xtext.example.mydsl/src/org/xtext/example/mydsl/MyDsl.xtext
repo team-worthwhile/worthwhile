@@ -4,19 +4,19 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 // A program consists of a sequence of statements and/or function declarations.
 Model:
-	{Model}
-	(statements+=Statement | functions+=FunctionDeclaration)?
-	(NL (statements+=Statement | functions+=FunctionDeclaration))*
+	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
 ;
 
+// Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements
+// TODO: \r 
 terminal WS : (' '|'\t')+;
 
+// A newline preceding a statement consists of at least a newline character, optionally followed by some whitespace and moar newlines.
+// The latter is necessary because of "blank lines" that have some whitespace (e.g. indentation) in them.
 terminal NL : '\n' ('\n' | WS)*;
-	
-// Override the whitespace rules since we do not allow newlines to count as whitespace.
-// terminal WS : (' '|'\t'|'\r')+;
 
-// A block consists of multiple statement enclosed in curly brackets.
+// A block consists of one or multiple statements enclosed in curly brackets.
 Block:
 	{Block} '{' (statements+=Statement)? (NL statements+=Statement)* NL? '}'
 ;
@@ -33,12 +33,12 @@ ReturnStatement:
 
 // A while statement specifies a while loop.
 WhileStatement:
-	{WhileStatement} 'while'
+	'while' condition=Expr body=Block
 ;
 
 // An if statement specifies a conditional expression.
 IfStatement:
-	{IfStatement} 'if'
+	'if' condition=Expr then=Block ('else' else=Block)?
 ;
 
 // A function declaration declares a function name, parameters, return type, and function body.
@@ -46,6 +46,7 @@ FunctionDeclaration:
 	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' body=Block
 ;
 
+// A parameter definition describes a single parameter (type and name) accepted by a function.
 Parameter returns Symbol:
 	{Parameter} type=Type name=ID
 ;
@@ -126,12 +127,12 @@ GreaterComparisonType:
 ;
 
 Addition returns Expression:
-	Multiplication ({Plus.left=current}"+" right=Multiplication)*;
+	Multiplication ({Plus.left=current} "+" right=Multiplication)*;
 	
 Multiplication returns Expression:
-	PostfixOperators ( {Multi.left=current} "*" right=PostfixOperators)*; 
+	PostfixOperator ( {Multi.left=current} "*" right=PostfixOperator)*; 
 	
-PostfixOperators returns Expression:
+PostfixOperator returns Expression:
 	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
 	
 // An atomic value in an expression is either
@@ -139,9 +140,7 @@ PostfixOperators returns Expression:
 //  - a number or
 //  - a Boolean literal.
 Atomic returns Expression:
-	FunctionCall |	// function call
-	{NumberLiteral} value=INT | // number
-	BooleanLiteral // Boolean literal
+	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral
 ;
 
 // A Boolean literal is either "true" or "false"

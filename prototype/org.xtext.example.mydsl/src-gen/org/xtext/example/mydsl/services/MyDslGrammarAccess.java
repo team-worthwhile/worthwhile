@@ -20,68 +20,65 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
-		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cStatementsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cStatementsStatementParserRuleCall_1_0_0 = (RuleCall)cStatementsAssignment_1_0.eContents().get(0);
-		private final Assignment cFunctionsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_1_1_0 = (RuleCall)cFunctionsAssignment_1_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final RuleCall cNLTerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final Alternatives cAlternatives_2_1 = (Alternatives)cGroup_2.eContents().get(1);
-		private final Assignment cStatementsAssignment_2_1_0 = (Assignment)cAlternatives_2_1.eContents().get(0);
-		private final RuleCall cStatementsStatementParserRuleCall_2_1_0_0 = (RuleCall)cStatementsAssignment_2_1_0.eContents().get(0);
-		private final Assignment cFunctionsAssignment_2_1_1 = (Assignment)cAlternatives_2_1.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_2_1_1_0 = (RuleCall)cFunctionsAssignment_2_1_1.eContents().get(0);
+		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
+		private final Assignment cStatementsAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
+		private final RuleCall cStatementsStatementParserRuleCall_0_0_0 = (RuleCall)cStatementsAssignment_0_0.eContents().get(0);
+		private final Assignment cFunctionsAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
+		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_0_1_0 = (RuleCall)cFunctionsAssignment_0_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final RuleCall cNLTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
+		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
+		private final Assignment cStatementsAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
+		private final RuleCall cStatementsStatementParserRuleCall_1_1_0_0 = (RuleCall)cStatementsAssignment_1_1_0.eContents().get(0);
+		private final Assignment cFunctionsAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
+		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cFunctionsAssignment_1_1_1.eContents().get(0);
 		
 		//// A program consists of a sequence of statements and/or function declarations.
 		//Model:
-		//	{Model} (statements+=Statement | functions+=FunctionDeclaration)? (NL (statements+=Statement |
-		//	functions+=FunctionDeclaration))*;
+		//	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+		//	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
+		//;
 		public ParserRule getRule() { return rule; }
 
-		//{Model} (statements+=Statement | functions+=FunctionDeclaration)? (NL (statements+=Statement |
-		//functions+=FunctionDeclaration))*
+		//(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+		//(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
 		public Group getGroup() { return cGroup; }
 
-		//{Model}
-		public Action getModelAction_0() { return cModelAction_0; }
-
 		//(statements+=Statement | functions+=FunctionDeclaration)?
-		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//statements+=Statement
-		public Assignment getStatementsAssignment_1_0() { return cStatementsAssignment_1_0; }
+		public Assignment getStatementsAssignment_0_0() { return cStatementsAssignment_0_0; }
 
 		//Statement
-		public RuleCall getStatementsStatementParserRuleCall_1_0_0() { return cStatementsStatementParserRuleCall_1_0_0; }
+		public RuleCall getStatementsStatementParserRuleCall_0_0_0() { return cStatementsStatementParserRuleCall_0_0_0; }
 
 		//functions+=FunctionDeclaration
-		public Assignment getFunctionsAssignment_1_1() { return cFunctionsAssignment_1_1; }
+		public Assignment getFunctionsAssignment_0_1() { return cFunctionsAssignment_0_1; }
 
 		//FunctionDeclaration
-		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_1_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_1_1_0; }
+		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_0_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_0_1_0; }
 
 		//(NL (statements+=Statement | functions+=FunctionDeclaration))*
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_1() { return cGroup_1; }
 
 		//NL
-		public RuleCall getNLTerminalRuleCall_2_0() { return cNLTerminalRuleCall_2_0; }
+		public RuleCall getNLTerminalRuleCall_1_0() { return cNLTerminalRuleCall_1_0; }
 
 		//statements+=Statement | functions+=FunctionDeclaration
-		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
+		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//statements+=Statement
-		public Assignment getStatementsAssignment_2_1_0() { return cStatementsAssignment_2_1_0; }
+		public Assignment getStatementsAssignment_1_1_0() { return cStatementsAssignment_1_1_0; }
 
 		//Statement
-		public RuleCall getStatementsStatementParserRuleCall_2_1_0_0() { return cStatementsStatementParserRuleCall_2_1_0_0; }
+		public RuleCall getStatementsStatementParserRuleCall_1_1_0_0() { return cStatementsStatementParserRuleCall_1_1_0_0; }
 
 		//functions+=FunctionDeclaration
-		public Assignment getFunctionsAssignment_2_1_1() { return cFunctionsAssignment_2_1_1; }
+		public Assignment getFunctionsAssignment_1_1_1() { return cFunctionsAssignment_1_1_1; }
 
 		//FunctionDeclaration
-		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_2_1_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_2_1_1_0; }
+		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_1_1_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_1_1_1_0; }
 	}
 
 	public class BlockElements extends AbstractParserRuleElementFinder {
@@ -98,9 +95,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//// Override the whitespace rules since we do not allow newlines to count as whitespace.
-		//// terminal WS : (' '|'\t'|'\r')+;
-		//// A block consists of multiple statement enclosed in curly brackets.
+		//// A block consists of one or multiple statements enclosed in curly brackets.
 		//Block:
 		//	{Block} "{" statements+=Statement? (NL statements+=Statement)* NL? "}";
 		public ParserRule getRule() { return rule; }
@@ -212,43 +207,83 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class WhileStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WhileStatement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cWhileStatementAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cWhileKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cWhileKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cConditionExprParserRuleCall_1_0 = (RuleCall)cConditionAssignment_1.eContents().get(0);
+		private final Assignment cBodyAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cBodyBlockParserRuleCall_2_0 = (RuleCall)cBodyAssignment_2.eContents().get(0);
 		
 		//// A while statement specifies a while loop.
 		//WhileStatement:
-		//	{WhileStatement} "while";
+		//	"while" condition=Expr body=Block;
 		public ParserRule getRule() { return rule; }
 
-		//{WhileStatement} "while"
+		//"while" condition=Expr body=Block
 		public Group getGroup() { return cGroup; }
 
-		//{WhileStatement}
-		public Action getWhileStatementAction_0() { return cWhileStatementAction_0; }
-
 		//"while"
-		public Keyword getWhileKeyword_1() { return cWhileKeyword_1; }
+		public Keyword getWhileKeyword_0() { return cWhileKeyword_0; }
+
+		//condition=Expr
+		public Assignment getConditionAssignment_1() { return cConditionAssignment_1; }
+
+		//Expr
+		public RuleCall getConditionExprParserRuleCall_1_0() { return cConditionExprParserRuleCall_1_0; }
+
+		//body=Block
+		public Assignment getBodyAssignment_2() { return cBodyAssignment_2; }
+
+		//Block
+		public RuleCall getBodyBlockParserRuleCall_2_0() { return cBodyBlockParserRuleCall_2_0; }
 	}
 
 	public class IfStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IfStatement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cIfStatementAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cIfKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cConditionExprParserRuleCall_1_0 = (RuleCall)cConditionAssignment_1.eContents().get(0);
+		private final Assignment cThenAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cThenBlockParserRuleCall_2_0 = (RuleCall)cThenAssignment_2.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cElseKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cElseAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cElseBlockParserRuleCall_3_1_0 = (RuleCall)cElseAssignment_3_1.eContents().get(0);
 		
 		//// An if statement specifies a conditional expression.
 		//IfStatement:
-		//	{IfStatement} "if";
+		//	"if" condition=Expr then=Block ("else" else=Block)?;
 		public ParserRule getRule() { return rule; }
 
-		//{IfStatement} "if"
+		//"if" condition=Expr then=Block ("else" else=Block)?
 		public Group getGroup() { return cGroup; }
 
-		//{IfStatement}
-		public Action getIfStatementAction_0() { return cIfStatementAction_0; }
-
 		//"if"
-		public Keyword getIfKeyword_1() { return cIfKeyword_1; }
+		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+
+		//condition=Expr
+		public Assignment getConditionAssignment_1() { return cConditionAssignment_1; }
+
+		//Expr
+		public RuleCall getConditionExprParserRuleCall_1_0() { return cConditionExprParserRuleCall_1_0; }
+
+		//then=Block
+		public Assignment getThenAssignment_2() { return cThenAssignment_2; }
+
+		//Block
+		public RuleCall getThenBlockParserRuleCall_2_0() { return cThenBlockParserRuleCall_2_0; }
+
+		//("else" else=Block)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"else"
+		public Keyword getElseKeyword_3_0() { return cElseKeyword_3_0; }
+
+		//else=Block
+		public Assignment getElseAssignment_3_1() { return cElseAssignment_3_1; }
+
+		//Block
+		public RuleCall getElseBlockParserRuleCall_3_1_0() { return cElseBlockParserRuleCall_3_1_0; }
 	}
 
 	public class FunctionDeclarationElements extends AbstractParserRuleElementFinder {
@@ -337,6 +372,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
+		//// A parameter definition describes a single parameter (type and name) accepted by a function.
 		//Parameter returns Symbol:
 		//	{Parameter} type=Type name=ID;
 		public ParserRule getRule() { return rule; }
@@ -882,24 +918,24 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class MultiplicationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cPostfixOperatorsParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cPostfixOperatorParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cMultiLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cAsteriskKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cRightPostfixOperatorsParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		private final RuleCall cRightPostfixOperatorParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Multiplication returns Expression:
-		//	PostfixOperators ({Multi.left=current} "*" right=PostfixOperators)*;
+		//	PostfixOperator ({Multi.left=current} "*" right=PostfixOperator)*;
 		public ParserRule getRule() { return rule; }
 
-		//PostfixOperators ({Multi.left=current} "*" right=PostfixOperators)*
+		//PostfixOperator ({Multi.left=current} "*" right=PostfixOperator)*
 		public Group getGroup() { return cGroup; }
 
-		//PostfixOperators
-		public RuleCall getPostfixOperatorsParserRuleCall_0() { return cPostfixOperatorsParserRuleCall_0; }
+		//PostfixOperator
+		public RuleCall getPostfixOperatorParserRuleCall_0() { return cPostfixOperatorParserRuleCall_0; }
 
-		//({Multi.left=current} "*" right=PostfixOperators)*
+		//({Multi.left=current} "*" right=PostfixOperator)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Multi.left=current}
@@ -908,15 +944,15 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//"*"
 		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
 
-		//right=PostfixOperators
+		//right=PostfixOperator
 		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
 
-		//PostfixOperators
-		public RuleCall getRightPostfixOperatorsParserRuleCall_1_2_0() { return cRightPostfixOperatorsParserRuleCall_1_2_0; }
+		//PostfixOperator
+		public RuleCall getRightPostfixOperatorParserRuleCall_1_2_0() { return cRightPostfixOperatorParserRuleCall_1_2_0; }
 	}
 
-	public class PostfixOperatorsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PostfixOperators");
+	public class PostfixOperatorElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PostfixOperator");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAtomicParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -926,7 +962,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIndexExprParserRuleCall_1_2_0 = (RuleCall)cIndexAssignment_1_2.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
-		//PostfixOperators returns Expression:
+		//PostfixOperator returns Expression:
 		//	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
 		public ParserRule getRule() { return rule; }
 
@@ -970,16 +1006,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		////  - a number or
 		////  - a Boolean literal.
 		//Atomic returns Expression:
-		//	FunctionCall // function call
-		//	// number
-		//	| {NumberLiteral} value=INT | // Boolean literal
-		//	BooleanLiteral;
+		//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//FunctionCall // function call
-		//// number
-		//| {NumberLiteral} value=INT | // Boolean literal
-		//BooleanLiteral
+		//FunctionCall | {NumberLiteral} value=INT | BooleanLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//FunctionCall
@@ -997,7 +1027,6 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//INT
 		public RuleCall getValueINTTerminalRuleCall_1_1_0() { return cValueINTTerminalRuleCall_1_1_0; }
 
-		//// Boolean literal
 		//BooleanLiteral
 		public RuleCall getBooleanLiteralParserRuleCall_2() { return cBooleanLiteralParserRuleCall_2; }
 	}
@@ -1095,7 +1124,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private GreaterComparisonTypeElements pGreaterComparisonType;
 	private AdditionElements pAddition;
 	private MultiplicationElements pMultiplication;
-	private PostfixOperatorsElements pPostfixOperators;
+	private PostfixOperatorElements pPostfixOperator;
 	private AtomicElements pAtomic;
 	private BooleanLiteralElements pBooleanLiteral;
 	private FalseLiteralElements pFalseLiteral;
@@ -1124,8 +1153,9 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	//// A program consists of a sequence of statements and/or function declarations.
 	//Model:
-	//	{Model} (statements+=Statement | functions+=FunctionDeclaration)? (NL (statements+=Statement |
-	//	functions+=FunctionDeclaration))*;
+	//	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+	//	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
+	//;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1134,21 +1164,23 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getModelAccess().getRule();
 	}
 
+	//// Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements
+	//// TODO: \r 
 	//terminal WS:
 	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
 		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
 	} 
 
+	//// A newline preceding a statement consists of at least a newline character, optionally followed by some whitespace and moar newlines.
+	//// The latter is necessary because of "blank lines" that have some whitespace (e.g. indentation) in them.
 	//terminal NL:
 	//	"\n" ("\n" | WS)*;
 	public TerminalRule getNLRule() {
 		return (tNL != null) ? tNL : (tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL"));
 	} 
 
-	//// Override the whitespace rules since we do not allow newlines to count as whitespace.
-	//// terminal WS : (' '|'\t'|'\r')+;
-	//// A block consists of multiple statement enclosed in curly brackets.
+	//// A block consists of one or multiple statements enclosed in curly brackets.
 	//Block:
 	//	{Block} "{" statements+=Statement? (NL statements+=Statement)* NL? "}";
 	public BlockElements getBlockAccess() {
@@ -1183,7 +1215,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// A while statement specifies a while loop.
 	//WhileStatement:
-	//	{WhileStatement} "while";
+	//	"while" condition=Expr body=Block;
 	public WhileStatementElements getWhileStatementAccess() {
 		return (pWhileStatement != null) ? pWhileStatement : (pWhileStatement = new WhileStatementElements());
 	}
@@ -1194,7 +1226,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// An if statement specifies a conditional expression.
 	//IfStatement:
-	//	{IfStatement} "if";
+	//	"if" condition=Expr then=Block ("else" else=Block)?;
 	public IfStatementElements getIfStatementAccess() {
 		return (pIfStatement != null) ? pIfStatement : (pIfStatement = new IfStatementElements());
 	}
@@ -1214,6 +1246,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getFunctionDeclarationAccess().getRule();
 	}
 
+	//// A parameter definition describes a single parameter (type and name) accepted by a function.
 	//Parameter returns Symbol:
 	//	{Parameter} type=Type name=ID;
 	public ParameterElements getParameterAccess() {
@@ -1415,7 +1448,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Multiplication returns Expression:
-	//	PostfixOperators ({Multi.left=current} "*" right=PostfixOperators)*;
+	//	PostfixOperator ({Multi.left=current} "*" right=PostfixOperator)*;
 	public MultiplicationElements getMultiplicationAccess() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	}
@@ -1424,14 +1457,14 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getMultiplicationAccess().getRule();
 	}
 
-	//PostfixOperators returns Expression:
+	//PostfixOperator returns Expression:
 	//	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
-	public PostfixOperatorsElements getPostfixOperatorsAccess() {
-		return (pPostfixOperators != null) ? pPostfixOperators : (pPostfixOperators = new PostfixOperatorsElements());
+	public PostfixOperatorElements getPostfixOperatorAccess() {
+		return (pPostfixOperator != null) ? pPostfixOperator : (pPostfixOperator = new PostfixOperatorElements());
 	}
 	
-	public ParserRule getPostfixOperatorsRule() {
-		return getPostfixOperatorsAccess().getRule();
+	public ParserRule getPostfixOperatorRule() {
+		return getPostfixOperatorAccess().getRule();
 	}
 
 	//// An atomic value in an expression is either
@@ -1439,10 +1472,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	////  - a number or
 	////  - a Boolean literal.
 	//Atomic returns Expression:
-	//	FunctionCall // function call
-	//	// number
-	//	| {NumberLiteral} value=INT | // Boolean literal
-	//	BooleanLiteral;
+	//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral;
 	public AtomicElements getAtomicAccess() {
 		return (pAtomic != null) ? pAtomic : (pAtomic = new AtomicElements());
 	}

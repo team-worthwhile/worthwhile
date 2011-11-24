@@ -85,8 +85,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
-				   context == grammarAccess.getPostfixOperatorsRule()) {
-					sequence_PostfixOperators(context, (ArrayAccess) semanticObject); 
+				   context == grammarAccess.getPostfixOperatorRule()) {
+					sequence_PostfixOperator(context, (ArrayAccess) semanticObject); 
 					return; 
 				}
 				else break;
@@ -144,8 +144,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getFalseLiteralRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
-				   context == grammarAccess.getPostfixOperatorsRule() ||
-				   context == grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0()) {
+				   context == grammarAccess.getPostfixOperatorRule() ||
+				   context == grammarAccess.getPostfixOperatorAccess().getArrayAccessExprAction_1_0()) {
 					sequence_Expr(context, (FalseLiteral) semanticObject); 
 					return; 
 				}
@@ -173,7 +173,7 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 			case MyDslPackage.IF_STATEMENT:
 				if(context == grammarAccess.getIfStatementRule() ||
 				   context == grammarAccess.getStatementRule()) {
-					sequence_Statement(context, (IfStatement) semanticObject); 
+					sequence_IfStatement(context, (IfStatement) semanticObject); 
 					return; 
 				}
 				else break;
@@ -226,8 +226,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
-				   context == grammarAccess.getPostfixOperatorsRule() ||
-				   context == grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0()) {
+				   context == grammarAccess.getPostfixOperatorRule() ||
+				   context == grammarAccess.getPostfixOperatorAccess().getArrayAccessExprAction_1_0()) {
 					sequence_Atomic(context, (NumberLiteral) semanticObject); 
 					return; 
 				}
@@ -265,8 +265,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getFunctionCallRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
-				   context == grammarAccess.getPostfixOperatorsRule() ||
-				   context == grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0() ||
+				   context == grammarAccess.getPostfixOperatorRule() ||
+				   context == grammarAccess.getPostfixOperatorAccess().getArrayAccessExprAction_1_0() ||
 				   context == grammarAccess.getStatementRule()) {
 					sequence_FunctionCall(context, (SymbolRef) semanticObject); 
 					return; 
@@ -282,8 +282,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
-				   context == grammarAccess.getPostfixOperatorsRule() ||
-				   context == grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0() ||
+				   context == grammarAccess.getPostfixOperatorRule() ||
+				   context == grammarAccess.getPostfixOperatorAccess().getArrayAccessExprAction_1_0() ||
 				   context == grammarAccess.getTrueLiteralRule()) {
 					sequence_Expr(context, (TrueLiteral) semanticObject); 
 					return; 
@@ -299,7 +299,7 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 			case MyDslPackage.WHILE_STATEMENT:
 				if(context == grammarAccess.getStatementRule() ||
 				   context == grammarAccess.getWhileStatementRule()) {
-					sequence_Statement(context, (WhileStatement) semanticObject); 
+					sequence_WhileStatement(context, (WhileStatement) semanticObject); 
 					return; 
 				}
 				else break;
@@ -537,6 +537,20 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (condition=Expr then=Block else=Block?)
+	 *
+	 * Features:
+	 *    condition[1, 1]
+	 *    then[1, 1]
+	 *    else[0, 1]
+	 */
+	protected void sequence_IfStatement(EObject context, IfStatement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     ((statements+=Statement | functions+=FunctionDeclaration)? (statements+=Statement | functions+=FunctionDeclaration)*)
 	 *
 	 * Features:
@@ -550,7 +564,7 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (left=Multiplication_Multi_1_0 right=PostfixOperators)
+	 *     (left=Multiplication_Multi_1_0 right=PostfixOperator)
 	 *
 	 * Features:
 	 *    left[1, 1]
@@ -566,7 +580,7 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getMultiplicationAccess().getRightPostfixOperatorsParserRuleCall_1_2_0(), semanticObject.getRight());
+		feeder.accept(grammarAccess.getMultiplicationAccess().getRightPostfixOperatorParserRuleCall_1_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
 	
@@ -596,13 +610,13 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (expr=PostfixOperators_ArrayAccess_1_0 index=Expr)
+	 *     (expr=PostfixOperator_ArrayAccess_1_0 index=Expr)
 	 *
 	 * Features:
 	 *    expr[1, 1]
 	 *    index[1, 1]
 	 */
-	protected void sequence_PostfixOperators(EObject context, ArrayAccess semanticObject) {
+	protected void sequence_PostfixOperator(EObject context, ArrayAccess semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARRAY_ACCESS__EXPR) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARRAY_ACCESS__EXPR));
@@ -611,8 +625,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0(), semanticObject.getExpr());
-		feeder.accept(grammarAccess.getPostfixOperatorsAccess().getIndexExprParserRuleCall_1_2_0(), semanticObject.getIndex());
+		feeder.accept(grammarAccess.getPostfixOperatorAccess().getArrayAccessExprAction_1_0(), semanticObject.getExpr());
+		feeder.accept(grammarAccess.getPostfixOperatorAccess().getIndexExprParserRuleCall_1_2_0(), semanticObject.getIndex());
 		feeder.finish();
 	}
 	
@@ -643,28 +657,6 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	 * Features:
 	 */
 	protected void sequence_Statement(EObject context, Annotation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {IfStatement}
-	 *
-	 * Features:
-	 */
-	protected void sequence_Statement(EObject context, IfStatement semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {WhileStatement}
-	 *
-	 * Features:
-	 */
-	protected void sequence_Statement(EObject context, WhileStatement semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -714,6 +706,29 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 		feeder.accept(grammarAccess.getVariableDeclarationAccess().getTypeTypeParserRuleCall_0_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getVariableDeclarationAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getVariableDeclarationAccess().getInitialValueExprParserRuleCall_2_1_0(), semanticObject.getInitialValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (condition=Expr body=Block)
+	 *
+	 * Features:
+	 *    condition[1, 1]
+	 *    body[1, 1]
+	 */
+	protected void sequence_WhileStatement(EObject context, WhileStatement semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.WHILE_STATEMENT__CONDITION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.WHILE_STATEMENT__CONDITION));
+			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.WHILE_STATEMENT__BODY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.WHILE_STATEMENT__BODY));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getWhileStatementAccess().getConditionExprParserRuleCall_1_0(), semanticObject.getCondition());
+		feeder.accept(grammarAccess.getWhileStatementAccess().getBodyBlockParserRuleCall_2_0(), semanticObject.getBody());
 		feeder.finish();
 	}
 }

@@ -1,0 +1,157 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+// A program consists of a sequence of statements and/or function declarations.
+Model:
+	(statements+=Statement | functions+=FunctionDeclaration)*;
+	
+// Override the whitespace rules since we do not allow newlines to count as whitespace.
+terminal WS : (' '|'\t'|'\r')+;
+
+// A block consists of multiple statement enclosed in curly brackets.
+Block:
+	{Block} '{' ('\n')? (statements+=Statement)* ('\n')? '}'
+;
+
+// A statement is everything that can be executed in the program.
+Statement:
+	((VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement) '\n') |  NoOp
+;
+
+NoOp:
+	{NoOp} '\n'
+;
+
+// A return statement returns a value from a function.
+ReturnStatement:
+	'return' returnExpr=Expr
+;
+
+// A while statement specifies a while loop.
+WhileStatement:
+	{WhileStatement} 'while'
+;
+
+// An if statement specifies a conditional expression.
+IfStatement:
+	{IfStatement} 'if'
+;
+
+// A function declaration declares a function name, parameters, return type, and function body.
+FunctionDeclaration:
+	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' body=Block
+;
+
+Parameter returns Symbol:
+	{Parameter} type=Type name=ID
+;
+
+// A type can either be a primitive type or an array of a primitive type
+Type:
+	PrimitiveType | ArrayType
+;
+
+// A primitive type represents a variable type that can hold one value.
+PrimitiveType:
+	IntType | BoolType	
+;
+
+// An integer type represents an arbitrarily large integer.
+IntType:
+	{IntType} 'int'
+;
+
+// A bool type represents a Boolean value.
+BoolType:
+	{BoolType} 'bool'
+;
+
+// An array type represents an array of a primitive type.
+ArrayType:
+	{ArrayType} baseType=PrimitiveType '[' ']'
+;
+
+// A function call simply calls a function without returning a value. 
+FunctionCall:
+	{FunctionCall} 'functionCallStatement'
+;
+
+// An annotation is used to specify assertions and assumptions.
+Annotation:
+	 {Annotation} 'TODO5'
+;
+
+// A variable declaration declares a new variable and optionally assigns it a value.
+VariableDeclaration:
+	type=Type name=ID ( ':=' initialValue=Expr)
+;
+
+// An assignment assigns a value to a variable.
+Assignment:
+	variable=ID ':=' value=Expr
+;
+
+Expr:
+	Comparison;
+
+Comparison returns Expression:
+	Addition ({Equals.left=current} type=ComparisonType right=Addition)?;
+
+ComparisonType:
+	LessComparisonType | LessOrEqualComparisonType | EqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType
+;
+
+LessComparisonType:
+	{LessComparisonType} '<'
+;
+
+LessOrEqualComparisonType:
+	{LessOrEqualComparisonType} ('<=' | '≤')	
+;
+
+EqualComparisonType:
+	{EqualComparisonType} '='
+;
+
+GreaterOrEqualComparisonType:
+	{GreaterOrEqualComparisonType} ('>=' | '≥')
+;
+
+GreaterComparisonType:
+	 {GreaterComparisonType} '>'	
+;
+
+Addition returns Expression:
+	Multiplication ({Plus.left=current}"+" right=Multiplication)*;
+	
+Multiplication returns Expression:
+	PostfixOperators ( {Multi.left=current} "*" right=PostfixOperators)*; 
+	
+PostfixOperators returns Expression:
+	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
+	
+// An atomic value in an expression is either
+//  - a function call or
+//  - a number or
+//  - a Boolean literal.
+Atomic returns Expression:
+	{SymbolRef} symbol=[Symbol|ID] ("(" (actuals+=Expr)? ("," actuals+=Expr)* ")")? |	/* function call */
+	{NumberLiteral} value=INT | /* number */
+	BooleanLiteral /* Boolean literal */
+;
+
+// A Boolean literal is either "true" or "false"
+BooleanLiteral:
+	TrueLiteral | FalseLiteral
+;
+
+// A FalseLiteral is the text "false".
+FalseLiteral:
+	{FalseLiteral} 'false'
+;
+
+// A TrueLiteral is the text "true".
+TrueLiteral:
+	{TrueLiteral} 'true'	
+;

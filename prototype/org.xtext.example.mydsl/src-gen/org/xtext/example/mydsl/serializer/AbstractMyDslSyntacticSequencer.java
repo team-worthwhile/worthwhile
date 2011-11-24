@@ -89,7 +89,7 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Syntax:
-	 *     '≥' | '>='
+	 *     '>=' | '≥'
 	 */
 	protected void emit_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -97,7 +97,7 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Syntax:
-	 *     '≤' | '<='
+	 *     '<=' | '≤'
 	 */
 	protected void emit_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

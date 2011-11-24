@@ -9,3 +9,5 @@
 *.fls
 # pdfs
 pflichtenheft.pdf
+# java stuff
+*.class

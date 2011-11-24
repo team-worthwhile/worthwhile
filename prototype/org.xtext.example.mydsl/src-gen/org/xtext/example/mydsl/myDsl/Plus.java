@@ -15,6 +15,7 @@ package org.xtext.example.mydsl.myDsl;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Plus#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Plus#getType <em>Type</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.Plus#getRight <em>Right</em>}</li>
  * </ul>
  * </p>
@@ -50,6 +51,32 @@ public interface Plus extends Expression
    * @generated
    */
   void setLeft(Expression value);
+
+  /**
+   * Returns the value of the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Type</em>' containment reference.
+   * @see #setType(AdditionType)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getPlus_Type()
+   * @model containment="true"
+   * @generated
+   */
+  AdditionType getType();
+
+  /**
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Plus#getType <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Type</em>' containment reference.
+   * @see #getType()
+   * @generated
+   */
+  void setType(AdditionType value);
 
   /**
    * Returns the value of the '<em><b>Right</b></em>' containment reference.

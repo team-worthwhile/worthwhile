@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xtext.example.mydsl.myDsl.ArrayAccess;
 import org.xtext.example.mydsl.myDsl.Expr;
-import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
@@ -25,7 +24,6 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ArrayAccessImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ArrayAccessImpl#getIndex <em>Index</em>}</li>
  * </ul>
  * </p>
@@ -34,16 +32,6 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  */
 public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
 {
-  /**
-   * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getExpr()
-   * @generated
-   * @ordered
-   */
-  protected Expression expr;
-
   /**
    * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -73,54 +61,6 @@ public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
   protected EClass eStaticClass()
   {
     return MyDslPackage.Literals.ARRAY_ACCESS;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Expression getExpr()
-  {
-    return expr;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetExpr(Expression newExpr, NotificationChain msgs)
-  {
-    Expression oldExpr = expr;
-    expr = newExpr;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.ARRAY_ACCESS__EXPR, oldExpr, newExpr);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setExpr(Expression newExpr)
-  {
-    if (newExpr != expr)
-    {
-      NotificationChain msgs = null;
-      if (expr != null)
-        msgs = ((InternalEObject)expr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.ARRAY_ACCESS__EXPR, null, msgs);
-      if (newExpr != null)
-        msgs = ((InternalEObject)newExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.ARRAY_ACCESS__EXPR, null, msgs);
-      msgs = basicSetExpr(newExpr, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ARRAY_ACCESS__EXPR, newExpr, newExpr));
   }
 
   /**
@@ -181,8 +121,6 @@ public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
   {
     switch (featureID)
     {
-      case MyDslPackage.ARRAY_ACCESS__EXPR:
-        return basicSetExpr(null, msgs);
       case MyDslPackage.ARRAY_ACCESS__INDEX:
         return basicSetIndex(null, msgs);
     }
@@ -199,8 +137,6 @@ public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
   {
     switch (featureID)
     {
-      case MyDslPackage.ARRAY_ACCESS__EXPR:
-        return getExpr();
       case MyDslPackage.ARRAY_ACCESS__INDEX:
         return getIndex();
     }
@@ -217,9 +153,6 @@ public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
   {
     switch (featureID)
     {
-      case MyDslPackage.ARRAY_ACCESS__EXPR:
-        setExpr((Expression)newValue);
-        return;
       case MyDslPackage.ARRAY_ACCESS__INDEX:
         setIndex((Expr)newValue);
         return;
@@ -237,9 +170,6 @@ public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
   {
     switch (featureID)
     {
-      case MyDslPackage.ARRAY_ACCESS__EXPR:
-        setExpr((Expression)null);
-        return;
       case MyDslPackage.ARRAY_ACCESS__INDEX:
         setIndex((Expr)null);
         return;
@@ -257,8 +187,6 @@ public class ArrayAccessImpl extends ExpressionImpl implements ArrayAccess
   {
     switch (featureID)
     {
-      case MyDslPackage.ARRAY_ACCESS__EXPR:
-        return expr != null;
       case MyDslPackage.ARRAY_ACCESS__INDEX:
         return index != null;
     }

@@ -443,13 +443,22 @@ public interface MyDslPackage extends EPackage
   int FUNCTION_CALL = 13;
 
   /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FUNCTION_CALL__EXPR = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Function Call</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FUNCTION_CALL_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
+  int FUNCTION_CALL_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AnnotationImpl <em>Annotation</em>}' class.
@@ -583,13 +592,22 @@ public interface MyDslPackage extends EPackage
   int EXPRESSION = 18;
 
   /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__EXPR = EXPR_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EXPRESSION_FEATURE_COUNT = EXPR_FEATURE_COUNT + 0;
+  int EXPRESSION_FEATURE_COUNT = EXPR_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ComparisonTypeImpl <em>Comparison Type</em>}' class.
@@ -649,25 +667,6 @@ public interface MyDslPackage extends EPackage
   int LESS_OR_EQUAL_COMPARISON_TYPE_FEATURE_COUNT = COMPARISON_TYPE_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.EqualComparisonTypeImpl <em>Equal Comparison Type</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.EqualComparisonTypeImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEqualComparisonType()
-   * @generated
-   */
-  int EQUAL_COMPARISON_TYPE = 22;
-
-  /**
-   * The number of structural features of the '<em>Equal Comparison Type</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EQUAL_COMPARISON_TYPE_FEATURE_COUNT = COMPARISON_TYPE_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.GreaterOrEqualComparisonTypeImpl <em>Greater Or Equal Comparison Type</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -675,7 +674,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGreaterOrEqualComparisonType()
    * @generated
    */
-  int GREATER_OR_EQUAL_COMPARISON_TYPE = 23;
+  int GREATER_OR_EQUAL_COMPARISON_TYPE = 22;
 
   /**
    * The number of structural features of the '<em>Greater Or Equal Comparison Type</em>' class.
@@ -694,7 +693,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getGreaterComparisonType()
    * @generated
    */
-  int GREATER_COMPARISON_TYPE = 24;
+  int GREATER_COMPARISON_TYPE = 23;
 
   /**
    * The number of structural features of the '<em>Greater Comparison Type</em>' class.
@@ -706,6 +705,139 @@ public interface MyDslPackage extends EPackage
   int GREATER_COMPARISON_TYPE_FEATURE_COUNT = COMPARISON_TYPE_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AdditionTypeImpl <em>Addition Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.AdditionTypeImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAdditionType()
+   * @generated
+   */
+  int ADDITION_TYPE = 24;
+
+  /**
+   * The number of structural features of the '<em>Addition Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADDITION_TYPE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.AdditionOpImpl <em>Addition Op</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.AdditionOpImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAdditionOp()
+   * @generated
+   */
+  int ADDITION_OP = 25;
+
+  /**
+   * The number of structural features of the '<em>Addition Op</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ADDITION_OP_FEATURE_COUNT = ADDITION_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SubtractionOpImpl <em>Subtraction Op</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.SubtractionOpImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSubtractionOp()
+   * @generated
+   */
+  int SUBTRACTION_OP = 26;
+
+  /**
+   * The number of structural features of the '<em>Subtraction Op</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUBTRACTION_OP_FEATURE_COUNT = ADDITION_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.MultiplicationTypeImpl <em>Multiplication Type</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.MultiplicationTypeImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMultiplicationType()
+   * @generated
+   */
+  int MULTIPLICATION_TYPE = 27;
+
+  /**
+   * The number of structural features of the '<em>Multiplication Type</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLICATION_TYPE_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.MultiplicationOpImpl <em>Multiplication Op</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.MultiplicationOpImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMultiplicationOp()
+   * @generated
+   */
+  int MULTIPLICATION_OP = 28;
+
+  /**
+   * The number of structural features of the '<em>Multiplication Op</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLICATION_OP_FEATURE_COUNT = MULTIPLICATION_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.DivisionOpImpl <em>Division Op</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.DivisionOpImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDivisionOp()
+   * @generated
+   */
+  int DIVISION_OP = 29;
+
+  /**
+   * The number of structural features of the '<em>Division Op</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIVISION_OP_FEATURE_COUNT = MULTIPLICATION_TYPE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ModuloOpImpl <em>Modulo Op</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.ModuloOpImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getModuloOp()
+   * @generated
+   */
+  int MODULO_OP = 30;
+
+  /**
+   * The number of structural features of the '<em>Modulo Op</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODULO_OP_FEATURE_COUNT = MULTIPLICATION_TYPE_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -713,7 +845,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 25;
+  int BOOLEAN_LITERAL = 31;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_LITERAL__EXPR = EXPRESSION__EXPR;
 
   /**
    * The number of structural features of the '<em>Boolean Literal</em>' class.
@@ -732,7 +873,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getFalseLiteral()
    * @generated
    */
-  int FALSE_LITERAL = 26;
+  int FALSE_LITERAL = 32;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FALSE_LITERAL__EXPR = BOOLEAN_LITERAL__EXPR;
 
   /**
    * The number of structural features of the '<em>False Literal</em>' class.
@@ -751,7 +901,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getTrueLiteral()
    * @generated
    */
-  int TRUE_LITERAL = 27;
+  int TRUE_LITERAL = 33;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRUE_LITERAL__EXPR = BOOLEAN_LITERAL__EXPR;
 
   /**
    * The number of structural features of the '<em>True Literal</em>' class.
@@ -770,7 +929,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getParameter()
    * @generated
    */
-  int PARAMETER = 28;
+  int PARAMETER = 34;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -807,7 +966,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbolRef()
    * @generated
    */
-  int SYMBOL_REF = 29;
+  int SYMBOL_REF = 35;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REF__EXPR = FUNCTION_CALL__EXPR;
 
   /**
    * The feature id for the '<em><b>Symbol</b></em>' reference.
@@ -844,7 +1012,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEquals()
    * @generated
    */
-  int EQUALS = 30;
+  int EQUALS = 36;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUALS__EXPR = EXPRESSION__EXPR;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -856,22 +1033,13 @@ public interface MyDslPackage extends EPackage
   int EQUALS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EQUALS__TYPE = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EQUALS__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
+  int EQUALS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Equals</em>' class.
@@ -880,7 +1048,62 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EQUALS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int EQUALS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.CompareImpl <em>Compare</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.CompareImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getCompare()
+   * @generated
+   */
+  int COMPARE = 37;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE__EXPR = EXPRESSION__EXPR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE__TYPE = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Compare</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPARE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.PlusImpl <em>Plus</em>}' class.
@@ -890,7 +1113,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 31;
+  int PLUS = 38;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__EXPR = EXPRESSION__EXPR;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -902,13 +1134,22 @@ public interface MyDslPackage extends EPackage
   int PLUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__TYPE = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Plus</em>' class.
@@ -917,7 +1158,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.MultiImpl <em>Multi</em>}' class.
@@ -927,7 +1168,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMulti()
    * @generated
    */
-  int MULTI = 32;
+  int MULTI = 39;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__EXPR = EXPRESSION__EXPR;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -939,13 +1189,22 @@ public interface MyDslPackage extends EPackage
   int MULTI__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTI__TYPE = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MULTI__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+  int MULTI__RIGHT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Multi</em>' class.
@@ -954,7 +1213,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MULTI_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+  int MULTI_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.ArrayAccessImpl <em>Array Access</em>}' class.
@@ -964,7 +1223,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArrayAccess()
    * @generated
    */
-  int ARRAY_ACCESS = 33;
+  int ARRAY_ACCESS = 40;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -973,7 +1232,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_ACCESS__EXPR = EXPRESSION_FEATURE_COUNT + 0;
+  int ARRAY_ACCESS__EXPR = EXPRESSION__EXPR;
 
   /**
    * The feature id for the '<em><b>Index</b></em>' containment reference.
@@ -982,7 +1241,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_ACCESS__INDEX = EXPRESSION_FEATURE_COUNT + 1;
+  int ARRAY_ACCESS__INDEX = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Array Access</em>' class.
@@ -991,7 +1250,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ARRAY_ACCESS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+  int ARRAY_ACCESS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
@@ -1001,7 +1260,16 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getNumberLiteral()
    * @generated
    */
-  int NUMBER_LITERAL = 34;
+  int NUMBER_LITERAL = 41;
+
+  /**
+   * The feature id for the '<em><b>Expr</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NUMBER_LITERAL__EXPR = EXPRESSION__EXPR;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1422,6 +1690,17 @@ public interface MyDslPackage extends EPackage
   EClass getExpression();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Expression#getExpr <em>Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Expr</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Expression#getExpr()
+   * @see #getExpression()
+   * @generated
+   */
+  EReference getExpression_Expr();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ComparisonType <em>Comparison Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1452,16 +1731,6 @@ public interface MyDslPackage extends EPackage
   EClass getLessOrEqualComparisonType();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.EqualComparisonType <em>Equal Comparison Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Equal Comparison Type</em>'.
-   * @see org.xtext.example.mydsl.myDsl.EqualComparisonType
-   * @generated
-   */
-  EClass getEqualComparisonType();
-
-  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.GreaterOrEqualComparisonType <em>Greater Or Equal Comparison Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1480,6 +1749,76 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getGreaterComparisonType();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.AdditionType <em>Addition Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Addition Type</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AdditionType
+   * @generated
+   */
+  EClass getAdditionType();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.AdditionOp <em>Addition Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Addition Op</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AdditionOp
+   * @generated
+   */
+  EClass getAdditionOp();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SubtractionOp <em>Subtraction Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Subtraction Op</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SubtractionOp
+   * @generated
+   */
+  EClass getSubtractionOp();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.MultiplicationType <em>Multiplication Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Multiplication Type</em>'.
+   * @see org.xtext.example.mydsl.myDsl.MultiplicationType
+   * @generated
+   */
+  EClass getMultiplicationType();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.MultiplicationOp <em>Multiplication Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Multiplication Op</em>'.
+   * @see org.xtext.example.mydsl.myDsl.MultiplicationOp
+   * @generated
+   */
+  EClass getMultiplicationOp();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.DivisionOp <em>Division Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Division Op</em>'.
+   * @see org.xtext.example.mydsl.myDsl.DivisionOp
+   * @generated
+   */
+  EClass getDivisionOp();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.ModuloOp <em>Modulo Op</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Modulo Op</em>'.
+   * @see org.xtext.example.mydsl.myDsl.ModuloOp
+   * @generated
+   */
+  EClass getModuloOp();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.BooleanLiteral <em>Boolean Literal</em>}'.
@@ -1597,17 +1936,6 @@ public interface MyDslPackage extends EPackage
   EReference getEquals_Left();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Equals#getType <em>Type</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Equals#getType()
-   * @see #getEquals()
-   * @generated
-   */
-  EReference getEquals_Type();
-
-  /**
    * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Equals#getRight <em>Right</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1617,6 +1945,49 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getEquals_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Compare <em>Compare</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compare</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Compare
+   * @generated
+   */
+  EClass getCompare();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Compare#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Compare#getLeft()
+   * @see #getCompare()
+   * @generated
+   */
+  EReference getCompare_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Compare#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Compare#getType()
+   * @see #getCompare()
+   * @generated
+   */
+  EReference getCompare_Type();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Compare#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Compare#getRight()
+   * @see #getCompare()
+   * @generated
+   */
+  EReference getCompare_Right();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Plus <em>Plus</em>}'.
@@ -1638,6 +2009,17 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getPlus_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Plus#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Plus#getType()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Type();
 
   /**
    * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Plus#getRight <em>Right</em>}'.
@@ -1672,6 +2054,17 @@ public interface MyDslPackage extends EPackage
   EReference getMulti_Left();
 
   /**
+   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Multi#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Multi#getType()
+   * @see #getMulti()
+   * @generated
+   */
+  EReference getMulti_Type();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.Multi#getRight <em>Right</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1691,17 +2084,6 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getArrayAccess();
-
-  /**
-   * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.ArrayAccess#getExpr <em>Expr</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Expr</em>'.
-   * @see org.xtext.example.mydsl.myDsl.ArrayAccess#getExpr()
-   * @see #getArrayAccess()
-   * @generated
-   */
-  EReference getArrayAccess_Expr();
 
   /**
    * Returns the meta object for the containment reference '{@link org.xtext.example.mydsl.myDsl.ArrayAccess#getIndex <em>Index</em>}'.
@@ -2101,6 +2483,14 @@ public interface MyDslPackage extends EPackage
     EClass EXPRESSION = eINSTANCE.getExpression();
 
     /**
+     * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXPRESSION__EXPR = eINSTANCE.getExpression_Expr();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ComparisonTypeImpl <em>Comparison Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2131,16 +2521,6 @@ public interface MyDslPackage extends EPackage
     EClass LESS_OR_EQUAL_COMPARISON_TYPE = eINSTANCE.getLessOrEqualComparisonType();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.EqualComparisonTypeImpl <em>Equal Comparison Type</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.EqualComparisonTypeImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEqualComparisonType()
-     * @generated
-     */
-    EClass EQUAL_COMPARISON_TYPE = eINSTANCE.getEqualComparisonType();
-
-    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.GreaterOrEqualComparisonTypeImpl <em>Greater Or Equal Comparison Type</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2159,6 +2539,76 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EClass GREATER_COMPARISON_TYPE = eINSTANCE.getGreaterComparisonType();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AdditionTypeImpl <em>Addition Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.AdditionTypeImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAdditionType()
+     * @generated
+     */
+    EClass ADDITION_TYPE = eINSTANCE.getAdditionType();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AdditionOpImpl <em>Addition Op</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.AdditionOpImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAdditionOp()
+     * @generated
+     */
+    EClass ADDITION_OP = eINSTANCE.getAdditionOp();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SubtractionOpImpl <em>Subtraction Op</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.SubtractionOpImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSubtractionOp()
+     * @generated
+     */
+    EClass SUBTRACTION_OP = eINSTANCE.getSubtractionOp();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.MultiplicationTypeImpl <em>Multiplication Type</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.MultiplicationTypeImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMultiplicationType()
+     * @generated
+     */
+    EClass MULTIPLICATION_TYPE = eINSTANCE.getMultiplicationType();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.MultiplicationOpImpl <em>Multiplication Op</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.MultiplicationOpImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMultiplicationOp()
+     * @generated
+     */
+    EClass MULTIPLICATION_OP = eINSTANCE.getMultiplicationOp();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.DivisionOpImpl <em>Division Op</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.DivisionOpImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getDivisionOp()
+     * @generated
+     */
+    EClass DIVISION_OP = eINSTANCE.getDivisionOp();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ModuloOpImpl <em>Modulo Op</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.ModuloOpImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getModuloOp()
+     * @generated
+     */
+    EClass MODULO_OP = eINSTANCE.getModuloOp();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -2261,12 +2711,38 @@ public interface MyDslPackage extends EPackage
     EReference EQUALS__LEFT = eINSTANCE.getEquals_Left();
 
     /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EQUALS__RIGHT = eINSTANCE.getEquals_Right();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.CompareImpl <em>Compare</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.CompareImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getCompare()
+     * @generated
+     */
+    EClass COMPARE = eINSTANCE.getCompare();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPARE__LEFT = eINSTANCE.getCompare_Left();
+
+    /**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EQUALS__TYPE = eINSTANCE.getEquals_Type();
+    EReference COMPARE__TYPE = eINSTANCE.getCompare_Type();
 
     /**
      * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
@@ -2274,7 +2750,7 @@ public interface MyDslPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EQUALS__RIGHT = eINSTANCE.getEquals_Right();
+    EReference COMPARE__RIGHT = eINSTANCE.getCompare_Right();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.PlusImpl <em>Plus</em>}' class.
@@ -2293,6 +2769,14 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference PLUS__LEFT = eINSTANCE.getPlus_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__TYPE = eINSTANCE.getPlus_Type();
 
     /**
      * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
@@ -2321,6 +2805,14 @@ public interface MyDslPackage extends EPackage
     EReference MULTI__LEFT = eINSTANCE.getMulti_Left();
 
     /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MULTI__TYPE = eINSTANCE.getMulti_Type();
+
+    /**
      * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2337,14 +2829,6 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EClass ARRAY_ACCESS = eINSTANCE.getArrayAccess();
-
-    /**
-     * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ARRAY_ACCESS__EXPR = eINSTANCE.getArrayAccess_Expr();
 
     /**
      * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.

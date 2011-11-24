@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.Multi;
+import org.xtext.example.mydsl.myDsl.MultiplicationType;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 
 /**
@@ -25,6 +26,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.MultiImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.MultiImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.MultiImpl#getRight <em>Right</em>}</li>
  * </ul>
  * </p>
@@ -42,6 +44,16 @@ public class MultiImpl extends ExpressionImpl implements Multi
    * @ordered
    */
   protected Expression left;
+
+  /**
+   * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getType()
+   * @generated
+   * @ordered
+   */
+  protected MultiplicationType type;
 
   /**
    * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
@@ -127,6 +139,54 @@ public class MultiImpl extends ExpressionImpl implements Multi
    * <!-- end-user-doc -->
    * @generated
    */
+  public MultiplicationType getType()
+  {
+    return type;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetType(MultiplicationType newType, NotificationChain msgs)
+  {
+    MultiplicationType oldType = type;
+    type = newType;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.MULTI__TYPE, oldType, newType);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setType(MultiplicationType newType)
+  {
+    if (newType != type)
+    {
+      NotificationChain msgs = null;
+      if (type != null)
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MULTI__TYPE, null, msgs);
+      if (newType != null)
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.MULTI__TYPE, null, msgs);
+      msgs = basicSetType(newType, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MULTI__TYPE, newType, newType));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Expression getRight()
   {
     return right;
@@ -182,6 +242,8 @@ public class MultiImpl extends ExpressionImpl implements Multi
     {
       case MyDslPackage.MULTI__LEFT:
         return basicSetLeft(null, msgs);
+      case MyDslPackage.MULTI__TYPE:
+        return basicSetType(null, msgs);
       case MyDslPackage.MULTI__RIGHT:
         return basicSetRight(null, msgs);
     }
@@ -200,6 +262,8 @@ public class MultiImpl extends ExpressionImpl implements Multi
     {
       case MyDslPackage.MULTI__LEFT:
         return getLeft();
+      case MyDslPackage.MULTI__TYPE:
+        return getType();
       case MyDslPackage.MULTI__RIGHT:
         return getRight();
     }
@@ -218,6 +282,9 @@ public class MultiImpl extends ExpressionImpl implements Multi
     {
       case MyDslPackage.MULTI__LEFT:
         setLeft((Expression)newValue);
+        return;
+      case MyDslPackage.MULTI__TYPE:
+        setType((MultiplicationType)newValue);
         return;
       case MyDslPackage.MULTI__RIGHT:
         setRight((Expression)newValue);
@@ -239,6 +306,9 @@ public class MultiImpl extends ExpressionImpl implements Multi
       case MyDslPackage.MULTI__LEFT:
         setLeft((Expression)null);
         return;
+      case MyDslPackage.MULTI__TYPE:
+        setType((MultiplicationType)null);
+        return;
       case MyDslPackage.MULTI__RIGHT:
         setRight((Expression)null);
         return;
@@ -258,6 +328,8 @@ public class MultiImpl extends ExpressionImpl implements Multi
     {
       case MyDslPackage.MULTI__LEFT:
         return left != null;
+      case MyDslPackage.MULTI__TYPE:
+        return type != null;
       case MyDslPackage.MULTI__RIGHT:
         return right != null;
     }

@@ -69,13 +69,22 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expr"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComparisonType"/>
   <eClassifiers xsi:type="ecore:EClass" name="LessComparisonType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"/>
   <eClassifiers xsi:type="ecore:EClass" name="LessOrEqualComparisonType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="EqualComparisonType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"/>
   <eClassifiers xsi:type="ecore:EClass" name="GreaterOrEqualComparisonType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"/>
   <eClassifiers xsi:type="ecore:EClass" name="GreaterComparisonType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AdditionOp" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//AdditionType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubtractionOp" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//AdditionType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicationType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicationOp" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//MultiplicationType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DivisionOp" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//MultiplicationType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuloOp" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//MultiplicationType"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="FalseLiteral" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//BooleanLiteral"/>
   <eClassifiers xsi:type="ecore:EClass" name="TrueLiteral" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//BooleanLiteral"/>
@@ -93,6 +102,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Equals" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
@@ -101,18 +116,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//AdditionType"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Multi" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//MultiplicationType"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayAccess" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"
         containment="true"/>
   </eClassifiers>

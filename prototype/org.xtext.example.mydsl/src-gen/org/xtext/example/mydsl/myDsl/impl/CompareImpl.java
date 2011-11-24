@@ -13,27 +13,27 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.xtext.example.mydsl.myDsl.AdditionType;
+import org.xtext.example.mydsl.myDsl.Compare;
+import org.xtext.example.mydsl.myDsl.ComparisonType;
 import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Plus;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Plus</b></em>'.
+ * An implementation of the model object '<em><b>Compare</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PlusImpl#getLeft <em>Left</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PlusImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PlusImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.CompareImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.CompareImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.CompareImpl#getRight <em>Right</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class PlusImpl extends ExpressionImpl implements Plus
+public class CompareImpl extends ExpressionImpl implements Compare
 {
   /**
    * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
@@ -53,7 +53,7 @@ public class PlusImpl extends ExpressionImpl implements Plus
    * @generated
    * @ordered
    */
-  protected AdditionType type;
+  protected ComparisonType type;
 
   /**
    * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
@@ -70,7 +70,7 @@ public class PlusImpl extends ExpressionImpl implements Plus
    * <!-- end-user-doc -->
    * @generated
    */
-  protected PlusImpl()
+  protected CompareImpl()
   {
     super();
   }
@@ -83,7 +83,7 @@ public class PlusImpl extends ExpressionImpl implements Plus
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PLUS;
+    return MyDslPackage.Literals.COMPARE;
   }
 
   /**
@@ -107,7 +107,7 @@ public class PlusImpl extends ExpressionImpl implements Plus
     left = newLeft;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.PLUS__LEFT, oldLeft, newLeft);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.COMPARE__LEFT, oldLeft, newLeft);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -124,14 +124,14 @@ public class PlusImpl extends ExpressionImpl implements Plus
     {
       NotificationChain msgs = null;
       if (left != null)
-        msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PLUS__LEFT, null, msgs);
+        msgs = ((InternalEObject)left).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.COMPARE__LEFT, null, msgs);
       if (newLeft != null)
-        msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PLUS__LEFT, null, msgs);
+        msgs = ((InternalEObject)newLeft).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.COMPARE__LEFT, null, msgs);
       msgs = basicSetLeft(newLeft, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PLUS__LEFT, newLeft, newLeft));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.COMPARE__LEFT, newLeft, newLeft));
   }
 
   /**
@@ -139,7 +139,7 @@ public class PlusImpl extends ExpressionImpl implements Plus
    * <!-- end-user-doc -->
    * @generated
    */
-  public AdditionType getType()
+  public ComparisonType getType()
   {
     return type;
   }
@@ -149,13 +149,13 @@ public class PlusImpl extends ExpressionImpl implements Plus
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetType(AdditionType newType, NotificationChain msgs)
+  public NotificationChain basicSetType(ComparisonType newType, NotificationChain msgs)
   {
-    AdditionType oldType = type;
+    ComparisonType oldType = type;
     type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.PLUS__TYPE, oldType, newType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.COMPARE__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -166,20 +166,20 @@ public class PlusImpl extends ExpressionImpl implements Plus
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(AdditionType newType)
+  public void setType(ComparisonType newType)
   {
     if (newType != type)
     {
       NotificationChain msgs = null;
       if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PLUS__TYPE, null, msgs);
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.COMPARE__TYPE, null, msgs);
       if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PLUS__TYPE, null, msgs);
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.COMPARE__TYPE, null, msgs);
       msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PLUS__TYPE, newType, newType));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.COMPARE__TYPE, newType, newType));
   }
 
   /**
@@ -203,7 +203,7 @@ public class PlusImpl extends ExpressionImpl implements Plus
     right = newRight;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.PLUS__RIGHT, oldRight, newRight);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.COMPARE__RIGHT, oldRight, newRight);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -220,14 +220,14 @@ public class PlusImpl extends ExpressionImpl implements Plus
     {
       NotificationChain msgs = null;
       if (right != null)
-        msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PLUS__RIGHT, null, msgs);
+        msgs = ((InternalEObject)right).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.COMPARE__RIGHT, null, msgs);
       if (newRight != null)
-        msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.PLUS__RIGHT, null, msgs);
+        msgs = ((InternalEObject)newRight).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.COMPARE__RIGHT, null, msgs);
       msgs = basicSetRight(newRight, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PLUS__RIGHT, newRight, newRight));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.COMPARE__RIGHT, newRight, newRight));
   }
 
   /**
@@ -240,11 +240,11 @@ public class PlusImpl extends ExpressionImpl implements Plus
   {
     switch (featureID)
     {
-      case MyDslPackage.PLUS__LEFT:
+      case MyDslPackage.COMPARE__LEFT:
         return basicSetLeft(null, msgs);
-      case MyDslPackage.PLUS__TYPE:
+      case MyDslPackage.COMPARE__TYPE:
         return basicSetType(null, msgs);
-      case MyDslPackage.PLUS__RIGHT:
+      case MyDslPackage.COMPARE__RIGHT:
         return basicSetRight(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -260,11 +260,11 @@ public class PlusImpl extends ExpressionImpl implements Plus
   {
     switch (featureID)
     {
-      case MyDslPackage.PLUS__LEFT:
+      case MyDslPackage.COMPARE__LEFT:
         return getLeft();
-      case MyDslPackage.PLUS__TYPE:
+      case MyDslPackage.COMPARE__TYPE:
         return getType();
-      case MyDslPackage.PLUS__RIGHT:
+      case MyDslPackage.COMPARE__RIGHT:
         return getRight();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -280,13 +280,13 @@ public class PlusImpl extends ExpressionImpl implements Plus
   {
     switch (featureID)
     {
-      case MyDslPackage.PLUS__LEFT:
+      case MyDslPackage.COMPARE__LEFT:
         setLeft((Expression)newValue);
         return;
-      case MyDslPackage.PLUS__TYPE:
-        setType((AdditionType)newValue);
+      case MyDslPackage.COMPARE__TYPE:
+        setType((ComparisonType)newValue);
         return;
-      case MyDslPackage.PLUS__RIGHT:
+      case MyDslPackage.COMPARE__RIGHT:
         setRight((Expression)newValue);
         return;
     }
@@ -303,13 +303,13 @@ public class PlusImpl extends ExpressionImpl implements Plus
   {
     switch (featureID)
     {
-      case MyDslPackage.PLUS__LEFT:
+      case MyDslPackage.COMPARE__LEFT:
         setLeft((Expression)null);
         return;
-      case MyDslPackage.PLUS__TYPE:
-        setType((AdditionType)null);
+      case MyDslPackage.COMPARE__TYPE:
+        setType((ComparisonType)null);
         return;
-      case MyDslPackage.PLUS__RIGHT:
+      case MyDslPackage.COMPARE__RIGHT:
         setRight((Expression)null);
         return;
     }
@@ -326,14 +326,14 @@ public class PlusImpl extends ExpressionImpl implements Plus
   {
     switch (featureID)
     {
-      case MyDslPackage.PLUS__LEFT:
+      case MyDslPackage.COMPARE__LEFT:
         return left != null;
-      case MyDslPackage.PLUS__TYPE:
+      case MyDslPackage.COMPARE__TYPE:
         return type != null;
-      case MyDslPackage.PLUS__RIGHT:
+      case MyDslPackage.COMPARE__RIGHT:
         return right != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //PlusImpl
+} //CompareImpl

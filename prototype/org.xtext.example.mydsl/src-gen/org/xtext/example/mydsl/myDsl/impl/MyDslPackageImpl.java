@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.xtext.example.mydsl.myDsl.AdditionOp;
+import org.xtext.example.mydsl.myDsl.AdditionType;
 import org.xtext.example.mydsl.myDsl.Annotation;
 import org.xtext.example.mydsl.myDsl.ArrayAccess;
 import org.xtext.example.mydsl.myDsl.ArrayType;
@@ -19,8 +21,9 @@ import org.xtext.example.mydsl.myDsl.Assignment;
 import org.xtext.example.mydsl.myDsl.Block;
 import org.xtext.example.mydsl.myDsl.BoolType;
 import org.xtext.example.mydsl.myDsl.BooleanLiteral;
+import org.xtext.example.mydsl.myDsl.Compare;
 import org.xtext.example.mydsl.myDsl.ComparisonType;
-import org.xtext.example.mydsl.myDsl.EqualComparisonType;
+import org.xtext.example.mydsl.myDsl.DivisionOp;
 import org.xtext.example.mydsl.myDsl.Equals;
 import org.xtext.example.mydsl.myDsl.Expr;
 import org.xtext.example.mydsl.myDsl.Expression;
@@ -34,7 +37,10 @@ import org.xtext.example.mydsl.myDsl.IntType;
 import org.xtext.example.mydsl.myDsl.LessComparisonType;
 import org.xtext.example.mydsl.myDsl.LessOrEqualComparisonType;
 import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.ModuloOp;
 import org.xtext.example.mydsl.myDsl.Multi;
+import org.xtext.example.mydsl.myDsl.MultiplicationOp;
+import org.xtext.example.mydsl.myDsl.MultiplicationType;
 import org.xtext.example.mydsl.myDsl.MyDslFactory;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.NumberLiteral;
@@ -43,6 +49,7 @@ import org.xtext.example.mydsl.myDsl.Plus;
 import org.xtext.example.mydsl.myDsl.PrimitiveType;
 import org.xtext.example.mydsl.myDsl.ReturnStatement;
 import org.xtext.example.mydsl.myDsl.Statement;
+import org.xtext.example.mydsl.myDsl.SubtractionOp;
 import org.xtext.example.mydsl.myDsl.Symbol;
 import org.xtext.example.mydsl.myDsl.SymbolRef;
 import org.xtext.example.mydsl.myDsl.TrueLiteral;
@@ -217,13 +224,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass equalComparisonTypeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass greaterOrEqualComparisonTypeEClass = null;
 
   /**
@@ -232,6 +232,55 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass greaterComparisonTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass additionTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass additionOpEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass subtractionOpEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass multiplicationTypeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass multiplicationOpEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass divisionOpEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass moduloOpEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -274,6 +323,13 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass equalsEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass compareEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -751,6 +807,16 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getExpression_Expr()
+  {
+    return (EReference)expressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getComparisonType()
   {
     return comparisonTypeEClass;
@@ -781,16 +847,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEqualComparisonType()
-  {
-    return equalComparisonTypeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getGreaterOrEqualComparisonType()
   {
     return greaterOrEqualComparisonTypeEClass;
@@ -804,6 +860,76 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
   public EClass getGreaterComparisonType()
   {
     return greaterComparisonTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAdditionType()
+  {
+    return additionTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAdditionOp()
+  {
+    return additionOpEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSubtractionOp()
+  {
+    return subtractionOpEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMultiplicationType()
+  {
+    return multiplicationTypeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMultiplicationOp()
+  {
+    return multiplicationOpEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDivisionOp()
+  {
+    return divisionOpEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getModuloOp()
+  {
+    return moduloOpEClass;
   }
 
   /**
@@ -921,7 +1047,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEquals_Type()
+  public EReference getEquals_Right()
   {
     return (EReference)equalsEClass.getEStructuralFeatures().get(1);
   }
@@ -931,9 +1057,39 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEquals_Right()
+  public EClass getCompare()
   {
-    return (EReference)equalsEClass.getEStructuralFeatures().get(2);
+    return compareEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompare_Left()
+  {
+    return (EReference)compareEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompare_Type()
+  {
+    return (EReference)compareEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompare_Right()
+  {
+    return (EReference)compareEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -961,9 +1117,19 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPlus_Right()
+  public EReference getPlus_Type()
   {
     return (EReference)plusEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getPlus_Right()
+  {
+    return (EReference)plusEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -991,9 +1157,19 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getMulti_Right()
+  public EReference getMulti_Type()
   {
     return (EReference)multiEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getMulti_Right()
+  {
+    return (EReference)multiEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1011,19 +1187,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getArrayAccess_Expr()
-  {
-    return (EReference)arrayAccessEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getArrayAccess_Index()
   {
-    return (EReference)arrayAccessEClass.getEStructuralFeatures().get(1);
+    return (EReference)arrayAccessEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1132,6 +1298,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     exprEClass = createEClass(EXPR);
 
     expressionEClass = createEClass(EXPRESSION);
+    createEReference(expressionEClass, EXPRESSION__EXPR);
 
     comparisonTypeEClass = createEClass(COMPARISON_TYPE);
 
@@ -1139,11 +1306,23 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     lessOrEqualComparisonTypeEClass = createEClass(LESS_OR_EQUAL_COMPARISON_TYPE);
 
-    equalComparisonTypeEClass = createEClass(EQUAL_COMPARISON_TYPE);
-
     greaterOrEqualComparisonTypeEClass = createEClass(GREATER_OR_EQUAL_COMPARISON_TYPE);
 
     greaterComparisonTypeEClass = createEClass(GREATER_COMPARISON_TYPE);
+
+    additionTypeEClass = createEClass(ADDITION_TYPE);
+
+    additionOpEClass = createEClass(ADDITION_OP);
+
+    subtractionOpEClass = createEClass(SUBTRACTION_OP);
+
+    multiplicationTypeEClass = createEClass(MULTIPLICATION_TYPE);
+
+    multiplicationOpEClass = createEClass(MULTIPLICATION_OP);
+
+    divisionOpEClass = createEClass(DIVISION_OP);
+
+    moduloOpEClass = createEClass(MODULO_OP);
 
     booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
 
@@ -1161,19 +1340,24 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     equalsEClass = createEClass(EQUALS);
     createEReference(equalsEClass, EQUALS__LEFT);
-    createEReference(equalsEClass, EQUALS__TYPE);
     createEReference(equalsEClass, EQUALS__RIGHT);
+
+    compareEClass = createEClass(COMPARE);
+    createEReference(compareEClass, COMPARE__LEFT);
+    createEReference(compareEClass, COMPARE__TYPE);
+    createEReference(compareEClass, COMPARE__RIGHT);
 
     plusEClass = createEClass(PLUS);
     createEReference(plusEClass, PLUS__LEFT);
+    createEReference(plusEClass, PLUS__TYPE);
     createEReference(plusEClass, PLUS__RIGHT);
 
     multiEClass = createEClass(MULTI);
     createEReference(multiEClass, MULTI__LEFT);
+    createEReference(multiEClass, MULTI__TYPE);
     createEReference(multiEClass, MULTI__RIGHT);
 
     arrayAccessEClass = createEClass(ARRAY_ACCESS);
-    createEReference(arrayAccessEClass, ARRAY_ACCESS__EXPR);
     createEReference(arrayAccessEClass, ARRAY_ACCESS__INDEX);
 
     numberLiteralEClass = createEClass(NUMBER_LITERAL);
@@ -1225,15 +1409,20 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     expressionEClass.getESuperTypes().add(this.getExpr());
     lessComparisonTypeEClass.getESuperTypes().add(this.getComparisonType());
     lessOrEqualComparisonTypeEClass.getESuperTypes().add(this.getComparisonType());
-    equalComparisonTypeEClass.getESuperTypes().add(this.getComparisonType());
     greaterOrEqualComparisonTypeEClass.getESuperTypes().add(this.getComparisonType());
     greaterComparisonTypeEClass.getESuperTypes().add(this.getComparisonType());
+    additionOpEClass.getESuperTypes().add(this.getAdditionType());
+    subtractionOpEClass.getESuperTypes().add(this.getAdditionType());
+    multiplicationOpEClass.getESuperTypes().add(this.getMultiplicationType());
+    divisionOpEClass.getESuperTypes().add(this.getMultiplicationType());
+    moduloOpEClass.getESuperTypes().add(this.getMultiplicationType());
     booleanLiteralEClass.getESuperTypes().add(this.getExpression());
     falseLiteralEClass.getESuperTypes().add(this.getBooleanLiteral());
     trueLiteralEClass.getESuperTypes().add(this.getBooleanLiteral());
     parameterEClass.getESuperTypes().add(this.getSymbol());
     symbolRefEClass.getESuperTypes().add(this.getFunctionCall());
     equalsEClass.getESuperTypes().add(this.getExpression());
+    compareEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     multiEClass.getESuperTypes().add(this.getExpression());
     arrayAccessEClass.getESuperTypes().add(this.getExpression());
@@ -1296,6 +1485,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEClass(exprEClass, Expr.class, "Expr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getExpression_Expr(), this.getExpr(), null, "expr", null, 0, 1, Expression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(comparisonTypeEClass, ComparisonType.class, "ComparisonType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1303,11 +1493,23 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(lessOrEqualComparisonTypeEClass, LessOrEqualComparisonType.class, "LessOrEqualComparisonType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(equalComparisonTypeEClass, EqualComparisonType.class, "EqualComparisonType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(greaterOrEqualComparisonTypeEClass, GreaterOrEqualComparisonType.class, "GreaterOrEqualComparisonType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(greaterComparisonTypeEClass, GreaterComparisonType.class, "GreaterComparisonType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(additionTypeEClass, AdditionType.class, "AdditionType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(additionOpEClass, AdditionOp.class, "AdditionOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(subtractionOpEClass, SubtractionOp.class, "SubtractionOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(multiplicationTypeEClass, MultiplicationType.class, "MultiplicationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(multiplicationOpEClass, MultiplicationOp.class, "MultiplicationOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(divisionOpEClass, DivisionOp.class, "DivisionOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(moduloOpEClass, ModuloOp.class, "ModuloOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1325,19 +1527,24 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(equalsEClass, Equals.class, "Equals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEquals_Left(), this.getExpression(), null, "left", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEquals_Type(), this.getComparisonType(), null, "type", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEquals_Right(), this.getExpression(), null, "right", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(compareEClass, Compare.class, "Compare", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCompare_Left(), this.getExpression(), null, "left", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCompare_Type(), this.getComparisonType(), null, "type", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCompare_Right(), this.getExpression(), null, "right", null, 0, 1, Compare.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(plusEClass, Plus.class, "Plus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlus_Left(), this.getExpression(), null, "left", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getPlus_Type(), this.getAdditionType(), null, "type", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPlus_Right(), this.getExpression(), null, "right", null, 0, 1, Plus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(multiEClass, Multi.class, "Multi", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getMulti_Left(), this.getExpression(), null, "left", null, 0, 1, Multi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMulti_Type(), this.getMultiplicationType(), null, "type", null, 0, 1, Multi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMulti_Right(), this.getExpression(), null, "right", null, 0, 1, Multi.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(arrayAccessEClass, ArrayAccess.class, "ArrayAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getArrayAccess_Expr(), this.getExpression(), null, "expr", null, 0, 1, ArrayAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArrayAccess_Index(), this.getExpr(), null, "index", null, 0, 1, ArrayAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

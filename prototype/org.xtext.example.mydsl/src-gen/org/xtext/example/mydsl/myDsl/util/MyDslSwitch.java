@@ -248,14 +248,6 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.EQUAL_COMPARISON_TYPE:
-      {
-        EqualComparisonType equalComparisonType = (EqualComparisonType)theEObject;
-        T result = caseEqualComparisonType(equalComparisonType);
-        if (result == null) result = caseComparisonType(equalComparisonType);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.GREATER_OR_EQUAL_COMPARISON_TYPE:
       {
         GreaterOrEqualComparisonType greaterOrEqualComparisonType = (GreaterOrEqualComparisonType)theEObject;
@@ -269,6 +261,60 @@ public class MyDslSwitch<T> extends Switch<T>
         GreaterComparisonType greaterComparisonType = (GreaterComparisonType)theEObject;
         T result = caseGreaterComparisonType(greaterComparisonType);
         if (result == null) result = caseComparisonType(greaterComparisonType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.ADDITION_TYPE:
+      {
+        AdditionType additionType = (AdditionType)theEObject;
+        T result = caseAdditionType(additionType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.ADDITION_OP:
+      {
+        AdditionOp additionOp = (AdditionOp)theEObject;
+        T result = caseAdditionOp(additionOp);
+        if (result == null) result = caseAdditionType(additionOp);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.SUBTRACTION_OP:
+      {
+        SubtractionOp subtractionOp = (SubtractionOp)theEObject;
+        T result = caseSubtractionOp(subtractionOp);
+        if (result == null) result = caseAdditionType(subtractionOp);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MULTIPLICATION_TYPE:
+      {
+        MultiplicationType multiplicationType = (MultiplicationType)theEObject;
+        T result = caseMultiplicationType(multiplicationType);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MULTIPLICATION_OP:
+      {
+        MultiplicationOp multiplicationOp = (MultiplicationOp)theEObject;
+        T result = caseMultiplicationOp(multiplicationOp);
+        if (result == null) result = caseMultiplicationType(multiplicationOp);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.DIVISION_OP:
+      {
+        DivisionOp divisionOp = (DivisionOp)theEObject;
+        T result = caseDivisionOp(divisionOp);
+        if (result == null) result = caseMultiplicationType(divisionOp);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.MODULO_OP:
+      {
+        ModuloOp moduloOp = (ModuloOp)theEObject;
+        T result = caseModuloOp(moduloOp);
+        if (result == null) result = caseMultiplicationType(moduloOp);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -326,6 +372,15 @@ public class MyDslSwitch<T> extends Switch<T>
         T result = caseEquals(equals);
         if (result == null) result = caseExpression(equals);
         if (result == null) result = caseExpr(equals);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.COMPARE:
+      {
+        Compare compare = (Compare)theEObject;
+        T result = caseCompare(compare);
+        if (result == null) result = caseExpression(compare);
+        if (result == null) result = caseExpr(compare);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -722,22 +777,6 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Equal Comparison Type</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Equal Comparison Type</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEqualComparisonType(EqualComparisonType object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Greater Or Equal Comparison Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -765,6 +804,118 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseGreaterComparisonType(GreaterComparisonType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Addition Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Addition Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAdditionType(AdditionType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Addition Op</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Addition Op</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAdditionOp(AdditionOp object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Subtraction Op</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Subtraction Op</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSubtractionOp(SubtractionOp object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Multiplication Type</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Multiplication Type</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMultiplicationType(MultiplicationType object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Multiplication Op</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Multiplication Op</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMultiplicationOp(MultiplicationOp object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Division Op</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Division Op</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDivisionOp(DivisionOp object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Modulo Op</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Modulo Op</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseModuloOp(ModuloOp object)
   {
     return null;
   }
@@ -861,6 +1012,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEquals(Equals object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compare</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compare</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompare(Compare object)
   {
     return null;
   }

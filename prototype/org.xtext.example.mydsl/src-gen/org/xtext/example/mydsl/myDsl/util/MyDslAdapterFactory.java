@@ -188,11 +188,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createLessOrEqualComparisonTypeAdapter();
       }
       @Override
-      public Adapter caseEqualComparisonType(EqualComparisonType object)
-      {
-        return createEqualComparisonTypeAdapter();
-      }
-      @Override
       public Adapter caseGreaterOrEqualComparisonType(GreaterOrEqualComparisonType object)
       {
         return createGreaterOrEqualComparisonTypeAdapter();
@@ -201,6 +196,41 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseGreaterComparisonType(GreaterComparisonType object)
       {
         return createGreaterComparisonTypeAdapter();
+      }
+      @Override
+      public Adapter caseAdditionType(AdditionType object)
+      {
+        return createAdditionTypeAdapter();
+      }
+      @Override
+      public Adapter caseAdditionOp(AdditionOp object)
+      {
+        return createAdditionOpAdapter();
+      }
+      @Override
+      public Adapter caseSubtractionOp(SubtractionOp object)
+      {
+        return createSubtractionOpAdapter();
+      }
+      @Override
+      public Adapter caseMultiplicationType(MultiplicationType object)
+      {
+        return createMultiplicationTypeAdapter();
+      }
+      @Override
+      public Adapter caseMultiplicationOp(MultiplicationOp object)
+      {
+        return createMultiplicationOpAdapter();
+      }
+      @Override
+      public Adapter caseDivisionOp(DivisionOp object)
+      {
+        return createDivisionOpAdapter();
+      }
+      @Override
+      public Adapter caseModuloOp(ModuloOp object)
+      {
+        return createModuloOpAdapter();
       }
       @Override
       public Adapter caseBooleanLiteral(BooleanLiteral object)
@@ -231,6 +261,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseEquals(Equals object)
       {
         return createEqualsAdapter();
+      }
+      @Override
+      public Adapter caseCompare(Compare object)
+      {
+        return createCompareAdapter();
       }
       @Override
       public Adapter casePlus(Plus object)
@@ -605,21 +640,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.EqualComparisonType <em>Equal Comparison Type</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.EqualComparisonType
-   * @generated
-   */
-  public Adapter createEqualComparisonTypeAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.GreaterOrEqualComparisonType <em>Greater Or Equal Comparison Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -645,6 +665,111 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGreaterComparisonTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.AdditionType <em>Addition Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.AdditionType
+   * @generated
+   */
+  public Adapter createAdditionTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.AdditionOp <em>Addition Op</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.AdditionOp
+   * @generated
+   */
+  public Adapter createAdditionOpAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.SubtractionOp <em>Subtraction Op</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.SubtractionOp
+   * @generated
+   */
+  public Adapter createSubtractionOpAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.MultiplicationType <em>Multiplication Type</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.MultiplicationType
+   * @generated
+   */
+  public Adapter createMultiplicationTypeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.MultiplicationOp <em>Multiplication Op</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.MultiplicationOp
+   * @generated
+   */
+  public Adapter createMultiplicationOpAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.DivisionOp <em>Division Op</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.DivisionOp
+   * @generated
+   */
+  public Adapter createDivisionOpAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.ModuloOp <em>Modulo Op</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.ModuloOp
+   * @generated
+   */
+  public Adapter createModuloOpAdapter()
   {
     return null;
   }
@@ -735,6 +860,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEqualsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Compare <em>Compare</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.Compare
+   * @generated
+   */
+  public Adapter createCompareAdapter()
   {
     return null;
   }

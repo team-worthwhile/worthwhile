@@ -55,13 +55,21 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Assignment/value"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"/>
-    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression/expr"/>
+    </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ComparisonType"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//LessComparisonType"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//LessOrEqualComparisonType"/>
-    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//EqualComparisonType"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//GreaterOrEqualComparisonType"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//GreaterComparisonType"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//AdditionType"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//AdditionOp"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//SubtractionOp"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//MultiplicationType"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//MultiplicationOp"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//DivisionOp"/>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ModuloOp"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//BooleanLiteral"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//FalseLiteral"/>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//TrueLiteral"/>
@@ -75,19 +83,24 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Equals">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Equals/left"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Equals/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Equals/right"/>
+    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Compare">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Compare/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Compare/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Compare/right"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Plus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Plus/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Plus/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Plus/right"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Multi">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Multi/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Multi/type"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Multi/right"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ArrayAccess">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ArrayAccess/expr"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//ArrayAccess/index"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//NumberLiteral">

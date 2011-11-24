@@ -89,15 +89,22 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.COMPARISON_TYPE: return createComparisonType();
       case MyDslPackage.LESS_COMPARISON_TYPE: return createLessComparisonType();
       case MyDslPackage.LESS_OR_EQUAL_COMPARISON_TYPE: return createLessOrEqualComparisonType();
-      case MyDslPackage.EQUAL_COMPARISON_TYPE: return createEqualComparisonType();
       case MyDslPackage.GREATER_OR_EQUAL_COMPARISON_TYPE: return createGreaterOrEqualComparisonType();
       case MyDslPackage.GREATER_COMPARISON_TYPE: return createGreaterComparisonType();
+      case MyDslPackage.ADDITION_TYPE: return createAdditionType();
+      case MyDslPackage.ADDITION_OP: return createAdditionOp();
+      case MyDslPackage.SUBTRACTION_OP: return createSubtractionOp();
+      case MyDslPackage.MULTIPLICATION_TYPE: return createMultiplicationType();
+      case MyDslPackage.MULTIPLICATION_OP: return createMultiplicationOp();
+      case MyDslPackage.DIVISION_OP: return createDivisionOp();
+      case MyDslPackage.MODULO_OP: return createModuloOp();
       case MyDslPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case MyDslPackage.FALSE_LITERAL: return createFalseLiteral();
       case MyDslPackage.TRUE_LITERAL: return createTrueLiteral();
       case MyDslPackage.PARAMETER: return createParameter();
       case MyDslPackage.SYMBOL_REF: return createSymbolRef();
       case MyDslPackage.EQUALS: return createEquals();
+      case MyDslPackage.COMPARE: return createCompare();
       case MyDslPackage.PLUS: return createPlus();
       case MyDslPackage.MULTI: return createMulti();
       case MyDslPackage.ARRAY_ACCESS: return createArrayAccess();
@@ -354,17 +361,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public EqualComparisonType createEqualComparisonType()
-  {
-    EqualComparisonTypeImpl equalComparisonType = new EqualComparisonTypeImpl();
-    return equalComparisonType;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public GreaterOrEqualComparisonType createGreaterOrEqualComparisonType()
   {
     GreaterOrEqualComparisonTypeImpl greaterOrEqualComparisonType = new GreaterOrEqualComparisonTypeImpl();
@@ -380,6 +376,83 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     GreaterComparisonTypeImpl greaterComparisonType = new GreaterComparisonTypeImpl();
     return greaterComparisonType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AdditionType createAdditionType()
+  {
+    AdditionTypeImpl additionType = new AdditionTypeImpl();
+    return additionType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AdditionOp createAdditionOp()
+  {
+    AdditionOpImpl additionOp = new AdditionOpImpl();
+    return additionOp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubtractionOp createSubtractionOp()
+  {
+    SubtractionOpImpl subtractionOp = new SubtractionOpImpl();
+    return subtractionOp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MultiplicationType createMultiplicationType()
+  {
+    MultiplicationTypeImpl multiplicationType = new MultiplicationTypeImpl();
+    return multiplicationType;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MultiplicationOp createMultiplicationOp()
+  {
+    MultiplicationOpImpl multiplicationOp = new MultiplicationOpImpl();
+    return multiplicationOp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DivisionOp createDivisionOp()
+  {
+    DivisionOpImpl divisionOp = new DivisionOpImpl();
+    return divisionOp;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ModuloOp createModuloOp()
+  {
+    ModuloOpImpl moduloOp = new ModuloOpImpl();
+    return moduloOp;
   }
 
   /**
@@ -446,6 +519,17 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     EqualsImpl equals = new EqualsImpl();
     return equals;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Compare createCompare()
+  {
+    CompareImpl compare = new CompareImpl();
+    return compare;
   }
 
   /**

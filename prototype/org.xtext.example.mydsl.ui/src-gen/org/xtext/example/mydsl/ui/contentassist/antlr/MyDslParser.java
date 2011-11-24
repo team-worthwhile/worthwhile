@@ -45,6 +45,10 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getComparisonTypeAccess().getAlternatives(), "rule__ComparisonType__Alternatives");
 					put(grammarAccess.getLessOrEqualComparisonTypeAccess().getAlternatives_1(), "rule__LessOrEqualComparisonType__Alternatives_1");
 					put(grammarAccess.getGreaterOrEqualComparisonTypeAccess().getAlternatives_1(), "rule__GreaterOrEqualComparisonType__Alternatives_1");
+					put(grammarAccess.getAdditionTypeAccess().getAlternatives(), "rule__AdditionType__Alternatives");
+					put(grammarAccess.getMultiplicationTypeAccess().getAlternatives(), "rule__MultiplicationType__Alternatives");
+					put(grammarAccess.getMultiplicationOpAccess().getAlternatives_1(), "rule__MultiplicationOp__Alternatives_1");
+					put(grammarAccess.getDivisionOpAccess().getAlternatives_1(), "rule__DivisionOp__Alternatives_1");
 					put(grammarAccess.getAtomicAccess().getAlternatives(), "rule__Atomic__Alternatives");
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives(), "rule__BooleanLiteral__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
@@ -69,20 +73,27 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDeclarationAccess().getGroup(), "rule__VariableDeclaration__Group__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup_2(), "rule__VariableDeclaration__Group_2__0");
 					put(grammarAccess.getAssignmentAccess().getGroup(), "rule__Assignment__Group__0");
+					put(grammarAccess.getEqualsComparisonAccess().getGroup(), "rule__EqualsComparison__Group__0");
+					put(grammarAccess.getEqualsComparisonAccess().getGroup_1(), "rule__EqualsComparison__Group_1__0");
 					put(grammarAccess.getComparisonAccess().getGroup(), "rule__Comparison__Group__0");
 					put(grammarAccess.getComparisonAccess().getGroup_1(), "rule__Comparison__Group_1__0");
 					put(grammarAccess.getLessComparisonTypeAccess().getGroup(), "rule__LessComparisonType__Group__0");
 					put(grammarAccess.getLessOrEqualComparisonTypeAccess().getGroup(), "rule__LessOrEqualComparisonType__Group__0");
-					put(grammarAccess.getEqualComparisonTypeAccess().getGroup(), "rule__EqualComparisonType__Group__0");
 					put(grammarAccess.getGreaterOrEqualComparisonTypeAccess().getGroup(), "rule__GreaterOrEqualComparisonType__Group__0");
 					put(grammarAccess.getGreaterComparisonTypeAccess().getGroup(), "rule__GreaterComparisonType__Group__0");
 					put(grammarAccess.getAdditionAccess().getGroup(), "rule__Addition__Group__0");
 					put(grammarAccess.getAdditionAccess().getGroup_1(), "rule__Addition__Group_1__0");
+					put(grammarAccess.getAdditionOpAccess().getGroup(), "rule__AdditionOp__Group__0");
+					put(grammarAccess.getSubtractionOpAccess().getGroup(), "rule__SubtractionOp__Group__0");
 					put(grammarAccess.getMultiplicationAccess().getGroup(), "rule__Multiplication__Group__0");
 					put(grammarAccess.getMultiplicationAccess().getGroup_1(), "rule__Multiplication__Group_1__0");
+					put(grammarAccess.getMultiplicationOpAccess().getGroup(), "rule__MultiplicationOp__Group__0");
+					put(grammarAccess.getDivisionOpAccess().getGroup(), "rule__DivisionOp__Group__0");
+					put(grammarAccess.getModuloOpAccess().getGroup(), "rule__ModuloOp__Group__0");
 					put(grammarAccess.getPostfixOperatorAccess().getGroup(), "rule__PostfixOperator__Group__0");
 					put(grammarAccess.getPostfixOperatorAccess().getGroup_1(), "rule__PostfixOperator__Group_1__0");
 					put(grammarAccess.getAtomicAccess().getGroup_1(), "rule__Atomic__Group_1__0");
+					put(grammarAccess.getAtomicAccess().getGroup_3(), "rule__Atomic__Group_3__0");
 					put(grammarAccess.getFalseLiteralAccess().getGroup(), "rule__FalseLiteral__Group__0");
 					put(grammarAccess.getTrueLiteralAccess().getGroup(), "rule__TrueLiteral__Group__0");
 					put(grammarAccess.getModelAccess().getStatementsAssignment_0_0(), "rule__Model__StatementsAssignment_0_0");
@@ -113,12 +124,16 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDeclarationAccess().getInitialValueAssignment_2_1(), "rule__VariableDeclaration__InitialValueAssignment_2_1");
 					put(grammarAccess.getAssignmentAccess().getVariableAssignment_0(), "rule__Assignment__VariableAssignment_0");
 					put(grammarAccess.getAssignmentAccess().getValueAssignment_2(), "rule__Assignment__ValueAssignment_2");
+					put(grammarAccess.getEqualsComparisonAccess().getRightAssignment_1_2(), "rule__EqualsComparison__RightAssignment_1_2");
 					put(grammarAccess.getComparisonAccess().getTypeAssignment_1_1(), "rule__Comparison__TypeAssignment_1_1");
 					put(grammarAccess.getComparisonAccess().getRightAssignment_1_2(), "rule__Comparison__RightAssignment_1_2");
+					put(grammarAccess.getAdditionAccess().getTypeAssignment_1_1(), "rule__Addition__TypeAssignment_1_1");
 					put(grammarAccess.getAdditionAccess().getRightAssignment_1_2(), "rule__Addition__RightAssignment_1_2");
+					put(grammarAccess.getMultiplicationAccess().getTypeAssignment_1_1(), "rule__Multiplication__TypeAssignment_1_1");
 					put(grammarAccess.getMultiplicationAccess().getRightAssignment_1_2(), "rule__Multiplication__RightAssignment_1_2");
 					put(grammarAccess.getPostfixOperatorAccess().getIndexAssignment_1_2(), "rule__PostfixOperator__IndexAssignment_1_2");
 					put(grammarAccess.getAtomicAccess().getValueAssignment_1_1(), "rule__Atomic__ValueAssignment_1_1");
+					put(grammarAccess.getAtomicAccess().getExprAssignment_3_1(), "rule__Atomic__ExprAssignment_3_1");
 				}
 			};
 		}

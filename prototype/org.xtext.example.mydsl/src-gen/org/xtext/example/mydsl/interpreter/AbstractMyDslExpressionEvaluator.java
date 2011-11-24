@@ -46,6 +46,10 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 			return evalEquals( (Equals)expr, localLog );
 		}
 		
+		if ( expr instanceof Compare ) {
+			return evalCompare( (Compare)expr, localLog );
+		}
+		
 		if ( expr instanceof Plus ) {
 			return evalPlus( (Plus)expr, localLog );
 		}
@@ -90,6 +94,10 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 	
 	protected Object evalEquals( Equals expr, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(expr, "method evalEquals not implemented");
+	} 
+	
+	protected Object evalCompare( Compare expr, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(expr, "method evalCompare not implemented");
 	} 
 	
 	protected Object evalPlus( Plus expr, LogEntry log )  throws InterpreterException {

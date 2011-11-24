@@ -6,14 +6,15 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 Model:
 	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
+	// FIXME: newline at end of file not possible ATM
 ;
 
-// Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements
-// TODO: \r 
+// Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
 terminal WS : (' '|'\t')+;
 
 // A newline preceding a statement consists of at least a newline character, optionally followed by some whitespace and moar newlines.
 // The latter is necessary because of "blank lines" that have some whitespace (e.g. indentation) in them.
+// TODO: \r
 terminal NL : '\n' ('\n' | WS)*;
 
 // A block consists of one or multiple statements enclosed in curly brackets.
@@ -97,13 +98,16 @@ Assignment:
 ;
 
 Expr:
-	Comparison;
+	EqualsComparison;
 
+EqualsComparison returns Expression:
+	Comparison ({Equals.left=current} '=' right=Comparison)?;
+	
 Comparison returns Expression:
-	Addition ({Equals.left=current} type=ComparisonType right=Addition)?;
+	Addition ({Compare.left=current} type=ComparisonType right=Addition)?;
 
 ComparisonType:
-	LessComparisonType | LessOrEqualComparisonType | EqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType
+	LessComparisonType | LessOrEqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType
 ;
 
 LessComparisonType:
@@ -112,10 +116,6 @@ LessComparisonType:
 
 LessOrEqualComparisonType:
 	{LessOrEqualComparisonType} ('<=' | '≤')	
-;
-
-EqualComparisonType:
-	{EqualComparisonType} '='
 ;
 
 GreaterOrEqualComparisonType:
@@ -127,10 +127,44 @@ GreaterComparisonType:
 ;
 
 Addition returns Expression:
-	Multiplication ({Plus.left=current} "+" right=Multiplication)*;
+	Multiplication ({Plus.left=current} type=AdditionType right=Multiplication)*;
+	
+AdditionType:
+	AdditionOp | SubtractionOp
+;
+
+AdditionOp:
+	{AdditionOp} '+'
+;
+
+SubtractionOp:
+	{SubtractionOp} '-'
+;
 	
 Multiplication returns Expression:
-	PostfixOperator ( {Multi.left=current} "*" right=PostfixOperator)*; 
+	PostfixOperator ( {Multi.left=current} type=MultiplicationType right=PostfixOperator)*
+;
+
+MultiplicationType:
+	MultiplicationOp | DivisionOp | ModuloOp
+;
+
+MultiplicationOp:
+	{MultiplicationOp} ('*' | '·')
+;
+
+DivisionOp:
+	{DivisionOp} ('/' | '÷')
+;
+
+ModuloOp:
+	{ModuloOp} '%'
+;
+	
+// TODO: unary expressions
+/*UnaryMinusOperator returns Expression:
+	 ('-' {UnaryMinus.expr=current})? PostfixOperator
+;*/
 	
 PostfixOperator returns Expression:
 	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
@@ -138,9 +172,10 @@ PostfixOperator returns Expression:
 // An atomic value in an expression is either
 //  - a function call or
 //  - a number or
-//  - a Boolean literal.
+//  - a Boolean literal or
+//  - a whole new expression in parentheses.
 Atomic returns Expression:
-	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral
+	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | '(' expr=Expr ')'
 ;
 
 // A Boolean literal is either "true" or "false"

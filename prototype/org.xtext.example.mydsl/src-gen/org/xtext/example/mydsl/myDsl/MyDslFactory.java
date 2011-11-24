@@ -224,15 +224,6 @@ public interface MyDslFactory extends EFactory
   LessOrEqualComparisonType createLessOrEqualComparisonType();
 
   /**
-   * Returns a new object of class '<em>Equal Comparison Type</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Equal Comparison Type</em>'.
-   * @generated
-   */
-  EqualComparisonType createEqualComparisonType();
-
-  /**
    * Returns a new object of class '<em>Greater Or Equal Comparison Type</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -249,6 +240,69 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   GreaterComparisonType createGreaterComparisonType();
+
+  /**
+   * Returns a new object of class '<em>Addition Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Addition Type</em>'.
+   * @generated
+   */
+  AdditionType createAdditionType();
+
+  /**
+   * Returns a new object of class '<em>Addition Op</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Addition Op</em>'.
+   * @generated
+   */
+  AdditionOp createAdditionOp();
+
+  /**
+   * Returns a new object of class '<em>Subtraction Op</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Subtraction Op</em>'.
+   * @generated
+   */
+  SubtractionOp createSubtractionOp();
+
+  /**
+   * Returns a new object of class '<em>Multiplication Type</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Multiplication Type</em>'.
+   * @generated
+   */
+  MultiplicationType createMultiplicationType();
+
+  /**
+   * Returns a new object of class '<em>Multiplication Op</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Multiplication Op</em>'.
+   * @generated
+   */
+  MultiplicationOp createMultiplicationOp();
+
+  /**
+   * Returns a new object of class '<em>Division Op</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Division Op</em>'.
+   * @generated
+   */
+  DivisionOp createDivisionOp();
+
+  /**
+   * Returns a new object of class '<em>Modulo Op</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Modulo Op</em>'.
+   * @generated
+   */
+  ModuloOp createModuloOp();
 
   /**
    * Returns a new object of class '<em>Boolean Literal</em>'.
@@ -303,6 +357,15 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Equals createEquals();
+
+  /**
+   * Returns a new object of class '<em>Compare</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Compare</em>'.
+   * @generated
+   */
+  Compare createCompare();
 
   /**
    * Returns a new object of class '<em>Plus</em>'.

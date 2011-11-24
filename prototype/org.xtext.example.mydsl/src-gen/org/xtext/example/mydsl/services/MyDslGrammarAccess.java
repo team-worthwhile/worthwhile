@@ -34,6 +34,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cFunctionsAssignment_1_1_1.eContents().get(0);
 		
 		//// A program consists of a sequence of statements and/or function declarations.
+		//// FIXME: newline at end of file not possible ATM
 		//Model:
 		//	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 		//	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
@@ -679,14 +680,50 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ExprElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expr");
-		private final RuleCall cComparisonParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final RuleCall cEqualsComparisonParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Expr:
-		//	Comparison;
+		//	EqualsComparison;
 		public ParserRule getRule() { return rule; }
 
+		//EqualsComparison
+		public RuleCall getEqualsComparisonParserRuleCall() { return cEqualsComparisonParserRuleCall; }
+	}
+
+	public class EqualsComparisonElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EqualsComparison");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cComparisonParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cEqualsLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cRightComparisonParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
+		
+		//EqualsComparison returns Expression:
+		//	Comparison ({Equals.left=current} "=" right=Comparison)?;
+		public ParserRule getRule() { return rule; }
+
+		//Comparison ({Equals.left=current} "=" right=Comparison)?
+		public Group getGroup() { return cGroup; }
+
 		//Comparison
-		public RuleCall getComparisonParserRuleCall() { return cComparisonParserRuleCall; }
+		public RuleCall getComparisonParserRuleCall_0() { return cComparisonParserRuleCall_0; }
+
+		//({Equals.left=current} "=" right=Comparison)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Equals.left=current}
+		public Action getEqualsLeftAction_1_0() { return cEqualsLeftAction_1_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_1_1() { return cEqualsSignKeyword_1_1; }
+
+		//right=Comparison
+		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
+
+		//Comparison
+		public RuleCall getRightComparisonParserRuleCall_1_2_0() { return cRightComparisonParserRuleCall_1_2_0; }
 	}
 
 	public class ComparisonElements extends AbstractParserRuleElementFinder {
@@ -694,27 +731,27 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cEqualsLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Action cCompareLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cTypeComparisonTypeParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightAdditionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Comparison returns Expression:
-		//	Addition ({Equals.left=current} type=ComparisonType right=Addition)?;
+		//	Addition ({Compare.left=current} type=ComparisonType right=Addition)?;
 		public ParserRule getRule() { return rule; }
 
-		//Addition ({Equals.left=current} type=ComparisonType right=Addition)?
+		//Addition ({Compare.left=current} type=ComparisonType right=Addition)?
 		public Group getGroup() { return cGroup; }
 
 		//Addition
 		public RuleCall getAdditionParserRuleCall_0() { return cAdditionParserRuleCall_0; }
 
-		//({Equals.left=current} type=ComparisonType right=Addition)?
+		//({Compare.left=current} type=ComparisonType right=Addition)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Equals.left=current}
-		public Action getEqualsLeftAction_1_0() { return cEqualsLeftAction_1_0; }
+		//{Compare.left=current}
+		public Action getCompareLeftAction_1_0() { return cCompareLeftAction_1_0; }
 
 		//type=ComparisonType
 		public Assignment getTypeAssignment_1_1() { return cTypeAssignment_1_1; }
@@ -734,17 +771,14 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cLessComparisonTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cLessOrEqualComparisonTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cEqualComparisonTypeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cGreaterOrEqualComparisonTypeParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cGreaterComparisonTypeParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cGreaterOrEqualComparisonTypeParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cGreaterComparisonTypeParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//ComparisonType:
-		//	LessComparisonType | LessOrEqualComparisonType | EqualComparisonType | GreaterOrEqualComparisonType |
-		//	GreaterComparisonType;
+		//	LessComparisonType | LessOrEqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType;
 		public ParserRule getRule() { return rule; }
 
-		//LessComparisonType | LessOrEqualComparisonType | EqualComparisonType | GreaterOrEqualComparisonType |
-		//GreaterComparisonType
+		//LessComparisonType | LessOrEqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//LessComparisonType
@@ -753,14 +787,11 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//LessOrEqualComparisonType
 		public RuleCall getLessOrEqualComparisonTypeParserRuleCall_1() { return cLessOrEqualComparisonTypeParserRuleCall_1; }
 
-		//EqualComparisonType
-		public RuleCall getEqualComparisonTypeParserRuleCall_2() { return cEqualComparisonTypeParserRuleCall_2; }
-
 		//GreaterOrEqualComparisonType
-		public RuleCall getGreaterOrEqualComparisonTypeParserRuleCall_3() { return cGreaterOrEqualComparisonTypeParserRuleCall_3; }
+		public RuleCall getGreaterOrEqualComparisonTypeParserRuleCall_2() { return cGreaterOrEqualComparisonTypeParserRuleCall_2; }
 
 		//GreaterComparisonType
-		public RuleCall getGreaterComparisonTypeParserRuleCall_4() { return cGreaterComparisonTypeParserRuleCall_4; }
+		public RuleCall getGreaterComparisonTypeParserRuleCall_3() { return cGreaterComparisonTypeParserRuleCall_3; }
 	}
 
 	public class LessComparisonTypeElements extends AbstractParserRuleElementFinder {
@@ -809,26 +840,6 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"≤"
 		public Keyword getLessThanOrEqualToKeyword_1_1() { return cLessThanOrEqualToKeyword_1_1; }
-	}
-
-	public class EqualComparisonTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EqualComparisonType");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEqualComparisonTypeAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//EqualComparisonType:
-		//	{EqualComparisonType} "=";
-		public ParserRule getRule() { return rule; }
-
-		//{EqualComparisonType} "="
-		public Group getGroup() { return cGroup; }
-
-		//{EqualComparisonType}
-		public Action getEqualComparisonTypeAction_0() { return cEqualComparisonTypeAction_0; }
-
-		//"="
-		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 	}
 
 	public class GreaterOrEqualComparisonTypeElements extends AbstractParserRuleElementFinder {
@@ -885,28 +896,32 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cMultiplicationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cPlusLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cPlusSignKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTypeAdditionTypeParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightMultiplicationParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Addition returns Expression:
-		//	Multiplication ({Plus.left=current} "+" right=Multiplication)*;
+		//	Multiplication ({Plus.left=current} type=AdditionType right=Multiplication)*;
 		public ParserRule getRule() { return rule; }
 
-		//Multiplication ({Plus.left=current} "+" right=Multiplication)*
+		//Multiplication ({Plus.left=current} type=AdditionType right=Multiplication)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication
 		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 
-		//({Plus.left=current} "+" right=Multiplication)*
+		//({Plus.left=current} type=AdditionType right=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Plus.left=current}
 		public Action getPlusLeftAction_1_0() { return cPlusLeftAction_1_0; }
 
-		//"+"
-		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
+		//type=AdditionType
+		public Assignment getTypeAssignment_1_1() { return cTypeAssignment_1_1; }
+
+		//AdditionType
+		public RuleCall getTypeAdditionTypeParserRuleCall_1_1_0() { return cTypeAdditionTypeParserRuleCall_1_1_0; }
 
 		//right=Multiplication
 		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
@@ -915,40 +930,204 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getRightMultiplicationParserRuleCall_1_2_0() { return cRightMultiplicationParserRuleCall_1_2_0; }
 	}
 
+	public class AdditionTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AdditionType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cAdditionOpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSubtractionOpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//AdditionType:
+		//	AdditionOp | SubtractionOp;
+		public ParserRule getRule() { return rule; }
+
+		//AdditionOp | SubtractionOp
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//AdditionOp
+		public RuleCall getAdditionOpParserRuleCall_0() { return cAdditionOpParserRuleCall_0; }
+
+		//SubtractionOp
+		public RuleCall getSubtractionOpParserRuleCall_1() { return cSubtractionOpParserRuleCall_1; }
+	}
+
+	public class AdditionOpElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AdditionOp");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAdditionOpAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cPlusSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//AdditionOp:
+		//	{AdditionOp} "+";
+		public ParserRule getRule() { return rule; }
+
+		//{AdditionOp} "+"
+		public Group getGroup() { return cGroup; }
+
+		//{AdditionOp}
+		public Action getAdditionOpAction_0() { return cAdditionOpAction_0; }
+
+		//"+"
+		public Keyword getPlusSignKeyword_1() { return cPlusSignKeyword_1; }
+	}
+
+	public class SubtractionOpElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubtractionOp");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSubtractionOpAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//SubtractionOp:
+		//	{SubtractionOp} "-";
+		public ParserRule getRule() { return rule; }
+
+		//{SubtractionOp} "-"
+		public Group getGroup() { return cGroup; }
+
+		//{SubtractionOp}
+		public Action getSubtractionOpAction_0() { return cSubtractionOpAction_0; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_1() { return cHyphenMinusKeyword_1; }
+	}
+
 	public class MultiplicationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPostfixOperatorParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cMultiLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cAsteriskKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cTypeMultiplicationTypeParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPostfixOperatorParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Multiplication returns Expression:
-		//	PostfixOperator ({Multi.left=current} "*" right=PostfixOperator)*;
+		//	PostfixOperator ({Multi.left=current} type=MultiplicationType right=PostfixOperator)*;
 		public ParserRule getRule() { return rule; }
 
-		//PostfixOperator ({Multi.left=current} "*" right=PostfixOperator)*
+		//PostfixOperator ({Multi.left=current} type=MultiplicationType right=PostfixOperator)*
 		public Group getGroup() { return cGroup; }
 
 		//PostfixOperator
 		public RuleCall getPostfixOperatorParserRuleCall_0() { return cPostfixOperatorParserRuleCall_0; }
 
-		//({Multi.left=current} "*" right=PostfixOperator)*
+		//({Multi.left=current} type=MultiplicationType right=PostfixOperator)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Multi.left=current}
 		public Action getMultiLeftAction_1_0() { return cMultiLeftAction_1_0; }
 
-		//"*"
-		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
+		//type=MultiplicationType
+		public Assignment getTypeAssignment_1_1() { return cTypeAssignment_1_1; }
+
+		//MultiplicationType
+		public RuleCall getTypeMultiplicationTypeParserRuleCall_1_1_0() { return cTypeMultiplicationTypeParserRuleCall_1_1_0; }
 
 		//right=PostfixOperator
 		public Assignment getRightAssignment_1_2() { return cRightAssignment_1_2; }
 
 		//PostfixOperator
 		public RuleCall getRightPostfixOperatorParserRuleCall_1_2_0() { return cRightPostfixOperatorParserRuleCall_1_2_0; }
+	}
+
+	public class MultiplicationTypeElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiplicationType");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cMultiplicationOpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDivisionOpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cModuloOpParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		
+		//MultiplicationType:
+		//	MultiplicationOp | DivisionOp | ModuloOp;
+		public ParserRule getRule() { return rule; }
+
+		//MultiplicationOp | DivisionOp | ModuloOp
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//MultiplicationOp
+		public RuleCall getMultiplicationOpParserRuleCall_0() { return cMultiplicationOpParserRuleCall_0; }
+
+		//DivisionOp
+		public RuleCall getDivisionOpParserRuleCall_1() { return cDivisionOpParserRuleCall_1; }
+
+		//ModuloOp
+		public RuleCall getModuloOpParserRuleCall_2() { return cModuloOpParserRuleCall_2; }
+	}
+
+	public class MultiplicationOpElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiplicationOp");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cMultiplicationOpAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cAsteriskKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cMiddleDotKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		
+		//MultiplicationOp:
+		//	{MultiplicationOp} ("*" | "·");
+		public ParserRule getRule() { return rule; }
+
+		//{MultiplicationOp} ("*" | "·")
+		public Group getGroup() { return cGroup; }
+
+		//{MultiplicationOp}
+		public Action getMultiplicationOpAction_0() { return cMultiplicationOpAction_0; }
+
+		//"*" | "·"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"*"
+		public Keyword getAsteriskKeyword_1_0() { return cAsteriskKeyword_1_0; }
+
+		//"·"
+		public Keyword getMiddleDotKeyword_1_1() { return cMiddleDotKeyword_1_1; }
+	}
+
+	public class DivisionOpElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DivisionOp");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cDivisionOpAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cSolidusKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cDivisionSignKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
+		
+		//DivisionOp:
+		//	{DivisionOp} ("/" | "÷");
+		public ParserRule getRule() { return rule; }
+
+		//{DivisionOp} ("/" | "÷")
+		public Group getGroup() { return cGroup; }
+
+		//{DivisionOp}
+		public Action getDivisionOpAction_0() { return cDivisionOpAction_0; }
+
+		//"/" | "÷"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"/"
+		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
+
+		//"÷"
+		public Keyword getDivisionSignKeyword_1_1() { return cDivisionSignKeyword_1_1; }
+	}
+
+	public class ModuloOpElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModuloOp");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cModuloOpAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cPercentSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//ModuloOp:
+		//	{ModuloOp} "%";
+		public ParserRule getRule() { return rule; }
+
+		//{ModuloOp} "%"
+		public Group getGroup() { return cGroup; }
+
+		//{ModuloOp}
+		public Action getModuloOpAction_0() { return cModuloOpAction_0; }
+
+		//"%"
+		public Keyword getPercentSignKeyword_1() { return cPercentSignKeyword_1; }
 	}
 
 	public class PostfixOperatorElements extends AbstractParserRuleElementFinder {
@@ -962,7 +1141,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIndexExprParserRuleCall_1_2_0 = (RuleCall)cIndexAssignment_1_2.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
-		//PostfixOperator returns Expression:
+		//// TODO: unary expressions
+		/// *UnaryMinusOperator returns Expression:
+		//	 ('-' {UnaryMinus.expr=current})? PostfixOperator
+		//;* / PostfixOperator returns Expression:
 		//	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
 		public ParserRule getRule() { return rule; }
 
@@ -1000,16 +1182,22 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cValueINTTerminalRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		private final RuleCall cBooleanLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
+		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cExprAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cExprExprParserRuleCall_3_1_0 = (RuleCall)cExprAssignment_3_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//// An atomic value in an expression is either
 		////  - a function call or
 		////  - a number or
-		////  - a Boolean literal.
+		////  - a Boolean literal or
+		////  - a whole new expression in parentheses.
 		//Atomic returns Expression:
-		//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral;
+		//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | "(" expr=Expr ")";
 		public ParserRule getRule() { return rule; }
 
-		//FunctionCall | {NumberLiteral} value=INT | BooleanLiteral
+		//FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | "(" expr=Expr ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//FunctionCall
@@ -1029,6 +1217,21 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//BooleanLiteral
 		public RuleCall getBooleanLiteralParserRuleCall_2() { return cBooleanLiteralParserRuleCall_2; }
+
+		//"(" expr=Expr ")"
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+
+		//expr=Expr
+		public Assignment getExprAssignment_3_1() { return cExprAssignment_3_1; }
+
+		//Expr
+		public RuleCall getExprExprParserRuleCall_3_1_0() { return cExprExprParserRuleCall_3_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
 	}
 
 	public class BooleanLiteralElements extends AbstractParserRuleElementFinder {
@@ -1115,15 +1318,22 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private VariableDeclarationElements pVariableDeclaration;
 	private AssignmentElements pAssignment;
 	private ExprElements pExpr;
+	private EqualsComparisonElements pEqualsComparison;
 	private ComparisonElements pComparison;
 	private ComparisonTypeElements pComparisonType;
 	private LessComparisonTypeElements pLessComparisonType;
 	private LessOrEqualComparisonTypeElements pLessOrEqualComparisonType;
-	private EqualComparisonTypeElements pEqualComparisonType;
 	private GreaterOrEqualComparisonTypeElements pGreaterOrEqualComparisonType;
 	private GreaterComparisonTypeElements pGreaterComparisonType;
 	private AdditionElements pAddition;
+	private AdditionTypeElements pAdditionType;
+	private AdditionOpElements pAdditionOp;
+	private SubtractionOpElements pSubtractionOp;
 	private MultiplicationElements pMultiplication;
+	private MultiplicationTypeElements pMultiplicationType;
+	private MultiplicationOpElements pMultiplicationOp;
+	private DivisionOpElements pDivisionOp;
+	private ModuloOpElements pModuloOp;
 	private PostfixOperatorElements pPostfixOperator;
 	private AtomicElements pAtomic;
 	private BooleanLiteralElements pBooleanLiteral;
@@ -1152,6 +1362,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//// A program consists of a sequence of statements and/or function declarations.
+	//// FIXME: newline at end of file not possible ATM
 	//Model:
 	//	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 	//	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
@@ -1164,8 +1375,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getModelAccess().getRule();
 	}
 
-	//// Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements
-	//// TODO: \r 
+	//// Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
 	//terminal WS:
 	//	(" " | "\t")+;
 	public TerminalRule getWSRule() {
@@ -1174,6 +1384,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// A newline preceding a statement consists of at least a newline character, optionally followed by some whitespace and moar newlines.
 	//// The latter is necessary because of "blank lines" that have some whitespace (e.g. indentation) in them.
+	//// TODO: \r
 	//terminal NL:
 	//	"\n" ("\n" | WS)*;
 	public TerminalRule getNLRule() {
@@ -1357,7 +1568,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Expr:
-	//	Comparison;
+	//	EqualsComparison;
 	public ExprElements getExprAccess() {
 		return (pExpr != null) ? pExpr : (pExpr = new ExprElements());
 	}
@@ -1366,8 +1577,18 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getExprAccess().getRule();
 	}
 
+	//EqualsComparison returns Expression:
+	//	Comparison ({Equals.left=current} "=" right=Comparison)?;
+	public EqualsComparisonElements getEqualsComparisonAccess() {
+		return (pEqualsComparison != null) ? pEqualsComparison : (pEqualsComparison = new EqualsComparisonElements());
+	}
+	
+	public ParserRule getEqualsComparisonRule() {
+		return getEqualsComparisonAccess().getRule();
+	}
+
 	//Comparison returns Expression:
-	//	Addition ({Equals.left=current} type=ComparisonType right=Addition)?;
+	//	Addition ({Compare.left=current} type=ComparisonType right=Addition)?;
 	public ComparisonElements getComparisonAccess() {
 		return (pComparison != null) ? pComparison : (pComparison = new ComparisonElements());
 	}
@@ -1377,8 +1598,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ComparisonType:
-	//	LessComparisonType | LessOrEqualComparisonType | EqualComparisonType | GreaterOrEqualComparisonType |
-	//	GreaterComparisonType;
+	//	LessComparisonType | LessOrEqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType;
 	public ComparisonTypeElements getComparisonTypeAccess() {
 		return (pComparisonType != null) ? pComparisonType : (pComparisonType = new ComparisonTypeElements());
 	}
@@ -1407,16 +1627,6 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getLessOrEqualComparisonTypeAccess().getRule();
 	}
 
-	//EqualComparisonType:
-	//	{EqualComparisonType} "=";
-	public EqualComparisonTypeElements getEqualComparisonTypeAccess() {
-		return (pEqualComparisonType != null) ? pEqualComparisonType : (pEqualComparisonType = new EqualComparisonTypeElements());
-	}
-	
-	public ParserRule getEqualComparisonTypeRule() {
-		return getEqualComparisonTypeAccess().getRule();
-	}
-
 	//GreaterOrEqualComparisonType:
 	//	{GreaterOrEqualComparisonType} (">=" | "≥");
 	public GreaterOrEqualComparisonTypeElements getGreaterOrEqualComparisonTypeAccess() {
@@ -1438,7 +1648,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Addition returns Expression:
-	//	Multiplication ({Plus.left=current} "+" right=Multiplication)*;
+	//	Multiplication ({Plus.left=current} type=AdditionType right=Multiplication)*;
 	public AdditionElements getAdditionAccess() {
 		return (pAddition != null) ? pAddition : (pAddition = new AdditionElements());
 	}
@@ -1447,8 +1657,38 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getAdditionAccess().getRule();
 	}
 
+	//AdditionType:
+	//	AdditionOp | SubtractionOp;
+	public AdditionTypeElements getAdditionTypeAccess() {
+		return (pAdditionType != null) ? pAdditionType : (pAdditionType = new AdditionTypeElements());
+	}
+	
+	public ParserRule getAdditionTypeRule() {
+		return getAdditionTypeAccess().getRule();
+	}
+
+	//AdditionOp:
+	//	{AdditionOp} "+";
+	public AdditionOpElements getAdditionOpAccess() {
+		return (pAdditionOp != null) ? pAdditionOp : (pAdditionOp = new AdditionOpElements());
+	}
+	
+	public ParserRule getAdditionOpRule() {
+		return getAdditionOpAccess().getRule();
+	}
+
+	//SubtractionOp:
+	//	{SubtractionOp} "-";
+	public SubtractionOpElements getSubtractionOpAccess() {
+		return (pSubtractionOp != null) ? pSubtractionOp : (pSubtractionOp = new SubtractionOpElements());
+	}
+	
+	public ParserRule getSubtractionOpRule() {
+		return getSubtractionOpAccess().getRule();
+	}
+
 	//Multiplication returns Expression:
-	//	PostfixOperator ({Multi.left=current} "*" right=PostfixOperator)*;
+	//	PostfixOperator ({Multi.left=current} type=MultiplicationType right=PostfixOperator)*;
 	public MultiplicationElements getMultiplicationAccess() {
 		return (pMultiplication != null) ? pMultiplication : (pMultiplication = new MultiplicationElements());
 	}
@@ -1457,7 +1697,50 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getMultiplicationAccess().getRule();
 	}
 
-	//PostfixOperator returns Expression:
+	//MultiplicationType:
+	//	MultiplicationOp | DivisionOp | ModuloOp;
+	public MultiplicationTypeElements getMultiplicationTypeAccess() {
+		return (pMultiplicationType != null) ? pMultiplicationType : (pMultiplicationType = new MultiplicationTypeElements());
+	}
+	
+	public ParserRule getMultiplicationTypeRule() {
+		return getMultiplicationTypeAccess().getRule();
+	}
+
+	//MultiplicationOp:
+	//	{MultiplicationOp} ("*" | "·");
+	public MultiplicationOpElements getMultiplicationOpAccess() {
+		return (pMultiplicationOp != null) ? pMultiplicationOp : (pMultiplicationOp = new MultiplicationOpElements());
+	}
+	
+	public ParserRule getMultiplicationOpRule() {
+		return getMultiplicationOpAccess().getRule();
+	}
+
+	//DivisionOp:
+	//	{DivisionOp} ("/" | "÷");
+	public DivisionOpElements getDivisionOpAccess() {
+		return (pDivisionOp != null) ? pDivisionOp : (pDivisionOp = new DivisionOpElements());
+	}
+	
+	public ParserRule getDivisionOpRule() {
+		return getDivisionOpAccess().getRule();
+	}
+
+	//ModuloOp:
+	//	{ModuloOp} "%";
+	public ModuloOpElements getModuloOpAccess() {
+		return (pModuloOp != null) ? pModuloOp : (pModuloOp = new ModuloOpElements());
+	}
+	
+	public ParserRule getModuloOpRule() {
+		return getModuloOpAccess().getRule();
+	}
+
+	//// TODO: unary expressions
+	/// *UnaryMinusOperator returns Expression:
+	//	 ('-' {UnaryMinus.expr=current})? PostfixOperator
+	//;* / PostfixOperator returns Expression:
 	//	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
 	public PostfixOperatorElements getPostfixOperatorAccess() {
 		return (pPostfixOperator != null) ? pPostfixOperator : (pPostfixOperator = new PostfixOperatorElements());
@@ -1470,9 +1753,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	//// An atomic value in an expression is either
 	////  - a function call or
 	////  - a number or
-	////  - a Boolean literal.
+	////  - a Boolean literal or
+	////  - a whole new expression in parentheses.
 	//Atomic returns Expression:
-	//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral;
+	//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | "(" expr=Expr ")";
 	public AtomicElements getAtomicAccess() {
 		return (pAtomic != null) ? pAtomic : (pAtomic = new AtomicElements());
 	}

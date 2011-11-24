@@ -8,23 +8,23 @@ package org.xtext.example.mydsl.myDsl;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Multi</b></em>'.
+ * A representation of the model object '<em><b>Compare</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Multi#getLeft <em>Left</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Multi#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Multi#getRight <em>Right</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Compare#getLeft <em>Left</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Compare#getType <em>Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Compare#getRight <em>Right</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getMulti()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getCompare()
  * @model
  * @generated
  */
-public interface Multi extends Expression
+public interface Compare extends Expression
 {
   /**
    * Returns the value of the '<em><b>Left</b></em>' containment reference.
@@ -36,14 +36,14 @@ public interface Multi extends Expression
    * <!-- end-user-doc -->
    * @return the value of the '<em>Left</em>' containment reference.
    * @see #setLeft(Expression)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getMulti_Left()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getCompare_Left()
    * @model containment="true"
    * @generated
    */
   Expression getLeft();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Multi#getLeft <em>Left</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Compare#getLeft <em>Left</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Left</em>' containment reference.
@@ -61,22 +61,22 @@ public interface Multi extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
-   * @see #setType(MultiplicationType)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getMulti_Type()
+   * @see #setType(ComparisonType)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getCompare_Type()
    * @model containment="true"
    * @generated
    */
-  MultiplicationType getType();
+  ComparisonType getType();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Multi#getType <em>Type</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Compare#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type</em>' containment reference.
    * @see #getType()
    * @generated
    */
-  void setType(MultiplicationType value);
+  void setType(ComparisonType value);
 
   /**
    * Returns the value of the '<em><b>Right</b></em>' containment reference.
@@ -88,14 +88,14 @@ public interface Multi extends Expression
    * <!-- end-user-doc -->
    * @return the value of the '<em>Right</em>' containment reference.
    * @see #setRight(Expression)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getMulti_Right()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getCompare_Right()
    * @model containment="true"
    * @generated
    */
   Expression getRight();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Multi#getRight <em>Right</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Compare#getRight <em>Right</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Right</em>' containment reference.
@@ -104,4 +104,4 @@ public interface Multi extends Expression
    */
   void setRight(Expression value);
 
-} // Multi
+} // Compare

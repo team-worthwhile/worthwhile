@@ -13,14 +13,17 @@ import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEOb
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import org.xtext.example.mydsl.myDsl.AdditionOp;
 import org.xtext.example.mydsl.myDsl.Annotation;
 import org.xtext.example.mydsl.myDsl.ArrayAccess;
 import org.xtext.example.mydsl.myDsl.ArrayType;
 import org.xtext.example.mydsl.myDsl.Assignment;
 import org.xtext.example.mydsl.myDsl.Block;
 import org.xtext.example.mydsl.myDsl.BoolType;
-import org.xtext.example.mydsl.myDsl.EqualComparisonType;
+import org.xtext.example.mydsl.myDsl.Compare;
+import org.xtext.example.mydsl.myDsl.DivisionOp;
 import org.xtext.example.mydsl.myDsl.Equals;
+import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.FalseLiteral;
 import org.xtext.example.mydsl.myDsl.FunctionDeclaration;
 import org.xtext.example.mydsl.myDsl.GreaterComparisonType;
@@ -30,12 +33,15 @@ import org.xtext.example.mydsl.myDsl.IntType;
 import org.xtext.example.mydsl.myDsl.LessComparisonType;
 import org.xtext.example.mydsl.myDsl.LessOrEqualComparisonType;
 import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.ModuloOp;
 import org.xtext.example.mydsl.myDsl.Multi;
+import org.xtext.example.mydsl.myDsl.MultiplicationOp;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.NumberLiteral;
 import org.xtext.example.mydsl.myDsl.Parameter;
 import org.xtext.example.mydsl.myDsl.Plus;
 import org.xtext.example.mydsl.myDsl.ReturnStatement;
+import org.xtext.example.mydsl.myDsl.SubtractionOp;
 import org.xtext.example.mydsl.myDsl.SymbolRef;
 import org.xtext.example.mydsl.myDsl.TrueLiteral;
 import org.xtext.example.mydsl.myDsl.VariableDeclaration;
@@ -70,6 +76,13 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == MyDslPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case MyDslPackage.ADDITION_OP:
+				if(context == grammarAccess.getAdditionOpRule() ||
+				   context == grammarAccess.getAdditionTypeRule()) {
+					sequence_AdditionType(context, (AdditionOp) semanticObject); 
+					return; 
+				}
+				else break;
 			case MyDslPackage.ANNOTATION:
 				if(context == grammarAccess.getAnnotationRule() ||
 				   context == grammarAccess.getStatementRule()) {
@@ -81,7 +94,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				if(context == grammarAccess.getAdditionRule() ||
 				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
@@ -119,17 +134,43 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
-			case MyDslPackage.EQUAL_COMPARISON_TYPE:
-				if(context == grammarAccess.getComparisonTypeRule() ||
-				   context == grammarAccess.getEqualComparisonTypeRule()) {
-					sequence_ComparisonType(context, (EqualComparisonType) semanticObject); 
+			case MyDslPackage.COMPARE:
+				if(context == grammarAccess.getComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getExprRule()) {
+					sequence_Comparison(context, (Compare) semanticObject); 
+					return; 
+				}
+				else break;
+			case MyDslPackage.DIVISION_OP:
+				if(context == grammarAccess.getDivisionOpRule() ||
+				   context == grammarAccess.getMultiplicationTypeRule()) {
+					sequence_MultiplicationType(context, (DivisionOp) semanticObject); 
 					return; 
 				}
 				else break;
 			case MyDslPackage.EQUALS:
-				if(context == grammarAccess.getComparisonRule() ||
+				if(context == grammarAccess.getEqualsComparisonRule() ||
 				   context == grammarAccess.getExprRule()) {
-					sequence_Comparison(context, (Equals) semanticObject); 
+					sequence_EqualsComparison(context, (Equals) semanticObject); 
+					return; 
+				}
+				else break;
+			case MyDslPackage.EXPRESSION:
+				if(context == grammarAccess.getAdditionRule() ||
+				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
+				   context == grammarAccess.getAtomicRule() ||
+				   context == grammarAccess.getComparisonRule() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getExprRule() ||
+				   context == grammarAccess.getMultiplicationRule() ||
+				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
+				   context == grammarAccess.getPostfixOperatorRule() ||
+				   context == grammarAccess.getPostfixOperatorAccess().getArrayAccessExprAction_1_0()) {
+					sequence_Atomic(context, (Expression) semanticObject); 
 					return; 
 				}
 				else break;
@@ -139,7 +180,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getAtomicRule() ||
 				   context == grammarAccess.getBooleanLiteralRule() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getFalseLiteralRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
@@ -205,15 +248,31 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
+			case MyDslPackage.MODULO_OP:
+				if(context == grammarAccess.getModuloOpRule() ||
+				   context == grammarAccess.getMultiplicationTypeRule()) {
+					sequence_MultiplicationType(context, (ModuloOp) semanticObject); 
+					return; 
+				}
+				else break;
 			case MyDslPackage.MULTI:
 				if(context == grammarAccess.getAdditionRule() ||
 				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0()) {
 					sequence_Multiplication(context, (Multi) semanticObject); 
+					return; 
+				}
+				else break;
+			case MyDslPackage.MULTIPLICATION_OP:
+				if(context == grammarAccess.getMultiplicationOpRule() ||
+				   context == grammarAccess.getMultiplicationTypeRule()) {
+					sequence_MultiplicationType(context, (MultiplicationOp) semanticObject); 
 					return; 
 				}
 				else break;
@@ -222,7 +281,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
 				   context == grammarAccess.getAtomicRule() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
@@ -242,7 +303,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				if(context == grammarAccess.getAdditionRule() ||
 				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule()) {
 					sequence_Addition(context, (Plus) semanticObject); 
 					return; 
@@ -255,12 +318,21 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
+			case MyDslPackage.SUBTRACTION_OP:
+				if(context == grammarAccess.getAdditionTypeRule() ||
+				   context == grammarAccess.getSubtractionOpRule()) {
+					sequence_AdditionType(context, (SubtractionOp) semanticObject); 
+					return; 
+				}
+				else break;
 			case MyDslPackage.SYMBOL_REF:
 				if(context == grammarAccess.getAdditionRule() ||
 				   context == grammarAccess.getAdditionAccess().getPlusLeftAction_1_0() ||
 				   context == grammarAccess.getAtomicRule() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getFunctionCallRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
@@ -278,7 +350,9 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getAtomicRule() ||
 				   context == grammarAccess.getBooleanLiteralRule() ||
 				   context == grammarAccess.getComparisonRule() ||
-				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
+				   context == grammarAccess.getComparisonAccess().getCompareLeftAction_1_0() ||
+				   context == grammarAccess.getEqualsComparisonRule() ||
+				   context == grammarAccess.getEqualsComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
@@ -309,24 +383,37 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (left=Addition_Plus_1_0 right=Multiplication)
+	 *     {AdditionOp}
+	 *
+	 * Features:
+	 */
+	protected void sequence_AdditionType(EObject context, AdditionOp semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {SubtractionOp}
+	 *
+	 * Features:
+	 */
+	protected void sequence_AdditionType(EObject context, SubtractionOp semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Addition_Plus_1_0 type=AdditionType right=Multiplication)
 	 *
 	 * Features:
 	 *    left[1, 1]
+	 *    type[1, 1]
 	 *    right[1, 1]
 	 */
 	protected void sequence_Addition(EObject context, Plus semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PLUS__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PLUS__LEFT));
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.PLUS__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.PLUS__RIGHT));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAdditionAccess().getPlusLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getAdditionAccess().getRightMultiplicationParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -374,20 +461,32 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     expr=Expr
+	 *
+	 * Features:
+	 *    expr[1, 1]
+	 */
+	protected void sequence_Atomic(EObject context, Expression semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EXPRESSION__EXPR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EXPRESSION__EXPR));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getAtomicAccess().getExprExprParserRuleCall_3_1_0(), semanticObject.getExpr());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     value=INT
 	 *
 	 * Features:
 	 *    value[1, 1]
 	 */
 	protected void sequence_Atomic(EObject context, NumberLiteral semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.NUMBER_LITERAL__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.NUMBER_LITERAL__VALUE));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getAtomicAccess().getValueINTTerminalRuleCall_1_1_0(), semanticObject.getValue());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -399,17 +498,6 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	 *    statements[0, *]
 	 */
 	protected void sequence_Block(EObject context, Block semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {EqualComparisonType}
-	 *
-	 * Features:
-	 */
-	protected void sequence_ComparisonType(EObject context, EqualComparisonType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -460,28 +548,28 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (left=Comparison_Equals_1_0 type=ComparisonType right=Addition)
+	 *     (left=Comparison_Compare_1_0 type=ComparisonType right=Addition)
 	 *
 	 * Features:
 	 *    left[1, 1]
 	 *    type[1, 1]
 	 *    right[1, 1]
 	 */
-	protected void sequence_Comparison(EObject context, Equals semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EQUALS__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EQUALS__LEFT));
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EQUALS__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EQUALS__TYPE));
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EQUALS__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EQUALS__RIGHT));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getComparisonAccess().getTypeComparisonTypeParserRuleCall_1_1_0(), semanticObject.getType());
-		feeder.accept(grammarAccess.getComparisonAccess().getRightAdditionParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
+	protected void sequence_Comparison(EObject context, Compare semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=EqualsComparison_Equals_1_0 right=Comparison)
+	 *
+	 * Features:
+	 *    left[1, 1]
+	 *    right[1, 1]
+	 */
+	protected void sequence_EqualsComparison(EObject context, Equals semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -564,24 +652,48 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (left=Multiplication_Multi_1_0 right=PostfixOperator)
+	 *     {DivisionOp}
+	 *
+	 * Features:
+	 */
+	protected void sequence_MultiplicationType(EObject context, DivisionOp semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {ModuloOp}
+	 *
+	 * Features:
+	 */
+	protected void sequence_MultiplicationType(EObject context, ModuloOp semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {MultiplicationOp}
+	 *
+	 * Features:
+	 */
+	protected void sequence_MultiplicationType(EObject context, MultiplicationOp semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=Multiplication_Multi_1_0 type=MultiplicationType right=PostfixOperator)
 	 *
 	 * Features:
 	 *    left[1, 1]
+	 *    type[1, 1]
 	 *    right[1, 1]
 	 */
 	protected void sequence_Multiplication(EObject context, Multi semanticObject) {
-		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MULTI__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MULTI__LEFT));
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.MULTI__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.MULTI__RIGHT));
-		}
-		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
-		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getMultiplicationAccess().getRightPostfixOperatorParserRuleCall_1_2_0(), semanticObject.getRight());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -618,8 +730,8 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	 */
 	protected void sequence_PostfixOperator(EObject context, ArrayAccess semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARRAY_ACCESS__EXPR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARRAY_ACCESS__EXPR));
+			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.EXPRESSION__EXPR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.EXPRESSION__EXPR));
 			if(transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.ARRAY_ACCESS__INDEX) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.ARRAY_ACCESS__INDEX));
 		}

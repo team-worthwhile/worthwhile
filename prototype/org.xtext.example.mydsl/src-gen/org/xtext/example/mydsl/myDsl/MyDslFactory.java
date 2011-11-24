@@ -287,6 +287,15 @@ public interface MyDslFactory extends EFactory
   Parameter createParameter();
 
   /**
+   * Returns a new object of class '<em>Symbol Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Symbol Ref</em>'.
+   * @generated
+   */
+  SymbolRef createSymbolRef();
+
+  /**
    * Returns a new object of class '<em>Equals</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -321,15 +330,6 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   ArrayAccess createArrayAccess();
-
-  /**
-   * Returns a new object of class '<em>Symbol Ref</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Symbol Ref</em>'.
-   * @generated
-   */
-  SymbolRef createSymbolRef();
 
   /**
    * Returns a new object of class '<em>Number Literal</em>'.

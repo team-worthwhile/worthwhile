@@ -4,7 +4,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 import org.xtext.example.mydsl.myDsl.FunctionDeclaration;
 import org.xtext.example.mydsl.myDsl.ReturnStatement;
- 
 
 public class MyDslJavaValidator extends AbstractMyDslJavaValidator {
 

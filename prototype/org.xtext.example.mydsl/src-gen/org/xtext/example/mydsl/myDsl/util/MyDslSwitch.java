@@ -181,6 +181,8 @@ public class MyDslSwitch<T> extends Switch<T>
         FunctionCall functionCall = (FunctionCall)theEObject;
         T result = caseFunctionCall(functionCall);
         if (result == null) result = caseStatement(functionCall);
+        if (result == null) result = caseExpression(functionCall);
+        if (result == null) result = caseExpr(functionCall);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -307,6 +309,17 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.SYMBOL_REF:
+      {
+        SymbolRef symbolRef = (SymbolRef)theEObject;
+        T result = caseSymbolRef(symbolRef);
+        if (result == null) result = caseFunctionCall(symbolRef);
+        if (result == null) result = caseStatement(symbolRef);
+        if (result == null) result = caseExpression(symbolRef);
+        if (result == null) result = caseExpr(symbolRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.EQUALS:
       {
         Equals equals = (Equals)theEObject;
@@ -340,15 +353,6 @@ public class MyDslSwitch<T> extends Switch<T>
         T result = caseArrayAccess(arrayAccess);
         if (result == null) result = caseExpression(arrayAccess);
         if (result == null) result = caseExpr(arrayAccess);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MyDslPackage.SYMBOL_REF:
-      {
-        SymbolRef symbolRef = (SymbolRef)theEObject;
-        T result = caseSymbolRef(symbolRef);
-        if (result == null) result = caseExpression(symbolRef);
-        if (result == null) result = caseExpr(symbolRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -830,6 +834,22 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Symbol Ref</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Symbol Ref</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSymbolRef(SymbolRef object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Equals</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -889,22 +909,6 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseArrayAccess(ArrayAccess object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Symbol Ref</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Symbol Ref</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseSymbolRef(SymbolRef object)
   {
     return null;
   }

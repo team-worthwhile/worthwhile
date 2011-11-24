@@ -22,7 +22,6 @@ import org.xtext.example.mydsl.myDsl.BoolType;
 import org.xtext.example.mydsl.myDsl.EqualComparisonType;
 import org.xtext.example.mydsl.myDsl.Equals;
 import org.xtext.example.mydsl.myDsl.FalseLiteral;
-import org.xtext.example.mydsl.myDsl.FunctionCall;
 import org.xtext.example.mydsl.myDsl.FunctionDeclaration;
 import org.xtext.example.mydsl.myDsl.GreaterComparisonType;
 import org.xtext.example.mydsl.myDsl.GreaterOrEqualComparisonType;
@@ -151,13 +150,6 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 					return; 
 				}
 				else break;
-			case MyDslPackage.FUNCTION_CALL:
-				if(context == grammarAccess.getFunctionCallRule() ||
-				   context == grammarAccess.getStatementRule()) {
-					sequence_Statement(context, (FunctionCall) semanticObject); 
-					return; 
-				}
-				else break;
 			case MyDslPackage.FUNCTION_DECLARATION:
 				if(context == grammarAccess.getFunctionDeclarationRule()) {
 					sequence_FunctionDeclaration(context, (FunctionDeclaration) semanticObject); 
@@ -270,11 +262,13 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 				   context == grammarAccess.getComparisonRule() ||
 				   context == grammarAccess.getComparisonAccess().getEqualsLeftAction_1_0() ||
 				   context == grammarAccess.getExprRule() ||
+				   context == grammarAccess.getFunctionCallRule() ||
 				   context == grammarAccess.getMultiplicationRule() ||
 				   context == grammarAccess.getMultiplicationAccess().getMultiLeftAction_1_0() ||
 				   context == grammarAccess.getPostfixOperatorsRule() ||
-				   context == grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0()) {
-					sequence_Atomic(context, (SymbolRef) semanticObject); 
+				   context == grammarAccess.getPostfixOperatorsAccess().getArrayAccessExprAction_1_0() ||
+				   context == grammarAccess.getStatementRule()) {
+					sequence_FunctionCall(context, (SymbolRef) semanticObject); 
 					return; 
 				}
 				else break;
@@ -399,20 +393,7 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (symbol=[Symbol|ID] (actuals+=Expr? actuals+=Expr*)?)
-	 *
-	 * Features:
-	 *    symbol[1, 1]
-	 *    actuals[0, *]
-	 */
-	protected void sequence_Atomic(EObject context, SymbolRef semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (statements+=Statement*)
+	 *     (statements+=Statement? statements+=Statement*)
 	 *
 	 * Features:
 	 *    statements[0, *]
@@ -528,6 +509,19 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (symbol=[Symbol|ID] (actuals+=Expr? actuals+=Expr*)?)
+	 *
+	 * Features:
+	 *    symbol[1, 1]
+	 *    actuals[0, *]
+	 */
+	protected void sequence_FunctionCall(EObject context, SymbolRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (returnType=Type name=ID (params+=Parameter params+=Parameter*)? body=Block)
 	 *
 	 * Features:
@@ -543,7 +537,7 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (statements+=Statement | functions+=FunctionDeclaration)*
+	 *     ((statements+=Statement | functions+=FunctionDeclaration)? (statements+=Statement | functions+=FunctionDeclaration)*)
 	 *
 	 * Features:
 	 *    statements[0, *]
@@ -649,17 +643,6 @@ public class AbstractMyDslSemanticSequencer extends AbstractSemanticSequencer {
 	 * Features:
 	 */
 	protected void sequence_Statement(EObject context, Annotation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     {FunctionCall}
-	 *
-	 * Features:
-	 */
-	protected void sequence_Statement(EObject context, FunctionCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

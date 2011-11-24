@@ -23,6 +23,16 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 		LogEntry localLog = log( statement, parentLog );
 	
 		
+		if ( statement instanceof SymbolRef ) {
+			executeSymbolRef( (SymbolRef)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof FunctionCall ) {
+			executeFunctionCall( (FunctionCall)statement, localLog );
+			return;
+		}
+		
 		if ( statement instanceof Block ) {
 			executeBlock( (Block)statement, localLog );
 			return;
@@ -40,11 +50,6 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 		
 		if ( statement instanceof IfStatement ) {
 			executeIfStatement( (IfStatement)statement, localLog );
-			return;
-		}
-		
-		if ( statement instanceof FunctionCall ) {
-			executeFunctionCall( (FunctionCall)statement, localLog );
 			return;
 		}
 		
@@ -70,6 +75,14 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 
 	
 	
+	protected void executeSymbolRef( SymbolRef s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeSymbolRef not implemented");
+	} 
+	
+	protected void executeFunctionCall( FunctionCall s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeFunctionCall not implemented");
+	} 
+	
 	protected void executeBlock( Block s, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(s, "method executeBlock not implemented");
 	} 
@@ -84,10 +97,6 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 	
 	protected void executeIfStatement( IfStatement s, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(s, "method executeIfStatement not implemented");
-	} 
-	
-	protected void executeFunctionCall( FunctionCall s, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(s, "method executeFunctionCall not implemented");
 	} 
 	
 	protected void executeAnnotation( Annotation s, LogEntry log )  throws InterpreterException {

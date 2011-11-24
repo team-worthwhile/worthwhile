@@ -223,6 +223,11 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createParameterAdapter();
       }
       @Override
+      public Adapter caseSymbolRef(SymbolRef object)
+      {
+        return createSymbolRefAdapter();
+      }
+      @Override
       public Adapter caseEquals(Equals object)
       {
         return createEqualsAdapter();
@@ -241,11 +246,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseArrayAccess(ArrayAccess object)
       {
         return createArrayAccessAdapter();
-      }
-      @Override
-      public Adapter caseSymbolRef(SymbolRef object)
-      {
-        return createSymbolRefAdapter();
       }
       @Override
       public Adapter caseNumberLiteral(NumberLiteral object)
@@ -710,6 +710,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.SymbolRef <em>Symbol Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.SymbolRef
+   * @generated
+   */
+  public Adapter createSymbolRefAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Equals <em>Equals</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -765,21 +780,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createArrayAccessAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.SymbolRef <em>Symbol Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.SymbolRef
-   * @generated
-   */
-  public Adapter createSymbolRefAdapter()
   {
     return null;
   }

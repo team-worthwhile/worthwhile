@@ -16,6 +16,6 @@ package org.xtext.example.mydsl.myDsl;
  * @model
  * @generated
  */
-public interface FunctionCall extends Statement
+public interface FunctionCall extends Statement, Expression
 {
 } // FunctionCall

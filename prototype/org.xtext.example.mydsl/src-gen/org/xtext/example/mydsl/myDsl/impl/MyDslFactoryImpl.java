@@ -96,11 +96,11 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.FALSE_LITERAL: return createFalseLiteral();
       case MyDslPackage.TRUE_LITERAL: return createTrueLiteral();
       case MyDslPackage.PARAMETER: return createParameter();
+      case MyDslPackage.SYMBOL_REF: return createSymbolRef();
       case MyDslPackage.EQUALS: return createEquals();
       case MyDslPackage.PLUS: return createPlus();
       case MyDslPackage.MULTI: return createMulti();
       case MyDslPackage.ARRAY_ACCESS: return createArrayAccess();
-      case MyDslPackage.SYMBOL_REF: return createSymbolRef();
       case MyDslPackage.NUMBER_LITERAL: return createNumberLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -431,6 +431,17 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public SymbolRef createSymbolRef()
+  {
+    SymbolRefImpl symbolRef = new SymbolRefImpl();
+    return symbolRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Equals createEquals()
   {
     EqualsImpl equals = new EqualsImpl();
@@ -468,17 +479,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     ArrayAccessImpl arrayAccess = new ArrayAccessImpl();
     return arrayAccess;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SymbolRef createSymbolRef()
-  {
-    SymbolRefImpl symbolRef = new SymbolRefImpl();
-    return symbolRef;
   }
 
   /**

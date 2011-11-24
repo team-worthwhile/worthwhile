@@ -37,7 +37,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
+					put(grammarAccess.getModelAccess().getAlternatives_1(), "rule__Model__Alternatives_1");
+					put(grammarAccess.getModelAccess().getAlternatives_2_1(), "rule__Model__Alternatives_2_1");
 					put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
 					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
 					put(grammarAccess.getPrimitiveTypeAccess().getAlternatives(), "rule__PrimitiveType__Alternatives");
@@ -46,7 +47,10 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getGreaterOrEqualComparisonTypeAccess().getAlternatives_1(), "rule__GreaterOrEqualComparisonType__Alternatives_1");
 					put(grammarAccess.getAtomicAccess().getAlternatives(), "rule__Atomic__Alternatives");
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives(), "rule__BooleanLiteral__Alternatives");
+					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
+					put(grammarAccess.getModelAccess().getGroup_2(), "rule__Model__Group_2__0");
 					put(grammarAccess.getBlockAccess().getGroup(), "rule__Block__Group__0");
+					put(grammarAccess.getBlockAccess().getGroup_3(), "rule__Block__Group_3__0");
 					put(grammarAccess.getReturnStatementAccess().getGroup(), "rule__ReturnStatement__Group__0");
 					put(grammarAccess.getWhileStatementAccess().getGroup(), "rule__WhileStatement__Group__0");
 					put(grammarAccess.getIfStatementAccess().getGroup(), "rule__IfStatement__Group__0");
@@ -58,6 +62,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBoolTypeAccess().getGroup(), "rule__BoolType__Group__0");
 					put(grammarAccess.getArrayTypeAccess().getGroup(), "rule__ArrayType__Group__0");
 					put(grammarAccess.getFunctionCallAccess().getGroup(), "rule__FunctionCall__Group__0");
+					put(grammarAccess.getFunctionCallAccess().getGroup_2(), "rule__FunctionCall__Group_2__0");
+					put(grammarAccess.getFunctionCallAccess().getGroup_2_2(), "rule__FunctionCall__Group_2_2__0");
 					put(grammarAccess.getAnnotationAccess().getGroup(), "rule__Annotation__Group__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup(), "rule__VariableDeclaration__Group__0");
 					put(grammarAccess.getVariableDeclarationAccess().getGroup_2(), "rule__VariableDeclaration__Group_2__0");
@@ -75,15 +81,15 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplicationAccess().getGroup_1(), "rule__Multiplication__Group_1__0");
 					put(grammarAccess.getPostfixOperatorsAccess().getGroup(), "rule__PostfixOperators__Group__0");
 					put(grammarAccess.getPostfixOperatorsAccess().getGroup_1(), "rule__PostfixOperators__Group_1__0");
-					put(grammarAccess.getAtomicAccess().getGroup_0(), "rule__Atomic__Group_0__0");
-					put(grammarAccess.getAtomicAccess().getGroup_0_2(), "rule__Atomic__Group_0_2__0");
-					put(grammarAccess.getAtomicAccess().getGroup_0_2_2(), "rule__Atomic__Group_0_2_2__0");
 					put(grammarAccess.getAtomicAccess().getGroup_1(), "rule__Atomic__Group_1__0");
 					put(grammarAccess.getFalseLiteralAccess().getGroup(), "rule__FalseLiteral__Group__0");
 					put(grammarAccess.getTrueLiteralAccess().getGroup(), "rule__TrueLiteral__Group__0");
-					put(grammarAccess.getModelAccess().getStatementsAssignment_0(), "rule__Model__StatementsAssignment_0");
-					put(grammarAccess.getModelAccess().getFunctionsAssignment_1(), "rule__Model__FunctionsAssignment_1");
+					put(grammarAccess.getModelAccess().getStatementsAssignment_1_0(), "rule__Model__StatementsAssignment_1_0");
+					put(grammarAccess.getModelAccess().getFunctionsAssignment_1_1(), "rule__Model__FunctionsAssignment_1_1");
+					put(grammarAccess.getModelAccess().getStatementsAssignment_2_1_0(), "rule__Model__StatementsAssignment_2_1_0");
+					put(grammarAccess.getModelAccess().getFunctionsAssignment_2_1_1(), "rule__Model__FunctionsAssignment_2_1_1");
 					put(grammarAccess.getBlockAccess().getStatementsAssignment_2(), "rule__Block__StatementsAssignment_2");
+					put(grammarAccess.getBlockAccess().getStatementsAssignment_3_1(), "rule__Block__StatementsAssignment_3_1");
 					put(grammarAccess.getReturnStatementAccess().getReturnExprAssignment_1(), "rule__ReturnStatement__ReturnExprAssignment_1");
 					put(grammarAccess.getFunctionDeclarationAccess().getReturnTypeAssignment_1(), "rule__FunctionDeclaration__ReturnTypeAssignment_1");
 					put(grammarAccess.getFunctionDeclarationAccess().getNameAssignment_2(), "rule__FunctionDeclaration__NameAssignment_2");
@@ -93,6 +99,9 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getParameterAccess().getTypeAssignment_1(), "rule__Parameter__TypeAssignment_1");
 					put(grammarAccess.getParameterAccess().getNameAssignment_2(), "rule__Parameter__NameAssignment_2");
 					put(grammarAccess.getArrayTypeAccess().getBaseTypeAssignment_1(), "rule__ArrayType__BaseTypeAssignment_1");
+					put(grammarAccess.getFunctionCallAccess().getSymbolAssignment_1(), "rule__FunctionCall__SymbolAssignment_1");
+					put(grammarAccess.getFunctionCallAccess().getActualsAssignment_2_1(), "rule__FunctionCall__ActualsAssignment_2_1");
+					put(grammarAccess.getFunctionCallAccess().getActualsAssignment_2_2_1(), "rule__FunctionCall__ActualsAssignment_2_2_1");
 					put(grammarAccess.getVariableDeclarationAccess().getTypeAssignment_0(), "rule__VariableDeclaration__TypeAssignment_0");
 					put(grammarAccess.getVariableDeclarationAccess().getNameAssignment_1(), "rule__VariableDeclaration__NameAssignment_1");
 					put(grammarAccess.getVariableDeclarationAccess().getInitialValueAssignment_2_1(), "rule__VariableDeclaration__InitialValueAssignment_2_1");
@@ -103,9 +112,6 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAdditionAccess().getRightAssignment_1_2(), "rule__Addition__RightAssignment_1_2");
 					put(grammarAccess.getMultiplicationAccess().getRightAssignment_1_2(), "rule__Multiplication__RightAssignment_1_2");
 					put(grammarAccess.getPostfixOperatorsAccess().getIndexAssignment_1_2(), "rule__PostfixOperators__IndexAssignment_1_2");
-					put(grammarAccess.getAtomicAccess().getSymbolAssignment_0_1(), "rule__Atomic__SymbolAssignment_0_1");
-					put(grammarAccess.getAtomicAccess().getActualsAssignment_0_2_1(), "rule__Atomic__ActualsAssignment_0_2_1");
-					put(grammarAccess.getAtomicAccess().getActualsAssignment_0_2_2_1(), "rule__Atomic__ActualsAssignment_0_2_2_1");
 					put(grammarAccess.getAtomicAccess().getValueAssignment_1_1(), "rule__Atomic__ValueAssignment_1_1");
 				}
 			};

@@ -39,7 +39,7 @@ import org.xtext.example.mydsl.myDsl.SymbolRef;
  *
  * @generated
  */
-public class SymbolRefImpl extends ExpressionImpl implements SymbolRef
+public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
 {
   /**
    * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' reference.

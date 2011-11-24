@@ -755,6 +755,43 @@ public interface MyDslPackage extends EPackage
   int PARAMETER_FEATURE_COUNT = SYMBOL_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl <em>Symbol Ref</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl
+   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbolRef()
+   * @generated
+   */
+  int SYMBOL_REF = 29;
+
+  /**
+   * The feature id for the '<em><b>Symbol</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REF__SYMBOL = FUNCTION_CALL_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Actuals</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REF__ACTUALS = FUNCTION_CALL_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Symbol Ref</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SYMBOL_REF_FEATURE_COUNT = FUNCTION_CALL_FEATURE_COUNT + 2;
+
+  /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.EqualsImpl <em>Equals</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -762,7 +799,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getEquals()
    * @generated
    */
-  int EQUALS = 29;
+  int EQUALS = 30;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -808,7 +845,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 30;
+  int PLUS = 31;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -845,7 +882,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getMulti()
    * @generated
    */
-  int MULTI = 31;
+  int MULTI = 32;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -882,7 +919,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getArrayAccess()
    * @generated
    */
-  int ARRAY_ACCESS = 32;
+  int ARRAY_ACCESS = 33;
 
   /**
    * The feature id for the '<em><b>Expr</b></em>' containment reference.
@@ -910,43 +947,6 @@ public interface MyDslPackage extends EPackage
    * @ordered
    */
   int ARRAY_ACCESS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl <em>Symbol Ref</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl
-   * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbolRef()
-   * @generated
-   */
-  int SYMBOL_REF = 33;
-
-  /**
-   * The feature id for the '<em><b>Symbol</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SYMBOL_REF__SYMBOL = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Actuals</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SYMBOL_REF__ACTUALS = EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The number of structural features of the '<em>Symbol Ref</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int SYMBOL_REF_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl.myDsl.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
@@ -1444,6 +1444,38 @@ public interface MyDslPackage extends EPackage
   EAttribute getParameter_Name();
 
   /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SymbolRef <em>Symbol Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Symbol Ref</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SymbolRef
+   * @generated
+   */
+  EClass getSymbolRef();
+
+  /**
+   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.SymbolRef#getSymbol <em>Symbol</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Symbol</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SymbolRef#getSymbol()
+   * @see #getSymbolRef()
+   * @generated
+   */
+  EReference getSymbolRef_Symbol();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.SymbolRef#getActuals <em>Actuals</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Actuals</em>'.
+   * @see org.xtext.example.mydsl.myDsl.SymbolRef#getActuals()
+   * @see #getSymbolRef()
+   * @generated
+   */
+  EReference getSymbolRef_Actuals();
+
+  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Equals <em>Equals</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1581,38 +1613,6 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getArrayAccess_Index();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.SymbolRef <em>Symbol Ref</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Symbol Ref</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SymbolRef
-   * @generated
-   */
-  EClass getSymbolRef();
-
-  /**
-   * Returns the meta object for the reference '{@link org.xtext.example.mydsl.myDsl.SymbolRef#getSymbol <em>Symbol</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Symbol</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SymbolRef#getSymbol()
-   * @see #getSymbolRef()
-   * @generated
-   */
-  EReference getSymbolRef_Symbol();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.SymbolRef#getActuals <em>Actuals</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Actuals</em>'.
-   * @see org.xtext.example.mydsl.myDsl.SymbolRef#getActuals()
-   * @see #getSymbolRef()
-   * @generated
-   */
-  EReference getSymbolRef_Actuals();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.NumberLiteral <em>Number Literal</em>}'.
@@ -2077,6 +2077,32 @@ public interface MyDslPackage extends EPackage
     EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
     /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl <em>Symbol Ref</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbolRef()
+     * @generated
+     */
+    EClass SYMBOL_REF = eINSTANCE.getSymbolRef();
+
+    /**
+     * The meta object literal for the '<em><b>Symbol</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYMBOL_REF__SYMBOL = eINSTANCE.getSymbolRef_Symbol();
+
+    /**
+     * The meta object literal for the '<em><b>Actuals</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SYMBOL_REF__ACTUALS = eINSTANCE.getSymbolRef_Actuals();
+
+    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.EqualsImpl <em>Equals</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2187,32 +2213,6 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference ARRAY_ACCESS__INDEX = eINSTANCE.getArrayAccess_Index();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl <em>Symbol Ref</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getSymbolRef()
-     * @generated
-     */
-    EClass SYMBOL_REF = eINSTANCE.getSymbolRef();
-
-    /**
-     * The meta object literal for the '<em><b>Symbol</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SYMBOL_REF__SYMBOL = eINSTANCE.getSymbolRef_Symbol();
-
-    /**
-     * The meta object literal for the '<em><b>Actuals</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference SYMBOL_REF__ACTUALS = eINSTANCE.getSymbolRef_Actuals();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.NumberLiteralImpl <em>Number Literal</em>}' class.

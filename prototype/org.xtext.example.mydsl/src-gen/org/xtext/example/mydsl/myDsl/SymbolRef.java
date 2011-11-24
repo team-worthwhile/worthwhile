@@ -24,7 +24,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface SymbolRef extends Expression
+public interface SymbolRef extends FunctionCall
 {
   /**
    * Returns the value of the '<em><b>Symbol</b></em>' reference.

@@ -266,6 +266,13 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass symbolRefEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass equalsEClass = null;
 
   /**
@@ -288,13 +295,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass arrayAccessEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass symbolRefEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -821,6 +821,36 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSymbolRef()
+  {
+    return symbolRefEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSymbolRef_Symbol()
+  {
+    return (EReference)symbolRefEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSymbolRef_Actuals()
+  {
+    return (EReference)symbolRefEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getEquals()
   {
     return equalsEClass;
@@ -951,36 +981,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getSymbolRef()
-  {
-    return symbolRefEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSymbolRef_Symbol()
-  {
-    return (EReference)symbolRefEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getSymbolRef_Actuals()
-  {
-    return (EReference)symbolRefEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getNumberLiteral()
   {
     return numberLiteralEClass;
@@ -1100,6 +1100,10 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(parameterEClass, PARAMETER__TYPE);
     createEAttribute(parameterEClass, PARAMETER__NAME);
 
+    symbolRefEClass = createEClass(SYMBOL_REF);
+    createEReference(symbolRefEClass, SYMBOL_REF__SYMBOL);
+    createEReference(symbolRefEClass, SYMBOL_REF__ACTUALS);
+
     equalsEClass = createEClass(EQUALS);
     createEReference(equalsEClass, EQUALS__LEFT);
     createEReference(equalsEClass, EQUALS__TYPE);
@@ -1116,10 +1120,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     arrayAccessEClass = createEClass(ARRAY_ACCESS);
     createEReference(arrayAccessEClass, ARRAY_ACCESS__EXPR);
     createEReference(arrayAccessEClass, ARRAY_ACCESS__INDEX);
-
-    symbolRefEClass = createEClass(SYMBOL_REF);
-    createEReference(symbolRefEClass, SYMBOL_REF__SYMBOL);
-    createEReference(symbolRefEClass, SYMBOL_REF__ACTUALS);
 
     numberLiteralEClass = createEClass(NUMBER_LITERAL);
     createEAttribute(numberLiteralEClass, NUMBER_LITERAL__VALUE);
@@ -1163,6 +1163,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     boolTypeEClass.getESuperTypes().add(this.getPrimitiveType());
     arrayTypeEClass.getESuperTypes().add(this.getType());
     functionCallEClass.getESuperTypes().add(this.getStatement());
+    functionCallEClass.getESuperTypes().add(this.getExpression());
     annotationEClass.getESuperTypes().add(this.getStatement());
     variableDeclarationEClass.getESuperTypes().add(this.getStatement());
     assignmentEClass.getESuperTypes().add(this.getStatement());
@@ -1176,11 +1177,11 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     falseLiteralEClass.getESuperTypes().add(this.getBooleanLiteral());
     trueLiteralEClass.getESuperTypes().add(this.getBooleanLiteral());
     parameterEClass.getESuperTypes().add(this.getSymbol());
+    symbolRefEClass.getESuperTypes().add(this.getFunctionCall());
     equalsEClass.getESuperTypes().add(this.getExpression());
     plusEClass.getESuperTypes().add(this.getExpression());
     multiEClass.getESuperTypes().add(this.getExpression());
     arrayAccessEClass.getESuperTypes().add(this.getExpression());
-    symbolRefEClass.getESuperTypes().add(this.getExpression());
     numberLiteralEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -1258,6 +1259,10 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getParameter_Type(), this.getType(), null, "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(symbolRefEClass, SymbolRef.class, "SymbolRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSymbolRef_Symbol(), this.getSymbol(), null, "symbol", null, 0, 1, SymbolRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSymbolRef_Actuals(), this.getExpr(), null, "actuals", null, 0, -1, SymbolRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(equalsEClass, Equals.class, "Equals", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEquals_Left(), this.getExpression(), null, "left", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getEquals_Type(), this.getComparisonType(), null, "type", null, 0, 1, Equals.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1274,10 +1279,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEClass(arrayAccessEClass, ArrayAccess.class, "ArrayAccess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getArrayAccess_Expr(), this.getExpression(), null, "expr", null, 0, 1, ArrayAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getArrayAccess_Index(), this.getExpr(), null, "index", null, 0, 1, ArrayAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(symbolRefEClass, SymbolRef.class, "SymbolRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getSymbolRef_Symbol(), this.getSymbol(), null, "symbol", null, 0, 1, SymbolRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSymbolRef_Actuals(), this.getExpr(), null, "actuals", null, 0, -1, SymbolRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNumberLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

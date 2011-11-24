@@ -19,23 +19,32 @@ import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected MyDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Atomic___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q;
+	protected AbstractElementAlias match_Block_NLTerminalRuleCall_4_q;
+	protected AbstractElementAlias match_FunctionCall___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_3__q;
 	protected AbstractElementAlias match_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0;
 	protected AbstractElementAlias match_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (MyDslGrammarAccess) access;
-		match_Atomic___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getAtomicAccess().getLeftParenthesisKeyword_0_2_0()), new TokenAlias(false, false, grammarAccess.getAtomicAccess().getRightParenthesisKeyword_0_2_3()));
+		match_Block_NLTerminalRuleCall_4_q = new TokenAlias(true, false, grammarAccess.getBlockAccess().getNLTerminalRuleCall_4());
+		match_FunctionCall___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_3__q = new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getFunctionCallAccess().getLeftParenthesisKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getFunctionCallAccess().getRightParenthesisKeyword_2_3()));
 		match_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getGreaterOrEqualComparisonTypeAccess().getGreaterThanOrEqualToKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getGreaterOrEqualComparisonTypeAccess().getGreaterThanSignEqualsSignKeyword_1_0()));
 		match_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getLessOrEqualComparisonTypeAccess().getLessThanOrEqualToKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getLessOrEqualComparisonTypeAccess().getLessThanSignEqualsSignKeyword_1_0()));
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getNLRule())
+			return getNLToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	protected String getNLToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "\n";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -43,8 +52,10 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Atomic___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q.equals(syntax))
-				emit_Atomic___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_Block_NLTerminalRuleCall_4_q.equals(syntax))
+				emit_Block_NLTerminalRuleCall_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_FunctionCall___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_3__q.equals(syntax))
+				emit_FunctionCall___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0.equals(syntax))
 				emit_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0.equals(syntax))
@@ -55,9 +66,17 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 
 	/**
 	 * Syntax:
+	 *     NL?
+	 */
+	protected void emit_Block_NLTerminalRuleCall_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Syntax:
 	 *     ('(' ')')?
 	 */
-	protected void emit_Atomic___LeftParenthesisKeyword_0_2_0_RightParenthesisKeyword_0_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_FunctionCall___LeftParenthesisKeyword_2_0_RightParenthesisKeyword_2_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

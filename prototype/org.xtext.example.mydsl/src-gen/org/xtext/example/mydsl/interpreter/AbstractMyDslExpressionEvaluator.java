@@ -22,6 +22,14 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 		LogEntry localLog = parentLog.child(LogEntry.Kind.eval, expr, "evaluating "+expr.eClass().getName());
 
 		
+		if ( expr instanceof SymbolRef ) {
+			return evalSymbolRef( (SymbolRef)expr, localLog );
+		}
+		
+		if ( expr instanceof FunctionCall ) {
+			return evalFunctionCall( (FunctionCall)expr, localLog );
+		}
+		
 		if ( expr instanceof FalseLiteral ) {
 			return evalFalseLiteral( (FalseLiteral)expr, localLog );
 		}
@@ -50,10 +58,6 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 			return evalArrayAccess( (ArrayAccess)expr, localLog );
 		}
 		
-		if ( expr instanceof SymbolRef ) {
-			return evalSymbolRef( (SymbolRef)expr, localLog );
-		}
-		
 		if ( expr instanceof NumberLiteral ) {
 			return evalNumberLiteral( (NumberLiteral)expr, localLog );
 		}
@@ -63,6 +67,14 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 	}
 
 	
+	
+	protected Object evalSymbolRef( SymbolRef expr, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(expr, "method evalSymbolRef not implemented");
+	} 
+	
+	protected Object evalFunctionCall( FunctionCall expr, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(expr, "method evalFunctionCall not implemented");
+	} 
 	
 	protected Object evalFalseLiteral( FalseLiteral expr, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(expr, "method evalFalseLiteral not implemented");
@@ -90,10 +102,6 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 	
 	protected Object evalArrayAccess( ArrayAccess expr, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(expr, "method evalArrayAccess not implemented");
-	} 
-	
-	protected Object evalSymbolRef( SymbolRef expr, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(expr, "method evalSymbolRef not implemented");
 	} 
 	
 	protected Object evalNumberLiteral( NumberLiteral expr, LogEntry log )  throws InterpreterException {

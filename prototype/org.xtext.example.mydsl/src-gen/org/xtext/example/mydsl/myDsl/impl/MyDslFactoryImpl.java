@@ -73,8 +73,8 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.RETURN_STATEMENT: return createReturnStatement();
       case MyDslPackage.WHILE_STATEMENT: return createWhileStatement();
       case MyDslPackage.IF_STATEMENT: return createIfStatement();
-      case MyDslPackage.FUNCTION_DECLARATION: return createFunctionDeclaration();
-      case MyDslPackage.SYMBOL: return createSymbol();
+      case MyDslPackage.FUNCTION: return createFunction();
+      case MyDslPackage.VARIABLE: return createVariable();
       case MyDslPackage.TYPE: return createType();
       case MyDslPackage.PRIMITIVE_TYPE: return createPrimitiveType();
       case MyDslPackage.INT_TYPE: return createIntType();
@@ -82,7 +82,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.ARRAY_TYPE: return createArrayType();
       case MyDslPackage.FUNCTION_CALL: return createFunctionCall();
       case MyDslPackage.ANNOTATION: return createAnnotation();
-      case MyDslPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
       case MyDslPackage.ASSIGNMENT: return createAssignment();
       case MyDslPackage.EXPR: return createExpr();
       case MyDslPackage.EXPRESSION: return createExpression();
@@ -101,8 +100,9 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case MyDslPackage.FALSE_LITERAL: return createFalseLiteral();
       case MyDslPackage.TRUE_LITERAL: return createTrueLiteral();
+      case MyDslPackage.VARIABLE_REF: return createVariableRef();
       case MyDslPackage.PARAMETER: return createParameter();
-      case MyDslPackage.SYMBOL_REF: return createSymbolRef();
+      case MyDslPackage.FUNCTION_REF: return createFunctionRef();
       case MyDslPackage.EQUALS: return createEquals();
       case MyDslPackage.COMPARE: return createCompare();
       case MyDslPackage.PLUS: return createPlus();
@@ -185,10 +185,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public FunctionDeclaration createFunctionDeclaration()
+  public Function createFunction()
   {
-    FunctionDeclarationImpl functionDeclaration = new FunctionDeclarationImpl();
-    return functionDeclaration;
+    FunctionImpl function = new FunctionImpl();
+    return function;
   }
 
   /**
@@ -196,10 +196,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Symbol createSymbol()
+  public Variable createVariable()
   {
-    SymbolImpl symbol = new SymbolImpl();
-    return symbol;
+    VariableImpl variable = new VariableImpl();
+    return variable;
   }
 
   /**
@@ -277,17 +277,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     AnnotationImpl annotation = new AnnotationImpl();
     return annotation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VariableDeclaration createVariableDeclaration()
-  {
-    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
-    return variableDeclaration;
   }
 
   /**
@@ -493,6 +482,17 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public VariableRef createVariableRef()
+  {
+    VariableRefImpl variableRef = new VariableRefImpl();
+    return variableRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Parameter createParameter()
   {
     ParameterImpl parameter = new ParameterImpl();
@@ -504,10 +504,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public SymbolRef createSymbolRef()
+  public FunctionRef createFunctionRef()
   {
-    SymbolRefImpl symbolRef = new SymbolRefImpl();
-    return symbolRef;
+    FunctionRefImpl functionRef = new FunctionRefImpl();
+    return functionRef;
   }
 
   /**

@@ -80,22 +80,22 @@ public interface MyDslFactory extends EFactory
   IfStatement createIfStatement();
 
   /**
-   * Returns a new object of class '<em>Function Declaration</em>'.
+   * Returns a new object of class '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Function Declaration</em>'.
+   * @return a new object of class '<em>Function</em>'.
    * @generated
    */
-  FunctionDeclaration createFunctionDeclaration();
+  Function createFunction();
 
   /**
-   * Returns a new object of class '<em>Symbol</em>'.
+   * Returns a new object of class '<em>Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Symbol</em>'.
+   * @return a new object of class '<em>Variable</em>'.
    * @generated
    */
-  Symbol createSymbol();
+  Variable createVariable();
 
   /**
    * Returns a new object of class '<em>Type</em>'.
@@ -159,15 +159,6 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   Annotation createAnnotation();
-
-  /**
-   * Returns a new object of class '<em>Variable Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Declaration</em>'.
-   * @generated
-   */
-  VariableDeclaration createVariableDeclaration();
 
   /**
    * Returns a new object of class '<em>Assignment</em>'.
@@ -332,6 +323,15 @@ public interface MyDslFactory extends EFactory
   TrueLiteral createTrueLiteral();
 
   /**
+   * Returns a new object of class '<em>Variable Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Variable Ref</em>'.
+   * @generated
+   */
+  VariableRef createVariableRef();
+
+  /**
    * Returns a new object of class '<em>Parameter</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -341,13 +341,13 @@ public interface MyDslFactory extends EFactory
   Parameter createParameter();
 
   /**
-   * Returns a new object of class '<em>Symbol Ref</em>'.
+   * Returns a new object of class '<em>Function Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Symbol Ref</em>'.
+   * @return a new object of class '<em>Function Ref</em>'.
    * @generated
    */
-  SymbolRef createSymbolRef();
+  FunctionRef createFunctionRef();
 
   /**
    * Returns a new object of class '<em>Equals</em>'.

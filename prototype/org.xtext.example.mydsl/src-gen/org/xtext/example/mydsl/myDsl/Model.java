@@ -46,7 +46,7 @@ public interface Model extends EObject
 
   /**
    * Returns the value of the '<em><b>Functions</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.FunctionDeclaration}.
+   * The list contents are of type {@link org.xtext.example.mydsl.myDsl.Function}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Functions</em>' containment reference list isn't clear,
@@ -58,6 +58,6 @@ public interface Model extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<FunctionDeclaration> getFunctions();
+  EList<Function> getFunctions();
 
 } // Model

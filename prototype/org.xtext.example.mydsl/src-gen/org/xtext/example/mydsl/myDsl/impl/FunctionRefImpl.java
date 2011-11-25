@@ -21,25 +21,25 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl.myDsl.Expr;
+import org.xtext.example.mydsl.myDsl.Function;
+import org.xtext.example.mydsl.myDsl.FunctionRef;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Symbol;
-import org.xtext.example.mydsl.myDsl.SymbolRef;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Symbol Ref</b></em>'.
+ * An implementation of the model object '<em><b>Function Ref</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl#getSymbol <em>Symbol</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.SymbolRefImpl#getActuals <em>Actuals</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionRefImpl#getSymbol <em>Symbol</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionRefImpl#getActuals <em>Actuals</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
+public class FunctionRefImpl extends FunctionCallImpl implements FunctionRef
 {
   /**
    * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' reference.
@@ -49,7 +49,7 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
    * @generated
    * @ordered
    */
-  protected Symbol symbol;
+  protected Function symbol;
 
   /**
    * The cached value of the '{@link #getActuals() <em>Actuals</em>}' containment reference list.
@@ -66,7 +66,7 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SymbolRefImpl()
+  protected FunctionRefImpl()
   {
     super();
   }
@@ -79,7 +79,7 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.SYMBOL_REF;
+    return MyDslPackage.Literals.FUNCTION_REF;
   }
 
   /**
@@ -87,16 +87,16 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Symbol getSymbol()
+  public Function getSymbol()
   {
     if (symbol != null && symbol.eIsProxy())
     {
       InternalEObject oldSymbol = (InternalEObject)symbol;
-      symbol = (Symbol)eResolveProxy(oldSymbol);
+      symbol = (Function)eResolveProxy(oldSymbol);
       if (symbol != oldSymbol)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.SYMBOL_REF__SYMBOL, oldSymbol, symbol));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.FUNCTION_REF__SYMBOL, oldSymbol, symbol));
       }
     }
     return symbol;
@@ -107,7 +107,7 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Symbol basicGetSymbol()
+  public Function basicGetSymbol()
   {
     return symbol;
   }
@@ -117,12 +117,12 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSymbol(Symbol newSymbol)
+  public void setSymbol(Function newSymbol)
   {
-    Symbol oldSymbol = symbol;
+    Function oldSymbol = symbol;
     symbol = newSymbol;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.SYMBOL_REF__SYMBOL, oldSymbol, symbol));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_REF__SYMBOL, oldSymbol, symbol));
   }
 
   /**
@@ -134,7 +134,7 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   {
     if (actuals == null)
     {
-      actuals = new EObjectContainmentEList<Expr>(Expr.class, this, MyDslPackage.SYMBOL_REF__ACTUALS);
+      actuals = new EObjectContainmentEList<Expr>(Expr.class, this, MyDslPackage.FUNCTION_REF__ACTUALS);
     }
     return actuals;
   }
@@ -149,7 +149,7 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   {
     switch (featureID)
     {
-      case MyDslPackage.SYMBOL_REF__ACTUALS:
+      case MyDslPackage.FUNCTION_REF__ACTUALS:
         return ((InternalEList<?>)getActuals()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -165,10 +165,10 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   {
     switch (featureID)
     {
-      case MyDslPackage.SYMBOL_REF__SYMBOL:
+      case MyDslPackage.FUNCTION_REF__SYMBOL:
         if (resolve) return getSymbol();
         return basicGetSymbol();
-      case MyDslPackage.SYMBOL_REF__ACTUALS:
+      case MyDslPackage.FUNCTION_REF__ACTUALS:
         return getActuals();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -185,10 +185,10 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   {
     switch (featureID)
     {
-      case MyDslPackage.SYMBOL_REF__SYMBOL:
-        setSymbol((Symbol)newValue);
+      case MyDslPackage.FUNCTION_REF__SYMBOL:
+        setSymbol((Function)newValue);
         return;
-      case MyDslPackage.SYMBOL_REF__ACTUALS:
+      case MyDslPackage.FUNCTION_REF__ACTUALS:
         getActuals().clear();
         getActuals().addAll((Collection<? extends Expr>)newValue);
         return;
@@ -206,10 +206,10 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   {
     switch (featureID)
     {
-      case MyDslPackage.SYMBOL_REF__SYMBOL:
-        setSymbol((Symbol)null);
+      case MyDslPackage.FUNCTION_REF__SYMBOL:
+        setSymbol((Function)null);
         return;
-      case MyDslPackage.SYMBOL_REF__ACTUALS:
+      case MyDslPackage.FUNCTION_REF__ACTUALS:
         getActuals().clear();
         return;
     }
@@ -226,12 +226,12 @@ public class SymbolRefImpl extends FunctionCallImpl implements SymbolRef
   {
     switch (featureID)
     {
-      case MyDslPackage.SYMBOL_REF__SYMBOL:
+      case MyDslPackage.FUNCTION_REF__SYMBOL:
         return symbol != null;
-      case MyDslPackage.SYMBOL_REF__ACTUALS:
+      case MyDslPackage.FUNCTION_REF__ACTUALS:
         return actuals != null && !actuals.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //SymbolRefImpl
+} //FunctionRefImpl

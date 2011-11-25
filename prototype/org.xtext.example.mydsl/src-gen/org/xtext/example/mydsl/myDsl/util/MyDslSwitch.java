@@ -121,17 +121,18 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.FUNCTION_DECLARATION:
+      case MyDslPackage.FUNCTION:
       {
-        FunctionDeclaration functionDeclaration = (FunctionDeclaration)theEObject;
-        T result = caseFunctionDeclaration(functionDeclaration);
+        Function function = (Function)theEObject;
+        T result = caseFunction(function);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.SYMBOL:
+      case MyDslPackage.VARIABLE:
       {
-        Symbol symbol = (Symbol)theEObject;
-        T result = caseSymbol(symbol);
+        Variable variable = (Variable)theEObject;
+        T result = caseVariable(variable);
+        if (result == null) result = caseStatement(variable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -191,14 +192,6 @@ public class MyDslSwitch<T> extends Switch<T>
         Annotation annotation = (Annotation)theEObject;
         T result = caseAnnotation(annotation);
         if (result == null) result = caseStatement(annotation);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case MyDslPackage.VARIABLE_DECLARATION:
-      {
-        VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
-        T result = caseVariableDeclaration(variableDeclaration);
-        if (result == null) result = caseStatement(variableDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -347,22 +340,32 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case MyDslPackage.VARIABLE_REF:
+      {
+        VariableRef variableRef = (VariableRef)theEObject;
+        T result = caseVariableRef(variableRef);
+        if (result == null) result = caseExpression(variableRef);
+        if (result == null) result = caseExpr(variableRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case MyDslPackage.PARAMETER:
       {
         Parameter parameter = (Parameter)theEObject;
         T result = caseParameter(parameter);
-        if (result == null) result = caseSymbol(parameter);
+        if (result == null) result = caseVariable(parameter);
+        if (result == null) result = caseStatement(parameter);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.SYMBOL_REF:
+      case MyDslPackage.FUNCTION_REF:
       {
-        SymbolRef symbolRef = (SymbolRef)theEObject;
-        T result = caseSymbolRef(symbolRef);
-        if (result == null) result = caseFunctionCall(symbolRef);
-        if (result == null) result = caseStatement(symbolRef);
-        if (result == null) result = caseExpression(symbolRef);
-        if (result == null) result = caseExpr(symbolRef);
+        FunctionRef functionRef = (FunctionRef)theEObject;
+        T result = caseFunctionRef(functionRef);
+        if (result == null) result = caseFunctionCall(functionRef);
+        if (result == null) result = caseStatement(functionRef);
+        if (result == null) result = caseExpression(functionRef);
+        if (result == null) result = caseExpr(functionRef);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -521,33 +524,33 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Function Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Function Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseFunctionDeclaration(FunctionDeclaration object)
+  public T caseFunction(Function object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Symbol</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Symbol</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSymbol(Symbol object)
+  public T caseVariable(Variable object)
   {
     return null;
   }
@@ -660,22 +663,6 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAnnotation(Annotation object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVariableDeclaration(VariableDeclaration object)
   {
     return null;
   }
@@ -969,6 +956,22 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Variable Ref</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Variable Ref</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseVariableRef(VariableRef object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Parameter</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -985,17 +988,17 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Symbol Ref</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Function Ref</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Symbol Ref</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Function Ref</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseSymbolRef(SymbolRef object)
+  public T caseFunctionRef(FunctionRef object)
   {
     return null;
   }

@@ -23,13 +23,18 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 		LogEntry localLog = log( statement, parentLog );
 	
 		
-		if ( statement instanceof SymbolRef ) {
-			executeSymbolRef( (SymbolRef)statement, localLog );
+		if ( statement instanceof FunctionRef ) {
+			executeFunctionRef( (FunctionRef)statement, localLog );
 			return;
 		}
 		
 		if ( statement instanceof FunctionCall ) {
 			executeFunctionCall( (FunctionCall)statement, localLog );
+			return;
+		}
+		
+		if ( statement instanceof Parameter ) {
+			executeParameter( (Parameter)statement, localLog );
 			return;
 		}
 		
@@ -53,13 +58,13 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 			return;
 		}
 		
-		if ( statement instanceof Annotation ) {
-			executeAnnotation( (Annotation)statement, localLog );
+		if ( statement instanceof Variable ) {
+			executeVariable( (Variable)statement, localLog );
 			return;
 		}
 		
-		if ( statement instanceof VariableDeclaration ) {
-			executeVariableDeclaration( (VariableDeclaration)statement, localLog );
+		if ( statement instanceof Annotation ) {
+			executeAnnotation( (Annotation)statement, localLog );
 			return;
 		}
 		
@@ -75,12 +80,16 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 
 	
 	
-	protected void executeSymbolRef( SymbolRef s, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(s, "method executeSymbolRef not implemented");
+	protected void executeFunctionRef( FunctionRef s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeFunctionRef not implemented");
 	} 
 	
 	protected void executeFunctionCall( FunctionCall s, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(s, "method executeFunctionCall not implemented");
+	} 
+	
+	protected void executeParameter( Parameter s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeParameter not implemented");
 	} 
 	
 	protected void executeBlock( Block s, LogEntry log )  throws InterpreterException {
@@ -99,12 +108,12 @@ public abstract class AbstractMyDslStatementExecutor extends AbstractStatementEx
 		throw new MethodNotImplementedException(s, "method executeIfStatement not implemented");
 	} 
 	
-	protected void executeAnnotation( Annotation s, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(s, "method executeAnnotation not implemented");
+	protected void executeVariable( Variable s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeVariable not implemented");
 	} 
 	
-	protected void executeVariableDeclaration( VariableDeclaration s, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(s, "method executeVariableDeclaration not implemented");
+	protected void executeAnnotation( Annotation s, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(s, "method executeAnnotation not implemented");
 	} 
 	
 	protected void executeAssignment( Assignment s, LogEntry log )  throws InterpreterException {

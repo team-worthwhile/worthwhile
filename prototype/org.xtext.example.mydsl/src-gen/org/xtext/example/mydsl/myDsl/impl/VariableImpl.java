@@ -16,24 +16,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.xtext.example.mydsl.myDsl.Expr;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
 import org.xtext.example.mydsl.myDsl.Type;
-import org.xtext.example.mydsl.myDsl.VariableDeclaration;
+import org.xtext.example.mydsl.myDsl.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Variable Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VariableDeclarationImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VariableDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VariableDeclarationImpl#getInitialValue <em>Initial Value</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VariableImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VariableImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.VariableImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class VariableDeclarationImpl extends StatementImpl implements VariableDeclaration
+public class VariableImpl extends StatementImpl implements Variable
 {
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
@@ -80,7 +80,7 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
    * <!-- end-user-doc -->
    * @generated
    */
-  protected VariableDeclarationImpl()
+  protected VariableImpl()
   {
     super();
   }
@@ -93,7 +93,7 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.VARIABLE_DECLARATION;
+    return MyDslPackage.Literals.VARIABLE;
   }
 
   /**
@@ -117,7 +117,7 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
     type = newType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE_DECLARATION__TYPE, oldType, newType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE__TYPE, oldType, newType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -134,14 +134,14 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
     {
       NotificationChain msgs = null;
       if (type != null)
-        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE_DECLARATION__TYPE, null, msgs);
+        msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE__TYPE, null, msgs);
       if (newType != null)
-        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE_DECLARATION__TYPE, null, msgs);
+        msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE__TYPE, null, msgs);
       msgs = basicSetType(newType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE_DECLARATION__TYPE, newType, newType));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE__TYPE, newType, newType));
   }
 
   /**
@@ -164,7 +164,7 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE_DECLARATION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE__NAME, oldName, name));
   }
 
   /**
@@ -188,7 +188,7 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
     initialValue = newInitialValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE, oldInitialValue, newInitialValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE__INITIAL_VALUE, oldInitialValue, newInitialValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -205,14 +205,14 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
     {
       NotificationChain msgs = null;
       if (initialValue != null)
-        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE, null, msgs);
+        msgs = ((InternalEObject)initialValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE__INITIAL_VALUE, null, msgs);
       if (newInitialValue != null)
-        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE, null, msgs);
+        msgs = ((InternalEObject)newInitialValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.VARIABLE__INITIAL_VALUE, null, msgs);
       msgs = basicSetInitialValue(newInitialValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE, newInitialValue, newInitialValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.VARIABLE__INITIAL_VALUE, newInitialValue, newInitialValue));
   }
 
   /**
@@ -225,9 +225,9 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
   {
     switch (featureID)
     {
-      case MyDslPackage.VARIABLE_DECLARATION__TYPE:
+      case MyDslPackage.VARIABLE__TYPE:
         return basicSetType(null, msgs);
-      case MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+      case MyDslPackage.VARIABLE__INITIAL_VALUE:
         return basicSetInitialValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -243,11 +243,11 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
   {
     switch (featureID)
     {
-      case MyDslPackage.VARIABLE_DECLARATION__TYPE:
+      case MyDslPackage.VARIABLE__TYPE:
         return getType();
-      case MyDslPackage.VARIABLE_DECLARATION__NAME:
+      case MyDslPackage.VARIABLE__NAME:
         return getName();
-      case MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+      case MyDslPackage.VARIABLE__INITIAL_VALUE:
         return getInitialValue();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -263,13 +263,13 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
   {
     switch (featureID)
     {
-      case MyDslPackage.VARIABLE_DECLARATION__TYPE:
+      case MyDslPackage.VARIABLE__TYPE:
         setType((Type)newValue);
         return;
-      case MyDslPackage.VARIABLE_DECLARATION__NAME:
+      case MyDslPackage.VARIABLE__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+      case MyDslPackage.VARIABLE__INITIAL_VALUE:
         setInitialValue((Expr)newValue);
         return;
     }
@@ -286,13 +286,13 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
   {
     switch (featureID)
     {
-      case MyDslPackage.VARIABLE_DECLARATION__TYPE:
+      case MyDslPackage.VARIABLE__TYPE:
         setType((Type)null);
         return;
-      case MyDslPackage.VARIABLE_DECLARATION__NAME:
+      case MyDslPackage.VARIABLE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+      case MyDslPackage.VARIABLE__INITIAL_VALUE:
         setInitialValue((Expr)null);
         return;
     }
@@ -309,11 +309,11 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
   {
     switch (featureID)
     {
-      case MyDslPackage.VARIABLE_DECLARATION__TYPE:
+      case MyDslPackage.VARIABLE__TYPE:
         return type != null;
-      case MyDslPackage.VARIABLE_DECLARATION__NAME:
+      case MyDslPackage.VARIABLE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.VARIABLE_DECLARATION__INITIAL_VALUE:
+      case MyDslPackage.VARIABLE__INITIAL_VALUE:
         return initialValue != null;
     }
     return super.eIsSet(featureID);
@@ -336,4 +336,4 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
     return result.toString();
   }
 
-} //VariableDeclarationImpl
+} //VariableImpl

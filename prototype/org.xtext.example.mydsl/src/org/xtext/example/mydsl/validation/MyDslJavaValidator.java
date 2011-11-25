@@ -2,7 +2,7 @@ package org.xtext.example.mydsl.validation;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
-import org.xtext.example.mydsl.myDsl.FunctionDeclaration;
+import org.xtext.example.mydsl.myDsl.Function;
 import org.xtext.example.mydsl.myDsl.ReturnStatement;
 
 public class MyDslJavaValidator extends AbstractMyDslJavaValidator {
@@ -25,7 +25,7 @@ public class MyDslJavaValidator extends AbstractMyDslJavaValidator {
 		// Go up the parse tree until we find a function declaration or arrive at the top.
 		do {
 			obj = obj.eContainer();
-		} while (obj != null && !(obj instanceof FunctionDeclaration));
+		} while (obj != null && !(obj instanceof Function));
 		
 		if (obj == null) {
 			error("You can only use a return statement within a function body.", null);

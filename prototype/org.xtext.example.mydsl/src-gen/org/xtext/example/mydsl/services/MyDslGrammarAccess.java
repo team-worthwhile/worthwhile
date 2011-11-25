@@ -96,7 +96,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNLTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
-		//// A block consists of one or multiple statements enclosed in curly brackets.
+		//// … as well as single line comments. TODO: does not work ATM
+		/// * terminal SL_COMMENT :
+		//	NL? '//' !('\n'|'\r')* ('\r'? '\n')?
+		//;* / // A block consists of one or multiple statements enclosed in curly brackets.
 		//Block:
 		//	{Block} "{" statements+=Statement? (NL statements+=Statement)* NL? "}";
 		public ParserRule getRule() { return rule; }
@@ -308,7 +311,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cBodyBlockParserRuleCall_6_0 = (RuleCall)cBodyAssignment_6.eContents().get(0);
 		
 		//// A function declaration declares a function name, parameters, return type, and function body.
-		//FunctionDeclaration:
+		//FunctionDeclaration returns Function:
 		//	"function" returnType=Type name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" body=Block;
 		public ParserRule getRule() { return rule; }
 
@@ -374,7 +377,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//// A parameter definition describes a single parameter (type and name) accepted by a function.
-		//Parameter returns Symbol:
+		//Parameter returns Variable:
 		//	{Parameter} type=Type name=ID;
 		public ParserRule getRule() { return rule; }
 
@@ -517,87 +520,83 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class FunctionCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FunctionCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cSymbolRefAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cFunctionRefAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cSymbolAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cSymbolSymbolCrossReference_1_0 = (CrossReference)cSymbolAssignment_1.eContents().get(0);
-		private final RuleCall cSymbolSymbolIDTerminalRuleCall_1_0_1 = (RuleCall)cSymbolSymbolCrossReference_1_0.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cActualsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cActualsExprParserRuleCall_2_1_0 = (RuleCall)cActualsAssignment_2_1.eContents().get(0);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final Keyword cCommaKeyword_2_2_0 = (Keyword)cGroup_2_2.eContents().get(0);
-		private final Assignment cActualsAssignment_2_2_1 = (Assignment)cGroup_2_2.eContents().get(1);
-		private final RuleCall cActualsExprParserRuleCall_2_2_1_0 = (RuleCall)cActualsAssignment_2_2_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
+		private final CrossReference cSymbolFunctionCrossReference_1_0 = (CrossReference)cSymbolAssignment_1.eContents().get(0);
+		private final RuleCall cSymbolFunctionIDTerminalRuleCall_1_0_1 = (RuleCall)cSymbolFunctionCrossReference_1_0.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cActualsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cActualsExprParserRuleCall_3_0 = (RuleCall)cActualsAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cActualsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cActualsExprParserRuleCall_4_1_0 = (RuleCall)cActualsAssignment_4_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//// A function call simply calls a function without returning a value. 
 		//FunctionCall:
-		//	{SymbolRef} symbol=[Symbol] ("(" actuals+=Expr? ("," actuals+=Expr)* ")")?;
+		//	{FunctionRef} symbol=[Function] "(" actuals+=Expr? ("," actuals+=Expr)* ")";
 		public ParserRule getRule() { return rule; }
 
-		//{SymbolRef} symbol=[Symbol] ("(" actuals+=Expr? ("," actuals+=Expr)* ")")?
+		//{FunctionRef} symbol=[Function] "(" actuals+=Expr? ("," actuals+=Expr)* ")"
 		public Group getGroup() { return cGroup; }
 
-		//{SymbolRef}
-		public Action getSymbolRefAction_0() { return cSymbolRefAction_0; }
+		//{FunctionRef}
+		public Action getFunctionRefAction_0() { return cFunctionRefAction_0; }
 
-		//symbol=[Symbol]
+		//symbol=[Function]
 		public Assignment getSymbolAssignment_1() { return cSymbolAssignment_1; }
 
-		//[Symbol]
-		public CrossReference getSymbolSymbolCrossReference_1_0() { return cSymbolSymbolCrossReference_1_0; }
+		//[Function]
+		public CrossReference getSymbolFunctionCrossReference_1_0() { return cSymbolFunctionCrossReference_1_0; }
 
 		//ID
-		public RuleCall getSymbolSymbolIDTerminalRuleCall_1_0_1() { return cSymbolSymbolIDTerminalRuleCall_1_0_1; }
-
-		//("(" actuals+=Expr? ("," actuals+=Expr)* ")")?
-		public Group getGroup_2() { return cGroup_2; }
+		public RuleCall getSymbolFunctionIDTerminalRuleCall_1_0_1() { return cSymbolFunctionIDTerminalRuleCall_1_0_1; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
+		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
 		//actuals+=Expr?
-		public Assignment getActualsAssignment_2_1() { return cActualsAssignment_2_1; }
+		public Assignment getActualsAssignment_3() { return cActualsAssignment_3; }
 
 		//Expr
-		public RuleCall getActualsExprParserRuleCall_2_1_0() { return cActualsExprParserRuleCall_2_1_0; }
+		public RuleCall getActualsExprParserRuleCall_3_0() { return cActualsExprParserRuleCall_3_0; }
 
 		//("," actuals+=Expr)*
-		public Group getGroup_2_2() { return cGroup_2_2; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//","
-		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
 		//actuals+=Expr
-		public Assignment getActualsAssignment_2_2_1() { return cActualsAssignment_2_2_1; }
+		public Assignment getActualsAssignment_4_1() { return cActualsAssignment_4_1; }
 
 		//Expr
-		public RuleCall getActualsExprParserRuleCall_2_2_1_0() { return cActualsExprParserRuleCall_2_2_1_0; }
+		public RuleCall getActualsExprParserRuleCall_4_1_0() { return cActualsExprParserRuleCall_4_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
+		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class AnnotationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Annotation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cAnnotationAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cTODO5Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cTODOKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//// An annotation is used to specify assertions and assumptions.
 		//Annotation:
-		//	{Annotation} "TODO5";
+		//	{Annotation} "TODO";
 		public ParserRule getRule() { return rule; }
 
-		//{Annotation} "TODO5"
+		//{Annotation} "TODO"
 		public Group getGroup() { return cGroup; }
 
 		//{Annotation}
 		public Action getAnnotationAction_0() { return cAnnotationAction_0; }
 
-		//"TODO5"
-		public Keyword getTODO5Keyword_1() { return cTODO5Keyword_1; }
+		//"TODO"
+		public Keyword getTODOKeyword_1() { return cTODOKeyword_1; }
 	}
 
 	public class VariableDeclarationElements extends AbstractParserRuleElementFinder {
@@ -613,7 +612,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInitialValueExprParserRuleCall_2_1_0 = (RuleCall)cInitialValueAssignment_2_1.eContents().get(0);
 		
 		//// A variable declaration declares a new variable and optionally assigns it a value.
-		//VariableDeclaration:
+		//VariableDeclaration returns Variable:
 		//	type=Type name=ID (":=" initialValue=Expr);
 		public ParserRule getRule() { return rule; }
 
@@ -649,24 +648,28 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assignment");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVariableAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cVariableIDTerminalRuleCall_0_0 = (RuleCall)cVariableAssignment_0.eContents().get(0);
+		private final CrossReference cVariableVariableCrossReference_0_0 = (CrossReference)cVariableAssignment_0.eContents().get(0);
+		private final RuleCall cVariableVariableIDTerminalRuleCall_0_0_1 = (RuleCall)cVariableVariableCrossReference_0_0.eContents().get(1);
 		private final Keyword cColonEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueExprParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//// An assignment assigns a value to a variable.
 		//Assignment:
-		//	variable=ID ":=" value=Expr;
+		//	variable=[Variable] ":=" value=Expr;
 		public ParserRule getRule() { return rule; }
 
-		//variable=ID ":=" value=Expr
+		//variable=[Variable] ":=" value=Expr
 		public Group getGroup() { return cGroup; }
 
-		//variable=ID
+		//variable=[Variable]
 		public Assignment getVariableAssignment_0() { return cVariableAssignment_0; }
 
+		//[Variable]
+		public CrossReference getVariableVariableCrossReference_0_0() { return cVariableVariableCrossReference_0_0; }
+
 		//ID
-		public RuleCall getVariableIDTerminalRuleCall_0_0() { return cVariableIDTerminalRuleCall_0_0; }
+		public RuleCall getVariableVariableIDTerminalRuleCall_0_0_1() { return cVariableVariableIDTerminalRuleCall_0_0_1; }
 
 		//":="
 		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
@@ -1182,22 +1185,24 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cValueINTTerminalRuleCall_1_1_0 = (RuleCall)cValueAssignment_1_1.eContents().get(0);
 		private final RuleCall cBooleanLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Keyword cLeftParenthesisKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cExprAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cExprExprParserRuleCall_3_1_0 = (RuleCall)cExprAssignment_3_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
+		private final RuleCall cVariableRefParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
+		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cExprAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cExprExprParserRuleCall_4_1_0 = (RuleCall)cExprAssignment_4_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
 		
 		//// An atomic value in an expression is either
 		////  - a function call or
 		////  - a number or
 		////  - a Boolean literal or
+		////  - a reference to a variable
 		////  - a whole new expression in parentheses.
 		//Atomic returns Expression:
-		//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | "(" expr=Expr ")";
+		//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | VariableRef | "(" expr=Expr ")";
 		public ParserRule getRule() { return rule; }
 
-		//FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | "(" expr=Expr ")"
+		//FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | VariableRef | "(" expr=Expr ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//FunctionCall
@@ -1218,20 +1223,23 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//BooleanLiteral
 		public RuleCall getBooleanLiteralParserRuleCall_2() { return cBooleanLiteralParserRuleCall_2; }
 
+		//VariableRef
+		public RuleCall getVariableRefParserRuleCall_3() { return cVariableRefParserRuleCall_3; }
+
 		//"(" expr=Expr ")"
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_4() { return cGroup_4; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
+		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
 
 		//expr=Expr
-		public Assignment getExprAssignment_3_1() { return cExprAssignment_3_1; }
+		public Assignment getExprAssignment_4_1() { return cExprAssignment_4_1; }
 
 		//Expr
-		public RuleCall getExprExprParserRuleCall_3_1_0() { return cExprExprParserRuleCall_3_1_0; }
+		public RuleCall getExprExprParserRuleCall_4_1_0() { return cExprExprParserRuleCall_4_1_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
+		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
 	}
 
 	public class BooleanLiteralElements extends AbstractParserRuleElementFinder {
@@ -1296,11 +1304,40 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//"true"
 		public Keyword getTrueKeyword_1() { return cTrueKeyword_1; }
 	}
+
+	public class VariableRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VariableRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cVariableRefAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cSymbolAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cSymbolVariableCrossReference_1_0 = (CrossReference)cSymbolAssignment_1.eContents().get(0);
+		private final RuleCall cSymbolVariableIDTerminalRuleCall_1_0_1 = (RuleCall)cSymbolVariableCrossReference_1_0.eContents().get(1);
+		
+		//VariableRef:
+		//	{VariableRef} symbol=[Variable];
+		public ParserRule getRule() { return rule; }
+
+		//{VariableRef} symbol=[Variable]
+		public Group getGroup() { return cGroup; }
+
+		//{VariableRef}
+		public Action getVariableRefAction_0() { return cVariableRefAction_0; }
+
+		//symbol=[Variable]
+		public Assignment getSymbolAssignment_1() { return cSymbolAssignment_1; }
+
+		//[Variable]
+		public CrossReference getSymbolVariableCrossReference_1_0() { return cSymbolVariableCrossReference_1_0; }
+
+		//ID
+		public RuleCall getSymbolVariableIDTerminalRuleCall_1_0_1() { return cSymbolVariableIDTerminalRuleCall_1_0_1; }
+	}
 	
 	
 	private ModelElements pModel;
 	private TerminalRule tWS;
 	private TerminalRule tNL;
+	private TerminalRule tML_COMMENT;
 	private BlockElements pBlock;
 	private StatementElements pStatement;
 	private ReturnStatementElements pReturnStatement;
@@ -1339,6 +1376,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private BooleanLiteralElements pBooleanLiteral;
 	private FalseLiteralElements pFalseLiteral;
 	private TrueLiteralElements pTrueLiteral;
+	private VariableRefElements pVariableRef;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1391,7 +1429,17 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return (tNL != null) ? tNL : (tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL"));
 	} 
 
-	//// A block consists of one or multiple statements enclosed in curly brackets.
+	//// Multiline comments must also be able to have line breaks before and after …
+	//terminal ML_COMMENT:
+	//	NL? "/ *"->"* /" NL?;
+	public TerminalRule getML_COMMENTRule() {
+		return (tML_COMMENT != null) ? tML_COMMENT : (tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT"));
+	} 
+
+	//// … as well as single line comments. TODO: does not work ATM
+	/// * terminal SL_COMMENT :
+	//	NL? '//' !('\n'|'\r')* ('\r'? '\n')?
+	//;* / // A block consists of one or multiple statements enclosed in curly brackets.
 	//Block:
 	//	{Block} "{" statements+=Statement? (NL statements+=Statement)* NL? "}";
 	public BlockElements getBlockAccess() {
@@ -1447,7 +1495,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// A function declaration declares a function name, parameters, return type, and function body.
-	//FunctionDeclaration:
+	//FunctionDeclaration returns Function:
 	//	"function" returnType=Type name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" body=Block;
 	public FunctionDeclarationElements getFunctionDeclarationAccess() {
 		return (pFunctionDeclaration != null) ? pFunctionDeclaration : (pFunctionDeclaration = new FunctionDeclarationElements());
@@ -1458,7 +1506,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// A parameter definition describes a single parameter (type and name) accepted by a function.
-	//Parameter returns Symbol:
+	//Parameter returns Variable:
 	//	{Parameter} type=Type name=ID;
 	public ParameterElements getParameterAccess() {
 		return (pParameter != null) ? pParameter : (pParameter = new ParameterElements());
@@ -1525,7 +1573,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// A function call simply calls a function without returning a value. 
 	//FunctionCall:
-	//	{SymbolRef} symbol=[Symbol] ("(" actuals+=Expr? ("," actuals+=Expr)* ")")?;
+	//	{FunctionRef} symbol=[Function] "(" actuals+=Expr? ("," actuals+=Expr)* ")";
 	public FunctionCallElements getFunctionCallAccess() {
 		return (pFunctionCall != null) ? pFunctionCall : (pFunctionCall = new FunctionCallElements());
 	}
@@ -1536,7 +1584,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// An annotation is used to specify assertions and assumptions.
 	//Annotation:
-	//	{Annotation} "TODO5";
+	//	{Annotation} "TODO";
 	public AnnotationElements getAnnotationAccess() {
 		return (pAnnotation != null) ? pAnnotation : (pAnnotation = new AnnotationElements());
 	}
@@ -1546,7 +1594,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// A variable declaration declares a new variable and optionally assigns it a value.
-	//VariableDeclaration:
+	//VariableDeclaration returns Variable:
 	//	type=Type name=ID (":=" initialValue=Expr);
 	public VariableDeclarationElements getVariableDeclarationAccess() {
 		return (pVariableDeclaration != null) ? pVariableDeclaration : (pVariableDeclaration = new VariableDeclarationElements());
@@ -1558,7 +1606,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// An assignment assigns a value to a variable.
 	//Assignment:
-	//	variable=ID ":=" value=Expr;
+	//	variable=[Variable] ":=" value=Expr;
 	public AssignmentElements getAssignmentAccess() {
 		return (pAssignment != null) ? pAssignment : (pAssignment = new AssignmentElements());
 	}
@@ -1754,9 +1802,10 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	////  - a function call or
 	////  - a number or
 	////  - a Boolean literal or
+	////  - a reference to a variable
 	////  - a whole new expression in parentheses.
 	//Atomic returns Expression:
-	//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | "(" expr=Expr ")";
+	//	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | VariableRef | "(" expr=Expr ")";
 	public AtomicElements getAtomicAccess() {
 		return (pAtomic != null) ? pAtomic : (pAtomic = new AtomicElements());
 	}
@@ -1798,6 +1847,16 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getTrueLiteralAccess().getRule();
 	}
 
+	//VariableRef:
+	//	{VariableRef} symbol=[Variable];
+	public VariableRefElements getVariableRefAccess() {
+		return (pVariableRef != null) ? pVariableRef : (pVariableRef = new VariableRefElements());
+	}
+	
+	public ParserRule getVariableRefRule() {
+		return getVariableRefAccess().getRule();
+	}
+
 	//terminal ID:
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
@@ -1815,12 +1874,6 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
-	} 
-
-	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
-	public TerminalRule getML_COMMENTRule() {
-		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:

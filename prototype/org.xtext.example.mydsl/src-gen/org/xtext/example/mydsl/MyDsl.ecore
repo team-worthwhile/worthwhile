@@ -8,7 +8,7 @@
         eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//FunctionDeclaration"
+        eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Function"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement">
@@ -35,17 +35,23 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="else" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Block"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionDeclaration">
+  <eClassifiers xsi:type="ecore:EClass" name="Function">
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Type"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="params" upperBound="-1"
-        eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Symbol"
+        eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Variable"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Block"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Symbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Type"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Type"/>
   <eClassifiers xsi:type="ecore:EClass" name="IntType" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//PrimitiveType"/>
@@ -56,15 +62,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Type"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Statement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="variable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"
         containment="true"/>
   </eClassifiers>
@@ -88,13 +87,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="FalseLiteral" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//BooleanLiteral"/>
   <eClassifiers xsi:type="ecore:EClass" name="TrueLiteral" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//BooleanLiteral"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Symbol">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Type"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableRef" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Variable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SymbolRef" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//FunctionCall">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Symbol"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionRef" eSuperTypes="platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//FunctionCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="symbol" eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Function"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actuals" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.xtext.example.mydsl/src-gen/org/xtext/example/mydsl/MyDsl.ecore#//Expr"
         containment="true"/>

@@ -22,28 +22,28 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl.myDsl.Block;
-import org.xtext.example.mydsl.myDsl.FunctionDeclaration;
+import org.xtext.example.mydsl.myDsl.Function;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Symbol;
 import org.xtext.example.mydsl.myDsl.Type;
+import org.xtext.example.mydsl.myDsl.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Function Declaration</b></em>'.
+ * An implementation of the model object '<em><b>Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionDeclarationImpl#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionDeclarationImpl#getParams <em>Params</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionDeclarationImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionImpl#getReturnType <em>Return Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionImpl#getParams <em>Params</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.FunctionImpl#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implements FunctionDeclaration
+public class FunctionImpl extends MinimalEObjectImpl.Container implements Function
 {
   /**
    * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
@@ -83,7 +83,7 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
    * @generated
    * @ordered
    */
-  protected EList<Symbol> params;
+  protected EList<Variable> params;
 
   /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -100,7 +100,7 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  protected FunctionDeclarationImpl()
+  protected FunctionImpl()
   {
     super();
   }
@@ -113,7 +113,7 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.FUNCTION_DECLARATION;
+    return MyDslPackage.Literals.FUNCTION;
   }
 
   /**
@@ -137,7 +137,7 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
     returnType = newReturnType;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE, oldReturnType, newReturnType);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION__RETURN_TYPE, oldReturnType, newReturnType);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -154,14 +154,14 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
     {
       NotificationChain msgs = null;
       if (returnType != null)
-        msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE, null, msgs);
+        msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION__RETURN_TYPE, null, msgs);
       if (newReturnType != null)
-        msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE, null, msgs);
+        msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION__RETURN_TYPE, null, msgs);
       msgs = basicSetReturnType(newReturnType, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE, newReturnType, newReturnType));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION__RETURN_TYPE, newReturnType, newReturnType));
   }
 
   /**
@@ -184,7 +184,7 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_DECLARATION__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION__NAME, oldName, name));
   }
 
   /**
@@ -192,11 +192,11 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Symbol> getParams()
+  public EList<Variable> getParams()
   {
     if (params == null)
     {
-      params = new EObjectContainmentEList<Symbol>(Symbol.class, this, MyDslPackage.FUNCTION_DECLARATION__PARAMS);
+      params = new EObjectContainmentEList<Variable>(Variable.class, this, MyDslPackage.FUNCTION__PARAMS);
     }
     return params;
   }
@@ -222,7 +222,7 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
     body = newBody;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_DECLARATION__BODY, oldBody, newBody);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION__BODY, oldBody, newBody);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -239,14 +239,14 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
     {
       NotificationChain msgs = null;
       if (body != null)
-        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION_DECLARATION__BODY, null, msgs);
+        msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION__BODY, null, msgs);
       if (newBody != null)
-        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION_DECLARATION__BODY, null, msgs);
+        msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MyDslPackage.FUNCTION__BODY, null, msgs);
       msgs = basicSetBody(newBody, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION_DECLARATION__BODY, newBody, newBody));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.FUNCTION__BODY, newBody, newBody));
   }
 
   /**
@@ -259,11 +259,11 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE:
+      case MyDslPackage.FUNCTION__RETURN_TYPE:
         return basicSetReturnType(null, msgs);
-      case MyDslPackage.FUNCTION_DECLARATION__PARAMS:
+      case MyDslPackage.FUNCTION__PARAMS:
         return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
-      case MyDslPackage.FUNCTION_DECLARATION__BODY:
+      case MyDslPackage.FUNCTION__BODY:
         return basicSetBody(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -279,13 +279,13 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE:
+      case MyDslPackage.FUNCTION__RETURN_TYPE:
         return getReturnType();
-      case MyDslPackage.FUNCTION_DECLARATION__NAME:
+      case MyDslPackage.FUNCTION__NAME:
         return getName();
-      case MyDslPackage.FUNCTION_DECLARATION__PARAMS:
+      case MyDslPackage.FUNCTION__PARAMS:
         return getParams();
-      case MyDslPackage.FUNCTION_DECLARATION__BODY:
+      case MyDslPackage.FUNCTION__BODY:
         return getBody();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -302,17 +302,17 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE:
+      case MyDslPackage.FUNCTION__RETURN_TYPE:
         setReturnType((Type)newValue);
         return;
-      case MyDslPackage.FUNCTION_DECLARATION__NAME:
+      case MyDslPackage.FUNCTION__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.FUNCTION_DECLARATION__PARAMS:
+      case MyDslPackage.FUNCTION__PARAMS:
         getParams().clear();
-        getParams().addAll((Collection<? extends Symbol>)newValue);
+        getParams().addAll((Collection<? extends Variable>)newValue);
         return;
-      case MyDslPackage.FUNCTION_DECLARATION__BODY:
+      case MyDslPackage.FUNCTION__BODY:
         setBody((Block)newValue);
         return;
     }
@@ -329,16 +329,16 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE:
+      case MyDslPackage.FUNCTION__RETURN_TYPE:
         setReturnType((Type)null);
         return;
-      case MyDslPackage.FUNCTION_DECLARATION__NAME:
+      case MyDslPackage.FUNCTION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.FUNCTION_DECLARATION__PARAMS:
+      case MyDslPackage.FUNCTION__PARAMS:
         getParams().clear();
         return;
-      case MyDslPackage.FUNCTION_DECLARATION__BODY:
+      case MyDslPackage.FUNCTION__BODY:
         setBody((Block)null);
         return;
     }
@@ -355,13 +355,13 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
   {
     switch (featureID)
     {
-      case MyDslPackage.FUNCTION_DECLARATION__RETURN_TYPE:
+      case MyDslPackage.FUNCTION__RETURN_TYPE:
         return returnType != null;
-      case MyDslPackage.FUNCTION_DECLARATION__NAME:
+      case MyDslPackage.FUNCTION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.FUNCTION_DECLARATION__PARAMS:
+      case MyDslPackage.FUNCTION__PARAMS:
         return params != null && !params.isEmpty();
-      case MyDslPackage.FUNCTION_DECLARATION__BODY:
+      case MyDslPackage.FUNCTION__BODY:
         return body != null;
     }
     return super.eIsSet(featureID);
@@ -384,4 +384,4 @@ public class FunctionDeclarationImpl extends MinimalEObjectImpl.Container implem
     return result.toString();
   }
 
-} //FunctionDeclarationImpl
+} //FunctionImpl

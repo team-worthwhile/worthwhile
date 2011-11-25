@@ -8,23 +8,23 @@ package org.xtext.example.mydsl.myDsl;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Variable Declaration</b></em>'.
+ * A representation of the model object '<em><b>Variable</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.VariableDeclaration#getType <em>Type</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.VariableDeclaration#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.VariableDeclaration#getInitialValue <em>Initial Value</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Variable#getType <em>Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Variable#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Variable#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariableDeclaration()
+ * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariable()
  * @model
  * @generated
  */
-public interface VariableDeclaration extends Statement
+public interface Variable extends Statement
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' containment reference.
@@ -36,14 +36,14 @@ public interface VariableDeclaration extends Statement
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' containment reference.
    * @see #setType(Type)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariableDeclaration_Type()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariable_Type()
    * @model containment="true"
    * @generated
    */
   Type getType();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.VariableDeclaration#getType <em>Type</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Variable#getType <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type</em>' containment reference.
@@ -62,14 +62,14 @@ public interface VariableDeclaration extends Statement
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariableDeclaration_Name()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariable_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.VariableDeclaration#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Variable#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -88,14 +88,14 @@ public interface VariableDeclaration extends Statement
    * <!-- end-user-doc -->
    * @return the value of the '<em>Initial Value</em>' containment reference.
    * @see #setInitialValue(Expr)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariableDeclaration_InitialValue()
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getVariable_InitialValue()
    * @model containment="true"
    * @generated
    */
   Expr getInitialValue();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.VariableDeclaration#getInitialValue <em>Initial Value</em>}' containment reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Variable#getInitialValue <em>Initial Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Initial Value</em>' containment reference.
@@ -104,4 +104,4 @@ public interface VariableDeclaration extends Statement
    */
   void setInitialValue(Expr value);
 
-} // VariableDeclaration
+} // Variable

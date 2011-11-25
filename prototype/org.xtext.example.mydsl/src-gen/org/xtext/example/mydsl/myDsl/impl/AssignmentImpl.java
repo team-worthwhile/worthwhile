@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.xtext.example.mydsl.myDsl.Assignment;
 import org.xtext.example.mydsl.myDsl.Expr;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,24 +35,14 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
 public class AssignmentImpl extends StatementImpl implements Assignment
 {
   /**
-   * The default value of the '{@link #getVariable() <em>Variable</em>}' attribute.
+   * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getVariable()
    * @generated
    * @ordered
    */
-  protected static final String VARIABLE_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getVariable() <em>Variable</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getVariable()
-   * @generated
-   * @ordered
-   */
-  protected String variable = VARIABLE_EDEFAULT;
+  protected Variable variable;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -89,7 +80,27 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVariable()
+  public Variable getVariable()
+  {
+    if (variable != null && variable.eIsProxy())
+    {
+      InternalEObject oldVariable = (InternalEObject)variable;
+      variable = (Variable)eResolveProxy(oldVariable);
+      if (variable != oldVariable)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.ASSIGNMENT__VARIABLE, oldVariable, variable));
+      }
+    }
+    return variable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Variable basicGetVariable()
   {
     return variable;
   }
@@ -99,9 +110,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVariable(String newVariable)
+  public void setVariable(Variable newVariable)
   {
-    String oldVariable = variable;
+    Variable oldVariable = variable;
     variable = newVariable;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.ASSIGNMENT__VARIABLE, oldVariable, variable));
@@ -182,7 +193,8 @@ public class AssignmentImpl extends StatementImpl implements Assignment
     switch (featureID)
     {
       case MyDslPackage.ASSIGNMENT__VARIABLE:
-        return getVariable();
+        if (resolve) return getVariable();
+        return basicGetVariable();
       case MyDslPackage.ASSIGNMENT__VALUE:
         return getValue();
     }
@@ -200,7 +212,7 @@ public class AssignmentImpl extends StatementImpl implements Assignment
     switch (featureID)
     {
       case MyDslPackage.ASSIGNMENT__VARIABLE:
-        setVariable((String)newValue);
+        setVariable((Variable)newValue);
         return;
       case MyDslPackage.ASSIGNMENT__VALUE:
         setValue((Expr)newValue);
@@ -220,7 +232,7 @@ public class AssignmentImpl extends StatementImpl implements Assignment
     switch (featureID)
     {
       case MyDslPackage.ASSIGNMENT__VARIABLE:
-        setVariable(VARIABLE_EDEFAULT);
+        setVariable((Variable)null);
         return;
       case MyDslPackage.ASSIGNMENT__VALUE:
         setValue((Expr)null);
@@ -240,28 +252,11 @@ public class AssignmentImpl extends StatementImpl implements Assignment
     switch (featureID)
     {
       case MyDslPackage.ASSIGNMENT__VARIABLE:
-        return VARIABLE_EDEFAULT == null ? variable != null : !VARIABLE_EDEFAULT.equals(variable);
+        return variable != null;
       case MyDslPackage.ASSIGNMENT__VALUE:
         return value != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (variable: ");
-    result.append(variable);
-    result.append(')');
-    return result.toString();
   }
 
 } //AssignmentImpl

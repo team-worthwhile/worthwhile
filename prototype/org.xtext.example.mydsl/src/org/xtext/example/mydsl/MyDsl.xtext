@@ -17,6 +17,16 @@ terminal WS : (' '|'\t')+;
 // TODO: \r
 terminal NL : '\n' ('\n' | WS)*;
 
+// Multiline comments must also be able to have line breaks before and after …
+terminal ML_COMMENT :
+	NL? '/*' -> '*/' NL?
+;
+
+// … as well as single line comments. TODO: does not work ATM
+/* terminal SL_COMMENT :
+	NL? '//' !('\n'|'\r')* ('\r'? '\n')?
+;*/
+
 // A block consists of one or multiple statements enclosed in curly brackets.
 Block:
 	{Block} '{' (statements+=Statement)? (NL statements+=Statement)* NL? '}'
@@ -43,12 +53,12 @@ IfStatement:
 ;
 
 // A function declaration declares a function name, parameters, return type, and function body.
-FunctionDeclaration:
+FunctionDeclaration returns Function:
 	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' body=Block
 ;
 
 // A parameter definition describes a single parameter (type and name) accepted by a function.
-Parameter returns Symbol:
+Parameter returns Variable:
 	{Parameter} type=Type name=ID
 ;
 
@@ -79,22 +89,22 @@ ArrayType:
 
 // A function call simply calls a function without returning a value. 
 FunctionCall:
-	{SymbolRef} symbol=[Symbol|ID] ("(" (actuals+=Expr)? ("," actuals+=Expr)* ")")?
+	{FunctionRef} symbol=[Function] '(' (actuals+=Expr)? (',' actuals+=Expr)* ')'
 ;
 
 // An annotation is used to specify assertions and assumptions.
 Annotation:
-	 {Annotation} 'TODO5'
+	 {Annotation} 'TODO'
 ;
 
 // A variable declaration declares a new variable and optionally assigns it a value.
-VariableDeclaration:
+VariableDeclaration returns Variable:
 	type=Type name=ID ( ':=' initialValue=Expr)
 ;
 
 // An assignment assigns a value to a variable.
 Assignment:
-	variable=ID ':=' value=Expr
+	variable=[Variable] ':=' value=Expr
 ;
 
 Expr:
@@ -173,9 +183,10 @@ PostfixOperator returns Expression:
 //  - a function call or
 //  - a number or
 //  - a Boolean literal or
+//  - a reference to a variable
 //  - a whole new expression in parentheses.
 Atomic returns Expression:
-	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | '(' expr=Expr ')'
+	FunctionCall | {NumberLiteral} value=INT | BooleanLiteral | VariableRef | '(' expr=Expr ')'
 ;
 
 // A Boolean literal is either "true" or "false"
@@ -191,4 +202,8 @@ FalseLiteral:
 // A TrueLiteral is the text "true".
 TrueLiteral:
 	{TrueLiteral} 'true'	
+;
+
+VariableRef:
+	{VariableRef} symbol=[Variable]
 ;

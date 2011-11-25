@@ -26,30 +26,30 @@ package org.xtext.example.mydsl.myDsl;
 public interface Assignment extends Statement
 {
   /**
-   * Returns the value of the '<em><b>Variable</b></em>' attribute.
+   * Returns the value of the '<em><b>Variable</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Variable</em>' attribute isn't clear,
+   * If the meaning of the '<em>Variable</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Variable</em>' attribute.
-   * @see #setVariable(String)
+   * @return the value of the '<em>Variable</em>' reference.
+   * @see #setVariable(Variable)
    * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getAssignment_Variable()
    * @model
    * @generated
    */
-  String getVariable();
+  Variable getVariable();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Assignment#getVariable <em>Variable</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Assignment#getVariable <em>Variable</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Variable</em>' attribute.
+   * @param value the new value of the '<em>Variable</em>' reference.
    * @see #getVariable()
    * @generated
    */
-  void setVariable(String value);
+  void setVariable(Variable value);
 
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.

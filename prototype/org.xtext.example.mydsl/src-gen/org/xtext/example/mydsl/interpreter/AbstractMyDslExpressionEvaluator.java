@@ -22,8 +22,8 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 		LogEntry localLog = parentLog.child(LogEntry.Kind.eval, expr, "evaluating "+expr.eClass().getName());
 
 		
-		if ( expr instanceof SymbolRef ) {
-			return evalSymbolRef( (SymbolRef)expr, localLog );
+		if ( expr instanceof FunctionRef ) {
+			return evalFunctionRef( (FunctionRef)expr, localLog );
 		}
 		
 		if ( expr instanceof FunctionCall ) {
@@ -40,6 +40,10 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 		
 		if ( expr instanceof BooleanLiteral ) {
 			return evalBooleanLiteral( (BooleanLiteral)expr, localLog );
+		}
+		
+		if ( expr instanceof VariableRef ) {
+			return evalVariableRef( (VariableRef)expr, localLog );
 		}
 		
 		if ( expr instanceof Equals ) {
@@ -72,8 +76,8 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 
 	
 	
-	protected Object evalSymbolRef( SymbolRef expr, LogEntry log )  throws InterpreterException {
-		throw new MethodNotImplementedException(expr, "method evalSymbolRef not implemented");
+	protected Object evalFunctionRef( FunctionRef expr, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(expr, "method evalFunctionRef not implemented");
 	} 
 	
 	protected Object evalFunctionCall( FunctionCall expr, LogEntry log )  throws InterpreterException {
@@ -90,6 +94,10 @@ public abstract class AbstractMyDslExpressionEvaluator extends AbstractExpressio
 	
 	protected Object evalBooleanLiteral( BooleanLiteral expr, LogEntry log )  throws InterpreterException {
 		throw new MethodNotImplementedException(expr, "method evalBooleanLiteral not implemented");
+	} 
+	
+	protected Object evalVariableRef( VariableRef expr, LogEntry log )  throws InterpreterException {
+		throw new MethodNotImplementedException(expr, "method evalVariableRef not implemented");
 	} 
 	
 	protected Object evalEquals( Equals expr, LogEntry log )  throws InterpreterException {

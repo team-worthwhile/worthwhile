@@ -108,14 +108,14 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createIfStatementAdapter();
       }
       @Override
-      public Adapter caseFunctionDeclaration(FunctionDeclaration object)
+      public Adapter caseFunction(Function object)
       {
-        return createFunctionDeclarationAdapter();
+        return createFunctionAdapter();
       }
       @Override
-      public Adapter caseSymbol(Symbol object)
+      public Adapter caseVariable(Variable object)
       {
-        return createSymbolAdapter();
+        return createVariableAdapter();
       }
       @Override
       public Adapter caseType(Type object)
@@ -151,11 +151,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAnnotation(Annotation object)
       {
         return createAnnotationAdapter();
-      }
-      @Override
-      public Adapter caseVariableDeclaration(VariableDeclaration object)
-      {
-        return createVariableDeclarationAdapter();
       }
       @Override
       public Adapter caseAssignment(Assignment object)
@@ -248,14 +243,19 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createTrueLiteralAdapter();
       }
       @Override
+      public Adapter caseVariableRef(VariableRef object)
+      {
+        return createVariableRefAdapter();
+      }
+      @Override
       public Adapter caseParameter(Parameter object)
       {
         return createParameterAdapter();
       }
       @Override
-      public Adapter caseSymbolRef(SymbolRef object)
+      public Adapter caseFunctionRef(FunctionRef object)
       {
-        return createSymbolRefAdapter();
+        return createFunctionRefAdapter();
       }
       @Override
       public Adapter caseEquals(Equals object)
@@ -400,31 +400,31 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.FunctionDeclaration <em>Function Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Function <em>Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.FunctionDeclaration
+   * @see org.xtext.example.mydsl.myDsl.Function
    * @generated
    */
-  public Adapter createFunctionDeclarationAdapter()
+  public Adapter createFunctionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Symbol <em>Symbol</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Variable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.Symbol
+   * @see org.xtext.example.mydsl.myDsl.Variable
    * @generated
    */
-  public Adapter createSymbolAdapter()
+  public Adapter createVariableAdapter()
   {
     return null;
   }
@@ -530,21 +530,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAnnotationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.VariableDeclaration <em>Variable Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.VariableDeclaration
-   * @generated
-   */
-  public Adapter createVariableDeclarationAdapter()
   {
     return null;
   }
@@ -820,6 +805,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.VariableRef <em>Variable Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl.myDsl.VariableRef
+   * @generated
+   */
+  public Adapter createVariableRefAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.Parameter <em>Parameter</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -835,16 +835,16 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.SymbolRef <em>Symbol Ref</em>}'.
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl.myDsl.FunctionRef <em>Function Ref</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.xtext.example.mydsl.myDsl.SymbolRef
+   * @see org.xtext.example.mydsl.myDsl.FunctionRef
    * @generated
    */
-  public Adapter createSymbolRefAdapter()
+  public Adapter createFunctionRefAdapter()
   {
     return null;
   }

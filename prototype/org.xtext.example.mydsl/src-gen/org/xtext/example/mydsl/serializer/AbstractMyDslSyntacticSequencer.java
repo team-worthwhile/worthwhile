@@ -22,6 +22,7 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected AbstractElementAlias match_DivisionOp_DivisionSignKeyword_1_1_or_SolidusKeyword_1_0;
 	protected AbstractElementAlias match_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0;
 	protected AbstractElementAlias match_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0;
+	protected AbstractElementAlias match_Model_NLTerminalRuleCall_3_q;
 	protected AbstractElementAlias match_MultiplicationOp_AsteriskKeyword_1_0_or_MiddleDotKeyword_1_1;
 	
 	@Inject
@@ -31,6 +32,7 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 		match_DivisionOp_DivisionSignKeyword_1_1_or_SolidusKeyword_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getDivisionOpAccess().getDivisionSignKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getDivisionOpAccess().getSolidusKeyword_1_0()));
 		match_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getGreaterOrEqualComparisonTypeAccess().getGreaterThanOrEqualToKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getGreaterOrEqualComparisonTypeAccess().getGreaterThanSignEqualsSignKeyword_1_0()));
 		match_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getLessOrEqualComparisonTypeAccess().getLessThanOrEqualToKeyword_1_1()), new TokenAlias(false, false, grammarAccess.getLessOrEqualComparisonTypeAccess().getLessThanSignEqualsSignKeyword_1_0()));
+		match_Model_NLTerminalRuleCall_3_q = new TokenAlias(true, false, grammarAccess.getModelAccess().getNLTerminalRuleCall_3());
 		match_MultiplicationOp_AsteriskKeyword_1_0_or_MiddleDotKeyword_1_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getMultiplicationOpAccess().getAsteriskKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getMultiplicationOpAccess().getMiddleDotKeyword_1_1()));
 	}
 	
@@ -61,6 +63,8 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 				emit_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0.equals(syntax))
 				emit_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Model_NLTerminalRuleCall_3_q.equals(syntax))
+				emit_Model_NLTerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_MultiplicationOp_AsteriskKeyword_1_0_or_MiddleDotKeyword_1_1.equals(syntax))
 				emit_MultiplicationOp_AsteriskKeyword_1_0_or_MiddleDotKeyword_1_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -85,7 +89,7 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 	
 	/**
 	 * Syntax:
-	 *     '>=' | '≥'
+	 *     '≥' | '>='
 	 */
 	protected void emit_GreaterOrEqualComparisonType_GreaterThanOrEqualToKeyword_1_1_or_GreaterThanSignEqualsSignKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -96,6 +100,14 @@ public class AbstractMyDslSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     '≤' | '<='
 	 */
 	protected void emit_LessOrEqualComparisonType_LessThanOrEqualToKeyword_1_1_or_LessThanSignEqualsSignKeyword_1_0(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Syntax:
+	 *     NL?
+	 */
+	protected void emit_Model_NLTerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

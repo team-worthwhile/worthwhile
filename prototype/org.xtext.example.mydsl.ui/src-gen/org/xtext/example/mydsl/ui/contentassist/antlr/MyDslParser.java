@@ -37,8 +37,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getModelAccess().getAlternatives_0(), "rule__Model__Alternatives_0");
-					put(grammarAccess.getModelAccess().getAlternatives_1_1(), "rule__Model__Alternatives_1_1");
+					put(grammarAccess.getModelAccess().getAlternatives_1(), "rule__Model__Alternatives_1");
+					put(grammarAccess.getModelAccess().getAlternatives_2_1(), "rule__Model__Alternatives_2_1");
 					put(grammarAccess.getStatementAccess().getAlternatives(), "rule__Statement__Alternatives");
 					put(grammarAccess.getTypeAccess().getAlternatives(), "rule__Type__Alternatives");
 					put(grammarAccess.getPrimitiveTypeAccess().getAlternatives(), "rule__PrimitiveType__Alternatives");
@@ -52,7 +52,7 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAtomicAccess().getAlternatives(), "rule__Atomic__Alternatives");
 					put(grammarAccess.getBooleanLiteralAccess().getAlternatives(), "rule__BooleanLiteral__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
-					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
+					put(grammarAccess.getModelAccess().getGroup_2(), "rule__Model__Group_2__0");
 					put(grammarAccess.getBlockAccess().getGroup(), "rule__Block__Group__0");
 					put(grammarAccess.getBlockAccess().getGroup_3(), "rule__Block__Group_3__0");
 					put(grammarAccess.getReturnStatementAccess().getGroup(), "rule__ReturnStatement__Group__0");
@@ -96,10 +96,10 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFalseLiteralAccess().getGroup(), "rule__FalseLiteral__Group__0");
 					put(grammarAccess.getTrueLiteralAccess().getGroup(), "rule__TrueLiteral__Group__0");
 					put(grammarAccess.getVariableRefAccess().getGroup(), "rule__VariableRef__Group__0");
-					put(grammarAccess.getModelAccess().getStatementsAssignment_0_0(), "rule__Model__StatementsAssignment_0_0");
-					put(grammarAccess.getModelAccess().getFunctionsAssignment_0_1(), "rule__Model__FunctionsAssignment_0_1");
-					put(grammarAccess.getModelAccess().getStatementsAssignment_1_1_0(), "rule__Model__StatementsAssignment_1_1_0");
-					put(grammarAccess.getModelAccess().getFunctionsAssignment_1_1_1(), "rule__Model__FunctionsAssignment_1_1_1");
+					put(grammarAccess.getModelAccess().getStatementsAssignment_1_0(), "rule__Model__StatementsAssignment_1_0");
+					put(grammarAccess.getModelAccess().getFunctionsAssignment_1_1(), "rule__Model__FunctionsAssignment_1_1");
+					put(grammarAccess.getModelAccess().getStatementsAssignment_2_1_0(), "rule__Model__StatementsAssignment_2_1_0");
+					put(grammarAccess.getModelAccess().getFunctionsAssignment_2_1_1(), "rule__Model__FunctionsAssignment_2_1_1");
 					put(grammarAccess.getBlockAccess().getStatementsAssignment_2(), "rule__Block__StatementsAssignment_2");
 					put(grammarAccess.getBlockAccess().getStatementsAssignment_3_1(), "rule__Block__StatementsAssignment_3_1");
 					put(grammarAccess.getReturnStatementAccess().getReturnExprAssignment_1(), "rule__ReturnStatement__ReturnExprAssignment_1");

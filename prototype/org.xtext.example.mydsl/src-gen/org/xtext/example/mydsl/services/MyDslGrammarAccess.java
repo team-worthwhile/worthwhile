@@ -20,66 +20,77 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class ModelElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
-		private final Assignment cStatementsAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
-		private final RuleCall cStatementsStatementParserRuleCall_0_0_0 = (RuleCall)cStatementsAssignment_0_0.eContents().get(0);
-		private final Assignment cFunctionsAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_0_1_0 = (RuleCall)cFunctionsAssignment_0_1.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final RuleCall cNLTerminalRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final Assignment cStatementsAssignment_1_1_0 = (Assignment)cAlternatives_1_1.eContents().get(0);
-		private final RuleCall cStatementsStatementParserRuleCall_1_1_0_0 = (RuleCall)cStatementsAssignment_1_1_0.eContents().get(0);
-		private final Assignment cFunctionsAssignment_1_1_1 = (Assignment)cAlternatives_1_1.eContents().get(1);
-		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_1_1_1_0 = (RuleCall)cFunctionsAssignment_1_1_1.eContents().get(0);
+		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Assignment cStatementsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cStatementsStatementParserRuleCall_1_0_0 = (RuleCall)cStatementsAssignment_1_0.eContents().get(0);
+		private final Assignment cFunctionsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_1_1_0 = (RuleCall)cFunctionsAssignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final RuleCall cNLTerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
+		private final Alternatives cAlternatives_2_1 = (Alternatives)cGroup_2.eContents().get(1);
+		private final Assignment cStatementsAssignment_2_1_0 = (Assignment)cAlternatives_2_1.eContents().get(0);
+		private final RuleCall cStatementsStatementParserRuleCall_2_1_0_0 = (RuleCall)cStatementsAssignment_2_1_0.eContents().get(0);
+		private final Assignment cFunctionsAssignment_2_1_1 = (Assignment)cAlternatives_2_1.eContents().get(1);
+		private final RuleCall cFunctionsFunctionDeclarationParserRuleCall_2_1_1_0 = (RuleCall)cFunctionsAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cNLTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//// A program consists of a sequence of statements and/or function declarations.
-		//// FIXME: newline at end of file not possible ATM
 		//Model:
-		//	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+		//	{Model} (statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 		//	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
-		//;
+		//	// FIXME: newline at end of file not possible ATM
+		//	NL?;
 		public ParserRule getRule() { return rule; }
 
-		//(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+		//{Model} (statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 		//(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
+		//// FIXME: newline at end of file not possible ATM
+		//NL?
 		public Group getGroup() { return cGroup; }
 
+		//{Model}
+		public Action getModelAction_0() { return cModelAction_0; }
+
 		//(statements+=Statement | functions+=FunctionDeclaration)?
-		public Alternatives getAlternatives_0() { return cAlternatives_0; }
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//statements+=Statement
-		public Assignment getStatementsAssignment_0_0() { return cStatementsAssignment_0_0; }
+		public Assignment getStatementsAssignment_1_0() { return cStatementsAssignment_1_0; }
 
 		//Statement
-		public RuleCall getStatementsStatementParserRuleCall_0_0_0() { return cStatementsStatementParserRuleCall_0_0_0; }
+		public RuleCall getStatementsStatementParserRuleCall_1_0_0() { return cStatementsStatementParserRuleCall_1_0_0; }
 
 		//functions+=FunctionDeclaration
-		public Assignment getFunctionsAssignment_0_1() { return cFunctionsAssignment_0_1; }
+		public Assignment getFunctionsAssignment_1_1() { return cFunctionsAssignment_1_1; }
 
 		//FunctionDeclaration
-		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_0_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_0_1_0; }
+		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_1_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_1_1_0; }
 
 		//(NL (statements+=Statement | functions+=FunctionDeclaration))*
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup_2() { return cGroup_2; }
 
 		//NL
-		public RuleCall getNLTerminalRuleCall_1_0() { return cNLTerminalRuleCall_1_0; }
+		public RuleCall getNLTerminalRuleCall_2_0() { return cNLTerminalRuleCall_2_0; }
 
 		//statements+=Statement | functions+=FunctionDeclaration
-		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
+		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
 		//statements+=Statement
-		public Assignment getStatementsAssignment_1_1_0() { return cStatementsAssignment_1_1_0; }
+		public Assignment getStatementsAssignment_2_1_0() { return cStatementsAssignment_2_1_0; }
 
 		//Statement
-		public RuleCall getStatementsStatementParserRuleCall_1_1_0_0() { return cStatementsStatementParserRuleCall_1_1_0_0; }
+		public RuleCall getStatementsStatementParserRuleCall_2_1_0_0() { return cStatementsStatementParserRuleCall_2_1_0_0; }
 
 		//functions+=FunctionDeclaration
-		public Assignment getFunctionsAssignment_1_1_1() { return cFunctionsAssignment_1_1_1; }
+		public Assignment getFunctionsAssignment_2_1_1() { return cFunctionsAssignment_2_1_1; }
 
 		//FunctionDeclaration
-		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_1_1_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_1_1_1_0; }
+		public RuleCall getFunctionsFunctionDeclarationParserRuleCall_2_1_1_0() { return cFunctionsFunctionDeclarationParserRuleCall_2_1_1_0; }
+
+		//// FIXME: newline at end of file not possible ATM
+		//NL?
+		public RuleCall getNLTerminalRuleCall_3() { return cNLTerminalRuleCall_3; }
 	}
 
 	public class BlockElements extends AbstractParserRuleElementFinder {
@@ -1400,11 +1411,11 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//// A program consists of a sequence of statements and/or function declarations.
-	//// FIXME: newline at end of file not possible ATM
 	//Model:
-	//	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+	//	{Model} (statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 	//	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
-	//;
+	//	// FIXME: newline at end of file not possible ATM
+	//	NL?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}

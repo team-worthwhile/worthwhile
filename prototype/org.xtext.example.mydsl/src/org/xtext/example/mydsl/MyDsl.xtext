@@ -4,9 +4,10 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 // A program consists of a sequence of statements and/or function declarations.
 Model:
+	{Model}
 	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
 	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
-	// FIXME: newline at end of file not possible ATM
+	NL? // Newline at the end of the file is allowed. 
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 

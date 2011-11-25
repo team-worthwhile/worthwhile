@@ -77,19 +77,25 @@ ruleModel returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(((
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getModelAccess().getModelAction_0(),
+            $current);
+    }
+)((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getStatementsStatementParserRuleCall_0_0_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getStatementsStatementParserRuleCall_1_0_0()); 
 	    }
-		lv_statements_0_0=ruleStatement		{
+		lv_statements_1_0=ruleStatement		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		add(
        			$current, 
        			"statements",
-        		lv_statements_0_0, 
+        		lv_statements_1_0, 
         		"Statement");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -99,38 +105,38 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getFunctionsFunctionDeclarationParserRuleCall_0_1_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getFunctionsFunctionDeclarationParserRuleCall_1_1_0()); 
 	    }
-		lv_functions_1_0=ruleFunctionDeclaration		{
+		lv_functions_2_0=ruleFunctionDeclaration		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		add(
        			$current, 
        			"functions",
-        		lv_functions_1_0, 
+        		lv_functions_2_0, 
         		"FunctionDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))?(this_NL_2=RULE_NL
+))?(this_NL_3=RULE_NL
     { 
-    newLeafNode(this_NL_2, grammarAccess.getModelAccess().getNLTerminalRuleCall_1_0()); 
+    newLeafNode(this_NL_3, grammarAccess.getModelAccess().getNLTerminalRuleCall_2_0()); 
     }
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getStatementsStatementParserRuleCall_1_1_0_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getStatementsStatementParserRuleCall_2_1_0_0()); 
 	    }
-		lv_statements_3_0=ruleStatement		{
+		lv_statements_4_0=ruleStatement		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		add(
        			$current, 
        			"statements",
-        		lv_statements_3_0, 
+        		lv_statements_4_0, 
         		"Statement");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -140,22 +146,26 @@ ruleModel returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getModelAccess().getFunctionsFunctionDeclarationParserRuleCall_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getModelAccess().getFunctionsFunctionDeclarationParserRuleCall_2_1_1_0()); 
 	    }
-		lv_functions_4_0=ruleFunctionDeclaration		{
+		lv_functions_5_0=ruleFunctionDeclaration		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getModelRule());
 	        }
        		add(
        			$current, 
        			"functions",
-        		lv_functions_4_0, 
+        		lv_functions_5_0, 
         		"FunctionDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)))*)
+)))*(this_NL_6=RULE_NL
+    { 
+    newLeafNode(this_NL_6, grammarAccess.getModelAccess().getNLTerminalRuleCall_3()); 
+    }
+)?)
 ;
 
 

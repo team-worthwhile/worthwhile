@@ -36,6 +36,23 @@
             markerType="org.xtext.example.mydsl.ui.MyDslBreakpointMarker">
       </breakpoint>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.xtext.example.mydsl.plugin.category.wizards"
+            name="MyDsl Project">
+      </category>
+      <wizard
+            canFinishEarly="true"
+            category="org.xtext.example.mydsl.plugin.category.wizards"
+            class="org.xtext.example.mydsl.plugin.NewWizard"
+            hasPages="false"
+            icon="icons/sample.gif"
+            id="org.xtext.example.mydsl.plugin.wizard.new.custom"
+            name="MyDsl Project Wizard"
+            project="true">
+      </wizard>
+   </extension>
  
 
 </plugin>

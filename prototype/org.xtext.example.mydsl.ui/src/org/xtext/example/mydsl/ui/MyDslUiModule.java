@@ -4,9 +4,11 @@
 package org.xtext.example.mydsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.xtext.example.mydsl.typesystem.ExprTypesystem;
+import org.xtext.example.mydsl.ui.autoedit.MyDslAutoEditStrategyProvider;
 
 import de.itemis.xtext.typesystem.ITypesystem;
-import org.xtext.example.mydsl.typesystem.*;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -19,4 +21,8 @@ public class MyDslUiModule extends org.xtext.example.mydsl.ui.AbstractMyDslUiMod
 	public Class<? extends ITypesystem> bindITypesystem() {
 	    return ExprTypesystem.class;
 	  }
+	
+	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return MyDslAutoEditStrategyProvider.class;
+	}
 }

@@ -19,8 +19,8 @@
    <windowImages/>
 
    <splash
-      startupProgressRect="10,310,480,15"
-      startupMessageRect="12,295,478,15"
+      startupProgressRect="10,305,480,15"
+      startupMessageRect="12,290,478,15"
       startupForegroundColor="000000" />
    <launcher>
       <solaris/>

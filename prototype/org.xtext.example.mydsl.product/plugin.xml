@@ -23,20 +23,24 @@
                value="MyDsl">
          </property>
          <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="aboutText"
+               value="Hello Worthwhile!">
+         </property>
+         <property
                name="startupForegroundColor"
                value="000000">
          </property>
          <property
                name="startupMessageRect"
-               value="7,252,445,20">
+               value="12,295,478,15">
          </property>
          <property
                name="startupProgressRect"
-               value="5,275,445,15">
-         </property>
-         <property
-               name="preferenceCustomization"
-               value="plugin_customization.ini">
+               value="10,310,480,15">
          </property>
       </product>
    </extension>

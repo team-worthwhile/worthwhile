@@ -3,6 +3,12 @@
 
 <product name="MyDsl" uid="mydsl" id="org.xtext.example.mydsl.product.mydsl" application="org.eclipse.ui.ide.workbench" version="1.0" useFeatures="false" includeLaunchers="true">
 
+   <aboutInfo>
+      <text>
+         Hello Worthwhile!
+      </text>
+   </aboutInfo>
+
    <configIni use="default">
    </configIni>
 
@@ -10,10 +16,24 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
+   <windowImages/>
+
    <splash
-      startupProgressRect="5,275,445,15"
-      startupMessageRect="7,252,445,20"
+      startupProgressRect="10,310,480,15"
+      startupMessageRect="12,295,478,15"
       startupForegroundColor="000000" />
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+
+   <vm>
+   </vm>
+
+
    <plugins>
    </plugins>
 

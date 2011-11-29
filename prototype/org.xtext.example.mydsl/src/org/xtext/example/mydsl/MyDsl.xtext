@@ -88,7 +88,7 @@ ArrayType:
 	{ArrayType} baseType=PrimitiveType '[' ']'
 ;
 
-// A function call simply calls a function without returning a value. 
+// A function call simply calls a function without returning a value.
 FunctionCall:
 	{FunctionRef} symbol=[Function] '(' (actuals+=Expr)? (',' actuals+=Expr)* ')'
 ;

@@ -3,23 +3,17 @@ package org.xtext.example.mydsl.interpreter;
 import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EObject;
-import org.xtext.example.mydsl.myDsl.ArrayAccess;
 import org.xtext.example.mydsl.myDsl.BooleanLiteral;
-import org.xtext.example.mydsl.myDsl.Compare;
 import org.xtext.example.mydsl.myDsl.Equals;
 import org.xtext.example.mydsl.myDsl.FalseLiteral;
-import org.xtext.example.mydsl.myDsl.FunctionCall;
-import org.xtext.example.mydsl.myDsl.FunctionRef;
 import org.xtext.example.mydsl.myDsl.Multi;
 import org.xtext.example.mydsl.myDsl.NumberLiteral;
 import org.xtext.example.mydsl.myDsl.Plus;
 import org.xtext.example.mydsl.myDsl.TrueLiteral;
 import org.xtext.example.mydsl.myDsl.VariableRef;
-import org.xtext.example.mydsl.services.MyDslGrammarAccess.AdditionElements;
 
 import de.itemis.interpreter.ExecutionContext;
 import de.itemis.interpreter.InterpreterException;
-import de.itemis.interpreter.MethodNotImplementedException;
 import de.itemis.interpreter.logging.LogEntry;
 
 public class MyDslEvaluator extends AbstractMyDslExpressionEvaluator {

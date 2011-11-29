@@ -98,77 +98,41 @@ Assignment:
 	variable=[Variable] ':=' value=Expr
 ;
 
+// An expression is based on operator precedence. Each "level" of expressions means one level of operator precedence,
+// where the last operation specified has the highest priority. In the same level, operators are evaluated from left to right.
 Expr:
-	EqualsComparison;
+	EqualsComparison
+;
 
+// The equals comparison has the lowest priority.
 EqualsComparison returns Expression:
-	Comparison ({Equals.left=current} '=' right=Comparison)?;
+	Comparison ({Equals.left=current} '=' right=Comparison)?
+;
 	
+// A comparison of two integer values has the second lowest priority.
 Comparison returns Expression:
-	Addition ({Compare.left=current} type=ComparisonType right=Addition)?;
-
-ComparisonType:
-	LessComparisonType | LessOrEqualComparisonType | GreaterOrEqualComparisonType | GreaterComparisonType
+	Addition (({Less.left=current} '<' | {LessOrEqual.left=current} ('<=' | '≤') | {GreaterOrEqual.left=current} ('>=' | '≥') | {Greater.left=current} '>') right=Addition)?
 ;
 
-LessComparisonType:
-	{LessComparisonType} '<'
-;
-
-LessOrEqualComparisonType:
-	{LessOrEqualComparisonType} ('<=' | '≤')	
-;
-
-GreaterOrEqualComparisonType:
-	{GreaterOrEqualComparisonType} ('>=' | '≥')
-;
-
-GreaterComparisonType:
-	 {GreaterComparisonType} '>'	
-;
-
+// Next in priority are addition and subtraction
 Addition returns Expression:
-	Multiplication ({Plus.left=current} type=AdditionType right=Multiplication)*;
-	
-AdditionType:
-	AdditionOp | SubtractionOp
+	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 ;
 
-AdditionOp:
-	{AdditionOp} '+'
-;
-
-SubtractionOp:
-	{SubtractionOp} '-'
-;
-	
+// Next in priority are multiplication, division, and modulo.
 Multiplication returns Expression:
-	PostfixOperator ( {Multi.left=current} type=MultiplicationType right=PostfixOperator)*
+	UnaryMinus (({Multi.left=current} ('*' | '·') | {Div.left=current} ('/' | '÷') | {Modulo.left=current} '%') right=UnaryMinus)*
 ;
 
-MultiplicationType:
-	MultiplicationOp | DivisionOp | ModuloOp
-;
-
-MultiplicationOp:
-	{MultiplicationOp} ('*' | '·')
-;
-
-DivisionOp:
-	{DivisionOp} ('/' | '÷')
-;
-
-ModuloOp:
-	{ModuloOp} '%'
+// The unary minus has second highest priority.
+UnaryMinus returns Expression:
+	 ArrayAccess | ({UnaryMinusOperator} '-' expr=UnaryMinus)
 ;
 	
-// TODO: unary expressions
-/*UnaryMinusOperator returns Expression:
-	 ('-' {UnaryMinus.expr=current})? PostfixOperator
-;*/
-	
-PostfixOperator returns Expression:
-	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?;
+// The access of array items via an index has highest priority.
+ArrayAccess returns Expression:
+	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?
+;
 	
 // An atomic value in an expression is either
 //  - a function call or

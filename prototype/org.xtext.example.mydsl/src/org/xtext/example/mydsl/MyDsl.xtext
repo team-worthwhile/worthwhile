@@ -6,8 +6,8 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 Model:
 	{Model}
 	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
-	(NL (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
-	NL? // Newline at the end of the file is allowed. 
+	(NL+ (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
+	NL* // Newline at the end of the file is allowed. 
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
@@ -18,19 +18,9 @@ terminal WS : (' '|'\t')+;
 // TODO: \r
 terminal NL : '\n' ('\n' | WS)*;
 
-// Multiline comments must also be able to have line breaks before and after …
-terminal ML_COMMENT :
-	NL? '/*' -> '*/' NL?
-;
-
-// … as well as single line comments. TODO: does not work ATM
-/* terminal SL_COMMENT :
-	NL? '//' !('\n'|'\r')* ('\r'? '\n')?
-;*/
-
 // A block consists of one or multiple statements enclosed in curly brackets.
 Block:
-	{Block} '{' (statements+=Statement)? (NL statements+=Statement)* NL? '}'
+	{Block} '{' (statements+=Statement)? (NL+ statements+=Statement)* NL* '}'
 ;
 
 // A statement is everything that can be executed in the program.

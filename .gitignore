@@ -12,3 +12,4 @@ pflichtenheft.pdf
 # java stuff
 *.class
 bin/
+src-gen/

@@ -1,0 +1,47 @@
+\section{Sprachdefinition}
+
+\subsection{Operatorreihenfolge}
+
+Die folgende Tabelle gibt die Reihenfolge an, in der Operatoren ausgewertet werden. Dabei werden die Operatoren mit höchster Priorität zuerst ausgewertet.
+
+Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Durch Klammersetzung kann die Auswertungsreihenfolge beeinflusst werden.
+
+\begin{figure}[H]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Priorität} & \textbf{Operatoren} \\
+\hline
+8 & \texttt{{[}\,{]}} \\
+\hline
+7 & $\neg, -, +$ (unäre Operatoren)\\
+\hline
+6 & $\cdot, \div, \%$\\
+\hline
+5 & $+, -$\\
+\hline
+4 & $<, \leq, \geq, >$\\
+\hline
+3 & $=$\\
+\hline
+2 & $\wedge$ \\
+\hline
+1 & $\vee$ \\
+\hline
+\end{tabular}
+\end{figure}
+
+\subsection{Formale Definition der Grammatik}
+
+\setlength{\grammarparsep}{20pt plus 1pt minus 1pt} % increase separation between rules
+\setlength{\grammarindent}{12em} % increase separation between LHS/RH
+
+\begin{grammar}
+
+<statement> ::= <ident> `=' <expr> 
+\alt `for' <ident> `=' <expr> `to' <expr> `do' <statement> 
+\alt `{' <stat-list> `}' 
+\alt <empty> 
+
+<stat-list> ::= <statement> `;' <stat-list> | <statement> 
+
+\end{grammar}

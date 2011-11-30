@@ -14,7 +14,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.xtext.example.mydsl.interpreter.ExprModelInterpreter;
-import org.xtext.example.mydsl.myDsl.Model;
+import org.xtext.example.mydsl.myDsl.Program;
 
 import com.google.inject.Inject;
 
@@ -50,7 +50,7 @@ public class WorthWhileLaunchConfigurationDelegate implements
 						public IStatus exec(XtextResource state) throws Exception {
 							// TODO Auto-generated method stub
 							ExprModelInterpreter interpreter = new ExprModelInterpreter();
-							interpreter.runModel((Model)(state.getParseResult().getRootASTElement()), ts);
+							interpreter.runProgram((Program)(state.getParseResult().getRootASTElement()), ts);
 
 							return null;
 						}

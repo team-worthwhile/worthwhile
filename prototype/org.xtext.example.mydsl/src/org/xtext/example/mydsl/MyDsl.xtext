@@ -18,6 +18,11 @@ terminal WS : (' '|'\t')+;
 // TODO: \r
 terminal NL : '\n' ('\n' | WS)*;
 
+// A single line comment includes everything from // to the next newline, but not the newline itself.
+terminal SL_COMMENT : 
+	'//' !('\n'|'\r')*
+;
+
 // A block consists of one or multiple statements enclosed in curly brackets.
 Block:
 	{Block} '{' (statements+=Statement)? (NL+ statements+=Statement)* NL* '}'

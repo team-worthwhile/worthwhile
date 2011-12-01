@@ -13,3 +13,4 @@ pflichtenheft.pdf
 *.class
 bin/
 src-gen/
+xtend-gen/

@@ -9,6 +9,7 @@
 *.fls
 # pdfs
 pflichtenheft.pdf
+entwurf.pdf
 # java stuff
 *.class
 bin/

@@ -40,7 +40,12 @@ ReturnStatement:
 
 // A while statement specifies a while loop.
 WhileStatement:
-	'while' condition=Expr body=Block
+	'while' condition=Expr (invariants+=Invariant)* body=Block
+;
+
+// 
+Invariant:
+	NL+ '_invariant' '(' expr=(Expr | QuantifiedExpr) ')'
 ;
 
 // An if statement specifies a conditional expression.

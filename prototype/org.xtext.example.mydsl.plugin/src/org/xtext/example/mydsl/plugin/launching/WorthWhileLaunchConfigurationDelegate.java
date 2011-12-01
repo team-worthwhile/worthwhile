@@ -26,7 +26,6 @@ public class WorthWhileLaunchConfigurationDelegate implements
 	@Inject
 	private ITypesystem ts;
 
-	@SuppressWarnings("unused")
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {

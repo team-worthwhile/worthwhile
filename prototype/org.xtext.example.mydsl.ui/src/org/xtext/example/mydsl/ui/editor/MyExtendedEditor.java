@@ -1,6 +1,5 @@
 package org.xtext.example.mydsl.ui.editor;
 
-import org.eclipse.debug.ui.actions.ToggleBreakpointAction;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuCreator;
 import org.eclipse.jface.action.IMenuManager;
@@ -9,7 +8,6 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.swt.events.HelpListener;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.xtext.example.mydsl.ui.actions.SampleAction;
 
 public class MyExtendedEditor extends XtextEditor {
 

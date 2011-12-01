@@ -90,19 +90,18 @@ FunctionCall:
 
 // An annotation is used to specify assertions and assumptions.
 Annotation:
-	 ({Assertion} '_assert' | {Assumption} '_assume') '(' expr=QuantifiedExpr ')'
+	 ({Assertion} '_assert' | {Assumption} '_assume') '(' expr=(Expr | QuantifiedExpr) ')'
 ;
 
 // A quantified expression is an expression optionally preceded by some quantifier definitions.
-// TODO: Allow moar or less than one quantifier
-QuantifiedExpr returns Expression:
-	(({ForAllExpression} ('forall' | '∀') | {ExistsExpression} ('exists' | '∃')) var=VariableDeclarationWithoutInitialValue)
+QuantifiedExpr:
+	(({ForAllExpression} ('forall' | '∀') | {ExistsExpression} ('exists' | '∃')) var=VariableDeclarationWithoutInitialValue (',' condition=Expr)?) (expr=QuantifiedExpr | ':' expr=Expr)
 ;
 
 
-// A variable declaration declares a new variable and optionally assigns it a value.
+// A variable declaration declares a new variable and assigns it a value.
 VariableDeclaration returns Variable:
-	type=Type name=ID ( ':=' initialValue=Expr)
+	type=Type name=ID ':=' initialValue=Expr
 ;
 
 // This variable declaration declares a new variable, but does not assign it a value

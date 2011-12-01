@@ -1,19 +1,15 @@
 package org.xtext.example.mydsl.interpreter;
 
-import java.util.ListIterator;
-
 import org.eclipse.emf.ecore.EObject;
 import org.xtext.example.mydsl.myDsl.Assignment;
 import org.xtext.example.mydsl.myDsl.Block;
 import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.IfStatement;
-import org.xtext.example.mydsl.myDsl.Statement;
 import org.xtext.example.mydsl.myDsl.Variable;
 import org.xtext.example.mydsl.myDsl.WhileStatement;
 
 import de.itemis.interpreter.ExecutionContext;
 import de.itemis.interpreter.InterpreterException;
-import de.itemis.interpreter.MethodNotImplementedException;
 import de.itemis.interpreter.logging.LogEntry;
 
 public class MyDslStatementExecutor extends AbstractMyDslStatementExecutor {

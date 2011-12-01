@@ -5,7 +5,7 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 // A program consists of a sequence of statements and/or function declarations.
 Program:
 	{Program}
-	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before …
+	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before it …
 	(NL+ (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
 	NL* // Newline at the end of the file is allowed. 
 ;
@@ -15,8 +15,7 @@ terminal WS : (' '|'\t')+;
 
 // A newline preceding a statement consists of at least a newline character, optionally followed by some whitespace and moar newlines.
 // The latter is necessary because of "blank lines" that have some whitespace (e.g. indentation) in them.
-// TODO: \r
-terminal NL : '\n' ('\n' | WS)*;
+terminal NL : ('\r')? '\n' ('\r' | '\n' | WS)*;
 
 // A single line comment includes everything from // to the next newline, but not the newline itself.
 terminal SL_COMMENT : 
@@ -30,7 +29,7 @@ Block:
 
 // A statement is everything that can be executed in the program.
 Statement:
-	(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement )
+	(VariableDeclaration | Assignment | Block | Annotation | FunctionCall | IfStatement | WhileStatement | ReturnStatement)
 ;
 
 // A return statement returns a value from a function.
@@ -165,7 +164,7 @@ Multiplication returns Expression:
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.
 UnaryOperation returns Expression:
-	 ArrayAccess | (({UnaryMinusOperator} '-' | {UnaryPlusOperator} '+' | {UnaryNotOperator} ('¬'|'!') ) expr=UnaryOperation)
+	 ArrayAccess | (({UnaryMinusOperator} '-' | {UnaryPlusOperator} '+' | {UnaryNotOperator} ('¬'|'!') ) expr=ArrayAccess)
 ;
 	
 // The access of array items via an index has highest priority.
@@ -185,19 +184,10 @@ Atomic returns Expression:
 
 // A Boolean literal is either "true" or "false"
 BooleanLiteral:
-	TrueLiteral | FalseLiteral
+	{TrueLiteral} 'true' | {FalseLiteral} 'false'
 ;
 
-// A FalseLiteral is the text "false".
-FalseLiteral:
-	{FalseLiteral} 'false'
-;
-
-// A TrueLiteral is the text "true".
-TrueLiteral:
-	{TrueLiteral} 'true'	
-;
-
+// A variable reference is used to denote the current content of a variable. 
 VariableRef:
 	{VariableRef} symbol=[Variable]
 ;

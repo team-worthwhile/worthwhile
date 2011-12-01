@@ -45,7 +45,7 @@ WhileStatement:
 
 // 
 Invariant:
-	NL+ '_invariant' '(' expr=(Expr | QuantifiedExpr) ')'
+	NL+ '_invariant' expr=(Expr | QuantifiedExpr)
 ;
 
 // An if statement specifies a conditional expression.
@@ -55,7 +55,15 @@ IfStatement:
 
 // A function declaration declares a function name, parameters, return type, and function body.
 FunctionDeclaration returns Function:
-	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' body=Block
+	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' (requires+=Require | ensures+=Ensure)* NL* body=Block
+;
+
+Require:
+	NL+ '_requires' expr=(Expr | QuantifiedExpr)
+;
+
+Ensure:
+	NL+ '_ensures' expr=(Expr | QuantifiedExpr)
 ;
 
 // A parameter definition describes a single parameter (type and name) accepted by a function.
@@ -85,7 +93,7 @@ BoolType:
 
 // An array type represents an array of a primitive type.
 ArrayType:
-	{ArrayType} baseType=PrimitiveType '[' ']'
+	{ArrayType} baseType=PrimitiveType '[' size=Expr ']'
 ;
 
 // A function call simply calls a function without returning a value.
@@ -95,7 +103,7 @@ FunctionCall:
 
 // An annotation is used to specify assertions and assumptions.
 Annotation:
-	 ({Assertion} '_assert' | {Assumption} '_assume') '(' expr=(Expr | QuantifiedExpr) ')'
+	 ({Assertion} '_assert' | {Assumption} '_assume' | {Axiom} '_axiom') expr=(Expr | QuantifiedExpr)
 ;
 
 // A quantified expression is an expression optionally preceded by some quantifier definitions.

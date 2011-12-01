@@ -83,12 +83,12 @@ PrimitiveType:
 
 // An integer type represents an arbitrarily large integer.
 IntType:
-	{IntType} 'int'
+	{IntType} 'Integer'
 ;
 
 // A bool type represents a Boolean value.
 BoolType:
-	{BoolType} 'bool'
+	{BoolType} 'Boolean'
 ;
 
 // An array type represents an array of a primitive type.

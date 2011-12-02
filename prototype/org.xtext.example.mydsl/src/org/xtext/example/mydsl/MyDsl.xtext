@@ -5,17 +5,15 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 // A program consists of a sequence of statements and/or function declarations.
 Program:
 	{Program}
-	(statements+=Statement | functions+=FunctionDeclaration)? // The first statement does not need a newline before it …
-	(NL+ (statements+=Statement | functions+=FunctionDeclaration))* // … but all the other statements do.
-	NL* // Newline at the end of the file is allowed. 
+	NL* // Newline at the beginning of the file is allowed. 
+	((statements+=Statement | functions+=FunctionDeclaration) NL+)* // All statements need a newline after them. FIXME: End of file?
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
 terminal WS : (' '|'\t')+;
 
-// A newline preceding a statement consists of at least a newline character, optionally followed by some whitespace and moar newlines.
-// The latter is necessary because of "blank lines" that have some whitespace (e.g. indentation) in them.
-terminal NL : ('\r')? '\n' ('\r' | '\n' | WS)*;
+// A newline consists of at least one '\n'.
+terminal NL : ('\r' | '\n' | WS)* '\n' WS*;
 
 // A single line comment includes everything from // to the next newline, but not the newline itself.
 terminal SL_COMMENT : 
@@ -24,7 +22,7 @@ terminal SL_COMMENT :
 
 // A block consists of one or multiple statements enclosed in curly brackets.
 Block:
-	{Block} '{' (statements+=Statement)? (NL+ statements+=Statement)* NL* '}'
+	{Block} '{' NL* (statements+=Statement NL+)* '}'
 ;
 
 // A statement is everything that can be executed in the program.
@@ -44,7 +42,7 @@ WhileStatement:
 
 // 
 Invariant:
-	NL+ '_invariant' expr=(Expr | QuantifiedExpr)
+	'_invariant' expr=(Expr | QuantifiedExpr) NL+ 
 ;
 
 // An if statement specifies a conditional expression.
@@ -54,17 +52,17 @@ IfStatement:
 
 // A function declaration declares a function name, parameters, return type, and function body.
 FunctionDeclaration returns Function:
-	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' (requires+=Require | ensures+=Ensure)* NL* body=Block
+	'function' returnType=Type name=ID '(' (params+=Parameter (',' params+=Parameter)* )? ')' NL* (requires+=Require | ensures+=Ensure)* body=Block 
 ;
 
 Require:
-	NL+ '_requires' expr=(Expr | QuantifiedExpr)
+	'_requires' expr=(Expr | QuantifiedExpr) NL+ 
 ;
 
 Ensure:
-	NL+ '_ensures' expr=(Expr | QuantifiedExpr)
+	'_ensures' expr=(Expr | QuantifiedExpr) NL+ 
 ;
-
+ 
 // A parameter definition describes a single parameter (type and name) accepted by a function.
 Parameter returns Variable:
 	{Parameter} type=Type name=ID
@@ -77,17 +75,7 @@ Type:
 
 // A primitive type represents a variable type that can hold one value.
 PrimitiveType:
-	IntType | BoolType	
-;
-
-// An integer type represents an arbitrarily large integer.
-IntType:
-	{IntType} 'Integer'
-;
-
-// A bool type represents a Boolean value.
-BoolType:
-	{BoolType} 'Boolean'
+	{IntType} 'Integer' | {BoolType} 'Boolean'	
 ;
 
 // An array type represents an array of a primitive type.
@@ -99,7 +87,7 @@ ArrayType:
 FunctionCall:
 	{FunctionRef} symbol=[Function] '(' (actuals+=Expr)? (',' actuals+=Expr)* ')'
 ;
-
+ 
 // An annotation is used to specify assertions and assumptions.
 Annotation:
 	 ({Assertion} '_assert' | {Assumption} '_assume' | {Axiom} '_axiom') expr=(Expr | QuantifiedExpr)
@@ -109,7 +97,6 @@ Annotation:
 QuantifiedExpr:
 	(({ForAllExpression} ('forall' | '∀') | {ExistsExpression} ('exists' | '∃')) var=VariableDeclarationWithoutInitialValue (',' condition=Expr)?) (expr=QuantifiedExpr | ':' expr=Expr)
 ;
-
 
 // A variable declaration declares a new variable and assigns it a value.
 VariableDeclaration returns Variable:
@@ -146,7 +133,7 @@ BooleanAnd returns Expression:
 EqualsComparison returns Expression:
 	Comparison ({Equals.left=current} '=' right=Comparison)?
 ;
-	
+
 // A comparison of two integer values is next in priority.
 Comparison returns Expression:
 	Addition (({Less.left=current} '<' | {LessOrEqual.left=current} ('<=' | '≤') | {GreaterOrEqual.left=current} ('>=' | '≥') | {Greater.left=current} '>') right=Addition)?
@@ -166,12 +153,12 @@ Multiplication returns Expression:
 UnaryOperation returns Expression:
 	 ArrayAccess | (({UnaryMinusOperator} '-' | {UnaryPlusOperator} '+' | {UnaryNotOperator} ('¬'|'!') ) expr=ArrayAccess)
 ;
-	
+
 // The access of array items via an index has highest priority.
 ArrayAccess returns Expression:
 	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?
 ;
-	
+
 // An atomic value in an expression is either
 //  - a function call or
 //  - a number or

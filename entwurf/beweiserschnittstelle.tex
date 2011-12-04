@@ -1,0 +1,244 @@
+\section{Beweiserschnittstelle}%
+
+Die Beweiserschnittstelle lässt Worthwhile-""Programmspezifikationen
+und -Annotationen mit Voraussetzungen von einem Beweiser überprüfen
+und liefert dem Aufrufer dessen Auswertung zurück.%
+
+\subsection{Eingabedaten}%
+
+\subsubsection{Programmspezifikation}%
+
+% TODO Datentyp des Abstract-Syntax-Tree
+
+Die Programmspezifikation wird dem Abstract-Syntax-Tree~(AST), welcher
+aus einem Worthwhile-Text erstellt wurde, entnommen. Sie setzt sich
+zusammen aus dem WHILE-Programmtext und den Annotationen. Annotationen
+sind entweder Axiome, Funktionsverträge, Schleifeninvarianten,
+Zusicherungen oder Voraussetzungen.%
+
+\subsubsection{Annotationen mit Voraussetzungen}%
+
+Der übergebene AST besteht aus genau einer Annotation, insbesondere
+fehlt jeglicher Programmtext. Allerdings wird zusätzlich eine Menge
+von Voraussetzungen übergeben, welche die Beweiserschnittstelle nicht
+selbst dem AST entnehmen kann.%
+
+% TODO was geschieht, wenn sich die Voraussetzungen widersprechen
+% TODO Beispiel finden, für das ausgewertete Zusicherungen
+%      übergeben werden müssen
+
+Diese Voraussetzungen enthalten den Zustand einer Programmausführung
+und bereits ausgewertete Annotationen. Der Programmzustand besteht aus
+den von einem Interpreter berechneten Wertbelegungen von Symbolen, die
+insbesondere in der auszuwertenden Annotation vorkommen können. Den
+Programmzustand kann die Beweiserschnittstelle nicht selbst
+feststellen, also auch nicht mehr zu einem früheren zurückkehren oder
+zu einem späteren übergehen und andere Annotationen auswerten. Deshalb
+werden in den Voraussetzungen auch die zuvor zu \texttt{true}
+ausgewertete Annotationen enthalten sein.%
+
+\subsection{Formelerstellung}%
+
+Bei der Erstellung einer Formel aus einer Programmspezifikation wird
+nach dem Kalkül der schwächsten Vorbedingung vorgegangen.%
+
+\subsubsection{Axiome}%
+
+Die schließlich an den Beweiser übergebene Formel ist eine
+Implikation, auf deren linke Seite die konjunktiv verknüpften Axiome
+stehen. Wenn keine Axiome angegeben wurden, steht auf der linke Seite
+der Implikation der Wahrheitswert \texttt{true}. Auf der rechten Seite
+steht das zu beweisende Theorem, dass das Programm der Spezifikation
+entspricht.%
+
+Axiome sind im AST als \texttt{axiom}-Knoten codiert und die Kinder
+sind syntaktische Elemente prädikatenlogische Formeln.%
+
+\subsubsection{Funktionsverträge}%
+
+Funktionen werden modular spezifiziert. Ihre Spezifikation besteht aus
+den Voraussetzungen, die ihre Parameter erfüllen müssen, und den
+Zusicherungen, die sie bei gültigen Parametern für ihr Ergebnis
+erfüllen. Voraussetzungen werden Vorbedingungen genannt, Zusicherungen
+Nachbedingungen und die Menge aller Bedingungen Funktionsvertrag.%
+
+Für den Funktionstext werden die Vorbedingungen wie Axiome behandelt
+und Nachbedingungen wie Zusicherungen für den Rückgabewert der
+Funktion.%
+
+Vorbedingungen werden im AST als \texttt{requires}-Knoten und
+Nachbedingungen als \texttt{ensures}-Knoten codiert. Die Kinder beider
+Knotentypen sind syntaktische Elemente prädikatenlogischer Formeln.%
+
+\subsubsection{Schleifeninvarianten}%
+
+Schleifeninvarianten werden in der Formel an den Beweiser so
+eingebettet, dass ihre Aussage vor dem Schleifeneintritt, nach jedem
+Durchlauf und nach dem Austritt gelten muss. Nach jedem Durchlauf
+heißt, dass die Erfülltheit der Schleifenbedingung und der Invariante
+die Aussage der Invariante impliziert, und nach dem Austritt bedeutet
+analog, dass die Erfülltheit der negierten Schleifenbedingung und der
+Invariante wiederum die Aussage der Invariante impliziert.%
+
+Schleifeninvarianten werden im AST als \texttt{invariant}-Knoten
+codiert, deren Kinder syntaktische Elemente prädikatenlogischer
+Formeln sind.%
+
+\subsubsection{Zusicherungen}%
+
+Zusicherungen werden in der Formel an den Beweiser so eingebettet,
+dass ihre Aussage bei jeder Programmausführung durch den
+vorhergehenden Programmtext erfüllt sein muss.%
+
+Zusicherungen werden im AST als \texttt{assert}-Knoten codiert, deren
+Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
+
+\subsubsection{Annahmen}%
+
+Annahmen werden wie Axiome behandelt, sodass sie insbesondere nicht
+wie Zusicherungen erfüllt sein müssen und vom Beweiser auch nicht
+geprüft werden.%
+
+Voraussetzungen werden im AST als \texttt{assume}-Knoten codiert,
+deren Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
+
+\subsection{Voraussetzungen für einzelne Annotationen}%
+
+% TODO Datentyp für Programmzustand und ausgewertete Annotationen
+
+Voraussetzungen bei der Prüfung von einzelnen Annotationen werden wie
+Axiome behandelt.%
+
+\subsection{Ausgabedaten}%
+
+\subsubsection{Modell}%
+
+\subsection{Klassenentwurf}%
+
+\begin{itemize}%
+
+    \item Zur Transformation einer Programmspezifikation werden für
+    \texttt{WWAST} Besucherklassen für die einzelnen syntaktischen
+    Elemente implementiert.%
+
+    % TODO Spezifikation des unterstützten SMT-LIB-Standards
+
+\end{itemize}%
+
+\subsubsection{class Environment}%
+
+Instanzen von \texttt{Environment} fassen einen Programmzustand
+zusammen. Dazu gehören sowohl Wertbelegungen für Symbole als auch
+erfüllte Annotationen.%
+
+\subsubsection{class WWAST}%
+
+Instanzen von \texttt{WWAST} codieren Programmtexte, welche der Syntax
+von Worthwhile entsprechen.%
+
+\subsubsection{class SMTLIBAST}%
+
+Instanzen von \texttt{SMTLIBAST} codieren Programmtexte, welche der
+Syntax von SMT-LIB entsprechen.%
+
+\subsubsection{class ProverInterface}%
+
+Instanzen von \texttt{ProverInterface} übersetzen
+\texttt{WWAST}-Instanzen in Instanzen von \texttt{SMTLIBAST}.%
+
+% TODO nicht öffentliche Attribute
+
+\begin{description}%
+    \item [private int timeout]
+
+    Zeit in Sekunden, nach der \texttt{check""Program} und
+    \texttt{check""Annotation} zurückkehren müssen.%
+
+    Siehe \texttt{setTimeout}.%
+
+    \item [private SMTLIBAST model]%
+
+\end{description}%
+
+% TODO öffentliche Methoden
+
+\begin{description}%
+    \item[public bool checkProgram(WWAST prg)]
+
+    Prüft mit Hilfe eines Beweisers die Korrektheit des annotierten
+    Programms \texttt{prg}. Es wird genau dann \texttt{true}
+    zurückgeliefert, wenn \texttt{prg} für alle Ausführungen den
+    Annotationen entspricht, und \texttt{false} sonst~(z.~B.\, wenn
+    \texttt{timeout} überschritten wurde oder die Spezifikation für
+    eine Ausführung nicht erfüllt wird).%
+
+    Siehe \texttt{getModel}%
+
+    \item[public bool checkAnnotation(WWAST ann, Environment env)]
+
+    Prüft mit Hilfe eines Beweisers die Erfülltheit der Annotation
+    \texttt{ann}. Es wird genau dann \texttt{true} zurückgeliefert,
+    wenn \texttt{ann} im Kontext \texttt{env} erfüllt ist, und
+    \texttt{false} sonst~(z.~B.\, wenn \texttt{timeout} überschritten
+    wurde).%
+
+    Siehe \texttt{getModel}%
+
+    \item[public Environment getModel()]
+
+    Liefert für den vorhergehenden Aufruf von \texttt{check""Program}
+    oder \texttt{check""Annotation} die Ausgabe des Beweisers und
+    \texttt{null}, wenn zuvor weder ein Programm noch eine Annotation
+    überprüft wurde oder keine Ausgabe verfügbar war.%
+
+    \item[public void setTimeout(int seconds)]
+
+    Setzt den Timeout für Aufrufe von \texttt{check""Program} und
+    \texttt{check""Annotation} auf den Wert von \texttt{seconds}. Ist
+    der angegebene Wert negativ, wird er als Null interpretiert.%
+
+    \item[public SMTLIBAST transformProgram(WWAST prg)]
+
+    Liefert eine SMT-""LIB-""Formel für das annotierte Programm
+    \texttt{prg}, wie sie von \texttt{check""Program} als Eingabe für
+    den Beweiser erstellt würde.%
+
+    \item[public SMTLIBAST transformAnnotation(WWAST ann, Environment env)]
+
+    Liefert eine SMT-""LIB-""Formel für die Annotation \texttt{ann} im
+    Kontext \texttt{env}, wie sie von \texttt{check""Annotation} als
+    Eingabe für den Beweiser erstellt würde.%
+
+\end{description}%
+
+% TODO nicht öffentliche Methoden
+
+\begin{description}%
+    \item[private SMTLIBAST transformWhile(WWAST loop)]%
+
+    \item[private SMTLIBAST transformFunction(WWAST fun)]%
+
+    \item[private SMTLIBAST transformFunCall(WWAST call)]%
+
+    \item[private SMTLIBAST transformAssign(WWAST assign)]%
+
+    \item[private SMTLIBAST transfromConditional(WWAST if)]%
+
+    \item[private SMTLIBAST transfromAssert(WWAST assert)]%
+
+    \item[private SMTLIBAST transfromAssume(WWAST assume)]%
+
+    \item[private SMTLIBAST transformAxiom(WWAST axiom)]%
+
+    \item[private bool prove(SMTLIBAST formula)]
+
+    Aufruf des Beweisers für die SMT-""LIB-""Formel \texttt{formula}.
+    Es wird genau dann \texttt{true} zurückgeliefert, wenn die Formel
+    erfüllt werden konnte, und \texttt{false} sonst~(z.~B.\, wenn
+    \texttt{timeout} überschritten wurde). Hat im Falle der
+    Erfüllbarkeit der Beweiser ein Modell geliefert, wird dies der
+    Variable \texttt{model} entsprechend zugewiesen.%
+
+\end{description}%
+
+\subsection{Interaktionsentwurf}%

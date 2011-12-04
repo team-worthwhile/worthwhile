@@ -32,16 +32,83 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 
 \subsection{Formale Definition der Grammatik}
 
-\setlength{\grammarparsep}{20pt plus 1pt minus 1pt} % increase separation between rules
+% \setlength{\grammarparsep}{20pt plus 1pt minus 1pt} % increase separation between rules
 \setlength{\grammarindent}{12em} % increase separation between LHS/RH
 
 \begin{grammar}
 
-<statement> ::= <ident> `=' <expr> 
-\alt `for' <ident> `=' <expr> `to' <expr> `do' <statement> 
-\alt `{' <stat-list> `}' 
-\alt <empty> 
+<program> ::= (<funcdecl> | <statement> | <axiom>)* 
 
-<stat-list> ::= <statement> `;' <stat-list> | <statement> 
+<funcdecl> ::= `function' <type> <name> (<parameter>*) \\ (<requires> | <ensures>)* \\ <block>
+
+<statement> ::= <vardecl> | <assign> | <block> | <annotation> | <funccall> | <conditional> | <loop> | <return>
+
+<axiom> ::= `_axiom' (<expr> | <quantifiedexpr>)
+
+<block> ::= `{' <statement>* `}'
+
+<vardecl> ::= <parameter> `:=' <expr>
+
+<assign> ::= <name> `:=' <expr>
+
+<annotation> ::= (`_assert' | `_assume') (<expr> | <quantifiedexpr>)
+
+<funccall> ::= <name> `(' (<expr> (`,' <expr>)* )? `)'
+
+<conditional> ::= `if' <expr> \\ <block>  \\ (`else' \\ <block>)?
+
+<loop> ::= `while' <expr> \\ <invariant> \\ <block>
+
+<invariant> ::= `_invariant' (<expr> | <quantifiedexpr>)
+
+<return> ::= `return' <expr>
+
+<quantifiedexpr> ::= (`\forall' | `\exists' ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
+
+<expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <literal> | <variable> | <funccall>
+
+<literal> ::= `false' | `true' | <integer>
+
+<type> ::= <primitivetype> | <arraytype>
+
+<primitivetype> ::= `Integer' | `Boolean'
+
+<arraytype> ::= <primitivetype> `[' <expr> `]'
+
+<parameter> ::= <type> <name>
+
+<binop> ::= $\vee$ | $\wedge$ | $\textless$ | $\leq$ | $=$ | $\geq$ | $>$ | $+$ | $-$ | $\cdot$ | $/$
+
+<prefixop> ::= $-$ | $+$ | $\neg$
+
+<postfixop> ::= `[' <expr> `]'
 
 \end{grammar}
+
+\subsection{Alternative Darstellungsweisen für mathematische Symbole}
+
+Einige mathematische Symbole sind auf Tastaturen nicht verfügbar. Daher sind folgende textuelle Alternativen vorgesehen, um die Sprache auch ohne die Hilfe einer IDE editieren zu können:
+
+\begin{figure}[H]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Symbol} & \textbf{Alternative} \\
+\hline
+$\forall$ & \texttt{forall} \\
+\hline
+$\exists$ & \texttt{exists} \\
+\hline
+$\cdot$ & \texttt{*} \\
+\hline
+$\neg$ & \texttt{!} \\
+\hline
+$\vee$ & \texttt{\textbar\textbar} \\
+\hline
+$\wedge$ & \texttt{\&\&} \\
+\hline
+$\leq$ & \texttt{<=} \\
+\hline
+$\geq$ & \texttt{>=} \\
+\hline
+\end{tabular}
+\end{figure}

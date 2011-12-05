@@ -1,5 +1,9 @@
 \section{Sprachdefinition}
 
+\subsection{Trennung von Befehlen}
+
+Die Trennung aufeinanderfolgender Befehle wird dadurch erreicht, dass in jeder Zeile höchstens ein Befehl stehen darf. Dies dient der Übersichtlichkeit, da Befehlstrenner wie das Semikolon unnötig werden.
+
 \subsection{Operatorreihenfolge}
 
 Die folgende Tabelle gibt die Reihenfolge an, in der Operatoren ausgewertet werden. Dabei werden die Operatoren mit höchster Priorität zuerst ausgewertet.
@@ -32,6 +36,8 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 
 \subsection{Formale Definition der Grammatik}
 
+Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program}.
+
 % \setlength{\grammarparsep}{20pt plus 1pt minus 1pt} % increase separation between rules
 \setlength{\grammarindent}{12em} % increase separation between LHS/RH
 
@@ -49,7 +55,9 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 
 <vardecl> ::= <parameter> `:=' <expr>
 
-<assign> ::= <name> `:=' <expr>
+<assign> ::= <varref> `:=' <expr>
+
+<varref> ::= <name> (`[' <expr> `]' )?
 
 <annotation> ::= (`_assert' | `_assume') (<expr> | <quantifiedexpr>)
 
@@ -65,7 +73,7 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 
 <quantifiedexpr> ::= (`\forall' | `\exists' ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
 
-<expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <literal> | <variable> | <funccall>
+<expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <literal> | <varref> | <funccall>
 
 <literal> ::= `false' | `true' | <integer>
 
@@ -82,6 +90,8 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 <prefixop> ::= $-$ | $+$ | $\neg$
 
 <postfixop> ::= `[' <expr> `]'
+
+<name> ::=  [`A--Za--z'][`A--Za--z0--9']*
 
 \end{grammar}
 

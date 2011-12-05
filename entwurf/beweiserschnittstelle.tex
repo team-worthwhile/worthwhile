@@ -70,6 +70,8 @@ Vorbedingungen werden im AST als \texttt{requires}-Knoten und
 Nachbedingungen als \texttt{ensures}-Knoten codiert. Die Kinder beider
 Knotentypen sind syntaktische Elemente prädikatenlogischer Formeln.%
 
+Siehe \texttt{FP020}%
+
 \subsubsection{Schleifeninvarianten}%
 
 Schleifeninvarianten werden in der Formel an den Beweiser so
@@ -83,6 +85,8 @@ Invariante wiederum die Aussage der Invariante impliziert.%
 Schleifeninvarianten werden im AST als \texttt{invariant}-Knoten
 codiert, deren Kinder syntaktische Elemente prädikatenlogischer
 Formeln sind.%
+
+Siehe \texttt{FP030}%
 
 \subsubsection{Zusicherungen}%
 
@@ -174,6 +178,8 @@ Instanzen von \texttt{ProverInterface} übersetzen
 
     Siehe \texttt{getModel}%
 
+    Siehe \texttt{FP005}%
+
     \item[public bool checkAnnotation(WWAST ann, Environment env)]
 
     Prüft mit Hilfe eines Beweisers die Erfülltheit der Annotation
@@ -183,6 +189,8 @@ Instanzen von \texttt{ProverInterface} übersetzen
     wurde).%
 
     Siehe \texttt{getModel}%
+
+    Siehe \texttt{FP005}%
 
     \item[public Environment getModel()]
 

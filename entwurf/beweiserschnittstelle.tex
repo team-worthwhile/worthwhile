@@ -108,8 +108,8 @@ der Formelerstellung die Zusicherung, dass der angegebene Feldindex
 nicht die Deklarationsgröße übersteigt, vorangestellt.%
 
 \begin{description}%
-    \item[A1] \begin{math}\forall i \in \mathbb{A}, e \in \mathbb{B} : a[i] := e \Rightarrow a[i] = e\end{math}%
-    \item[A2] \begin{math}\forall i, j \in \mathbb{A}, e, f \in \mathbb{B} : i \neq j \wedge a[i] = e \wedge a[i] := f \Rightarrow a[i] = e\end{math}%
+    \item[A1] \begin{math}\forall i \in \mathbb{A}, e \in \mathbb{B} : \{\texttt{true}\} a[i] := e \{a[i] = e\}\end{math}%
+    \item[A2] \begin{math}\forall i, j \in \mathbb{A}, e, f \in \mathbb{B} : \{i \neq j \wedge a[i] = e\} a[i] := f \{a[i] = e\}\end{math}%
     \item[A3] \begin{math}\forall a, b \in \mathbb{B}^\mathbb{A} : (\forall i, j \in \mathbb{A} : a[i] = b[j]) \Rightarrow a = b\end{math}%
 \end{description}%
 

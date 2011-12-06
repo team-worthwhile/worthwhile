@@ -27,15 +27,12 @@ selbst dem AST entnehmen kann.%
 % TODO Beispiel finden, für das ausgewertete Zusicherungen
 %      übergeben werden müssen
 
-Diese Voraussetzungen enthalten den Zustand einer Programmausführung
-und bereits ausgewertete Annotationen. Der Programmzustand besteht aus
-den von einem Interpreter berechneten Wertbelegungen von Symbolen, die
+Diese Voraussetzungen enthalten den Zustand einer Programmausführung.
+Der Programmzustand enthält
+die von einem Interpreter berechneten Wertbelegungen von Symbolen, die
 insbesondere in der auszuwertenden Annotation vorkommen können. Den
 Programmzustand kann die Beweiserschnittstelle nicht selbst
-feststellen, also auch nicht mehr zu einem früheren zurückkehren oder
-zu einem späteren übergehen und andere Annotationen auswerten. Deshalb
-werden in den Voraussetzungen auch die zuvor zu \texttt{true}
-ausgewertete Annotationen enthalten sein.%
+feststellen.
 
 \subsection{Formelerstellung}%
 

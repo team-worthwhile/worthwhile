@@ -178,9 +178,6 @@
     <packageImport xmi:id="_TKT2pCAfEeGXqsUcua6Xfg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Component" xmi:id="_iUdFkCAfEeGXqsUcua6Xfg" name="Interpreter"/>
-    <packagedElement xmi:type="uml:Component" xmi:id="_jDmqkCAfEeGXqsUcua6Xfg" name="Beweiserschnittstelle"/>
-    <packagedElement xmi:type="uml:Component" xmi:id="_kC1S8CAfEeGXqsUcua6Xfg" name="Beweiser"/>
     <packagedElement xmi:type="uml:Package" xmi:id="_nObsQCAfEeGXqsUcua6Xfg" name="GUI">
       <eAnnotations xmi:id="_nOc6YCAfEeGXqsUcua6Xfg" source="uml2.diagrams"/>
       <packagedElement xmi:type="uml:Component" xmi:id="_lxsBcCAfEeGXqsUcua6Xfg" name="Debugger"/>

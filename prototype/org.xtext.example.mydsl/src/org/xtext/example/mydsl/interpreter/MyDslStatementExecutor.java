@@ -5,7 +5,7 @@ import org.xtext.example.mydsl.myDsl.Assignment;
 import org.xtext.example.mydsl.myDsl.Block;
 import org.xtext.example.mydsl.myDsl.Expression;
 import org.xtext.example.mydsl.myDsl.IfStatement;
-import org.xtext.example.mydsl.myDsl.Variable;
+import org.xtext.example.mydsl.myDsl.VariableDeclaration;
 import org.xtext.example.mydsl.myDsl.WhileStatement;
 
 import de.itemis.interpreter.ExecutionContext;
@@ -34,14 +34,14 @@ public class MyDslStatementExecutor extends AbstractMyDslStatementExecutor {
 	}
 	
 	@Override
-	protected void executeVariable( Variable s, LogEntry log )  throws InterpreterException {
+	protected void executeVariableDeclaration( VariableDeclaration s, LogEntry log )  throws InterpreterException {
 		// Variables are indexed by name
 		ctx.environment.put(s.getName(), ctx.getEvaluator().eval(s.getInitialValue(), log));
 	}
 	
 	@Override
 	protected void executeAssignment( Assignment s, LogEntry log )  throws InterpreterException {
-		ctx.environment.put(s.getVariable().getName(), ctx.getEvaluator().eval(s.getValue(), log));
+		ctx.environment.put(s.getVariable().getVariable().getName(), ctx.getEvaluator().eval(s.getValue(), log));
 	}
 	
 	@Override

@@ -5,6 +5,10 @@ import org.eclipse.xtext.validation.Check;
 import org.xtext.example.mydsl.myDsl.Function;
 import org.xtext.example.mydsl.myDsl.ReturnStatement;
 
+import com.google.inject.Inject;
+
+import de.itemis.xtext.typesystem.ITypesystem;
+
 public class MyDslJavaValidator extends AbstractMyDslJavaValidator {
 
 //	@Check
@@ -30,6 +34,14 @@ public class MyDslJavaValidator extends AbstractMyDslJavaValidator {
 		if (obj == null) {
 			error("You can only use a return statement within a function body.", null);
 		}
+	}
+	
+	@Inject
+	private ITypesystem ts;
+	
+	@Check
+	public void checkTypesystemRules( EObject x ) {
+	  ts.checkTypesystemConstraints(x, this);
 	}
 
 }

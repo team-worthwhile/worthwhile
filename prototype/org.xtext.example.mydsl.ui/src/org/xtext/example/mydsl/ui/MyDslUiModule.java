@@ -5,7 +5,7 @@ package org.xtext.example.mydsl.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
-import org.xtext.example.mydsl.typesystem.ExprTypesystem;
+import org.xtext.example.mydsl.typesystem.MyDslTypesystem;
 import org.xtext.example.mydsl.ui.autoedit.MyDslAutoEditStrategyProvider;
 
 import de.itemis.xtext.typesystem.ITypesystem;
@@ -19,7 +19,7 @@ public class MyDslUiModule extends org.xtext.example.mydsl.ui.AbstractMyDslUiMod
 	}
 	
 	public Class<? extends ITypesystem> bindITypesystem() {
-	    return ExprTypesystem.class;
+	    return MyDslTypesystem.class;
 	  }
 	
 	public Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {

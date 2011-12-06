@@ -57,7 +57,7 @@ public class MyDslEvaluator extends AbstractMyDslExpressionEvaluator {
 	@Override
 	protected Object evalVariableRef( VariableRef expr, LogEntry log )  throws InterpreterException {
 		// return the value stored in the context under this name
-		return ctx.environment.get(expr.getSymbol().getName());
+		return ctx.environment.get(expr.getVariable().getName());
 	} 
 
 	@Override

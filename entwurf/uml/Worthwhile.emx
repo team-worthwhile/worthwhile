@@ -984,17 +984,17 @@
             </defaultValue>
           </ownedAttribute>
           <ownedOperation xmi:id="_B9WwgCAhEeGXqsUcua6Xfg" name="checkFormula" visibility="private">
-            <ownedParameter xmi:id="_Fe3vcCAhEeGXqsUcua6Xfg" name="return" type="_8XzdQCAgEeGXqsUcua6Xfg" direction="return"/>
+            <ownedParameter xmi:id="_Fe3vcCAhEeGXqsUcua6Xfg" name="satisfiable" type="_8XzdQCAgEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_It86kCAhEeGXqsUcua6Xfg" name="formula" type="_8XzdQCAgEeGXqsUcua6Xfg"/>
           </ownedOperation>
           <ownedOperation xmi:id="_7WPY8CAoEeGHwObOJpuHDA" name="generateFormula" visibility="private"/>
           <ownedOperation xmi:id="_uzCbQCAhEeGXqsUcua6Xfg" name="checkAnnotation">
-            <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="return" direction="return">
+            <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation xmi:id="_r7KPMCAhEeGXqsUcua6Xfg" name="checkProgram">
-            <ownedParameter xmi:id="_7ETYkCAhEeGXqsUcua6Xfg" name="return" direction="return">
+            <ownedParameter xmi:id="_7ETYkCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
           </ownedOperation>

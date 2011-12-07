@@ -1777,7 +1777,77 @@
           </ownedAttribute>
           <ownedAttribute xmi:id="_NuNS8CAiEeGXqsUcua6Xfg" name="model" visibility="private"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_jRMTQCAiEeGXqsUcua6Xfg" name="Formula" isAbstract="true"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_jRMTQCAiEeGXqsUcua6Xfg" name="Formula" isAbstract="true">
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_s-RWYCA_EeGZU5xff2MlPA" name="FormulaAtom" isAbstract="true">
+            <generalization xmi:id="_wK0x8CA_EeGZU5xff2MlPA" general="_V-q8MCBBEeGZU5xff2MlPA"/>
+            <generalization xmi:id="_0W2bkCBBEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
+            <generalization xmi:id="_BdDx8CBEEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_GzDbsCBDEeGZU5xff2MlPA" name="FormulaBinaryFunction" isAbstract="true">
+            <generalization xmi:id="_kW4QgCBEEeGZU5xff2MlPA" general="_fGnQwCBEEeGZU5xff2MlPA"/>
+            <generalization xmi:id="_cBWeECBGEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
+            <ownedAttribute xmi:id="_bkcnACBDEeGZU5xff2MlPA" name="operands" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_bkb_8CBDEeGZU5xff2MlPA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bkdOESBDEeGZU5xff2MlPA" value="2"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bkdOECBDEeGZU5xff2MlPA" value="2"/>
+            </ownedAttribute>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_c91J4CBFEeGZU5xff2MlPA" name="FormulaBinaryPredicate" isAbstract="true">
+            <generalization xmi:id="_242hcCBFEeGZU5xff2MlPA" general="_s-RWYCA_EeGZU5xff2MlPA"/>
+            <ownedAttribute xmi:id="_xKf3gCBFEeGZU5xff2MlPA" name="operands" visibility="private" type="_fGnQwCBEEeGZU5xff2MlPA" association="_xKepYCBFEeGZU5xff2MlPA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xKf3giBFEeGZU5xff2MlPA" value="2"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xKf3gSBFEeGZU5xff2MlPA" value="2"/>
+            </ownedAttribute>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_3u41wCA-EeGZU5xff2MlPA" name="FormulaConjunction">
+            <generalization xmi:id="_Z_XfkCBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_5GPqQCA-EeGZU5xff2MlPA" name="FormulaDisjunction">
+            <generalization xmi:id="_Yq3KwCBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_hpHNQCBFEeGZU5xff2MlPA" name="FormulaEqual">
+            <generalization xmi:id="_q613UCBFEeGZU5xff2MlPA" general="_c91J4CBFEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_23abMCA-EeGZU5xff2MlPA" name="FormulaExists">
+            <generalization xmi:id="_SnR0gCA_EeGZU5xff2MlPA" general="_99epgCA_EeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_0UJ0QCA-EeGZU5xff2MlPA" name="FormulaForall">
+            <generalization xmi:id="_Q2E8oCA_EeGZU5xff2MlPA" general="_99epgCA_EeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_h5OF0CBFEeGZU5xff2MlPA" name="FormulaGreater">
+            <generalization xmi:id="_rfOWwCBFEeGZU5xff2MlPA" general="_c91J4CBFEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_61jrwCA-EeGZU5xff2MlPA" name="FormulaImplication">
+            <generalization xmi:id="_ZSaS8CBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_hW6C8CBFEeGZU5xff2MlPA" name="FormulaLess">
+            <generalization xmi:id="_qakb0CBFEeGZU5xff2MlPA" general="_c91J4CBFEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_V-q8MCBBEeGZU5xff2MlPA" name="FormulaLiteral" isAbstract="true"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_56CesCA-EeGZU5xff2MlPA" name="FormulaNegation">
+            <generalization xmi:id="_R-jAkCA_EeGZU5xff2MlPA" general="_V-q8MCBBEeGZU5xff2MlPA"/>
+            <ownedAttribute xmi:id="_jMrOkCBBEeGZU5xff2MlPA" name="formulaAtom" visibility="private" type="_s-RWYCA_EeGZU5xff2MlPA" association="_jMpZYCBBEeGZU5xff2MlPA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jMr1oSBBEeGZU5xff2MlPA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jMr1oCBBEeGZU5xff2MlPA" value="1"/>
+            </ownedAttribute>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_99epgCA_EeGZU5xff2MlPA" name="FormulaQuantifier" isAbstract="true">
+            <generalization xmi:id="_QV3uYCBGEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
+            <ownedAttribute xmi:id="_FNJVMCBAEeGZU5xff2MlPA" name="formulaASTNode" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_FNIuICBAEeGZU5xff2MlPA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FNKjUCBAEeGZU5xff2MlPA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FNJ8QCBAEeGZU5xff2MlPA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Ej21sCBCEeGZU5xff2MlPA" name="formulaVariable" visibility="private" type="_kErqECBAEeGZU5xff2MlPA" association="_Ej1AgCBCEeGZU5xff2MlPA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ej4D0CBCEeGZU5xff2MlPA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ej3cwCBCEeGZU5xff2MlPA" value="1"/>
+            </ownedAttribute>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_fGnQwCBEEeGZU5xff2MlPA" name="FormulaTerm" isAbstract="true"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_kErqECBAEeGZU5xff2MlPA" name="FormulaVariable">
+            <generalization xmi:id="_pJNT4CBAEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
+            <generalization xmi:id="_AMSGkCBEEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
+            <generalization xmi:id="_l0670CBEEeGZU5xff2MlPA" general="_fGnQwCBEEeGZU5xff2MlPA"/>
+          </nestedClassifier>
+        </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_CNev0CAkEeGXqsUcua6Xfg" name="WPStrategy" clientDependency="_tc2kECAkEeGXqsUcua6Xfg">
           <interfaceRealization xmi:id="_tc2kECAkEeGXqsUcua6Xfg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_CNev0CAkEeGXqsUcua6Xfg" contract="_obF6YCAkEeGXqsUcua6Xfg"/>
         </packagedElement>
@@ -1865,56 +1935,12 @@
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_d6SjMCAmEeGXqsUcua6Xfg" name="Prover"/>
-        <packagedElement xmi:type="uml:Class" xmi:id="_0UJ0QCA-EeGZU5xff2MlPA" name="FormulaForall">
-          <generalization xmi:id="_Q2E8oCA_EeGZU5xff2MlPA" general="_99epgCA_EeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_23abMCA-EeGZU5xff2MlPA" name="FormulaExists">
-          <generalization xmi:id="_SnR0gCA_EeGZU5xff2MlPA" general="_99epgCA_EeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_3u41wCA-EeGZU5xff2MlPA" name="FormulaConjunction">
-          <generalization xmi:id="_Z_XfkCBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_5GPqQCA-EeGZU5xff2MlPA" name="FormulaDisjunction">
-          <generalization xmi:id="_Yq3KwCBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_56CesCA-EeGZU5xff2MlPA" name="FormulaNegation">
-          <generalization xmi:id="_R-jAkCA_EeGZU5xff2MlPA" general="_V-q8MCBBEeGZU5xff2MlPA"/>
-          <ownedAttribute xmi:id="_jMrOkCBBEeGZU5xff2MlPA" name="formulaAtom" visibility="private" type="_s-RWYCA_EeGZU5xff2MlPA" association="_jMpZYCBBEeGZU5xff2MlPA">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jMr1oSBBEeGZU5xff2MlPA" value="1"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_jMr1oCBBEeGZU5xff2MlPA" value="1"/>
-          </ownedAttribute>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_61jrwCA-EeGZU5xff2MlPA" name="FormulaImplication">
-          <generalization xmi:id="_ZSaS8CBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_s-RWYCA_EeGZU5xff2MlPA" name="FormulaAtom" isAbstract="true">
-          <generalization xmi:id="_wK0x8CA_EeGZU5xff2MlPA" general="_V-q8MCBBEeGZU5xff2MlPA"/>
-          <generalization xmi:id="_0W2bkCBBEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <generalization xmi:id="_BdDx8CBEEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_99epgCA_EeGZU5xff2MlPA" name="FormulaQuantifier" isAbstract="true">
-          <generalization xmi:id="_QV3uYCBGEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <ownedAttribute xmi:id="_FNJVMCBAEeGZU5xff2MlPA" name="formulaASTNode" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_FNIuICBAEeGZU5xff2MlPA">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FNKjUCBAEeGZU5xff2MlPA" value="1"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FNJ8QCBAEeGZU5xff2MlPA" value="1"/>
-          </ownedAttribute>
-          <ownedAttribute xmi:id="_Ej21sCBCEeGZU5xff2MlPA" name="formulaVariable" visibility="private" type="_kErqECBAEeGZU5xff2MlPA" association="_Ej1AgCBCEeGZU5xff2MlPA">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Ej4D0CBCEeGZU5xff2MlPA" value="1"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ej3cwCBCEeGZU5xff2MlPA" value="1"/>
-          </ownedAttribute>
-        </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="_FNIuICBAEeGZU5xff2MlPA" memberEnd="_FNJVMCBAEeGZU5xff2MlPA _FNLxcCBAEeGZU5xff2MlPA">
           <ownedEnd xmi:id="_FNLxcCBAEeGZU5xff2MlPA" name="" visibility="private" type="_99epgCA_EeGZU5xff2MlPA" association="_FNIuICBAEeGZU5xff2MlPA">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FNMYgCBAEeGZU5xff2MlPA" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FNLxcSBAEeGZU5xff2MlPA"/>
           </ownedEnd>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_kErqECBAEeGZU5xff2MlPA" name="FormulaVariable">
-          <generalization xmi:id="_pJNT4CBAEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <generalization xmi:id="_AMSGkCBEEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <generalization xmi:id="_l0670CBEEeGZU5xff2MlPA" general="_fGnQwCBEEeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_V-q8MCBBEeGZU5xff2MlPA" name="FormulaLiteral" isAbstract="true"/>
         <packagedElement xmi:type="uml:Association" xmi:id="_jMpZYCBBEeGZU5xff2MlPA" memberEnd="_jMrOkCBBEeGZU5xff2MlPA _jMtDwCBBEeGZU5xff2MlPA">
           <ownedEnd xmi:id="_jMtDwCBBEeGZU5xff2MlPA" name="" visibility="private" type="_56CesCA-EeGZU5xff2MlPA" association="_jMpZYCBBEeGZU5xff2MlPA">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_jMtq0SBBEeGZU5xff2MlPA" value="*"/>
@@ -1927,36 +1953,11 @@
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ej55ACBCEeGZU5xff2MlPA"/>
           </ownedEnd>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_GzDbsCBDEeGZU5xff2MlPA" name="FormulaBinaryFunction" isAbstract="true">
-          <generalization xmi:id="_kW4QgCBEEeGZU5xff2MlPA" general="_fGnQwCBEEeGZU5xff2MlPA"/>
-          <generalization xmi:id="_cBWeECBGEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <ownedAttribute xmi:id="_bkcnACBDEeGZU5xff2MlPA" name="operands" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_bkb_8CBDEeGZU5xff2MlPA">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bkdOESBDEeGZU5xff2MlPA" value="2"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bkdOECBDEeGZU5xff2MlPA" value="2"/>
-          </ownedAttribute>
-        </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="_bkb_8CBDEeGZU5xff2MlPA" name="operands" memberEnd="_bkcnACBDEeGZU5xff2MlPA _bkd1ICBDEeGZU5xff2MlPA">
           <ownedEnd xmi:id="_bkd1ICBDEeGZU5xff2MlPA" name="" visibility="private" type="_GzDbsCBDEeGZU5xff2MlPA" association="_bkb_8CBDEeGZU5xff2MlPA">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bkecMCBDEeGZU5xff2MlPA" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bkd1ISBDEeGZU5xff2MlPA"/>
           </ownedEnd>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_fGnQwCBEEeGZU5xff2MlPA" name="FormulaTerm" isAbstract="true"/>
-        <packagedElement xmi:type="uml:Class" xmi:id="_c91J4CBFEeGZU5xff2MlPA" name="FormulaBinaryPredicate" isAbstract="true">
-          <generalization xmi:id="_242hcCBFEeGZU5xff2MlPA" general="_s-RWYCA_EeGZU5xff2MlPA"/>
-          <ownedAttribute xmi:id="_xKf3gCBFEeGZU5xff2MlPA" name="operands" visibility="private" type="_fGnQwCBEEeGZU5xff2MlPA" association="_xKepYCBFEeGZU5xff2MlPA">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xKf3giBFEeGZU5xff2MlPA" value="2"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xKf3gSBFEeGZU5xff2MlPA" value="2"/>
-          </ownedAttribute>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_hW6C8CBFEeGZU5xff2MlPA" name="FormulaLess">
-          <generalization xmi:id="_qakb0CBFEeGZU5xff2MlPA" general="_c91J4CBFEeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_hpHNQCBFEeGZU5xff2MlPA" name="FormulaEqual">
-          <generalization xmi:id="_q613UCBFEeGZU5xff2MlPA" general="_c91J4CBFEeGZU5xff2MlPA"/>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_h5OF0CBFEeGZU5xff2MlPA" name="FormulaGreater">
-          <generalization xmi:id="_rfOWwCBFEeGZU5xff2MlPA" general="_c91J4CBFEeGZU5xff2MlPA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Association" xmi:id="_xKepYCBFEeGZU5xff2MlPA" memberEnd="_xKf3gCBFEeGZU5xff2MlPA _xKhFoCBFEeGZU5xff2MlPA">
           <ownedEnd xmi:id="_xKhFoCBFEeGZU5xff2MlPA" name="" visibility="private" type="_c91J4CBFEeGZU5xff2MlPA" association="_xKepYCBFEeGZU5xff2MlPA">

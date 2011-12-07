@@ -1786,7 +1786,7 @@
           <nestedClassifier xmi:type="uml:Class" xmi:id="_GzDbsCBDEeGZU5xff2MlPA" name="FormulaBinaryFunction" isAbstract="true">
             <generalization xmi:id="_kW4QgCBEEeGZU5xff2MlPA" general="_fGnQwCBEEeGZU5xff2MlPA"/>
             <generalization xmi:id="_cBWeECBGEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-            <ownedAttribute xmi:id="_bkcnACBDEeGZU5xff2MlPA" name="operands" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_bkb_8CBDEeGZU5xff2MlPA">
+            <ownedAttribute xmi:id="_bkcnACBDEeGZU5xff2MlPA" name="operand" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_bkb_8CBDEeGZU5xff2MlPA">
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bkdOESBDEeGZU5xff2MlPA" value="2"/>
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bkdOECBDEeGZU5xff2MlPA" value="2"/>
             </ownedAttribute>
@@ -1832,7 +1832,7 @@
           </nestedClassifier>
           <nestedClassifier xmi:type="uml:Class" xmi:id="_99epgCA_EeGZU5xff2MlPA" name="FormulaQuantifier" isAbstract="true">
             <generalization xmi:id="_QV3uYCBGEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-            <ownedAttribute xmi:id="_FNJVMCBAEeGZU5xff2MlPA" name="formulaASTNode" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_FNIuICBAEeGZU5xff2MlPA">
+            <ownedAttribute xmi:id="_FNJVMCBAEeGZU5xff2MlPA" name="formula" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" association="_FNIuICBAEeGZU5xff2MlPA">
               <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FNKjUCBAEeGZU5xff2MlPA" value="1"/>
               <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FNJ8QCBAEeGZU5xff2MlPA" value="1"/>
             </ownedAttribute>
@@ -1953,7 +1953,7 @@
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Ej55ACBCEeGZU5xff2MlPA"/>
           </ownedEnd>
         </packagedElement>
-        <packagedElement xmi:type="uml:Association" xmi:id="_bkb_8CBDEeGZU5xff2MlPA" name="operands" memberEnd="_bkcnACBDEeGZU5xff2MlPA _bkd1ICBDEeGZU5xff2MlPA">
+        <packagedElement xmi:type="uml:Association" xmi:id="_bkb_8CBDEeGZU5xff2MlPA" name="" memberEnd="_bkcnACBDEeGZU5xff2MlPA _bkd1ICBDEeGZU5xff2MlPA">
           <ownedEnd xmi:id="_bkd1ICBDEeGZU5xff2MlPA" name="" visibility="private" type="_GzDbsCBDEeGZU5xff2MlPA" association="_bkb_8CBDEeGZU5xff2MlPA">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bkecMCBDEeGZU5xff2MlPA" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bkd1ISBDEeGZU5xff2MlPA"/>

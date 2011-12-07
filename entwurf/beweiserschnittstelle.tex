@@ -113,6 +113,15 @@ nicht die Deklarationsgröße übersteigt, vorangestellt.%
     \item[A3] \begin{math}\forall a, b \in \mathbb{B}^\mathbb{A} : (\forall i, j \in \mathbb{A} : a[i] = b[j]) \Rightarrow a = b\end{math}%
 \end{description}%
 
+\subsubsection{Division}%
+
+Ausdrücken, die eine Division durchführen, wird implizit die Zusicherung
+vorangestellt, dass der Dividend ungleich Null ist. Damit wird erreicht, dass
+die Möglichkeit eines Programmdurchlaufs, der eine Division durch Null enthält,
+auch bei der Prüfung der Spezifikation erkannt und das spezifizierte Programm
+nicht als korrekt eingestuft wird, obwohl nicht alle Programmaufrufe mit
+definiertem Ergebnis terminieren.%
+
 \subsection{Voraussetzungen für einzelne Annotationen}%
 
 % TODO Datentyp für Programmzustand und ausgewertete Annotationen

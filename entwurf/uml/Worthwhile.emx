@@ -1881,10 +1881,6 @@
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator">
-          <ownedOperation xmi:id="_vTTIUCAkEeGXqsUcua6Xfg" name="transformWhile">
-            <ownedParameter xmi:id="_-nGngCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ix0vECD_EeGxG4RbAt-9lQ" name="statement"/>
-          </ownedOperation>
           <ownedOperation xmi:id="_w3WVACAkEeGXqsUcua6Xfg" name="transformConditional">
             <ownedParameter xmi:id="_-m-EoCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxvPgCD_EeGxG4RbAt-9lQ" name="statement" type="_ZyQp4CECEeGxG4RbAt-9lQ"/>
@@ -1932,6 +1928,10 @@
           <ownedOperation xmi:id="_qHYgQCAoEeGHwObOJpuHDA" name="transformRequires">
             <ownedParameter xmi:id="_-nEyUCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ixzg8CD_EeGxG4RbAt-9lQ" name="statement" type="_rGntoCECEeGxG4RbAt-9lQ"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_rW-9gCEFEeGxG4RbAt-9lQ" name="transformInvariant">
+            <ownedParameter xmi:id="_tZFYICEFEeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
+            <ownedParameter xmi:id="_tZFYISEFEeGxG4RbAt-9lQ" name="statement" type="_Df0bMCEFEeGxG4RbAt-9lQ"/>
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_d6SjMCAmEeGXqsUcua6Xfg" name="Prover"/>

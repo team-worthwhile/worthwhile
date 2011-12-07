@@ -2,7 +2,7 @@
 <!--xtools2_universal_type_manager-->
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.uml.msl.model" version="7.0.0"><feature description="" name="com.ibm.xtools.ruml.feature" url="" version="7.0.0"/></signature>?>
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.mmi.ui.signatures.diagram" version="7.0.0"><feature description="" name="Rational Modeling Platform (com.ibm.xtools.rmp)" url="" version="7.0.0"/></signature>?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:XSDProfile="http:///schemas/XSDProfile/100" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.2/Umlnotation" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Standard/1 pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w http:///schemas/XSDProfile/100 pathmap://XSD_PROFILES/XSDProfile.epx#_vvGR0PDPEdq5wKwOrH0SmA?XSDProfile/XSDProfile?">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Standard="http://www.eclipse.org/uml2/schemas/Standard/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.1/notation" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.2/Umlnotation" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Standard/1 pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w">
   <uml:Package xmi:id="_TKT2oCAfEeGXqsUcua6Xfg" name="Worthwhile">
     <eAnnotations xmi:id="_TKT2oSAfEeGXqsUcua6Xfg" source="uml2.diagrams">
       <contents xmi:type="notation:Diagram" xmi:id="_bPDJICAfEeGXqsUcua6Xfg" type="Component" name="Worthwhile">
@@ -1743,11 +1743,13 @@
             </defaultValue>
           </ownedAttribute>
           <ownedOperation xmi:id="_B9WwgCAhEeGXqsUcua6Xfg" name="checkFormula" visibility="private">
-            <ownedParameter xmi:id="_Fe3vcCAhEeGXqsUcua6Xfg" name="satisfiable" type="_8XzdQCAgEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_It86kCAhEeGXqsUcua6Xfg" name="formula" type="_8XzdQCAgEeGXqsUcua6Xfg"/>
+            <ownedParameter xmi:id="_Fe3vcCAhEeGXqsUcua6Xfg" name="satisfiable" direction="return">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+            </ownedParameter>
+            <ownedParameter xmi:id="_It86kCAhEeGXqsUcua6Xfg" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg"/>
           </ownedOperation>
           <ownedOperation xmi:id="_7WPY8CAoEeGHwObOJpuHDA" name="generateFormula" visibility="private">
-            <ownedParameter xmi:id="_3KTpYCA7EeGZU5xff2MlPA" name="formula" type="_8XzdQCAgEeGXqsUcua6Xfg" direction="return"/>
+            <ownedParameter xmi:id="_3KTpYCA7EeGZU5xff2MlPA" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_79lyMCA7EeGZU5xff2MlPA" name="specification"/>
           </ownedOperation>
           <ownedOperation xmi:id="_uzCbQCAhEeGXqsUcua6Xfg" name="checkAnnotation">
@@ -1769,27 +1771,13 @@
             </ownedParameter>
           </ownedOperation>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_8XzdQCAgEeGXqsUcua6Xfg" name="FormulaAST">
-          <generalization xmi:id="_GhWOMCAjEeGXqsUcua6Xfg" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <generalization xmi:id="_E-e-MCAsEeGHwObOJpuHDA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
-          <ownedAttribute xmi:id="_KmyZkCAjEeGXqsUcua6Xfg" name="sMTLIBASTNode" visibility="private" type="_jRMTQCAiEeGXqsUcua6Xfg" aggregation="shared" association="_KmthECAjEeGXqsUcua6Xfg">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KmznsSAjEeGXqsUcua6Xfg" value="*"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KmznsCAjEeGXqsUcua6Xfg"/>
-          </ownedAttribute>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_CjqGECAiEeGXqsUcua6Xfg" name="ProverResult" clientDependency="_h8X_8CAjEeGXqsUcua6Xfg">
+        <packagedElement xmi:type="uml:Class" xmi:id="_CjqGECAiEeGXqsUcua6Xfg" name="ProverResult">
           <ownedAttribute xmi:id="_HIuMsCAiEeGXqsUcua6Xfg" name="satisfiable" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedAttribute>
-          <ownedAttribute xmi:id="_NuNS8CAiEeGXqsUcua6Xfg" name="model" visibility="private" type="_8XzdQCAgEeGXqsUcua6Xfg"/>
+          <ownedAttribute xmi:id="_NuNS8CAiEeGXqsUcua6Xfg" name="model" visibility="private"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:Class" xmi:id="_jRMTQCAiEeGXqsUcua6Xfg" name="Formula" isAbstract="true">
-          <ownedAttribute xmi:id="_Km010CAjEeGXqsUcua6Xfg" name="sMTLIBAST" visibility="private" type="_8XzdQCAgEeGXqsUcua6Xfg" association="_KmthECAjEeGXqsUcua6Xfg">
-            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Km1c4SAjEeGXqsUcua6Xfg" value="1"/>
-            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Km1c4CAjEeGXqsUcua6Xfg" value="1"/>
-          </ownedAttribute>
-        </packagedElement>
-        <packagedElement xmi:type="uml:Association" xmi:id="_KmthECAjEeGXqsUcua6Xfg" name="children" memberEnd="_KmyZkCAjEeGXqsUcua6Xfg _Km010CAjEeGXqsUcua6Xfg"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_jRMTQCAiEeGXqsUcua6Xfg" name="Formula" isAbstract="true"/>
         <packagedElement xmi:type="uml:Class" xmi:id="_CNev0CAkEeGXqsUcua6Xfg" name="WPStrategy" clientDependency="_tc2kECAkEeGXqsUcua6Xfg">
           <interfaceRealization xmi:id="_tc2kECAkEeGXqsUcua6Xfg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_CNev0CAkEeGXqsUcua6Xfg" contract="_obF6YCAkEeGXqsUcua6Xfg"/>
         </packagedElement>
@@ -1827,11 +1815,9 @@
           <generalization xmi:id="_SnR0gCA_EeGZU5xff2MlPA" general="_99epgCA_EeGZU5xff2MlPA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_3u41wCA-EeGZU5xff2MlPA" name="FormulaConjunction">
-          <generalization xmi:id="_RYwL4CA_EeGZU5xff2MlPA" general="_8XzdQCAgEeGXqsUcua6Xfg"/>
           <generalization xmi:id="_Z_XfkCBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_5GPqQCA-EeGZU5xff2MlPA" name="FormulaDisjunction">
-          <generalization xmi:id="_TNguECA_EeGZU5xff2MlPA" general="_8XzdQCAgEeGXqsUcua6Xfg"/>
           <generalization xmi:id="_Yq3KwCBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_56CesCA-EeGZU5xff2MlPA" name="FormulaNegation">
@@ -1842,7 +1828,6 @@
           </ownedAttribute>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_61jrwCA-EeGZU5xff2MlPA" name="FormulaImplication">
-          <generalization xmi:id="_T0_k0CA_EeGZU5xff2MlPA" general="_8XzdQCAgEeGXqsUcua6Xfg"/>
           <generalization xmi:id="_ZSaS8CBDEeGZU5xff2MlPA" general="_GzDbsCBDEeGZU5xff2MlPA"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_s-RWYCA_EeGZU5xff2MlPA" name="FormulaAtom" isAbstract="true">
@@ -1925,7 +1910,6 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_IuVKgCAgEeGXqsUcua6Xfg" name="Theorem Prover"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_dIKqECAjEeGXqsUcua6Xfg" supplier="_CjqGECAiEeGXqsUcua6Xfg" client="_rHP7cCAgEeGXqsUcua6Xfg"/>
-      <packagedElement xmi:type="uml:Usage" xmi:id="_h8X_8CAjEeGXqsUcua6Xfg" supplier="_8XzdQCAgEeGXqsUcua6Xfg" client="_CjqGECAiEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_tYFG4CAmEeGXqsUcua6Xfg" supplier="_IuVKgCAgEeGXqsUcua6Xfg" client="_KrLRsCAgEeGXqsUcua6Xfg"/>
     </packagedElement>
     <profileApplication xmi:id="_TKT2pSAfEeGXqsUcua6Xfg">
@@ -1953,7 +1937,5 @@
       <appliedProfile href="pathmap://XSD_PROFILES/XSDProfile.epx#_w1-ykSkOEdmj4ajjgbmSxQ?XSDProfile?"/>
     </profileApplication>
   </uml:Package>
-  <XSDProfile:restriction xmi:id="_GhZRgCAjEeGXqsUcua6Xfg" base_Generalization="_GhWOMCAjEeGXqsUcua6Xfg"/>
   <Standard:Instantiate xmi:id="_dIPikCAjEeGXqsUcua6Xfg" base_Usage="_dIKqECAjEeGXqsUcua6Xfg"/>
-  <Standard:Instantiate xmi:id="_h8bqUCAjEeGXqsUcua6Xfg" base_Usage="_h8X_8CAjEeGXqsUcua6Xfg"/>
 </xmi:XMI>

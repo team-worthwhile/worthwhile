@@ -1785,12 +1785,30 @@
           <interfaceRealization xmi:id="_j7uzICAkEeGXqsUcua6Xfg" supplier="_eyu5ACAkEeGXqsUcua6Xfg" client="_Et2a0CAkEeGXqsUcua6Xfg" contract="_eyu5ACAkEeGXqsUcua6Xfg"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_eyu5ACAkEeGXqsUcua6Xfg" name="FormulaCompiler">
-          <ownedOperation xmi:id="_NZYnkCAkEeGXqsUcua6Xfg" name="generateForall"/>
-          <ownedOperation xmi:id="_O6i4UCAkEeGXqsUcua6Xfg" name="generateExists"/>
-          <ownedOperation xmi:id="_ZmwjYCAkEeGXqsUcua6Xfg" name="generateAnd"/>
-          <ownedOperation xmi:id="_ab734CAkEeGXqsUcua6Xfg" name="generateOr"/>
-          <ownedOperation xmi:id="_XqIpMCAlEeGXqsUcua6Xfg" name="generateNegation"/>
-          <ownedOperation xmi:id="_PxjY0CAkEeGXqsUcua6Xfg" name="generateImplies"/>
+          <ownedOperation xmi:id="_NZYnkCAkEeGXqsUcua6Xfg" name="generateForall">
+            <ownedParameter xmi:id="_TYxDICEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
+            <ownedParameter xmi:id="_c261ECD_EeGxG4RbAt-9lQ" name="formula" type="_0UJ0QCA-EeGZU5xff2MlPA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_O6i4UCAkEeGXqsUcua6Xfg" name="generateExists">
+            <ownedParameter xmi:id="_TYum4CEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
+            <ownedParameter xmi:id="_c24Y0CD_EeGxG4RbAt-9lQ" name="formula" type="_23abMCA-EeGZU5xff2MlPA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_ZmwjYCAkEeGXqsUcua6Xfg" name="generateConjunction">
+            <ownedParameter xmi:id="_RdBvMCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
+            <ownedParameter xmi:id="_Wu01cCD_EeGxG4RbAt-9lQ" name="formula" type="_3u41wCA-EeGZU5xff2MlPA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_ab734CAkEeGXqsUcua6Xfg" name="generateDisjunction">
+            <ownedParameter xmi:id="_TYsxsCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
+            <ownedParameter xmi:id="_c2_tkCD_EeGxG4RbAt-9lQ" name="formula" type="_5GPqQCA-EeGZU5xff2MlPA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_XqIpMCAlEeGXqsUcua6Xfg" name="generateNegation">
+            <ownedParameter xmi:id="_TYy4UCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
+            <ownedParameter xmi:id="_c2-fcCD_EeGxG4RbAt-9lQ" name="formula" type="_56CesCA-EeGZU5xff2MlPA"/>
+          </ownedOperation>
+          <ownedOperation xmi:id="_PxjY0CAkEeGXqsUcua6Xfg" name="generateImplication">
+            <ownedParameter xmi:id="_TYxqMCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
+            <ownedParameter xmi:id="_c28qQCD_EeGxG4RbAt-9lQ" name="formula" type="_61jrwCA-EeGZU5xff2MlPA"/>
+          </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator">
           <ownedOperation xmi:id="_vTTIUCAkEeGXqsUcua6Xfg" name="transformWhile">

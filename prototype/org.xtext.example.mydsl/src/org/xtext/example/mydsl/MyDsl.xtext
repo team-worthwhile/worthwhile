@@ -22,7 +22,7 @@ terminal SL_COMMENT :
 	'//' !('\n'|'\r')*
 ;
 
-terminal NUMBER returns ecore::EBigDecimal:
+terminal NUMBER returns ecore::EBigInteger:
  	('0'..'9')* ('.' ('0'..'9')+)?
  ;
  

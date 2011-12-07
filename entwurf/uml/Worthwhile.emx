@@ -1855,81 +1855,81 @@
           <interfaceRealization xmi:id="_j7uzICAkEeGXqsUcua6Xfg" supplier="_eyu5ACAkEeGXqsUcua6Xfg" client="_Et2a0CAkEeGXqsUcua6Xfg" contract="_eyu5ACAkEeGXqsUcua6Xfg"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_eyu5ACAkEeGXqsUcua6Xfg" name="FormulaCompiler">
-          <ownedOperation xmi:id="_NZYnkCAkEeGXqsUcua6Xfg" name="generateForall">
+          <ownedOperation xmi:id="_NZYnkCAkEeGXqsUcua6Xfg" name="compile">
             <ownedParameter xmi:id="_TYxDICEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
             <ownedParameter xmi:id="_c261ECD_EeGxG4RbAt-9lQ" name="formula" type="_0UJ0QCA-EeGZU5xff2MlPA"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_O6i4UCAkEeGXqsUcua6Xfg" name="generateExists">
+          <ownedOperation xmi:id="_O6i4UCAkEeGXqsUcua6Xfg" name="compile">
             <ownedParameter xmi:id="_TYum4CEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
             <ownedParameter xmi:id="_c24Y0CD_EeGxG4RbAt-9lQ" name="formula" type="_23abMCA-EeGZU5xff2MlPA"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_ZmwjYCAkEeGXqsUcua6Xfg" name="generateConjunction">
+          <ownedOperation xmi:id="_ZmwjYCAkEeGXqsUcua6Xfg" name="compile">
             <ownedParameter xmi:id="_RdBvMCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
             <ownedParameter xmi:id="_Wu01cCD_EeGxG4RbAt-9lQ" name="formula" type="_3u41wCA-EeGZU5xff2MlPA"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_ab734CAkEeGXqsUcua6Xfg" name="generateDisjunction">
+          <ownedOperation xmi:id="_ab734CAkEeGXqsUcua6Xfg" name="compile">
             <ownedParameter xmi:id="_TYsxsCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
             <ownedParameter xmi:id="_c2_tkCD_EeGxG4RbAt-9lQ" name="formula" type="_5GPqQCA-EeGZU5xff2MlPA"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_XqIpMCAlEeGXqsUcua6Xfg" name="generateNegation">
+          <ownedOperation xmi:id="_XqIpMCAlEeGXqsUcua6Xfg" name="compile">
             <ownedParameter xmi:id="_TYy4UCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
             <ownedParameter xmi:id="_c2-fcCD_EeGxG4RbAt-9lQ" name="formula" type="_56CesCA-EeGZU5xff2MlPA"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_PxjY0CAkEeGXqsUcua6Xfg" name="generateImplication">
+          <ownedOperation xmi:id="_PxjY0CAkEeGXqsUcua6Xfg" name="compile">
             <ownedParameter xmi:id="_TYxqMCEAEeGxG4RbAt-9lQ" name="code" direction="return"/>
             <ownedParameter xmi:id="_c28qQCD_EeGxG4RbAt-9lQ" name="formula" type="_61jrwCA-EeGZU5xff2MlPA"/>
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator">
-          <ownedOperation xmi:id="_w3WVACAkEeGXqsUcua6Xfg" name="transformConditional">
+          <ownedOperation xmi:id="_w3WVACAkEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-m-EoCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxvPgCD_EeGxG4RbAt-9lQ" name="statement" type="_ZyQp4CECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_BZxlgCAlEeGXqsUcua6Xfg" name="transformArrayElementAssignment">
+          <ownedOperation xmi:id="_BZxlgCAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_7sIrMCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ixoh0CD_EeGxG4RbAt-9lQ" name="statement" type="_VkWfACECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_HHR64CAlEeGXqsUcua6Xfg" name="transformAssert">
+          <ownedOperation xmi:id="_HHR64CAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_9rJ8oCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ixq-ECD_EeGxG4RbAt-9lQ" name="statement" type="_XQCkwCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_JO-nMCAlEeGXqsUcua6Xfg" name="transformAssume">
+          <ownedOperation xmi:id="_JO-nMCAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-m5zMCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxszQCD_EeGxG4RbAt-9lQ" name="statement" type="_YraWkCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_hDtnsCAlEeGXqsUcua6Xfg" name="transformVariableAssignment">
+          <ownedOperation xmi:id="_hDtnsCAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-nGAcCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ix0IACD_EeGxG4RbAt-9lQ" name="statement" type="_OiXqACECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_mxaKUCAlEeGXqsUcua6Xfg" name="transformArrayAssignment">
+          <ownedOperation xmi:id="_mxaKUCAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_1_qQkCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ekz8ECD_EeGxG4RbAt-9lQ" name="statement" type="_Tx-icCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_pK5KMCAlEeGXqsUcua6Xfg" name="transformAxiom">
+          <ownedOperation xmi:id="_pK5KMCAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-m8PcCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxuocCD_EeGxG4RbAt-9lQ" name="statement" type="_oEjq0CECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_tkXE0CAlEeGXqsUcua6Xfg" name="transformLoop">
+          <ownedOperation xmi:id="_tkXE0CAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-nELQCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxyS0CD_EeGxG4RbAt-9lQ" name="statement" type="_NSyRcCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_yOhG0CAlEeGXqsUcua6Xfg" name="transformFunctionCall">
+          <ownedOperation xmi:id="_yOhG0CAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-nCWECD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxxEsCD_EeGxG4RbAt-9lQ" name="statement" type="_2JWbQCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_zWT1UCAlEeGXqsUcua6Xfg" name="transformFunctionDefinition">
+          <ownedOperation xmi:id="_zWT1UCAlEeGXqsUcua6Xfg" name="transform">
             <ownedParameter xmi:id="_-nC9ICD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_IxxrwCD_EeGxG4RbAt-9lQ" name="statement" type="_3OUfQCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_n8_sUCAoEeGHwObOJpuHDA" name="transformEnsures">
+          <ownedOperation xmi:id="_n8_sUCAoEeGHwObOJpuHDA" name="transform">
             <ownedParameter xmi:id="_-nAg4CD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ixv2kCD_EeGxG4RbAt-9lQ" name="statement" type="_pnkVsCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_qHYgQCAoEeGHwObOJpuHDA" name="transformRequires">
+          <ownedOperation xmi:id="_qHYgQCAoEeGHwObOJpuHDA" name="transform">
             <ownedParameter xmi:id="_-nEyUCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_Ixzg8CD_EeGxG4RbAt-9lQ" name="statement" type="_rGntoCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_rW-9gCEFEeGxG4RbAt-9lQ" name="transformInvariant">
+          <ownedOperation xmi:id="_rW-9gCEFEeGxG4RbAt-9lQ" name="transform">
             <ownedParameter xmi:id="_tZFYICEFEeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_tZFYISEFEeGxG4RbAt-9lQ" name="statement" type="_Df0bMCEFEeGxG4RbAt-9lQ"/>
           </ownedOperation>

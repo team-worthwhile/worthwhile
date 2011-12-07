@@ -2,19 +2,48 @@ package org.xtext.example.mydsl.typesystem;
 
 import org.eclipse.emf.ecore.EObject;
 import org.xtext.example.mydsl.myDsl.ArrayAccess;
+import org.xtext.example.mydsl.myDsl.ArrayType;
 import org.xtext.example.mydsl.myDsl.Function;
 import org.xtext.example.mydsl.myDsl.ReturnStatement;
+import org.xtext.example.mydsl.myDsl.Type;
 import org.xtext.example.mydsl.typesys.MyDslTypesystemGenerated;
 
+import de.itemis.xtext.typesystem.ITypesystem;
+import de.itemis.xtext.typesystem.checks.CustomTypeChecker;
+import de.itemis.xtext.typesystem.checks.custom.StaticCustomTypeChecker;
+import de.itemis.xtext.typesystem.exceptions.EClassDoesntHaveFeatureException;
+import de.itemis.xtext.typesystem.exceptions.FeatureMustBeSingleValuedException;
+import de.itemis.xtext.typesystem.exceptions.InvalidTypeSpecification;
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 
 
 public class MyDslTypesystem extends MyDslTypesystemGenerated  {
 
 	@Override
+	protected void initialize() {
+		super.initialize();
+		
+		try {
+			ensureFeatureType(p.getFunctionCallActualParameter(), p.getFunctionCallActualParameter_Value(), new FunctionCallActualParameterTypeChecker(null));
+		} catch (FeatureMustBeSingleValuedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EClassDoesntHaveFeatureException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidTypeSpecification e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	protected EObject type(ArrayAccess element, TypeCalculationTrace trace) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayType arrayType = (ArrayType) typeof(element.getExpr(), trace);
+		trace.add(element, "array type is " + typeString(arrayType));
+		Type bt = arrayType.getBaseType();
+		trace.add(element, "base type is is " + typeString(bt));
+		return bt;
 	}
 
 	@Override
@@ -32,41 +61,11 @@ public class MyDslTypesystem extends MyDslTypesystemGenerated  {
 			return null;
 		}
 	}
-
-//	@Override
-//	protected void initialize() {
-//		MyDslPackage lang = MyDslPackage.eINSTANCE;
-//		
-//		try {
-//			// Integer and Boolean literals return -- surprise -- the integer and boolean types, respectively. 
-//			useCloneAsType(lang.getIntType());
-//			useCloneAsType(lang.getBoolType());
-//			
-//			// Variable declarations return the type of the specified variable
-//			useTypeOfFeature(lang.getVariableDeclaration(), lang.getVariable_Type());
-//			
-//			// A variable reference return the type of the variable it references. 
-//			useTypeOfFeature(lang.getVariableRef(), lang.getVariableRef_Symbol());
-//			
-//			// The arithmetic operations need an integer type as parameters.
-//			useFixedType(lang.getPlus(), lang.getIntType());
-//			useFixedType(lang.getMinus(), lang.getIntType());
-//			useFixedType(lang.getMulti(), lang.getIntType());
-//			useFixedType(lang.getDiv(), lang.getIntType());
-//			useFixedType(lang.getModulo(), lang.getIntType());
-//			useFixedType(lang.getUnaryMinusOperator(), lang.getIntType());
-//			useFixedType(lang.getUnaryPlusOperator(), lang.getIntType());
-//			
-//			// The Boolean operators need a boolean type as parameters
-//			useFixedType(lang.getAnd(), lang.getBoolType());
-//			useFixedType(lang.getOr(), lang.getBoolType());
-//			useFixedType(lang.getUnaryNotOperator(), lang.getBoolType());
-//			
-//			// The initial value of a variable has to match the declared type.
-//			ensureOrderedCompatibility(lang.getVariableDeclaration(), lang.getVariableDeclaration_InitialValue(), lang.getVariable_Type());
-//		} catch (TypesystemConfigurationException e) {
-//			e.printStackTrace();
-//		}
-//	} 
+	
+	public String typeToString( EObject o ) {
+		String cn = o.eClass().getName();
+		if ( cn.toLowerCase().endsWith("type")) return cn.substring(0,cn.length()-4);
+		return null;
+	}
 	
 }

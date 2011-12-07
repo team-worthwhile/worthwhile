@@ -5,7 +5,7 @@ language package org.xtext.example.mydsl.myDsl.MyDslPackage
 section "BaseTypes"
 	typeof Type -> abstract
 	typeof PrimitiveType -> abstract
-	typeof ArrayType -> feature baseType // FIXME
+	typeof ArrayType -> feature baseType
 	typeof IntType -> clone
 	typeof BoolType -> clone
 	
@@ -20,7 +20,10 @@ section "Variables"
     	ensureCompatibility variable :<=>: value
     }
     typeof VariableRef -> feature variable
-    typeof ArrayAccess -> javacode  // FIXME
+    typeof ArrayAccess -> javacode { // FIXME
+    	ensureType expr :<=: ArrayType
+    	ensureType index :<=: IntType "Array index must be an Integer"
+    }
 
 section "Expressions"
 	typeof Expression + -> abstract 
@@ -107,16 +110,16 @@ typeof UnaryNotOperator -> feature expr {
 }
 
 section "Equals"
-typeof Equals -> common left right {
-	ensureType left :<=: BoolType, IntType
-	ensureType right :<=: BoolType, IntType
-	ensureCompatibility left :<=>: right
-}
+	typeof Equals -> common left right {
+		ensureType left :<=: BoolType, IntType
+		ensureType right :<=: BoolType, IntType
+		ensureCompatibility left :<=>: right
+	}
 
 section "Functions"
-
 	typeof Parameter -> feature type
 	typeof Function -> feature returnType	
-	// typeof FunctionCall -> FunctionRef
-	 typeof FunctionRef -> feature function
-	 typeof ReturnStatement -> javacode
+	typeof FunctionCall -> feature expr
+	typeof FunctionRef -> feature function
+	typeof ReturnStatement -> javacode
+	typeof FunctionCallActualParameter -> feature value

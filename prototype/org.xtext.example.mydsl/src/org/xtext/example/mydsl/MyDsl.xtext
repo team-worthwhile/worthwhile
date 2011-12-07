@@ -96,7 +96,11 @@ ArrayType:
 
 // A function call simply calls a function without returning a value.
 FunctionCall:
-	{FunctionRef} function=[Function] '(' (actuals+=Expr)? (',' actuals+=Expr)* ')'
+	{FunctionRef} function=[Function] '(' (actuals+=FunctionCallActualParameter)? (',' actuals+=FunctionCallActualParameter)* ')'
+;
+
+FunctionCallActualParameter:
+	{FunctionCallActualParameter} value=Expr
 ;
  
 // An annotation is used to specify assertions and assumptions.

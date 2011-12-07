@@ -1887,51 +1887,51 @@
           </ownedOperation>
           <ownedOperation xmi:id="_w3WVACAkEeGXqsUcua6Xfg" name="transformConditional">
             <ownedParameter xmi:id="_-m-EoCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_IxvPgCD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_IxvPgCD_EeGxG4RbAt-9lQ" name="statement" type="_ZyQp4CECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_BZxlgCAlEeGXqsUcua6Xfg" name="transformArrayElementAssignment">
             <ownedParameter xmi:id="_7sIrMCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ixoh0CD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_Ixoh0CD_EeGxG4RbAt-9lQ" name="statement" type="_VkWfACECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_HHR64CAlEeGXqsUcua6Xfg" name="transformAssert">
             <ownedParameter xmi:id="_9rJ8oCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ixq-ECD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_Ixq-ECD_EeGxG4RbAt-9lQ" name="statement" type="_XQCkwCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_JO-nMCAlEeGXqsUcua6Xfg" name="transformAssume">
             <ownedParameter xmi:id="_-m5zMCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_IxszQCD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_IxszQCD_EeGxG4RbAt-9lQ" name="statement" type="_YraWkCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_hDtnsCAlEeGXqsUcua6Xfg" name="transformVariableAssignment">
             <ownedParameter xmi:id="_-nGAcCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ix0IACD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_Ix0IACD_EeGxG4RbAt-9lQ" name="statement" type="_OiXqACECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_mxaKUCAlEeGXqsUcua6Xfg" name="transformArrayAssignment">
             <ownedParameter xmi:id="_1_qQkCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ekz8ECD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_Ekz8ECD_EeGxG4RbAt-9lQ" name="statement" type="_Tx-icCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_pK5KMCAlEeGXqsUcua6Xfg" name="transformAxiom">
             <ownedParameter xmi:id="_-m8PcCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_IxuocCD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_IxuocCD_EeGxG4RbAt-9lQ" name="statement" type="_oEjq0CECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_tkXE0CAlEeGXqsUcua6Xfg" name="transformLoop">
             <ownedParameter xmi:id="_-nELQCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_IxyS0CD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_IxyS0CD_EeGxG4RbAt-9lQ" name="statement" type="_NSyRcCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_yOhG0CAlEeGXqsUcua6Xfg" name="transformFunctionCall">
             <ownedParameter xmi:id="_-nCWECD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_IxxEsCD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_IxxEsCD_EeGxG4RbAt-9lQ" name="statement" type="_2JWbQCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_zWT1UCAlEeGXqsUcua6Xfg" name="transformFunctionDefinition">
             <ownedParameter xmi:id="_-nC9ICD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_IxxrwCD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_IxxrwCD_EeGxG4RbAt-9lQ" name="statement" type="_3OUfQCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_n8_sUCAoEeGHwObOJpuHDA" name="transformEnsures">
             <ownedParameter xmi:id="_-nAg4CD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ixv2kCD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_Ixv2kCD_EeGxG4RbAt-9lQ" name="statement" type="_pnkVsCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_qHYgQCAoEeGHwObOJpuHDA" name="transformRequires">
             <ownedParameter xmi:id="_-nEyUCD-EeGxG4RbAt-9lQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_Ixzg8CD_EeGxG4RbAt-9lQ" name="statement"/>
+            <ownedParameter xmi:id="_Ixzg8CD_EeGxG4RbAt-9lQ" name="statement" type="_rGntoCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_d6SjMCAmEeGXqsUcua6Xfg" name="Prover"/>
@@ -1963,6 +1963,118 @@
           <ownedEnd xmi:id="_xKhFoCBFEeGZU5xff2MlPA" name="" visibility="private" type="_c91J4CBFEeGZU5xff2MlPA" association="_xKepYCBFEeGZU5xff2MlPA">
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xKhFoiBFEeGZU5xff2MlPA" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xKhFoSBFEeGZU5xff2MlPA"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_McCPoCECEeGxG4RbAt-9lQ" name="Program">
+          <ownedAttribute xmi:id="_oyx0ACEIEeGxG4RbAt-9lQ" name="statement" visibility="private" type="_lWiI4CEDEeGxG4RbAt-9lQ" aggregation="shared" association="_oywl4CEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oyybESEIEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oyybECEIEeGxG4RbAt-9lQ"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_snZVICEIEeGxG4RbAt-9lQ" name="annotation" visibility="private" type="_m1GYoCEDEeGxG4RbAt-9lQ" aggregation="shared" association="_snYuECEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_snZ8MSEIEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_snZ8MCEIEeGxG4RbAt-9lQ"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_4DoH4CEIEeGxG4RbAt-9lQ" name="axiom" visibility="private" type="_oEjq0CECEeGxG4RbAt-9lQ" aggregation="shared" association="_4Dm5wCEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4Dou8SEIEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4Dou8CEIEeGxG4RbAt-9lQ"/>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="__qfyoCEIEeGxG4RbAt-9lQ" name="function definition" visibility="private" type="_3OUfQCECEeGxG4RbAt-9lQ" aggregation="shared" association="__qekgCEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__qgZsCEIEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__qfyoSEIEeGxG4RbAt-9lQ"/>
+          </ownedAttribute>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_NSyRcCECEeGxG4RbAt-9lQ" name="ProgramLoop">
+            <generalization xmi:id="_ED3Y4CEEEeGxG4RbAt-9lQ" general="_lWiI4CEDEeGxG4RbAt-9lQ"/>
+            <ownedAttribute xmi:id="_cFUp8CEIEeGxG4RbAt-9lQ" name="invariant" visibility="private" type="_Df0bMCEFEeGxG4RbAt-9lQ" association="_cFUC4CEIEeGxG4RbAt-9lQ">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cFVRASEIEeGxG4RbAt-9lQ" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cFVRACEIEeGxG4RbAt-9lQ"/>
+            </ownedAttribute>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_OiXqACECEeGxG4RbAt-9lQ" name="ProgramVariableAssignment">
+            <generalization xmi:id="_NCeSoCEEEeGxG4RbAt-9lQ" general="_lWiI4CEDEeGxG4RbAt-9lQ"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_Tx-icCECEeGxG4RbAt-9lQ" name="ProgramArrayAssignment">
+            <generalization xmi:id="_-8LtYCEDEeGxG4RbAt-9lQ" general="_lWiI4CEDEeGxG4RbAt-9lQ"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_VkWfACECEeGxG4RbAt-9lQ" name="ProgramArrayElementAssignment">
+            <generalization xmi:id="_ED08oCEEEeGxG4RbAt-9lQ" general="_lWiI4CEDEeGxG4RbAt-9lQ"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_XQCkwCECEeGxG4RbAt-9lQ" name="ProgramAssert">
+            <generalization xmi:id="_HX1EACEEEeGxG4RbAt-9lQ" general="_m1GYoCEDEeGxG4RbAt-9lQ"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_YraWkCECEeGxG4RbAt-9lQ" name="ProgramAssume">
+            <generalization xmi:id="_MHc00CEEEeGxG4RbAt-9lQ" general="_m1GYoCEDEeGxG4RbAt-9lQ"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_ZyQp4CECEeGxG4RbAt-9lQ" name="ProgramConditional">
+            <generalization xmi:id="_ED2x0CEEEeGxG4RbAt-9lQ" general="_lWiI4CEDEeGxG4RbAt-9lQ"/>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_oEjq0CECEeGxG4RbAt-9lQ" name="ProgramAxiom"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_pnkVsCECEeGxG4RbAt-9lQ" name="ProgramEnsures"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_rGntoCECEeGxG4RbAt-9lQ" name="ProgramRequires"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_2JWbQCECEeGxG4RbAt-9lQ" name="ProgramFunctionCall"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_3OUfQCECEeGxG4RbAt-9lQ" name="ProgramFunctionDefinition">
+            <ownedAttribute xmi:id="_MeX8gCEDEeGxG4RbAt-9lQ" name="precondition" visibility="private" type="_rGntoCECEeGxG4RbAt-9lQ" association="_MeWHUCEDEeGxG4RbAt-9lQ">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MeaYwCEDEeGxG4RbAt-9lQ" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MeZxsCEDEeGxG4RbAt-9lQ"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_gu5PYCEDEeGxG4RbAt-9lQ" name="postcondition" visibility="private" type="_pnkVsCECEeGxG4RbAt-9lQ" association="_gu4BQCEDEeGxG4RbAt-9lQ">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gu52cSEDEeGxG4RbAt-9lQ" value="*"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gu52cCEDEeGxG4RbAt-9lQ"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_cgAFsCEGEeGxG4RbAt-9lQ" name="body" visibility="private" type="_McCPoCECEeGxG4RbAt-9lQ" association="_cf_eoCEGEeGxG4RbAt-9lQ">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cgAswSEGEeGxG4RbAt-9lQ" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cgAswCEGEeGxG4RbAt-9lQ"/>
+            </ownedAttribute>
+          </nestedClassifier>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_lWiI4CEDEeGxG4RbAt-9lQ" name="ProgramStatement" isAbstract="true"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_m1GYoCEDEeGxG4RbAt-9lQ" name="ProgramAnnotation" isAbstract="true"/>
+          <nestedClassifier xmi:type="uml:Class" xmi:id="_Df0bMCEFEeGxG4RbAt-9lQ" name="ProgramInvariant"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_MeWHUCEDEeGxG4RbAt-9lQ" memberEnd="_MeX8gCEDEeGxG4RbAt-9lQ _Mea_0CEDEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_Mea_0CEDEeGxG4RbAt-9lQ" name="" visibility="private" type="_3OUfQCECEeGxG4RbAt-9lQ" association="_MeWHUCEDEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Mebm4SEDEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Mebm4CEDEeGxG4RbAt-9lQ"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_gu4BQCEDEeGxG4RbAt-9lQ" memberEnd="_gu5PYCEDEeGxG4RbAt-9lQ _gu6dgCEDEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_gu6dgCEDEeGxG4RbAt-9lQ" name="" visibility="private" type="_3OUfQCECEeGxG4RbAt-9lQ" association="_gu4BQCEDEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_gu7roSEDEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_gu7roCEDEeGxG4RbAt-9lQ"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_cf_eoCEGEeGxG4RbAt-9lQ" name="" memberEnd="_cgAFsCEGEeGxG4RbAt-9lQ _cgBT0CEGEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_cgBT0CEGEeGxG4RbAt-9lQ" name="" visibility="private" type="_3OUfQCECEeGxG4RbAt-9lQ" association="_cf_eoCEGEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cgBT0iEGEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cgBT0SEGEeGxG4RbAt-9lQ"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_cFUC4CEIEeGxG4RbAt-9lQ" memberEnd="_cFUp8CEIEeGxG4RbAt-9lQ _cFV4ECEIEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_cFV4ECEIEeGxG4RbAt-9lQ" name="" visibility="private" type="_NSyRcCECEeGxG4RbAt-9lQ" association="_cFUC4CEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cFV4EiEIEeGxG4RbAt-9lQ" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_cFV4ESEIEeGxG4RbAt-9lQ"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_oywl4CEIEeGxG4RbAt-9lQ" name="" memberEnd="_oyx0ACEIEeGxG4RbAt-9lQ _oyzCICEIEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_oyzCICEIEeGxG4RbAt-9lQ" name="" visibility="private" type="_McCPoCECEeGxG4RbAt-9lQ" association="_oywl4CEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oyzpMCEIEeGxG4RbAt-9lQ" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oyzCISEIEeGxG4RbAt-9lQ" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_snYuECEIEeGxG4RbAt-9lQ" name="" memberEnd="_snZVICEIEeGxG4RbAt-9lQ _snajQCEIEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_snajQCEIEeGxG4RbAt-9lQ" name="" visibility="private" type="_McCPoCECEeGxG4RbAt-9lQ" association="_snYuECEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_snbKUSEIEeGxG4RbAt-9lQ" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_snbKUCEIEeGxG4RbAt-9lQ" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_4Dm5wCEIEeGxG4RbAt-9lQ" name="" memberEnd="_4DoH4CEIEeGxG4RbAt-9lQ _4DpWACEIEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="_4DpWACEIEeGxG4RbAt-9lQ" name="" visibility="private" type="_McCPoCECEeGxG4RbAt-9lQ" association="_4Dm5wCEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4Dp9ESEIEeGxG4RbAt-9lQ" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4Dp9ECEIEeGxG4RbAt-9lQ" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="__qekgCEIEeGxG4RbAt-9lQ" memberEnd="__qfyoCEIEeGxG4RbAt-9lQ __qhAwCEIEeGxG4RbAt-9lQ">
+          <ownedEnd xmi:id="__qhAwCEIEeGxG4RbAt-9lQ" name="" visibility="private" type="_McCPoCECEeGxG4RbAt-9lQ" association="__qekgCEIEeGxG4RbAt-9lQ">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__qhAwiEIEeGxG4RbAt-9lQ" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__qhAwSEIEeGxG4RbAt-9lQ" value="1"/>
           </ownedEnd>
         </packagedElement>
       </packagedElement>

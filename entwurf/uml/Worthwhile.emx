@@ -1750,20 +1750,20 @@
           </ownedOperation>
           <ownedOperation xmi:id="_7WPY8CAoEeGHwObOJpuHDA" name="generateFormula" visibility="private">
             <ownedParameter xmi:id="_3KTpYCA7EeGZU5xff2MlPA" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_79lyMCA7EeGZU5xff2MlPA" name="specification"/>
+            <ownedParameter xmi:id="_79lyMCA7EeGZU5xff2MlPA" name="specification" type="_McCPoCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_uzCbQCAhEeGXqsUcua6Xfg" name="checkAnnotation">
             <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
-            <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation"/>
-            <ownedParameter xmi:id="_IbpOUCA8EeGZU5xff2MlPA" name="environment"/>
+            <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation" type="_m1GYoCEDEeGxG4RbAt-9lQ"/>
+            <ownedParameter xmi:id="_IbpOUCA8EeGZU5xff2MlPA" name="environment" type="_yDQmICAyEeGrgZ0lnErJwQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_r7KPMCAhEeGXqsUcua6Xfg" name="checkProgram">
             <ownedParameter xmi:id="_7ETYkCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
             </ownedParameter>
-            <ownedParameter xmi:id="_zX6V0CA7EeGZU5xff2MlPA" name="program"/>
+            <ownedParameter xmi:id="_zX6V0CA7EeGZU5xff2MlPA" name="program" type="_McCPoCECEeGxG4RbAt-9lQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_ryMOgCAjEeGXqsUcua6Xfg" name="setTimeout">
             <ownedParameter xmi:id="_wIuw8CAjEeGXqsUcua6Xfg" name="seconds">

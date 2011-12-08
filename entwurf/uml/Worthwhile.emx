@@ -2541,7 +2541,7 @@
             </edges>
           </contents>
         </eAnnotations>
-        <packagedElement xmi:type="uml:Class" xmi:id="_rHP7cCAgEeGXqsUcua6Xfg" name="Main" clientDependency="_dIKqECAjEeGXqsUcua6Xfg">
+        <packagedElement xmi:type="uml:Class" xmi:id="_rHP7cCAgEeGXqsUcua6Xfg" name="SpecificationChecker" clientDependency="_dIKqECAjEeGXqsUcua6Xfg">
           <ownedAttribute xmi:id="_uxIMMCAgEeGXqsUcua6Xfg" name="timeout" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
             <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_65lLwCAgEeGXqsUcua6Xfg">

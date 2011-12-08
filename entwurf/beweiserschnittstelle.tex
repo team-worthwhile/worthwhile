@@ -122,6 +122,14 @@ auch bei der Prüfung der Spezifikation erkannt und das spezifizierte Programm
 nicht als korrekt eingestuft wird, obwohl nicht alle Programmaufrufe mit
 definiertem Ergebnis terminieren.%
 
+\subsubsection{Typsystem}%
+
+Die in Worthwhile vorhandenen Datentypen \texttt{Integer} und
+\texttt{Boolean} werden beide von dem Beweiser Z3 unterstützt. Typen
+werden bei Parameterübergabe, Symbolreferenz und Symboldefinition
+geprüft. Treten nicht übereinstimmende Typen auf, liefert Z3 einen
+Fehler.%
+
 \subsection{Voraussetzungen für einzelne Annotationen}%
 
 % TODO Datentyp für Programmzustand und ausgewertete Annotationen

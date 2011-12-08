@@ -2709,7 +2709,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Component" xmi:id="_KrLRsCAgEeGXqsUcua6Xfg" name="SpecificationChecker" clientDependency="_tYFG4CAmEeGXqsUcua6Xfg">
+      <packagedElement xmi:type="uml:Component" xmi:id="_KrLRsCAgEeGXqsUcua6Xfg" name="Program Transformer" clientDependency="_tYFG4CAmEeGXqsUcua6Xfg">
         <eAnnotations xmi:id="_kG43ECAgEeGXqsUcua6Xfg" source="uml2.diagrams"/>
         <packagedElement xmi:type="uml:Class" xmi:id="_CNev0CAkEeGXqsUcua6Xfg" name="WPStrategy" clientDependency="_tc2kECAkEeGXqsUcua6Xfg">
           <interfaceRealization xmi:id="_tc2kECAkEeGXqsUcua6Xfg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_CNev0CAkEeGXqsUcua6Xfg" contract="_obF6YCAkEeGXqsUcua6Xfg"/>

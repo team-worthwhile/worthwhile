@@ -5516,6 +5516,25 @@
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_xyYUkCG-EeGaTKTGYPOQ0Q" name="ReceiveOperationEvent2"/>
     <packagedElement xmi:type="uml:ExecutionEvent" xmi:id="_xyY7oSG-EeGaTKTGYPOQ0Q" name="ExecutionEvent2"/>
     <packagedElement xmi:type="uml:ExecutionEvent" xmi:id="_0A2XQiG-EeGaTKTGYPOQ0Q" name="ExecutionEvent3"/>
+    <packagedElement xmi:type="uml:Package" xmi:id="_UEqJoCHNEeGPOLJv6XZMnQ" name="Parser">
+      <eAnnotations xmi:id="_UEsl4CHNEeGPOLJv6XZMnQ" source="uml2.diagrams"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dFvvoCHNEeGPOLJv6XZMnQ" name="Parser">
+        <ownedOperation xmi:id="_jZu2MCHNEeGPOLJv6XZMnQ" name="parse">
+          <ownedParameter xmi:id="_ibW3gCHPEeGPOLJv6XZMnQ" name="parserResult" type="_plZHMCHNEeGPOLJv6XZMnQ" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_ehnbQCHOEeGPOLJv6XZMnQ" name="Parser"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_d_Kq8CHNEeGPOLJv6XZMnQ" name="Validator">
+        <ownedOperation xmi:id="_nfET4CHNEeGPOLJv6XZMnQ" name="checkTypes"/>
+        <ownedOperation xmi:id="_yYAW4CHOEeGPOLJv6XZMnQ" name="Validator"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_plZHMCHNEeGPOLJv6XZMnQ" name="ParserResult">
+        <ownedOperation xmi:id="_riE2UCHNEeGPOLJv6XZMnQ" name="getSyntaxErrors"/>
+        <ownedOperation xmi:id="_ttQUcCHNEeGPOLJv6XZMnQ" name="getRootASTElement"/>
+        <ownedOperation xmi:id="_yD8n4CHNEeGPOLJv6XZMnQ" name="hasSyntaxErrors"/>
+        <ownedOperation xmi:id="_y-ggwCHPEeGPOLJv6XZMnQ" name="ParserResult"/>
+      </packagedElement>
+    </packagedElement>
     <profileApplication xmi:id="_TKT2pSAfEeGXqsUcua6Xfg">
       <eAnnotations xmi:id="_TKT2piAfEeGXqsUcua6Xfg" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>

@@ -14,7 +14,7 @@ Die Programmspezifikation wird dem Abstract-Syntax-Tree~(AST), welcher
 aus einem Worthwhile-Text erstellt wurde, entnommen. Sie setzt sich
 zusammen aus dem WHILE-Programmtext und den Annotationen. Annotationen
 sind entweder Axiome, Funktionsverträge, Schleifeninvarianten,
-Zusicherungen oder Voraussetzungen.%
+Zusicherungen oder Annahmen.%
 
 \subsubsection{Annotationen mit Voraussetzungen}%
 
@@ -51,9 +51,9 @@ sind syntaktische Elemente prädikatenlogische Formeln.%
 \subsubsection{Funktionsverträge}%
 
 Funktionen werden modular spezifiziert. Ihre Spezifikation besteht aus
-den Voraussetzungen, die ihre Parameter erfüllen müssen, und den
+den Annahmen, die ihre Parameter erfüllen müssen, und den
 Zusicherungen, die sie bei gültigen Parametern für ihr Ergebnis
-erfüllen. Voraussetzungen werden Vorbedingungen genannt, Zusicherungen
+erfüllen. Annahmen werden Vorbedingungen genannt, Zusicherungen
 Nachbedingungen und die Menge aller Bedingungen Funktionsvertrag.%
 
 Für den Funktionstext werden die Vorbedingungen wie Axiome behandelt
@@ -97,7 +97,7 @@ Annahmen werden wie Axiome behandelt, sodass sie insbesondere nicht
 wie Zusicherungen erfüllt sein müssen und vom Beweiser auch nicht
 geprüft werden.%
 
-Voraussetzungen werden im AST als \texttt{assume}-Knoten codiert,
+Annahmen werden im AST als \texttt{assume}-Knoten codiert,
 deren Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
 
 \subsubsection{Arrayzugriffe}%

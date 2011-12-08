@@ -1051,18 +1051,24 @@
         </ownedAttribute>
         <ownedAttribute xmi:id="_RbthgCG5EeGKpI5RvdQKoQ" name="interpreter" visibility="private" type="_yDP_ECAyEeGrgZ0lnErJwQ" association="_RbrsUCG5EeGKpI5RvdQKoQ">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_RbuvoSG5EeGKpI5RvdQKoQ" value="1"/>
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_RbuvoCG5EeGKpI5RvdQKoQ"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_RbuvoCG5EeGKpI5RvdQKoQ" value="1"/>
         </ownedAttribute>
         <ownedOperation xmi:id="_yDQmKiAyEeGrgZ0lnErJwQ" name="executeStatement">
           <ownedParameter xmi:id="_yDQmKyAyEeGrgZ0lnErJwQ" name="statement">
             <type xmi:type="uml:Class" href="platform:/resource/wuwuwu/worthwhile.emx#_3qFCgCAjEeGVEYA29WGayA?worthwhile/Statement?"/>
           </ownedParameter>
         </ownedOperation>
+        <ownedOperation xmi:id="_hh2P4CG_EeGaTKTGYPOQ0Q" name="getInterpreter">
+          <ownedParameter xmi:id="_lIQ88CG_EeGaTKTGYPOQ0Q" name="interpreter" type="_yDP_ECAyEeGrgZ0lnErJwQ" direction="return"/>
+        </ownedOperation>
         <ownedOperation xmi:id="_PgYLUCG7EeGKpI5RvdQKoQ" name="evaluateExpression">
           <ownedParameter xmi:id="_RM1GECG7EeGKpI5RvdQKoQ" name="expression" type="_Mt0ncCA3EeGF64vKeOiUTw"/>
         </ownedOperation>
         <ownedOperation xmi:id="_B0tFgCG7EeGKpI5RvdQKoQ" name="getSymbolTable">
           <ownedParameter xmi:id="_D6nCECG7EeGKpI5RvdQKoQ" name="Parameter1" type="_yDRNMyAyEeGrgZ0lnErJwQ" direction="return"/>
+        </ownedOperation>
+        <ownedOperation xmi:id="_qqOJoCG_EeGaTKTGYPOQ0Q" name="ExecutionContext">
+          <ownedParameter xmi:id="_sSWlECG_EeGaTKTGYPOQ0Q" name="interpreter" type="_yDP_ECAyEeGrgZ0lnErJwQ"/>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_yDQmLCAyEeGrgZ0lnErJwQ" name="StatementExecutor">

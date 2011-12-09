@@ -2892,6 +2892,7 @@
           <generalization xmi:id="_AMSGkCBEEeGZU5xff2MlPA" general="_jRMTQCAiEeGXqsUcua6Xfg"/>
           <generalization xmi:id="_l0670CBEEeGZU5xff2MlPA" general="_fGnQwCBEEeGZU5xff2MlPA"/>
         </nestedClassifier>
+        <ownedOperation xmi:id="_OOD5UCIzEeG2MZcopdUy_Q" name="Formula"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_McCPoCECEeGxG4RbAt-9lQ" name="Program">
         <ownedAttribute xmi:id="_oyx0ACEIEeGxG4RbAt-9lQ" name="statement" visibility="private" type="_lWiI4CEDEeGxG4RbAt-9lQ" aggregation="shared" association="_oywl4CEIEeGxG4RbAt-9lQ">
@@ -2956,6 +2957,7 @@
         <nestedClassifier xmi:type="uml:Class" xmi:id="_lWiI4CEDEeGxG4RbAt-9lQ" name="ProgramStatement" isAbstract="true"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_m1GYoCEDEeGxG4RbAt-9lQ" name="ProgramAnnotation" isAbstract="true"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_Df0bMCEFEeGxG4RbAt-9lQ" name="ProgramInvariant"/>
+        <ownedOperation xmi:id="_nQ79YCIyEeG2MZcopdUy_Q" name="Program"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_rHP7cCAgEeGXqsUcua6Xfg" name="SpecificationChecker">
         <ownedAttribute xmi:id="_uxIMMCAgEeGXqsUcua6Xfg" name="timeout" visibility="private">
@@ -2994,11 +2996,14 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
         </ownedOperation>
+        <ownedOperation xmi:id="_AzejgCIzEeG2MZcopdUy_Q" name="SpecificationChecker"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_KrLRsCAgEeGXqsUcua6Xfg" name="Program Transformer" clientDependency="_tYFG4CAmEeGXqsUcua6Xfg">
         <eAnnotations xmi:id="_kG43ECAgEeGXqsUcua6Xfg" source="uml2.diagrams"/>
         <packagedElement xmi:type="uml:Class" xmi:id="_CNev0CAkEeGXqsUcua6Xfg" name="WPStrategy" clientDependency="_tc2kECAkEeGXqsUcua6Xfg">
           <interfaceRealization xmi:id="_tc2kECAkEeGXqsUcua6Xfg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_CNev0CAkEeGXqsUcua6Xfg" contract="_obF6YCAkEeGXqsUcua6Xfg"/>
+          <ownedOperation xmi:id="_9gcFcCIyEeG2MZcopdUy_Q" name="WPStrategy"/>
+          <ownedOperation xmi:id="_IwNJgCIzEeG2MZcopdUy_Q" name="transformProgram"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator" clientDependency="_m5_9sCIqEeG2MZcopdUy_Q">
           <ownedOperation xmi:id="_w3WVACAkEeGXqsUcua6Xfg" name="transformConditional">
@@ -3131,6 +3136,7 @@
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_fSOuUCIaEeG2MZcopdUy_Q" name="Z3Prover" clientDependency="_sOV_cCIaEeG2MZcopdUy_Q">
           <generalization xmi:id="_hv2AQCIaEeG2MZcopdUy_Q" general="_UgFsUCIYEeG2MZcopdUy_Q"/>
+          <ownedOperation xmi:id="_1aZycCIyEeG2MZcopdUy_Q" name="Z3Prover"/>
         </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Usage" xmi:id="_tYFG4CAmEeGXqsUcua6Xfg" supplier="_IuVKgCAgEeGXqsUcua6Xfg" client="_KrLRsCAgEeGXqsUcua6Xfg"/>

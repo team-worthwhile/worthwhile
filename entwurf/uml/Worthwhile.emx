@@ -1568,6 +1568,13 @@
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_j_PuISG5EeGKpI5RvdQKoQ" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_j_PuICG5EeGKpI5RvdQKoQ" value="1"/>
         </ownedAttribute>
+        <ownedOperation xmi:id="_uJOvQCJQEeGg_vfj29rAQQ" name="statementExecuted"/>
+        <ownedOperation xmi:id="_wzZ2gCJQEeGg_vfj29rAQQ" name="expressionEvaluated"/>
+        <ownedOperation xmi:id="_1RImECJQEeGg_vfj29rAQQ" name="executionStarted"/>
+        <ownedOperation xmi:id="_2RhFACJQEeGg_vfj29rAQQ" name="executionTerminatedNormally"/>
+        <ownedOperation xmi:id="_35g9kCJQEeGg_vfj29rAQQ" name="executionTerminatedAbnormally"/>
+        <ownedOperation xmi:id="_CaJqwCJREeGg_vfj29rAQQ" name="assertionChecked"/>
+        <ownedOperation xmi:id="_EBzlECJREeGg_vfj29rAQQ" name="breakpointReached"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_3eg9gCGpEeGpWqdt5MVe9Q" memberEnd="_3eiLoCGpEeGpWqdt5MVe9Q _3elO8CGpEeGpWqdt5MVe9Q">
         <ownedEnd xmi:id="_3elO8CGpEeGpWqdt5MVe9Q" name="" visibility="private" type="_yDP_ECAyEeGrgZ0lnErJwQ" association="_3eg9gCGpEeGpWqdt5MVe9Q">

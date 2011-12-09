@@ -71,7 +71,8 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <return> ::= `return' <expr>
 
-<quantifiedexpr> ::= (`\forall' | `\exists' ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
+% TODO mark math symbols as tokens
+<quantifiedexpr> ::= ($\forall$ | $\exists$ ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
 
 <expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <literal> | <varref> | <funccall>
 

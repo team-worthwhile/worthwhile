@@ -1,3 +1,4 @@
+% vim: spell spelllang=de:
 \section{Interpreter}
 
 Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter läuft in einem eigenen Thread und interagiert mit Hilfe von gemeinsam genutzten Datenstrukturen mit dem GUI-Thread.
@@ -13,53 +14,65 @@ Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stel
 \subsubsection{class ExecutionContext}
 Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungskontextes. Dazu gehören ein \texttt{ExpressionEvaluator}, ein \texttt{StatementExecutor} sowie eine \texttt{SymbolTable}, in der in diesem Kontext angelegte Symbole gespeichert werden.
 
-\textbf{Öffentliche Methoden}
 \begin{description}
-    \item[public SymbolTable getSymbolTable()]
+    \method{private SymbolTable symbolTable}
+    \method{private StatementExecutor statementExecutor}
+    \method{private ExpressionEvaluator expressionEvaluator}
+\end{description}
+
+\begin{description}
+    \method{public SymbolTable getSymbolTable()}
     Gibt die aktuelle Symboltabelle zurück.
 
-    \item[public void executeStatement(Statement statement)]
+    \method{public void executeStatement(Statement statement)}
     Führt in diesem Kontext das angegebene Statement aus.
 
-    % TODO Rückgabetyp fehlt
-    \item[public evaluateExpression(Statement statement)]
+    % TODO Ist Type die Grundklasse des Typsystems?
+    \method{public Type evaluateExpression(Statement statement)}
     Wertet in diesem Kontext die gegebene Expression aus und gibt das Ergebnis der Auswertung zurück.
 \end{description}
 
-\textbf{Private Methoden und Attribute}
-\begin{description}
-    \item[private SymbolTable symbolTable]
-    \item[private StatementExecutor statementExecutor]
-    \item[private ExpressionEvaluator expressionEvaluator]
-\end{description}
 
+\subsubsection{interface ExecutionContextStack}
+
+Instanzen von \texttt{ExecutionContextStack} verwalten eine Menge von ``gestapelten'' \texttt{ExecutionContext}-Objekten. Die Klasse \texttt{Interpreter} verwendet diesen Stack, um die für Funktionsaufrufe benötigten mehreren Instanzen von \texttt{ExecutionContext} einfach zu verwalten.
 
 \subsubsection{class Interpreter}
 
 Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial übergebenen Programms.
 
 \begin{description}
-    \item[public Interpreter(Program p, DebugInterface debugInterface)]
-    Erzeugt eine Instanz, die das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann.
+    \method{public Interpreter(Program p, DebugInterface debugInterface)}
+    Erzeugt eine Instanz, die das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann. Das übergebene \texttt{DebugInterface} Objekt wird zur interaktion mit dem Debugger verwendet.
 
-    \item[public void executeStatement(Statement s)]
+    \method{public void executeStatement(Statement s)}
     Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
 \end{description}
 
 
 \subsubsection{interface ExpressionEvaluator}
+Die Aufgabe von \texttt{ExpressionEvaluator} Instanzen ist es, \texttt{Expression} Objekte aus dem AST auszuwerten.
+\begin{description}
+    % TODO Ist Type die Grundklasse des Typsystems?
+    \method{public Type eval(Expression expression)}
+    Wertet die Expression \texttt{expression} aus und gibt das Ergebnis zurück.
+\end{description}
+
+\subsubsection{class InterpreterExpressionEvaluator implements ContextFreeExpressionEvaluator}
+Wertet Expressions aus, für die zur Auswertung Zugriff auf den \texttt{ExecutionContext} sowie den \texttt{Interpreter} nötig ist, beispielsweise um Funktionsaufrufe auszuwerten oder die Werte referenzierter Variablen aufzulösen.
+
 \subsubsection{interface DebugInterface}
 Implementationen von \texttt{DebugInterface} sind für die Interaktion des Interpreters mit anderen Teilen des Programms zuständig.
 
 \begin{description}
-    \item[public void statementExecuted()]
+    \method{public void statementExecuted()}
     Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
-    \item[public void expressionEvaluated()]
+    \method{public void expressionEvaluated()}
     Wird vom Interpreter nach jedem Auswerten einer Expression aufgerufen.
-    \item[public void executionStarted()]
+    \method{public void executionStarted()}
     Wird vom Interpreter direkt nach dessen Start aufgerufen.
-    \item[public void executionTerminatedNormally()]
+    \method{public void executionTerminatedNormally()}
     Wird vom Interpreter nach ordnungsgemäßer Terminierung des Programms aufgerufen.
-    \item[public void executionTerminatedAbnormally()]
+    \method{public void executionTerminatedAbnormally()}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms, ausgelöst beispielsweise durch einen Laufzeitfehler, aufgerufen.
 \end{description}

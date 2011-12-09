@@ -15,3 +15,5 @@ entwurf.pdf
 bin/
 src-gen/
 xtend-gen/
+# automatic backups
+*~

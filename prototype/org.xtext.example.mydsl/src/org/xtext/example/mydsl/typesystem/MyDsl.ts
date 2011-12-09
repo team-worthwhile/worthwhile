@@ -26,8 +26,7 @@ section "Variables"
     }
 
 section "Expressions"
-	typeof Expression + -> abstract 
-	typeof Expr + -> abstract
+	typeof Expression + -> abstract
 
 section "Arithmetic"
 typeof Plus -> common left right {

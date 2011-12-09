@@ -23,7 +23,7 @@ terminal SL_COMMENT :
 ;
 
 terminal NUMBER returns ecore::EBigInteger:
- 	('0'..'9')* ('.' ('0'..'9')+)?
+ 	('0'..'9')+
  ;
  
 terminal INT returns ecore::EInt:
@@ -43,22 +43,22 @@ Statement:
 
 // A return statement returns a value from a function.
 ReturnStatement:
-	'return' returnExpr=Expr
+	'return' returnExpression=Expression
 ;
 
 // A while statement specifies a while loop.
 WhileStatement:
-	'while' condition=Expr (invariants+=Invariant)* body=Block
+	'while' condition=Expression (invariants+=Invariant)* body=Block
 ;
 
 // 
 Invariant:
-	'_invariant' expr=(Expr | QuantifiedExpr) NL+ 
+	'_invariant' Expression=(Expression | QuantifiedExpression) NL+ 
 ;
 
-// An if statement specifies a conditional expression.
+// An if statement specifies a conditional Expression.
 IfStatement:
-	'if' condition=Expr then=Block ('else' else=Block)?
+	'if' condition=Expression then=Block ('else' else=Block)?
 ;
 
 // A function declaration declares a function name, parameters, return type, and function body.
@@ -67,11 +67,11 @@ FunctionDeclaration returns Function:
 ;
 
 Require:
-	'_requires' expr=(Expr | QuantifiedExpr) NL+ 
+	'_requires' Expression=(Expression | QuantifiedExpression) NL+ 
 ;
 
 Ensure:
-	'_ensures' expr=(Expr | QuantifiedExpr) NL+ 
+	'_ensures' Expression=(Expression | QuantifiedExpression) NL+ 
 ;
  
 // A parameter definition describes a single parameter (type and name) accepted by a function.
@@ -91,7 +91,7 @@ PrimitiveType:
 
 // An array type represents an array of a primitive type.
 ArrayType:
-	{ArrayType} baseType=PrimitiveType '[' size=Expr ']'
+	{ArrayType} baseType=PrimitiveType '[' size=Expression ']'
 ;
 
 // A function call simply calls a function without returning a value.
@@ -100,22 +100,22 @@ FunctionCall:
 ;
 
 FunctionCallActualParameter:
-	{FunctionCallActualParameter} value=Expr
+	{FunctionCallActualParameter} value=Expression
 ;
  
 // An annotation is used to specify assertions and assumptions.
 Annotation:
-	 ({Assertion} '_assert' | {Assumption} '_assume' | {Axiom} '_axiom') expr=(Expr | QuantifiedExpr)
+	 ({Assertion} '_assert' | {Assumption} '_assume' | {Axiom} '_axiom') Expression=(Expression | QuantifiedExpression)
 ;
 
-// A quantified expression is an expression optionally preceded by some quantifier definitions.
-QuantifiedExpr:
-	(({ForAllExpression} ('forall' | '∀') | {ExistsExpression} ('exists' | '∃')) var=VariableDeclarationWithoutInitialValue (',' condition=Expr)?) (expr=QuantifiedExpr | ':' expr=Expr)
+// A quantified Expression is an Expression optionally preceded by some quantifier definitions.
+QuantifiedExpression:
+	(({ForAllExpression} ('forall' | '∀') | {ExistsExpression} ('exists' | '∃')) var=VariableDeclarationWithoutInitialValue (',' condition=Expression)?) (Expression=QuantifiedExpression | ':' Expression=Expression)
 ;
 
 // A variable declaration declares a new variable and assigns it a value.
 VariableDeclaration returns Variable:
-	{VariableDeclaration} type=Type name=ID ':=' initialValue=Expr
+	{VariableDeclaration} type=Type name=ID ':=' initialValue=Expression
 ;
 
 // This variable declaration declares a new variable, but does not assign it a value
@@ -125,12 +125,12 @@ VariableDeclarationWithoutInitialValue returns Variable:
 
 // An assignment assigns a value to a variable.
 Assignment:
-	variable=VariableRef ':=' value=Expr
+	variable=VariableRef ':=' value=Expression
 ;
 
-// An expression is based on operator precedence. Each "level" of expressions means one level of operator precedence,
+// An Expression is based on operator precedence. Each "level" of Expressions means one level of operator precedence,
 // where the last operation specified has the highest priority. In the same level, operators are evaluated from left to right.
-Expr:
+Expression:
 	BooleanOr
 ;
 
@@ -166,22 +166,22 @@ Multiplication returns Expression:
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.
 UnaryOperation returns Expression:
-	 ArrayAccess | (({UnaryMinusOperator} '-' | {UnaryPlusOperator} '+' | {UnaryNotOperator} ('¬'|'!') ) expr=ArrayAccess)
+	 ArrayAccess | (({UnaryMinusOperator} '-' | {UnaryPlusOperator} '+' | {UnaryNotOperator} ('¬'|'!') ) Expression=ArrayAccess)
 ;
 
 // The access of array items via an index has highest priority.
 ArrayAccess returns Expression:
-	Atomic ({ArrayAccess.expr=current} "[" index=Expr "]")?
+	Atomic ({ArrayAccess.Expression=current} "[" index=Expression "]")?
 ;
 
-// An atomic value in an expression is either
+// An atomic value in an Expression is either
 //  - a function call or
 //  - a number or
 //  - a Boolean literal or
 //  - a reference to a variable
-//  - a whole new expression in parentheses.
+//  - a whole new Expression in parentheses.
 Atomic returns Expression:
-	FunctionCall | {NumberLiteral} value=NUMBER | BooleanLiteral | VariableRef | '(' expr=Expr ')'
+	FunctionCall | {NumberLiteral} value=NUMBER | BooleanLiteral | VariableRef | '(' expr=Expression ')'
 ;
 
 // A Boolean literal is either "true" or "false"
@@ -191,5 +191,5 @@ BooleanLiteral:
 
 // A variable reference is used to denote the current content of a variable. 
 VariableRef:
-	{VariableRef} variable=[Variable] // TODO ('[' index=Expr ']')?
+	{VariableRef} variable=[Variable] // TODO ('[' index=Expression ']')?
 ;

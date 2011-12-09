@@ -1,6 +1,6 @@
 \section{Interpreter}
 
-Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter läuft in einem eigenen Thread und interagiert mit Hilfe von gemeinsam genutzten Datenstrukturen mit dem GUI-Thread.
+Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter läuft in einem eigenen Thread und interagiert mit Hilfe von gemeinsam genutzten Datenstrukturen mit dem GUI-Thread.
 
 \subsection{Eingabedaten}
 
@@ -11,7 +11,7 @@ Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stel
 \subsubsection{Klassenentwurf}
 
 \subsubsection{class ExecutionContext}
-Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungskontext. Dazu gehören ein \texttt{ExpressionEvaluator}, ein \texttt{StatementExecutor} sowie eine Symboltabelle, in der in diesem Kontext angelegte Symbole gespeichert werden.
+Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungskontextes. Dazu gehören ein \texttt{ExpressionEvaluator}, ein \texttt{StatementExecutor} sowie eine \texttt{SymbolTable}, in der in diesem Kontext angelegte Symbole gespeichert werden.
 
 \textbf{Öffentliche Methoden}
 \begin{description}
@@ -21,15 +21,16 @@ Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungs
     \item[public void executeStatement(Statement statement)]
     Führt in diesem Kontext das angegebene Statement aus.
 
-    \item[public void evaluateExpression(Statement statement)]
+    % TODO Rückgabetyp fehlt
+    \item[public evaluateExpression(Statement statement)]
     Wertet in diesem Kontext die gegebene Expression aus und gibt das Ergebnis der Auswertung zurück.
 \end{description}
 
 \textbf{Private Methoden und Attribute}
 \begin{description}
     \item[private SymbolTable symbolTable]
-    \item[private SymbolTable statementExecutor]
-    \item[private SymbolTable expressionEvaluator]
+    \item[private StatementExecutor statementExecutor]
+    \item[private ExpressionEvaluator expressionEvaluator]
 \end{description}
 
 
@@ -39,7 +40,7 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
 
 \begin{description}
     \item[public Interpreter(Program p, DebugInterface debugInterface)]
-    Erzeugt ein Instanz, das das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann.
+    Erzeugt eine Instanz, die das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann.
 
     \item[public void executeStatement(Statement s)]
     Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
@@ -48,13 +49,13 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
 
 \subsubsection{interface ExpressionEvaluator}
 \subsubsection{interface DebugInterface}
-Implementationen \texttt{DebugInterface} sind für die Interaktion des Interpreters mit anderen Teilen des Programms zuständig.
+Implementationen von \texttt{DebugInterface} sind für die Interaktion des Interpreters mit anderen Teilen des Programms zuständig.
 
 \begin{description}
     \item[public void statementExecuted()]
     Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
     \item[public void expressionEvaluated()]
-    Wird vom Interpreter nach jedem Auswerten jeder Expression aufgerufen.
+    Wird vom Interpreter nach jedem Auswerten einer Expression aufgerufen.
     \item[public void executionStarted()]
     Wird vom Interpreter direkt nach dessen Start aufgerufen.
     \item[public void executionTerminatedNormally()]

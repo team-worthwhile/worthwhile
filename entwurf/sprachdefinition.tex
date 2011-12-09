@@ -48,7 +48,11 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <statement> ::= <vardecl> | <assign> | <block> | <annotation> | <funccall> | <conditional> | <loop> | <return>
 
-<axiom> ::= `_axiom' (<expr> | <quantifiedexpr>)
+<axiom> ::= `_axiom' <quantifiedexpr>
+
+<requires> ::= `_requires' <predformula>
+
+<ensures> ::= `_ensures' <predformula>
 
 <block> ::= `{' <statement>* `}'
 
@@ -58,7 +62,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <varref> ::= <name> (`[' <expr> `]' )?
 
-<annotation> ::= (`_assert' | `_assume') (<expr> | <quantifiedexpr>)
+<annotation> ::= (`_assert' | `_assume') <predformula>
 
 <funccall> ::= <name> `(' (<expr> (`,' <expr>)* )? `)'
 
@@ -66,12 +70,13 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <loop> ::= `while' <expr> \\ <invariant> \\ <block>
 
-<invariant> ::= `_invariant' (<expr> | <quantifiedexpr>)
+<invariant> ::= `_invariant' <predformula>
 
 <return> ::= `return' <expr>
 
-% TODO mark math symbols as tokens
-<quantifiedexpr> ::= ($\forall$ | $\exists$ ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
+<predformula> ::= <expr> | <quantifiedexpr>
+
+<quantifiedexpr> ::= (\lit{$\forall$} | \lit{$\exists$} ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
 
 <expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <literal> | <varref> | <funccall>
 
@@ -150,17 +155,23 @@ Bedingt durch die kleine Anzahl möglicher Variablentypen ist das Typsystem nich
 
 Jedes Sprachelement, das einen Wert zurückliefert, besitzt einen Rückgabetyp, kurz Typ des Sprachelements. Ein Sprachelement kann Kindelemente besitzen, deren Typ Einschränkungen unterliegen kann -- beispielsweise kann der Operator $+$ nur auf Operanden vom Typ \int{} angewendet werden.
 
-In folgender Tabelle bedeutet die Notation $\rightarrow x$, dass der Typ des Sprachelements gleich dem Typ von $x$ ist.
+Die Spezifikation des Typsystems ist in Tabelle~\ref{typesystem} dargestellt.
 
 \begin{landscape}
 
-\enlargethispage{2cm}
+\enlargethispage{.2cm}
 
-\begin{figure}[H]
-\begin{tabular}{lllp{11cm}}
+\begin{longtable}{lllp{11cm}}
+\label{typesystem} \\
+\caption{Typsystem-Spezifikation. Die Notation $\rightarrow x$ bedeutet, dass der Typ des Sprachelements gleich dem Typ von $x$ ist.} \\
 \toprule
 \textbf{Kategorie} & \textbf{Sprachelement} & \textbf{Typ} & \textbf{Einschränkungen} \\
 \midrule
+
+\endhead
+
+\endfoot
+
 \multirow{4}{*}{Typdeklaration} & \int & \int & \\
 \cmidrule{2-4}
 & \bool & \bool & \\
@@ -176,7 +187,7 @@ Variablendeklaration & $type$ $name$ := $value$ & $\rightarrow type$ & Die Typen
 \midrule
 Variablenzuweisung & $varref$ := $value$ & $\rightarrow varref$ & Die Typen von $varref$ und $value$ müssen gleich sein. \\
 \midrule
-\multirow{6}{*}{Ausdrücke} & $x + y, x - y, x \cdot y, x \mathop{/} y, x \mathop{\%} y$ & \int & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
+\multirow{7}{*}{Ausdrücke} & $x + y, x - y, x \cdot y, x \mathop{/} y, x \mathop{\%} y$ & \int & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
 \cmidrule{2-4}
 & $a \wedge b, a \vee b$ & \bool & $a$ und $b$ müssen beide vom Typ \bool{} sein. \\
 \cmidrule{2-4}
@@ -188,6 +199,8 @@ Variablenzuweisung & $varref$ := $value$ & $\rightarrow varref$ & Die Typen von 
 & & & $x$ und $y$ müssen vom Typ \int{} oder \bool{} sein. \\
 \cmidrule{2-4}
 & $x \leq y, x < y, x > y, x \geq y$ & \bool & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
+\cmidrule{2-4}
+& $\forall$ $x$ $expr$ und $\exists$ $x$ $expr$ & \bool & $x$ muss vom Typ \int{} oder \bool{} sein.\\
 \midrule
 Funktionsdeklaration & \texttt{function} $type$ $name$ ($params$) & $\rightarrow type$ & \\
 \midrule
@@ -197,6 +210,6 @@ Funktionsaufruf & $funcref(params)$ & $\rightarrow funcref$ & Die Parameter $par
 \midrule
 Rückgabewert & \texttt{return} $value$ & $-$ & Der Typ von $value$ muss gleich dem Rückgabetyp der umschließenden Funktion sein. \\
 \bottomrule
-\end{tabular}
-\end{figure}
+\end{longtable}
+
 \end{landscape}

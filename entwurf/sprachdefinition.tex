@@ -105,11 +105,11 @@ Folgende Schlüsselwörter sind für die Verwendung innerhalb der Sprache reserv
 	\item \texttt{Boolean}
 	\item \texttt{false}
 	\item \texttt{true}	
-	\item \texttt{_axiom}
-	\item \texttt{_assert}
-	\item \texttt{_assume}
-	\item \texttt{_requires}
-	\item \texttt{_ensures}
+	\item \texttt{\_axiom}
+	\item \texttt{\_assert}
+	\item \texttt{\_assume}
+	\item \texttt{\_requires}
+	\item \texttt{\_ensures}
 	\item \texttt{if}
 	\item \texttt{else}	
 	\item \texttt{while}		
@@ -166,7 +166,7 @@ In folgender Tabelle bedeutet die Notation $\rightarrow x$, dass der Typ des Spr
 & \bool & \bool & \\
 \cmidrule{2-4}
 & \multirow{2}{*}{$x$\texttt{[$N$]}} & \multirow{2}{*}{$\rightarrow x$} & $x \in \{$ \int{}, \bool{}$\}$ \\
-& & & \linebreak $N$ muss vom Typ \int{} sein \\
+& & & $N$ muss vom Typ \int{} sein \\
 \midrule
 Variablendeklaration & $type$ $name$ := $value$ & $\rightarrow type$ & Die Typen von $type$ und $value$ müssen gleich sein. \\
 \midrule
@@ -185,7 +185,7 @@ Variablenzuweisung & $varref$ := $value$ & $\rightarrow varref$ & Die Typen von 
 & $\neg a$ & \bool & $a$ muss vom Typ \bool{} sein. \\
 \cmidrule{2-4}
 & \multirow{2}{*}{$x = y$} & \multirow{2}{*}{\bool} & $x$ und $y$ müssen beide vom gleichen Typ sein. \\
-& & & $x$ und $y$ müssen vom Typ \int{} oder \bool{} sein.} \\
+& & & $x$ und $y$ müssen vom Typ \int{} oder \bool{} sein. \\
 \cmidrule{2-4}
 & $x \leq y, x < y, x > y, x \geq y$ & \bool & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
 \midrule

@@ -16,23 +16,18 @@ zusammen aus dem WHILE-Programmtext und den Annotationen. Annotationen
 sind entweder Axiome, Funktionsverträge, Schleifeninvarianten,
 Zusicherungen oder Annahmen.%
 
-\subsubsection{Annotationen mit Voraussetzungen}%
+\subsubsection{Annotationen mit Kontext}%
 
-Der übergebene AST besteht aus genau einer Annotation, insbesondere
-fehlt jeglicher Programmtext. Allerdings wird zusätzlich eine Menge
-von Voraussetzungen übergeben, welche die Beweiserschnittstelle nicht
-selbst dem AST entnehmen kann.%
+Der Beweiserschnittstelle wird ein AST übergeben, der genau einen
+Annotationsausdruck enthält, also insbesondere kein WHILE-Programmtext
+oder Annotationstyp. Zusätzlich kann ein Modell als Auswertungskontext
+angegeben werden, das im Ausdruck freien Variablen eine Bedeutung
+zuweist. Dieses Modell kann zum Beispiel einem Ausführungszustand
+entsprechen, sodass Annotationsausdrücke auch für konkrete
+Ausführungen (anstatt für alle wie bei
+Programmspezifikationsprüfungen) geprüft werden können.%
 
-% TODO was geschieht, wenn sich die Voraussetzungen widersprechen
-% TODO Beispiel finden, für das ausgewertete Zusicherungen
-%      übergeben werden müssen
-
-Diese Voraussetzungen enthalten den Zustand einer Programmausführung.
-Der Programmzustand enthält
-die von einem Interpreter berechneten Wertbelegungen von Symbolen, die
-insbesondere in der auszuwertenden Annotation vorkommen können. Den
-Programmzustand kann die Beweiserschnittstelle nicht selbst
-feststellen.
+Siehe \texttt{SpecificationChecker::checkAnnotation}%
 
 \subsection{Formelerstellung im wp-Kalkül}%
 

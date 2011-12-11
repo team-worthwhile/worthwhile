@@ -14,65 +14,93 @@ Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stel
 \subsubsection{class ExecutionContext}
 Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungskontextes. Dazu gehören ein \texttt{ExpressionEvaluator}, ein \texttt{StatementExecutor} sowie eine \texttt{SymbolTable}, in der in diesem Kontext angelegte Symbole gespeichert werden.
 
-\begin{description}
-    \method{private SymbolTable symbolTable}
-    \method{private StatementExecutor statementExecutor}
-    \method{private ExpressionEvaluator expressionEvaluator}
-\end{description}
+%\begin{description}
+%    \method{private SymbolTable symbolTable}
+%    \method{private StatementExecutor statementExecutor}
+%    \method{private ExpressionEvaluator expressionEvaluator}
+%\end{description}
 
 \begin{description}
+    \method{public String getCurrentFunctionName()} % TODO should this really be a String?
+    Gibt den Namen der in diesem Kontext ausgeführen Funktion zurück.
+
     \method{public SymbolTable getSymbolTable()}
-    Gibt die aktuelle Symboltabelle zurück.
+    Gibt die aktuell gültige Symboltabelle zurück.
 
-    \method{public void executeStatement(Statement statement)}
+    \method{protected void executeStatement(Statement statement)}
     Führt in diesem Kontext das angegebene Statement aus.
 
-    % TODO Ist Type die Grundklasse des Typsystems?
-    \method{public Type evaluateExpression(Statement statement)}
+    \method{protection Object evaluateExpression(Expression expression)}
     Wertet in diesem Kontext die gegebene Expression aus und gibt das Ergebnis der Auswertung zurück.
 \end{description}
 
 
-\subsubsection{interface ExecutionContextStack}
+\subsubsection{class ExecutionContextStack}
 
 Instanzen von \texttt{ExecutionContextStack} verwalten eine Menge von "`gestapelten"' \texttt{ExecutionContext}-Objekten. Die Klasse \texttt{Interpreter} verwendet diesen Stack, um die für Funktionsaufrufe benötigten mehreren Instanzen von \texttt{ExecutionContext} einfach zu verwalten.
+
+\textbf{TODO} ein Stack, relativ einfach
 
 \subsubsection{class Interpreter}
 
 Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial übergebenen Programms.
 
 \begin{description}
-    \method{public Interpreter(Program p, DebugInterface debugInterface)}
-    Erzeugt eine Instanz, die das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann. Das übergebene \texttt{DebugInterface}-Objekt wird zur Interaktion mit dem Debugger verwendet.
+    \method{public Interpreter(IParseResult parseResult)}
+    Erzeugt eine Instanz, die das Programm, definiert durch die Parserausgabe \texttt{parseResult}, ausführen kann. Das Interface IParseResult wird vom Xtext Framework zur Verfügung gestellt und enthält neben dem AST Metainformationen wie bespielsweise die Positionen der Syntaxelemente in der gelesenen Quelldatei.
 
-    \method{public void executeStatement(Statement s)}
-    Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
+    \method{public void addDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
+    Fügt dem Interpreter eine Instanz einer Unterklasse von \texttt{AbstractDebugEventPolicy} hinzu und fügt sie der Menge der bei Ereignissen zu benachrichtigenden Objekte hinzu
+
+    \method{public void removeDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
+    Entfernt eine Instanz einer Unterklasse von \texttt{AbstractDebugEventPolicy} aus der Menge der bei Ereignissen zu benachrichtigenden Objekte.
+
+    \method{public boolean addBreakpoint(int line)}
+    Fügt einen Breakpoint in der gegebenen Zeile ein.
+
+    \method{public boolean addBreakpoint(int line, \textbf{TODO} condition)} % Welche sprache?
+    Fügt einen Breakpoint in der gegebenen Zeile ein, dessen Erreichen nur dann ein Ereignis auslöst, wenn die Aussage \texttt{condition} wahr ist.
+
+    \method{public boolean clearBreakpoint(int line)}
+    Entfernt den Breakpoint in der gegeben Zeile.
+
+    \method{public ExecutionContextStack getExecutionContextStack()} % TODO: in diesen Strukturen nur manche sachen public machen!
+    Entfernt den Breakpoint in der gegeben Zeile.
+
+    %\method{public void executeStatement(Statement s)}
+    %Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
 \end{description}
 
 
 \subsubsection{interface ExpressionEvaluator}
-Die Aufgabe von \texttt{ExpressionEvaluator}-Instanzen ist es, \texttt{Expression}-Objekte aus dem AST auszuwerten.
+Die Aufgabe von \texttt{ExpressionEvaluator} Instanzen ist es, \texttt{Expression} Objekte aus dem AST auszuwerten.
 \begin{description}
     % TODO Ist Type die Grundklasse des Typsystems?
-    \method{public Type eval(Expression expression)}
+    \method{public Object eval(Expression expression)}
     Wertet die Expression \texttt{expression} aus und gibt das Ergebnis zurück.
 \end{description}
 
 \subsubsection{class InterpreterExpressionEvaluator implements ContextFreeExpressionEvaluator}
 Wertet Expressions aus, für die zur Auswertung Zugriff auf den \texttt{ExecutionContext} sowie den \texttt{Interpreter} nötig ist, beispielsweise um Funktionsaufrufe auszuwerten oder die Werte referenzierter Variablen aufzulösen.
 
-\subsubsection{interface DebugInterface}
-Implementationen von \texttt{DebugInterface} sind für die Interaktion des Interpreters mit anderen Teilen des Programms zuständig.
+\subsubsection{abstract class AbstractDebugEventPolicy}
+Instanzen von Unterklassen von \texttt{AbstractDebugEventPolicy} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Policy-Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden - eine Unterklasse von AbstractDebugEventPolicy kann auch nur auf eine Teilmenge der definierten Ereignisse reagieren.
 
 \begin{description}
-    \method{public void statementExecuted()}
+    \method{protected void statementExecuted()}
     Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
-    \method{public void expressionEvaluated()}
+    \method{protected void expressionEvaluated()}
     Wird vom Interpreter nach jedem Auswerten einer Expression aufgerufen.
-    \method{public void executionStarted()}
+    \method{protected void executionStarted()}
     Wird vom Interpreter direkt nach dessen Start aufgerufen.
-    \method{public void executionTerminatedNormally()}
+    \method{protected void executionTerminatedNormally()}
     Wird vom Interpreter nach ordnungsgemäßer Terminierung des Programms aufgerufen.
-    \method{public void executionTerminatedAbnormally()}
+    \method{protected void executionTerminatedAbnormally()}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms, ausgelöst beispielsweise durch einen Laufzeitfehler, aufgerufen.
+    \method{protected void breakpointReached()}
+    Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet wurde)
+    \method{protected void assertionSucceeded()}
+    Wird vom Interpreter nach jeder erfolgreichen Ausführung einer Zusicherungsinstruktion aufgerufen
+    \method{protected void assertionFailed()}
+    Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen
 \end{description}

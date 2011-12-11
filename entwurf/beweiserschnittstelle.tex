@@ -1,8 +1,10 @@
 \section{Beweiserschnittstelle}%
 
 Die Beweiserschnittstelle lässt Worthwhile-""Programmspezifikationen
-und -Annotationen mit Voraussetzungen von einem Beweiser überprüfen
-und liefert dem Aufrufer dessen Auswertung zurück.%
+und -""Annotationen mit Kontext von einem Beweiser überprüfen
+und liefert dem Aufrufer dessen Auswertung zurück. Die Auswertung
+besteht aus einem Wahrheitswert, einem Modell und einer Liste von
+Fehlerausgaben.%
 
 \subsection{Eingabedaten}%
 
@@ -15,6 +17,8 @@ aus einem Worthwhile-Text erstellt wurde, entnommen. Sie setzt sich
 zusammen aus dem WHILE-Programmtext und den Annotationen. Annotationen
 sind entweder Axiome, Funktionsverträge, Schleifeninvarianten,
 Zusicherungen oder Annahmen.%
+
+Siehe \texttt{SpecificationChecker::checkProgram}%
 
 \subsubsection{Annotationen mit Kontext}%
 
@@ -41,7 +45,7 @@ mitgeliefert.%
 \subsubsection{Axiome}%
 
 Die schließlich an den Beweiser übergebene Formel ist eine
-Implikation, auf deren linke Seite die konjunktiv verknüpften Axiome
+Implikation, auf deren linken Seite die konjunktiv verknüpften Axiome
 stehen. Wenn keine Axiome angegeben wurden, steht auf der linke Seite
 der Implikation der Wahrheitswert \texttt{true}. Auf der rechten Seite
 steht das zu beweisende Theorem, dass das Programm der Spezifikation
@@ -53,12 +57,12 @@ sind syntaktische Elemente prädikatenlogische Formeln.%
 \subsubsection{Funktionsverträge}%
 
 Funktionen werden modular spezifiziert. Ihre Spezifikation besteht aus
-den Annahmen, die ihre Parameter erfüllen müssen, und den
+den Annahmen, die ihre Parameter für Ergebniskorrektheit erfüllen müssen, und den
 Zusicherungen, die sie bei gültigen Parametern für ihr Ergebnis
 erfüllen. Annahmen werden Vorbedingungen genannt, Zusicherungen
-Nachbedingungen und die Menge aller Bedingungen Funktionsvertrag.%
+Nachbedingungen und die Menge aller dieser Bedingungen Funktionsvertrag.%
 
-Für den Funktionstext werden die Vorbedingungen wie Axiome behandelt
+Für den Funktionsprogrammtext werden die Vorbedingungen wie Axiome behandelt
 und Nachbedingungen wie Zusicherungen für den Rückgabewert der
 Funktion.%
 
@@ -71,8 +75,8 @@ Siehe \texttt{FP020}%
 \subsubsection{Schleifeninvarianten}%
 
 Schleifeninvarianten werden in der Formel an den Beweiser so
-eingebettet, dass ihre Aussage vor dem Schleifeneintritt, nach jedem
-Durchlauf und nach dem Austritt gelten muss. Nach jedem Durchlauf
+eingebettet, dass ihre Aussagen vor dem Schleifeneintritt, nach jedem
+Durchlauf und nach dem Austritt gelten müssen. Nach jedem Durchlauf
 heißt, dass die Erfülltheit der Schleifenbedingung und der Invariante
 die Aussage der Invariante impliziert, und nach dem Austritt bedeutet
 analog, dass die Erfülltheit der negierten Schleifenbedingung und der
@@ -96,7 +100,7 @@ Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
 \subsubsection{Annahmen}%
 
 Annahmen werden wie Axiome behandelt, sodass sie insbesondere nicht
-wie Zusicherungen erfüllt sein müssen und vom Beweiser auch nicht
+wie Zusicherungen erfüllt sein müssen und vom Beweiser auch nicht auf Erfülltheit
 geprüft werden.%
 
 Annahmen werden im AST als \texttt{assume}-Knoten codiert,
@@ -107,11 +111,11 @@ deren Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
 Für Arrays werden implizit die drei Axiome (A1), (A2) und (A3)
 vorausgesetzt. Außerdem wird jedem Arrayzugriff im Programmtext bei
 der Formelerstellung die Zusicherung, dass der angegebene Feldindex
-nicht die Deklarationsgröße übersteigt, vorangestellt.%
+nicht negativ ist und nicht die Deklarationsgröße übersteigt, vorangestellt.%
 
 \begin{description}%
     \item[A1] \begin{math}\forall i \in \mathbb{A}, e \in \mathbb{B} : \{\texttt{true}\} a[i] := e \{a[i] = e\}\end{math}%
-    \item[A2] \begin{math}\forall i, j \in \mathbb{A}, e, f \in \mathbb{B} : \{i \neq j \wedge a[i] = e\} a[i] := f \{a[i] = e\}\end{math}%
+    \item[A2] \begin{math}\forall i, j \in \mathbb{A}, e, f \in \mathbb{B} : \{i \neq j \wedge a[i] = e\} a[j] := f \{a[i] = e\}\end{math}%
     \item[A3] \begin{math}\forall a, b \in \mathbb{B}^\mathbb{A} : (\forall i, j \in \mathbb{A} : a[i] = b[j]) \Rightarrow a = b\end{math}%
 \end{description}%
 
@@ -127,21 +131,23 @@ definiertem Ergebnis terminieren.%
 \subsubsection{Typsystem}%
 
 Die in Worthwhile vorhandenen Datentypen \texttt{Integer} und
-\texttt{Boolean} werden beide von dem Beweiser Z3 unterstützt. Typen
+\texttt{Boolean} werden beide von dem Beweiser Z3 unterstützt. Die Typen verwendeter Sprachelemente
 werden bei Parameterübergabe, Symbolreferenz und Symboldefinition
-geprüft. Treten nicht übereinstimmende Typen auf, liefert Z3 einen
-Fehler.%
+geprüft. Treten in einem dieser Fälle nicht übereinstimmende Typen auf, liefert Z3 einen
+Fehler. Diese Fehler sind in der \texttt{ProverResult}-Rückgabe enthalten.%
 
-\subsection{Voraussetzungen für einzelne Annotationen}%
+\subsection{Kontext für einzelne Annotationen}%
 
 % TODO Datentyp für Programmzustand und ausgewertete Annotationen
 
-Voraussetzungen bei der Prüfung von einzelnen Annotationen werden wie
+Die Bedeutungszuweisung für freie Variablen im Annotationsausdruck werden wie
 Axiome behandelt.%
 
 \subsection{Ausgabedaten}%
 
 \subsubsection{Modell}%
+
+\subsubsection{Fehlerausgaben}%
 
 \subsection{Klassenentwurf}%
 
@@ -153,6 +159,10 @@ Axiome behandelt.%
 
     \item Die Besucher hängen von Strategieklassen ab, welche die
     Transformationsregeln und die Formelsprache austauschbar machen.%
+
+    Siehe \texttt{Prover::ProgramTransformer::FormulaGenerator}%
+
+    Siehe \texttt{Prover::TheoremProver::FormulaCompiler}%
 
     % TODO Spezifikation des unterstützten SMT-LIB-Standards
 

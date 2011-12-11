@@ -172,9 +172,16 @@ von Worthwhile entsprechen.%
 Instanzen von \texttt{SMTLIBAST} codieren Programmtexte, welche der
 Syntax von SMT-LIB entsprechen.%
 
-\subsubsection{class ProverInterface}%
+\subsubsection{class Prover::Formula}%
 
-Instanzen von \texttt{ProverInterface} übersetzen
+Formula beschreibt Instanzen, die prädikatenlogische Formeln als
+Syntax~Tree \footnote{Die Syntax prädikatenlogischer Formeln ist
+\url{http://formal.iti.kit.edu/teaching/pse/2011/Downloads/intro.pdf}
+entnommen} zugänglich machen.%
+
+\subsubsection{class Prover::SpecificationChecker}%
+
+Instanzen von \texttt{SpecificationChecker} übersetzen
 \texttt{WWAST}-Instanzen in Instanzen von \texttt{SMTLIBAST}.%
 
 % TODO nicht öffentliche Attribute
@@ -194,7 +201,9 @@ Instanzen von \texttt{ProverInterface} übersetzen
 % TODO öffentliche Methoden
 
 \begin{description}%
-    \item[public bool checkProgram(WWAST prg)]
+    \item[public SpecificationChecker(ProverCaller prover, FormulaGenerator generator)]%
+
+    \item[public bool checkProgram(WWAST program)]
 
     Prüft mit Hilfe eines Beweisers die Korrektheit des annotierten
     Programms \texttt{prg}. Es wird genau dann \texttt{true}
@@ -207,7 +216,7 @@ Instanzen von \texttt{ProverInterface} übersetzen
 
     Siehe \texttt{FP005}%
 
-    \item[public bool checkAnnotation(WWAST ann, Environment env)]
+    \item[public bool checkAnnotation(WWAST annotation, Environment env)]
 
     Prüft mit Hilfe eines Beweisers die Erfülltheit der Annotation
     \texttt{ann}. Es wird genau dann \texttt{true} zurückgeliefert,
@@ -232,47 +241,77 @@ Instanzen von \texttt{ProverInterface} übersetzen
     \texttt{check""Annotation} auf den Wert von \texttt{seconds}. Ist
     der angegebene Wert negativ, wird er als Null interpretiert.%
 
-    \item[public SMTLIBAST transformProgram(WWAST prg)]
+\end{description}%
 
-    Liefert eine SMT-""LIB-""Formel für das annotierte Programm
-    \texttt{prg}, wie sie von \texttt{check""Program} als Eingabe für
-    den Beweiser erstellt würde.%
+\subsubsection{interface Prover::ProgramTransformer::FormulaGenerator}%
 
-    \item[public SMTLIBAST transformAnnotation(WWAST ann, Environment env)]
+\begin{description}%
+    \item[public Formula transformLoop(WWAST statement)]%
 
-    Liefert eine SMT-""LIB-""Formel für die Annotation \texttt{ann} im
-    Kontext \texttt{env}, wie sie von \texttt{check""Annotation} als
-    Eingabe für den Beweiser erstellt würde.%
+    \item[public Formula transformFunctionDefinition(WWAST statement)]%
+
+    \item[public Formula transformEnsures(WWAST statement)]%
+
+    \item[public Formula transformRequires(WWAST statement)]%
+
+    \item[public Formula transformInvariant(WWAST statement)]%
+
+    \item[public Formula transformFunctionCall(WWAST statement)]%
+
+    \item[public Formula transformVariableAssignment(WWAST statement)]%
+
+    \item[public Formula transformArrayAssignment(WWAST statement)]%
+
+    \item[public Formula transfromConditional(WWAST statement)]%
+
+    \item[public Formula transformArrayElementAssignment(WWAST statement)]%
+
+    \item[public Formula transfromAssert(WWAST statement)]%
+
+    \item[public Formula transfromAssume(WWAST statement)]%
+
+    \item[public Formula transformAxiom(WWAST statement)]%
+
+    \item[public Formula transformVariableDeclaration(WWAST statement)]%
 
 \end{description}%
 
-% TODO nicht öffentliche Methoden
+\subsubsection{class Prover::TheoremProver::ProverCaller}%
 
 \begin{description}%
-    \item[private SMTLIBAST transformLoop(WWAST loop)]%
+    \item[public ProverResult checkFormula(Formula formula)]
 
-    \item[private SMTLIBAST transformFunctionDef(WWAST fundef)]%
+    Aufruf des Beweisers für die prädikatenlogische Formel
+    \texttt{formula}. Es wird genau dann \texttt{true} in
+    \texttt{ProverResult\#satisfiable} zurückgeliefert, wenn die Formel
+    erfüllt werden konnte, und \texttt{false} sonst. Hat im Falle der
+    Erfüllbarkeit der Beweiser ein Modell geliefert, wird dies in
+    \texttt{ProverResult\#model} entsprechend zurückgeliefert.%
 
-    \item[private SMTLIBAST transformFunctionCall(WWAST funcall)]%
+\end{description}%
 
-    \item[private SMTLIBAST transformAssign(WWAST assign)]%
+\subsubsection{class Prover::TheoremProver::StdProver extends ProverCaller}%
 
-    \item[private SMTLIBAST transfromConditional(WWAST cond)]%
+\begin{description}%
+    \item[public StdProver(String path, FormulaCompiler compiler)]%
 
-    \item[private SMTLIBAST transfromAssert(WWAST assert)]%
+\end{description}%
 
-    \item[private SMTLIBAST transfromAssume(WWAST assume)]%
+\subsubsection{interface Prover::TheoremProver::FormulaCompiler}%
 
-    \item[private SMTLIBAST transformAxiom(WWAST axiom)]%
+\begin{description}%
+    % TODO return types missing
+    \item[public compileForall(Formula formula)]%
 
-    \item[private bool checkSAT(SMTLIBAST formula)]
+    \item[public compileExists(Formula formula)]%
 
-    Aufruf des Beweisers für die SMT-""LIB-""Formel \texttt{formula}.
-    Es wird genau dann \texttt{true} zurückgeliefert, wenn die Formel
-    erfüllt werden konnte, und \texttt{false} sonst~(z.~B.\, wenn
-    \texttt{timeout} überschritten wurde). Hat im Falle der
-    Erfüllbarkeit der Beweiser ein Modell geliefert, wird dies der
-    Variable \texttt{model} entsprechend zugewiesen.%
+    \item[public compileConjunction(Formula formula)]%
+
+    \item[public compileDisjunction(Formula formula)]%
+
+    \item[public compileNegation(Formula formula)]%
+
+    \item[public compileImplication(Formula formula)]%
 
 \end{description}%
 

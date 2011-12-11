@@ -4,7 +4,9 @@ Die Debugger-Komponente vermittelt zwischen dem Debug-Modell der GUI-Plattform u
 
 \subsection{Debugging}
 
-Dieser Teil des Debuggers implementiert des Debug-Modell von Eclipse. Eine Übersicht über dieses Modell findet sich in Abbildung~\ref{debugmodel}.
+Dieser Teil des Debuggers implementiert des Debug-Modell von Eclipse. Somit können alle in Eclipse vorhandenen Debug-Ansichten (etwa Breakpoint-Manager, Variablenansicht, Ausdrucksansicht) mit dem Worthwhile-Interpreter kommunizieren.
+
+Eine Übersicht über dieses Modell findet sich in Abbildung~\ref{debugmodel}.
 
 \begin{figure}
 	\label{debugmodel}
@@ -96,12 +98,16 @@ Diese Klasse repräsentiert einen \textit{Watchpoint}, also einen Breakpoint, de
 
 \subsubsection{class WorthwhileLaunchDelegate}
 
+Der \texttt{LaunchDelegate} ist dafür verantwortlich, den Interpreter zu starten und zu initialisieren sowie die Verbindung zwischen Interpreter und Debug-Infrastruktur herzustellen.
+
 \begin{description}
 	\mlmethod{public void launch(ILaunchConfiguration~configuration, String~mode, ILaunch~launch, IProgressMonitor~monitor)}
 	Diese Methode wird von der GUI aufgerufen, wenn der Benutzer den Befehl zum Ausführen des Programms wählt. Dabei enthält \texttt{configuration} die nötigen Einstellungen zum Aufruf des Interpreters, etwa den Pfad zur ausführbaren Datei von Z3 oder Optionen für den Interpreter. \texttt{mode} enthält den Modus, in dem das Programm ausgeführt wird, und ist entweder \texttt{run} oder \texttt{debug}. Der Parameter \texttt{launch} enthält Informationen über diese Ausführung des Programms; die Aufgabe dieser Methode ist es, sämtliche erzeugten Processe und \texttt{DebugTarget}s diesem Objekt bekannt zu machen. Schließlich kann der Fortschritt der Ausführung dem Benutzer über das \texttt{monitor}-Objekt mitgeteilt werden.
 \end{description}
 
 \subsubsection{class WorthwhileSourcePathComputerDelegate}
+
+Diese Klasse ist dafür verantwortlich, die Pfade zu bestimmen, die auf der Suche nach Quelldateien (Source Lookup) durchsucht werden sollen. Ein Source Lookup wird immer dann nötig, wenn der aktuelle Ausführungszustand des Interpreters auf die Quelldatei zurückgeführt werden soll, etwa bei der Anzeige der aktuell ausgeführten Zeile.
 
 \begin{description}
 	\mlmethod{public ISourceContainer[] computeSourceContainers( ILaunchConfiguration~configuration, IProgressMonitor~monitor)}
@@ -110,12 +116,16 @@ Diese Klasse repräsentiert einen \textit{Watchpoint}, also einen Breakpoint, de
 
 \subsubsection{class WorthwhileSourceLookupParticipant}
 
+Für den Source Lookup kann sich eine Reihe von Klassen (Participants) registrieren, die ein Objekt einer Quelldatei zuordnen. Ein solcher Participant wird in dieser Klasse implementiert.
+
 \begin{description}
 	\method{public String getSourceName(Object object)} Ruft den Quelldateinamen für \texttt{object} ab, wenn es sich dabei um eine Instanz von \texttt{WorthwhileStackFrame} handelt.
 \end{description}
 
 \subsubsection{class WorthwhileSourceLookupDirector}
 
+Diese Klasse ist dafür verantwortlich, den \texttt{SourceLookupParticipant} der Debugger-Infrastruktur bekannt zu machen.
+
 \begin{description}
-	\method{public void initializeParticipants()} Macht der GUI die Objekte bekannt, die am Source Lookup teilnehmen sollen.
+	\method{public void initializeParticipants()} Macht der Debugger-Infrastruktur die Objekte bekannt, die am Source Lookup teilnehmen sollen.
 \end{description}

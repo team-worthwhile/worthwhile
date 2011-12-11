@@ -29,7 +29,14 @@ Programmspezifikationsprüfungen) geprüft werden können.%
 
 Siehe \texttt{SpecificationChecker::checkAnnotation}%
 
-\subsection{Formelerstellung im wp-Kalkül}%
+\subsection{Formelerstellung im wp-Kalkül für den Beweiser Z3}%
+
+Die Erstellung einer Formel aus einer Programmspezifikation im
+wp-Kalkül ist eine Implementierung der Schnittstelle
+\texttt{FormulaGenerator} und die Benutzung des Beweisers Z3 für
+erstellte Formeln ist eine Implementierung der Schnittstelle
+\texttt{ProverCaller}. Beide Implementierungen werden von Worthwhile
+mitgeliefert.%
 
 \subsubsection{Axiome}%
 

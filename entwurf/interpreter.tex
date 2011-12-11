@@ -22,7 +22,7 @@ Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungs
 
 \begin{description}
     \method{public String getCurrentFunctionName()} % TODO should this really be a String?
-    Gibt den Namen der in diesem Kontext ausgeführen Funktion zurück.
+    Gibt den Namen der in diesem Kontext ausgeführten Funktion zurück.
 
     \method{public SymbolTable getSymbolTable()}
     Gibt die aktuell gültige Symboltabelle zurück.
@@ -30,7 +30,7 @@ Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungs
     \method{protected void executeStatement(Statement statement)}
     Führt in diesem Kontext das angegebene Statement aus.
 
-    \method{protection Object evaluateExpression(Expression expression)}
+    \method{protected Object evaluateExpression(Expression expression)}
     Wertet in diesem Kontext die gegebene Expression aus und gibt das Ergebnis der Auswertung zurück.
 \end{description}
 
@@ -47,10 +47,10 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
 
 \begin{description}
     \method{public Interpreter(IParseResult parseResult)}
-    Erzeugt eine Instanz, die das Programm, definiert durch die Parserausgabe \texttt{parseResult}, ausführen kann. Das Interface IParseResult wird vom Xtext Framework zur Verfügung gestellt und enthält neben dem AST Metainformationen wie bespielsweise die Positionen der Syntaxelemente in der gelesenen Quelldatei.
+    Erzeugt eine Instanz, die das Programm, definiert durch die Parserausgabe \texttt{parseResult}, ausführen kann. Das Interface IParseResult wird vom Xtext Framework zur Verfügung gestellt und enthält neben dem AST Metainformationen wie beispielsweise die Positionen der Syntaxelemente in der gelesenen Quelldatei.
 
     \method{public void addDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
-    Fügt dem Interpreter eine Instanz einer Unterklasse von \texttt{AbstractDebugEventPolicy} hinzu und fügt sie der Menge der bei Ereignissen zu benachrichtigenden Objekte hinzu
+    Fügt dem Interpreter eine Instanz einer Unterklasse von \texttt{AbstractDebugEventPolicy} hinzu und fügt sie der Menge der bei Ereignissen zu benachrichtigenden Objekte hinzu.
 
     \method{public void removeDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
     Entfernt eine Instanz einer Unterklasse von \texttt{AbstractDebugEventPolicy} aus der Menge der bei Ereignissen zu benachrichtigenden Objekte.
@@ -62,10 +62,10 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
     Fügt einen Breakpoint in der gegebenen Zeile ein, dessen Erreichen nur dann ein Ereignis auslöst, wenn die Aussage \texttt{condition} wahr ist.
 
     \method{public boolean clearBreakpoint(int line)}
-    Entfernt den Breakpoint in der gegeben Zeile.
+    Entfernt den Breakpoint in der gegebenen Zeile.
 
     \method{public ExecutionContextStack getExecutionContextStack()} % TODO: in diesen Strukturen nur manche sachen public machen!
-    Entfernt den Breakpoint in der gegeben Zeile.
+    Entfernt den Breakpoint in der gegebenen Zeile.
 
     %\method{public void executeStatement(Statement s)}
     %Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
@@ -84,7 +84,7 @@ Die Aufgabe von \texttt{ExpressionEvaluator} Instanzen ist es, \texttt{Expressio
 Wertet Expressions aus, für die zur Auswertung Zugriff auf den \texttt{ExecutionContext} sowie den \texttt{Interpreter} nötig ist, beispielsweise um Funktionsaufrufe auszuwerten oder die Werte referenzierter Variablen aufzulösen.
 
 \subsubsection{abstract class AbstractDebugEventPolicy}
-Instanzen von Unterklassen von \texttt{AbstractDebugEventPolicy} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Policy-Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden - eine Unterklasse von AbstractDebugEventPolicy kann auch nur auf eine Teilmenge der definierten Ereignisse reagieren.
+Instanzen von Unterklassen von \texttt{AbstractDebugEventPolicy} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Policy-Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden -- eine Unterklasse von AbstractDebugEventPolicy kann auch nur auf eine Teilmenge der definierten Ereignisse reagieren.
 
 \begin{description}
     \method{protected void statementExecuted()}
@@ -98,9 +98,9 @@ Instanzen von Unterklassen von \texttt{AbstractDebugEventPolicy} behandeln Ereig
     \method{protected void executionTerminatedAbnormally()}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms, ausgelöst beispielsweise durch einen Laufzeitfehler, aufgerufen.
     \method{protected void breakpointReached()}
-    Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet wurde)
+    Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet) wurde.
     \method{protected void assertionSucceeded()}
-    Wird vom Interpreter nach jeder erfolgreichen Ausführung einer Zusicherungsinstruktion aufgerufen
+    Wird vom Interpreter nach jeder erfolgreichen Ausführung einer Zusicherungsinstruktion aufgerufen.
     \method{protected void assertionFailed()}
-    Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen
+    Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen.
 \end{description}

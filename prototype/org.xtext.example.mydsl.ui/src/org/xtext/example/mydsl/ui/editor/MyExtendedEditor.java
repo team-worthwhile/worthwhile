@@ -1,5 +1,6 @@
 package org.xtext.example.mydsl.ui.editor;
 
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuCreator;
 import org.eclipse.jface.action.IMenuManager;
@@ -8,6 +9,7 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.swt.events.HelpListener;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 public class MyExtendedEditor extends XtextEditor {
 
@@ -213,6 +215,24 @@ public class MyExtendedEditor extends XtextEditor {
 			}
 			
 		});
+	}
+
+	@Override
+	public IXtextDocument getDocument() {
+		// TODO Auto-generated method stub
+		return super.getDocument();
+	}
+
+	@Override
+	public IResource getResource() {
+		// TODO Auto-generated method stub
+		return super.getResource();
+	}
+
+	@Override
+	public boolean isEditable() {
+		// TODO Auto-generated method stub
+		return super.isEditable();
 	}
 
 }

@@ -43,7 +43,7 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
 
 \begin{description}
     \method{public Interpreter(Program p, DebugInterface debugInterface)}
-    Erzeugt eine Instanz, die das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann. Das übergebene \texttt{DebugInterface} Objekt wird zur interaktion mit dem Debugger verwendet.
+    Erzeugt eine Instanz, die das Programm mit der gegebenen Spezifikation \texttt{p} ausführen kann. Das übergebene \texttt{DebugInterface}-Objekt wird zur Interaktion mit dem Debugger verwendet.
 
     \method{public void executeStatement(Statement s)}
     Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
@@ -51,7 +51,7 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
 
 
 \subsubsection{interface ExpressionEvaluator}
-Die Aufgabe von \texttt{ExpressionEvaluator} Instanzen ist es, \texttt{Expression} Objekte aus dem AST auszuwerten.
+Die Aufgabe von \texttt{ExpressionEvaluator}-Instanzen ist es, \texttt{Expression}-Objekte aus dem AST auszuwerten.
 \begin{description}
     % TODO Ist Type die Grundklasse des Typsystems?
     \method{public Type eval(Expression expression)}

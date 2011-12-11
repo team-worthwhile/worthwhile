@@ -187,23 +187,23 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 % TODO nicht öffentliche Attribute
 
 \begin{description}%
-    \item [private int timeout]
+    \method{private int timeout}%
 
     Zeit in Sekunden, nach der \texttt{check""Program} und
     \texttt{check""Annotation} zurückkehren müssen.%
 
     Siehe \texttt{setTimeout}.%
 
-    \item [private SMTLIBAST model]%
+    \method{private SMTLIBAST model}%
 
 \end{description}%
 
 % TODO öffentliche Methoden
 
 \begin{description}%
-    \item[public SpecificationChecker(ProverCaller prover, FormulaGenerator generator)]%
+    \method{public SpecificationChecker(ProverCaller prover, FormulaGenerator generator)}%
 
-    \item[public bool checkProgram(WWAST program)]
+    \method{public bool checkProgram(WWAST program)}
 
     Prüft mit Hilfe eines Beweisers die Korrektheit des annotierten
     Programms \texttt{prg}. Es wird genau dann \texttt{true}
@@ -216,7 +216,7 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 
     Siehe \texttt{FP005}%
 
-    \item[public bool checkAnnotation(WWAST annotation, Environment env)]
+    \method{public bool checkAnnotation(WWAST annotation, Environment env)}
 
     Prüft mit Hilfe eines Beweisers die Erfülltheit der Annotation
     \texttt{ann}. Es wird genau dann \texttt{true} zurückgeliefert,
@@ -228,14 +228,14 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 
     Siehe \texttt{FP005}%
 
-    \item[public Environment getModel()]
+    \method{public Environment getModel()}
 
     Liefert für den vorhergehenden Aufruf von \texttt{check""Program}
     oder \texttt{check""Annotation} die Ausgabe des Beweisers und
     \texttt{null}, wenn zuvor weder ein Programm noch eine Annotation
     überprüft wurde oder keine Ausgabe verfügbar war.%
 
-    \item[public void setTimeout(int seconds)]
+    \method{public void setTimeout(int seconds)}
 
     Setzt den Timeout für Aufrufe von \texttt{check""Program} und
     \texttt{check""Annotation} auf den Wert von \texttt{seconds}. Ist
@@ -246,40 +246,40 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 \subsubsection{interface Prover::ProgramTransformer::FormulaGenerator}%
 
 \begin{description}%
-    \item[public Formula transformLoop(WWAST statement)]%
+    \method{public Formula transformLoop(WWAST statement)}%
 
-    \item[public Formula transformFunctionDefinition(WWAST statement)]%
+    \method{public Formula transformFunctionDefinition(WWAST statement)}%
 
-    \item[public Formula transformEnsures(WWAST statement)]%
+    \method{public Formula transformEnsures(WWAST statement)}%
 
-    \item[public Formula transformRequires(WWAST statement)]%
+    \method{public Formula transformRequires(WWAST statement)}%
 
-    \item[public Formula transformInvariant(WWAST statement)]%
+    \method{public Formula transformInvariant(WWAST statement)}%
 
-    \item[public Formula transformFunctionCall(WWAST statement)]%
+    \method{public Formula transformFunctionCall(WWAST statement)}%
 
-    \item[public Formula transformVariableAssignment(WWAST statement)]%
+    \method{public Formula transformVariableAssignment(WWAST statement)}%
 
-    \item[public Formula transformArrayAssignment(WWAST statement)]%
+    \method{public Formula transformArrayAssignment(WWAST statement)}%
 
-    \item[public Formula transfromConditional(WWAST statement)]%
+    \method{public Formula transfromConditional(WWAST statement)}%
 
-    \item[public Formula transformArrayElementAssignment(WWAST statement)]%
+    \method{public Formula transformArrayElementAssignment(WWAST statement)}%
 
-    \item[public Formula transfromAssert(WWAST statement)]%
+    \method{public Formula transfromAssert(WWAST statement)}%
 
-    \item[public Formula transfromAssume(WWAST statement)]%
+    \method{public Formula transfromAssume(WWAST statement)}%
 
-    \item[public Formula transformAxiom(WWAST statement)]%
+    \method{public Formula transformAxiom(WWAST statement)}%
 
-    \item[public Formula transformVariableDeclaration(WWAST statement)]%
+    \method{public Formula transformVariableDeclaration(WWAST statement)}%
 
 \end{description}%
 
 \subsubsection{class Prover::TheoremProver::ProverCaller}%
 
 \begin{description}%
-    \item[public ProverResult checkFormula(Formula formula)]
+    \method{public ProverResult checkFormula(Formula formula)}%
 
     Aufruf des Beweisers für die prädikatenlogische Formel
     \texttt{formula}. Es wird genau dann \texttt{true} in
@@ -293,7 +293,7 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 \subsubsection{class Prover::TheoremProver::StdProver extends ProverCaller}%
 
 \begin{description}%
-    \item[public StdProver(String path, FormulaCompiler compiler)]%
+    \method{public StdProver(String path, FormulaCompiler compiler)}%
 
 \end{description}%
 
@@ -301,17 +301,17 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 
 \begin{description}%
     % TODO return types missing
-    \item[public compileForall(Formula formula)]%
+    \method{public compileForall(Formula formula)}%
 
-    \item[public compileExists(Formula formula)]%
+    \method{public compileExists(Formula formula)}%
 
-    \item[public compileConjunction(Formula formula)]%
+    \method{public compileConjunction(Formula formula)}%
 
-    \item[public compileDisjunction(Formula formula)]%
+    \method{public compileDisjunction(Formula formula)}%
 
-    \item[public compileNegation(Formula formula)]%
+    \method{public compileNegation(Formula formula)}%
 
-    \item[public compileImplication(Formula formula)]%
+    \method{public compileImplication(Formula formula)}%
 
 \end{description}%
 

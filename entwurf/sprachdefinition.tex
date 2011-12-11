@@ -121,8 +121,19 @@ Folgende Schlüsselwörter sind für die Verwendung innerhalb der Sprache reserv
 	\item \texttt{return}	
 \end{itemize}
 
-\subsection{Alternative Darstellungsweisen für mathematische Symbole}
+\subsection{Semantische Einschränkungen}
+Aus der Semantik der Sprache ergeben sich weitere Einschränkungen, die nicht in der Sprachdefinition abgebildet sind:
 
+\begin{itemize}
+	\item Eine Variable kann nur in Anweisungen referenziert werden, die nach der Deklaration stehen (insbesondere also nicht in der Deklaration selbst).
+	\item Eine Funktion kann nur in Anweisungen referenziert werden, die nach der Funktionsdeklaration stehen (insbesondere also nicht in der Funktion selbst). Damit wird effektiv die Verwendung von Rekursion verunmöglicht.
+	\item Eine \textit{return}-Anweisung kann nur innerhalb einer Funktion stehen.
+	\item Eine Funktion muss einen Rückgabewert haben; es müssen also alle möglichen Codepfade innerhalb der Funktion eine \textit{return}-Anweisung beinhalten.
+	\item Nach Ausführung der \textit{return}-Anweisung wird die Funktion verlassen und keine weiteren Anweisungen der Funktion werden ausgeführt.
+\end{itemize}
+
+\subsection{Alternative Darstellungsweisen für mathematische Symbole}
+\label{textrep}
 Einige mathematische Symbole sind auf Tastaturen nicht verfügbar. Daher sind folgende textuelle Alternativen vorgesehen, um die Sprache auch ohne die Hilfe einer IDE editieren zu können:
 
 \begin{figure}[H]
@@ -157,6 +168,24 @@ Jedes Sprachelement, das einen Wert zurückliefert, besitzt einen Rückgabetyp, 
 
 Die Spezifikation des Typsystems ist in Tabelle~\ref{typesystem} dargestellt.
 
+\subsection{Scoping}
+
+Um die Transformierbarkeit der Sprache in eine prädikatenlogische Formel zu erleichtern, werden einige Einschränkungen bezüglich der Sichtbarkeit von Variablen und Funktionen vorgenommen.
+
+Im Einzelnen gibt es folgende Gültigkeitsbereiche (Scopes) in einem Programm:
+
+\begin{description}
+	\item[Globaler Gültigkeitsbereich] In diesem Gültigkeitsbereich befinden sich alle Variablen, die nicht innerhalb einer Funktion deklariert wurden.
+	\item[Gültigkeitsbereich einer Funktion] Jede Funktion besitzt ihren eigenen Gültigkeitsbereich. Hier sind nur sichtbar: \begin{itemize}
+		\item In der Funktion deklarierte Variablen
+		\item Parameter der Funktion
+	\end{itemize}
+	Insbesondere sind keine im globalen Gültigkeitsbereich oder in aufrufenden Funktionen deklarierten Variablen sichtbar.
+	\item[Parameter einer Funktion] Die Parameterliste einer Funktion bildet einen eigenen Gültigkeitsbereich. Die einzigen sichtbaren Variablen sind andere Parameter. Soll also ein Array als Parameter übergeben werden, so muss die Arraygröße in einem weiteren Parameter übergeben werden, der in der Deklaration des Array-Parameters verwendet werden kann. Die Reihenfolge beider Deklarationen ist hierbei unerheblich.
+\end{description}
+
+
+
 \begin{landscape}
 
 \begin{longtable}{lllp{11cm}}
@@ -177,7 +206,7 @@ Die Spezifikation des Typsystems ist in Tabelle~\ref{typesystem} dargestellt.
 & \multirow{2}{*}{$x$\texttt{[$N$]}} & \multirow{2}{*}{$\rightarrow x$} & $x \in \{$ \int{}, \bool{}$\}$ \\
 & & & $N$ muss vom Typ \int{} sein \\
 \midrule
-Variablendeklaration & $type$ $name$ := $value$ & $\rightarrow type$ & Die Typen von $type$ und $value$ müssen gleich sein. \\
+Variablendeklaration & $type$ $name$ := $value$ & -- & Die Typen von $type$ und $value$ müssen gleich sein. \\
 \midrule
 \multirow{2}{*}{Variablenverweis} & $varref$ & $\rightarrow type$ & $type$ ist der in der Deklaration festgelegte Typ der Variablen. \\
 \cmidrule{2-4}
@@ -199,8 +228,6 @@ Variablenzuweisung & $varref$ := $value$ & $\rightarrow varref$ & Die Typen von 
 & $x \leq y, x < y, x > y, x \geq y$ & \bool & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
 \cmidrule{2-4}
 & $\forall$ $x$ $expr$ und $\exists$ $x$ $expr$ & \bool & $x$ muss vom Typ \int{} oder \bool{} sein.\\
-\midrule
-Funktionsdeklaration & \texttt{function} $type$ $name$ ($params$) & $\rightarrow type$ & \\
 \midrule
 Funktionsverweis & $funcref$ & $\rightarrow type$ & $type$ ist der in der Deklaration festgelegte Rückgabetyp der Funktion. \\
 \midrule

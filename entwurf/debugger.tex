@@ -1,16 +1,16 @@
 \section{Debugger}
 
-Die Debugger-Komponente vermittelt zwischen dem Debug-Modell der GUI-Plattform und dem Interpreter. Außerdem ist in dieser Komponente die Funktionalität zum Starten des Interpreters aus der GUI (Launching) enthalten.
+Die Debugger-""Komponente vermittelt zwischen dem Debug-""Modell der GUI-""Plattform und dem Interpreter. Außerdem ist in dieser Komponente die Funktionalität zum Starten des Interpreters aus der GUI (Launching) enthalten.
 
 \subsection{Debugging}
 
-Dieser Teil des Debuggers implementiert des Debug-Modell von Eclipse. Somit können alle in Eclipse vorhandenen Debug-Ansichten (etwa Breakpoint-Manager, Variablenansicht, Ausdrucksansicht) mit dem Worthwhile-Interpreter kommunizieren.
+Dieser Teil des Debuggers implementiert das Debug-""Modell von Eclipse. Somit können alle in Eclipse vorhandenen Debug-""Ansichten (etwa Breakpoint-""Manager, Variablenansicht, Ausdrucksansicht) mit dem Worthwhile-""Interpreter kommunizieren.
 
 Eine Übersicht über dieses Modell findet sich in Abbildung~\ref{debugmodel}.
 
 \begin{figure}
 	\label{debugmodel}
-	\caption[B]{Das Debug-Modell von Eclipse\footnotemark}
+	\caption[B]{Das Debug-""Modell von Eclipse\footnotemark}
 	\centering
 	\includegraphics[scale=.5]{debug_model}
 \end{figure}
@@ -29,7 +29,7 @@ Diese Klasse stellt die Schnittstelle zwischen GUI und Interpreter bereit. Sie �
 
 \subsubsection{class WorthwhileThread}
 
-Ein Thread repräsentiert einen sequentiellen Programmablauf. Da die While-Sprache kein Multithreading unterstützt, gibt es für jeden Interpreterlauf nur eine Instanz dieser Klasse. Ein Thread ermöglicht den Zugriff auf \texttt{StackFrames}, wenn die Programmausführung pausiert ist.
+Ein Thread repräsentiert einen sequentiellen Programmablauf. Da die WHILE-""Sprache kein Multithreading unterstützt, gibt es für jeden Interpreterlauf nur eine Instanz dieser Klasse. Ein Thread ermöglicht den Zugriff auf \texttt{StackFrames}, wenn die Programmausführung pausiert ist.
 
 \begin{description}
 	\method{public IStackFrame[] getStackFrames()} Gibt alle in diesem Thread enthaltenen Stackframes zurück.
@@ -64,7 +64,7 @@ Diese Klasse repräsentiert den Wert einer Variablen.
 \begin{description}
 	\method{public String getReferenceTypeName()} Gibt eine textuelle Repräsentation des Datentyps des Wertes zurück.
 	\method{public String getValueString()} Gibt eine textuelle Repräsentation des Wertes zurück.
-	\method{public IVariable[] getVariables()} Gibt eine Liste aller enthaltenen Variablen (z.B. Werte in einem Array) zurück.
+	\method{public IVariable[] getVariables()} Gibt eine Liste aller enthaltenen Variablen (z.~B.\ Werte in einem Array) zurück.
 	\method{public boolean hasVariables()} Gibt zurück, ob dieser Wert enthaltene Variablen besitzt.
 \end{description}
 
@@ -83,7 +83,7 @@ Diese Klasse repräsentiert einen Breakpoint, der an eine bestimmte Zeile im Pro
 
 \begin{description}
 	\method{public int getLineNumber()} Gibt die Zeilennummer dieses Breakpoints zurück.
-	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-Sitzung hinaus gespeichert.
+	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
 \end{description}
 
 \subsubsection{class WorthwhileWatchpoint}
@@ -91,18 +91,18 @@ Diese Klasse repräsentiert einen Breakpoint, der an eine bestimmte Zeile im Pro
 Diese Klasse repräsentiert einen \textit{Watchpoint}, also einen Breakpoint, der an eine Variable gebunden ist und die Programmausführung anhält, sobald ihr Wert gelesen oder verändert wird.
 
 \begin{description}
-	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-Sitzung hinaus gespeichert.
+	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
 \end{description}
 
 \subsection{Launching}
 
 \subsubsection{class WorthwhileLaunchDelegate}
 
-Der \texttt{LaunchDelegate} ist dafür verantwortlich, den Interpreter zu starten und zu initialisieren sowie die Verbindung zwischen Interpreter und Debug-Infrastruktur herzustellen.
+Der \texttt{LaunchDelegate} ist dafür verantwortlich, den Interpreter zu starten und zu initialisieren sowie die Verbindung zwischen Interpreter und Debug-""Infrastruktur herzustellen.
 
 \begin{description}
 	\mlmethod{public void launch(ILaunchConfiguration~configuration, String~mode, ILaunch~launch, IProgressMonitor~monitor)}
-	Diese Methode wird von der GUI aufgerufen, wenn der Benutzer den Befehl zum Ausführen des Programms wählt. Dabei enthält \texttt{configuration} die nötigen Einstellungen zum Aufruf des Interpreters, etwa den Pfad zur ausführbaren Datei von Z3 oder Optionen für den Interpreter. \texttt{mode} enthält den Modus, in dem das Programm ausgeführt wird, und ist entweder \texttt{run} oder \texttt{debug}. Der Parameter \texttt{launch} enthält Informationen über diese Ausführung des Programms; die Aufgabe dieser Methode ist es, sämtliche erzeugten Processe und \texttt{DebugTarget}s diesem Objekt bekannt zu machen. Schließlich kann der Fortschritt der Ausführung dem Benutzer über das \texttt{monitor}-Objekt mitgeteilt werden.
+	Diese Methode wird von der GUI aufgerufen, wenn der Benutzer den Befehl zum Ausführen des Programms wählt. Dabei enthält \texttt{configuration} die nötigen Einstellungen zum Aufruf des Interpreters, etwa den Pfad zur ausführbaren Datei von Z3 oder Optionen für den Interpreter. \texttt{mode} enthält den Modus, in dem das Programm ausgeführt wird, und ist entweder \texttt{run} oder \texttt{debug}. Der Parameter \texttt{launch} enthält Informationen über diese Ausführung des Programms; die Aufgabe dieser Methode ist es, sämtliche erzeugten Prozesse und \texttt{DebugTarget}s diesem Objekt bekannt zu machen. Schließlich kann der Fortschritt der Ausführung dem Benutzer über das \texttt{monitor}-""Objekt mitgeteilt werden.
 \end{description}
 
 \subsubsection{class WorthwhileSourcePathComputerDelegate}
@@ -124,8 +124,8 @@ Für den Source Lookup kann sich eine Reihe von Klassen (Participants) registrie
 
 \subsubsection{class WorthwhileSourceLookupDirector}
 
-Diese Klasse ist dafür verantwortlich, den \texttt{SourceLookupParticipant} der Debugger-Infrastruktur bekannt zu machen.
+Diese Klasse ist dafür verantwortlich, den \texttt{SourceLookupParticipant} der Debugger-""Infrastruktur bekannt zu machen.
 
 \begin{description}
-	\method{public void initializeParticipants()} Macht der Debugger-Infrastruktur die Objekte bekannt, die am Source Lookup teilnehmen sollen.
+	\method{public void initializeParticipants()} Macht der Debugger-""Infrastruktur die Objekte bekannt, die am Source Lookup teilnehmen sollen.
 \end{description}

@@ -1,0 +1,62 @@
+\section{Grafische Benutzeroberfläche (GUI)}
+
+Die GUI bietet eine grafische Schnittstelle zur Steuerung aller Komponenten von Worthwhile. Während wichtige Komponenten wie Interpreter und Beweiser auch ohne die GUI ausgeführt werden können, erleichtert eine grafische Oberfläche das Arbeiten mit ihnen ungemein.
+
+Die GUI enthält alle Funktionen, die man von einer modernen integrierten Entwicklungsumgebung erwartet. Dazu gehört insbesondere ein Editor mit Syntaxhervorhebung, Code Folding und Markierung von Parserfehlern während der Eingabe. Weiterhin bietet sie Funktionen zum Ausführen des Interpreters und des Beweisers sowie einen Debugger.
+
+\subsection{Klassenentwurf}
+
+\subsubsection{class WorthwhileEditor}
+
+Der Editor dient zur Bearbeitung von Dateien vom Typ Worthwhile-Programm (Dateiendung \texttt{.ww}). Für jede geöffnete Datei erstellt die GUI eine neue Instanz dieser Klasse.
+
+\begin{description}
+	\item[public IResource getResource()] Gibt die vom Editor bearbeitete Ressource zurück. In diesem Fall ist dies eine Datei, also eine Instanz einer Klasse, die \texttt{IFile} implementiert.
+	\item[public bool isEditable()] Gibt zurück, ob die im Editor geöffnete Datei zum aktuellen Zeitpunkt verändert werden kann.
+\end{description}
+
+\subsubsection{class WorthwhileLabelProvider}
+
+Der Label Provider dient dazu, einem Sprachelement eine Beschriftung und ein Symbol zuzuweisen. Wo in der GUI eine textuelle Repräsentation eines Sprachelements angezeigt werden muss (etwa in Tooltips oder bei der Codevervollständigung), wird auf den \texttt{LabelProvider} zurückgegriffen.
+
+\begin{description}
+	\item[public String getText(EObject element)] Gibt den Beschriftungstext für das Sprachelement \texttt{element} zurück.
+	\item[public String getImage(EObject element)] Gibt den Dateinamen eines Symbols für das Sprachelement \texttt{element} zurück.
+\end{description}
+
+\subsubsection{class WorthwhileDescriptionLabelProvider}
+
+In manchen Fällen müssen Beschriftungstexte und Symbole für Sprachelemente angezeigt werden, ohne dass die entsprechende Datei geöffnet ist. Ein Beispiel dafür ist die Fehlerübersicht, in der alle Parserfehler der Dateien eines Projekts angezeigt werden, auch wenn die Datei nicht in einem Editor geöffnet ist. Dazu wird in einem internen Cache der GUI für jedes Sprachelement einer Datei eine sogenannte Beschreibung (\texttt{IEObjectDescription}) abgelegt. Der \texttt{DescriptionLabelProvider} dient dazu, aus einer solchen Beschreibung einen Beschriftungstext und ein Symbol zu extrahieren.
+
+\begin{description}
+	\item[public String getText(IEObjectDescription description)] Gibt den Beschriftungstext für das durch \texttt{description} beschriebene Sprachelement zurück.
+	\item[public String getImage(IEObjectDescription description)] Gibt den Dateinamen eines Symbols für das durch \texttt{description} beschriebene Sprachelement zurück.
+\end{description}
+
+\subsubsection{class WorthwhileQuickfixProvider}
+
+Da durch den \texttt{Validator} nicht nur syntaktische, sondern auch semantische Fehler erkannt werden sowie durch den \texttt{SyntaxErrorMessageProvider} die Art eines Syntaxfehlers näher spezifiert werden kann, ist es möglich, für bestimmte Fehler und Warnungen eine Reihe von Korrekturvorschlägen anzubieten. Der Benutzer kann einen dieser Korrekturvorschläge zur automatischen Anwendung auswählen.
+
+Die in dieser Klasse spezifizierten Korrekturfunktionen erhalten als Parameter jeweils eine Fehlerbeschreibung (\texttt{Issue}) sowie eine Referenz auf einen \texttt{IssueResolutionAcceptor}, der die Korrekturvorschläge entgegennimmt und an die GUI weiterleitet.
+
+\begin{description}
+	\item[public void addFunctionReturnType(final Issue issue, IssueResolutionAcceptor acceptor)] Bietet für eine Funktion mit nicht spezifiziertem Rückgabetyp das Hinzufügen eines Rückgabetyps an.
+	\item[TODO]
+\end{description}
+
+\subsubsection{class WorthwhileOutlineTreeProvider}
+
+Für größere Programmdateien ist es eine Hilfe, die in einem Programm vorkommenden Elemente wie Funktions- und Variablendeklarationen auf einen Blick zu sehen. Die GUI bietet diese Möglichkeit, indem im \textit{Outline}-Fenster eine hierarchische Ansicht des Programmtextes angezeigt wird. Diese Ansicht wird durch den \texttt{OutlineTreeProvider} erstellt.
+
+\begin{description}
+	\item[public IOutlineNode createRoot(IXtextDocument document)] Erstellt den Wurzelknoten der hierarchischen Ansicht aus dem Dokument \texttt{document}.
+	\item[public void createChildren(IOutlineNode parent, EObject modelElement)] Erstellt die Kindknoten eines gegebenen Knoten \texttt{parent} in der Outline-Ansicht, wobei der Knoten \texttt{parent} das Sprachelement \texttt{modelElement} repräsentiert.
+\end{description}
+
+\subsubsection{class WorthwhileProposalProvider}
+
+Für die Code-Vervollständigung
+
+\begin{description}
+	\item[public void complete\_$\{$ElementName$\}$(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor)] Übergibt eine Liste von Vervollständigungs-Vorschlägen an das \texttt{acceptor}-Objekt, das sie an die GUI weiterleitet. 
+\end{description}

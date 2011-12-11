@@ -11,8 +11,8 @@ Die GUI enthält alle Funktionen, die man von einer modernen integrierten Entwic
 Der Editor dient zur Bearbeitung von Dateien vom Typ Worthwhile-Programm (Dateiendung \texttt{.ww}). Für jede geöffnete Datei erstellt die GUI eine neue Instanz dieser Klasse.
 
 \begin{description}
-	\item[public IResource getResource()] Gibt die vom Editor bearbeitete Ressource zurück. In diesem Fall ist dies eine Datei, also eine Instanz einer Klasse, die \texttt{IFile} implementiert.
-	\item[public bool isEditable()] Gibt zurück, ob die im Editor geöffnete Datei zum aktuellen Zeitpunkt verändert werden kann.
+	\method{public IResource getResource()} Gibt die vom Editor bearbeitete Ressource zurück. In diesem Fall ist dies eine Datei, also eine Instanz einer Klasse, die \texttt{IFile} implementiert.
+	\method{public bool isEditable()} Gibt zurück, ob die im Editor geöffnete Datei zum aktuellen Zeitpunkt verändert werden kann.
 \end{description}
 
 \subsubsection{class WorthwhileLabelProvider}
@@ -20,8 +20,8 @@ Der Editor dient zur Bearbeitung von Dateien vom Typ Worthwhile-Programm (Dateie
 Der Label Provider dient dazu, einem Sprachelement eine Beschriftung und ein Symbol zuzuweisen. Wo in der GUI eine textuelle Repräsentation eines Sprachelements angezeigt werden muss (etwa in Tooltips oder bei der Codevervollständigung), wird auf den \texttt{LabelProvider} zurückgegriffen.
 
 \begin{description}
-	\item[public String getText(EObject element)] Gibt den Beschriftungstext für das Sprachelement \texttt{element} zurück.
-	\item[public String getImage(EObject element)] Gibt den Dateinamen eines Symbols für das Sprachelement \texttt{element} zurück.
+	\method{public String getText(EObject element)} Gibt den Beschriftungstext für das Sprachelement \texttt{element} zurück.
+	\method{public String getImage(EObject element)} Gibt den Dateinamen eines Symbols für das Sprachelement \texttt{element} zurück.
 \end{description}
 
 \subsubsection{class WorthwhileDescriptionLabelProvider}
@@ -29,8 +29,8 @@ Der Label Provider dient dazu, einem Sprachelement eine Beschriftung und ein Sym
 In manchen Fällen müssen Beschriftungstexte und Symbole für Sprachelemente angezeigt werden, ohne dass die entsprechende Datei geöffnet ist. Ein Beispiel dafür ist die Fehlerübersicht, in der alle Parserfehler der Dateien eines Projekts angezeigt werden, auch wenn die Datei nicht in einem Editor geöffnet ist. Dazu wird in einem internen Cache der GUI für jedes Sprachelement einer Datei eine sogenannte Beschreibung (\texttt{IEObjectDescription}) abgelegt. Der \texttt{DescriptionLabelProvider} dient dazu, aus einer solchen Beschreibung einen Beschriftungstext und ein Symbol zu extrahieren.
 
 \begin{description}
-	\item[public String getText(IEObjectDescription description)] Gibt den Beschriftungstext für das durch \texttt{description} beschriebene Sprachelement zurück.
-	\item[public String getImage(IEObjectDescription description)] Gibt den Dateinamen eines Symbols für das durch \texttt{description} beschriebene Sprachelement zurück.
+	\method{public String getText(IEObjectDescription description)} Gibt den Beschriftungstext für das durch \texttt{description} beschriebene Sprachelement zurück.
+	\method{public String getImage(IEObjectDescription description)} Gibt den Dateinamen eines Symbols für das durch \texttt{description} beschriebene Sprachelement zurück.
 \end{description}
 
 \subsubsection{class WorthwhileQuickfixProvider}
@@ -40,8 +40,8 @@ Da durch den \texttt{Validator} nicht nur syntaktische, sondern auch semantische
 Die in dieser Klasse spezifizierten Korrekturfunktionen erhalten als Parameter jeweils eine Fehlerbeschreibung (\texttt{Issue}) sowie eine Referenz auf einen \texttt{IssueResolutionAcceptor}, der die Korrekturvorschläge entgegennimmt und an die GUI weiterleitet.
 
 \begin{description}
-	\item[public void addFunctionReturnType(final Issue issue, IssueResolutionAcceptor acceptor)] Bietet für eine Funktion mit nicht spezifiziertem Rückgabetyp das Hinzufügen eines Rückgabetyps an.
-	\item[TODO]
+	\mlmethod{public void addFunctionReturnType(final Issue issue, \\ IssueResolutionAcceptor acceptor)} Bietet für eine Funktion mit nicht spezifiziertem Rückgabetyp das Hinzufügen eines Rückgabetyps an.
+	\method{TODO}
 \end{description}
 
 \subsubsection{class WorthwhileOutlineTreeProvider}
@@ -49,14 +49,25 @@ Die in dieser Klasse spezifizierten Korrekturfunktionen erhalten als Parameter j
 Für größere Programmdateien ist es eine Hilfe, die in einem Programm vorkommenden Elemente wie Funktions- und Variablendeklarationen auf einen Blick zu sehen. Die GUI bietet diese Möglichkeit, indem im \textit{Outline}-Fenster eine hierarchische Ansicht des Programmtextes angezeigt wird. Diese Ansicht wird durch den \texttt{OutlineTreeProvider} erstellt.
 
 \begin{description}
-	\item[public IOutlineNode createRoot(IXtextDocument document)] Erstellt den Wurzelknoten der hierarchischen Ansicht aus dem Dokument \texttt{document}.
-	\item[public void createChildren(IOutlineNode parent, EObject modelElement)] Erstellt die Kindknoten eines gegebenen Knoten \texttt{parent} in der Outline-Ansicht, wobei der Knoten \texttt{parent} das Sprachelement \texttt{modelElement} repräsentiert.
+	\method{public IOutlineNode createRoot(IXtextDocument document)} Erstellt den Wurzelknoten der hierarchischen Ansicht aus dem Dokument \texttt{document}.
+	\method{public void createChildren(IOutlineNode parent, EObject modelElement)} Erstellt die Kindknoten eines gegebenen Knoten \texttt{parent} in der Outline-Ansicht, wobei der Knoten \texttt{parent} das Sprachelement \texttt{modelElement} repräsentiert.
 \end{description}
 
 \subsubsection{class WorthwhileProposalProvider}
 
-Für die Code-Vervollständigung
+Für die Code-Vervollständigung muss eine Reihe von Vorschlägen erstellt werden. Während sich die meisten direkt aus der Grammatik und den schon vorhandenen AST-Elementen ableiten lassen, kann es wünschenswert sein, eigene Vorschläge zu erstellen oder vorhandene anzupassen. Diese Aufgabe übernimmt der \texttt{ProposalProvider}.
 
 \begin{description}
-	\item[public void complete\_$\{$ElementName$\}$(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor)] Übergibt eine Liste von Vervollständigungs-Vorschlägen an das \texttt{acceptor}-Objekt, das sie an die GUI weiterleitet. 
+	\mlmethod{public void complete\_$\{$RegelName$\}$(EObject model, RuleCall ruleCall, ContentAssistContext~context, ICompletionProposalAcceptor acceptor)} Übergibt eine Liste von Vervollständigungs-Vorschlägen an das \texttt{acceptor}-Objekt, das sie an die GUI weiterleitet. Dabei ist \texttt{RegelName} die Regel aus der Sprachdefinition, für die Vorschläge erstellt werden sollen. Wird beispielsweise an der aktuellen Stelle im Programm gemäß Sprachspezifikation eine Zahl erwartet, so wird die Methode \texttt{complete\_{}NUMBER} aufgerufen.
+	\mlmethod{public void complete$\{$TypName$\}$\_{}$\{$FeatureName$\}$(EObject~model, Assignment~assignment,ContentAssistContext~context, ICompletionProposalAcceptor~acceptor)}
+	Übergibt eine Liste von Vervollständigungs-Vorschlägen an das \texttt{acceptor}-Objekt, das sie an die GUI weiterleitet. Dabei ist \texttt{TypName} der Typ des Sprachelements, für das ein Vorschlag erstellt werden soll, und \texttt{FeatureName} das spezifische Feature des Sprachelements (beispielsweise \texttt{completeFunctionDeclaration\_{}ReturnType}).
+\end{description}
+
+\subsubsection{class WorthwhileAutoEditStrategyProvider}
+
+Mit "`AutoEdit"' wird die Funktion bezeichnet, eine Eingabe im Texteditor abzufangen und je nach Inhalt Aktionen im Texteditor auszulösen. Dazu gehört das automatische Schließen geöffneter Klammern ebenso wie die Umwandlung von Operatorenzeichen in textueller Repräsentation (siehe \ref{textrep}) in die entsprechenden Unicode-Operatorenzeichen.
+
+\begin{description}
+	\mlmethod{public List<IAutoEditStrategy> getStrategies(final~ISourceViewer~sourceViewer, final~String~contentType)}
+	Gibt eine Liste von AutoEdit-Strategien für den gegebenen Quelltexteditor und den gegebenen Inhaltstyp zurück.
 \end{description}

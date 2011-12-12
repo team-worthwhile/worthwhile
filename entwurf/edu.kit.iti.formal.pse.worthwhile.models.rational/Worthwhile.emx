@@ -1897,7 +1897,7 @@
               <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_rHvqsyAgEeGXqsUcua6Xfg"/>
             </children>
             <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_rHtOcSAgEeGXqsUcua6Xfg" fontName="Bitstream Vera Sans" showListSignature="true" showStereotype="Label"/>
-            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rHtOciAgEeGXqsUcua6Xfg" x="17321" y="11962"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_rHtOciAgEeGXqsUcua6Xfg" x="16592" y="11962"/>
           </children>
           <children xmi:id="_CjrUMCAiEeGXqsUcua6Xfg" element="_CjqGECAiEeGXqsUcua6Xfg">
             <children xmi:id="_CjrUMyAiEeGXqsUcua6Xfg" type="ImageCompartment">
@@ -2248,7 +2248,7 @@
             <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_1qXtoSIdEeG2MZcopdUy_Q" fontName="Bitstream Vera Sans" lineWidth="1" showStereotype="Text"/>
             <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_1qXtoiIdEeG2MZcopdUy_Q" points="[0, 0, 0, 5730]$[0, -5730, 0, 0]"/>
             <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qkIEQCTWEeGx3bt7bTBB-w" id="(0.72964996,0.0)"/>
-            <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_peAJsCTWEeGx3bt7bTBB-w" id="(0.4998926,1.0)"/>
+            <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_peAJsCTWEeGx3bt7bTBB-w" id="(0.23995703,0.5696544)"/>
           </edges>
           <edges xmi:id="_yFZKACIoEeG2MZcopdUy_Q" element="_wwPU8CIoEeG2MZcopdUy_Q" source="_afwd0CIaEeG2MZcopdUy_Q" target="_CjrUMCAiEeGXqsUcua6Xfg">
             <children xmi:id="_yFZxECIoEeG2MZcopdUy_Q" type="NameLabel">

@@ -3468,7 +3468,7 @@
                     <children xmi:id="_iyA7AiIyEeG2MZcopdUy_Q" type="Name"/>
                     <children xmi:id="_iyBiECIyEeG2MZcopdUy_Q" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_ixc6USIyEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ixc6UiIyEeG2MZcopdUy_Q" x="264" y="132" width="2698" height="19966"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ixc6UiIyEeG2MZcopdUy_Q" x="264" y="132"/>
                   </children>
                   <children xmi:id="_jgApcCIyEeG2MZcopdUy_Q" element="_jf9mICIyEeG2MZcopdUy_Q">
                     <eAnnotations xmi:id="_jgBQgCIyEeG2MZcopdUy_Q" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -3478,7 +3478,7 @@
                     <children xmi:id="_jgB3kSIyEeG2MZcopdUy_Q" type="Name"/>
                     <children xmi:id="_jgCeoCIyEeG2MZcopdUy_Q" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_jgApcSIyEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jgApciIyEeG2MZcopdUy_Q" x="1292" y="4280" width="3572" height="13283"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jgApciIyEeG2MZcopdUy_Q" x="1292" y="4280"/>
                   </children>
                   <children xmi:id="_x9rz8CIyEeG2MZcopdUy_Q" element="_x9owoCIyEeG2MZcopdUy_Q">
                     <eAnnotations xmi:id="_x9sbACIyEeG2MZcopdUy_Q" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -3488,7 +3488,7 @@
                     <children xmi:id="_x9tCECIyEeG2MZcopdUy_Q" type="Name"/>
                     <children xmi:id="_x9tpICIyEeG2MZcopdUy_Q" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_x9rz8SIyEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_x9rz8iIyEeG2MZcopdUy_Q" x="264" y="2913" width="3863" height="17215"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_x9rz8iIyEeG2MZcopdUy_Q" x="264" y="2913"/>
                   </children>
                   <children xmi:id="_5RFJECIyEeG2MZcopdUy_Q" element="_5RCFwCIyEeG2MZcopdUy_Q">
                     <eAnnotations xmi:id="_5RFwICIyEeG2MZcopdUy_Q" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -3498,7 +3498,7 @@
                     <children xmi:id="_5RGXMCIyEeG2MZcopdUy_Q" type="Name"/>
                     <children xmi:id="_5RGXMSIyEeG2MZcopdUy_Q" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_5RFJESIyEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5RFJEiIyEeG2MZcopdUy_Q" x="264" y="1431" width="4603" height="18696"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5RFJEiIyEeG2MZcopdUy_Q" x="264" y="1431"/>
                   </children>
                   <children xmi:id="_-axmwCIyEeG2MZcopdUy_Q" element="_-aujcCIyEeG2MZcopdUy_Q">
                     <eAnnotations xmi:id="_-ayN0CIyEeG2MZcopdUy_Q" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -3508,19 +3508,19 @@
                     <children xmi:id="_-ay04SIyEeG2MZcopdUy_Q" type="Name"/>
                     <children xmi:id="_-azb8CIyEeG2MZcopdUy_Q" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_-axmwSIyEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-axmwiIyEeG2MZcopdUy_Q" x="264" y="6017" width="6905" height="14081"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-axmwiIyEeG2MZcopdUy_Q" x="264" y="6017"/>
                   </children>
                   <children xmi:id="_B5MOYCIzEeG2MZcopdUy_Q" element="_B4_aECIzEeG2MZcopdUy_Q">
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_B5MOYSIzEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_B5MOYiIzEeG2MZcopdUy_Q" x="-1" y="1426" height="1587"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_B5MOYiIzEeG2MZcopdUy_Q" x="-1" y="1426"/>
                   </children>
                   <children xmi:id="_EaOnwCIzEeG2MZcopdUy_Q" element="_EZ6esCIzEeG2MZcopdUy_Q">
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_EaOnwSIzEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EaOnwiIzEeG2MZcopdUy_Q" x="-1" y="1426" height="1111"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EaOnwiIzEeG2MZcopdUy_Q" x="-1" y="1426"/>
                   </children>
                   <children xmi:id="_HMkMgCIzEeG2MZcopdUy_Q" element="_HMJ80SIzEeG2MZcopdUy_Q">
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_HMkMgSIzEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HMkMgiIzEeG2MZcopdUy_Q" x="-1" y="1426" height="1455"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HMkMgiIzEeG2MZcopdUy_Q" x="-1" y="1426"/>
                   </children>
                   <children xmi:id="_Lkw70CIzEeG2MZcopdUy_Q" element="_LkrcQCIzEeG2MZcopdUy_Q">
                     <eAnnotations xmi:id="_Lkxi4CIzEeG2MZcopdUy_Q" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -3530,7 +3530,7 @@
                     <children xmi:id="_LkyJ8SIzEeG2MZcopdUy_Q" type="Name"/>
                     <children xmi:id="_LkyxACIzEeG2MZcopdUy_Q" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_Lkw70SIzEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Lkw70iIzEeG2MZcopdUy_Q" x="754" y="11254" width="3307" height="6419"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Lkw70iIzEeG2MZcopdUy_Q" x="754" y="11254"/>
                   </children>
                   <children xmi:id="_s09xMCIzEeG2MZcopdUy_Q" element="_s011YCIzEeG2MZcopdUy_Q">
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_s09xMSIzEeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
@@ -3542,11 +3542,11 @@
                   </children>
                   <children xmi:id="_U_hJkCI0EeG2MZcopdUy_Q" element="_U--XASI0EeG2MZcopdUy_Q">
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_U_hJkSI0EeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_U_hJkiI0EeG2MZcopdUy_Q" x="-1" y="1426" height="952"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_U_hJkiI0EeG2MZcopdUy_Q" x="-1" y="1426"/>
                   </children>
                   <children xmi:id="_ijrSICI0EeG2MZcopdUy_Q" element="_ii09kSI0EeG2MZcopdUy_Q">
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_ijrSISI0EeG2MZcopdUy_Q" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ijrSIiI0EeG2MZcopdUy_Q" x="-1" y="1426" height="952"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ijrSIiI0EeG2MZcopdUy_Q" x="-1" y="1426"/>
                   </children>
                   <children xmi:id="_2QxlgCS-EeGCVYtmoWb2Bg" element="_2K9RYCS-EeGCVYtmoWb2Bg">
                     <eAnnotations xmi:id="_2QyMkCS-EeGCVYtmoWb2Bg" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
@@ -3556,7 +3556,11 @@
                     <children xmi:id="_2Q4TMSS-EeGCVYtmoWb2Bg" type="Name"/>
                     <children xmi:id="_2Q4TMiS-EeGCVYtmoWb2Bg" type="Parent"/>
                     <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_2QxlgSS-EeGCVYtmoWb2Bg" fontName="Cantarell" showStereotype="Label"/>
-                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2QxlgiS-EeGCVYtmoWb2Bg" x="3027" y="16326" width="4842" height="3517"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2QxlgiS-EeGCVYtmoWb2Bg" x="3027" y="16206" width="4979" height="3567"/>
+                  </children>
+                  <children xmi:id="_wbrJoCTaEeGx3bt7bTBB-w" element="_LkYtECS_EeGCVYtmoWb2Bg">
+                    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_wbrJoSTaEeGx3bt7bTBB-w" fontName="Cantarell" showStereotype="Label"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wbrJoiTaEeGx3bt7bTBB-w" x="-1" y="1365"/>
                   </children>
                   <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_LdRCJCIyEeG2MZcopdUy_Q"/>
                 </children>

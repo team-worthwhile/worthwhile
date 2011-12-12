@@ -187,11 +187,6 @@ erfüllte Annotationen.%
 Instanzen von \texttt{WWAST} codieren Programmtexte, welche der Syntax
 von Worthwhile entsprechen.%
 
-\subsubsection{class SMTLIBAST}%
-
-Instanzen von \texttt{SMTLIBAST} codieren Programmtexte, welche der
-Syntax von SMT-LIB entsprechen.%
-
 \subsubsection{class Prover::Formula}%
 
 Formula beschreibt Instanzen, die prädikatenlogische Formeln als
@@ -201,8 +196,6 @@ entnommen} zugänglich machen.%
 
 \subsubsection{class Prover::SpecificationChecker}%
 
-Instanzen von \texttt{SpecificationChecker} übersetzen
-\texttt{WWAST}-Instanzen in Instanzen von \texttt{SMTLIBAST}.%
 
 % TODO nicht öffentliche Attribute
 
@@ -214,7 +207,7 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 
     Siehe \texttt{setTimeout}.%
 
-    \method{private SMTLIBAST model}%
+    \method{private Map<VariableRef,Literal> model}%
 
 \end{description}%
 

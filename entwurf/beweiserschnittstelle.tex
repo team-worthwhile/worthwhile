@@ -157,6 +157,15 @@ Parameter) beziehen.%
 
 \subsubsection{Fehlerausgaben}%
 
+Fehler, welche von der Beweiserschnittstelle an den Aufrufer
+zurückgegeben werden, sind semantische aus der Beweiserausgabe, da der
+Syntaxbaum korrekte Syntax erzwingt und die Programmtransformation nur
+syntaktische Operationen auf der Programmspezifikation durchführt.
+Aufgrund der Behandlung von Laufzeitfehlern wie Nulldivision und
+unerlaubtem Arrayfeldzugriff, bleiben als einzige Fehlerausgaben an
+den Aufrufer Typfehler und Referenzierung nicht deklarierter Variablen
+oder Funktionen.%
+
 \subsection{Klassenentwurf}%
 
 \begin{itemize}%

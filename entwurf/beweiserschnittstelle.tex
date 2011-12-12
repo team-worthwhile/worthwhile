@@ -257,55 +257,96 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 
 \subsubsection{interface Prover::ProgramTransformer::FormulaGenerator}%
 
+Implementierungen dieser Schnittstelle erstellen aus einem
+Worthwhile-""Programmtext eine prädikatenlogische Formel. Diese Formel
+soll nur dann beweisbar sein, wenn das Programm seine Spezifikation
+erfüllt. Diese Korrektheit bezieht sich immer auf ein Kalkül, weshalb
+Implementierungen dieser Schnittstelle meistens die Produktionsregeln
+eines solchen formalen Systems kapseln.%
+
 \begin{description}%
-    \method{public Formula transformLoop(WWAST statement)}%
+    \method{protected Formula transformProgram(WWAST root)} %
 
-    \method{public Formula transformFunctionDefinition(WWAST statement)}%
+    Liefert die aus \texttt{root} transformierte \texttt{Formula}
+    zurück. Die Semantik der Formel ist unbestimmt, falls der
+    Programmtext kein semantisch korrektes Programm beschreibt, also
+    nicht ausgeführt werden kann. Ansonsten ist die zurückgelieferte
+    Formel nur dann beweisbar, wenn im angewendeten Kalkül das
+    WHILE-""Programm für alle Ausführungen seinen Annotationen
+    entspricht.%
 
-    \method{public Formula transformEnsures(WWAST statement)}%
-
-    \method{public Formula transformRequires(WWAST statement)}%
-
-    \method{public Formula transformInvariant(WWAST statement)}%
-
-    \method{public Formula transformFunctionCall(WWAST statement)}%
-
-    \method{public Formula transformVariableAssignment(WWAST statement)}%
-
-    \method{public Formula transformArrayAssignment(WWAST statement)}%
-
-    \method{public Formula transfromConditional(WWAST statement)}%
-
-    \method{public Formula transformArrayElementAssignment(WWAST statement)}%
-
-    \method{public Formula transfromAssert(WWAST statement)}%
-
-    \method{public Formula transfromAssume(WWAST statement)}%
-
-    \method{public Formula transformAxiom(WWAST statement)}%
-
-    \method{public Formula transformVariableDeclaration(WWAST statement)}%
+    Parameter \texttt{root}: Wurzelsprachelement des zu
+    transformierenden Worthwhile-""Programms, d.~h.\ sowohl der
+    WHILE-""Programmtext als auch dessen Annotationen sind im
+    Syntaxbaum enthalten.%
 
 \end{description}%
 
-\subsubsection{class Prover::TheoremProver::ProverCaller}%
+\subsubsection{interface Prover::TheoremProver::ProverCaller}%
+
+Implementierungen dieser Schnittstelle kapseln Aufrufe eines Beweisers
+für gegebene prädikatenlogische Formeln. Das Ergebnis eines Aufrufs
+besteht aus der Formelerfüllbarkeit, einem Modell zur Verifikation
+derselben und einer Liste semantischer Fehler.%
 
 \begin{description}%
-    \method{public ProverResult checkFormula(Formula formula)}%
+    \method{protected ProverResult checkFormula(Formula formula)}%
 
-    Aufruf des Beweisers für die prädikatenlogische Formel
-    \texttt{formula}. Es wird genau dann \texttt{true} in
-    \texttt{ProverResult\#satisfiable} zurückgeliefert, wenn die Formel
-    erfüllt werden konnte, und \texttt{false} sonst. Hat im Falle der
-    Erfüllbarkeit der Beweiser ein Modell geliefert, wird dies in
-    \texttt{ProverResult\#model} entsprechend zurückgeliefert.%
+    Aufruf des unterstützten Beweisers für die Überprüfung der
+    prädikatenlogischen Formel \texttt{formula}. Es wird nur dann
+    \texttt{true} in \texttt{ProverResult\#satisfiable}
+    zurückgeliefert, wenn die Formel erfüllbar ist, und \texttt{false}
+    sonst. Ist \texttt{ProverResult\#satisfiable} auf \texttt{true}
+    gesetzt, muss \texttt{ProverResult\#model} mit einem
+    entsprechenden Modell als Zeuge und \texttt{ProverResult\#errors}
+    mit einer leeren Liste initialisiert sein.%
+
+    Parameter \texttt{formula}: Wurzelsprachelement der zu prüfenden
+    prädikatenlogischen Formel.%
 
 \end{description}%
 
-\subsubsection{class Prover::TheoremProver::StdProver extends ProverCaller}%
+\subsubsection{abstract class Prover::TheoremProver::StdProver extends ProverCaller}%
+
+Instanzen von dieser Abstraktion abgeleiteter Klassen rufen Beweiser
+auf, denen die zu überprüfende Formel auf der Standardeingabe
+übergeben wird. Spezialisierungen dieser Klasse implementieren die
+Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \begin{description}%
-    \method{public StdProver(String path, FormulaCompiler compiler)}%
+    \method{protected StdProver(String path, FormulaCompiler compiler)}%
+
+    Konfiguriert Instanzen so, dass der Beweiser \texttt{path} mit dem
+    Formelkompilat von \texttt{compiler} für zu überprüfende
+    prädikatenlogische Formeln aufgerufen wird.%
+
+    Parameter \texttt{path}: Systempfad der ausführbaren Datei eines
+    Beweisers.%
+
+    Parameter \texttt{compiler}: Wird zur Generierung der
+    Beweisereingabe aus einer angegebenen prädikatenlogischen Formel
+    aufgerufen.%
+
+    \method{override protected ProverResult checkFormula(Formula formula)}%
+
+    Ruft den bei Objekterstellung angegebenen Beweiserpfad auf und
+    füllt die Standardeingabe mit dem vom angegebenen Compiler aus
+    \texttt{formula} erstellten Kompilat auf.
+    \texttt{ProverResult\#satisfiable} wird auf \texttt{false}
+    gesetzt, falls bei der Beweiserausführung ein Systemfehler
+    aufgetreten ist, und sonst wird die Rückgabe von
+    \texttt{getResult} zurückgeliefert, welche den Inhalt der
+    Standardausgabe nach Beweiseraufruf erhalten hat.%
+
+    \method{abstract protected ProverResult getResult(String output)}%
+
+    Extrahiert aus \texttt{output} sowohl Ergebnis als auch Fehler
+    eines Beweiseraufrufs und liefert diese Informationen in einer
+    Instanz von \texttt{ProverResult} zurück. Kann der Inhalt von
+    \texttt{output} nicht interpretiert werden, wird
+    \texttt{ProverResult\#satisfiable} auf \texttt{false} gesetzt.%
+
+    Parameter \texttt{output}: Textausgabe nach einem Beweiseraufruf.%
 
 \end{description}%
 

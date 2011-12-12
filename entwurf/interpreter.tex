@@ -12,12 +12,12 @@ Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stel
 \subsubsection{Klassenentwurf}
 
 \subsubsection{class ExecutionContext}
-Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungskontextes. Dazu gehören ein \texttt{ExpressionEvaluator}, ein \texttt{StatementExecutor} sowie eine \texttt{SymbolTable}, in der in diesem Kontext angelegte Symbole gespeichert werden.
+Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungskontextes. Dazu gehören eine Implementation von \texttt{IExpressionEvaluator}, ein \texttt{StatementExecutor} sowie eine \texttt{SymbolTable}, in der in diesem Kontext angelegte Symbole gespeichert werden.
 
 %\begin{description}
 %    \method{private SymbolTable symbolTable}
 %    \method{private StatementExecutor statementExecutor}
-%    \method{private ExpressionEvaluator expressionEvaluator}
+%    \method{private IExpressionEvaluator expressionEvaluator}
 %\end{description}
 
 \begin{description}
@@ -25,13 +25,16 @@ Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungs
     Gibt einen Namen zurück, der diesem Kontext zugeordnet wurde. Normalerweise ist dies der Name der gerade ausgeführten Funktion.
 
     \method{public SymbolTable getSymbolTable()}
-    Gibt die aktuell gültige Symboltabelle zur Inspektion und Veränderung zrück.
+    Gibt die aktuell gültige Symboltabelle zur Inspektion und Veränderung zurück.
 
-    \method{protected void executeStatement(Statement statement)}
-    Führt in diesem Kontext das angegebene Statement aus.
+    %\method{protected void executeStatement(Statement statement)}
+    %Führt in diesem Kontext das angegebene Statement aus.
 
-    \method{protected Object evaluateExpression(Expression expression)}
-    Wertet in diesem Kontext die gegebene Expression aus und gibt das Ergebnis der Auswertung zurück.
+    \method{public Object evaluateExpression(String expressionString)}
+    Wertet in diesem Kontext die durch die Zeichenfolge \texttt{expressionString} definierte Expression aus und gibt das Ergebnis der Auswertung zurück.
+
+    \method{public int getCurrentStatementLineNumber()}
+    Gibt die Zeile des Statements zurück, mit dem \texttt{executeStatement} zuletzt aufgerufen wurde. Ist diese nicht bekannt, wird der Wert \texttt{-1} zurückgegeben.
 \end{description}
 
 
@@ -44,8 +47,8 @@ Instanzen von \texttt{ExecutionContextStack} verwalten eine Menge von "`gestapel
 Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial übergebenen Programms.
 
 \begin{description}
-    \method{public Interpreter(IParseResult parseResult)}
-    Erzeugt eine Instanz, die das Programm, definiert durch die Parserausgabe \texttt{parseResult}, ausführen kann. Das Interface IParseResult wird vom Xtext Framework zur Verfügung gestellt und enthält neben dem AST Metainformationen wie beispielsweise die Positionen der Syntaxelemente im gelesenen Quelltext.
+    \method{public Interpreter(IParser parser, String programSource)}
+    Erzeugt eine Instanz, die das Programm, definiert durch den Quelltext \texttt{programSource}, ausführen kann. Der übergebene Parser \texttt{parser} wird dann verwendet, um den Quelltext zu parsen. Das Interface \texttt{IParser} wird vom Xtext Framework zur Verfügung gestellt.
 
     \method{public void execute()}
     Startet die Ausführung des im Konstruktor übergebenen Programms in dieser Interpreter-""Instanz.
@@ -59,8 +62,8 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
     \method{public boolean addBreakpoint(int line)}
     Fügt einen Breakpoint in der gegebenen Zeile ein.
 
-    \method{public boolean addBreakpoint(int line, \textbf{TODO} condition)} % Welche sprache?
-    Fügt einen Breakpoint in der gegebenen Zeile ein, dessen Erreichen nur dann ein Ereignis auslöst, wenn die Aussage \texttt{condition} wahr ist.
+    \method{public boolean addBreakpoint(int line, String conditionExpressionString)} % Welche sprache?
+    Fügt einen Breakpoint in der gegebenen Zeile ein, dessen Erreichen nur dann ein Ereignis auslöst, wenn die durch \texttt{conditionExpressionString} definierte Aussage wahr ist.
 
     \method{public boolean clearBreakpoint(int line)}
     Entfernt den Breakpoint in der gegebenen Zeile.
@@ -72,23 +75,28 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
     %Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
 \end{description}
 
-\subsubsection{class ReadableInterpreter extends Interpreter}
-
+\subsubsection{interface IExpressionEvaluator}
+Die Aufgabe von Implementationen von \texttt{IExpressionEvaluator} Instanzen ist es, \texttt{Expression} Objekte aus dem AST auszuwerten.
 \begin{description}
-    \method{public ReadableInterpreter(Readable inputReadable)}
-    Konstruiert eine neue \texttt{Interpreter}-""Instanz durch Lesen der Spezifikation des Programms in der WHILE-""Sprache aus dem übergebenen Readable-""Objekt.
-\end{description}
-
-
-\subsubsection{interface ExpressionEvaluator}
-Die Aufgabe von \texttt{ExpressionEvaluator} Instanzen ist es, \texttt{Expression} Objekte aus dem AST auszuwerten.
-\begin{description}
-    \method{public Object eval(Expression expression)}
+    \method{protected Object eval(Expression expression)}
     Wertet die Expression \texttt{expression} aus und gibt das Ergebnis zurück.
 \end{description}
 
-\subsubsection{class InterpreterExpressionEvaluator implements ExpressionEvaluator}
-Wertet Expressions aus, für die zur Auswertung Zugriff auf den \texttt{ExecutionContext} sowie den \texttt{Interpreter} nötig ist, beispielsweise um Funktionsaufrufe auszuwerten oder die Werte referenzierter Variablen aufzulösen.
+%\subsubsection{class InterpreterExpressionEvaluator implements IExpressionEvaluator}
+%Wertet Expressions aus, für die zur Auswertung Zugriff auf den \texttt{ExecutionContext} sowie den \texttt{Interpreter} nötig ist, beispielsweise um Funktionsaufrufe auszuwerten oder die Werte referenzierter Variablen aufzulösen.
+
+\subsubsection{class InterpreterError}
+Instanzen der Klasse \texttt{InterpreterError} dienen zur Weitergabe und Behandlung von Fehlern im Interpreter.
+\begin{description}
+    \method{public InterpreterError(String description)}
+    Konstruiert eine neue \texttt{InterpreterError} Instanz mit der gegebenen textuellen Beschreibung \texttt{description}.
+\end{description}
+
+\subsubsection{class RuntimeError extends InterpreterError}
+Instanzen der Klasse \texttt{RuntimeError} dienen zur Weitergabe und Behandlung von Fehlern, die zur Laufzeit bei der Interpretation des Programms auftreten.
+
+\subsubsection{class DivisionByZeroError extends RuntimeError}
+\subsubsection{class IllegalArrayAccessError extends RuntimeError}
 
 \subsubsection{abstract class AbstractDebugEventPolicy}
 Instanzen von Unterklassen von \texttt{AbstractDebugEventPolicy} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Policy-Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden -- eine Unterklasse von AbstractDebugEventPolicy kann auch nur auf eine Teilmenge der definierten Ereignisse reagieren.
@@ -102,7 +110,7 @@ Instanzen von Unterklassen von \texttt{AbstractDebugEventPolicy} behandeln Ereig
     Wird vom Interpreter direkt nach dessen Start aufgerufen.
     \method{protected void executionTerminatedNormally()}
     Wird vom Interpreter nach ordnungsgemäßer Terminierung des Programms aufgerufen.
-    \method{protected void executionTerminatedAbnormally()}
+    \method{protected void executionTerminatedAbnormally(RuntimeError error)}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms, ausgelöst beispielsweise durch einen Laufzeitfehler, aufgerufen.
     \method{protected void breakpointReached()}
     Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet) wurde.

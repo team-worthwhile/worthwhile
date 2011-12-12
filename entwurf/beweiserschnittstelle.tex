@@ -352,19 +352,21 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \subsubsection{interface Prover::TheoremProver::FormulaCompiler}%
 
+Implementierungen dieser Schnittstelle übersetzen eine
+\texttt{Formula} in die Eingabesprache eines Beweisers, sodass dieser
+mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
+ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
+Modell zurückübersetzt werden kann.%
+
 \begin{description}%
-    % TODO return types missing
-    \method{public compileForall(Formula formula)}%
+    \method{protected String compileFormula(Formula formula)}%
 
-    \method{public compileExists(Formula formula)}%
+    Liefert eine Übersetzung von \texttt{formula} in eine
+    Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
+    diese Sprache interpretiert, genau auf ein erfüllendes Modell von
+    \texttt{formula} abbilden lässt~(Bedeutungserhalt).%
 
-    \method{public compileConjunction(Formula formula)}%
-
-    \method{public compileDisjunction(Formula formula)}%
-
-    \method{public compileNegation(Formula formula)}%
-
-    \method{public compileImplication(Formula formula)}%
+    %\method{protected Formula uncompileFormula(String formula)}%
 
 \end{description}%
 

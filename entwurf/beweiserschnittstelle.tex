@@ -196,6 +196,16 @@ entnommen} zugänglich machen.%
 
 \subsubsection{class Prover::SpecificationChecker}%
 
+% TODO Belegung von Funktionsvariablen
+
+Instanzen von \texttt{SpecificationChecker} lassen
+\texttt{WWAST}-""Instanzen von einem \texttt{FormulaGenerator} in eine
+\texttt{Formula} übersetzen und diese von einem \texttt{ProverCaller}
+auf Erfülltheit für alle Belegungen der nicht initialisierten
+Programmvariablen überprüfen. Das zurückgelieferte Ergebnis gibt dann
+an, ob die Erfülltheit in allen diesen Fällen gegeben ist. Wenn es
+Belegungen gibt, für welche die \texttt{Formula} nicht erfüllt ist,
+wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
 % TODO nicht öffentliche Attribute
 

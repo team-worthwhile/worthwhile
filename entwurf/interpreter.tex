@@ -21,11 +21,16 @@ Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungs
 %\end{description}
 
 \begin{description}
+<<<<<<< HEAD
     \method{public String getCurrentFunctionName()} % TODO should this really be a String?
     Gibt den Namen der in diesem Kontext ausgeführten Funktion zurück.
+=======
+    \method{public String getName()}
+    Gibt einen Namen zurück, der diesem Kontext zugeordnet wurde. Normalerweise ist dies der Name der gerade ausgeführten Funktion.
+>>>>>>> [ew] Add ReadableInterpreter, improve ExecutionContextStack
 
     \method{public SymbolTable getSymbolTable()}
-    Gibt die aktuell gültige Symboltabelle zurück.
+    Gibt die aktuell gültige Symboltabelle zur Inspektion und Veränderung zrück.
 
     \method{protected void executeStatement(Statement statement)}
     Führt in diesem Kontext das angegebene Statement aus.
@@ -35,11 +40,9 @@ Instanzen von \texttt{ExecutionContext} verwalten den Zustand eines Ausführungs
 \end{description}
 
 
-\subsubsection{class ExecutionContextStack}
+\subsubsection{class ExecutionContextStack extends java.util.Stack<ExecutionContext>}
 
 Instanzen von \texttt{ExecutionContextStack} verwalten eine Menge von "`gestapelten"' \texttt{ExecutionContext}-Objekten. Die Klasse \texttt{Interpreter} verwendet diesen Stack, um die für Funktionsaufrufe benötigten mehreren Instanzen von \texttt{ExecutionContext} einfach zu verwalten.
-
-\textbf{TODO} ein Stack, relativ einfach
 
 \subsubsection{class Interpreter}
 
@@ -47,7 +50,10 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
 
 \begin{description}
     \method{public Interpreter(IParseResult parseResult)}
-    Erzeugt eine Instanz, die das Programm, definiert durch die Parserausgabe \texttt{parseResult}, ausführen kann. Das Interface IParseResult wird vom Xtext Framework zur Verfügung gestellt und enthält neben dem AST Metainformationen wie beispielsweise die Positionen der Syntaxelemente in der gelesenen Quelldatei.
+    Erzeugt eine Instanz, die das Programm, definiert durch die Parserausgabe \texttt{parseResult}, ausführen kann. Das Interface IParseResult wird vom Xtext Framework zur Verfügung gestellt und enthält neben dem AST Metainformationen wie beispielsweise die Positionen der Syntaxelemente im gelesenen Quelltext.
+
+    \method{public void execute()}
+    Startet die Ausführung des im Konstruktor übergebenen Programms in dieser Interpreter-""Instanz.
 
     \method{public void addDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
     Fügt dem Interpreter eine Instanz einer Unterklasse von \texttt{AbstractDebugEventPolicy} hinzu und fügt sie der Menge der bei Ereignissen zu benachrichtigenden Objekte hinzu.
@@ -71,16 +77,22 @@ Instanzen von \texttt{Interpreter} kontrollieren die Ausführung eines initial �
     %Führt das gegebene Statement aus und aktualisiert bei Bedarf die Symboltabelle.
 \end{description}
 
+\subsubsection{class ReadableInterpreter extends Interpreter}
+
+\begin{description}
+    \method{public ReadableInterpreter(Readable inputReadable)}
+    Konstruiert eine neue \texttt{Interpreter}-""Instanz durch Lesen der Spezifikation des Programms in der WHILE-""Sprache aus dem übergebenen Readable-""Objekt.
+\end{description}
+
 
 \subsubsection{interface ExpressionEvaluator}
 Die Aufgabe von \texttt{ExpressionEvaluator} Instanzen ist es, \texttt{Expression} Objekte aus dem AST auszuwerten.
 \begin{description}
-    % TODO Ist Type die Grundklasse des Typsystems?
     \method{public Object eval(Expression expression)}
     Wertet die Expression \texttt{expression} aus und gibt das Ergebnis zurück.
 \end{description}
 
-\subsubsection{class InterpreterExpressionEvaluator implements ContextFreeExpressionEvaluator}
+\subsubsection{class InterpreterExpressionEvaluator implements ExpressionEvaluator}
 Wertet Expressions aus, für die zur Auswertung Zugriff auf den \texttt{ExecutionContext} sowie den \texttt{Interpreter} nötig ist, beispielsweise um Funktionsaufrufe auszuwerten oder die Werte referenzierter Variablen aufzulösen.
 
 \subsubsection{abstract class AbstractDebugEventPolicy}

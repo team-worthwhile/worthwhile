@@ -3455,7 +3455,7 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_m5_9sCIqEeG2MZcopdUy_Q" supplier="_jRMTQCAiEeGXqsUcua6Xfg" client="_obF6YCAkEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Collaboration" xmi:id="_LdEN0CIyEeG2MZcopdUy_Q" name="Collaboration1">
-        <ownedBehavior xmi:type="uml:Interaction" xmi:id="_LdGDACIyEeG2MZcopdUy_Q" name="Interaction1">
+        <ownedBehavior xmi:type="uml:Interaction" xmi:id="_LdGDACIyEeG2MZcopdUy_Q" name="ProverCall">
           <eAnnotations xmi:id="_LdRCICIyEeG2MZcopdUy_Q" source="uml2.diagrams">
             <contents xmi:type="notation:Diagram" xmi:id="_LdRCISIyEeG2MZcopdUy_Q" type="Sequence" element="_LdGDACIyEeG2MZcopdUy_Q" name="ProgramChecking" measurementUnit="Himetric">
               <children xmi:id="_LdRCIiIyEeG2MZcopdUy_Q" element="_LdGDACIyEeG2MZcopdUy_Q">

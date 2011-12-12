@@ -10,11 +10,11 @@ Eine Übersicht über dieses Modell findet sich in Abbildung~\ref{debugmodel}.
 
 \begin{figure}
 	\label{debugmodel}
-	\caption[B]{Das Debug-""Modell von Eclipse\footnotemark}
+	\caption[B]{Das Debug-""Modell von Eclipse und dessen Implementierung\footnotemark}
 	\centering
-	\includegraphics[scale=.5]{debug_model}
+	\includegraphics[angle=90,height=\textheight]{diagrams/debugmodel.pdf}
 \end{figure}
-\footnotetext{Quelle: \url{http://www.eclipse.org/articles/Article-Debugger/how-to.html}}
+\footnotetext{basierend auf \url{http://www.eclipse.org/articles/Article-Debugger/how-to.html}}
 
 \subsubsection{class WorthwhileDebugTarget}
 
@@ -42,7 +42,7 @@ Ein Thread repräsentiert einen sequentiellen Programmablauf. Da die WHILE-""Spr
 Ein Stackframe repräsentiert in der GUI einen Ausführungskontext eines Programms. Dazu gehören insbesondere die an der aktuellen Ausführungsposition sichtbaren Variablen.
 
 \begin{description}
-	\method{public int getLineNumner()} Gibt die Zeilennummer der Ausführungsposition in der Quelldatei zurück.
+	\method{public int getLineNumber()} Gibt die Zeilennummer der Ausführungsposition in der Quelldatei zurück.
 	\method{public IVariable[] getVariables()} Gibt die im Ausführungskontext sichtbaren Variablen zurück.
 \end{description}
 

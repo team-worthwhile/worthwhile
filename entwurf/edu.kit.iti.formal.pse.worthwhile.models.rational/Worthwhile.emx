@@ -3231,7 +3231,9 @@
           <ownedAttribute xmi:id="_HIuMsCAiEeGXqsUcua6Xfg" name="satisfiable" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedAttribute>
-          <ownedAttribute xmi:id="_NuNS8CAiEeGXqsUcua6Xfg" name="model" visibility="private"/>
+          <ownedAttribute xmi:id="_XipCYCW9EeGpg6ehjt84bA" name="output" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
           <ownedOperation xmi:id="_8q_P4CS-EeGCVYtmoWb2Bg" name="ProverResult"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_Et2a0CAkEeGXqsUcua6Xfg" name="SMTLIBStrategy" clientDependency="_j7uzICAkEeGXqsUcua6Xfg">

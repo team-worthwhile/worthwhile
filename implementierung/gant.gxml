@@ -11,8 +11,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-19T08:00:00</Start>
-      <Finish>2011-12-20T17:00:00</Finish>
+      <Start>2011-12-20T08:00:00</Start>
+      <Finish>2011-12-21T17:00:00</Finish>
       <OutlineNumber>0</OutlineNumber>
     </Task>
     <Task>
@@ -39,8 +39,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-21T08:00:00</Start>
-      <Finish>2011-12-23T17:00:00</Finish>
+      <Start>2011-12-22T08:00:00</Start>
+      <Finish>2011-12-26T17:00:00</Finish>
       <OutlineNumber>2</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>B347A355-3605-A12C-870E-3854B36BFF5C</PredecessorUID>
@@ -57,8 +57,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-26T08:00:00</Start>
-      <Finish>2011-12-27T17:00:00</Finish>
+      <Start>2011-12-27T08:00:00</Start>
+      <Finish>2011-12-28T17:00:00</Finish>
       <OutlineNumber>3</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>BE055CD3-1D17-2E06-88CE-38329FC4F8E8</PredecessorUID>
@@ -75,8 +75,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-21T08:00:00</Start>
-      <Finish>2011-12-22T16:00:00</Finish>
+      <Start>2011-12-22T08:00:00</Start>
+      <Finish>2011-12-23T16:00:00</Finish>
       <OutlineNumber>4</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>B347A355-3605-A12C-870E-3854B36BFF5C</PredecessorUID>
@@ -93,8 +93,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-22T16:00:00</Start>
-      <Finish>2011-12-27T16:00:00</Finish>
+      <Start>2011-12-23T16:00:00</Start>
+      <Finish>2011-12-28T16:00:00</Finish>
       <OutlineNumber>5</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>ACA564AE-D282-601D-57B7-383359276E63</PredecessorUID>
@@ -111,8 +111,8 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-27T16:00:00</Start>
-      <Finish>2011-12-30T17:00:00</Finish>
+      <Start>2011-12-28T16:00:00</Start>
+      <Finish>2012-01-02T12:00:00</Finish>
       <OutlineNumber>6</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>3540AC06-82D9-FDA7-AFF1-383646A60E01</PredecessorUID>
@@ -120,46 +120,22 @@
       </PredecessorLink>
     </Task>
     <Task>
-      <ID>DC5263E8-F320-2663-B42B-36A716F9F689</ID>
-      <UID>DC5263E8-F320-2663-B42B-36A716F9F689</UID>
-      <Name>AST</Name>
+      <ID>BDFFA1A9-3507-2646-566E-38BA9E08EB4E</ID>
+      <UID>BDFFA1A9-3507-2646-566E-38BA9E08EB4E</UID>
+      <Name>Vorbereitungen abgeschlossen</Name>
       <Critical>0</Critical>
-      <Milestone>0</Milestone>
-      <Summary>1</Summary>
+      <Milestone>1</Milestone>
+      <Summary>0</Summary>
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-04T08:00:00</Start>
-      <Finish>2012-01-13T17:00:00</Finish>
+      <Start>2012-01-02T12:00:00</Start>
+      <Finish>2012-01-02T12:00:00</Finish>
       <OutlineNumber>7</OutlineNumber>
-    </Task>
-    <Task>
-      <ID>E7E9DD09-FD2E-F14D-6B28-36A772D674F0</ID>
-      <UID>E7E9DD09-FD2E-F14D-6B28-36A772D674F0</UID>
-      <Name>Klassenstruktur und Schnittstellen</Name>
-      <Critical>0</Critical>
-      <Milestone>0</Milestone>
-      <Summary>0</Summary>
-      <IsNull>0</IsNull>
-      <PercentComplete>0</PercentComplete>
-      <Notes/>
-      <Start>2012-01-04T08:00:00</Start>
-      <Finish>2012-01-10T15:10:47</Finish>
-      <OutlineNumber>7.1</OutlineNumber>
-    </Task>
-    <Task>
-      <ID>CB311173-E026-EFF9-DA75-369C7D91F8E8</ID>
-      <UID>CB311173-E026-EFF9-DA75-369C7D91F8E8</UID>
-      <Name>Visitor Unit-Test</Name>
-      <Critical>0</Critical>
-      <Milestone>0</Milestone>
-      <Summary>0</Summary>
-      <IsNull>0</IsNull>
-      <PercentComplete>0</PercentComplete>
-      <Notes/>
-      <Start>2012-01-06T09:00:00</Start>
-      <Finish>2012-01-13T17:00:00</Finish>
-      <OutlineNumber>7.2</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>FC7C32B9-ED8E-37E6-7DF8-3854183C13D5</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
     </Task>
     <Task>
       <ID>5B90A494-BE5E-259C-2A85-36AA7E752680</ID>
@@ -171,23 +147,77 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-03T08:00:00</Start>
-      <Finish>2012-01-10T09:00:00</Finish>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-23T09:00:00</Finish>
       <OutlineNumber>8</OutlineNumber>
     </Task>
     <Task>
-      <ID>412E85E7-0C7F-EB7B-D888-36AB0BC0E479</ID>
-      <UID>412E85E7-0C7F-EB7B-D888-36AB0BC0E479</UID>
-      <Name>Öffentliche Schnittstellen</Name>
+      <ID>7C47C4B1-55C9-6CA4-A074-3896DFA92F68</ID>
+      <UID>7C47C4B1-55C9-6CA4-A074-3896DFA92F68</UID>
+      <Name>kompl. Ausführung eines Programms</Name>
       <Critical>0</Critical>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-03T08:00:00</Start>
-      <Finish>2012-01-10T09:00:00</Finish>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-16T09:00:00</Finish>
       <OutlineNumber>8.1</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>FC7C32B9-ED8E-37E6-7DF8-3854183C13D5</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
+    </Task>
+    <Task>
+      <ID>8E53B718-9221-ADA1-61B6-38B0485DB9F2</ID>
+      <UID>8E53B718-9221-ADA1-61B6-38B0485DB9F2</UID>
+      <Name>Debugschnittstelle</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-16T09:00:00</Start>
+      <Finish>2012-01-23T09:00:00</Finish>
+      <OutlineNumber>8.2</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>7C47C4B1-55C9-6CA4-A074-3896DFA92F68</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
+    </Task>
+    <Task>
+      <ID>5F4FF91D-DF4A-FB3E-AFB8-38D034671D65</ID>
+      <UID>5F4FF91D-DF4A-FB3E-AFB8-38D034671D65</UID>
+      <Name>Breakpoints</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-16T08:00:00</Start>
+      <Finish>2012-01-17T17:00:00</Finish>
+      <OutlineNumber>8.3</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>9EC8AD5F-5636-30EE-7EE3-38C91354CFB7</ID>
+      <UID>9EC8AD5F-5636-30EE-7EE3-38C91354CFB7</UID>
+      <Name>Interpreter fertiggestellt</Name>
+      <Critical>0</Critical>
+      <Milestone>1</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-23T09:00:00</Start>
+      <Finish>2012-01-23T09:00:00</Finish>
+      <OutlineNumber>9</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>8E53B718-9221-ADA1-61B6-38B0485DB9F2</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
     </Task>
     <Task>
       <ID>AD8C2021-8D67-D6FD-D3D9-369C7D92FF51</ID>
@@ -200,13 +230,41 @@
       <PercentComplete>0</PercentComplete>
       <Notes/>
       <Start>2012-01-02T13:00:00</Start>
-      <Finish>2012-01-09T14:00:00</Finish>
-      <OutlineNumber>9</OutlineNumber>
+      <Finish>2012-01-19T16:00:00</Finish>
+      <OutlineNumber>10</OutlineNumber>
     </Task>
     <Task>
-      <ID>2501B302-4CFC-CF87-99EE-36AC820DB6B9</ID>
-      <UID>2501B302-4CFC-CF87-99EE-36AC820DB6B9</UID>
-      <Name>Öffentliche Schnittstellen</Name>
+      <ID>44750CF6-6BFA-64DF-1276-3892AF0F724B</ID>
+      <UID>44750CF6-6BFA-64DF-1276-3892AF0F724B</UID>
+      <Name>Theorem Prover</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>1</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-19T16:00:00</Finish>
+      <OutlineNumber>10.1</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>4CDFC643-88AC-B649-9CD5-389985106D22</ID>
+      <UID>4CDFC643-88AC-B649-9CD5-389985106D22</UID>
+      <Name>Z3 Prover</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-06T16:00:00</Start>
+      <Finish>2012-01-18T17:00:00</Finish>
+      <OutlineNumber>10.1.1</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>92C62699-E2F4-B000-E5E4-389A173CA1FB</ID>
+      <UID>92C62699-E2F4-B000-E5E4-389A173CA1FB</UID>
+      <Name>SMTLIB Compiler</Name>
       <Critical>0</Critical>
       <Milestone>0</Milestone>
       <Summary>0</Summary>
@@ -214,8 +272,62 @@
       <PercentComplete>0</PercentComplete>
       <Notes/>
       <Start>2012-01-02T13:00:00</Start>
-      <Finish>2012-01-09T14:00:00</Finish>
-      <OutlineNumber>9.1</OutlineNumber>
+      <Finish>2012-01-19T16:00:00</Finish>
+      <OutlineNumber>10.1.2</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>FC7C32B9-ED8E-37E6-7DF8-3854183C13D5</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
+    </Task>
+    <Task>
+      <ID>0E7D1FAF-6A0C-B680-D5FA-3892C9C90777</ID>
+      <UID>0E7D1FAF-6A0C-B680-D5FA-3892C9C90777</UID>
+      <Name>Program Transformer</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>1</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-09T17:00:00</Finish>
+      <OutlineNumber>10.2</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>18DAC4B2-5C9D-69F6-AC4E-389A7F0EFF7F</ID>
+      <UID>18DAC4B2-5C9D-69F6-AC4E-389A7F0EFF7F</UID>
+      <Name>WP Generator</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-09T17:00:00</Finish>
+      <OutlineNumber>10.2.1</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>FC7C32B9-ED8E-37E6-7DF8-3854183C13D5</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
+    </Task>
+    <Task>
+      <ID>9317688B-35AA-2527-268A-38C969D04312</ID>
+      <UID>9317688B-35AA-2527-268A-38C969D04312</UID>
+      <Name>Beweiserschnittstelle fertiggestellt</Name>
+      <Critical>0</Critical>
+      <Milestone>1</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-19T16:00:00</Start>
+      <Finish>2012-01-19T16:00:00</Finish>
+      <OutlineNumber>11</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>92C62699-E2F4-B000-E5E4-389A173CA1FB</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
     </Task>
     <Task>
       <ID>BC5A3DE2-0C01-E0C8-A835-3834B8F643D4</ID>
@@ -227,9 +339,9 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-28T08:00:00</Start>
-      <Finish>2012-01-13T16:00:00</Finish>
-      <OutlineNumber>10</OutlineNumber>
+      <Start>2011-12-29T08:00:00</Start>
+      <Finish>2012-01-20T16:00:00</Finish>
+      <OutlineNumber>12</OutlineNumber>
     </Task>
     <Task>
       <ID>1BE339B3-63D0-5146-7E47-369C7D921577</ID>
@@ -241,9 +353,9 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2011-12-28T08:00:00</Start>
-      <Finish>2012-01-11T12:00:00</Finish>
-      <OutlineNumber>10.1</OutlineNumber>
+      <Start>2011-12-29T08:00:00</Start>
+      <Finish>2012-01-16T17:00:00</Finish>
+      <OutlineNumber>12.1</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>975EA57F-10C2-10B0-A09B-38333099B604</PredecessorUID>
         <Type>1</Type>
@@ -259,9 +371,9 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-06T13:00:00</Start>
-      <Finish>2012-01-10T17:00:00</Finish>
-      <OutlineNumber>10.2</OutlineNumber>
+      <Start>2011-12-30T13:00:00</Start>
+      <Finish>2012-01-13T17:00:00</Finish>
+      <OutlineNumber>12.2</OutlineNumber>
     </Task>
     <Task>
       <ID>893816E4-9C94-2859-B062-384DFFD81506</ID>
@@ -273,11 +385,25 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-11T08:00:00</Start>
-      <Finish>2012-01-13T16:00:00</Finish>
-      <OutlineNumber>10.3</OutlineNumber>
+      <Start>2012-01-11T11:00:00</Start>
+      <Finish>2012-01-20T16:00:00</Finish>
+      <OutlineNumber>12.3</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>DF96A510-8922-57A6-8E20-38CA0050EC6A</ID>
+      <UID>DF96A510-8922-57A6-8E20-38CA0050EC6A</UID>
+      <Name>Parser fertiggestellt</Name>
+      <Critical>0</Critical>
+      <Milestone>1</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-20T16:00:00</Start>
+      <Finish>2012-01-20T16:00:00</Finish>
+      <OutlineNumber>13</OutlineNumber>
       <PredecessorLink>
-        <PredecessorUID>63992931-75B7-A31D-6B10-385E642A2BB2</PredecessorUID>
+        <PredecessorUID>893816E4-9C94-2859-B062-384DFFD81506</PredecessorUID>
         <Type>1</Type>
       </PredecessorLink>
     </Task>
@@ -291,9 +417,9 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-02T08:00:00</Start>
-      <Finish>2012-01-06T12:00:00</Finish>
-      <OutlineNumber>11</OutlineNumber>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-26T17:00:00</Finish>
+      <OutlineNumber>14</OutlineNumber>
     </Task>
     <Task>
       <ID>49B84C1B-D620-FD2E-3CB9-3834742844E4</ID>
@@ -305,9 +431,9 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-02T08:00:00</Start>
-      <Finish>2012-01-03T16:00:00</Finish>
-      <OutlineNumber>11.1</OutlineNumber>
+      <Start>2012-01-02T13:00:00</Start>
+      <Finish>2012-01-04T17:00:00</Finish>
+      <OutlineNumber>14.1</OutlineNumber>
       <PredecessorLink>
         <PredecessorUID>FC7C32B9-ED8E-37E6-7DF8-3854183C13D5</PredecessorUID>
         <Type>1</Type>
@@ -323,23 +449,13 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-05T09:35:21</Start>
-      <Finish>2012-01-06T12:00:00</Finish>
-      <OutlineNumber>11.2</OutlineNumber>
-    </Task>
-    <Task>
-      <ID>82249F53-74EE-5AE4-CB6B-387DC723EA76</ID>
-      <UID>82249F53-74EE-5AE4-CB6B-387DC723EA76</UID>
-      <Name>Kommunikation mit dem Interpreter</Name>
-      <Critical>0</Critical>
-      <Milestone>0</Milestone>
-      <Summary>0</Summary>
-      <IsNull>0</IsNull>
-      <PercentComplete>0</PercentComplete>
-      <Notes/>
-      <Start>2012-01-05T09:35:21</Start>
-      <Finish>2012-01-06T12:00:00</Finish>
-      <OutlineNumber>11.3</OutlineNumber>
+      <Start>2012-01-20T16:00:00</Start>
+      <Finish>2012-01-26T16:00:00</Finish>
+      <OutlineNumber>14.2</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>DF96A510-8922-57A6-8E20-38CA0050EC6A</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
     </Task>
     <Task>
       <ID>0ECCA00B-DA4A-C2AC-949E-387EFA8E1AE7</ID>
@@ -351,9 +467,45 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-05T09:35:21</Start>
-      <Finish>2012-01-06T12:00:00</Finish>
-      <OutlineNumber>11.4</OutlineNumber>
+      <Start>2012-01-19T16:00:00</Start>
+      <Finish>2012-01-26T16:00:00</Finish>
+      <OutlineNumber>14.3</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>9317688B-35AA-2527-268A-38C969D04312</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
+    </Task>
+    <Task>
+      <ID>61BE9EC1-2A4D-08BB-DE5C-388FF31B0916</ID>
+      <UID>61BE9EC1-2A4D-08BB-DE5C-388FF31B0916</UID>
+      <Name>Debugger</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>1</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-23T09:00:00</Start>
+      <Finish>2012-01-26T17:00:00</Finish>
+      <OutlineNumber>14.4</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>82249F53-74EE-5AE4-CB6B-387DC723EA76</ID>
+      <UID>82249F53-74EE-5AE4-CB6B-387DC723EA76</UID>
+      <Name>Kommunikation mit dem Interpreter</Name>
+      <Critical>0</Critical>
+      <Milestone>0</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-23T09:00:00</Start>
+      <Finish>2012-01-26T17:00:00</Finish>
+      <OutlineNumber>14.4.1</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>9EC8AD5F-5636-30EE-7EE3-38C91354CFB7</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
     </Task>
     <Task>
       <ID>7A1DDF91-830B-3479-CA0F-388495BB18F7</ID>
@@ -365,9 +517,9 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-03T08:00:00</Start>
-      <Finish>2012-01-04T17:00:00</Finish>
-      <OutlineNumber>12</OutlineNumber>
+      <Start>2012-01-16T08:00:00</Start>
+      <Finish>2012-01-26T17:00:00</Finish>
+      <OutlineNumber>14.5</OutlineNumber>
     </Task>
     <Task>
       <ID>81B88852-1087-AC2D-4279-38852F7F8369</ID>
@@ -379,9 +531,27 @@
       <IsNull>0</IsNull>
       <PercentComplete>0</PercentComplete>
       <Notes/>
-      <Start>2012-01-03T08:00:00</Start>
-      <Finish>2012-01-04T17:00:00</Finish>
-      <OutlineNumber>13</OutlineNumber>
+      <Start>2012-01-16T08:00:00</Start>
+      <Finish>2012-01-26T17:00:00</Finish>
+      <OutlineNumber>14.6</OutlineNumber>
+    </Task>
+    <Task>
+      <ID>6E98C3AE-FA56-F700-4ED9-38CA4B0989DD</ID>
+      <UID>6E98C3AE-FA56-F700-4ED9-38CA4B0989DD</UID>
+      <Name>GUI fertiggestellt</Name>
+      <Critical>0</Critical>
+      <Milestone>1</Milestone>
+      <Summary>0</Summary>
+      <IsNull>0</IsNull>
+      <PercentComplete>0</PercentComplete>
+      <Notes/>
+      <Start>2012-01-26T17:00:00</Start>
+      <Finish>2012-01-26T17:00:00</Finish>
+      <OutlineNumber>15</OutlineNumber>
+      <PredecessorLink>
+        <PredecessorUID>81B88852-1087-AC2D-4279-38852F7F8369</PredecessorUID>
+        <Type>1</Type>
+      </PredecessorLink>
     </Task>
     <Task>
       <ID>42E98917-CDB2-479A-3550-369C7D921973</ID>
@@ -395,7 +565,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>14</OutlineNumber>
+      <OutlineNumber>16</OutlineNumber>
     </Task>
     <Task>
       <ID>350DCF5F-27A7-5866-6596-369C7D93AA24</ID>
@@ -409,7 +579,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>15</OutlineNumber>
+      <OutlineNumber>17</OutlineNumber>
     </Task>
     <Task>
       <ID>DF34726D-6C7E-797C-0E26-369C7D93FE6B</ID>
@@ -423,7 +593,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>16</OutlineNumber>
+      <OutlineNumber>18</OutlineNumber>
     </Task>
     <Task>
       <ID>AC6500DE-321C-020D-F5E1-369C7D933B31</ID>
@@ -437,7 +607,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>17</OutlineNumber>
+      <OutlineNumber>19</OutlineNumber>
     </Task>
     <Task>
       <ID>C6E351CF-88BE-E49D-F651-369C7D946D38</ID>
@@ -451,7 +621,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>18</OutlineNumber>
+      <OutlineNumber>20</OutlineNumber>
     </Task>
     <Task>
       <ID>807D7576-5BE8-D5AE-D378-369C7D94F978</ID>
@@ -465,7 +635,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>19</OutlineNumber>
+      <OutlineNumber>21</OutlineNumber>
     </Task>
     <Task>
       <ID>10070C66-2262-AB46-8E01-369C7D94AB2A</ID>
@@ -479,7 +649,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>20</OutlineNumber>
+      <OutlineNumber>22</OutlineNumber>
     </Task>
     <Task>
       <ID>569A8547-C0ED-EE24-0CD0-369C7D94A6C1</ID>
@@ -493,7 +663,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>21</OutlineNumber>
+      <OutlineNumber>23</OutlineNumber>
     </Task>
     <Task>
       <ID>ECC9CE2B-5EE0-1075-58F7-369C7D958A78</ID>
@@ -507,7 +677,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>22</OutlineNumber>
+      <OutlineNumber>24</OutlineNumber>
     </Task>
     <Task>
       <ID>295EB603-801D-5DF8-50C7-369C7D958C5A</ID>
@@ -521,7 +691,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>23</OutlineNumber>
+      <OutlineNumber>25</OutlineNumber>
     </Task>
     <Task>
       <ID>7242BB6D-7A32-AB97-82A2-369C7D9508CF</ID>
@@ -535,7 +705,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>24</OutlineNumber>
+      <OutlineNumber>26</OutlineNumber>
     </Task>
     <Task>
       <ID>AAD1CD17-2332-2AE0-C701-369C7D96E67C</ID>
@@ -549,7 +719,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>25</OutlineNumber>
+      <OutlineNumber>27</OutlineNumber>
     </Task>
     <Task>
       <ID>3EE71C96-9ADB-2BFB-EB7D-369C7D967A10</ID>
@@ -563,7 +733,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>26</OutlineNumber>
+      <OutlineNumber>28</OutlineNumber>
     </Task>
     <Task>
       <ID>30268C73-CCF2-D4B4-A5C7-369C7D96DF68</ID>
@@ -577,7 +747,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>27</OutlineNumber>
+      <OutlineNumber>29</OutlineNumber>
     </Task>
     <Task>
       <ID>88F1FDBB-BD04-2C4B-8A6C-369C7D97B91B</ID>
@@ -591,7 +761,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>28</OutlineNumber>
+      <OutlineNumber>30</OutlineNumber>
     </Task>
     <Task>
       <ID>B57AB710-4670-3888-E113-369C7D9770B0</ID>
@@ -605,7 +775,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>29</OutlineNumber>
+      <OutlineNumber>31</OutlineNumber>
     </Task>
     <Task>
       <ID>E54059A8-C8D3-683A-5F9B-369C7D97C8AD</ID>
@@ -619,7 +789,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>30</OutlineNumber>
+      <OutlineNumber>32</OutlineNumber>
     </Task>
     <Task>
       <ID>490C9615-9F83-4433-AE30-369C7D98535B</ID>
@@ -633,7 +803,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>31</OutlineNumber>
+      <OutlineNumber>33</OutlineNumber>
     </Task>
     <Task>
       <ID>2097B3F5-B82B-D04A-E143-369C7D98ECF0</ID>
@@ -647,7 +817,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>32</OutlineNumber>
+      <OutlineNumber>34</OutlineNumber>
     </Task>
     <Task>
       <ID>08811C38-FDA2-1299-CB32-369C7D98947A</ID>
@@ -661,7 +831,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>33</OutlineNumber>
+      <OutlineNumber>35</OutlineNumber>
     </Task>
     <Task>
       <ID>3CD9C59F-C66C-3410-7AD1-369C7D99FFF0</ID>
@@ -675,7 +845,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>34</OutlineNumber>
+      <OutlineNumber>36</OutlineNumber>
     </Task>
     <Task>
       <ID>BE96DF3E-09B4-3AB2-4287-369C7D9940E3</ID>
@@ -689,7 +859,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>35</OutlineNumber>
+      <OutlineNumber>37</OutlineNumber>
     </Task>
     <Task>
       <ID>6601367F-83A0-C52A-2B41-369C7D9AC540</ID>
@@ -703,7 +873,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>36</OutlineNumber>
+      <OutlineNumber>38</OutlineNumber>
     </Task>
     <Task>
       <ID>2205BC83-0705-50AF-A0E3-369C7D9A9449</ID>
@@ -717,7 +887,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>37</OutlineNumber>
+      <OutlineNumber>39</OutlineNumber>
     </Task>
     <Task>
       <ID>D2AF78FE-CE7F-90FA-EE3A-369C7D9B5827</ID>
@@ -731,7 +901,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>38</OutlineNumber>
+      <OutlineNumber>40</OutlineNumber>
     </Task>
     <Task>
       <ID>480E0F85-3021-9904-D5F7-369C7D9C2A0B</ID>
@@ -745,7 +915,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>39</OutlineNumber>
+      <OutlineNumber>41</OutlineNumber>
     </Task>
     <Task>
       <ID>FB7AFC40-5F73-BCC3-FF6B-369C7D9DFC68</ID>
@@ -759,7 +929,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>40</OutlineNumber>
+      <OutlineNumber>42</OutlineNumber>
     </Task>
     <Task>
       <ID>6C6829A1-5FC3-D68C-DC12-369C7D9E3CAF</ID>
@@ -773,7 +943,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>41</OutlineNumber>
+      <OutlineNumber>43</OutlineNumber>
     </Task>
     <Task>
       <ID>B49D275F-365E-DF7D-C16A-369C7D9EFA0E</ID>
@@ -787,7 +957,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>42</OutlineNumber>
+      <OutlineNumber>44</OutlineNumber>
     </Task>
     <Task>
       <ID>AE76D6B7-7AF6-494F-004A-369C7D9F5B68</ID>
@@ -801,7 +971,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>43</OutlineNumber>
+      <OutlineNumber>45</OutlineNumber>
     </Task>
     <Task>
       <ID>8F267258-B045-2D1A-7B3A-369C7D9FC100</ID>
@@ -815,7 +985,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>44</OutlineNumber>
+      <OutlineNumber>46</OutlineNumber>
     </Task>
     <Task>
       <ID>5D47ABB7-7D9D-331B-27F6-369C7DA0968E</ID>
@@ -829,7 +999,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>45</OutlineNumber>
+      <OutlineNumber>47</OutlineNumber>
     </Task>
     <Task>
       <ID>266FB88F-970D-AA85-F10D-369C7DA00D0D</ID>
@@ -843,7 +1013,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>46</OutlineNumber>
+      <OutlineNumber>48</OutlineNumber>
     </Task>
     <Task>
       <ID>6CF593BF-1452-8E70-AD96-369C7DA1C6F7</ID>
@@ -857,7 +1027,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>47</OutlineNumber>
+      <OutlineNumber>49</OutlineNumber>
     </Task>
     <Task>
       <ID>B0863B32-2263-6218-946E-369C7DA1A871</ID>
@@ -871,7 +1041,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>48</OutlineNumber>
+      <OutlineNumber>50</OutlineNumber>
     </Task>
     <Task>
       <ID>E1F08F87-BB78-B55F-B389-369C7DA26A14</ID>
@@ -885,7 +1055,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>49</OutlineNumber>
+      <OutlineNumber>51</OutlineNumber>
     </Task>
     <Task>
       <ID>54A74BFE-1CFB-4BFE-AF56-369C7DA22578</ID>
@@ -899,7 +1069,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>50</OutlineNumber>
+      <OutlineNumber>52</OutlineNumber>
     </Task>
     <Task>
       <ID>29B3FB90-35C3-952F-D5D8-369C7DA36871</ID>
@@ -913,7 +1083,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>51</OutlineNumber>
+      <OutlineNumber>53</OutlineNumber>
     </Task>
     <Task>
       <ID>713BC8D7-B70C-1144-8CE3-369C7DA301CD</ID>
@@ -927,7 +1097,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>52</OutlineNumber>
+      <OutlineNumber>54</OutlineNumber>
     </Task>
     <Task>
       <ID>CFB87328-7E32-3491-D4C2-369C7DA4C4CB</ID>
@@ -941,7 +1111,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>53</OutlineNumber>
+      <OutlineNumber>55</OutlineNumber>
     </Task>
     <Task>
       <ID>6A7D49F5-A8C2-86FF-24D3-369C7DA47BB1</ID>
@@ -955,7 +1125,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>54</OutlineNumber>
+      <OutlineNumber>56</OutlineNumber>
     </Task>
     <Task>
       <ID>406EDDDC-6328-EF96-817B-369C7DA59103</ID>
@@ -969,7 +1139,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>55</OutlineNumber>
+      <OutlineNumber>57</OutlineNumber>
     </Task>
     <Task>
       <ID>07F0BE84-65BA-5DBC-2816-369C7DA5D6C2</ID>
@@ -983,7 +1153,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>56</OutlineNumber>
+      <OutlineNumber>58</OutlineNumber>
     </Task>
     <Task>
       <ID>7DD9F0BF-18C6-42A7-DF7B-369C7DA63177</ID>
@@ -997,7 +1167,7 @@
       <Notes/>
       <Start>2011-12-14T09:49:12</Start>
       <Finish>2011-12-14T09:49:12</Finish>
-      <OutlineNumber>57</OutlineNumber>
+      <OutlineNumber>59</OutlineNumber>
     </Task>
     <Task>
       <ID>7FE556C4-F9AA-B4FC-6EF3-36A914341BCB</ID>
@@ -1011,7 +1181,7 @@
       <Notes/>
       <Start>2011-12-14T10:02:57</Start>
       <Finish>2011-12-14T10:02:57</Finish>
-      <OutlineNumber>58</OutlineNumber>
+      <OutlineNumber>60</OutlineNumber>
     </Task>
     <Task>
       <ID>37FF6793-749F-A45D-1141-36AAFA056F7F</ID>
@@ -1025,7 +1195,7 @@
       <Notes/>
       <Start>2011-12-14T10:05:01</Start>
       <Finish>2011-12-14T10:05:01</Finish>
-      <OutlineNumber>59</OutlineNumber>
+      <OutlineNumber>61</OutlineNumber>
     </Task>
     <Task>
       <ID>6A1447A1-FD17-AF9F-A203-36ACC72ED9BC</ID>
@@ -1039,7 +1209,7 @@
       <Notes/>
       <Start>2011-12-14T10:07:00</Start>
       <Finish>2011-12-14T10:07:00</Finish>
-      <OutlineNumber>60</OutlineNumber>
+      <OutlineNumber>62</OutlineNumber>
     </Task>
     <Task>
       <ID>88689002-BD25-E6D4-27F7-36ACC732BCB3</ID>
@@ -1053,7 +1223,7 @@
       <Notes/>
       <Start>2011-12-14T10:07:00</Start>
       <Finish>2011-12-14T10:07:00</Finish>
-      <OutlineNumber>61</OutlineNumber>
+      <OutlineNumber>63</OutlineNumber>
     </Task>
     <Task>
       <ID>AE6D13FE-4078-3587-A0B6-3834220690E2</ID>
@@ -1067,7 +1237,7 @@
       <Notes/>
       <Start>2011-12-14T17:00:00</Start>
       <Finish>2011-12-14T17:00:00</Finish>
-      <OutlineNumber>62</OutlineNumber>
+      <OutlineNumber>64</OutlineNumber>
     </Task>
     <Task>
       <ID>E3D8E343-C322-7DCF-2AFD-387E7E91E3FC</ID>
@@ -1081,7 +1251,7 @@
       <Notes/>
       <Start>2011-12-14T17:00:00</Start>
       <Finish>2011-12-14T17:00:00</Finish>
-      <OutlineNumber>63</OutlineNumber>
+      <OutlineNumber>65</OutlineNumber>
     </Task>
   </Tasks>
   <Resources>
@@ -1148,18 +1318,15 @@
   </Resources>
   <Assignments/>
   <ViewState>
-    <VisibleStartTime>2011-12-18T20:02:56</VisibleStartTime>
-    <VisibleEndTime>2012-01-18T20:58:09</VisibleEndTime>
-    <ScrollPosition>0</ScrollPosition>
-    <HorizontalZoom>4.434048401124339</HorizontalZoom>
+    <VisibleStartTime>2011-12-27T04:00:55</VisibleStartTime>
+    <VisibleEndTime>2012-02-02T21:18:39</VisibleEndTime>
+    <ScrollPosition>1</ScrollPosition>
+    <HorizontalZoom>5.388663908730159</HorizontalZoom>
     <VerticalZoom>12</VerticalZoom>
     <ShowCurrentDay>0</ShowCurrentDay>
     <DGColumnsState>1</DGColumnsState>
     <Exists>1</Exists>
     <OpenNodes>
-      <OpenNode>
-        <OpenTaskID>DC5263E8-F320-2663-B42B-36A716F9F689</OpenTaskID>
-      </OpenNode>
       <OpenNode>
         <OpenTaskID>5B90A494-BE5E-259C-2A85-36AA7E752680</OpenTaskID>
       </OpenNode>
@@ -1167,10 +1334,19 @@
         <OpenTaskID>AD8C2021-8D67-D6FD-D3D9-369C7D92FF51</OpenTaskID>
       </OpenNode>
       <OpenNode>
+        <OpenTaskID>44750CF6-6BFA-64DF-1276-3892AF0F724B</OpenTaskID>
+      </OpenNode>
+      <OpenNode>
+        <OpenTaskID>0E7D1FAF-6A0C-B680-D5FA-3892C9C90777</OpenTaskID>
+      </OpenNode>
+      <OpenNode>
         <OpenTaskID>BC5A3DE2-0C01-E0C8-A835-3834B8F643D4</OpenTaskID>
       </OpenNode>
       <OpenNode>
         <OpenTaskID>BA2D1D64-D72D-FDA9-CD94-38352CCF3DFB</OpenTaskID>
+      </OpenNode>
+      <OpenNode>
+        <OpenTaskID>61BE9EC1-2A4D-08BB-DE5C-388FF31B0916</OpenTaskID>
       </OpenNode>
     </OpenNodes>
     <DataGridSizes>

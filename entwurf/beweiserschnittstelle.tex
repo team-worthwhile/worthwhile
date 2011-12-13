@@ -147,7 +147,24 @@ Axiome behandelt.%
 
 \subsubsection{Modell}%
 
+Modelle verifizieren die Erfüllbarkeit von prädikatenlogischen
+Formeln, indem sie freie Variablen auf genau ein Element ihrer Domäne
+abbilden. Ein Modell, das die Beweiserschnittstelle liefert, besteht
+ausschließlich aus Abbildungen, die hinreichend für eine
+verifizierende Auswertung der geprüften Formel sind und sich auf im
+geprüften Programmteil nicht initialisierte Variablen (z.~B.\
+Parameter) beziehen.%
+
 \subsubsection{Fehlerausgaben}%
+
+Fehler, welche von der Beweiserschnittstelle an den Aufrufer
+zurückgegeben werden, sind semantische aus der Beweiserausgabe, da der
+Syntaxbaum korrekte Syntax erzwingt und die Programmtransformation nur
+syntaktische Operationen auf der Programmspezifikation durchführt.
+Aufgrund der Behandlung von Laufzeitfehlern wie Nulldivision und
+unerlaubtem Arrayfeldzugriff, bleiben als einzige Fehlerausgaben an
+den Aufrufer Typfehler und Referenzierung nicht deklarierter Variablen
+oder Funktionen.%
 
 \subsection{Klassenentwurf}%
 
@@ -179,11 +196,6 @@ erfüllte Annotationen.%
 Instanzen von \texttt{WWAST} codieren Programmtexte, welche der Syntax
 von Worthwhile entsprechen.%
 
-\subsubsection{class SMTLIBAST}%
-
-Instanzen von \texttt{SMTLIBAST} codieren Programmtexte, welche der
-Syntax von SMT-LIB entsprechen.%
-
 \subsubsection{class Prover::Formula}%
 
 Formula beschreibt Instanzen, die prädikatenlogische Formeln als
@@ -193,8 +205,16 @@ entnommen} zugänglich machen.%
 
 \subsubsection{class Prover::SpecificationChecker}%
 
-Instanzen von \texttt{SpecificationChecker} übersetzen
-\texttt{WWAST}-Instanzen in Instanzen von \texttt{SMTLIBAST}.%
+% TODO Belegung von Funktionsvariablen
+
+Instanzen von \texttt{SpecificationChecker} lassen
+\texttt{WWAST}-""Instanzen von einem \texttt{FormulaGenerator} in eine
+\texttt{Formula} übersetzen und diese von einem \texttt{ProverCaller}
+auf Erfülltheit für alle Belegungen der nicht initialisierten
+Programmvariablen überprüfen. Das zurückgelieferte Ergebnis gibt dann
+an, ob die Erfülltheit in allen diesen Fällen gegeben ist. Wenn es
+Belegungen gibt, für welche die \texttt{Formula} nicht erfüllt ist,
+wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
 % TODO nicht öffentliche Attribute
 
@@ -206,7 +226,7 @@ Instanzen von \texttt{SpecificationChecker} übersetzen
 
     Siehe \texttt{setTimeout}.%
 
-    \method{private SMTLIBAST model}%
+    \method{private Map<VariableRef,Literal> model}%
 
 \end{description}%
 

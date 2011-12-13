@@ -3217,12 +3217,11 @@
         <packagedElement xmi:type="uml:Class" xmi:id="_CNev0CAkEeGXqsUcua6Xfg" name="WPStrategy" clientDependency="_tc2kECAkEeGXqsUcua6Xfg">
           <interfaceRealization xmi:id="_tc2kECAkEeGXqsUcua6Xfg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_CNev0CAkEeGXqsUcua6Xfg" contract="_obF6YCAkEeGXqsUcua6Xfg"/>
           <ownedOperation xmi:id="_9gcFcCIyEeG2MZcopdUy_Q" name="WPStrategy"/>
-          <ownedOperation xmi:id="_IwNJgCIzEeG2MZcopdUy_Q" name="transformProgram"/>
         </packagedElement>
-        <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator" clientDependency="_m5_9sCIqEeG2MZcopdUy_Q">
-          <ownedOperation xmi:id="_0SFyoCS7EeGCVYtmoWb2Bg" name="transformProgram" visibility="protected">
-            <ownedParameter xmi:id="_x5ypECS8EeGCVYtmoWb2Bg" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_0jTpACS8EeGCVYtmoWb2Bg" name="root" type="_McCPoCECEeGxG4RbAt-9lQ"/>
+        <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator" clientDependency="__ATuUCW3EeGpg6ehjt84bA">
+          <ownedOperation xmi:id="_0SFyoCS7EeGCVYtmoWb2Bg" name="transformProgram" visibility="public">
+            <ownedParameter xmi:id="_x5ypECS8EeGCVYtmoWb2Bg" name="formula" type="_5dWwQCUAEeGYCsZV17GpuQ" direction="return"/>
+            <ownedParameter xmi:id="_0jTpACS8EeGCVYtmoWb2Bg" name="root" type="_ybyncCT_EeGYCsZV17GpuQ"/>
           </ownedOperation>
         </packagedElement>
       </packagedElement>
@@ -3240,7 +3239,7 @@
           <interfaceRealization xmi:id="_j7uzICAkEeGXqsUcua6Xfg" supplier="_eyu5ACAkEeGXqsUcua6Xfg" client="_Et2a0CAkEeGXqsUcua6Xfg" contract="_eyu5ACAkEeGXqsUcua6Xfg"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_eyu5ACAkEeGXqsUcua6Xfg" name="FormulaCompiler">
-          <ownedOperation xmi:id="_haXMwCS9EeGCVYtmoWb2Bg" name="compileFormula" visibility="protected">
+          <ownedOperation xmi:id="_haXMwCS9EeGCVYtmoWb2Bg" name="compileFormula" visibility="public">
             <ownedParameter xmi:id="_jpDR4CS9EeGCVYtmoWb2Bg" name="object" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedParameter>
@@ -3248,7 +3247,7 @@
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_S3E1ACH1EeGPOLJv6XZMnQ" name="ProverCaller" clientDependency="_wwPU8CIoEeG2MZcopdUy_Q">
-          <ownedOperation xmi:id="_XcAYwCH1EeGPOLJv6XZMnQ" name="checkFormula" visibility="protected">
+          <ownedOperation xmi:id="_XcAYwCH1EeGPOLJv6XZMnQ" name="checkFormula" visibility="public">
             <ownedParameter xmi:id="_XcAYwSH1EeGPOLJv6XZMnQ" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_XcAYwiH1EeGPOLJv6XZMnQ" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg"/>
           </ownedOperation>
@@ -3262,17 +3261,17 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedAttribute>
           <interfaceRealization xmi:id="_4S9SwCIYEeG2MZcopdUy_Q" supplier="_S3E1ACH1EeGPOLJv6XZMnQ" client="_UgFsUCIYEeG2MZcopdUy_Q" contract="_S3E1ACH1EeGPOLJv6XZMnQ"/>
-          <ownedOperation xmi:id="_2J--oCIZEeG2MZcopdUy_Q" name="StdProver" visibility="protected">
+          <ownedOperation xmi:id="_2J--oCIZEeG2MZcopdUy_Q" name="StdProver" visibility="public">
             <ownedParameter xmi:id="_DrJdkCIaEeG2MZcopdUy_Q" name="path">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedParameter>
             <ownedParameter xmi:id="_3PoYECIZEeG2MZcopdUy_Q" name="compiler" type="_eyu5ACAkEeGXqsUcua6Xfg"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_N8HzkCIZEeG2MZcopdUy_Q" name="checkFormula" visibility="protected">
+          <ownedOperation xmi:id="_N8HzkCIZEeG2MZcopdUy_Q" name="checkFormula" visibility="public">
             <ownedParameter xmi:id="_N8HzkSIZEeG2MZcopdUy_Q" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_N8IaoCIZEeG2MZcopdUy_Q" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg"/>
           </ownedOperation>
-          <ownedOperation xmi:id="_UgcU0CIcEeG2MZcopdUy_Q" name="getResult" visibility="protected" isAbstract="true">
+          <ownedOperation xmi:id="_UgcU0CIcEeG2MZcopdUy_Q" name="getResult" visibility="public" isAbstract="true">
             <ownedParameter xmi:id="_WjsmACIcEeG2MZcopdUy_Q" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_dMhUICIcEeG2MZcopdUy_Q" name="output">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -3821,8 +3820,8 @@
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_CNMvgCIzEeG2MZcopdUy_Q" name="SendOperationEvent9" operation="_r7KPMCAhEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_EZ53oCIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent2" operation="_7WPY8CAoEeGHwObOJpuHDA"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_E_lXkCIzEeG2MZcopdUy_Q" name="SendOperationEvent10" operation="_7WPY8CAoEeGHwObOJpuHDA"/>
-      <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_HMJ80CIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent3" operation="_IwNJgCIzEeG2MZcopdUy_Q"/>
-      <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_IwNJgSIzEeG2MZcopdUy_Q" name="SendOperationEvent11" operation="_IwNJgCIzEeG2MZcopdUy_Q"/>
+      <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_HMJ80CIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent3"/>
+      <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_IwNJgSIzEeG2MZcopdUy_Q" name="SendOperationEvent11"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_NoREoSIzEeG2MZcopdUy_Q" name="SendOperationEvent12"/>
       <packagedElement xmi:type="uml:CreationEvent" xmi:id="_NoSSwCIzEeG2MZcopdUy_Q" name="CreationEvent5"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_OOEgYCIzEeG2MZcopdUy_Q" name="SendOperationEvent13" operation="_OOD5UCIzEeG2MZcopdUy_Q"/>

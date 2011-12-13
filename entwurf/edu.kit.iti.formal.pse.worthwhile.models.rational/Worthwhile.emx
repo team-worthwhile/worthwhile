@@ -3188,7 +3188,6 @@
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O8fbsSIqEeG2MZcopdUy_Q" value="1"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O8fbsCIqEeG2MZcopdUy_Q" value="1"/>
         </ownedAttribute>
-        <ownedAttribute xmi:id="_mpX6MCS7EeGCVYtmoWb2Bg" name="model" visibility="private"/>
         <ownedOperation xmi:id="_AzejgCIzEeG2MZcopdUy_Q" name="SpecificationChecker"/>
         <ownedOperation xmi:id="_uzCbQCAhEeGXqsUcua6Xfg" name="checkAnnotation">
           <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
@@ -3208,7 +3207,6 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation xmi:id="_1-R8wCS9EeGCVYtmoWb2Bg" name="getModel"/>
         <ownedOperation xmi:id="_7WPY8CAoEeGHwObOJpuHDA" name="generateFormula" visibility="private">
           <ownedParameter xmi:id="_3KTpYCA7EeGZU5xff2MlPA" name="formula" type="_jRMTQCAiEeGXqsUcua6Xfg" direction="return"/>
           <ownedParameter xmi:id="_79lyMCA7EeGZU5xff2MlPA" name="specification" type="_McCPoCECEeGxG4RbAt-9lQ"/>

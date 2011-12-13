@@ -3835,11 +3835,6 @@
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_i2gHgCI0EeG2MZcopdUy_Q" name="SendOperationEvent15" operation="_ryMOgCAjEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:InformationFlow" xmi:id="_lXboACKIEeGqK7hXUP0ZrQ" name="Messages" conveyed="_lqV88CKIEeGqK7hXUP0ZrQ" informationSource="_2EaCACAfEeGXqsUcua6Xfg" informationTarget="_nObsQCAfEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Signal" xmi:id="_lqV88CKIEeGqK7hXUP0ZrQ" name="Signal1"/>
-      <packagedElement xmi:type="uml:Component" xmi:id="_kkSB4CKKEeGMWJSXoAw51Q" name="ProverCaller"/>
-      <packagedElement xmi:type="uml:Component" xmi:id="_pKuBgCKKEeGMWJSXoAw51Q" name="FormulaGenerator"/>
-      <packagedElement xmi:type="uml:Component" xmi:id="_wRw8sCKKEeGMWJSXoAw51Q" name="SpecificationChecker" clientDependency="_8Vd_ICKKEeGMWJSXoAw51Q _-c6MwCKKEeGMWJSXoAw51Q"/>
-      <packagedElement xmi:type="uml:Usage" xmi:id="_8Vd_ICKKEeGMWJSXoAw51Q" supplier="_pKuBgCKKEeGMWJSXoAw51Q" client="_wRw8sCKKEeGMWJSXoAw51Q"/>
-      <packagedElement xmi:type="uml:Usage" xmi:id="_-c6MwCKKEeGMWJSXoAw51Q" supplier="_kkSB4CKKEeGMWJSXoAw51Q" client="_wRw8sCKKEeGMWJSXoAw51Q"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_8MhyQCS-EeGCVYtmoWb2Bg" name="SendOperationEvent16"/>
       <packagedElement xmi:type="uml:CreationEvent" xmi:id="_8MhyQiS-EeGCVYtmoWb2Bg" name="CreationEvent6"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_8q_28CS-EeGCVYtmoWb2Bg" name="SendOperationEvent17" operation="_8q_P4CS-EeGCVYtmoWb2Bg"/>

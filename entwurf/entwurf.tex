@@ -6,6 +6,7 @@
 \usepackage{float}
 \usepackage{fullpage}
 \usepackage{amssymb}
+\usepackage{amsmath}
 \usepackage[nounderscore]{syntax}
 \usepackage{url}                % URLs
 \usepackage{tikz}               % for the grey border on the title page
@@ -58,6 +59,10 @@
 			\item[\texttt{\textbf{#1}}]
             }
 \newcommand{\mlmethod}[1]{\method{\parbox{\textwidth}{#1}}}
+\newenvironment{rcases}{%
+  \left.\renewcommand*\lbrace.%
+  \begin{cases}}%
+{\end{cases}\right\rbrace}
 \graphicspath{{images/}}
 
 \begin{document}

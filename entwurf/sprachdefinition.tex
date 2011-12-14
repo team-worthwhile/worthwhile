@@ -56,7 +56,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <block> ::= `{' <statement>* `}'
 
-<vardecl> ::= <parameter> `:=' <expr>
+<vardecl> ::= <type> <name> ( `:=' <expr> )?
 
 <assign> ::= <varref> `:=' <expr>
 
@@ -78,7 +78,9 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <quantifiedexpr> ::= (\lit{$\forall$} | \lit{$\exists$} ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
 
-<expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <literal> | <varref> | <funccall>
+<expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <arraylen> | <literal> | <varref> | <funccall>
+
+<arraylen> ::= `length' `(' <expr> `)'
 
 <literal> ::= `false' | `true' | <integer>
 
@@ -130,6 +132,7 @@ Aus der Semantik der Sprache ergeben sich weitere Einschränkungen, die nicht in
 	\item Eine \textit{return}-Anweisung kann nur innerhalb einer Funktion stehen.
 	\item Eine Funktion muss einen Rückgabewert haben; es müssen also alle möglichen Codepfade innerhalb der Funktion eine \textit{return}-Anweisung beinhalten.
 	\item Nach Ausführung der \textit{return}-Anweisung wird die Funktion verlassen und keine weiteren Anweisungen der Funktion werden ausgeführt.
+	\item Wenn bei der Deklaration einer Variablen kein Wert festgelegt wird, wird ein Standardwert angenommen. Dieser ist 0 für Variablen vom Type \int{}, \texttt{false} für Variablen vom Typ \bool{} und ein Array mit Standardwerten des jeweiligen Typs für Arrays.
 \end{itemize}
 
 \subsection{Alternative Darstellungsweisen für mathematische Symbole}
@@ -157,6 +160,8 @@ $\leq$ & \texttt{<=} \\
 \hline
 $\geq$ & \texttt{>=} \\
 \hline
+$\neq$ & \texttt{!=} \\
+\hline
 \end{tabular}
 \end{figure}
 
@@ -181,7 +186,8 @@ Im Einzelnen gibt es folgende Gültigkeitsbereiche (Scopes) in einem Programm:
 		\item Parameter der Funktion
 	\end{itemize}
 	Insbesondere sind keine im globalen Gültigkeitsbereich oder in aufrufenden Funktionen deklarierten Variablen sichtbar.
-	\item[Parameter einer Funktion] Die Parameterliste einer Funktion bildet einen eigenen Gültigkeitsbereich. Die einzigen sichtbaren Variablen sind andere Parameter. Soll also ein Array als Parameter übergeben werden, so muss die Arraygröße in einem weiteren Parameter übergeben werden, der in der Deklaration des Array-Parameters verwendet werden kann. Die Reihenfolge beider Deklarationen ist hierbei unerheblich.
+	\item[Axiome] Da Axiome globale Gültigkeit haben sollen, sind in einem Axiom keine Variablen sichtbar. Variablen können also nur über Quantorenausdrücke angegeben werden.
+	\item[Parameter einer Funktion] Die Parameterliste einer Funktion bildet einen eigenen Gültigkeitsbereich. Die einzigen sichtbaren Variablen sind andere Parameter.
 \end{description}
 
 
@@ -234,6 +240,12 @@ Funktionsverweis & $funcref$ & $\rightarrow type$ & $type$ ist der in der Deklar
 Funktionsaufruf & $funcref(params)$ & $\rightarrow funcref$ & Die Parameter $params$ müssen in Anzahl und jeweiligem Typ den deklarierten Parametern entsprechen. \\
 \midrule
 Rückgabewert & \texttt{return} $value$ & $-$ & Der Typ von $value$ muss gleich dem Rückgabetyp der umschließenden Funktion sein. \\
+\midrule
+Verzweigung & \texttt{if} $expr$ \ldots & $-$ & $expr$ muss vom Typ \bool{} sein. \\
+\midrule
+Schleife & \texttt{while} $expr$ \ldots & $-$ & $expr$ muss vom Typ \bool{} sein. \\
+\midrule
+Annotation & $\begin{rcases} \text{\texttt{\_axiom}} \\ \text{\texttt{\_assert}} \\ \text{\texttt{\_assume}} \\ \text{\texttt{\_requires}} \\ \text{\texttt{\_ensures}} \end{rcases} expr \ldots$ & $-$ & $expr$ muss vom Typ \bool{} sein. \\
 \bottomrule
 \end{longtable}
 

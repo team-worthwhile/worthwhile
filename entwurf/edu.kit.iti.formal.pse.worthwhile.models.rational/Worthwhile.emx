@@ -2000,17 +2000,6 @@
             <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qkIEQCTWEeGx3bt7bTBB-w" id="(0.72964996,0.0)"/>
             <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_peAJsCTWEeGx3bt7bTBB-w" id="(0.23995703,0.5696544)"/>
           </edges>
-          <edges xmi:id="_yFZKACIoEeG2MZcopdUy_Q" element="_wwPU8CIoEeG2MZcopdUy_Q" source="_afwd0CIaEeG2MZcopdUy_Q" target="_CjrUMCAiEeGXqsUcua6Xfg">
-            <children xmi:id="_yFZxECIoEeG2MZcopdUy_Q" type="NameLabel">
-              <children xmi:id="_yFZxEiIoEeG2MZcopdUy_Q" type="Stereotype"/>
-              <children xmi:id="_yFaYICIoEeG2MZcopdUy_Q" type="Name"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_yFZxESIoEeG2MZcopdUy_Q" y="-186"/>
-            </children>
-            <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_O8s9sSZ1EeGid91tC4LrQw" fontName="Bitstream Vera Sans" lineColor="8421504" lineWidth="1" showStereotype="Text"/>
-            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_yFZKAiIoEeG2MZcopdUy_Q" points="[0, 0, -2626, -1638]$[2627, 1638, 1, 0]"/>
-            <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dJWrwCTXEeGx3bt7bTBB-w" id="(0.7499463,1.0)"/>
-            <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_dJWrwSTXEeGx3bt7bTBB-w" id="(0.49988475,0.0)"/>
-          </edges>
           <edges xmi:id="_RFUwcCIqEeG2MZcopdUy_Q" element="_O8eNkCIqEeG2MZcopdUy_Q" source="_rHtOcCAgEeGXqsUcua6Xfg" target="_obJkwCAkEeGXqsUcua6Xfg">
             <children xmi:id="_RFVXgCIqEeG2MZcopdUy_Q" type="NameLabel">
               <children xmi:id="_RFVXgiIqEeG2MZcopdUy_Q" type="Stereotype"/>
@@ -2110,6 +2099,16 @@
             <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_O84j5CZ1EeGid91tC4LrQw" fontName="Cantarell" lineColor="8421504" lineWidth="1" showStereotype="Text"/>
             <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uNsK0iZpEeG8TMLfrUJ9xA" points="[-2, -20, 0, 505]$[0, -509, 2, 16]"/>
           </edges>
+          <edges xmi:id="_NqlcQCZ6EeG8TMLfrUJ9xA" element="_NqdgcCZ6EeG8TMLfrUJ9xA" source="_afwd0CIaEeG2MZcopdUy_Q" target="_CjrUMCAiEeGXqsUcua6Xfg">
+            <children xmi:id="_NqlcQyZ6EeG8TMLfrUJ9xA" type="KindLabel">
+              <children xmi:id="_NqlcRSZ6EeG8TMLfrUJ9xA" type="Stereotype"/>
+              <children xmi:id="_NqmDUCZ6EeG8TMLfrUJ9xA" type="Kind"/>
+              <children xmi:id="_NqlcRiZ6EeG8TMLfrUJ9xA" type="Name"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NqlcRCZ6EeG8TMLfrUJ9xA" y="-186"/>
+            </children>
+            <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_NqlcQSZ6EeG8TMLfrUJ9xA" fontName="Cantarell" lineWidth="1" showStereotype="Text"/>
+            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_NqlcQiZ6EeG8TMLfrUJ9xA" points="[38, -24, -72, 61]$[90, -46, -20, 39]"/>
+          </edges>
         </contents>
       </eAnnotations>
       <packagedElement xmi:type="uml:Class" xmi:id="_rHP7cCAgEeGXqsUcua6Xfg" name="SpecificationChecker">
@@ -2132,7 +2131,7 @@
           <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation"/>
+          <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation" type="_Inl-6CXIEeGmor1mpCEcEQ"/>
           <ownedParameter xmi:id="_IbpOUCA8EeGZU5xff2MlPA" name="environment"/>
         </ownedOperation>
         <ownedOperation xmi:id="_r7KPMCAhEeGXqsUcua6Xfg" name="checkProgram">
@@ -2149,7 +2148,7 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_KrLRsCAgEeGXqsUcua6Xfg" name="Program Transformer" clientDependency="_tYFG4CAmEeGXqsUcua6Xfg">
         <eAnnotations xmi:id="_kG43ECAgEeGXqsUcua6Xfg" source="uml2.diagrams"/>
-        <packagedElement xmi:type="uml:Class" xmi:id="_HkcMYCXVEeG1nsp6Ca-zRg" name="WPStrategyASTNodeVisitor" visibility="package" clientDependency="_uNpHgCZpEeG8TMLfrUJ9xA">
+        <packagedElement xmi:type="uml:Class" xmi:id="_HkcMYCXVEeG1nsp6Ca-zRg" name="WPStrategyASTNodeVisitor" visibility="protected" clientDependency="_uNpHgCZpEeG8TMLfrUJ9xA">
           <ownedAttribute xmi:id="_gOV7ECZpEeG8TMLfrUJ9xA" name="formula" visibility="private" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
           <interfaceRealization xmi:id="_uNpHgCZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_HkcMYCXVEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
         </packagedElement>
@@ -2165,7 +2164,7 @@
         </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_IuVKgCAgEeGXqsUcua6Xfg" name="Theorem Prover">
-        <packagedElement xmi:type="uml:Class" xmi:id="_3pz7sCXUEeG1nsp6Ca-zRg" name="SMTLIBStrategyASTNodeVisitor" visibility="package" clientDependency="_pD0G8CZpEeG8TMLfrUJ9xA">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3pz7sCXUEeG1nsp6Ca-zRg" name="SMTLIBStrategyASTNodeVisitor" visibility="protected" clientDependency="_pD0G8CZpEeG8TMLfrUJ9xA">
           <ownedAttribute xmi:id="_GeOzACZpEeG8TMLfrUJ9xA" name="compilation" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedAttribute>
@@ -2179,6 +2178,16 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedAttribute>
           <ownedOperation xmi:id="_8q_P4CS-EeGCVYtmoWb2Bg" name="ProverResult"/>
+          <ownedOperation xmi:id="_VMMpACZ5EeG8TMLfrUJ9xA" name="setOutput" visibility="protected">
+            <ownedParameter xmi:id="_YBn-ACZ5EeG8TMLfrUJ9xA" name="output">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation xmi:id="_cHxUACZ5EeG8TMLfrUJ9xA" name="setSatisfiable" visibility="protected">
+            <ownedParameter xmi:id="_fTUC8CZ5EeG8TMLfrUJ9xA" name="satisfiable">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+            </ownedParameter>
+          </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_Et2a0CAkEeGXqsUcua6Xfg" name="SMTLIBStrategy" clientDependency="_j7uzICAkEeGXqsUcua6Xfg _oyRqQCXVEeG1nsp6Ca-zRg">
           <interfaceRealization xmi:id="_j7uzICAkEeGXqsUcua6Xfg" supplier="_eyu5ACAkEeGXqsUcua6Xfg" client="_Et2a0CAkEeGXqsUcua6Xfg" contract="_eyu5ACAkEeGXqsUcua6Xfg"/>
@@ -2192,7 +2201,7 @@
             <ownedParameter xmi:id="_svuigCS9EeGCVYtmoWb2Bg" name="formula" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
           </ownedOperation>
         </packagedElement>
-        <packagedElement xmi:type="uml:Interface" xmi:id="_S3E1ACH1EeGPOLJv6XZMnQ" name="ProverCaller" clientDependency="_wwPU8CIoEeG2MZcopdUy_Q">
+        <packagedElement xmi:type="uml:Interface" xmi:id="_S3E1ACH1EeGPOLJv6XZMnQ" name="ProverCaller" clientDependency="_NqdgcCZ6EeG8TMLfrUJ9xA">
           <ownedOperation xmi:id="_XcAYwCH1EeGPOLJv6XZMnQ" name="checkFormula" visibility="public">
             <ownedParameter xmi:id="_XcAYwSH1EeGPOLJv6XZMnQ" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
             <ownedParameter xmi:id="_XcAYwiH1EeGPOLJv6XZMnQ" name="formula" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
@@ -2242,7 +2251,6 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zqm1UCIdEeG2MZcopdUy_Q"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_wwPU8CIoEeG2MZcopdUy_Q" supplier="_CjqGECAiEeGXqsUcua6Xfg" client="_S3E1ACH1EeGPOLJv6XZMnQ"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_O8eNkCIqEeG2MZcopdUy_Q" memberEnd="_O8e0oCIqEeG2MZcopdUy_Q _O8gCwCIqEeG2MZcopdUy_Q">
         <ownedEnd xmi:id="_O8gCwCIqEeG2MZcopdUy_Q" name="" visibility="private" type="_rHP7cCAgEeGXqsUcua6Xfg" association="_O8eNkCIqEeG2MZcopdUy_Q">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O8gCwiIqEeG2MZcopdUy_Q" value="*"/>
@@ -2709,6 +2717,7 @@
       <packagedElement xmi:type="uml:Usage" xmi:id="_msMukCXVEeG1nsp6Ca-zRg" supplier="_HkcMYCXVEeG1nsp6Ca-zRg" client="_CNev0CAkEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_oyRqQCXVEeG1nsp6Ca-zRg" supplier="_3pz7sCXUEeG1nsp6Ca-zRg" client="_Et2a0CAkEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_vDa4MCXVEeG1nsp6Ca-zRg" supplier="_Et2a0CAkEeGXqsUcua6Xfg" client="_fSOuUCIaEeG2MZcopdUy_Q"/>
+      <packagedElement xmi:type="uml:Usage" xmi:id="_NqdgcCZ6EeG8TMLfrUJ9xA" supplier="_CjqGECAiEeGXqsUcua6Xfg" client="_S3E1ACH1EeGPOLJv6XZMnQ"/>
     </packagedElement>
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_luRCcCG-EeGaTKTGYPOQ0Q" name="SendOperationEvent1"/>
     <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_luSQkCG-EeGaTKTGYPOQ0Q" name="ReceiveOperationEvent1"/>
@@ -9357,4 +9366,5 @@
   <Standard:Instantiate xmi:id="_vDfwsCXVEeG1nsp6Ca-zRg" base_Usage="_vDa4MCXVEeG1nsp6Ca-zRg"/>
   <Standard:Instantiate xmi:id="_caiy8CZhEeG21b73bxMMnw" base_Usage="_cacFQCZhEeG21b73bxMMnw"/>
   <Standard:Instantiate xmi:id="_iooQYCZiEeG21b73bxMMnw" base_Usage="_iolNECZiEeG21b73bxMMnw"/>
+  <Standard:Instantiate xmi:id="_Nqhx4CZ6EeG8TMLfrUJ9xA" base_Usage="_NqdgcCZ6EeG8TMLfrUJ9xA"/>
 </xmi:XMI>

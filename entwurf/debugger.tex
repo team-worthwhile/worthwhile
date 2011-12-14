@@ -48,12 +48,17 @@ Ein Stackframe repräsentiert in der GUI einen Ausführungskontext eines Program
 
 \subsubsection{class WorthwhileVariable}
 
-Diese Klasse repräsentiert eine Variable in einem Ausführungskontext. Jede Variable besitzt einen Wert und kann verändert werden.
+Diese Klasse repräsentiert eine Variable in einem Ausführungskontext. Jede Variable besitzt einen Typ und einen veränderbaren Wert.
 
 \begin{description}
 	\method{public String getName()} Gibt den Namen der Variablen zurück.
 	\method{public String getReferenceTypeName()} Gibt eine textuelle Repräsentation des Datentyps der Variablen zurück.
 	\method{public IValue getValue()} Gibt den Wert der Variablen zurück.
+	\method{public boolean supportsValueModification()} Gibt an, ob der Wert dieser Variablen verändert werden kann.
+	\method{public void setValue(IValue value)} Setzt den Wert dieser Variablen auf den angegebenen Wert.
+	\method{public void setValue(String expression)} Setzt den Wert dieser Variablen auf den Wert des übergebenen Ausdrucks.
+	\method{public void verifyValue(IValue value)} Prüft, ob der angegebene Wert als neuer Wert für diese Variable gesetzt werden kann.
+	\method{public void verifyValue(String expression)} Prüft, ob das Ergebnis des angegebenen Ausdrucks als neuer Wert für diese Variable gesetzt werden kann
 	\method{public boolean hasValueChanged()} Gibt an, ob sich der Wert der Variablen seit der letzten Pausierung des Programmablaufs geändert hat.
 \end{description}
 
@@ -91,7 +96,7 @@ Diese Klasse repräsentiert einen Breakpoint, der an eine bestimmte Zeile im Pro
 Diese Klasse repräsentiert einen \textit{Watchpoint}, also einen Breakpoint, der an eine Variable gebunden ist und die Programmausführung anhält, sobald ihr Wert gelesen oder verändert wird.
 
 \begin{description}
-	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
+	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Watchpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Watchpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
 \end{description}
 
 \subsection{Launching}
@@ -102,7 +107,7 @@ Der \texttt{LaunchDelegate} ist dafür verantwortlich, den Interpreter zu starte
 
 \begin{description}
 	\mlmethod{public void launch(ILaunchConfiguration~configuration, String~mode, ILaunch~launch, IProgressMonitor~monitor)}
-	Diese Methode wird von der GUI aufgerufen, wenn der Benutzer den Befehl zum Ausführen des Programms wählt. Dabei enthält \texttt{configuration} die nötigen Einstellungen zum Aufruf des Interpreters, etwa den Pfad zur ausführbaren Datei von Z3 oder Optionen für den Interpreter. \texttt{mode} enthält den Modus, in dem das Programm ausgeführt wird, und ist entweder \texttt{run} oder \texttt{debug}. Der Parameter \texttt{launch} enthält Informationen über diese Ausführung des Programms; die Aufgabe dieser Methode ist es, sämtliche erzeugten Prozesse und \texttt{DebugTarget}s diesem Objekt bekannt zu machen. Schließlich kann der Fortschritt der Ausführung dem Benutzer über das \texttt{monitor}-""Objekt mitgeteilt werden.
+	Diese Methode wird von der GUI aufgerufen, wenn der Benutzer den Befehl zum Ausführen des Programms wählt. Dabei enthält \texttt{configuration} die nötigen Einstellungen zum Aufruf des Interpreters, etwa den Pfad zur ausführbaren Datei von Z3 oder Optionen für den Interpreter. \texttt{mode} enthält den Modus, in dem das Programm ausgeführt wird, und ist entweder \texttt{run} oder \texttt{debug}. Der Parameter \texttt{launch} enthält Informationen über diese Ausführung des Programms; die Aufgabe der \texttt{launch()}-Methode ist es, sämtliche erzeugten Prozesse und \texttt{DebugTarget}s diesem Objekt bekannt zu machen. Schließlich kann der Fortschritt der Ausführung dem Benutzer über das \texttt{monitor}-""Objekt mitgeteilt werden.
 \end{description}
 
 \subsubsection{class WorthwhileSourcePathComputerDelegate}

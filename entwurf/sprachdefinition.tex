@@ -6,11 +6,14 @@ Die Trennung aufeinanderfolgender Befehle wird dadurch erreicht, dass in jeder Z
 
 \subsection{Operatorreihenfolge}
 
-Die folgende Tabelle gibt die Reihenfolge an, in der Operatoren ausgewertet werden. Dabei werden die Operatoren mit höchster Priorität zuerst ausgewertet.
+Tabelle~\ref{operators} gibt die Reihenfolge an, in der Operatoren ausgewertet werden. Dabei werden die Operatoren mit höchster Priorität zuerst ausgewertet.
 
 Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Durch Klammersetzung kann die Auswertungsreihenfolge beeinflusst werden.
 
-\begin{figure}[H]
+\begin{table}[h]
+\centering
+\label{operators}
+\caption{Operatorreihenfolge}
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Priorität} & \textbf{Operatoren} \\
@@ -32,7 +35,7 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 1 & $\vee$ \\
 \hline
 \end{tabular}
-\end{figure}
+\end{table}
 
 \subsection{Formale Definition der Grammatik}
 
@@ -133,14 +136,17 @@ Aus der Semantik der Sprache ergeben sich weitere Einschränkungen, die nicht in
 	\item Eine \textit{return}-Anweisung kann nur innerhalb einer Funktion stehen.
 	\item Eine Funktion muss einen Rückgabewert haben; es müssen also alle möglichen Codepfade innerhalb der Funktion eine \textit{return}-Anweisung beinhalten.
 	\item Nach Ausführung der \textit{return}-Anweisung wird die Funktion verlassen und keine weiteren Anweisungen der Funktion werden ausgeführt.
-	\item Wenn bei der Deklaration einer Variablen kein Wert festgelegt wird, wird ein Standardwert angenommen. Dieser ist 0 für Variablen vom Type \int{}, \texttt{false} für Variablen vom Typ \bool{} und ein Array mit Standardwerten des jeweiligen Typs für Arrays.
+	\item Wird bei der Deklaration einer Variablen kein Wert festgelegt, so wird ein Standardwert angenommen. Dieser ist 0 für Variablen vom Type \int{}, \texttt{false} für Variablen vom Typ \bool{} und ein Array mit Standardwerten des jeweiligen Typs für Arrays.
 \end{itemize}
 
 \subsection{Alternative Darstellungsweisen für mathematische Symbole}
 \label{textrep}
-Einige mathematische Symbole sind auf Tastaturen nicht verfügbar. Daher sind folgende textuelle Alternativen vorgesehen, um die Sprache auch ohne die Hilfe einer IDE editieren zu können:
+Einige mathematische Symbole sind auf Tastaturen nicht verfügbar. Daher sind textuelle Alternativen vorgesehen, um die Sprache auch ohne die Hilfe einer IDE editieren zu können. Diese Alternativen sind in Tabelle~\ref{alttext} aufgelistet.
 
-\begin{figure}[H]
+\begin{table}
+\centering
+\label{alttext}
+\caption{Textuelle Alternativen für mathematische Symbole}
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Symbol} & \textbf{Alternative} \\
@@ -164,7 +170,7 @@ $\geq$ & \texttt{>=} \\
 $\neq$ & \texttt{!=} \\
 \hline
 \end{tabular}
-\end{figure}
+\end{table}
 
 \subsection{Typsystem}
 
@@ -187,7 +193,7 @@ Im Einzelnen gibt es folgende Gültigkeitsbereiche (Scopes) in einem Programm:
 		\item Parameter der Funktion
 	\end{itemize}
 	Insbesondere sind keine im globalen Gültigkeitsbereich oder in aufrufenden Funktionen deklarierten Variablen sichtbar.
-	\item[Axiome] Da Axiome globale Gültigkeit haben sollen, sind in einem Axiom keine Variablen sichtbar. Variablen können also nur über Quantorenausdrücke angegeben werden.
+	\item[Axiome] Da Axiome überall Gültigkeit haben sollen, sind in einem Axiom keine Variablen sichtbar. Variablen können also nur über Quantoren eingeführt werden.
 	\item[Parameter einer Funktion] Die Parameterliste einer Funktion bildet einen eigenen Gültigkeitsbereich. Die einzigen sichtbaren Variablen sind andere Parameter.
 \end{description}
 
@@ -199,7 +205,7 @@ Im Einzelnen gibt es folgende Gültigkeitsbereiche (Scopes) in einem Programm:
 \label{typesystem} \\
 \caption{Typsystem-Spezifikation. Die Notation $\rightarrow x$ bedeutet, dass der Typ des Sprachelements gleich dem Typ von $x$ ist.} \\
 \toprule
-\textbf{Kategorie} & \textbf{Sprachelement} & \textbf{Typ} & \textbf{Einschränkungen} \\
+\textbf{Kategorie} & \textbf{Sprachelement} & \textbf{Typ} & \textbf{Einschränkungen / Bemerkungen} \\
 \midrule
 
 \endhead

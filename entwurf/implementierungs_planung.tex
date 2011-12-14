@@ -1,6 +1,6 @@
 \section{Planung der Implementierungsphase}
 
-Die Implementierungsphase lässt sich grob in sechs Phasen (Vorbereitung, Parser, Interpreter, Beweiserschnittstelle, GUI, Dokumentation) einteilen. Die ungefähre Zeitplanung und die Abhängigkeiten jedes Arbeitsschrittes sind in Abbildung \ref{gantt_impl} verdeutlicht. Die geschätzten Zeiten werden in Abbildung \ref{timeplan} dargestellt.
+Die Implementierungsphase lässt sich grob in sechs Phasen (Vorbereitung, Parser, Interpreter, Beweiserschnittstelle, GUI, Dokumentation) einteilen. Die ungefähre Zeitplanung und die Abhängigkeiten jedes Arbeitsschrittes sind in Abbildung~\ref{gantt_impl} verdeutlicht. Die geschätzten Zeiten werden in Abbildung~\ref{timeplan} dargestellt.
 
 \begin{figure}
 	\centering
@@ -9,8 +9,8 @@ Die Implementierungsphase lässt sich grob in sechs Phasen (Vorbereitung, Parser
 	\label{gantt_impl}
 \end{figure}
 
-\begin{figure}[H]
-\caption[B]{Ungefähre Zeiteinteilung für die Implementierungsphase}
+\begin{table}[H]
+\caption[B]{Ungefähre Zeiteinteilung (in Stunden) für die Implementierungsphase}
 \label{timeplan}
 \begin{tabular}{|l|l|l|l|l|l|l|}
 
@@ -30,7 +30,7 @@ Die Implementierungsphase lässt sich grob in sechs Phasen (Vorbereitung, Parser
 \textbf{Dokumentation} & 1 & 5 & 1 & 1 & 1 & 1 \\
 \hline
 \end{tabular}
-\end{figure}
+\end{table}
 
 \subsection{Vorbereitungen}
 In der Vorbereitungsphase, welche allen anderen Phasen voranliegt, wird hauptsächlich das Klassendiagramm in Quelltext umgesetzt sowie eine Basis für die Implementierungen eingerichtet. Hierzu gehört insbesondere das Erstellen der Grammatik für die WHILE-Sprache und das Ausrüsten aller Komponenten mit Stubs, um eingeschränkt funktionierende Schnittstellen für die anderen Teile des Programms bereitzustellen. Desweiteren werden JUnit-""Tests erstellt, die implementierungsbegleitend benutzt werden sollen. Durch die vorgesehenen Stubs müssen alle JUnit-""Tests erfolgreich ausgeführt werden. Im späteren Verlauf der Implementierungsphase wird Wert darauf gelegt, dass ein Stub nur dann gegen eine funktionierende Schnittstelle ausgetauscht wird, wenn gewährleistet ist, dass der zuständige JUnit-""Test immer noch erfolgreich abläuft. Für diese Phase werden alle Mitglieder des Teams in etwa gleich beansprucht. Nach erfolgreicher Beendigung der Vorbereitungen können die Phasen für die jeweiligen Komponenten des Projekts (Interpreter mit Run-""time-""Checker, Beweiserschnittstelle, GUI) anlaufen.

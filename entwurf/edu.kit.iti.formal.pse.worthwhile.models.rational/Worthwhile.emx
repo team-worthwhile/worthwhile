@@ -1834,10 +1834,6 @@
             <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_vDiM8iXVEeG1nsp6Ca-zRg" points="[-39, -1, 163, 1]$[-259, -3, -57, -1]"/>
           </edges>
         </contents>
-        <contents xmi:type="notation:Diagram" xmi:id="_pH90oCIrEeG2MZcopdUy_Q" type="Class" name="FormulaClassDiagram">
-          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_pH90oSIrEeG2MZcopdUy_Q"/>
-          <element xsi:nil="true"/>
-        </contents>
       </eAnnotations>
       <packagedElement xmi:type="uml:Class" xmi:id="_rHP7cCAgEeGXqsUcua6Xfg" name="SpecificationChecker">
         <ownedAttribute xmi:id="_uxIMMCAgEeGXqsUcua6Xfg" name="timeout" visibility="private">

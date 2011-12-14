@@ -11,7 +11,6 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
 \begin{description}
     % TODO: Mit was aufrufen?
     \method{public Interpreter()}
-    Erzeugt eine Instanz, die das Programm, definiert durch den Quelltext \texttt{programSource}, ausführen kann. Der übergebene Parser \texttt{parser} wird dann verwendet, um den Quelltext zu parsen. Das Interface \texttt{IParser} wird vom Xtext Framework zur Verfügung gestellt.
 
     \method{public void execute()}
     Führt das dem Interpreter übergebene Programm aus. Der Aufruf passiert synchron - es bietet sich daher an, diese Methode in einem separaten Thread auszuführen. Die öffentlich Zugänglichen Datenstrukturen der Klasse Interpreter sind Thread-Safe, können also auch während der Ausführung modifiziert werden.

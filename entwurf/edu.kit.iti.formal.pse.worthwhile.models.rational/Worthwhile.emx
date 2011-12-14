@@ -1539,7 +1539,6 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_LmpmsCZbEeG21b73bxMMnw" name="Class1"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_zUJ2sCZbEeG21b73bxMMnw" name="Value">
         <ownedAttribute xmi:id="_OtmzwCZfEeG21b73bxMMnw" name="valueType" visibility="private" type="_Atl9ACZcEeG21b73bxMMnw" association="_Otk-kCZfEeG21b73bxMMnw">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_OtoB4CZfEeG21b73bxMMnw" value="1"/>

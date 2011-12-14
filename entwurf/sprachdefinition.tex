@@ -42,19 +42,19 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 \begin{grammar}
 
-<program> ::= (<funcdecl> | <statement> | <axiom>)* 
+<program> ::= (<funcdecl> | <axiom>)* <block>? (<funcdecl> | <axiom>)*
 
-<funcdecl> ::= `function' <type> <name> `('<parameter>*`)' \\ (<requires> | <ensures>)* \\ <block>
+<funcdecl> ::= `function' <type> <name> `(' <parameter>* `)' \\ (<precondition> | <postcondition>)* \\ `{' <block> `}'
 
 <statement> ::= <vardecl> | <assign> | <block> | <annotation> | <funccall> | <conditional> | <loop> | <return>
 
-<axiom> ::= `_axiom' <quantifiedexpr>
+<axiom> ::= `_axiom' <predformula>
 
-<requires> ::= `_requires' <predformula>
+<precondition> ::= `_requires' <predformula>
 
-<ensures> ::= `_ensures' <predformula>
+<postcondition> ::= `_ensures' <predformula>
 
-<block> ::= `{' <statement>* `}'
+<block> ::= <statement>*
 
 <vardecl> ::= <type> <name> ( `:=' <expr> )?
 
@@ -66,9 +66,9 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <funccall> ::= <name> `(' (<expr> (`,' <expr>)* )? `)'
 
-<conditional> ::= `if' <expr> \\ <block>  \\ (`else' \\ <block>)?
+<conditional> ::= `if' <expr> \\ `{' <block> `}'  \\ (`else' \\ `{' <block> `}')?
 
-<loop> ::= `while' <expr> \\ <invariant> \\ <block>
+<loop> ::= `while' <expr> \\ <invariant> \\ `{' <block> `}'
 
 <invariant> ::= `_invariant' <predformula>
 
@@ -82,7 +82,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <arraylen> ::= `length' `(' <expr> `)'
 
-<literal> ::= `false' | `true' | <integer>
+<literal> ::= `false' | `true' | <integer> | `{' <expr>* `}'
 
 <type> ::= <primitivetype> | <arraytype>
 
@@ -98,7 +98,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <postfixop> ::= `[' <expr> `]'
 
-<name> ::=  [`A--Za--z'][`A--Za--z0--9']*
+<name> ::=  [`A--Za--z'][`A--Za--z0--9-\_']*
 
 \end{grammar}
 
@@ -120,7 +120,8 @@ Folgende Schlüsselwörter sind für die Verwendung innerhalb der Sprache reserv
 	\item \texttt{if}
 	\item \texttt{else}	
 	\item \texttt{while}		
-	\item \texttt{return}	
+	\item \texttt{return}
+	\item \texttt{length}
 \end{itemize}
 
 \subsection{Semantische Einschränkungen}

@@ -2132,7 +2132,9 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
           </ownedParameter>
           <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation" type="_Inl-6CXIEeGmor1mpCEcEQ"/>
-          <ownedParameter xmi:id="_IbpOUCA8EeGZU5xff2MlPA" name="environment"/>
+          <ownedParameter xmi:id="_IbpOUCA8EeGZU5xff2MlPA" name="environment">
+            <type xmi:type="uml:Interface" href="pathmap://ROSE_LIBRARIES/RoseJavaDatatypes.emx#_7mRkkAddEdm1Sa24K-Ukow?RoseJavaDatatypes/java/util/Map?"/>
+          </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:id="_r7KPMCAhEeGXqsUcua6Xfg" name="checkProgram">
           <ownedParameter xmi:id="_7ETYkCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">

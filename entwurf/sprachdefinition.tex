@@ -44,7 +44,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <program> ::= (<funcdecl> | <statement> | <axiom>)* 
 
-<funcdecl> ::= `function' <type> <name> (<parameter>*) \\ (<requires> | <ensures>)* \\ <block>
+<funcdecl> ::= `function' <type> <name> `('<parameter>*`)' \\ (<requires> | <ensures>)* \\ <block>
 
 <statement> ::= <vardecl> | <assign> | <block> | <annotation> | <funccall> | <conditional> | <loop> | <return>
 
@@ -128,7 +128,7 @@ Aus der Semantik der Sprache ergeben sich weitere Einschränkungen, die nicht in
 
 \begin{itemize}
 	\item Eine Variable kann nur in Anweisungen referenziert werden, die nach der Deklaration stehen (insbesondere also nicht in der Deklaration selbst).
-	\item Eine Funktion kann nur in Anweisungen referenziert werden, die nach der Funktionsdeklaration stehen (insbesondere also nicht in der Funktion selbst). Damit wird effektiv die Verwendung von Rekursion verunmöglicht.
+	\item Eine Funktion kann nur in Anweisungen referenziert werden, die nach der Funktionsdefintion stehen (insbesondere also nicht in der Funktion selbst). Damit wird effektiv die Verwendung von Rekursion verunmöglicht.
 	\item Eine \textit{return}-Anweisung kann nur innerhalb einer Funktion stehen.
 	\item Eine Funktion muss einen Rückgabewert haben; es müssen also alle möglichen Codepfade innerhalb der Funktion eine \textit{return}-Anweisung beinhalten.
 	\item Nach Ausführung der \textit{return}-Anweisung wird die Funktion verlassen und keine weiteren Anweisungen der Funktion werden ausgeführt.

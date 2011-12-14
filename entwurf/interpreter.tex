@@ -16,9 +16,7 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
     Führt das dem Interpreter übergebene Programm aus. Der Aufruf passiert synchron - es bietet sich daher an, diese Methode in einem separaten Thread auszuführen. Die öffentlich Zugänglichen Datenstrukturen der Klasse Interpreter sind Thread-Safe, können also auch während der Ausführung modifiziert werden.
 
     \method{public void addDebugEventListener(AbstractDebugEventListener debugListener)}
-    Fügt dem Interpreter einen Listener hinzu, der, ähnlich dem Entwurfsmuster ``Observer'' über Ereignisse bei der Ausführung des Programms benachrichtigt wird. \texttt{AbstractDebugEventListener} implementiert dabei ``no-op'' Stubs für alle möglichen aufgerufenen Ereignisse, sodass konkrete Unterklassen nur die von ihnen Benötigten Event-Handler überschreiben müssen.
-
-    \method{public void removeDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
+    Fügt dem Interpreter einen Listener hinzu, der, ähnlich dem Entwurfsmuster ``Observer'' über Ereignisse bei der Ausführung des Programms benachrichtigt wird. \texttt{AbstractDebugEventListener} implementiert dabei ``no-op'' Stubs für alle auftretenden Ereignisse, sodass konkrete Unterklassen nur die von ihnen benötigten Event-Handler überschreiben müssen.
 
     \method{public boolean addBreakpoint(LineBreakpoint breakpoint)}
     Fügt dem Interpreter den gegebenen \texttt{LineBreakpoint} hinzu. Wird der Breakpoint erreicht, so benachrichtigt der Interpreter seine Event Listener, indem er die Methode \texttt{breakpointReached} aufruft, damit diese das Ereignis behandeln und z.B. die Ausführung unterbrechen können.
@@ -27,7 +25,7 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
 \end{description}
 
 \subsubsection{class InterpreterASTNodeVisitor}
-Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen und auszuwerten, verwendet die Interpreter-Komponente intern das Entwurfsmuster ``Visitor'' Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine genaue Kenntnis über deren Typ nötig ist - jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will.
+Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen und auszuwerten, verwendet die Interpreter-Komponente intern das Entwurfsmuster ``Visitor''. Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine genaue Kenntnis über deren Typ nötig ist - jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will.
 
 \subsubsection{class InterpreterError}
 Diese Fehlerklasse dienen zur Weitergabe von Fehlern, die im Interpreter auftreten.

@@ -1698,11 +1698,6 @@
         <ownedOperation xmi:id="_NufOQCWdEeG4pq_0Xwp5Rg" name="expressionEvaluated">
           <ownedParameter xmi:id="_Ce7wICWeEeG4pq_0Xwp5Rg" name="expression" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_WHYVUCZtEeGrP92ZOYcZLA" name="equals">
-          <ownedParameter xmi:id="_YdWHICZtEeGrP92ZOYcZLA" name="Parameter1" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-          </ownedParameter>
-        </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_scMEICW9EeG4pq_0Xwp5Rg" memberEnd="_scPugCW9EeG4pq_0Xwp5Rg _scNSQCW9EeG4pq_0Xwp5Rg _scNSQCW9EeG4pq_0Xwp5Rg">
         <ownedEnd xmi:id="_scPugCW9EeG4pq_0Xwp5Rg" name="" visibility="private" type="_CQDDsCZbEeG21b73bxMMnw" association="_scMEICW9EeG4pq_0Xwp5Rg">

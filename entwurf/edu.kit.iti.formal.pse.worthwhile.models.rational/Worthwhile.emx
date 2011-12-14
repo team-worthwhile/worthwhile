@@ -2180,39 +2180,45 @@
           <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation" type="_8rJAQCAxEeGfR9ypD_n70g"/>
+          <ownedParameter xmi:id="_sliqICA7EeGZU5xff2MlPA" name="annotation"/>
           <ownedParameter xmi:id="_IbpOUCA8EeGZU5xff2MlPA" name="environment"/>
         </ownedOperation>
         <ownedOperation xmi:id="_r7KPMCAhEeGXqsUcua6Xfg" name="checkProgram">
           <ownedParameter xmi:id="_7ETYkCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
           </ownedParameter>
-          <ownedParameter xmi:id="_zX6V0CA7EeGZU5xff2MlPA" name="program"/>
+          <ownedParameter xmi:id="_zX6V0CA7EeGZU5xff2MlPA" name="program" type="_Inl-oyXIEeGmor1mpCEcEQ"/>
         </ownedOperation>
         <ownedOperation xmi:id="_ryMOgCAjEeGXqsUcua6Xfg" name="setTimeout">
           <ownedParameter xmi:id="_wIuw8CAjEeGXqsUcua6Xfg" name="seconds">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
           </ownedParameter>
         </ownedOperation>
-        <ownedOperation xmi:id="_7WPY8CAoEeGHwObOJpuHDA" name="generateFormula" visibility="private">
-          <ownedParameter xmi:id="_3KTpYCA7EeGZU5xff2MlPA" name="formula" direction="return"/>
-          <ownedParameter xmi:id="_79lyMCA7EeGZU5xff2MlPA" name="specification"/>
-        </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_KrLRsCAgEeGXqsUcua6Xfg" name="Program Transformer" clientDependency="_tYFG4CAmEeGXqsUcua6Xfg">
         <eAnnotations xmi:id="_kG43ECAgEeGXqsUcua6Xfg" source="uml2.diagrams"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_HkcMYCXVEeG1nsp6Ca-zRg" name="WPStrategyASTNodeVisitor" visibility="package" clientDependency="_uNpHgCZpEeG8TMLfrUJ9xA">
+          <ownedAttribute xmi:id="_gOV7ECZpEeG8TMLfrUJ9xA" name="formula" visibility="private" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
+          <interfaceRealization xmi:id="_uNpHgCZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_HkcMYCXVEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
+        </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_CNev0CAkEeGXqsUcua6Xfg" name="WPStrategy" clientDependency="_tc2kECAkEeGXqsUcua6Xfg _msMukCXVEeG1nsp6Ca-zRg">
           <interfaceRealization xmi:id="_tc2kECAkEeGXqsUcua6Xfg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_CNev0CAkEeGXqsUcua6Xfg" contract="_obF6YCAkEeGXqsUcua6Xfg"/>
           <ownedOperation xmi:id="_9gcFcCIyEeG2MZcopdUy_Q" name="WPStrategy"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_obF6YCAkEeGXqsUcua6Xfg" name="FormulaGenerator">
           <ownedOperation xmi:id="_0SFyoCS7EeGCVYtmoWb2Bg" name="transformProgram" visibility="public">
-            <ownedParameter xmi:id="_x5ypECS8EeGCVYtmoWb2Bg" name="formula" direction="return"/>
-            <ownedParameter xmi:id="_0jTpACS8EeGCVYtmoWb2Bg" name="root"/>
+            <ownedParameter xmi:id="_x5ypECS8EeGCVYtmoWb2Bg" name="formula" type="_Inl_EiXIEeGmor1mpCEcEQ" direction="return"/>
+            <ownedParameter xmi:id="_0jTpACS8EeGCVYtmoWb2Bg" name="program" type="_Inl-oyXIEeGmor1mpCEcEQ"/>
           </ownedOperation>
         </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_IuVKgCAgEeGXqsUcua6Xfg" name="Theorem Prover">
+        <packagedElement xmi:type="uml:Class" xmi:id="_3pz7sCXUEeG1nsp6Ca-zRg" name="SMTLIBStrategyASTNodeVisitor" visibility="package" clientDependency="_pD0G8CZpEeG8TMLfrUJ9xA">
+          <ownedAttribute xmi:id="_GeOzACZpEeG8TMLfrUJ9xA" name="compilation" visibility="private">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedAttribute>
+          <interfaceRealization xmi:id="_pD0G8CZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_3pz7sCXUEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
+        </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_CjqGECAiEeGXqsUcua6Xfg" name="ProverResult">
           <ownedAttribute xmi:id="_HIuMsCAiEeGXqsUcua6Xfg" name="satisfiable" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
@@ -2224,19 +2230,20 @@
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_Et2a0CAkEeGXqsUcua6Xfg" name="SMTLIBStrategy" clientDependency="_j7uzICAkEeGXqsUcua6Xfg _oyRqQCXVEeG1nsp6Ca-zRg">
           <interfaceRealization xmi:id="_j7uzICAkEeGXqsUcua6Xfg" supplier="_eyu5ACAkEeGXqsUcua6Xfg" client="_Et2a0CAkEeGXqsUcua6Xfg" contract="_eyu5ACAkEeGXqsUcua6Xfg"/>
+          <ownedOperation xmi:id="_KETP4CZrEeG8TMLfrUJ9xA" name="SMTLIBStrategy"/>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_eyu5ACAkEeGXqsUcua6Xfg" name="FormulaCompiler">
           <ownedOperation xmi:id="_haXMwCS9EeGCVYtmoWb2Bg" name="compileFormula" visibility="public">
             <ownedParameter xmi:id="_jpDR4CS9EeGCVYtmoWb2Bg" name="object" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
             </ownedParameter>
-            <ownedParameter xmi:id="_svuigCS9EeGCVYtmoWb2Bg" name="formula"/>
+            <ownedParameter xmi:id="_svuigCS9EeGCVYtmoWb2Bg" name="formula" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Interface" xmi:id="_S3E1ACH1EeGPOLJv6XZMnQ" name="ProverCaller" clientDependency="_wwPU8CIoEeG2MZcopdUy_Q">
           <ownedOperation xmi:id="_XcAYwCH1EeGPOLJv6XZMnQ" name="checkFormula" visibility="public">
             <ownedParameter xmi:id="_XcAYwSH1EeGPOLJv6XZMnQ" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_XcAYwiH1EeGPOLJv6XZMnQ" name="formula"/>
+            <ownedParameter xmi:id="_XcAYwiH1EeGPOLJv6XZMnQ" name="formula" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
           </ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_UgFsUCIYEeG2MZcopdUy_Q" name="StdProver" clientDependency="_4S9SwCIYEeG2MZcopdUy_Q" isAbstract="true">
@@ -2244,7 +2251,7 @@
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ysMpICIZEeG2MZcopdUy_Q" value="1"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ysMCECIZEeG2MZcopdUy_Q" value="1"/>
           </ownedAttribute>
-          <ownedAttribute xmi:id="_K2mXoCIaEeG2MZcopdUy_Q" name="path" visibility="private">
+          <ownedAttribute xmi:id="_K2mXoCIaEeG2MZcopdUy_Q" name="proverPath" visibility="private">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedAttribute>
           <interfaceRealization xmi:id="_4S9SwCIYEeG2MZcopdUy_Q" supplier="_S3E1ACH1EeGPOLJv6XZMnQ" client="_UgFsUCIYEeG2MZcopdUy_Q" contract="_S3E1ACH1EeGPOLJv6XZMnQ"/>
@@ -2256,7 +2263,7 @@
           </ownedOperation>
           <ownedOperation xmi:id="_N8HzkCIZEeG2MZcopdUy_Q" name="checkFormula" visibility="public">
             <ownedParameter xmi:id="_N8HzkSIZEeG2MZcopdUy_Q" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
-            <ownedParameter xmi:id="_N8IaoCIZEeG2MZcopdUy_Q" name="formula"/>
+            <ownedParameter xmi:id="_N8IaoCIZEeG2MZcopdUy_Q" name="formula" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
           </ownedOperation>
           <ownedOperation xmi:id="_UgcU0CIcEeG2MZcopdUy_Q" name="getResult" visibility="public" isAbstract="true">
             <ownedParameter xmi:id="_WjsmACIcEeG2MZcopdUy_Q" name="result" type="_CjqGECAiEeGXqsUcua6Xfg" direction="return"/>
@@ -2725,8 +2732,8 @@
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_AzfKkCIzEeG2MZcopdUy_Q" name="SendOperationEvent8" operation="_AzejgCIzEeG2MZcopdUy_Q"/>
       <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_B4-zAiIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent1" operation="_r7KPMCAhEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_CNMvgCIzEeG2MZcopdUy_Q" name="SendOperationEvent9" operation="_r7KPMCAhEeGXqsUcua6Xfg"/>
-      <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_EZ53oCIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent2" operation="_7WPY8CAoEeGHwObOJpuHDA"/>
-      <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_E_lXkCIzEeG2MZcopdUy_Q" name="SendOperationEvent10" operation="_7WPY8CAoEeGHwObOJpuHDA"/>
+      <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_EZ53oCIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent2"/>
+      <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_E_lXkCIzEeG2MZcopdUy_Q" name="SendOperationEvent10"/>
       <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_HMJ80CIzEeG2MZcopdUy_Q" name="ReceiveOperationEvent3"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_IwNJgSIzEeG2MZcopdUy_Q" name="SendOperationEvent11"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_NoREoSIzEeG2MZcopdUy_Q" name="SendOperationEvent12"/>
@@ -2748,16 +2755,6 @@
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_L3WsYCS_EeGCVYtmoWb2Bg" name="SendOperationEvent18" operation="_UgcU0CIcEeG2MZcopdUy_Q"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_P98uUSS_EeGCVYtmoWb2Bg" name="SendOperationEvent19"/>
       <packagedElement xmi:type="uml:CreationEvent" xmi:id="_P99VYCS_EeGCVYtmoWb2Bg" name="CreationEvent7"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_3pz7sCXUEeG1nsp6Ca-zRg" name="SMTLIBStrategyASTNodeVisitor" visibility="package" clientDependency="_pD0G8CZpEeG8TMLfrUJ9xA">
-        <ownedAttribute xmi:id="_GeOzACZpEeG8TMLfrUJ9xA" name="compilation" visibility="private">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-        </ownedAttribute>
-        <interfaceRealization xmi:id="_pD0G8CZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_3pz7sCXUEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_HkcMYCXVEeG1nsp6Ca-zRg" name="WPStrategyASTNodeVisitor" visibility="package" clientDependency="_uNpHgCZpEeG8TMLfrUJ9xA">
-        <ownedAttribute xmi:id="_gOV7ECZpEeG8TMLfrUJ9xA" name="formula" visibility="private" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
-        <interfaceRealization xmi:id="_uNpHgCZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_HkcMYCXVEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
-      </packagedElement>
       <packagedElement xmi:type="uml:Usage" xmi:id="_msMukCXVEeG1nsp6Ca-zRg" supplier="_HkcMYCXVEeG1nsp6Ca-zRg" client="_CNev0CAkEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_oyRqQCXVEeG1nsp6Ca-zRg" supplier="_3pz7sCXUEeG1nsp6Ca-zRg" client="_Et2a0CAkEeGXqsUcua6Xfg"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_vDa4MCXVEeG1nsp6Ca-zRg" supplier="_Et2a0CAkEeGXqsUcua6Xfg" client="_fSOuUCIaEeG2MZcopdUy_Q"/>

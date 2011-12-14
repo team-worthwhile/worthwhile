@@ -1,7 +1,7 @@
 % vim: spell spelllang=de:
 \section{Interpreter}
 
-Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter-Prozess kann in einem eigenen Thread gestartet werden und teilt anderen Komponenten mit Hilfe des Entwurfsmusters "Observer" bei der Ausführung auftretende Ereignisse mit.
+Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter-Prozess kann in einem eigenen Thread gestartet werden und teilt anderen Komponenten mit Hilfe des Entwurfsmusters ``Observer'' bei der Ausführung auftretende Ereignisse mit.
 
 \subsubsection{Klassenentwurf}
 
@@ -17,7 +17,7 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
     Führt das dem Interpreter übergebene Programm aus. Der Aufruf passiert synchron - es bietet sich daher an, diese Methode in einem separaten Thread auszuführen. Die öffentlich Zugänglichen Datenstrukturen der Klasse Interpreter sind Thread-Safe, können also auch während der Ausführung modifiziert werden.
 
     \method{public void addDebugEventListener(AbstractDebugEventListener debugListener)}
-    Fügt dem Interpreter einen Listener hinzu, der, ähnlich dem Entwurfsmuster "Observer", über Ereignisse bei der Ausführung des Programms benachrichtigt wird. \texttt{AbstractDebugEventListener} implementiert dabei "no-op" Stubs für alle möglichen aufgerufenen Ereignisse, sodass konkrete Unterklassen nur die von ihnen Benötigten Event-Handler überschreiben müssen.
+    Fügt dem Interpreter einen Listener hinzu, der, ähnlich dem Entwurfsmuster ``Observer'' über Ereignisse bei der Ausführung des Programms benachrichtigt wird. \texttt{AbstractDebugEventListener} implementiert dabei ``no-op'' Stubs für alle möglichen aufgerufenen Ereignisse, sodass konkrete Unterklassen nur die von ihnen Benötigten Event-Handler überschreiben müssen.
 
     \method{public void removeDebugEventPolicy(AbstractDebugEventPolicy debugPolicy)}
 
@@ -28,7 +28,7 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
 \end{description}
 
 \subsubsection{class InterpreterASTNodeVisitor}
-Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen und auszuwerten, verwendet die Interpreter-Komponente intern das Entwurfsmuster "Visitor". Der Vorteil dieses Entwurfsmusters ist, dass beim "Besuchen" der Knoten noch keine genaue Kenntnis über deren Typ nötig ist - jeder Knoten "entscheidet" selbst, von welcher Methode des Visitors er verarbeitet werden will.
+Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen und auszuwerten, verwendet die Interpreter-Komponente intern das Entwurfsmuster ``Visitor'' Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine genaue Kenntnis über deren Typ nötig ist - jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will.
 
 \subsubsection{class InterpreterError}
 Diese Fehlerklasse dienen zur Weitergabe von Fehlern, die im Interpreter auftreten.
@@ -37,7 +37,7 @@ Diese Fehlerklasse dienen zur Weitergabe von Fehlern, die im Interpreter auftret
 Diese Fehlerklasse enthält neben den in der Klasse \texttt{InterpreterError} vorhandenen Fehlerinformationen eine Referenz auf das \texttt{Statement}-Objekt, an dem der Laufzeitfehler aufgetreten ist.
 
 \subsubsection{abstract class AbstractDebugEventListener}
-Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden -- eine Unterklasse von \texttt{AbstractDebugEventPolicy} kann auch nur auf eine Teilmenge der definierten Ereignisse reagieren. Die abstrakte Klasse \texttt{AbstractDebugEventListener} stellt aus diesem Grund für jedes mögliche Ereignis "no-op" Event Handler zur Verfügung.
+Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden -- eine Unterklasse von \texttt{AbstractDebugEventPolicy} kann auch nur auf eine Teilmenge der definierten Ereignisse reagieren. Die abstrakte Klasse \texttt{AbstractDebugEventListener} stellt aus diesem Grund für jedes mögliche Ereignis ``no-op'' Event Handler zur Verfügung.
 
 \begin{description}
     \method{protected void statementExecuted(Statement statement)}

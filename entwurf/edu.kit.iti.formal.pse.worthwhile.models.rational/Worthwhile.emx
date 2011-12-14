@@ -1308,25 +1308,6 @@
         <ownedAttribute xmi:id="_RQaBsCG_EeGaTKTGYPOQ0Q" name="statementExecutor"/>
         <ownedAttribute xmi:id="_aULIQSG_EeGaTKTGYPOQ0Q" name="expressionEvaluator"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_i6Me0CA-EeGrgZ0lnErJwQ" name="IntegerSymbol">
-        <ownedOperation xmi:id="_5yuq4CBAEeGrgZ0lnErJwQ" name="IntegerSymbol">
-          <ownedParameter xmi:id="_VmXeoCTbEeGMRvXx13O-kw" name="value">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-        </ownedOperation>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_kwhHQCA-EeGrgZ0lnErJwQ" name="BooleanSymbol">
-        <ownedOperation xmi:id="_RPyyQCBBEeGrgZ0lnErJwQ" name="BooleanSymbol">
-          <ownedParameter xmi:id="_QkPokCTbEeGMRvXx13O-kw" name="value">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-          </ownedParameter>
-        </ownedOperation>
-      </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_x8uC0CA-EeGrgZ0lnErJwQ" name="ArraySymbol">
-        <ownedOperation xmi:id="_TaMNQCBBEeGrgZ0lnErJwQ" name="ArraySymbol">
-          <ownedParameter xmi:id="_zBs7QCTbEeGMRvXx13O-kw" name="value"/>
-        </ownedOperation>
-      </packagedElement>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_6xC4sSG-EeGaTKTGYPOQ0Q" name="SendOperationEvent1"/>
       <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_6xDfwSG-EeGaTKTGYPOQ0Q" name="ReceiveOperationEvent1"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_Nr_fwSG_EeGaTKTGYPOQ0Q" name="SendOperationEvent2"/>
@@ -1346,7 +1327,7 @@
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_xCrEACHAEeGaTKTGYPOQ0Q" name="SendOperationEvent9"/>
       <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_xCsSICHAEeGaTKTGYPOQ0Q" name="ReceiveOperationEvent9"/>
       <packagedElement xmi:type="uml:Signal" xmi:id="_XlPf8CKHEeGqK7hXUP0ZrQ" name="Signal1"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tHcEkCWREeGaw9b1k5TN9Q" name="InterpreterASTNodeVisitor" clientDependency="_unrjwCWbEeG4pq_0Xwp5Rg _-CvfkCXHEeG4pq_0Xwp5Rg _i7GYUCXREeG4pq_0Xwp5Rg _3zDsYCXWEeG4pq_0Xwp5Rg _oaqV4CZhEeG8TMLfrUJ9xA _9WivYCZgEeG21b73bxMMnw _cacFQCZhEeG21b73bxMMnw _iolNECZiEeG21b73bxMMnw">
+      <packagedElement xmi:type="uml:Class" xmi:id="_tHcEkCWREeGaw9b1k5TN9Q" name="InterpreterASTNodeVisitor" visibility="protected" clientDependency="_unrjwCWbEeG4pq_0Xwp5Rg _-CvfkCXHEeG4pq_0Xwp5Rg _i7GYUCXREeG4pq_0Xwp5Rg _3zDsYCXWEeG4pq_0Xwp5Rg _oaqV4CZhEeG8TMLfrUJ9xA _9WivYCZgEeG21b73bxMMnw _cacFQCZhEeG21b73bxMMnw _iolNECZiEeG21b73bxMMnw">
         <ownedAttribute xmi:id="_scNSQCW9EeG4pq_0Xwp5Rg" name="debugEventHandlers" visibility="private" type="_I-fqACWdEeG4pq_0Xwp5Rg" association="_scMEICW9EeG4pq_0Xwp5Rg">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_scOgYSW9EeG4pq_0Xwp5Rg" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_scOgYCW9EeG4pq_0Xwp5Rg"/>

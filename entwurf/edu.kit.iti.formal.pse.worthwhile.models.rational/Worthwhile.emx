@@ -1104,7 +1104,7 @@
       <packagedElement xmi:type="uml:Usage" xmi:id="__p4oICKIEeGMWJSXoAw51Q" supplier="_XQI9MCKIEeGqK7hXUP0ZrQ" client="_YOkUUCKIEeGqK7hXUP0ZrQ"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_J6VSUCKLEeGMWJSXoAw51Q" supplier="_PzKOQCKIEeGqK7hXUP0ZrQ" client="_XQI9MCKIEeGqK7hXUP0ZrQ"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_Ln5AUCKLEeGMWJSXoAw51Q" supplier="_XQI9MCKIEeGqK7hXUP0ZrQ" client="_PzKOQCKIEeGqK7hXUP0ZrQ"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tHcEkCWREeGaw9b1k5TN9Q" name="InterpreterASTNodeVisitor" clientDependency="_unrjwCWbEeG4pq_0Xwp5Rg _-CvfkCXHEeG4pq_0Xwp5Rg _i7GYUCXREeG4pq_0Xwp5Rg _3zDsYCXWEeG4pq_0Xwp5Rg">
+      <packagedElement xmi:type="uml:Class" xmi:id="_tHcEkCWREeGaw9b1k5TN9Q" name="InterpreterASTNodeVisitor" clientDependency="_unrjwCWbEeG4pq_0Xwp5Rg _-CvfkCXHEeG4pq_0Xwp5Rg _i7GYUCXREeG4pq_0Xwp5Rg _3zDsYCXWEeG4pq_0Xwp5Rg _oaqV4CZhEeG8TMLfrUJ9xA">
         <ownedAttribute xmi:id="_QrY5sCWcEeG4pq_0Xwp5Rg" name="symbolTable" visibility="private">
           <type xmi:type="uml:Interface" href="pathmap://ROSE_LIBRARIES/RoseJavaDatatypes.emx#_7mRkkAddEdm1Sa24K-Ukow?RoseJavaDatatypes/java/util/Map?"/>
         </ownedAttribute>
@@ -1112,6 +1112,7 @@
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_scOgYSW9EeG4pq_0Xwp5Rg" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_scOgYCW9EeG4pq_0Xwp5Rg"/>
         </ownedAttribute>
+        <interfaceRealization xmi:id="_oaqV4CZhEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_tHcEkCWREeGaw9b1k5TN9Q" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
         <ownedOperation xmi:id="_2wmYkCXQEeG4pq_0Xwp5Rg" name="getSymbolTable">
           <ownedParameter xmi:id="_5jiaQCXQEeG4pq_0Xwp5Rg" name="Parameter1" direction="return">
             <type xmi:type="uml:Interface" href="pathmap://ROSE_LIBRARIES/RoseJavaDatatypes.emx#_7mRkkAddEdm1Sa24K-Ukow?RoseJavaDatatypes/java/util/Map?"/>
@@ -1132,182 +1133,6 @@
           <ownedParameter xmi:id="_An3YoCXREeG4pq_0Xwp5Rg" name="line">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
           </ownedParameter>
-        </ownedOperation>
-        <ownedOperation xmi:id="__jJeMCXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_D2SuYCXPEeG4pq_0Xwp5Rg" name="node" type="_InpB1iXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_3gbRoCWREeGaw9b1k5TN9Q" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_xoqXkCWSEeGaw9b1k5TN9Q" name="program" type="_Inl-oyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_xDwkoCWbEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_4P7QYCWbEeG4pq_0Xwp5Rg" name="booleanLiteral" type="_InpBsSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_Ug78MCXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_XSihICXOEeG4pq_0Xwp5Rg" name="annotation" type="_Inl-6CXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_c4LwcCXNEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_uqUVUCXNEeG4pq_0Xwp5Rg" name="addition" type="_InoariXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_k5NyMCXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_mKtPQCXOEeG4pq_0Xwp5Rg" name="arrayAccess" type="_Inl_PSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_mU_MoCXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_nQH_MCXOEeG4pq_0Xwp5Rg" name="arrayLiteral" type="_InpB0CXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_ncsbkCXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_p45_UCXOEeG4pq_0Xwp5Rg" name="assertion" type="_Inl_DiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_y4_fwCXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_1g59MCXOEeG4pq_0Xwp5Rg" name="assignment" type="_Inl_ISXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_88dv0CXOEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_-MM5YCXOEeG4pq_0Xwp5Rg" name="assumption" type="_Inl_ECXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_J-9VwCXPEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_MH5YMCXPEeG4pq_0Xwp5Rg" name="axiom" type="_Inl-5iXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_pzjocCXSEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_vUL_cCXSEeG4pq_0Xwp5Rg" name="binaryExpression" type="_Inl_RiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_-pYAwCXSEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_Asu_oCXTEeG4pq_0Xwp5Rg" name="block" type="_Inl-uCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_EMMJECXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_Gk0NUCXTEeG4pq_0Xwp5Rg" name="booleanExpression" type="_Inl_RCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_K07XoCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_NkII0CXTEeG4pq_0Xwp5Rg" name="booleanLiteral" type="_InpBsSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_RSvvoCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_T_pawCXTEeG4pq_0Xwp5Rg" name="booleanType" type="_InpCEyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_W72tMCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_af0jMCXTEeG4pq_0Xwp5Rg" name="conditional" type="_Inl-7yXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_eNBNsCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_gRV14CXTEeG4pq_0Xwp5Rg" name="conjunction" type="_InoapCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_iViiQCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_kMA7sCXTEeG4pq_0Xwp5Rg" name="disjunction" type="_InoapiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_nOMTQCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_qyGe4CXTEeG4pq_0Xwp5Rg" name="division" type="_InoatCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_s_PE0CXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_t5Fd8CXTEeG4pq_0Xwp5Rg" name="equal" type="_InpBwiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_v_Cd0CXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_xS9j0CXTEeG4pq_0Xwp5Rg" name="equivalence" type="_InoarCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_zOVEUCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_1dOk0CXTEeG4pq_0Xwp5Rg" name="existsQuantifier" type="_InpBvSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_3MFTUCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_4IJS8CXTEeG4pq_0Xwp5Rg" name="expression" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_6T-4YCXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_8tGE0CXTEeG4pq_0Xwp5Rg" name="forAllQuantifier" type="_InpBuyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="__BHV4CXTEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_AGGoACXUEeG4pq_0Xwp5Rg" name="functionCall" type="_InoaviXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_EY558CXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_FzaJECXUEeG4pq_0Xwp5Rg" name="functionDeclaration" type="_Inl-wSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_Hjx6gCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_Jvdu8CXUEeG4pq_0Xwp5Rg" name="greater" type="_InpByCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_MUyycCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_PloRECXUEeG4pq_0Xwp5Rg" name="greaterOrEqual" type="_InpBxiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_MY4BMCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_WGNCICXUEeG4pq_0Xwp5Rg" name="implication" type="_InoaqiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_XuengCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_aQAwICXUEeG4pq_0Xwp5Rg" name="integerExpression" type="_Inl_RSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_cb6nACXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_fPY0MCXUEeG4pq_0Xwp5Rg" name="integerLiteral" type="_InpBtiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_chV5kCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_jCddMCXUEeG4pq_0Xwp5Rg" name="integerType" type="_InpCFSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_ck_qgCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_n9soICXUEeG4pq_0Xwp5Rg" name="invariant" type="_InpCcCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_cm7kMCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_q2faMCXUEeG4pq_0Xwp5Rg" name="less" type="_InpBwCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_coviECXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_uWWMQCXUEeG4pq_0Xwp5Rg" name="lessOrEqual" type="_InpBxCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_wdSqoCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_yFJZQCXUEeG4pq_0Xwp5Rg" name="literal" type="_InoavCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_z0hFICXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_0uhPQCXUEeG4pq_0Xwp5Rg" name="loop" type="_Inl-_SXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_2JyTYCXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_2_B5UCXUEeG4pq_0Xwp5Rg" name="minus" type="_InpBziXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_5zeW4CXUEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="__Q0JUCXUEeG4pq_0Xwp5Rg" name="modulus" type="_InoatiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_Bb4SsCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_DFvMcCXVEeG4pq_0Xwp5Rg" name="multiplication" type="_InoasiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_E2szwCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_Gg_yYCXVEeG4pq_0Xwp5Rg" name="negation" type="_InoaqCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_INd7QCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_JL5SYCXVEeG4pq_0Xwp5Rg" name="parameter" type="_InpB8CXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_LEpjwCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_L4A6YCXVEeG4pq_0Xwp5Rg" name="plus" type="_InpBzCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_NCFg0CXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_O5DCcCXVEeG4pq_0Xwp5Rg" name="postcondition" type="_InoauiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_RHZJUCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_SHzdcCXVEeG4pq_0Xwp5Rg" name="precondition" type="_InoauCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_T5O-0CXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_Y2kbgCXVEeG4pq_0Xwp5Rg" name="predicates" type="_InpBvyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_aUUL4CXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_lqk5gCXVEeG4pq_0Xwp5Rg" name="primitiveType" type="_InpCFyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_nxwBYCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_pFZakCXVEeG4pq_0Xwp5Rg" name="program" type="_Inl-oyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_qxB18CXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_tEhikCXVEeG4pq_0Xwp5Rg" name="quantifiedExpression" type="_Inl_FyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_x8QGgCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_zR2ngCXVEeG4pq_0Xwp5Rg" name="returnStatement" type="_InpCTCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_0lA4gCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_1bplkCXVEeG4pq_0Xwp5Rg" name="sign" type="_InpByiXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_3AHpACXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_4uz_cCXVEeG4pq_0Xwp5Rg" name="statement">
-            <type xmi:type="uml:Class" href="platform:/resource/wuwuwu/worthwhile.emx#_3qFCgCAjEeGVEYA29WGayA?worthwhile/Statement?"/>
-          </ownedParameter>
-        </ownedOperation>
-        <ownedOperation xmi:id="_6HykkCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_7UQXsCXVEeG4pq_0Xwp5Rg" name="subtraction" type="_InoasCXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_9pnskCXVEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="__JT9sCXVEeG4pq_0Xwp5Rg" name="type" type="_InpCESXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_ArGgkCXWEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_COlskCXWEeG4pq_0Xwp5Rg" name="unaryExpression" type="_Inl_TyXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_DECt4CXWEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_JN_usCXWEeG4pq_0Xwp5Rg" name="variableDecleration" type="_Inl_LSXIEeGmor1mpCEcEQ"/>
-        </ownedOperation>
-        <ownedOperation xmi:id="_L4MrICXWEeG4pq_0Xwp5Rg" name="visit" visibility="protected">
-          <ownedParameter xmi:id="_NLJgwCXWEeG4pq_0Xwp5Rg" name="variableReference"/>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Usage" xmi:id="_unrjwCWbEeG4pq_0Xwp5Rg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_tHcEkCWREeGaw9b1k5TN9Q"/>
@@ -11185,7 +11010,7 @@
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_InpB1SXIEeGmor1mpCEcEQ" name="Annotation"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_InpB1iXIEeGmor1mpCEcEQ" name="ASTNode" isAbstract="true">
+      <packagedElement xmi:type="uml:Class" xmi:id="_InpB1iXIEeGmor1mpCEcEQ" name="ASTNode" clientDependency="_xnwNACZgEeG8TMLfrUJ9xA" isAbstract="true">
         <ownedAttribute xmi:id="_InpB1yXIEeGmor1mpCEcEQ" name="lineNumber" visibility="private">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedAttribute>
@@ -11203,9 +11028,7 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:id="_InpB2iXIEeGmor1mpCEcEQ" name="accept">
-          <ownedParameter xmi:id="_InpB2yXIEeGmor1mpCEcEQ" name="visitor">
-            <type xmi:type="uml:PrimitiveType" href="platform:/resource/WorthwhileTemp/Worthwhile.emx#_wXpYcCWOEeGmcKgzelvxJg?Worthwhile/PrimitiveTypes/Visitor?"/>
-          </ownedParameter>
+          <ownedParameter xmi:id="_InpB2yXIEeGmor1mpCEcEQ" name="visitor" type="_2CUikCZaEeG8TMLfrUJ9xA"/>
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_InpB3CXIEeGmor1mpCEcEQ" memberEnd="_Inl-pSXIEeGmor1mpCEcEQ _InpB3SXIEeGmor1mpCEcEQ">

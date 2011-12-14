@@ -10676,7 +10676,7 @@
       </eAnnotations>
       <packagedElement xmi:type="uml:Class" xmi:id="_Inl-oyXIEeGmor1mpCEcEQ" name="Program">
         <generalization xmi:id="_Inl-pCXIEeGmor1mpCEcEQ" general="_InpB1iXIEeGmor1mpCEcEQ"/>
-        <ownedAttribute xmi:id="_Inl-pSXIEeGmor1mpCEcEQ" name="functionDeclarations" visibility="private" type="_Inl-wSXIEeGmor1mpCEcEQ" aggregation="composite" association="_InpB3CXIEeGmor1mpCEcEQ">
+        <ownedAttribute xmi:id="_Inl-pSXIEeGmor1mpCEcEQ" name="functionDefinitions" visibility="private" type="_Inl-wSXIEeGmor1mpCEcEQ" aggregation="composite" association="_InpB3CXIEeGmor1mpCEcEQ">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Inl-piXIEeGmor1mpCEcEQ" value="*"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Inl-pyXIEeGmor1mpCEcEQ"/>
         </ownedAttribute>
@@ -10717,7 +10717,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Inl-wSXIEeGmor1mpCEcEQ" name="FunctionDeclaration">
+      <packagedElement xmi:type="uml:Class" xmi:id="_Inl-wSXIEeGmor1mpCEcEQ" name="FunctionDefinition">
         <generalization xmi:id="_Inl-wiXIEeGmor1mpCEcEQ" general="_InpB1iXIEeGmor1mpCEcEQ"/>
         <ownedAttribute xmi:id="_Inl-wyXIEeGmor1mpCEcEQ" name="preconditions" visibility="private" type="_InoauCXIEeGmor1mpCEcEQ" aggregation="composite" association="_InpB6CXIEeGmor1mpCEcEQ">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Inl-xCXIEeGmor1mpCEcEQ" value="*"/>
@@ -11442,7 +11442,7 @@
           <ownedParameter xmi:id="_6KZWAiZbEeG8TMLfrUJ9xA" name="functionCall" type="_InoaviXIEeGmor1mpCEcEQ"/>
         </ownedOperation>
         <ownedOperation xmi:id="_6KZWAyZbEeG8TMLfrUJ9xA" name="visit" visibility="public">
-          <ownedParameter xmi:id="_6KZWBCZbEeG8TMLfrUJ9xA" name="functionDeclaration" type="_Inl-wSXIEeGmor1mpCEcEQ"/>
+          <ownedParameter xmi:id="_6KZWBCZbEeG8TMLfrUJ9xA" name="functionDefinition" type="_Inl-wSXIEeGmor1mpCEcEQ"/>
         </ownedOperation>
         <ownedOperation xmi:id="_6KZWBSZbEeG8TMLfrUJ9xA" name="visit" visibility="public">
           <ownedParameter xmi:id="_6KZWBiZbEeG8TMLfrUJ9xA" name="greater" type="_InpByCXIEeGmor1mpCEcEQ"/>

@@ -24,7 +24,7 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
     \method{public boolean addBreakpoint(LineBreakpoint breakpoint)}
     Fügt dem Interpreter den gegebenen \texttt{LineBreakpoint} hinzu. Wird der Breakpoint erreicht, so benachrichtigt der Interpreter seine Event Listener, indem er die Methode \texttt{breakpointReached} aufruft, damit diese das Ereignis behandeln und z.B. die Ausführung unterbrechen können.
 
-    \method{public Map<String, Value> getAllSymbols()} gibt die im aktuellen Ausführungskontext gültige Symboltabelle zurück. Symbole werden durch einen String identifiziert und ihr Wert durch die Klasse \textt{Value} gekapselt.
+    \method{public Map<String, Value> getAllSymbols()} gibt die im aktuellen Ausführungskontext gültige Symboltabelle zurück. Symbole werden durch einen String identifiziert und ihr Wert durch die Klasse \texttt{Value} gekapselt.
 \end{description}
 
 \subsubsection{class InterpreterASTNodeVisitor}

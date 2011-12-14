@@ -1350,7 +1350,7 @@
         </ownedOperation>
         <ownedOperation xmi:id="_HF7l0CZhEeG21b73bxMMnw" name="getAllSymbols" visibility="protected">
           <ownedParameter xmi:id="_JeNEwCZhEeG21b73bxMMnw" name="Parameter1" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <type xmi:type="uml:Interface" href="pathmap://ROSE_LIBRARIES/RoseJavaDatatypes.emx#_7mRkkAddEdm1Sa24K-Ukow?RoseJavaDatatypes/java/util/Map?"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JeOS4SZhEeG21b73bxMMnw" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JeOS4CZhEeG21b73bxMMnw"/>
           </ownedParameter>
@@ -1462,7 +1462,7 @@
         </ownedOperation>
         <ownedOperation xmi:id="_wDXzsCZhEeG21b73bxMMnw" name="getAllSymbols">
           <ownedParameter xmi:id="_xFpJACZhEeG21b73bxMMnw" name="Parameter1" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            <type xmi:type="uml:Interface" href="pathmap://ROSE_LIBRARIES/RoseJavaDatatypes.emx#_7mRkkAddEdm1Sa24K-Ukow?RoseJavaDatatypes/java/util/Map?"/>
             <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xFqXICZhEeG21b73bxMMnw" value="*"/>
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xFpwECZhEeG21b73bxMMnw"/>
           </ownedParameter>

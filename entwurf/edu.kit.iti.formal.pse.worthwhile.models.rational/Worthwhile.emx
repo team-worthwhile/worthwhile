@@ -2526,6 +2526,16 @@
             <contents xmi:type="notation:Diagram" xmi:id="_LdRCISIyEeG2MZcopdUy_Q" type="Sequence" element="_LdGDACIyEeG2MZcopdUy_Q" name="ProgramChecking" measurementUnit="Himetric">
               <children xmi:id="_LdRCIiIyEeG2MZcopdUy_Q" element="_LdGDACIyEeG2MZcopdUy_Q">
                 <children xmi:id="_LdRCIyIyEeG2MZcopdUy_Q" type="interaction_compartment">
+                  <children xmi:id="_tkm74CcJEeG6vLSoeqwoZw" element="_tkXEQCcJEeG6vLSoeqwoZw">
+                    <eAnnotations xmi:id="_tkni8CcJEeG6vLSoeqwoZw" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
+                      <details xmi:id="_tkni8ScJEeG6vLSoeqwoZw" key="LifelineLabelStyle" value="Represents Name and Type Name"/>
+                    </eAnnotations>
+                    <children xmi:id="_tkoxECcJEeG6vLSoeqwoZw" type="Stereotype"/>
+                    <children xmi:id="_tkoxEScJEeG6vLSoeqwoZw" type="Name"/>
+                    <children xmi:id="_tkpYICcJEeG6vLSoeqwoZw" type="Parent"/>
+                    <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_tkm74ScJEeG6vLSoeqwoZw" fontName="Cantarell" showListSignature="true" showStereotype="Label"/>
+                    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tkm74icJEeG6vLSoeqwoZw" x="264" y="10920"/>
+                  </children>
                   <children xmi:id="_ixc6UCIyEeG2MZcopdUy_Q" element="_ixPe8CIyEeG2MZcopdUy_Q">
                     <eAnnotations xmi:id="_PAZK4iZ1EeGid91tC4LrQw" source="com.ibm.xtools.uml.ui.diagram.internal.styles">
                       <details xmi:id="_PAZK4yZ1EeGid91tC4LrQw" key="LifelineLabelStyle" value="Represents Name and Type Name"/>
@@ -2869,6 +2879,7 @@
           <lifeline xmi:id="_5RCFwCIyEeG2MZcopdUy_Q" name="wPStrategy" represents="_5RCFwSIyEeG2MZcopdUy_Q" coveredBy="_70rHMSIyEeG2MZcopdUy_Q _HMJVwCIzEeG2MZcopdUy_Q _HMJ80SIzEeG2MZcopdUy_Q _HMKj4CIzEeG2MZcopdUy_Q _NoREoCIzEeG2MZcopdUy_Q"/>
           <lifeline xmi:id="_LkrcQCIzEeG2MZcopdUy_Q" name="formula" represents="_LksDUCIzEeG2MZcopdUy_Q" coveredBy="_NoRrsCIzEeG2MZcopdUy_Q _s011YCIzEeG2MZcopdUy_Q"/>
           <lifeline xmi:id="_x9owoCIyEeG2MZcopdUy_Q" name="z3Prover" represents="_x9pXsCIyEeG2MZcopdUy_Q" coveredBy="_zozR8iIyEeG2MZcopdUy_Q _U-9v8CI0EeG2MZcopdUy_Q _U--XASI0EeG2MZcopdUy_Q _U-_lICI0EeG2MZcopdUy_Q _LkW34CS_EeGCVYtmoWb2Bg _LkXe8CS_EeGCVYtmoWb2Bg _LkYtECS_EeGCVYtmoWb2Bg _LkZUICS_EeGCVYtmoWb2Bg _LkaiQCS_EeGCVYtmoWb2Bg _P98uUCS_EeGCVYtmoWb2Bg"/>
+          <lifeline xmi:id="_tkXEQCcJEeG6vLSoeqwoZw" name="wPStrategyASTNodeVisitor" represents="_tkXEQScJEeG6vLSoeqwoZw"/>
           <lifeline xmi:id="_2K9RYCS-EeGCVYtmoWb2Bg" name="proverResult" represents="_2K94cCS-EeGCVYtmoWb2Bg" coveredBy="_P98uUiS_EeGCVYtmoWb2Bg"/>
           <lifeline xmi:id="_-aujcCIyEeG2MZcopdUy_Q" name="specificationChecker" represents="_-aujcSIyEeG2MZcopdUy_Q" coveredBy="__4mPoCIyEeG2MZcopdUy_Q _B4-zASIzEeG2MZcopdUy_Q _B4_aECIzEeG2MZcopdUy_Q _B4_aESIzEeG2MZcopdUy_Q _EZ5QkCIzEeG2MZcopdUy_Q _EZ5QkSIzEeG2MZcopdUy_Q _EZ6esCIzEeG2MZcopdUy_Q _EZ6esSIzEeG2MZcopdUy_Q _EZ7FwSIzEeG2MZcopdUy_Q _HMIusSIzEeG2MZcopdUy_Q _HMKj4iIzEeG2MZcopdUy_Q _U-9I4CI0EeG2MZcopdUy_Q _ii0WgCI0EeG2MZcopdUy_Q _ii09kSI0EeG2MZcopdUy_Q _ii09kiI0EeG2MZcopdUy_Q"/>
           <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_70qgISIyEeG2MZcopdUy_Q" covered="_ixPe8CIyEeG2MZcopdUy_Q" event="_9gcsgCIyEeG2MZcopdUy_Q" message="_70qgICIyEeG2MZcopdUy_Q"/>
@@ -2933,12 +2944,13 @@
           <message xmi:id="_P98HQCS_EeGCVYtmoWb2Bg" name="ProverResult" messageSort="createMessage" receiveEvent="_P98uUiS_EeGCVYtmoWb2Bg" sendEvent="_P98uUCS_EeGCVYtmoWb2Bg" connector="_8MiZUCS-EeGCVYtmoWb2Bg"/>
         </ownedBehavior>
         <ownedAttribute xmi:id="_ixQGACIyEeG2MZcopdUy_Q" name="caller" type="_iHYpoCIyEeG2MZcopdUy_Q"/>
-        <ownedAttribute xmi:id="_jf-NMCIyEeG2MZcopdUy_Q" name="program"/>
-        <ownedAttribute xmi:id="_x9pXsCIyEeG2MZcopdUy_Q" name="z3Prover" type="_fSOuUCIaEeG2MZcopdUy_Q"/>
-        <ownedAttribute xmi:id="_5RCFwSIyEeG2MZcopdUy_Q" name="wPStrategy" type="_CNev0CAkEeGXqsUcua6Xfg"/>
-        <ownedAttribute xmi:id="_-aujcSIyEeG2MZcopdUy_Q" name="specificationChecker" type="_rHP7cCAgEeGXqsUcua6Xfg"/>
-        <ownedAttribute xmi:id="_LksDUCIzEeG2MZcopdUy_Q" name="formula"/>
-        <ownedAttribute xmi:id="_2K94cCS-EeGCVYtmoWb2Bg" name="proverResult" type="_CjqGECAiEeGXqsUcua6Xfg"/>
+        <ownedAttribute xmi:id="_jf-NMCIyEeG2MZcopdUy_Q" name="program" type="_Inl-oyXIEeGmor1mpCEcEQ"/>
+        <ownedAttribute xmi:id="_x9pXsCIyEeG2MZcopdUy_Q" name="prover" type="_fSOuUCIaEeG2MZcopdUy_Q"/>
+        <ownedAttribute xmi:id="_5RCFwSIyEeG2MZcopdUy_Q" name="generator" type="_CNev0CAkEeGXqsUcua6Xfg"/>
+        <ownedAttribute xmi:id="_-aujcSIyEeG2MZcopdUy_Q" name="checker" type="_rHP7cCAgEeGXqsUcua6Xfg"/>
+        <ownedAttribute xmi:id="_LksDUCIzEeG2MZcopdUy_Q" name="weakestPrecondition" type="_Inl_EiXIEeGmor1mpCEcEQ"/>
+        <ownedAttribute xmi:id="_2K94cCS-EeGCVYtmoWb2Bg" name="checkResult" type="_CjqGECAiEeGXqsUcua6Xfg"/>
+        <ownedAttribute xmi:id="_tkXEQScJEeG6vLSoeqwoZw" name="visitor" type="_HkcMYCXVEeG1nsp6Ca-zRg"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Actor" xmi:id="_iHYpoCIyEeG2MZcopdUy_Q" name="Caller"/>
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_m70B8SIyEeG2MZcopdUy_Q" name="SendOperationEvent1"/>

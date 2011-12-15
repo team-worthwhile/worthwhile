@@ -46,7 +46,7 @@ Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ere
     Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
     \method{protected void statementWillExecute(Statement statement)}
     Wird vom Interpreter vor jedem Ausführen eines Statements aufgerufen.
-    \method{protected void executionFailed(Statement statement, InterpreterError error)
+    \method{protected void executionFailed(Statement statement, InterpreterError error)}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms aufgerufen~(beispielsweise ausgelöst durch einen Laufzeitfehler).
     \method{protected void breakpointReached(LineBreakpoint breakpoint, Statement statement)}
     Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet) wurde.

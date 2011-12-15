@@ -12351,7 +12351,7 @@
                 </children>
                 <children xmi:id="_Mv--tSdKEeGFNo9enJ-5rQ" type="Name"/>
                 <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_Mv--tidKEeGFNo9enJ-5rQ" fontName="Cantarell" showListSignature="true" showStereotype="Label"/>
-                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mv--tydKEeGFNo9enJ-5rQ" y="530" width="33813" height="35615"/>
+                <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Mv--tydKEeGFNo9enJ-5rQ" y="530" width="29247" height="43474"/>
               </children>
               <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_Mv--uCdKEeGFNo9enJ-5rQ"/>
               <edges xmi:id="_1pkAQCdKEeGFNo9enJ-5rQ" element="_1o7uICdKEeGFNo9enJ-5rQ" source="_DfBUMCdLEeGFNo9enJ-5rQ" target="_gTT0YCdKEeGFNo9enJ-5rQ">

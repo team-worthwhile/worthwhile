@@ -1,11 +1,45 @@
 \section{Parser}
 
-Der Parser bietet eine Schnittstelle um ein Programm in while Sprache in einen AbstractSyntaxTree zu überführen.
+Der Parser bietet die Funktionaltiät einen Abstract-""Syntax-""Trees aus einem Programm in while Sprache zu generieren und dabei auftretende Syntax Fehler zu übergeben.
 
 \subsection{Klassenentwurf}
 
 \subsubsection{class Parser}
 
-Die Klasse Parser dient als Schnittstelle zum aufgerufenen Parser und bündelt komplexe Vorgänge in einzelnen Methodenaufrufen. Hier wird das Entwurfsmuster "`Fasade"' benutzt.
+Die Klasse Parser dient als Schnittstelle zum externen Parser und bündelt komplexe Vorgänge in einzelnen Methodenaufrufen. Hier kommt das Entwurfsmuster "`Fasade"' zur Anwendung.
 
+\begin{description}
+	\method{public Parser(source : String)}
+	\method{public Parser(source : Reader)}
+		Der Konstruktor der Klasse kann wahlweise mit einem Parameter, welcher das zu parsende Programm in String Form enthält, oder mittels einem Objekt vom Typ Reader, aufgerufen werden.
 
+	\method{public INode[*] getSyntaxErrors()}
+		Diese Methode liefert eine Liste der Syntax Fehler, die beim parsen erkannt wurden, zurück.
+  
+	\method{public ASTNode getRootASTElement()}
+		Hiermit wird das Wurzelelement des Abstract-""Syntax-""Trees, des geparsten Programms, zurück gegeben.
+
+	\method{public Boolean hasSyntaxErrors()}
+		Der Rückgabewert dieser Methode gibt an, ob während des parsens Syntax Fehler aufgetreten sind.
+\end{description}
+
+\subsubsection{class Validator}
+
+Diese Klasse wird komponentenintern zur semantischen Validierung des geparsten Programms benutzt. Hierzu wird ein programmunabhängiges Typsystem benutzt.
+
+\begin{description}
+	\method{public Validator()}
+		Diese Methode initialisiert eine neue Instanz der Klasse Validator.
+
+	\method{public checkTypesystemRules(node : ASTNode)}
+		Überprüft den Abstract-""Syntax-""Tree des übergebenen ASTNodes auf semantische Fehler
+\end{description}
+
+\subsubsection{class TypeSystemCheck}
+
+Diese Klasse ist ein Teil des programmunabhängiges Typsystem.
+
+\begin{description}
+	\method{public checkTypesystemConstraints(node : ASTNode, validator : Validator)}
+		Dies ist die einzige Methode, die vom Validator zum überprüfen aufgerufen wird.
+\end{description}

@@ -10,8 +10,8 @@ Die Klasse Parser dient als Schnittstelle zum externen Parser und bündelt kompl
 
 \begin{description}
 	\method{public Parser(source : String)}
-	\method{public Parser(source : Reader)}
-		Der Konstruktor der Klasse kann wahlweise mit einem Parameter, welcher das zu parsende Programm in String Form enthält, oder mittels einem Objekt vom Typ Reader, aufgerufen werden.
+	\method{public Parser(source : Readable)}
+		Der Konstruktor der Klasse kann wahlweise mit einem Parameter, welcher das zu parsende Programm in String Form enthält, oder mittels eines "`Readable"' Objekts, aufgerufen werden.
 
 	\method{public INode[*] getSyntaxErrors()}
 		Diese Methode liefert eine Liste der Syntax Fehler, die beim parsen erkannt wurden, zurück.

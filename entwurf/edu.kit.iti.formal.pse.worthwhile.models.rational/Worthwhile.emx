@@ -5840,13 +5840,19 @@
           </ownedParameter>
         </ownedOperation>
         <ownedOperation xmi:id="_xlnDsCZ7EeG8TMLfrUJ9xA" name="Parser">
-          <ownedParameter xmi:id="_yl7RMCZ7EeG8TMLfrUJ9xA" name="source"/>
+          <ownedParameter xmi:id="_yl7RMCZ7EeG8TMLfrUJ9xA" name="source" type="_uYpf4CNDEeG_DftwTfWKNQ"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_riE2UCHNEeGPOLJv6XZMnQ" name="getSyntaxErrors"/>
+        <ownedOperation xmi:id="_riE2UCHNEeGPOLJv6XZMnQ" name="getSyntaxErrors">
+          <ownedParameter xmi:id="_TDapQCcWEeG6vLSoeqwoZw" name="syntaxErrors" type="_Z1idUCcWEeG6vLSoeqwoZw" direction="return"/>
+        </ownedOperation>
         <ownedOperation xmi:id="_ttQUcCHNEeGPOLJv6XZMnQ" name="getRootASTElement">
           <ownedParameter xmi:id="_ps3JUCZ8EeG8TMLfrUJ9xA" name="ASTRoot" type="_InpB1iXIEeGmor1mpCEcEQ" direction="return"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_yD8n4CHNEeGPOLJv6XZMnQ" name="hasSyntaxErrors"/>
+        <ownedOperation xmi:id="_yD8n4CHNEeGPOLJv6XZMnQ" name="hasSyntaxErrors">
+          <ownedParameter xmi:id="_Gorm4CcWEeG6vLSoeqwoZw" name="hasSyntaxErrors" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_d_Kq8CHNEeGPOLJv6XZMnQ" name="Validator" clientDependency="_14nUgCZ8EeG8TMLfrUJ9xA">
         <ownedOperation xmi:id="_yYAW4CHOEeGPOLJv6XZMnQ" name="Validator">
@@ -5861,6 +5867,7 @@
       <packagedElement xmi:type="uml:Class" xmi:id="_ui_x0CZ8EeG8TMLfrUJ9xA" name="TypeSystemChecker"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_14nUgCZ8EeG8TMLfrUJ9xA" supplier="_ui_x0CZ8EeG8TMLfrUJ9xA" client="_d_Kq8CHNEeGPOLJv6XZMnQ"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_375a4CZ8EeG8TMLfrUJ9xA" supplier="_tQXFQCZ8EeG8TMLfrUJ9xA" client="_dFvvoCHNEeGPOLJv6XZMnQ"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_Z1idUCcWEeG6vLSoeqwoZw" name="INode"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Collaboration" xmi:id="_In0dcCHOEeGPOLJv6XZMnQ" name="Collaboration1">
       <ownedBehavior xmi:type="uml:Interaction" xmi:id="_In2SoCHOEeGPOLJv6XZMnQ" name="Interaction1">

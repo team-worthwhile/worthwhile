@@ -6188,11 +6188,7 @@
     <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_fPIhMCHREeGPOLJv6XZMnQ" name="SendOperationEvent15"/>
     <packagedElement xmi:type="uml:ExecutionEvent" xmi:id="_gSbKMSHREeGPOLJv6XZMnQ" name="ExecutionEvent4"/>
     <packagedElement xmi:type="uml:Package" xmi:id="_InhF4CXIEeGmor1mpCEcEQ" name="AST">
-      <eAnnotations xmi:id="_InhF4SXIEeGmor1mpCEcEQ" source="uml2.diagrams" references="_InhF4iXIEeGmor1mpCEcEQ">
-        <contents xmi:type="notation:Diagram" xmi:id="_InhF4iXIEeGmor1mpCEcEQ" type="Freeform" name="Main">
-          <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_OyjjMSZ1EeGid91tC4LrQw"/>
-          <element xsi:nil="true"/>
-        </contents>
+      <eAnnotations xmi:id="_InhF4SXIEeGmor1mpCEcEQ" source="uml2.diagrams">
         <contents xmi:type="notation:Diagram" xmi:id="_InhF5iXIEeGmor1mpCEcEQ" type="Class" name="ClassAssociationDiagram">
           <children xmi:id="_InhF5yXIEeGmor1mpCEcEQ" element="_Inl-oyXIEeGmor1mpCEcEQ">
             <children xmi:id="_InhF6CXIEeGmor1mpCEcEQ" type="ImageCompartment">

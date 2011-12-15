@@ -24,13 +24,13 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
     \method{public Map<String, Value> getAllSymbols()} Gibt die im aktuellen Ausführungskontext gültige Symboltabelle zurück. Symbole werden durch einen String identifiziert und ihr Wert durch die Klasse \texttt{Value} gekapselt.
 
     \method{public Value evaluateExpression(Expression expression)}
-    Wertet die übergebene Expression im Kontext des aktuellen Programmzustandes aus gibt den erhaltenen Wert zurück. Um den Programmablauf sowie andere Debug-Komponenten von diesem externen Eingriff unbeeiträchtigt zu lassen, werden bei der Ausführung der Expression keine Listener benchrichtigt. Eventuelle Laufzeitfehler bei der Auswertung der Expression führen zum Werfen einer Exception, die vom Aufrufer gefangen werden kann.
+    Wertet die übergebene Expression im Kontext des aktuellen Programmzustandes aus und gibt den erhaltenen Wert zurück. Um den Programmablauf sowie andere Debug-""Komponenten von diesem externen Eingriff unbeeinträchtigt zu lassen, werden bei der Ausführung der Expression keine Listener benachrichtigt. Eventuelle Laufzeitfehler bei der Auswertung der Expression führen zum Werfen einer Exception, die vom Aufrufer gefangen werden kann.
 \end{description}
 
 \subsubsection{class InterpreterASTNodeVisitor}
 Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen bzw.\ auszuwerten, verwendet die Interpreter-""Komponente intern das Entwurfsmuster ``Visitor''. Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine Kenntnis über deren Typ nötig ist, denn jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will. \texttt{InterpreterASTNodeVisitor} implementiert deshalb die Schnittstelle \texttt{ASTNodeVisitor}.
 
-Außerdem implementiert die Klasse \texttt{InterpreterASTNodeVisitor} eine Methode \texttt{clone()}. Diese wird intern von der Interpreter-Fassade verwendet, um bei der Auswertung einer Expression nicht das ``richtige'' Objekt verwenden zu müssen, sondern alle Operationen mit einer Kopie durchführen zu können. Dies verhindert die Störung des Debugablaufs durch unerwartete Benachrichtigungen an Listener während der Auswertung.
+Außerdem implementiert die Klasse \texttt{InterpreterASTNodeVisitor} eine Methode \texttt{clone()}. Diese wird intern von der Interpreter-""Fassade verwendet, um bei der Auswertung einer Expression nicht das ``richtige'' Objekt verwenden zu müssen, sondern alle Operationen mit einer Kopie durchführen zu können. Dies verhindert die Störung des Debug-""Ablaufs durch unerwartete Benachrichtigungen an Listener während der Auswertung.
 
 \subsubsection{class InterpreterError}
 Diese Fehlerklasse dient zur Weitergabe von Fehlern, die im Interpreter bei einer Ausführung des Programms auftreten.

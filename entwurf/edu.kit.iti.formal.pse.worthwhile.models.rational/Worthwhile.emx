@@ -3145,7 +3145,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_iosh0SZiEeG21b73bxMMnw" x="397" y="-194"/>
             </children>
             <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_O_vDliZ1EeGid91tC4LrQw" fontName="Cantarell" routing="Rectilinear" lineColor="8421504" lineWidth="1" showStereotype="Text"/>
-            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ior6wiZiEeG21b73bxMMnw" points="[-111, -6, 230, -5]$[-312, -27, 29, -26]"/>
+            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ior6wiZiEeG21b73bxMMnw" points="[-103, -53, 7517, 128]$[-5341, -53, 2279, 128]"/>
             <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Yni7ECZkEeG21b73bxMMnw" id="(0.009474671,0.465813)"/>
           </edges>
           <edges xmi:id="_qJVzUCZjEeG21b73bxMMnw" element="_qJNQcCZjEeG21b73bxMMnw" source="_JE0pgCZjEeG21b73bxMMnw" target="_dTFSkCZjEeG21b73bxMMnw">
@@ -3263,7 +3263,7 @@
               <layoutConstraint xmi:type="notation:Bounds" xmi:id="_LYntliZiEeG8TMLfrUJ9xA" y="-186"/>
             </children>
             <styles xmi:type="umlnotation:UMLConnectorStyle" xmi:id="_O_9GByZ1EeGid91tC4LrQw" fontName="Cantarell" routing="Rectilinear" lineColor="8421504" lineWidth="1" showStereotype="Text"/>
-            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LYntlCZiEeG8TMLfrUJ9xA" points="[102, -36, -7190, -153]$[3875, -36, -3417, -153]"/>
+            <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LYntlCZiEeG8TMLfrUJ9xA" points="[354, 15, -5579, 189]$[2406, 15, -3527, 189]"/>
             <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SdkXACZiEeG8TMLfrUJ9xA" id="(0.9678236,0.13336554)"/>
             <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TEYfYCZiEeG8TMLfrUJ9xA" id="(0.9868157,0.40794224)"/>
           </edges>
@@ -3476,6 +3476,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5DxaICdGEeGW1c4vZt6AqQ" value="1"/>
         </ownedAttribute>
         <interfaceRealization xmi:id="_oaqV4CZhEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_tHcEkCWREeGaw9b1k5TN9Q" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
+        <ownedOperation xmi:id="_uIj94CdTEeGW1c4vZt6AqQ" name="InterpreterASTNodeVisitor" visibility="protected"/>
         <ownedOperation xmi:id="_2wmYkCXQEeG4pq_0Xwp5Rg" name="getSymbol" visibility="protected">
           <ownedParameter xmi:id="__D1hMCZsEeGrP92ZOYcZLA" name="key">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -3506,7 +3507,6 @@
         <ownedOperation xmi:id="_QlcWwCZtEeGrP92ZOYcZLA" name="clone" visibility="protected">
           <ownedParameter xmi:id="_Ro1tcCZtEeGrP92ZOYcZLA" name="Parameter1" type="_tHcEkCWREeGaw9b1k5TN9Q" direction="return"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_uIj94CdTEeGW1c4vZt6AqQ" name="InterpreterASTNodeVisitor"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Usage" xmi:id="_unrjwCWbEeG4pq_0Xwp5Rg" supplier="_obF6YCAkEeGXqsUcua6Xfg" client="_tHcEkCWREeGaw9b1k5TN9Q"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_I-fqACWdEeG4pq_0Xwp5Rg" name="AbstractDebugEventListener" isAbstract="true">

@@ -2362,6 +2362,9 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GBCJICb3EeGetMSr5dwwxA"/>
         </ownedAttribute>
         <ownedOperation xmi:id="_AzejgCIzEeG2MZcopdUy_Q" name="SpecificationChecker"/>
+        <ownedOperation xmi:id="_qlt38CcAEeGetMSr5dwwxA" name="SpecificationChecker">
+          <ownedParameter xmi:id="_sRyYMCcAEeGetMSr5dwwxA" name="transformer" type="_obF6YCAkEeGXqsUcua6Xfg"/>
+        </ownedOperation>
         <ownedOperation xmi:id="_uzCbQCAhEeGXqsUcua6Xfg" name="checkAnnotation">
           <ownedParameter xmi:id="_0SMyoCAhEeGXqsUcua6Xfg" name="satisfied" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>

@@ -2399,6 +2399,7 @@
             <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Y2IcUCb2EeGetMSr5dwwxA" value="1"/>
           </ownedAttribute>
           <interfaceRealization xmi:id="_uNpHgCZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_HkcMYCXVEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
+          <ownedOperation xmi:id="_TueEUCcJEeG6vLSoeqwoZw" name="WPStrategyASTNodeVisitor" visibility="protected"/>
           <ownedOperation xmi:id="_dIC9cCb2EeGetMSr5dwwxA" name="getWeakestPrecondition" visibility="protected">
             <ownedParameter xmi:id="_fjE1cCb2EeGetMSr5dwwxA" name="weakestPrecondition" type="_Inl_EiXIEeGmor1mpCEcEQ" direction="return"/>
           </ownedOperation>

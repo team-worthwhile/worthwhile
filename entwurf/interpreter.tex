@@ -52,6 +52,9 @@ Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ere
     Wird vom Interpreter nach jeder Auswertung einer Expression aufgerufen.
 \end{description}
 
+\subsection{Datentyp-""Wrapper-""Klasse \texttt{Value}}
+Die Klasse \texttt{Value} repräsentiert den Wert einer Variablen im Typsystem des Worthwhile-""Interpreters. Der Typ der Variable kann dabei auch ohne die Verwendung des \texttt{instanceof}-""Operators herausgefunden werden.
+
 \subsection{Fehlerklassen}
 \subsubsection{class InterpreterError}
 Diese Fehlerklasse dient zur Weitergabe von Fehlern, die im Interpreter bei einer Ausführung des Programms auftreten.
@@ -61,4 +64,6 @@ Diese Fehlerklasse enthält neben den in der Klasse \texttt{InterpreterError} vo
 
 \includegraphics[angle=90,height=\textheight]{diagrams/interpreter_component.pdf}
 \newpage
+
+\hspace{-2cm}
 \includegraphics[angle=90,height=\textheight]{diagrams/interpreter_functioncall_sequence.pdf}

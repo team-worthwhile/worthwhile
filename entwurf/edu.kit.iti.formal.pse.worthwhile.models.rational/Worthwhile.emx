@@ -5796,7 +5796,7 @@
             <children xmi:id="_ujC1ICZ8EeG8TMLfrUJ9xA" visible="false" type="StructureCompartment">
               <styles xmi:type="umlnotation:UMLShapeCompartmentStyle" xmi:id="_ujC1ISZ8EeG8TMLfrUJ9xA"/>
             </children>
-            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_ujA_8SZ8EeG8TMLfrUJ9xA" fontName="Cantarell" showStereotype="Label"/>
+            <styles xmi:type="umlnotation:UMLShapeStyle" xmi:id="_ujA_8SZ8EeG8TMLfrUJ9xA" fontName="Cantarell" showListSignature="true" showStereotype="Label"/>
             <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ujA_8iZ8EeG8TMLfrUJ9xA" x="14234" y="9510"/>
           </children>
           <styles xmi:type="umlnotation:UMLDiagramStyle" xmi:id="_OyZLISZ1EeGid91tC4LrQw"/>
@@ -5866,11 +5866,23 @@
       <packagedElement xmi:type="uml:Signal" xmi:id="_AY_bwCKHEeGqK7hXUP0ZrQ" name="Signal1"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_uYpf4CNDEeG_DftwTfWKNQ" name="Readable"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_WZ3EECZ7EeG8TMLfrUJ9xA" supplier="_d_Kq8CHNEeGPOLJv6XZMnQ" client="_dFvvoCHNEeGPOLJv6XZMnQ"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_tQXFQCZ8EeG8TMLfrUJ9xA" name="SyntaxErrorMessageProvider"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_ui_x0CZ8EeG8TMLfrUJ9xA" name="TypeSystemChecker"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_tQXFQCZ8EeG8TMLfrUJ9xA" name="SyntaxErrorMessageProvider">
+        <ownedOperation xmi:id="_lsZSkCdCEeGDHu-hhc9I8w" name="getSyntaxErrorMessage">
+          <ownedParameter xmi:id="_mcddkCdCEeGDHu-hhc9I8w" name="context" type="_HRGNwCdCEeGDHu-hhc9I8w"/>
+          <ownedParameter xmi:id="_sUXFECdCEeGDHu-hhc9I8w" name="Parameter1" type="_gakMkCdCEeGDHu-hhc9I8w" direction="return"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_ui_x0CZ8EeG8TMLfrUJ9xA" name="TypeSystemChecker">
+        <ownedOperation xmi:id="_Jc5-ACdCEeGDHu-hhc9I8w" name="checkTypesystemRule">
+          <ownedParameter xmi:id="_KIeDgCdCEeGDHu-hhc9I8w" name="object" type="_D8KSQCdCEeGDHu-hhc9I8w"/>
+        </ownedOperation>
+      </packagedElement>
       <packagedElement xmi:type="uml:Usage" xmi:id="_14nUgCZ8EeG8TMLfrUJ9xA" supplier="_ui_x0CZ8EeG8TMLfrUJ9xA" client="_d_Kq8CHNEeGPOLJv6XZMnQ"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_375a4CZ8EeG8TMLfrUJ9xA" supplier="_tQXFQCZ8EeG8TMLfrUJ9xA" client="_dFvvoCHNEeGPOLJv6XZMnQ"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_Z1idUCcWEeG6vLSoeqwoZw" name="INode"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_D8KSQCdCEeGDHu-hhc9I8w" name="EObject"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_HRGNwCdCEeGDHu-hhc9I8w" name="IParserErrorContext"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_gakMkCdCEeGDHu-hhc9I8w" name="SyntaxErrorMessage"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Collaboration" xmi:id="_In0dcCHOEeGPOLJv6XZMnQ" name="Collaboration1">
       <ownedBehavior xmi:type="uml:Interaction" xmi:id="_In2SoCHOEeGPOLJv6XZMnQ" name="Interaction1">

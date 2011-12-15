@@ -1,4 +1,3 @@
-% vim: spell spelllang=de:
 \section{Interpreter}
 
 Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter-""Prozess kann in einem eigenen Thread gestartet werden und teilt anderen Komponenten mit Hilfe des Entwurfsmusters ``Observer'' bei der Ausführung auftretende Ereignisse mit.
@@ -39,27 +38,26 @@ Diese Fehlerklasse dient zur Weitergabe von Fehlern, die im Interpreter bei eine
 Diese Fehlerklasse enthält neben den in der Klasse \texttt{InterpreterError} vorhandenen Fehlerinformationen eine Referenz auf das \texttt{Statement}-""Objekt, an dem der Laufzeitfehler aufgetreten ist.
 
 \subsubsection{abstract class AbstractDebugEventListener}
-Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-""Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden, sodass eine Unterklasse von \texttt{AbstractDebugEventPolicy} auch nur auf eine Teilmenge der definierten Ereignisse reagieren kann. Die abstrakte Klasse \texttt{AbstractDebugEventListener} stellt aus diesem Grund für jedes mögliche Ereignis ``no-op''-""Event-""Handler zur Verfügung.
+Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-""Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden, sodass eine Unterklasse von \texttt{AbstractDebugEventListener} auch nur auf eine Teilmenge der definierten Ereignisse reagieren kann. Die abstrakte Klasse \texttt{AbstractDebugEventListener} stellt aus diesem Grund für jedes mögliche Ereignis ``no-op''-""Event-""Handler zur Verfügung.
 
 \begin{description}
-    \method{protected void statementExecuted(Statement statement)}
+    \method{public void statementExecuted(Statement statement)}
     Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
-    \method{protected void statementWillExecute(Statement statement)}
+    \method{public void statementWillExecute(Statement statement)}
     Wird vom Interpreter vor jedem Ausführen eines Statements aufgerufen.
-    \method{protected void executionFailed(Statement statement, InterpreterError error)}
+    \method{public void executionFailed(Statement statement, InterpreterError error)}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms aufgerufen~(beispielsweise ausgelöst durch einen Laufzeitfehler).
-    \method{protected void breakpointReached(LineBreakpoint breakpoint, Statement statement)}
+    \method{public void breakpointReached(Statement statement, LineBreakpoint breakpoint)}
     Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet) wurde.
-    \method{protected void assertionSucceeded(Assertion assertion)}
+    \method{public void executionStarted}
+    \method{public void executionFailed}
+    \method{public void assertionSucceeded(Assertion assertion)}
     Wird vom Interpreter nach jeder erfolgreichen Ausführung einer Zusicherungsinstruktion aufgerufen.
-    \method{protected void assertionFailed(Assertion assertion)}
+    \method{public void assertionFailed(Assertion assertion)}
     Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen.
-    \method{protected void expressionEvaluated(Expression expression)}
+    \method{public void expressionEvaluated(Expression expression)}
     Wird vom Interpreter nach jeder Auswertung einer Expression aufgerufen.
 \end{description}
-
-%\subsubsection{class Linebreakpoint und class ConditionalLineBreakpoint}
-
 
 \includegraphics[angle=90,height=\textheight]{diagrams/interpreter_component.pdf}
 \newpage

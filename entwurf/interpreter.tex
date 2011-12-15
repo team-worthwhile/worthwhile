@@ -27,7 +27,7 @@ Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente g
     Wertet die übergebene Expression im Kontext des aktuellen Programmzustandes aus und gibt den erhaltenen Wert zurück. Um den Programmablauf sowie andere Debug-""Komponenten von diesem externen Eingriff unbeeinträchtigt zu lassen, werden bei der Ausführung der Expression keine Listener benachrichtigt. Eventuelle Laufzeitfehler bei der Auswertung der Expression führen zum Werfen einer Exception, die vom Aufrufer gefangen werden kann.
 \end{description}
 
-\subsubsection{class InterpreterASTNodeVisitor}
+\subsubsection{class InterpreterASTNodeVisitor implements ASTNodeVisitor}
 Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen bzw.\ auszuwerten, verwendet die Interpreter-""Komponente intern das Entwurfsmuster ``Visitor''. Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine Kenntnis über deren Typ nötig ist, denn jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will. \texttt{InterpreterASTNodeVisitor} implementiert deshalb die Schnittstelle \texttt{ASTNodeVisitor}.
 
 Außerdem implementiert die Klasse \texttt{InterpreterASTNodeVisitor} eine Methode \texttt{clone()}. Diese wird intern von der Interpreter-""Fassade verwendet, um bei der Auswertung einer Expression nicht das ``richtige'' Objekt verwenden zu müssen, sondern alle Operationen mit einer Kopie durchführen zu können. Dies verhindert die Störung des Debug-""Ablaufs durch unerwartete Benachrichtigungen an Listener während der Auswertung.
@@ -46,16 +46,19 @@ Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ere
     Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
     \method{protected void statementWillExecute(Statement statement)}
     Wird vom Interpreter vor jedem Ausführen eines Statements aufgerufen.
-    \method{protected void executionStarted()}
-    Wird vom Interpreter direkt nach dessen Start aufgerufen.
-    \method{protected void executionFailed()} %TODO
+    \method{protected void executionFailed(Statement statement, InterpreterError error)
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms aufgerufen~(beispielsweise ausgelöst durch einen Laufzeitfehler).
-    \method{protected void breakpointReached()} %TODO
+    \method{protected void breakpointReached(LineBreakpoint breakpoint, Statement statement)}
     Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet) wurde.
-    \method{protected void assertionSucceeded()}
+    \method{protected void assertionSucceeded(Assertion assertion)}
     Wird vom Interpreter nach jeder erfolgreichen Ausführung einer Zusicherungsinstruktion aufgerufen.
-    \method{protected void assertionFailed()}
+    \method{protected void assertionFailed(Assertion assertion)}
     Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen.
+    \method{protected void expressionEvaluated(Expression expression)}
+    Wird vom Interpreter nach jeder Auswertung einer Expression aufgerufen.
 \end{description}
+
+%\subsubsection{class Linebreakpoint und class ConditionalLineBreakpoint}
+
 
 \includegraphics[angle=90,height=\textheight]{diagrams/interpreter_component.pdf}

@@ -4137,7 +4137,7 @@
             <children xmi:id="_CNjoUCAkEeGXqsUcua6Xfg" type="AttributeCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8Hu4iZ1EeGid91tC4LrQw"/>
             </children>
-            <children xmi:id="_CNjoUiAkEeGXqsUcua6Xfg" type="OperationCompartment">
+            <children xmi:id="_CNjoUiAkEeGXqsUcua6Xfg" visible="false" type="OperationCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8Hu5CZ1EeGid91tC4LrQw"/>
             </children>
             <children xmi:id="_CNjoVCAkEeGXqsUcua6Xfg" visible="false" type="SignalCompartment">
@@ -4159,7 +4159,7 @@
             <children xmi:id="_Et6sQCAkEeGXqsUcua6Xfg" type="AttributeCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8JkFiZ1EeGid91tC4LrQw"/>
             </children>
-            <children xmi:id="_Et6sQiAkEeGXqsUcua6Xfg" type="OperationCompartment">
+            <children xmi:id="_Et6sQiAkEeGXqsUcua6Xfg" visible="false" type="OperationCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8KLISZ1EeGid91tC4LrQw"/>
             </children>
             <children xmi:id="_Et7TUCAkEeGXqsUcua6Xfg" visible="false" type="SignalCompartment">
@@ -4263,7 +4263,7 @@
             <children xmi:id="_s2ougCIaEeG2MZcopdUy_Q" type="AttributeCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8T8IyZ1EeGid91tC4LrQw"/>
             </children>
-            <children xmi:id="_s2ougiIaEeG2MZcopdUy_Q" type="OperationCompartment">
+            <children xmi:id="_s2ougiIaEeG2MZcopdUy_Q" visible="false" type="OperationCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8T8JSZ1EeGid91tC4LrQw"/>
             </children>
             <children xmi:id="_s2pVkCIaEeG2MZcopdUy_Q" visible="false" type="SignalCompartment">
@@ -4285,7 +4285,7 @@
             <children xmi:id="_3sJeASXUEeG1nsp6Ca-zRg" type="AttributeCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8WYYiZ1EeGid91tC4LrQw"/>
             </children>
-            <children xmi:id="_3sKFECXUEeG1nsp6Ca-zRg" type="OperationCompartment">
+            <children xmi:id="_3sKFECXUEeG1nsp6Ca-zRg" visible="false" type="OperationCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8WYZCZ1EeGid91tC4LrQw"/>
             </children>
             <children xmi:id="_3sKFEiXUEeG1nsp6Ca-zRg" visible="false" type="SignalCompartment">
@@ -4307,7 +4307,7 @@
             <children xmi:id="_HkiTACXVEeG1nsp6Ca-zRg" type="AttributeCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8YNliZ1EeGid91tC4LrQw"/>
             </children>
-            <children xmi:id="_Hki6ECXVEeG1nsp6Ca-zRg" type="OperationCompartment">
+            <children xmi:id="_Hki6ECXVEeG1nsp6Ca-zRg" visible="false" type="OperationCompartment">
               <styles xmi:type="umlnotation:UMLListCompartmentStyle" xmi:id="_O8Y0oSZ1EeGid91tC4LrQw"/>
             </children>
             <children xmi:id="_Hki6EiXVEeG1nsp6Ca-zRg" visible="false" type="SignalCompartment">
@@ -5009,6 +5009,7 @@
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
           </ownedAttribute>
           <interfaceRealization xmi:id="_pD0G8CZpEeG8TMLfrUJ9xA" supplier="_2CUikCZaEeG8TMLfrUJ9xA" client="_3pz7sCXUEeG1nsp6Ca-zRg" contract="_2CUikCZaEeG8TMLfrUJ9xA"/>
+          <ownedOperation xmi:id="_plSIUCdFEeGpZeFPKGydYg" name="SMTLIBStrategyASTNodeVisitor" visibility="protected"/>
           <ownedOperation xmi:id="_nUaDwCb2EeGetMSr5dwwxA" name="getCompilation" visibility="protected">
             <ownedParameter xmi:id="_oNzJ4Cb2EeGetMSr5dwwxA" name="Parameter1" direction="return">
               <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>

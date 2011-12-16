@@ -28,6 +28,10 @@ terminal NUMBER returns ecore::EBigInteger:
  	'-'? ('0'..'9')+
  ;
  
+ terminal BOOL returns ecore::EBoolean:
+	'true' | 'false'
+;
+ 
 terminal INT returns ecore::EInt:
  	"$$$don't use this anymore$$$"
  ;
@@ -58,7 +62,7 @@ WhileStatement returns Loop:
 
 // 
 Invariant returns Invariant:
-	'_invariant' expression=(Expression | QuantifiedExpression) NL+ 
+	'_invariant' expression=Expression NL+ 
 ;
 
 // An if statement specifies a conditional Expression.
@@ -72,11 +76,11 @@ FunctionDeclaration returns FunctionDeclaration:
 ;
 
 Require returns Precondition:
-	'_requires' expression=(Expression | QuantifiedExpression) NL+ 
+	'_requires' expression=Expression NL+ 
 ;
 
 Ensure returns Postcondition:
-	'_ensures' expression=(Expression | QuantifiedExpression) NL+ 
+	'_ensures' expression=Expression  NL+ 
 ;
  
 // A parameter definition describes a single parameter (type and name) accepted by a function.
@@ -106,7 +110,7 @@ FunctionCall returns FunctionCall:
  
 // An annotation is used to specify assertions and assumptions.
 Annotation returns Annotation:
-	 ({Assertion} '_assert' | {Assumption} '_assume') expression=(Expression | QuantifiedExpression)
+	 ({Assertion} '_assert' | {Assumption} '_assume') expression=Expression
 ;
 
 // A quantified Expression is an Expression optionally preceded by some quantifier definitions.
@@ -127,7 +131,7 @@ Assignment returns Assignment:
 // An Expression is based on operator precedence. Each "level" of Expressions means one level of operator precedence,
 // where the last operation specified has the highest priority. In the same level, operators are evaluated from left to right.
 Expression returns Expression:
-	BooleanOr
+	QuantifiedExpression | BooleanOr
 ;
 
 // The boolean or has the lowest priority.
@@ -140,9 +144,9 @@ BooleanAnd returns Expression:
 	EqualsComparison ({Conjunction.left=current} ('∧' | '&&') right=EqualsComparison)?
 ;
 
-// The equals comparison is next in priority.
+// The equal and unequal comparisons are next in priority.
 EqualsComparison returns Expression:
-	Comparison ({Equal.left=current} '=' right=Comparison)?
+	Comparison (({Equal.left=current} '=' | {Unequal.left = current} ('!=' | '≠')) right=Comparison)?
 ;
 
 // A comparison of two integer values is next in priority.
@@ -162,7 +166,7 @@ Multiplication returns Expression:
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.
 UnaryOperation returns Expression:
-	 ArrayAccess | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=ArrayAccess)
+	 ArrayAccess | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=ArrayAccess) | {ArrayLength} 'length' '(' operand=ArrayAccess ')'
 ;
 
 // The access of array items via an index has highest priority.
@@ -177,19 +181,10 @@ ArrayAccess returns Expression:
 //  - a reference to a variable
 //  - a whole new Expression in parentheses.
 Atomic returns Expression:
-	FunctionCall | {IntegerLiteral} value=NUMBER | BooleanLiteral | VariableReference | '(' Expression ')'
-;
-
-// A Boolean literal is either "true" or "false"
-BooleanLiteral returns BooleanLiteral:
-	value=BooleanValue
-;
-
-BooleanValue returns ecore::EBoolean:
-	'true' | 'false'
+	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL  | VariableReference | '(' Expression ')'
 ;
 
 // A variable reference is used to denote the current content of a variable. 
 VariableReference returns VariableReference:
-		{VariableReference} variable=[VariableDeclaration] // TODO ('[' index=Expression ']')?
+		{VariableReference} variable=[VariableDeclaration] ('[' index=Expression ']')?
 ;

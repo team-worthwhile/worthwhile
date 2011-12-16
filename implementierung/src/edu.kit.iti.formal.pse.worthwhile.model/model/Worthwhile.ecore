@@ -300,6 +300,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//AST/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
           lowerBound="1" eType="#//AST/VariableDeclaration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//AST/Expression"
+          containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//AST/ASTNode"/>
   </eSubpackages>

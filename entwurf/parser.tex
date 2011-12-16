@@ -28,18 +28,16 @@ Die Klasse Parser dient als Schnittstelle zum externen Parser und bündelt kompl
 Diese Klasse wird komponentenintern zur semantischen Validierung des geparsten Programms benutzt. Hierzu wird ein programmunabhängiges Typsystem benutzt.
 
 \begin{description}
-	\method{public Validator()}
-		Diese Methode initialisiert eine neue Instanz der Klasse Validator.
-
 	\method{public checkTypesystemRules(node : ASTNode)}
-		Überprüft den Abstract-""Syntax-""Tree des übergebenen ASTNodes auf semantische Fehler
+		Überprüft den Abstract-""Syntax-""Tree des übergebenen ASTNodes auf semantisc Fehler	
+
+	\method{public checkFunktionReferences(node : ASTNode)}
+		Diese Methode untersucht den AST auf verwendete und nicht deklarierte Funktionen.	
+	\method{public checkVariableReferences(node : ASTNode)}
+		Überprüft alle vorkommenden Variablen ob sie vor ihrer Verwendung bereits deklariert wurden.
+
+	\method{public checkReturnStatments(node : ASTNode)}
+		Hierbei wird kontrolliert, dass alle Funktionen, bei jedem möglichen Funktionsdurchlauf, ein return-Statment besitzt.
+
 \end{description}
 
-\subsubsection{class TypeSystemCheck}
-
-Diese Klasse ist ein Teil des programmunabhängiges Typsystem.
-
-\begin{description}
-	\method{public checkTypesystemConstraints(node : ASTNode, validator : Validator)}
-		Dies ist die einzige Methode, die vom Validator zum überprüfen aufgerufen wird.
-\end{description}

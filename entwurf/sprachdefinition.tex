@@ -20,7 +20,7 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 \hline
 8 & \texttt{{[}\,{]}} \\
 \hline
-7 & $\neg, -, +$ (unäre Operatoren)\\
+7 & $\neg, -, +$, \texttt{length()} (unäre Operatoren)\\
 \hline
 6 & $\cdot, \div, \%$\\
 \hline
@@ -28,7 +28,7 @@ Operatoren mit gleicher Priorität werden von links nach rechts ausgewertet. Dur
 \hline
 4 & $<, \leq, \geq, >$\\
 \hline
-3 & $=$\\
+3 & $=, \neq$\\
 \hline
 2 & $\wedge$ \\
 \hline
@@ -51,11 +51,11 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <statement> ::= <vardecl> | <assign> | <block> | <annotation> | <funccall> | <conditional> | <loop> | <return>
 
-<axiom> ::= `_axiom' <predformula>
+<axiom> ::= `_axiom' <expr>
 
-<precondition> ::= `_requires' <predformula>
+<precondition> ::= `_requires' <expr>
 
-<postcondition> ::= `_ensures' <predformula>
+<postcondition> ::= `_ensures' <expr>
 
 <block> ::= <statement>*
 
@@ -65,7 +65,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <varref> ::= <name> (`[' <expr> `]' )?
 
-<annotation> ::= (`_assert' | `_assume') <predformula>
+<annotation> ::= (`_assert' | `_assume') <expr>
 
 <funccall> ::= <name> `(' (<expr> (`,' <expr>)* )? `)'
 
@@ -73,15 +73,13 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <loop> ::= `while' <expr> \\ <invariant> \\ `{' <block> `}'
 
-<invariant> ::= `_invariant' <predformula>
+<invariant> ::= `_invariant' <expr>
 
 <return> ::= `return' <expr>
 
-<predformula> ::= <expr> | <quantifiedexpr>
-
 <quantifiedexpr> ::= (\lit{$\forall$} | \lit{$\exists$} ) <type> <name> (`,' <expr>) (<quantifiedexpr> | `:' <expr>)
 
-<expr> ::= <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <arraylen> | <literal> | <varref> | <funccall>
+<expr> ::= <quantifiedexpr> | <prefixop> <expr> | <expr> <binop> <expr> | <expr> <postfixop> | `(' <expr> `)' | <arraylen> | <literal> | <varref> | <funccall>
 
 <arraylen> ::= `length' `(' <expr> `)'
 
@@ -95,7 +93,7 @@ Ein Worthwhile-Programm besteht aus genau einem Element des Typs \textit{program
 
 <parameter> ::= <type> <name>
 
-<binop> ::= $\vee$ | $\wedge$ | $\textless$ | $\leq$ | $=$ | $\geq$ | $>$ | $+$ | $-$ | $\cdot$ | $/$
+<binop> ::= $\vee$ | $\wedge$ | $\textless$ | $\leq$ | $=$ | $\neq$ | $\geq$ | $>$ | $+$ | $-$ | $\cdot$ | $/$ | $\%$
 
 <prefixop> ::= $-$ | $+$ | $\neg$
 
@@ -178,7 +176,7 @@ Bedingt durch die kleine Anzahl möglicher Variablentypen ist das Typsystem nich
 
 Jedes Sprachelement, das einen Wert zurückliefert, besitzt einen Rückgabetyp, kurz Typ des Sprachelements. Ein Sprachelement kann Kindelemente besitzen, deren Typ Einschränkungen unterliegen kann -- beispielsweise kann der Operator $+$ nur auf Operanden vom Typ \int{} angewendet werden.
 
-Die Spezifikation des Typsystems ist in Tabelle~\ref{typesystem} dargestellt.
+Die Spezifikation des Typsystems ist in Tabelle~\ref{typesystemdef} dargestellt.
 
 \subsection{Scoping}
 
@@ -202,7 +200,7 @@ Im Einzelnen gibt es folgende Gültigkeitsbereiche (Scopes) in einem Programm:
 \begin{landscape}
 
 \begin{longtable}{lllp{11cm}}
-\label{typesystem} \\
+\label{typesystemdef} \\
 \caption{Typsystem-Spezifikation. Die Notation $\rightarrow x$ bedeutet, dass der Typ des Sprachelements gleich dem Typ von $x$ ist.} \\
 \toprule
 \textbf{Kategorie} & \textbf{Sprachelement} & \textbf{Typ} & \textbf{Einschränkungen/Bemerkungen} \\
@@ -227,7 +225,7 @@ Variablendeklaration & $type$ $name$ := $value$ & -- & Die Typen von $type$ und 
 \midrule
 Variablenzuweisung & $varref$ := $value$ & $\rightarrow varref$ & Die Typen von $varref$ und $value$ müssen gleich sein. \\
 \midrule
-\multirow{7}{*}{Ausdrücke} & $x + y, x - y, x \cdot y, x \mathop{/} y, x \mathop{\%} y$ & \int & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
+\multirow{8}{*}{Ausdrücke} & $x + y, x - y, x \cdot y, x \mathop{/} y, x \mathop{\%} y$ & \int & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
 \cmidrule{2-4}
 & $a \wedge b, a \vee b$ & \bool & $a$ und $b$ müssen beide vom Typ \bool{} sein. \\
 \cmidrule{2-4}
@@ -235,7 +233,9 @@ Variablenzuweisung & $varref$ := $value$ & $\rightarrow varref$ & Die Typen von 
 \cmidrule{2-4}
 & $\neg a$ & \bool & $a$ muss vom Typ \bool{} sein. \\
 \cmidrule{2-4}
-& \multirow{2}{*}{$x = y$} & \multirow{2}{*}{\bool} & $x$ und $y$ müssen beide vom gleichen Typ sein. \\
+& \texttt{length(} $expr$ \texttt{)} & \int & $expr$ muss ein Array sein. \\
+\cmidrule{2-4}
+& \multirow{2}{*}{$x = y$, $x \neq y$} & \multirow{2}{*}{\bool} & $x$ und $y$ müssen beide vom gleichen Typ sein. \\
 & & & $x$ und $y$ müssen vom Typ \int{} oder \bool{} sein. \\
 \cmidrule{2-4}
 & $x \leq y, x < y, x > y, x \geq y$ & \bool & $x$ und $y$ müssen beide vom Typ \int{} sein. \\
@@ -247,8 +247,6 @@ Funktionsverweis & $funcref$ & $\rightarrow type$ & $type$ ist der in der Deklar
 Funktionsaufruf & $funcref(params)$ & $\rightarrow funcref$ & Die Parameter $params$ müssen in Anzahl und jeweiligem Typ den deklarierten Parametern entsprechen. \\
 \midrule
 Rückgabewert & \texttt{return} $value$ & $-$ & Der Typ von $value$ muss gleich dem Rückgabetyp der umschließenden Funktion sein. \\
-\midrule
-Arraygröße & \texttt{length(} $expr$ \texttt{)} & \int & $expr$ muss ein Array sein. \\
 \midrule
 Verzweigung & \texttt{if} $expr$ \ldots & $-$ & $expr$ muss vom Typ \bool{} sein. \\
 \midrule

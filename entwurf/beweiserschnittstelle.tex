@@ -1,35 +1,40 @@
 \section{Beweiserschnittstelle}%
 
-Die Beweiserschnittstelle lässt Worthwhile-""Programmspezifikationen
-und -""Annotationen mit Kontext von einem Beweiser überprüfen
-und liefert dem Aufrufer dessen Auswertung zurück. Die Auswertung
-besteht aus einem Wahrheitswert, einem Modell und einer Liste von
-Fehlerausgaben.%
+Die Beweiserschnittstelle lässt Worthwhile-""Programm"-spezifikationen
+und prädikatenlogische Formeln mit Kontext von einem Beweiser
+überprüfen. Der Formelkontext kann zum Beispiel einem
+Ausführungszustand entsprechen, sodass eine Programm"-spezifikation
+auch nur für konkrete statt für alle Programmdurchläufe geprüft werden
+kann. Das dem Aufrufer zurückgelieferte Überprüfungsergebnis besteht
+unter anderem aus der Programm"-spezifikations-"" bzw.\
+Formelvalidität.
+
+In den folgenden Abschnitten wird zunächst das Format der Eingaben,
+anschließend deren Vorbereitung für einen Beweiseraufruf und zuletzt
+die Ergebniserstellung aus der Beweiserausgabe beschrieben.%
 
 \subsection{Eingabedaten}%
 
-\subsubsection{Programmspezifikation}%
+\subsubsection{Worthwhile-""Programm"-spezifikation}%
 
-% TODO Datentyp des Abstract-Syntax-Tree
+Die Programm"-spezifikation wird dem Abstract-""Syntax-""Tree~(AST)
+entnommen, welcher aus einem Worthwhile-""Text erstellt wurde. Sie
+setzt sich aus dem WHILE-""Programmtext und den Annotationen
+zusammen.%
 
-Die Programmspezifikation wird dem Abstract-Syntax-Tree~(AST), welcher
-aus einem Worthwhile-Text erstellt wurde, entnommen. Sie setzt sich
-zusammen aus dem WHILE-Programmtext und den Annotationen. Annotationen
-sind entweder Axiome, Funktionsverträge, Schleifeninvarianten,
-Zusicherungen oder Annahmen.%
+Siehe \texttt{AST::Program}%
 
 Siehe \texttt{SpecificationChecker::checkProgram}%
 
-\subsubsection{Annotationen mit Kontext}%
+\subsubsection{Prädikatenlogische Formel mit Kontext}%
 
-Der Beweiserschnittstelle wird ein AST übergeben, der genau einen
-Annotationsausdruck enthält, also insbesondere kein WHILE-Programmtext
-oder Annotationstyp. Zusätzlich kann ein Modell als Auswertungskontext
-angegeben werden, das im Ausdruck freien Variablen eine Bedeutung
-zuweist. Dieses Modell kann zum Beispiel einem Ausführungszustand
-entsprechen, sodass Annotationsausdrücke auch für konkrete
-Ausführungen (anstatt für alle wie bei
-Programmspezifikationsprüfungen) geprüft werden können.%
+Die Formel wird einem AST entnommen, dessen Wurzelknoten ein
+Worthwhile-""Ausdruck ist. Insbesondere ist unbekannt, wo die Formel
+in einem Programmtext steht oder wie ihre Validität verwendet wird.
+Den Kontext gibt eine Abbildung von freien Variablen nach Bedeutungen
+an.%
+
+Siehe \texttt{AST::Expression}%
 
 Siehe \texttt{SpecificationChecker::checkAnnotation}%
 

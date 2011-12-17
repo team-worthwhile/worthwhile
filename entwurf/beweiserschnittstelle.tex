@@ -38,14 +38,14 @@ Siehe \texttt{AST::Expression}%
 
 Siehe \texttt{SpecificationChecker::checkAnnotation}%
 
-\subsection{Formelerstellung im wp-Kalkül für den Beweiser Z3}%
+\subsection{Vorbereitungen für einen Beweiseraufruf}%
 
-Die Erstellung einer Formel aus einer Programmspezifikation im
-wp-Kalkül ist eine Implementierung der Schnittstelle
-\texttt{FormulaGenerator} und die Benutzung des Beweisers Z3 für
-erstellte Formeln ist eine Implementierung der Schnittstelle
-\texttt{ProverCaller}. Beide Implementierungen werden von Worthwhile
-mitgeliefert.%
+In den folgenden Unterabschnitten werden die Vorbereitungen der
+Beweiserschnittstelle an den Eingabedaten, bevor diese an einen
+Beweiser übergeben werden, beschrieben. Solche Vorbereitungen
+betreffen Worthwhile-spezifische Syntax und Semantik. Für jeden
+Unterabschnitt wird angegeben, welche Eingabedaten die jeweiligen
+Vorbereitungen betreffen.%
 
 \subsubsection{Axiome}%
 

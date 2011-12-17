@@ -75,37 +75,6 @@ Nachbedingungen als \texttt{ensures}-Knoten codiert.%
 
 Siehe \texttt{FP020}%
 
-\subsubsection{Schleifeninvarianten}%
-
-Schleifeninvarianten werden in der Formel an den Beweiser so
-eingebettet, dass ihre Aussagen vor dem Schleifeneintritt, nach jedem
-Durchlauf und nach dem Austritt gelten müssen. Nach jedem Durchlauf
-heißt, dass die Erfülltheit der Schleifenbedingung und der Invariante
-die Aussage der Invariante impliziert, und nach dem Austritt bedeutet
-analog, dass die Erfülltheit der negierten Schleifenbedingung und der
-Invariante wiederum die Aussage der Invariante impliziert.%
-
-Schleifeninvarianten werden im AST als \texttt{invariant}-Knoten
-codiert.%
-
-Siehe \texttt{FP030}%
-
-\subsubsection{Zusicherungen}%
-
-Zusicherungen werden in der Formel an den Beweiser so eingebettet,
-dass ihre Aussage bei jeder Programmausführung durch den
-vorhergehenden Programmtext erfüllt sein muss.%
-
-Zusicherungen werden im AST als \texttt{assert}-Knoten codiert.%
-
-\subsubsection{Annahmen}%
-
-Annahmen werden wie Axiome behandelt, sodass sie insbesondere nicht
-wie Zusicherungen erfüllt sein müssen und vom Beweiser auch nicht auf Erfülltheit
-geprüft werden.%
-
-Annahmen werden im AST als \texttt{assume}-Knoten codiert.%
-
 \subsubsection{Arrayzugriffe}%
 
 Für Arrays werden implizit die drei Axiome (A1), (A2) und (A3)

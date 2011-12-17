@@ -56,8 +56,7 @@ der Implikation der Wahrheitswert \texttt{true}. Auf der rechten Seite
 steht das zu beweisende Theorem, dass das Programm der Spezifikation
 entspricht.%
 
-Axiome sind im AST als \texttt{axiom}-Knoten codiert und die Kinder
-sind syntaktische Elemente prädikatenlogische Formeln.%
+Axiome sind im AST als \texttt{axiom}-Knoten codiert.%
 
 \subsubsection{Funktionsverträge}%
 
@@ -72,8 +71,7 @@ und Nachbedingungen wie Zusicherungen für den Rückgabewert der
 Funktion.%
 
 Vorbedingungen werden im AST als \texttt{requires}-Knoten und
-Nachbedingungen als \texttt{ensures}-Knoten codiert. Die Kinder beider
-Knotentypen sind syntaktische Elemente prädikatenlogischer Formeln.%
+Nachbedingungen als \texttt{ensures}-Knoten codiert.%
 
 Siehe \texttt{FP020}%
 
@@ -88,8 +86,7 @@ analog, dass die Erfülltheit der negierten Schleifenbedingung und der
 Invariante wiederum die Aussage der Invariante impliziert.%
 
 Schleifeninvarianten werden im AST als \texttt{invariant}-Knoten
-codiert, deren Kinder syntaktische Elemente prädikatenlogischer
-Formeln sind.%
+codiert.%
 
 Siehe \texttt{FP030}%
 
@@ -99,8 +96,7 @@ Zusicherungen werden in der Formel an den Beweiser so eingebettet,
 dass ihre Aussage bei jeder Programmausführung durch den
 vorhergehenden Programmtext erfüllt sein muss.%
 
-Zusicherungen werden im AST als \texttt{assert}-Knoten codiert, deren
-Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
+Zusicherungen werden im AST als \texttt{assert}-Knoten codiert.%
 
 \subsubsection{Annahmen}%
 
@@ -108,8 +104,7 @@ Annahmen werden wie Axiome behandelt, sodass sie insbesondere nicht
 wie Zusicherungen erfüllt sein müssen und vom Beweiser auch nicht auf Erfülltheit
 geprüft werden.%
 
-Annahmen werden im AST als \texttt{assume}-Knoten codiert,
-deren Kinder syntaktische Elemente prädikatenlogischer Formeln sind.%
+Annahmen werden im AST als \texttt{assume}-Knoten codiert.%
 
 \subsubsection{Arrayzugriffe}%
 

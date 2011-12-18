@@ -16,7 +16,7 @@ Die Klasse \type{Interpreter} ist eine Fassade, die innerhalb der Komponente get
     Die Event-""Handler werden dabei synchron aufgerufen und können durch Warten die komplette Ausführung blockieren. Auf diese Weise kann ein Debugger Funktionalitäten wie Single-""Step-""Execution oder das Anhalten nach einer fehlgeschlagenen Zusicherungsinstruktion einfach implementieren. Die Interpreter-""Komponente bleibt dadurch weitgehend frei von konkreter Debugger-""Logik.
 
     \item[Breakpoints]
-    Dem Interpreter können Breakpoints in Form von Objekten des Typs \type{Line"-Breakpoint} (bzw. \type{Conditional"-Line"-Breakpoint}) hinzugefügt werden. Wird bei der Ausführung die von dem Breakpoint spezifizierte Zeile im Quelltext überschritten, so ruft der Interpreter auf allen ihm hinzugefügten \type{Debug"-Event"-Listener}-""Objekten die Methode \texttt{breakpoint"-Reached()} auf, damit diese das Ereignis behandeln und z.~B.\ die Ausführung unterbrechen können.
+    Dem Interpreter können Breakpoints in Form von Objekten des Typs \type{Line"-Breakpoint} (bzw.\ \type{Conditional"-Line"-Breakpoint}) hinzugefügt werden. Wird bei der Ausführung die von dem Breakpoint spezifizierte Zeile im Quelltext überschritten, so ruft der Interpreter auf allen ihm hinzugefügten \type{Debug"-Event"-Listener}-""Objekten die Methode \texttt{breakpoint"-Reached()} auf, damit diese das Ereignis behandeln und z.~B.\ die Ausführung unterbrechen können.
 
     \item[Symbolzuordnung]
     Die Methode \texttt{get"-All"-Symbols()} Gibt die im aktuellen Ausführungskontext gültige Symbolzuordnungstabelle zurück. Symbole werden durch einen String identifiziert und ihr Wert durch die Klasse \type{Value} gekapselt.

@@ -252,7 +252,7 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
     \method{public checkProgram(program : Program) : Validity}
 
-    Prüft mit Hilfe eines Beweisers die Korrektheit des annotierten
+    Prüft mit Hilfe des Beweisers die Korrektheit des annotierten
     \type{Program}s \texttt{program}. Es wird genau dann \texttt{true}
     zurückgeliefert, wenn \texttt{program} für alle Ausführungen den
     Annotationen entspricht, und \texttt{false} sonst~(z.~B.\, wenn
@@ -265,7 +265,7 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
     \method{public checkAnnotation(annotation : Annotation, environment : StringToValueMap) : Validity}
 
-    Prüft mit Hilfe eines Beweisers die Erfülltheit der Annotation
+    Prüft mit Hilfe des Beweisers die Erfülltheit der Annotation
     \texttt{ann}. Es wird genau dann \texttt{true} zurückgeliefert,
     wenn \texttt{ann} im Kontext \texttt{env} erfüllt ist, und
     \texttt{false} sonst~(z.~B.\, wenn \texttt{timeout} überschritten

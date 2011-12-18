@@ -201,6 +201,15 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \end{itemize}%
 
+\begin{figure}[p]%
+    \hspace{-4cm}%
+    \includegraphics[width=1.5\textwidth]{diagrams/prover_component.pdf}%
+
+    \caption{Klassendiagramm der Komponente Beweiserschnittstelle mit
+    der Schnittstellenklasse \type{SpecificationChecker}}%
+
+\end{figure}%
+
 \subsubsection{class Prover::SpecificationChecker}%
 
 % TODO Belegung von Funktionsvariablen
@@ -389,3 +398,14 @@ Modell zurückübersetzt werden kann.%
 \end{description}%
 
 \subsection{Interaktionsentwurf}%
+
+\begin{landscape}%
+    \begin{figure}[p]%
+        \vspace{-2cm}%
+        \includegraphics[height=1.2\textheight]{diagrams/programchecking_sequence.pdf}%
+
+        \caption{Sequenzdiagramm zum Aufruf der Beweiserschnittstelle,
+        um eine Programmspezifikation zu überprüfen.}%
+
+    \end{figure}%
+\end{landscape}%

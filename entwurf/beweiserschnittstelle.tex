@@ -166,7 +166,9 @@ insbesondere keine Interpretation der Beweiserausgabe durch die
 Beweiserschnittstelle, welche zum Beispiel aufgrund eines Modell eine
 Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
-\subsection{Klassenentwurf}%
+% TODO Klassenentwurf
+
+\subsection{package Prover}%
 
 \begin{itemize}%
 
@@ -212,7 +214,7 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \subsubsection{enum Validity}%
 
-\subsubsection{class Prover::SpecificationChecker}%
+\subsubsection{class SpecificationChecker}%
 
 % TODO Belegung von Funktionsvariablen
 
@@ -294,7 +296,7 @@ gegeben oder unbekannt ist.%
 
 \end{description}%
 
-\subsubsection{interface Prover::ProgramTransformer::FormulaGenerator}%
+\subsubsection{interface FormulaGenerator}%
 
 Implementierungen dieser Schnittstelle erstellen aus einem
 Worthwhile-""Programmtext eine prädikatenlogische Formel. Diese Formel
@@ -321,7 +323,9 @@ eines solchen formalen Systems kapseln.%
 
 \end{description}%
 
-\subsubsection{class Prover::TheoremProver::ProverResult}%
+\subsection{package Prover::TheoremProver}%
+
+\subsubsection{class ProverResult}%
 
 % TODO Attribute
 
@@ -339,7 +343,9 @@ eines solchen formalen Systems kapseln.%
 
 \end{description}%
 
-\subsubsection{class Prover::ProgramTransformer::WPStrategy implements ASTNodeVisitor, FormulaGenerator}%
+\subsection{package Prover::ProgramTransformer}%
+
+\subsubsection{class WPStrategy implements ASTNodeVisitor, FormulaGenerator}%
 
 % TODO Attribute
 
@@ -355,7 +361,7 @@ eines solchen formalen Systems kapseln.%
 
 \end{description}%
 
-\subsubsection{interface Prover::TheoremProver::ProverCaller}%
+\subsubsection{interface ProverCaller}%
 
 Implementierungen dieser Schnittstelle kapseln Aufrufe eines Beweisers
 für gegebene prädikatenlogische Formeln. Das Ergebnis eines Aufrufs
@@ -381,7 +387,7 @@ derselben und einer Liste semantischer Fehler.%
 
 \end{description}%
 
-\subsubsection{abstract class Prover::TheoremProver::StdProver extends ProverCaller}%
+\subsubsection{abstract class StdProver extends ProverCaller}%
 
 Instanzen von dieser Abstraktion abgeleiteter Klassen rufen Beweiser
 auf, denen die zu überprüfende Formel auf der Standardeingabe
@@ -436,7 +442,7 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \end{description}%
 
-\subsubsection{class Prover::TheoremProver::Z3Prover extends StdProver}%
+\subsubsection{class Z3Prover extends StdProver}%
 
 % TODO Methoden
 
@@ -447,7 +453,7 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \end{description}%
 
-\subsubsection{interface Prover::TheoremProver::FormulaCompiler}%
+\subsubsection{interface FormulaCompiler}%
 
 Implementierungen dieser Schnittstelle übersetzen eine
 \type{Expression} in die Eingabesprache eines Beweisers, sodass dieser

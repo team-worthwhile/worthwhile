@@ -22,7 +22,7 @@ entnommen, welcher aus einem Worthwhile-""Text erstellt wurde. Sie
 setzt sich aus dem WHILE-""Programmtext und den Annotationen
 zusammen.%
 
-Siehe \texttt{AST::Program}%
+Siehe \type{AST::Program}%
 
 Siehe \texttt{SpecificationChecker::checkProgram}%
 
@@ -34,7 +34,7 @@ in einem Programmtext steht oder wie ihre Validität verwendet wird.
 Den Kontext geben eine Abbildung von Variablen auf Bedeutungen
 und eine Axiomliste an.%
 
-Siehe \texttt{AST::Expression}%
+Siehe \type{AST::Expression}%
 
 Siehe \texttt{SpecificationChecker::checkAnnotation}%
 
@@ -111,14 +111,14 @@ Division durch Null unabhängig vom Beweiser festgelegt ist.%
 
 Wird eine Variable ohne Initialisierung deklariert, gilt für den
 nachfolgenden Spezifikationsteil eine Initialisierung der Variablen
-mit dem Standardwert Null für \texttt{Integer}- und \texttt{false} für
-\texttt{Boolean}-""Variablen sowie dem jeweiligen Standardwert des
+mit dem Standardwert Null für \int- und \texttt{false} für
+\bool-""Variablen sowie dem jeweiligen Standardwert des
 Basistyps für Array-""Variablen als Annahme.%
 
 \subsubsection{Typprüfung}%
 
-Die in Worthwhile vorhandenen Datentypen \texttt{Integer} und
-\texttt{Boolean} werden beide vom Beweiser ohne Typkonvertierung
+Die in Worthwhile vorhandenen Datentypen \int und
+\bool werden beide vom Beweiser ohne Typkonvertierung
 unterstützt. Die Typen von Sprachelementen werden bei Parameterangabe,
 Variablenreferenz und Variablendefinition in der Eingabe vom Beweiser
 geprüft. Treten in einem dieser Fälle nicht übereinstimmende Typen
@@ -170,7 +170,7 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \begin{itemize}%
 
-    \item \texttt{SpecificationChecker} verwaltet eine dreistufige
+    \item \type{SpecificationChecker} verwaltet eine dreistufige
     Pipeline:%
 
         \begin{enumerate}%
@@ -187,15 +187,15 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
         \end{enumerate}%
 
     \item Zur Transformation einer Programmspezifikation werden für
-    \texttt{ASTNode} Besucherklassen für die einzelnen syntaktischen
+    \type{ASTNode} Besucherklassen für die einzelnen syntaktischen
     Elemente implementiert.%
 
     \item Die Besucher hängen von Strategieklassen ab, welche die
     Transformationsregeln und die Formelsprache austauschbar machen.%
 
-    Siehe \texttt{Prover::ProgramTransformer::FormulaGenerator}%
+    Siehe \type{Prover::ProgramTransformer::FormulaGenerator}%
 
-    Siehe \texttt{Prover::TheoremProver::FormulaCompiler}%
+    Siehe \type{Prover::TheoremProver::FormulaCompiler}%
 
     % TODO Spezifikation des unterstützten SMT-LIB-Standards
 
@@ -210,52 +210,60 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \end{figure}%
 
+\subsubsection{enum Validity}%
+
 \subsubsection{class Prover::SpecificationChecker}%
 
 % TODO Belegung von Funktionsvariablen
 
-Instanzen von \texttt{SpecificationChecker} lassen
-\texttt{WWAST}-""Instanzen von einem \texttt{FormulaGenerator} in eine
-\texttt{Formula} übersetzen und diese von einem \texttt{ProverCaller}
+Instanzen von \type{SpecificationChecker} lassen
+\type{Program}-""Instanzen von einem \type{FormulaGenerator} in eine
+\type{Expression} übersetzen und diese von einem \type{ProverCaller}
 auf Erfülltheit für alle Belegungen der nicht initialisierten
 Programmvariablen überprüfen. Das zurückgelieferte Ergebnis gibt dann
 an, ob die Erfülltheit in allen diesen Fällen gegeben ist. Wenn es
-Belegungen gibt, für welche die \texttt{Formula} nicht erfüllt ist,
+Belegungen gibt, für welche die \type{Expression} nicht erfüllt ist,
 wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
 % TODO nicht öffentliche Attribute
 
 \begin{description}%
-    \method{private int timeout}%
+    \attr{private timeout : Integer = 0}%
 
-    Zeit in Sekunden, nach der \texttt{check""Program} und
-    \texttt{check""Annotation} zurückkehren müssen.%
+    Zeit in Sekunden, nach der \texttt{check""Program()} und
+    \texttt{check""Annotation()} zurückkehren müssen.%
 
-    Siehe \texttt{setTimeout}.%
+    Siehe \texttt{setTimeout()}%
 
-    \method{private Map<VariableRef,Literal> model}%
+    \attr{private prover : ProverCaller}%
+
+    \attr{private transformer : FormulaGenerator}%
+
+    \attr{private checkResult : ProverResult}%
 
 \end{description}%
 
 % TODO öffentliche Methoden
 
 \begin{description}%
-    \method{public SpecificationChecker(ProverCaller prover, FormulaGenerator generator)}%
+    \method{public SpecificationChecker()}%
 
-    \method{public bool checkProgram(WWAST program)}
+    \method{public SpecificationChecker(transformer : FormulaGenerator)}%
+
+    \method{public checkProgram(program : Program) : Validity}
 
     Prüft mit Hilfe eines Beweisers die Korrektheit des annotierten
-    Programms \texttt{prg}. Es wird genau dann \texttt{true}
-    zurückgeliefert, wenn \texttt{prg} für alle Ausführungen den
+    \type{Program}s \texttt{program}. Es wird genau dann \texttt{true}
+    zurückgeliefert, wenn \texttt{program} für alle Ausführungen den
     Annotationen entspricht, und \texttt{false} sonst~(z.~B.\, wenn
     \texttt{timeout} überschritten wurde oder die Spezifikation für
     eine Ausführung nicht erfüllt wird).%
 
-    Siehe \texttt{getModel}%
+    %Siehe \texttt{getCheckResult()}%
 
     Siehe \texttt{FP005}%
 
-    \method{public bool checkAnnotation(WWAST annotation, Environment env)}
+    \method{public checkAnnotation(annotation : Annotation, environment : StringToValueMap) : Validity}
 
     Prüft mit Hilfe eines Beweisers die Erfülltheit der Annotation
     \texttt{ann}. Es wird genau dann \texttt{true} zurückgeliefert,
@@ -263,21 +271,21 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
     \texttt{false} sonst~(z.~B.\, wenn \texttt{timeout} überschritten
     wurde).%
 
-    Siehe \texttt{getModel}%
+    %Siehe \texttt{getCheckResult()}%
 
     Siehe \texttt{FP005}%
 
-    \method{public Environment getModel()}
+    %\method{public getCheckResult() : ProverResult}
+    %
+    %Liefert für den vorhergehenden Aufruf von %\texttt{check""Program()}
+    %oder \texttt{check""Annotation()} das Ergebnis des Beweiseraufrufs und
+    %\texttt{null}, wenn zuvor weder ein Programm noch eine Annotation
+    %überprüft wurde.%
 
-    Liefert für den vorhergehenden Aufruf von \texttt{check""Program}
-    oder \texttt{check""Annotation} die Ausgabe des Beweisers und
-    \texttt{null}, wenn zuvor weder ein Programm noch eine Annotation
-    überprüft wurde oder keine Ausgabe verfügbar war.%
+    \method{public setTimeout(seconds : Integer)}
 
-    \method{public void setTimeout(int seconds)}
-
-    Setzt den Timeout für Aufrufe von \texttt{check""Program} und
-    \texttt{check""Annotation} auf den Wert von \texttt{seconds}. Ist
+    Setzt den Timeout für Aufrufe von \texttt{check""Program()} und
+    \texttt{check""Annotation()} auf den Wert von \texttt{seconds}. Ist
     der angegebene Wert negativ, wird er als Null interpretiert.%
 
 \end{description}%
@@ -292,9 +300,9 @@ Implementierungen dieser Schnittstelle meistens die Produktionsregeln
 eines solchen formalen Systems kapseln.%
 
 \begin{description}%
-    \method{protected Formula transformProgram(WWAST root)} %
+    \method{public transformProgram(program : Program) : Expression} %
 
-    Liefert die aus \texttt{root} transformierte \texttt{Formula}
+    Liefert die aus \texttt{program} transformierte \type{Expression}
     zurück. Die Semantik der Formel ist unbestimmt, falls der
     Programmtext kein semantisch korrektes Programm beschreibt, also
     nicht ausgeführt werden kann. Ansonsten ist die zurückgelieferte
@@ -302,10 +310,44 @@ eines solchen formalen Systems kapseln.%
     WHILE-""Programm für alle Ausführungen seinen Annotationen
     entspricht.%
 
-    Parameter \texttt{root}: Wurzelsprachelement des zu
+    Parameter \texttt{program}: Wurzelsprachelement des zu
     transformierenden Worthwhile-""Programms, d.~h.\ sowohl der
     WHILE-""Programmtext als auch dessen Annotationen sind im
     Syntaxbaum enthalten.%
+
+\end{description}%
+
+\subsubsection{class Prover::TheoremProver::ProverResult}%
+
+% TODO Attribute
+
+\begin{description}%
+    \attr{private output : String}%
+
+    \attr{private satisfiability : FormulaSatisfiability}%
+
+\end{description}%
+
+% TODO Methoden
+
+\begin{description}%
+    \method{protected ProverResult(satisfiability : FormulaSatisfiability, output : String)}%
+
+\end{description}%
+
+\subsubsection{class Prover::ProgramTransformer::WPStrategy implements ASTNodeVisitor, FormulaGenerator}%
+
+% TODO Attribute
+
+\begin{description}%
+    \method{private weakestPrecondition : Expression}%
+
+\end{description}%
+
+% TODO Methoden
+
+\begin{description}%
+    \method{public transformProgram(program : Program) : Expression}%
 
 \end{description}%
 
@@ -316,8 +358,10 @@ für gegebene prädikatenlogische Formeln. Das Ergebnis eines Aufrufs
 besteht aus der Formelerfüllbarkeit, einem Modell zur Verifikation
 derselben und einer Liste semantischer Fehler.%
 
+% TODO Methoden
+
 \begin{description}%
-    \method{protected ProverResult checkFormula(Formula formula)}%
+    \method{public checkFormula(formula : Expression) : ProverResult}%
 
     Aufruf des unterstützten Beweisers für die Überprüfung der
     prädikatenlogischen Formel \texttt{formula}. Es wird nur dann
@@ -340,8 +384,19 @@ auf, denen die zu überprüfende Formel auf der Standardeingabe
 übergeben wird. Spezialisierungen dieser Klasse implementieren die
 Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
+% TODO Attribute
+
 \begin{description}%
-    \method{protected StdProver(String path, FormulaCompiler compiler)}%
+    \attr{private proverPath : String}%
+
+    \attr{private compiler : FormulaCompiler}%
+
+\end{description}%
+
+% TODO Methoden
+
+\begin{description}%
+    \method{protected StdProver(path : String, compiler : FormulaCompiler)}%
 
     Konfiguriert Instanzen so, dass der Beweiser \texttt{path} mit dem
     Formelkompilat von \texttt{compiler} für zu überprüfende
@@ -354,7 +409,7 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
     Beweisereingabe aus einer angegebenen prädikatenlogischen Formel
     aufgerufen.%
 
-    \method{override protected ProverResult checkFormula(Formula formula)}%
+    \method{public checkFormula(formula : Expression) : ProverResult}%
 
     Ruft den bei Objekterstellung angegebenen Beweiserpfad auf und
     füllt die Standardeingabe mit dem vom angegebenen Compiler aus
@@ -362,14 +417,14 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
     \texttt{ProverResult\#satisfiable} wird auf \texttt{false}
     gesetzt, falls bei der Beweiserausführung ein Systemfehler
     aufgetreten ist, und sonst wird die Rückgabe von
-    \texttt{getResult} zurückgeliefert, welche den Inhalt der
+    \texttt{getResult()} zurückgeliefert, welche den Inhalt der
     Standardausgabe nach Beweiseraufruf erhalten hat.%
 
-    \method{abstract protected ProverResult getResult(String output)}%
+    \method{abstract public getResult(output : String) : ProverResult}%
 
     Extrahiert aus \texttt{output} sowohl Ergebnis als auch Fehler
     eines Beweiseraufrufs und liefert diese Informationen in einer
-    Instanz von \texttt{ProverResult} zurück. Kann der Inhalt von
+    Instanz von \type{ProverResult} zurück. Kann der Inhalt von
     \texttt{output} nicht interpretiert werden, wird
     \texttt{ProverResult\#satisfiable} auf \texttt{false} gesetzt.%
 
@@ -377,16 +432,29 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \end{description}%
 
+\subsubsection{class Prover::TheoremProver::Z3Prover extends StdProver}%
+
+% TODO Methoden
+
+\begin{description}%
+    \method{public Z3Prover()}%
+
+    \method{public getResult(output : String) : ProverResult}%
+
+\end{description}%
+
 \subsubsection{interface Prover::TheoremProver::FormulaCompiler}%
 
 Implementierungen dieser Schnittstelle übersetzen eine
-\texttt{Formula} in die Eingabesprache eines Beweisers, sodass dieser
+\type{Expression} in die Eingabesprache eines Beweisers, sodass dieser
 mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
 ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
 Modell zurückübersetzt werden kann.%
 
+% TODO Methoden
+
 \begin{description}%
-    \method{protected String compileFormula(Formula formula)}%
+    \method{public compileFormula(formula : Expression) : String}%
 
     Liefert eine Übersetzung von \texttt{formula} in eine
     Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
@@ -396,6 +464,23 @@ Modell zurückübersetzt werden kann.%
     %\method{protected Formula uncompileFormula(String formula)}%
 
 \end{description}%
+
+\subsubsection{class SMTLIBStrategy implements ASTNodeVisitor, FormulaCompiler}%
+
+% TODO Attribute
+
+\begin{description}%
+    \attr{private compilation : String}%
+
+\end{description}%
+
+% TODO Methoden
+
+%\begin{description}%
+%
+%\end{description}%
+
+\subsubsection{enum FormulaSatisfiability}%
 
 \subsection{Interaktionsentwurf}%
 

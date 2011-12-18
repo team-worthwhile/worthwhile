@@ -230,8 +230,8 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 \begin{description}%
     \attr{private timeout : Integer = 0}%
 
-    Zeit in Sekunden, nach der \texttt{check""Program()} und
-    \texttt{check""Annotation()} zurückkehren müssen.%
+    Zeit in Sekunden, nach der \texttt{check"-Program()} und
+    \texttt{check"-Annotation()} zurückkehren müssen.%
 
     Siehe \texttt{setTimeout()}%
 
@@ -277,15 +277,15 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
     %\method{public getCheckResult() : ProverResult}
     %
-    %Liefert für den vorhergehenden Aufruf von %\texttt{check""Program()}
-    %oder \texttt{check""Annotation()} das Ergebnis des Beweiseraufrufs und
+    %Liefert für den vorhergehenden Aufruf von %\texttt{check"-Program()}
+    %oder \texttt{check"-Annotation()} das Ergebnis des Beweiseraufrufs und
     %\texttt{null}, wenn zuvor weder ein Programm noch eine Annotation
     %überprüft wurde.%
 
     \method{public setTimeout(seconds : Integer)}
 
-    Setzt den Timeout für Aufrufe von \texttt{check""Program()} und
-    \texttt{check""Annotation()} auf den Wert von \texttt{seconds}. Ist
+    Setzt den Timeout für Aufrufe von \texttt{check"-Program()} und
+    \texttt{check"-Annotation()} auf den Wert von \texttt{seconds}. Ist
     der angegebene Wert negativ, wird er als Null interpretiert.%
 
 \end{description}%

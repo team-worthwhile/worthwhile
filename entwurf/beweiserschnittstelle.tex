@@ -216,14 +216,12 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 % TODO Belegung von Funktionsvariablen
 
-Instanzen von \type{SpecificationChecker} lassen
-\type{Program}-""Instanzen von einem \type{FormulaGenerator} in eine
-\type{Expression} übersetzen und diese von einem \type{ProverCaller}
-auf Erfülltheit für alle Belegungen der nicht initialisierten
-Programmvariablen überprüfen. Das zurückgelieferte Ergebnis gibt dann
-an, ob die Erfülltheit in allen diesen Fällen gegeben ist. Wenn es
-Belegungen gibt, für welche die \type{Expression} nicht erfüllt ist,
-wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
+Bereitet \type{Program}s bzw.\ \type{Annotation}s entsprechend der
+Worthwhile-""Syntax und -""Semantik vor, lässt sie von einem
+\type{FormulaGenerator} in eine \type{Expression} überführen und diese
+von einem \type{ProverCaller} auf Validität überprüfen. Das an den
+Aufrufer zurückgelieferte Ergebnis gibt an, ob die Validität beweisbar
+gegeben oder unbekannt ist.%
 
 % TODO nicht öffentliche Attribute
 
@@ -252,12 +250,13 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
     \method{public checkProgram(program : Program) : Validity}
 
-    Prüft mit Hilfe des Beweisers die Korrektheit des annotierten
-    \type{Program}s \texttt{program}. Es wird genau dann \texttt{true}
-    zurückgeliefert, wenn \texttt{program} für alle Ausführungen den
-    Annotationen entspricht, und \texttt{false} sonst~(z.~B.\, wenn
-    \texttt{timeout} überschritten wurde oder die Spezifikation für
-    eine Ausführung nicht erfüllt wird).%
+    Überprüft mit Hilfe des Beweisers die Validität der Spezifikation
+    \texttt{program}. Es wird nur dann \texttt{VALID} zurückgeliefert,
+    wenn \texttt{program} beweisbar valide ist, \texttt{INVALID} nur
+    dann, wenn ein nicht erfüllendes Modell existiert und
+    \texttt{UNKNOWN} sonst~(z.~B.\, wenn \texttt{timeout}
+    überschritten wurde oder der Beweiser ohne Ergebnis zurückgekehrt
+    ist).%
 
     %Siehe \texttt{getCheckResult()}%
 
@@ -265,11 +264,14 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
 
     \method{public checkAnnotation(annotation : Annotation, environment : StringToValueMap) : Validity}
 
-    Prüft mit Hilfe des Beweisers die Erfülltheit der Annotation
-    \texttt{ann}. Es wird genau dann \texttt{true} zurückgeliefert,
-    wenn \texttt{ann} im Kontext \texttt{env} erfüllt ist, und
-    \texttt{false} sonst~(z.~B.\, wenn \texttt{timeout} überschritten
-    wurde).%
+    Überprüft mit Hilfe des Beweisers die Validität der Annotation
+    \texttt{annotation}. Es wird nur dann \texttt{VALID}
+    zurückgeliefert, wenn \texttt{annotation} im Kontext
+    \texttt{environment} beweisbar valide ist, \texttt{INVALID} nur
+    dann, wenn ein nicht erfüllendes Modell existiert und
+    \texttt{UNKNOWN} sonst~(z.~B.\, wenn \texttt{timeout}
+    überschritten wurde oder der Beweiser ohne Ergebnis zurückgekehrt
+    ist).%
 
     %Siehe \texttt{getCheckResult()}%
 
@@ -285,8 +287,10 @@ wird eine zur Verifikation des Beweiserergebnisses zurückgegeben.%
     \method{public setTimeout(seconds : Integer)}
 
     Setzt den Timeout für Aufrufe von \texttt{check"-Program()} und
-    \texttt{check"-Annotation()} auf den Wert von \texttt{seconds}. Ist
-    der angegebene Wert negativ, wird er als Null interpretiert.%
+    \texttt{check"-Annotation()} auf den Wert von \texttt{seconds}.
+    Nach Überschreiten des Timeouts wird der Beweiseraufruf
+    abgebrochen. Ist der angegebene Wert negativ, wird er als Null
+    interpretiert.%
 
 \end{description}%
 

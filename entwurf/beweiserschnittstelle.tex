@@ -137,26 +137,34 @@ Annahme gilt, dass die Variablen die angegebenen Bedeutungen haben.%
 
 \subsection{Ausgabedaten}%
 
-\subsubsection{Modell}%
+\subsubsection{Validität}%
 
-Modelle verifizieren die Erfüllbarkeit von prädikatenlogischen
-Formeln, indem sie freie Variablen auf genau ein Element ihrer Domäne
-abbilden. Ein Modell, das die Beweiserschnittstelle liefert, besteht
-ausschließlich aus Abbildungen, die hinreichend für eine
-verifizierende Auswertung der geprüften Formel sind und sich auf im
-geprüften Programmteil nicht initialisierte Variablen (z.~B.\
-Parameter) beziehen.%
+Die Validität der Spezifikation bzw.\ Formel ist entweder
+bewiesenermaßen gegeben, verifizierbar nicht gegeben oder unbekannt.
+Ist der Beweiser zu einem Ergebnis gekommen, ist die Spezifikation
+genau dann valide, wenn bewiesen wurde, dass jeder mögliche
+Programmdurchlauf niemals den Annahmen widerspricht und die
+Zusicherungen an ihrer Position in der Spezifikation erfüllt. Die
+Formel ist genau dann valide, wenn bewiesen wurde, dass es keine
+Belegung der Variabeln in der Formel gibt, sodass die Formel nicht
+gültig ist, d.~h.\ zu \texttt{false} ausgewertet wird. Wenn der
+Beweiser zu keinem Ergebnis gekommen ist, wird die Validität der
+Spezifikation bzw.\ Formel im Überprüfungsergebnis als unbekannt
+angegeben.%
 
-\subsubsection{Fehlerausgaben}%
+\subsubsection{Beweiserausgabe}%
 
-Fehler, welche von der Beweiserschnittstelle an den Aufrufer
-zurückgegeben werden, sind semantische aus der Beweiserausgabe, da der
-Syntaxbaum korrekte Syntax erzwingt und die Programmtransformation nur
-syntaktische Operationen auf der Programmspezifikation durchführt.
-Aufgrund der Behandlung von Laufzeitfehlern wie Nulldivision und
-unerlaubtem Arrayfeldzugriff, bleiben als einzige Fehlerausgaben an
-den Aufrufer Typfehler und Referenzierung nicht deklarierter Variablen
-oder Funktionen.%
+Die komplette Ausgabe des Beweisers wird zur Fehleruntersuchung in das
+Überprüfungsergebnis aufgenommen. Sie kann zur Ergebnisverifikation
+neben Typfehlern ein Modell für Variablen in der von der
+Beweiserschnittstelle erstellten Formel enthalten, wenn die
+Spezifikation bzw.\ die Formel nicht valide ist, d.~h.\ ein
+Programmdurchlauf bzw.\ eine Variablenbelegung existiert, sodass einer
+Annahme widersprochen wird oder eine Zusicherung nicht erfüllt ist
+bzw.\ die Formel zu \texttt{false} ausgewertet wird. Es findet
+insbesondere keine Interpretation der Beweiserausgabe durch die
+Beweiserschnittstelle, welche zum Beispiel aufgrund eines Modell eine
+Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \subsection{Klassenentwurf}%
 

@@ -13,13 +13,13 @@ Die Klasse Parser dient als Schnittstelle zum externen Parser und bündelt kompl
 	\method{public Parser(source : Readable)}
 		Der Konstruktor der Klasse kann wahlweise mit einem String-""Parameter, welcher das zu parsende Programm enthält, oder einem \texttt{Readable}-Objekt, das beliebige Programmquellen zulässt, aufgerufen werden.
 
-	\method{public INode[*] getSyntaxErrors()}
+	\method{public getSyntaxErrors() : INode[*]}
 		Diese Methode liefert eine Liste der Syntaxfehler, die beim Parsen erkannt wurden, zurück.
 
-	\method{public ASTNode getRootASTElement()}
+	\method{public getRootASTElement() : ASTNode}
 		Hiermit wird das Wurzelelement des aus dem geparsten Programm generierten ASTs zurückgegeben.
 
-	\method{public Boolean hasSyntaxErrors()}
+	\method{public hasSyntaxErrors() : Boolean}
 		Der Rückgabewert dieser Methode gibt an, ob während des Parsens Syntaxfehler aufgetreten sind.
 \end{description}
 

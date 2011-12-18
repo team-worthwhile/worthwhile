@@ -334,30 +334,57 @@ erstellte Formel, bezieht.%
 
 \subsubsection{enumeration FormulaSatisfiability}%
 
+Gibt den Ausgang einer Beweiser"-überpüfung, ob eine
+prädikatenlogische Formel erfüllbar ist, an oder dass die
+Erfüllbarkeit unbekannt ist. Aufgrund der Komplexität von
+Beweis"-findungen treten alle drei Zustände auf und genügt kein
+\bool-Typ.%
+
 \begin{description}%
     \literal{SATISFIABLE}%
 
+    Es wurde bewiesen, dass eine erfüllende Belegung existiert.%
+
     \literal{UNSATISFIABLE}%
 
+    Es wurde bewiesen, dass keine erfüllende Belegung gibt.%
+
     \literal{UNKNOWN}%
+
+    Es ist unbekannt, ob ein Modell für die prädikatenlogische Formel
+    existiert.%
 
 \end{description}%
 
 \subsubsection{class ProverResult}%
 
-% TODO Attribute
+Fasst das Überprüfungs"-ergebnis eines Beweiser"-aufrufs zusammen.
+Diese Klasse könnte auch die Fehler-"" und Modell"-extraktion aus der
+Beweiser"-ausgabe kapseln und über ihre Schnittstelle wie Attribute
+verfügbar machen. Dann würde der Konstruktor nur noch mit der
+Beweiser"-ausgabe aufgerufen. Zunächst wird aber das
+Erfüllbarkeits"-ergebnis von der erstellenden Klasse gesetzt und die
+Ausgabe nur der Vollständigkeit halber sowie zur Fehleranalyse
+mitangegeben.%
 
 \begin{description}%
     \attr{private output : String}%
 
-    \attr{private satisfiability : FormulaSatisfiability}%
+    Die vom Beweiser während seiner Ausführung generierte Ausgabe.%
+
+    \attr{private satisfiability : Formula"-Satisfiability}%
+
+    Das der Beweiser"-ausgabe \texttt{output} entnommene
+    Erfüllbarkeits"-ergebnis.%
 
 \end{description}%
 
-% TODO Methoden
-
 \begin{description}%
-    \method{protected ProverResult(satisfiability : FormulaSatisfiability, output : String)}%
+    \method{protected Prover"-Result(satisfiability : Formula"-Satisfiability, output : String)}%
+
+    Erstellt eine einfache Datenstruktur, die das
+    Erfüllbarkeits"-ergebnis \texttt{satisfiability} und die
+    Beweiserausgabe \texttt{output} bündelt.%
 
 \end{description}%
 

@@ -1,6 +1,6 @@
 \section{Parser}
 
-Der Parser bietet die Funktionalität, einen Abstract-""Syntax-""Tree~(AST) aus einem Worthwhile-""Text zu generieren und dabei auftretende Syntaxfehler über seine Schnittstelle zugänglich zu machen.
+Der Parser bietet die Funktionalität, einen Abstract-""Syntax-""Tree~(AST) aus einer in der WHILE-""Sprache verfassten Programmspezifikation zu generieren und dabei erkannte Syntaxfehler über seine Schnittstelle zugänglich zu machen.
 
 \subsection{Klassenentwurf}
 
@@ -29,17 +29,16 @@ Diese Klasse wird ausschließlich innerhalb der Parser-Komponente zur semantisch
 
 \begin{description}
 	\method{public checkTypesystemRules(node : ASTNode)}
-		Überprüft den AST mit der übergebenen \texttt{ASTNode}-Wurzel auf Typfehler in Zuweisungen, Operandenangaben und Parameterübergaben.
+    Überprüft den AST mit der übergebenen \texttt{ASTNode}-Wurzel auf Typfehler in Zuweisungen, Operandenangaben und Parameterübergaben.
 
 	\method{public checkFunctionReferences(node : ASTNode)}
-		Diese Methode untersucht den übergebenen AST auf verwendete und nicht deklarierte Funktionen.
+    Untersucht den übergebenen AST auf verwendete und nicht deklarierte Funktionen.
 
 	\method{public checkVariableReferences(node : ASTNode)}
-		Überprüft alle vorkommenden Variablen, ob sie vor ihrer Verwendung deklariert wurden.
+    Überprüft alle vorkommenden Variablen, ob sie vor ihrer Verwendung deklariert wurden.
 
 	\method{public checkReturnStatements(node : ASTNode)}
-		Hierbei wird überprüft, ob bei jedem möglichen Funktionsdurchlauf ein \texttt{return}-Statement erreicht wird.
-
+    Überprüft, ob bei jedem möglichen Funktionsdurchlauf ein \texttt{return}-Statement erreicht wird.
 \end{description}
 
 \includegraphics[width=\textwidth]{diagrams/parser_component.pdf}

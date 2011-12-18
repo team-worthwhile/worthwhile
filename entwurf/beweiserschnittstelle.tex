@@ -189,15 +189,15 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
         \end{enumerate}%
 
     \item Zur Transformation einer Programmspezifikation werden für
-    \type{ASTNode} Besucherklassen für die einzelnen syntaktischen
+    \type{AST::ASTNode} Besucherklassen für die einzelnen syntaktischen
     Elemente implementiert.%
 
     \item Die Besucher hängen von Strategieklassen ab, welche die
     Transformationsregeln und die Formelsprache austauschbar machen.%
 
-    Siehe \type{Prover::ProgramTransformer::FormulaGenerator}%
+    Siehe \type{ProgramTransformer::FormulaGenerator}%
 
-    Siehe \type{Prover::TheoremProver::FormulaCompiler}%
+    Siehe \type{TheoremProver::FormulaCompiler}%
 
     % TODO Spezifikation des unterstützten SMT-LIB-Standards
 
@@ -218,10 +218,10 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 % TODO Belegung von Funktionsvariablen
 
-Bereitet \type{Program}s bzw.\ \type{Annotation}s entsprechend der
+Bereitet \type{AST::Program}s bzw.\ \type{AST::Annotation}s entsprechend der
 Worthwhile-""Syntax und -""Semantik vor, lässt sie von einem
-\type{FormulaGenerator} in eine \type{Expression} überführen und diese
-von einem \type{ProverCaller} auf Validität überprüfen. Das an den
+\type{ProgramTransformer::FormulaGenerator} in eine \type{AST::Expression} überführen und diese
+von einem \type{TheoremProver::ProverCaller} auf Validität überprüfen. Das an den
 Aufrufer zurückgelieferte Ergebnis gibt an, ob die Validität beweisbar
 gegeben oder unbekannt ist.%
 
@@ -237,9 +237,9 @@ gegeben oder unbekannt ist.%
 
     \attr{private prover : ProverCaller}%
 
-    \attr{private transformer : FormulaGenerator}%
+    \attr{private transformer : ProgramTransformer::FormulaGenerator}%
 
-    \attr{private checkResult : ProverResult}%
+    \attr{private checkResult : TheoremProver::ProverResult}%
 
 \end{description}%
 
@@ -248,9 +248,9 @@ gegeben oder unbekannt ist.%
 \begin{description}%
     \method{public SpecificationChecker()}%
 
-    \method{public SpecificationChecker(transformer : FormulaGenerator)}%
+    \method{public SpecificationChecker(transformer : ProgramTransformer::FormulaGenerator)}%
 
-    \method{public checkProgram(program : Program) : Validity}
+    \method{public checkProgram(program : AST::Program) : Validity}
 
     Überprüft mit Hilfe des Beweisers die Validität der Spezifikation
     \texttt{program}. Es wird nur dann \texttt{VALID} zurückgeliefert,
@@ -264,7 +264,7 @@ gegeben oder unbekannt ist.%
 
     Siehe \texttt{FP005}%
 
-    \method{public checkAnnotation(annotation : Annotation, environment : StringToValueMap) : Validity}
+    \method{public checkAnnotation(annotation : AST::Annotation, environment : StringToValueMap) : Validity}
 
     Überprüft mit Hilfe des Beweisers die Validität der Annotation
     \texttt{annotation}. Es wird nur dann \texttt{VALID}
@@ -279,7 +279,7 @@ gegeben oder unbekannt ist.%
 
     Siehe \texttt{FP005}%
 
-    %\method{public getCheckResult() : ProverResult}
+    %\method{public getCheckResult() : TheoremProver::ProverResult}
     %
     %Liefert für den vorhergehenden Aufruf von %\texttt{check"-Program()}
     %oder \texttt{check"-Annotation()} das Ergebnis des Beweiseraufrufs und
@@ -306,9 +306,9 @@ Implementierungen dieser Schnittstelle meistens die Produktionsregeln
 eines solchen formalen Systems kapseln.%
 
 \begin{description}%
-    \method{public transformProgram(program : Program) : Expression} %
+    \method{public transformProgram(program : AST::Program) : AST::Expression} %
 
-    Liefert die aus \texttt{program} transformierte \type{Expression}
+    Liefert die aus \texttt{program} transformierte \type{AST::Expression}
     zurück. Die Semantik der Formel ist unbestimmt, falls der
     Programmtext kein semantisch korrektes Programm beschreibt, also
     nicht ausgeführt werden kann. Ansonsten ist die zurückgelieferte
@@ -345,19 +345,19 @@ eines solchen formalen Systems kapseln.%
 
 \subsection{package Prover::ProgramTransformer}%
 
-\subsubsection{class WPStrategy implements ASTNodeVisitor, FormulaGenerator}%
+\subsubsection{class WPStrategy implements AST::ASTNodeVisitor, FormulaGenerator}%
 
 % TODO Attribute
 
 \begin{description}%
-    \method{private weakestPrecondition : Expression}%
+    \attr{private weakestPrecondition : AST::Expression}%
 
 \end{description}%
 
 % TODO Methoden
 
 \begin{description}%
-    \method{public transformProgram(program : Program) : Expression}%
+    \method{public transformProgram(program : AST::Program) : AST::Expression}%
 
 \end{description}%
 
@@ -371,7 +371,7 @@ derselben und einer Liste semantischer Fehler.%
 % TODO Methoden
 
 \begin{description}%
-    \method{public checkFormula(formula : Expression) : ProverResult}%
+    \method{public checkFormula(formula : AST::Expression) : ProverResult}%
 
     Aufruf des unterstützten Beweisers für die Überprüfung der
     prädikatenlogischen Formel \texttt{formula}. Es wird nur dann
@@ -419,7 +419,7 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
     Beweisereingabe aus einer angegebenen prädikatenlogischen Formel
     aufgerufen.%
 
-    \method{public checkFormula(formula : Expression) : ProverResult}%
+    \method{public checkFormula(formula : AST::Expression) : ProverResult}%
 
     Ruft den bei Objekterstellung angegebenen Beweiserpfad auf und
     füllt die Standardeingabe mit dem vom angegebenen Compiler aus
@@ -456,7 +456,7 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 \subsubsection{interface FormulaCompiler}%
 
 Implementierungen dieser Schnittstelle übersetzen eine
-\type{Expression} in die Eingabesprache eines Beweisers, sodass dieser
+\type{AST::Expression} in die Eingabesprache eines Beweisers, sodass dieser
 mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
 ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
 Modell zurückübersetzt werden kann.%
@@ -464,7 +464,7 @@ Modell zurückübersetzt werden kann.%
 % TODO Methoden
 
 \begin{description}%
-    \method{public compileFormula(formula : Expression) : String}%
+    \method{public compileFormula(formula : AST::Expression) : String}%
 
     Liefert eine Übersetzung von \texttt{formula} in eine
     Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
@@ -475,7 +475,7 @@ Modell zurückübersetzt werden kann.%
 
 \end{description}%
 
-\subsubsection{class SMTLIBStrategy implements ASTNodeVisitor, FormulaCompiler}%
+\subsubsection{class SMTLIBStrategy implements AST::ASTNodeVisitor, FormulaCompiler}%
 
 % TODO Attribute
 

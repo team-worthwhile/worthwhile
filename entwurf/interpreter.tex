@@ -67,8 +67,22 @@ Diese Fehlerklasse dient zur Weitergabe von Fehlern, die im Interpreter bei eine
 \subsubsection{class StatementInterpreterError extends InterpreterError}
 Diese Fehlerklasse enthält neben den in der Klasse \type{Interpreter"-Error} vorhandenen Fehlerinformationen eine Referenz auf das \type{Statement}-""Objekt, an dem der Laufzeitfehler aufgetreten ist.
 
-\includegraphics[angle=90,height=\textheight]{diagrams/interpreter_component.pdf}
-\newpage
+\begin{landscape}%
+    \begin{figure}%
+        \vspace{-15mm}
+        \includegraphics[width=250mm]{diagrams/interpreter_component.pdf}
 
-\hspace{-2cm}
-\includegraphics[angle=90,height=\textheight]{diagrams/interpreter_functioncall_sequence.pdf}
+        \caption{Klassendiagramm der Komponente Interpreter}
+
+    \end{figure}%
+\end{landscape}%
+
+\begin{landscape}%
+    \begin{figure}%
+        \vspace{-30mm}
+        \includegraphics[width=250mm]{diagrams/interpreter_functioncall_sequence.pdf}
+
+        \caption{Sequenzdiagramm der Komponente Interpreter für die Asuführung eines Programms mit einer einzigen Zuweisungsoperation}
+
+    \end{figure}%
+\end{landscape}%

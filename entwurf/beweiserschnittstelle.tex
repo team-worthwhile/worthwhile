@@ -305,34 +305,18 @@ gegeben oder unbekannt ist.%
 
 \end{description}%
 
-\subsubsection{interface FormulaGenerator}%
+\subsection{package Prover::TheoremProver}%
 
-Implementierungen dieser Schnittstelle erstellen aus einem
-Worthwhile-""Programmtext eine prädikatenlogische Formel. Diese Formel
-soll nur dann beweisbar sein, wenn das Programm seine Spezifikation
-erfüllt. Diese Korrektheit bezieht sich immer auf ein Kalkül, weshalb
-Implementierungen dieser Schnittstelle meistens die Produktionsregeln
-eines solchen formalen Systems kapseln.%
+\subsubsection{enumeration FormulaSatisfiability}%
 
 \begin{description}%
-    \method{public transformProgram(program : AST::Program) : AST::Expression} %
+    \literal{SATISFIABLE}%
 
-    Liefert die aus \texttt{program} transformierte \type{AST::Expression}
-    zurück. Die Semantik der Formel ist unbestimmt, falls der
-    Programmtext kein semantisch korrektes Programm beschreibt, also
-    nicht ausgeführt werden kann. Ansonsten ist die zurückgelieferte
-    Formel nur dann beweisbar, wenn im angewendeten Kalkül das
-    WHILE-""Programm für alle Ausführungen seinen Annotationen
-    entspricht.%
+    \literal{UNSATISFIABLE}%
 
-    Parameter \texttt{program}: Wurzelsprachelement des zu
-    transformierenden Worthwhile-""Programms, d.~h.\ sowohl der
-    WHILE-""Programmtext als auch dessen Annotationen sind im
-    Syntaxbaum enthalten.%
+    \literal{UNKNOWN}%
 
 \end{description}%
-
-\subsection{package Prover::TheoremProver}%
 
 \subsubsection{class ProverResult}%
 
@@ -352,23 +336,42 @@ eines solchen formalen Systems kapseln.%
 
 \end{description}%
 
-\subsection{package Prover::ProgramTransformer}%
+\subsubsection{interface FormulaCompiler}%
 
-\subsubsection{class WPStrategy implements AST::ASTNodeVisitor, FormulaGenerator}%
+Implementierungen dieser Schnittstelle übersetzen eine
+\type{AST::Expression} in die Eingabesprache eines Beweisers, sodass dieser
+mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
+ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
+Modell zurückübersetzt werden kann.%
+
+% TODO Methoden
+
+\begin{description}%
+    \method{public compileFormula(formula : AST::Expression) : String}%
+
+    Liefert eine Übersetzung von \texttt{formula} in eine
+    Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
+    diese Sprache interpretiert, genau auf ein erfüllendes Modell von
+    \texttt{formula} abbilden lässt~(Bedeutungserhalt).%
+
+    %\method{protected Formula uncompileFormula(String formula)}%
+
+\end{description}%
+
+\subsubsection{class SMTLIBStrategy implements AST::ASTNodeVisitor, FormulaCompiler}%
 
 % TODO Attribute
 
 \begin{description}%
-    \attr{private weakestPrecondition : AST::Expression}%
+    \attr{private compilation : String}%
 
 \end{description}%
 
 % TODO Methoden
 
-\begin{description}%
-    \method{public transformProgram(program : AST::Program) : AST::Expression}%
-
-\end{description}%
+%\begin{description}%
+%
+%\end{description}%
 
 \subsubsection{interface ProverCaller}%
 
@@ -462,51 +465,48 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \end{description}%
 
-\subsubsection{interface FormulaCompiler}%
+\subsection{package Prover::ProgramTransformer}%
 
-Implementierungen dieser Schnittstelle übersetzen eine
-\type{AST::Expression} in die Eingabesprache eines Beweisers, sodass dieser
-mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
-ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
-Modell zurückübersetzt werden kann.%
+\subsubsection{interface FormulaGenerator}%
 
-% TODO Methoden
+Implementierungen dieser Schnittstelle erstellen aus einem
+Worthwhile-""Programmtext eine prädikatenlogische Formel. Diese Formel
+soll nur dann beweisbar sein, wenn das Programm seine Spezifikation
+erfüllt. Diese Korrektheit bezieht sich immer auf ein Kalkül, weshalb
+Implementierungen dieser Schnittstelle meistens die Produktionsregeln
+eines solchen formalen Systems kapseln.%
 
 \begin{description}%
-    \method{public compileFormula(formula : AST::Expression) : String}%
+    \method{public transformProgram(program : AST::Program) : AST::Expression} %
 
-    Liefert eine Übersetzung von \texttt{formula} in eine
-    Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
-    diese Sprache interpretiert, genau auf ein erfüllendes Modell von
-    \texttt{formula} abbilden lässt~(Bedeutungserhalt).%
+    Liefert die aus \texttt{program} transformierte \type{AST::Expression}
+    zurück. Die Semantik der Formel ist unbestimmt, falls der
+    Programmtext kein semantisch korrektes Programm beschreibt, also
+    nicht ausgeführt werden kann. Ansonsten ist die zurückgelieferte
+    Formel nur dann beweisbar, wenn im angewendeten Kalkül das
+    WHILE-""Programm für alle Ausführungen seinen Annotationen
+    entspricht.%
 
-    %\method{protected Formula uncompileFormula(String formula)}%
+    Parameter \texttt{program}: Wurzelsprachelement des zu
+    transformierenden Worthwhile-""Programms, d.~h.\ sowohl der
+    WHILE-""Programmtext als auch dessen Annotationen sind im
+    Syntaxbaum enthalten.%
 
 \end{description}%
 
-\subsubsection{class SMTLIBStrategy implements AST::ASTNodeVisitor, FormulaCompiler}%
+\subsubsection{class WPStrategy implements AST::ASTNodeVisitor, FormulaGenerator}%
 
 % TODO Attribute
 
 \begin{description}%
-    \attr{private compilation : String}%
+    \attr{private weakestPrecondition : AST::Expression}%
 
 \end{description}%
 
 % TODO Methoden
 
-%\begin{description}%
-%
-%\end{description}%
-
-\subsubsection{enumeration FormulaSatisfiability}%
-
 \begin{description}%
-    \literal{SATISFIABLE}%
-
-    \literal{UNSATISFIABLE}%
-
-    \literal{UNKNOWN}%
+    \method{public transformProgram(program : AST::Program) : AST::Expression}%
 
 \end{description}%
 

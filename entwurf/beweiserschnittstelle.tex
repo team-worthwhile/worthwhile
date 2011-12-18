@@ -41,76 +41,101 @@ Siehe \texttt{SpecificationChecker::checkAnnotation}%
 \subsection{Vorbereitungen für einen Beweiseraufruf}%
 
 In den folgenden Unterabschnitten werden die Vorbereitungen der
-Beweiserschnittstelle an den Eingabedaten, bevor diese an einen
-Beweiser übergeben werden, beschrieben. Solche Vorbereitungen
-betreffen Worthwhile-spezifische Syntax und Semantik. Für jeden
-Unterabschnitt wird angegeben, welche Eingabedaten die jeweiligen
-Vorbereitungen betreffen.%
+Beweiserschnittstelle an den Eingabedaten, bevor diese an den
+Beweiser übergeben werden, beschrieben. Die Vorbereitungen
+betreffen Worthwhile-spezifische Syntax und Semantik.%
 
 \subsubsection{Axiome}%
 
-Die schließlich an den Beweiser übergebene Formel ist eine
-Implikation, auf deren linken Seite die konjunktiv verknüpften Axiome
-stehen. Wenn keine Axiome angegeben wurden, steht auf der linke Seite
-der Implikation der Wahrheitswert \texttt{true}. Auf der rechten Seite
-steht das zu beweisende Theorem, dass das Programm der Spezifikation
-entspricht.%
+Axiome werden als Annahmen behandelt, die für die gesamte
+Spezifikation bzw.\ Formel gelten.%
 
 Axiome sind im AST als \texttt{axiom}-Knoten codiert.%
 
-\subsubsection{Funktionsverträge}%
+\subsubsection{Funktionsdefinition}%
 
-Funktionen werden modular spezifiziert. Ihre Spezifikation besteht aus
-den Annahmen, die ihre Parameter für Ergebniskorrektheit erfüllen müssen, und den
-Zusicherungen, die sie bei gültigen Parametern für ihr Ergebnis
-erfüllen. Annahmen werden Vorbedingungen genannt, Zusicherungen
-Nachbedingungen und die Menge aller dieser Bedingungen Funktionsvertrag.%
+Funktionen werden modular spezifiziert und überprüft. Ihre
+Spezifikation besteht sowohl aus Annahmen über die Aktualparameter
+eines Funktionsaufrufs als auch aus Zusicherungen, welche für den
+Rückgabewert gelten müssen. Die Annahmen werden Vorbedingungen
+genannt und gelten als solche für den gesamten Funktionskörper. Die
+Zusicherungen heißen auch Nachbedingungen und bilden zusammen mit den
+Vorbedingungen den Funktionsvertrag.%
 
-Für den Funktionsprogrammtext werden die Vorbedingungen wie Axiome behandelt
-und Nachbedingungen wie Zusicherungen für den Rückgabewert der
-Funktion.%
-
-Vorbedingungen werden im AST als \texttt{requires}-Knoten und
-Nachbedingungen als \texttt{ensures}-Knoten codiert.%
+Im AST werden \texttt{requires}-Knoten als Vorbedingungen und
+\texttt{ensures}-Knoten als Nachbedingungen interpretiert.%
 
 Siehe \texttt{FP020}%
 
-\subsubsection{Arrayzugriffe}%
+\subsubsection{Funktionsaufruf}%
 
-Für Arrays werden implizit die drei Axiome (A1), (A2) und (A3)
-vorausgesetzt. Außerdem wird jedem Arrayzugriff im Programmtext bei
-der Formelerstellung die Zusicherung, dass der angegebene Feldindex
-nicht negativ ist und nicht die Deklarationsgröße übersteigt, vorangestellt.%
+Für jeden Funktionsaufruf in der Spezifikation bzw.\ Formel gilt die
+Erfülltheit des jeweiligen Funktionsvertrags als Annahme. Insbesondere
+wird der Funktionskörper nicht betrachet.%
+
+\subsubsection{Arrayzugriff}%
+
+Für jeden Arrayzugriff in der Spezifikation bzw.\ Formel gelten die
+drei Axiome (A1), (A2) und (A3) als Annahmen \footnote{Die Axiome sind
+der Theorie
+\url{http://goedel.cs.uiowa.edu/smtlib/theories/ArraysEx.smt2}
+entnommen}. Hierbei ist $\mathbb{A}$ eine Indexmenge, $\mathbb{B}$
+eine Basismenge sowie $\mathbb{B}^\mathbb{A}$ die Menge aller Arrays
+mit der Indexmenge $\mathbb{A}$ und der Basismenge $\mathbb{B}$. %
 
 \begin{description}%
-    \item[A1] \begin{math}\forall i \in \mathbb{A}, e \in \mathbb{B} : \{\texttt{true}\} a[i] := e \{a[i] = e\}\end{math}%
-    \item[A2] \begin{math}\forall i, j \in \mathbb{A}, e, f \in \mathbb{B} : \{i \neq j \wedge a[i] = e\} a[j] := f \{a[i] = e\}\end{math}%
-    \item[A3] \begin{math}\forall a, b \in \mathbb{B}^\mathbb{A} : (\forall i, j \in \mathbb{A} : a[i] = b[j]) \Rightarrow a = b\end{math}%
+    \item[(A1)] \begin{math}\forall i \in \mathbb{A}, e \in \mathbb{B} : \{\texttt{true}\} a[i] := e \{a[i] = e\}\end{math}%
+    \item[(A2)] \begin{math}\forall i, j \in \mathbb{A}, e, f \in \mathbb{B} : \{i \neq j \wedge a[i] = e\} a[j] := f \{a[i] = e\}\end{math}%
+    \item[(A3)] \begin{math}\forall a, b \in \mathbb{B}^\mathbb{A} : (\forall i, j \in \mathbb{A} : a[i] = b[j]) \Rightarrow a = b\end{math}%
 \end{description}%
+
+Außerdem muss vor jedem Arrayzugriff in der Spezifikation bzw.\ Formel
+als Zusicherung gelten, dass der Feldindex des Zugriffs nicht negativ
+und echt kleiner als die Deklarationsgröße des Arrays ist. Damit wird
+erstens erreicht, dass ein Programmdurchlauf, der einen ungültigen
+Arrayzugriff enthält und deswegen entweder gar nicht oder mit
+undefiniertem Ergebnis terminiert, für eine valide Spezifikation
+ausgeschlossen ist, und zweitens, dass die Validität der Spezifikation
+bzw.\ Formel bei ungültigem Feldzugriff unabhängig vom Beweiser
+festgelegt ist.%
 
 \subsubsection{Division}%
 
-Ausdrücken, die eine Division durchführen, wird implizit die Zusicherung
-vorangestellt, dass der Dividend ungleich Null ist. Damit wird erreicht, dass
-die Möglichkeit eines Programmdurchlaufs, der eine Division durch Null enthält,
-auch bei der Prüfung der Spezifikation erkannt und das spezifizierte Programm
-nicht als korrekt eingestuft wird, obwohl nicht alle Programmaufrufe mit
-definiertem Ergebnis terminieren.%
+Vor jeder Division in der Spezifikation bzw.\ Formel muss als
+Zusicherung gelten, dass der Dividend ungleich Null ist. Damit wird
+erstens erreicht, dass ein Programmdurchlauf, der eine Division durch
+Null enthält und deswegen entweder gar nicht oder mit undefiniertem
+Ergebnis terminiert, für eine valide Spezifikation ausgeschlossen ist,
+und zweitens, dass die Validität der Spezifikation bzw.\ Formel bei
+Division durch Null unabhängig vom Beweiser festgelegt ist.%
 
-\subsubsection{Typsystem}%
+\subsubsection{Variablendeklarierung}%
+
+Wird eine Variable ohne Initialisierung deklariert, gilt für den
+nachfolgenden Spezifikationsteil eine Initialisierung der Variablen
+mit dem Standardwert Null für \texttt{Integer}- und \texttt{false} für
+\texttt{Boolean}-""Variablen sowie dem jeweiligen Standardwert des
+Basistyps für Array-""Variablen als Annahme.%
+
+\subsubsection{Typprüfung}%
 
 Die in Worthwhile vorhandenen Datentypen \texttt{Integer} und
-\texttt{Boolean} werden beide von dem Beweiser Z3 unterstützt. Die Typen verwendeter Sprachelemente
-werden bei Parameterübergabe, Symbolreferenz und Symboldefinition
-geprüft. Treten in einem dieser Fälle nicht übereinstimmende Typen auf, liefert Z3 einen
-Fehler. Diese Fehler sind in der \texttt{ProverResult}-Rückgabe enthalten.%
+\texttt{Boolean} werden beide vom Beweiser ohne Typkonvertierung
+unterstützt. Die Typen von Sprachelementen werden bei Parameterangabe,
+Variablenreferenz und Variablendefinition in der Eingabe vom Beweiser
+geprüft. Treten in einem dieser Fälle nicht übereinstimmende Typen
+auf, liefert der Beweiser einen Typfehler in der Ausgabe und diese ist
+im zurückgelieferten Überprüfungsergebnis enthalten.%
 
-\subsection{Kontext für einzelne Annotationen}%
+\subsubsection{Prädikatenlogische Formel}%
 
-% TODO Datentyp für Programmzustand und ausgewertete Annotationen
+Die prädikatenlogische Formel wird so behandelt, dass sie als
+Zusicherung gelten muss.%
 
-Die Bedeutungszuweisung für freie Variablen im Annotationsausdruck werden wie
-Axiome behandelt.%
+\subsubsection{Abbildung von freien Variablen nach Bedeutungen}%
+
+Die Abbildung wird so behandelt, dass in der gesamten Formel die
+Annahme gilt, dass die Variablen die angegebenen Bedeutungen haben.%
 
 \subsection{Ausgabedaten}%
 

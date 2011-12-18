@@ -170,6 +170,22 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \begin{itemize}%
 
+    \item \texttt{SpecificationChecker} verwaltet eine dreistufige
+    Pipeline:%
+
+        \begin{enumerate}%
+            \item Worthwhile-spezifische syntaktische Ersetzung und
+            semantische Ergänzung der Spezifikation bzw.\ Formel%
+
+            \item Anwendung syntaktischer Produktionen eines Kalküls
+            zur Programmverifikation, das den annotierten
+            Programmtext in eine prädikatenlogische Formel überführt%
+
+            \item Übersetzung der prädikatenlogischen Formel in eine
+            Zeichenkette und Aufruf des Beweisers mit dieser%
+
+        \end{enumerate}%
+
     \item Zur Transformation einer Programmspezifikation werden für
     \texttt{ASTNode} Besucherklassen für die einzelnen syntaktischen
     Elemente implementiert.%

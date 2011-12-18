@@ -171,23 +171,6 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 \subsection{package Prover}%
 
 \begin{itemize}%
-
-    \item \type{SpecificationChecker} verwaltet eine dreistufige
-    Pipeline:%
-
-        \begin{enumerate}%
-            \item Worthwhile-spezifische syntaktische Ersetzung und
-            semantische Ergänzung der Spezifikation bzw.\ Formel%
-
-            \item Anwendung syntaktischer Produktionen eines Kalküls
-            zur Programmverifikation, das den annotierten
-            Programmtext in eine prädikatenlogische Formel überführt%
-
-            \item Übersetzung der prädikatenlogischen Formel in eine
-            Zeichenkette und Aufruf des Beweisers mit dieser%
-
-        \end{enumerate}%
-
     \item Zur Transformation einer Programmspezifikation werden für
     \type{AST::ASTNode} Besucherklassen für die einzelnen syntaktischen
     Elemente implementiert.%
@@ -225,43 +208,84 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \subsubsection{class SpecificationChecker}%
 
-% TODO Belegung von Funktionsvariablen
+Ist Fassaden"-klasse für die Komponente Beweiserschnittstelle. Zur
+Überprüfung einer Spezifikation bzw.\ Formel arbeitet sie dreistufig
+und benutzt dazu die allgemeineren Funktionsklassen der Komponente.
+Sowohl in der ersten als auch in der letzten Stufe fungiert die Klasse
+außerdem als Adapter, da für Worthwhile-""Programme spezifische Syntax
+und Semantik existiert und sich das Beweiserergebnis nicht unmittelbar
+auf das übergebene Worthwhile-""Programm, sondern auf die daraus
+erstellte Formel, bezieht.%
 
-Bereitet \type{AST::Program}s bzw.\ \type{AST::Annotation}s entsprechend der
-Worthwhile-""Syntax und -""Semantik vor, lässt sie von einem
-\type{ProgramTransformer::FormulaGenerator} in eine \type{AST::Expression} überführen und diese
-von einem \type{TheoremProver::ProverCaller} auf Validität überprüfen. Das an den
-Aufrufer zurückgelieferte Ergebnis gibt an, ob die Validität beweisbar
-gegeben oder unbekannt ist.%
+\begin{enumerate}%
 
-% TODO nicht öffentliche Attribute
+    \item Übersetzung Worthwhile-""spezifischer
+    Syntax~(Funktions"-verträge, Axiome) und Ergänzung spezifischer
+    Semantik~(Array"-zugriff, Division, Standard"-werte) in der
+    Spezifikation~(\texttt{program}) bzw.\
+    Formel~(\texttt{annotation})%
+
+    \item Anwendung der Transformationen eines Kalküls zur
+    Programm"-verifikation, das die Spezifikation bzw.\ Formel in eine
+    prädikatenlogische Formel vom Typ \type{AST::Expression}
+    überführt. Diese Stufe ist in einem Aufruf des
+    \texttt{transformer}s gekapselt.%
+
+    \item Übersetzung der prädikatenlogischen Formel aus der zweiten
+    Stufe in eine Zeichenkette, mit welcher als Eingabe der Beweiser
+    ausgeführt wird. Diese Stufe ist in einem Aufruf des
+    \texttt{prover}s gekapselt, dessen Rückgabe die zurückgelieferte
+    \type{Validity} entnommen wird.%
+
+\end{enumerate}%
 
 \begin{description}%
     \attr{private timeout : Integer = 0}%
 
-    Zeit in Sekunden, nach der \texttt{check"-Program()} und
-    \texttt{check"-Annotation()} zurückkehren müssen.%
+    Zeit in Sekunden, die ein Beweiser"-aufruf höchstens dauern darf.%
 
     Siehe \texttt{setTimeout()}%
 
-    \attr{private prover : ProverCaller}%
+    \attr{private prover : Theorem"-Prover::Prover"-Caller = Theorem"-Prover::Z3"-Prover()}%
 
-    \attr{private transformer : ProgramTransformer::FormulaGenerator}%
+    Beweiser, der zur Prüfung der Validität prädikatenlogischer
+    Formeln aufgerufen wird.%
 
-    \attr{private checkResult : TheoremProver::ProverResult}%
+    \attr{private transformer : Program"-Transformer::Formula"-Generator}%
+
+    Programm"-transformator, der zur Erstellung einer zu beweisenden
+    prädikatenlogischen Formel aus einer Programm"-spezifikation,
+    welche bei Validität die Korrektheit des Programms verifiziert,
+    aufgerufen wird.%
+
+    Siehe \texttt{Specification"-Checker()}%
+
+    Siehe \texttt{Specification"-Checker(: Program"-Transformer::Formula"-Generator)}%
+
+    \attr{private check"-Result : Theorem"-Prover::Prover"-Result = null}%
+
+    Ergebnis der letzten Spezifikations-"" bzw.\ Formel"-überprüfung.%
 
 \end{description}%
 
 % TODO öffentliche Methoden
 
 \begin{description}%
-    \method{public SpecificationChecker()}%
+    \method{public Specification"-Checker()}%
 
-    \method{public SpecificationChecker(transformer : ProgramTransformer::FormulaGenerator)}%
+    Erstellt einen \type{Specification"-Checker} mit der
+    \type{Program"-Transformer::WP"-Strategy} als \texttt{transformer}
+    und dem \type{Theorem"-Prover::Z3"-Prover} als \texttt{prover}.%
 
-    \method{public checkProgram(program : AST::Program) : Validity}
+    \method{public Specification"-Checker(transformer : Program"-Transformer::Formula"-Generator)}%
 
-    Überprüft mit Hilfe des Beweisers die Validität der Spezifikation
+    Erstellt einen \type{Specification"-Checker}, der
+    \texttt{transformer} zur Programm"-transformation und den
+    \type{Theorem"-Prover::Z3"-Prover} als \texttt{prover} verwendet.%
+
+    \method{public check"-Program(program : AST::Program) : Validity}
+
+    Überprüft mit Hilfe des \texttt{prover}s die Validität der Spezifikation
     \texttt{program}. Es wird nur dann \texttt{VALID} zurückgeliefert,
     wenn \texttt{program} beweisbar valide ist, \texttt{INVALID} nur
     dann, wenn ein nicht erfüllendes Modell existiert und
@@ -273,9 +297,10 @@ gegeben oder unbekannt ist.%
 
     Siehe \texttt{FP005}%
 
-    \method{public checkAnnotation(annotation : AST::Annotation, environment : StringToValueMap) : Validity}
+    \mlmethod{public check"-Annotation(annotation : AST::Annotation,\\
+    environment : String"-To"-Value"-Map) : Validity}
 
-    Überprüft mit Hilfe des Beweisers die Validität der Annotation
+    Überprüft mit Hilfe des \texttt{prover}s die Validität der Annotation
     \texttt{annotation}. Es wird nur dann \texttt{VALID}
     zurückgeliefert, wenn \texttt{annotation} im Kontext
     \texttt{environment} beweisbar valide ist, \texttt{INVALID} nur
@@ -284,18 +309,18 @@ gegeben oder unbekannt ist.%
     überschritten wurde oder der Beweiser ohne Ergebnis zurückgekehrt
     ist).%
 
-    %Siehe \texttt{getCheckResult()}%
+    %Siehe \texttt{get"-Check"-Result()}%
 
     Siehe \texttt{FP005}%
 
-    %\method{public getCheckResult() : TheoremProver::ProverResult}
+    %\method{public get"-Check"-Result() : Theorem"-Prover::Prover"-Result}
     %
     %Liefert für den vorhergehenden Aufruf von %\texttt{check"-Program()}
     %oder \texttt{check"-Annotation()} das Ergebnis des Beweiseraufrufs und
     %\texttt{null}, wenn zuvor weder ein Programm noch eine Annotation
     %überprüft wurde.%
 
-    \method{public setTimeout(seconds : Integer)}
+    \method{public set"-Timeout(seconds : Integer)}
 
     Setzt den Timeout für Aufrufe von \texttt{check"-Program()} und
     \texttt{check"-Annotation()} auf den Wert von \texttt{seconds}.

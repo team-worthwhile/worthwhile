@@ -2,42 +2,42 @@
 
 Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter-""Prozess kann in einem eigenen Thread gestartet werden und teilt anderen Komponenten mit Hilfe des Entwurfsmusters ``Observer'' bei der Ausführung auftretende Ereignisse mit.
 
-\subsection{Die Fassadenklasse \texttt{Interpreter}}
-Die Klasse \texttt{Interpreter} ist eine Fassade, die innerhalb der Komponente getroffene Entwurfsentscheidungen abstrahiert und die internen Datenstrukturen in ihrer Komplexität reduziert darstellt.
+\subsection{Die Fassadenklasse \type{Interpreter}}
+Die Klasse \type{Interpreter} ist eine Fassade, die innerhalb der Komponente getroffene Entwurfsentscheidungen abstrahiert und die internen Datenstrukturen in ihrer Komplexität reduziert darstellt.
 
 \begin{description}
-    \item[Instanziierung] Die Klasse \texttt{Interpreter} wird mit einer Programmspezifikation initialisiert.
+    \item[Instanziierung] Die Klasse \type{Interpreter} wird mit einer Programmspezifikation initialisiert.
 
     \item[Ausführung] Mit der Methode \texttt{execute()} wird die Ausführung des im Konstruktur übergebenen Programms gestartet. Der Aufruf kehrt erst nach der Ausführung des kompletten Programms zurück, weshalb es sich anbietet, diese Methode in einem separaten Thread auszuführen. Die öffentlich zugänglichen Datenstrukturen der Klasse Interpreter sind Thread-""Safe und können deshalb auch während der Ausführung modifiziert werden.
 
     \item[DebugEventListener]
-    Mit den Methoden \texttt{addDebugEventListener} und \texttt{removeDebugEventListener} können dem \texttt{Interpreter}-""Objekt Listener-""Objekte hinzugefügt werden. Diese werden, ähnlich wie im Entwurfsmuster ``Observer'', über Ereignisse bei der Ausführung des Programms benachrichtigt und können unterschiedlich darauf reagieren. Die Klasse \texttt{AbstractDebugEventListener} implementiert ``no-op''-""Stubs für alle auftretenden Ereignisse, sodass konkrete Unterklassen nur die von ihnen benötigten Event-""Handler überschreiben müssen.
+    Mit den Methoden \texttt{addDebugEventListener} und \texttt{removeDebugEventListener} können dem \type{Interpreter}-""Objekt Listener-""Objekte hinzugefügt werden. Diese werden, ähnlich wie im Entwurfsmuster ``Observer'', über Ereignisse bei der Ausführung des Programms benachrichtigt und können unterschiedlich darauf reagieren. Die Klasse \type{AbstractDebugEventListener} implementiert ``no-op''-""Stubs für alle auftretenden Ereignisse, sodass konkrete Unterklassen nur die von ihnen benötigten Event-""Handler überschreiben müssen.
 
     Die Event-""Handler werden dabei synchron aufgerufen und können durch Warten die komplette Ausführung blockieren. Auf diese Weise kann ein Debugger Funktionalitäten wie Single-""Step-""Execution oder das Anhalten nach einer fehlgeschlagenen Zusicherungsinstruktion einfach implementieren. Die Interpreter-""Komponente bleibt dadurch weitgehend frei von konkreter Debugger-""Logik.
 
     \item[Breakpoints]
-    Dem Interpreter können Breakpoints in Form von Objekten des Typs \texttt{LineBreakpoint} (bzw. \texttt{ConditionalLineBreakpoint}) hinzugefügt werden. Wird bei der Ausführung die von dem Breakpoint spezifizierte Zeile im Quelltext überschritten, so ruft der Interpreter auf allen ihm hinzugefügten \texttt{DebugEventListener}-""Objekten die Methode \texttt{breakpointReached(Statement statement, LineBreakpoint breakpoint)} auf, damit diese das Ereignis behandeln und z.~B.\ die Ausführung unterbrechen können.
+    Dem Interpreter können Breakpoints in Form von Objekten des Typs \type{LineBreakpoint} (bzw. \type{ConditionalLineBreakpoint}) hinzugefügt werden. Wird bei der Ausführung die von dem Breakpoint spezifizierte Zeile im Quelltext überschritten, so ruft der Interpreter auf allen ihm hinzugefügten \type{DebugEventListener}-""Objekten die Methode \texttt{breakpointReached(Statement statement, LineBreakpoint breakpoint)} auf, damit diese das Ereignis behandeln und z.~B.\ die Ausführung unterbrechen können.
 
     \item[Symbolzuordnung]
-    Die Methode \texttt{Map<String, Value> getAllSymbols()} Gibt die im aktuellen Ausführungskontext gültige Symbolzuordnungstabelle zurück. Symbole werden durch einen String identifiziert und ihr Wert durch die Klasse \texttt{Value} gekapselt.
+    Die Methode \texttt{Map<String, Value> getAllSymbols()} Gibt die im aktuellen Ausführungskontext gültige Symbolzuordnungstabelle zurück. Symbole werden durch einen String identifiziert und ihr Wert durch die Klasse \type{Value} gekapselt.
 
-    \item[Auswertung von Expressions]
-    Die Methode \texttt{public Value evaluateExpression(Expression expression)} wertet die übergebene Expression im Kontext des aktuellen Programmzustandes aus und gibt den erhaltenen Wert zurück. Um den Programmablauf sowie andere Debug-""Komponenten von diesem externen Eingriff unbeeinträchtigt zu lassen, werden bei der Ausführung der Expression keine Listener benachrichtigt. Eventuelle Laufzeitfehler bei der Auswertung der Expression führen zum Werfen einer Exception, die vom Aufrufer gefangen werden kann.
+    \item[Auswertung von \type{Expression}s]
+    Die Methode \texttt{public Value evaluateExpression(Expression expression)} wertet die übergebene \type{Expression} im Kontext des aktuellen Programmzustandes aus und gibt den erhaltenen Wert zurück. Um den Programmablauf sowie andere Debug-""Komponenten von diesem externen Eingriff unbeeinträchtigt zu lassen, werden bei der Ausführung der \type{Expression} keine Listener benachrichtigt. Eventuelle Laufzeitfehler bei der Auswertung der \type{Expression} führen zum Werfen einer Exception, die vom Aufrufer gefangen werden kann.
 \end{description}
 
-\subsection{Die Visitor-Klasse \texttt{InterpreterASTNodeVisitor}}
-Um die im übergebenen AST vorhandenen Statements und Expressions auszuführen bzw.\ auszuwerten, verwendet die Interpreter-""Komponente intern das Entwurfsmuster ``Visitor''. Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine Kenntnis über deren Typ nötig ist, denn jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will. \texttt{InterpreterASTNodeVisitor} implementiert deshalb die Schnittstelle \texttt{ASTNodeVisitor}.
+\subsection{Die Visitor-Klasse \type{InterpreterASTNodeVisitor}}
+Um die im übergebenen AST vorhandenen \type{Statement}s und \type{Expression}s auszuführen bzw.\ auszuwerten, verwendet die Interpreter-""Komponente intern das Entwurfsmuster ``Visitor''. Der Vorteil dieses Entwurfsmusters ist, dass beim ``Besuchen'' der Knoten noch keine Kenntnis über deren Typ nötig ist, denn jeder Knoten ``entscheidet'' selbst, von welcher Methode des Visitors er verarbeitet werden will. \type{InterpreterASTNodeVisitor} implementiert deshalb die Schnittstelle \type{ASTNodeVisitor}.
 
-Außerdem implementiert die Klasse \texttt{InterpreterASTNodeVisitor} eine Methode \texttt{clone()}. Diese wird intern von der Interpreter-""Fassade verwendet, um bei der Auswertung einer Expression nicht das ``richtige'' Objekt verwenden zu müssen, sondern alle Operationen mit einer Kopie durchführen zu können. Dies verhindert die Störung des Debug-""Ablaufs durch unerwartete Benachrichtigungen an Listener während der Auswertung.
+Außerdem implementiert die Klasse \type{InterpreterASTNodeVisitor} eine Methode \texttt{clone()}. Diese wird intern von der Interpreter-""Fassade verwendet, um bei der Auswertung einer \type{Expression} nicht das ``richtige'' Objekt verwenden zu müssen, sondern alle Operationen mit einer Kopie durchführen zu können. Dies verhindert die Störung des Debug-""Ablaufs durch unerwartete Benachrichtigungen an Listener während der Auswertung.
 
-\subsection{Event-""Handling mit \texttt{DebugEventListener}-""Objekten}
-Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-""Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden, sodass eine Unterklasse von \texttt{AbstractDebugEventListener} auch nur auf eine Teilmenge der definierten Ereignisse reagieren kann. Die abstrakte Klasse \texttt{AbstractDebugEventListener} stellt aus diesem Grund für jedes mögliche Ereignis ``no-op''-""Event-""Handler zur Verfügung.
+\subsection{Event-""Handling mit \type{DebugEventListener}-""Objekten}
+Instanzen von Unterklassen von \type{AbstractDebugEventListener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-""Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden, sodass eine Unterklasse von \type{AbstractDebugEventListener} auch nur auf eine Teilmenge der definierten Ereignisse reagieren kann. Die abstrakte Klasse \type{AbstractDebugEventListener} stellt aus diesem Grund für jedes mögliche Ereignis ``no-op''-""Event-""Handler zur Verfügung.
 
 \begin{description}
     \method{public void statementExecuted(Statement statement)}
-    Wird vom Interpreter nach jedem Ausführen eines Statements aufgerufen.
+    Wird vom Interpreter nach jedem Ausführen eines \type{Statement}s aufgerufen.
     \method{public void statementWillExecute(Statement statement)}
-    Wird vom Interpreter vor jedem Ausführen eines Statements aufgerufen.
+    Wird vom Interpreter vor jedem Ausführen eines \type{Statement}s aufgerufen.
     \method{public void executionFailed(Statement statement, InterpreterError error)}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms aufgerufen~(beispielsweise ausgelöst durch einen Laufzeitfehler).
     \method{public void breakpointReached(Statement statement, LineBreakpoint breakpoint)}
@@ -49,18 +49,18 @@ Instanzen von Unterklassen von \texttt{AbstractDebugEventListener} behandeln Ere
     \method{public void assertionFailed(Assertion assertion)}
     Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen.
     \method{public void expressionEvaluated(Expression expression)}
-    Wird vom Interpreter nach jeder Auswertung einer Expression aufgerufen.
+    Wird vom Interpreter nach jeder Auswertung einer \type{Expression} aufgerufen.
 \end{description}
 
-\subsection{Datentyp-""Wrapper-""Klasse \texttt{Value}}
-Die Klasse \texttt{Value} repräsentiert den Wert einer Variablen im Typsystem des Worthwhile-""Interpreters. Der Typ der Variable kann dabei auch ohne die Verwendung des \texttt{instanceof}-""Operators herausgefunden werden.
+\subsection{Datentyp-""Wrapper-""Klasse \type{Value}}
+Die Klasse \type{Value} repräsentiert den Wert einer Variablen im Typsystem des Worthwhile-""Interpreters. Der Typ der Variable kann dabei auch ohne die Verwendung des \texttt{instanceof}-""Operators herausgefunden werden.
 
 \subsection{Fehlerklassen}
 \subsubsection{class InterpreterError}
 Diese Fehlerklasse dient zur Weitergabe von Fehlern, die im Interpreter bei einer Ausführung des Programms auftreten.
 
 \subsubsection{class StatementInterpreterError extends InterpreterError}
-Diese Fehlerklasse enthält neben den in der Klasse \texttt{InterpreterError} vorhandenen Fehlerinformationen eine Referenz auf das \texttt{Statement}-""Objekt, an dem der Laufzeitfehler aufgetreten ist.
+Diese Fehlerklasse enthält neben den in der Klasse \type{InterpreterError} vorhandenen Fehlerinformationen eine Referenz auf das \type{Statement}-""Objekt, an dem der Laufzeitfehler aufgetreten ist.
 
 \includegraphics[angle=90,height=\textheight]{diagrams/interpreter_component.pdf}
 \newpage

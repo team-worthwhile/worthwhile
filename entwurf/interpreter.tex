@@ -58,7 +58,7 @@ Die Klasse \type{Value} repräsentiert den Wert einer Variablen im Typsystem des
 Diese Klasse repräsentiert einen an einer bestimmten Zeile im Quellcode gesetzten Breakpoint. Instanzen dieser Klasse können einem \type{Interpreter}-""Objekt übergeben werden, um bei Erreichen des Breakpoints das Ereignis \texttt{breakpointReached()} auszulösen.
 
 \subsubsection{class ConditionalLineBreakpoint extends LineBreakpoint}
-Diese Klasse erweitert \type{LineBreakpoint} um die Möglichkeit, eine \type{Expression} als Bedingung zu übergeben. Wird der Breakpoint erreicht, so wird zunächst diese Bedingung überprüft und nur bei Erfüllung ein Ereignis ausgelöst.
+Diese Klasse erweitert \type{LineBreakpoint} um die Möglichkeit, eine \type{Expression} als Bedingung zu übergeben. Wird der Breakpoint erreicht, so wird zunächst diese Bedingung überprüft und nur bei Erfüllung das Ereignis \texttt{breakpointReached()} ausgelöst.
 
 \subsection{Fehlerklassen}
 \subsubsection{class InterpreterError}

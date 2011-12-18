@@ -34,19 +34,19 @@ Außerdem implementiert die Klasse \type{Interpreter"-AST"-Node"-Visitor} eine M
 Instanzen von Unterklassen von \type{Abstract"-Debug"-Event"-Listener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-""Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden, sodass eine Unterklasse von \type{Abstract"-Debug"-Event"-Listener} auch nur auf eine Teilmenge der definierten Ereignisse reagieren kann. Die abstrakte Klasse \type{Abstract"-Debug"-Event"-Listener} stellt aus diesem Grund für jedes mögliche Ereignis ``no-op''-""Event-""Handler zur Verfügung.
 
 \begin{description}
-    \method{public void statementExecuted(Statement statement)}
+    \method{public statementExecuted(statement : Statement)}
     Wird vom Interpreter nach jedem Ausführen eines \type{Statement}s aufgerufen.
-    \method{public void statementWillExecute(Statement statement)}
+    \method{public statementWillExecute(statement : Statement)}
     Wird vom Interpreter vor jedem Ausführen eines \type{Statement}s aufgerufen.
-    \method{public void executionFailed(Statement statement, InterpreterError error)}
+    \method{public executionFailed(statement : Statement, error : InterpreterError)}
     Wird vom Interpreter nach einer fehlerbedingten Terminierung des Programms aufgerufen~(beispielsweise ausgelöst durch einen Laufzeitfehler).
-    \method{public void breakpointReached(Statement statement, LineBreakpoint breakpoint)}
+    \method{public breakpointReached(statement : Statement, breakpoint : LineBreakpoint)}
     Wird vom Interpreter aufgerufen, nachdem ein Breakpoint erreicht (und gegebenenfalls die damit assoziierte Bedingung als wahr ausgewertet) wurde.
-    \method{public void assertionSucceeded(Assertion assertion)}
+    \method{public assertionSucceeded(assertion : Assertion)}
     Wird vom Interpreter nach jeder erfolgreichen Ausführung einer Zusicherungsinstruktion aufgerufen.
-    \method{public void assertionFailed(Assertion assertion)}
+    \method{public assertionFailed(assertion : Assertion)}
     Wird vom Interpreter nach jeder fehlgeschlagenen Ausführung einer Zusicherungsinstruktion aufgerufen.
-    \method{public void expressionEvaluated(Expression expression)}
+    \method{public expressionEvaluated(expression : Expression)}
     Wird vom Interpreter nach jeder Auswertung einer \type{Expression} aufgerufen.
 \end{description}
 

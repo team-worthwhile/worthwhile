@@ -55,10 +55,10 @@ Die Klasse \type{Value} repräsentiert den Wert einer Variablen im Typsystem des
 
 \subsection{Breakpoints}
 \subsubsection{class LineBreakpoint}
-Diese Klasse repräsentiert einen an einer bestimmten Zeile im Quellcode gesetzten Breakpoint. Instanzen dieser Klasse können einem \type{Interpreter}-""Objekt übergeben werden, um bei erreichen des Breakpoints einen \texttt{breakpointReached(statement : Statement, breakpoint : LineBreakpoint)} auszulösen.
+Diese Klasse repräsentiert einen an einer bestimmten Zeile im Quellcode gesetzten Breakpoint. Instanzen dieser Klasse können einem \type{Interpreter}-""Objekt übergeben werden, um bei Erreichen des Breakpoints das Ereignis \texttt{breakpointReached()} auszulösen.
 
 \subsubsection{class ConditionalLineBreakpoint extends LineBreakpoint}
-Diese Klasse erweitert \type{LineBreakpoint} um die Möglichkeit, eine \type{Expression} als Bedingung zu übergeben. Wird der Breakpoint erreicht, so wird zunächst diese Bedingung überprüft und nur bei Erfülltheit dieser ein Event ausgelöst.
+Diese Klasse erweitert \type{LineBreakpoint} um die Möglichkeit, eine \type{Expression} als Bedingung zu übergeben. Wird der Breakpoint erreicht, so wird zunächst diese Bedingung überprüft und nur bei Erfülltheit dieser ein Ereignis ausgelöst.
 
 \subsection{Fehlerklassen}
 \subsubsection{class InterpreterError}
@@ -82,7 +82,7 @@ Diese Fehlerklasse enthält neben den in der Klasse \type{Interpreter"-Error} vo
         \vspace{-30mm}
         \includegraphics[width=250mm]{diagrams/interpreter_functioncall_sequence.pdf}
 
-        \caption{Sequenzdiagramm der Komponente Interpreter für die Asuführung eines Programms mit einer einzigen Zuweisungsoperation}
+        \caption{Sequenzdiagramm der Komponente Interpreter für die Ausführung eines Programms mit einer einzigen Zuweisungsoperation}
 
     \end{figure}%
 \end{landscape}%

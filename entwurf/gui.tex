@@ -4,9 +4,9 @@ Die GUI bietet eine grafische Schnittstelle zur Steuerung aller Komponenten von 
 
 Die GUI enthält alle Funktionen, die man von einer modernen integrierten Entwicklungsumgebung erwartet. Dazu gehört insbesondere ein Editor mit Syntaxhervorhebung, Code Folding und Markierung von Parserfehlern während der Eingabe. Weiterhin bietet sie Funktionen zum Ausführen des Interpreters und des Beweisers sowie einen Debugger.
 
-Die GUI benutzt das Entwurfsmuster \textit{Model-View-Controller.} Dabei ist der AST das Modell, das von diversen Sichten (Views) wie dem Editor, der Parserfehler-Ansicht oder dem Projektexplorer angezeigt wird. Über GUI-Befehle werden Änderungen am Modell ausgelöst, sodass die GUI selbst hier als Controller fungiert.
+Die GUI benutzt das Entwurfsmuster "`Model-View-Controller"'. Dabei ist der AST das Modell, das von diversen Sichten (Views) wie dem Editor, der Parserfehler-Ansicht oder dem Projektexplorer angezeigt wird. Über GUI-Befehle werden Änderungen am Modell ausgelöst, sodass die GUI selbst hier als Controller fungiert.
 
-Weitere eingesetzte Entwurfsmuster sind \textit{Strategy} etwa bei der Bereitstellung von AutoEdits und bei den Provider"-klassen (\texttt{Label"-Provider}, \texttt{Quickfix"-Provider}, \texttt{Outline"-Tree"-Provider} etc.) sowie \textit{Plugin}, da die Worthwhile-Komponente in die existierende Eclipse-Plattform über Plugins eingebunden wird. Diese Plugins implementieren Schnittstellen, die durch die Plattform vorgegeben sind.
+Weitere eingesetzte Entwurfsmuster sind "`Strategie"' etwa bei der Bereitstellung von AutoEdits und bei den Provider"-klassen (\texttt{Label"-Provider}, \texttt{Quickfix"-Provider}, \texttt{Outline"-Tree"-Provider} etc.) sowie "`Einschub"', da die Worthwhile-Komponente in die existierende Eclipse-Plattform über Plugins eingebunden wird. Diese Plugins implementieren Schnittstellen, die durch die Plattform vorgegeben sind.
 
 \subsection{Klassenentwurf}
 

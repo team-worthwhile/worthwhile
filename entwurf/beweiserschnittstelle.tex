@@ -168,41 +168,41 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 % TODO Klassenentwurf
 
-\subsection{package Prover}%
-
-\begin{itemize}%
-    \item Zur Transformation einer Programmspezifikation werden für
-    \type{AST::ASTNode} Besucherklassen für die einzelnen syntaktischen
-    Elemente implementiert.%
-
-    \item Die Besucher hängen von Strategieklassen ab, welche die
-    Transformationsregeln und die Formelsprache austauschbar machen.%
-
-    Siehe \type{ProgramTransformer::FormulaGenerator}%
-
-    Siehe \type{TheoremProver::FormulaCompiler}%
-
-    % TODO Spezifikation des unterstützten SMT-LIB-Standards
-
-\end{itemize}%
-
-\begin{figure}[p]%
-    \hspace{-4cm}%
-    \includegraphics[width=1.5\textwidth]{diagrams/prover_component.pdf}%
+\begin{figure}[ph]%
 
     \caption{Klassendiagramm der Komponente Beweiserschnittstelle mit
     der Schnittstellenklasse \type{SpecificationChecker}}%
 
+    \hspace{-4cm}%
+    \includegraphics[width=1.5\textwidth]{diagrams/prover_component.pdf}%
+    \label{prover_classdiagram}%
 \end{figure}%
 
+\subsection{package Prover}%
+
 \subsubsection{enumeration Validity}%
+
+Gibt an, ob die überprüfte Spezifikation bzw.\ Formel valide ist oder
+dass die Validität nicht bestimmt werden konnte. Aufgrund der
+Komplexität von Spezifikation und Beweis"-findung können Überprüfungen
+in allen drei Zuständen enden und reichen die beiden Zustände
+\texttt{VALID} und \texttt{INVALID} nicht aus.%
 
 \begin{description}%
     \literal{VALID}%
 
+    Bedeutet, dass für alle Programm"-durchläufe die Spezifikation
+    bzw.\ für alle Belegungen die Formel erfüllt ist.%
+
     \literal{INVALID}%
 
+    Bedeutet, dass es Programm"-durchläufe bzw.\ Belegungen gibt,
+    sodass die Spezifikation bzw.\ Formel nicht erfüllt ist.%
+
     \literal{UNKNOWN}%
+
+    Bedeutet, dass unbekannt ist, ob nicht erfüllende
+    Programm"-durchläufe bzw.\ Belegungen existieren.%
 
 \end{description}%
 
@@ -388,13 +388,16 @@ mitangegeben.%
 
 \end{description}%
 
-\subsubsection{interface FormulaCompiler}%
+\subsubsection{interface Formula"-Compiler}%
 
 Implementierungen dieser Schnittstelle übersetzen eine
-\type{AST::Expression} in die Eingabesprache eines Beweisers, sodass dieser
-mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
-ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
-Modell zurückübersetzt werden kann.%
+prädikatenlogische Formel \texttt{formula} vom Typ
+\type{AST::Expression} in die Eingabe"-sprache eines Beweisers, sodass
+dieser mit der von \texttt{compile"-Formula()} zurückgelieferten
+Zeichenkette die Erfüllbarkeit von \texttt{formula} prüfen kann. Die
+Abhängigkeit nur von dieser Schnittstelle und nicht von
+Implementierungen ermöglicht die Austauschbarkeit von Compilern und
+Beweiser"-sprachen~("`Strategien"').%
 
 % TODO Methoden
 
@@ -402,111 +405,111 @@ Modell zurückübersetzt werden kann.%
     \method{public compileFormula(formula : AST::Expression) : String}%
 
     Liefert eine Übersetzung von \texttt{formula} in eine
-    Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
+    Beweiser"-sprache, sodass sich ein erfüllendes Modell eines Beweisers, der
     diese Sprache interpretiert, genau auf ein erfüllendes Modell von
-    \texttt{formula} abbilden lässt~(Bedeutungserhalt).%
+    \texttt{formula} abbilden lässt~(Bedeutungs"-erhalt).%
 
     %\method{protected Formula uncompileFormula(String formula)}%
 
 \end{description}%
 
-\subsubsection{class SMTLIBStrategy}%
+\subsubsection{class SMTLIB"-Strategy}%
 
-\texttt{implements AST::ASTNodeVisitor, FormulaCompiler}%
+\texttt{implements AST::AST"-Node"-Visitor, Formula"-Compiler}%
 
-% TODO Attribute
+Ist eine Implementierung der Schnittstelle \type{Formula"-Compiler},
+die prädikatenlogische Formeln nach \texttt{SMTLIB} übersetzt.%
+
+Außerdem implementiert die Klasse die Schnittstelle
+\type{AST::AST"-Node"-Visitor}, um sich selbst als "`Besucher"' dem
+AST-""Teilbaum, dessen Wurzel \texttt{formula} ist, zu übergeben. Der
+Zustand des "`Besuchers"' ist die Ausgabe"-zeichenkette und die
+Implementierungen der \texttt{visit()}-""Methoden hängen an diese den
+dem jeweiligen Knoten entsprechenden \texttt{SMTLIB}-""Funktionsaufruf
+an und übergeben den "`Besucher"' an die Kinderknoten, damit diese die
+Funktionsparameter belegen. Hierbei wird ausgenutzt, dass die
+\texttt{SMTLIB}-""Syntax mit ihrem heftigen Klammergebrauch und der
+Präfixschreibweise auch für alle Operatoren Texte baumartig aufbauen
+lässt.%
 
 \begin{description}%
-    \attr{private compilation : String}%
+    \attr{private compilation : String = ''''}%
+
+    Repräsentiert stets den aktuellen Kompilier"-stand und nach dem
+    Rückkehren das fertige Kompilat.%
 
 \end{description}%
 
-% TODO Methoden
+\subsubsection{interface Prover"-Caller}%
 
-%\begin{description}%
-%
-%\end{description}%
-
-\subsubsection{interface ProverCaller}%
-
-Implementierungen dieser Schnittstelle kapseln Aufrufe eines Beweisers
-für gegebene prädikatenlogische Formeln. Das Ergebnis eines Aufrufs
-besteht aus der Formelerfüllbarkeit, einem Modell zur Verifikation
-derselben und einer Liste semantischer Fehler.%
-
-% TODO Methoden
+Implementierungen dieser Schnittstelle kapseln Beweiser"-aufrufe für
+gegebene prädikatenlogische Formeln \texttt{formula}. Das Ergebnis
+eines Aufrufs wird als \type{Prover"-Result} zurückgegeben. Wie bei
+\type{Formula"-Compiler} ermöglicht die Abhängigkeit von nur dieser
+Schnittstelle sowohl die Austauschbarkeit des tatsächlich verwendeten
+Beweisers als auch des Aufruf"-protokolls~(Bibliotheks"-funktionen,
+Programm"-ausführung).%
 
 \begin{description}%
-    \method{public checkFormula(formula : AST::Expression) : ProverResult}%
+    \method{public check"-Formula(formula : AST::Expression) : Prover"-Result}%
 
-    Aufruf des unterstützten Beweisers für die Überprüfung der
-    prädikatenlogischen Formel \texttt{formula}. Es wird nur dann
-    \texttt{true} in \texttt{ProverResult\#satisfiable}
-    zurückgeliefert, wenn die Formel erfüllbar ist, und \texttt{false}
-    sonst. Ist \texttt{ProverResult\#satisfiable} auf \texttt{true}
-    gesetzt, muss \texttt{ProverResult\#model} mit einem
-    entsprechenden Modell als Zeuge und \texttt{ProverResult\#errors}
-    mit einer leeren Liste initialisiert sein.%
-
-    Parameter \texttt{formula}: Wurzelsprachelement der zu prüfenden
-    prädikatenlogischen Formel.%
+    Ruft den von der Implementierung unterstützten Beweiser zur Überprüfung der
+    prädikatenlogischen Formel \texttt{formula} auf. Es wird nur dann
+    \texttt{SATISFIABLE} in \texttt{Prover"-Result\#satisfiability}
+    zurückgeliefert, wenn die Formel bewiesen erfüllbar ist,
+    \texttt{UNSATISFIABLE} nur dann, wenn bewiesen keine erfüllende
+    Belegung existiert und \texttt{UNKNOWN} sonst.
 
 \end{description}%
 
-\subsubsection{abstract class StdProver}%
+\subsubsection{abstract class Std"-Prover}%
 
-\texttt{extends ProverCaller}%
+\texttt{extends Prover"-Caller}%
 
 Instanzen von dieser Abstraktion abgeleiteter Klassen rufen Beweiser
 auf, denen die zu überprüfende Formel auf der Standardeingabe
 übergeben wird. Spezialisierungen dieser Klasse implementieren die
-Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
-
-% TODO Attribute
+Extrahierung des Beweiser"-ergebnisses aus der Standardausgabe.%
 
 \begin{description}%
-    \attr{private proverPath : String}%
+    \attr{private prover"-Path : String}%
 
-    \attr{private compiler : FormulaCompiler}%
+    Aufgerufener Pfad, wenn in \texttt{check"-Formula()} der Beweiser
+    ausgeführt wird.%
+
+    \attr{private compiler : Formula"-Compiler}%
+
+    Aufgerufener \texttt{Formula"-Compiler}, wenn die übergebene
+    \texttt{formula} in die Eingabe"-sprache des Beweisers übersetzt
+    wird.%
 
 \end{description}%
 
-% TODO Methoden
-
 \begin{description}%
-    \method{protected StdProver(path : String, compiler : FormulaCompiler)}%
+    \method{protected StdProver(path : String, compiler : Formula"-Compiler)}%
 
-    Konfiguriert Instanzen so, dass der Beweiser \texttt{path} mit dem
-    Formelkompilat von \texttt{compiler} für zu überprüfende
-    prädikatenlogische Formeln aufgerufen wird.%
+    Konfiguriert Instanzen so, dass der Beweiser"-pfad \texttt{path} mit dem
+    Formelkompilat vom \texttt{compiler} auf der Standardeingabe für zu überprüfende
+    prädikatenlogische Formeln \texttt{formula} aufgerufen wird.%
 
-    Parameter \texttt{path}: Systempfad der ausführbaren Datei eines
-    Beweisers.%
+    \method{public check"-Formula(formula : AST::Expression) : Prover"-Result}%
 
-    Parameter \texttt{compiler}: Wird zur Generierung der
-    Beweisereingabe aus einer angegebenen prädikatenlogischen Formel
-    aufgerufen.%
-
-    \method{public checkFormula(formula : AST::Expression) : ProverResult}%
-
-    Ruft den bei Objekterstellung angegebenen Beweiserpfad auf und
-    füllt die Standardeingabe mit dem vom angegebenen Compiler aus
+    Ruft den bei Objekt"-erstellung angegebenen Beweiser"-pfad \texttt{prover"-Path} auf und
+    füllt die Standardeingabe mit dem vom angegebenen \texttt{compiler} aus
     \texttt{formula} erstellten Kompilat auf.
-    \texttt{ProverResult\#satisfiable} wird auf \texttt{false}
-    gesetzt, falls bei der Beweiserausführung ein Systemfehler
-    aufgetreten ist, und sonst wird die Rückgabe von
+    \texttt{Prover"-Result\#satisfiability} wird auf \texttt{UNKNOWN}
+    gesetzt, falls bei der Beweiser"-ausführung ein Systemfehler
+    aufgetreten ist, und sonst wird der Rückgabewert von
     \texttt{getResult()} zurückgeliefert, welche den Inhalt der
     Standardausgabe nach Beweiseraufruf erhalten hat.%
 
-    \method{abstract public getResult(output : String) : ProverResult}%
+    \method{abstract public get"-Result(output : String) : Prover"-Result}%
 
-    Extrahiert aus \texttt{output} sowohl Ergebnis als auch Fehler
-    eines Beweiseraufrufs und liefert diese Informationen in einer
-    Instanz von \type{ProverResult} zurück. Kann der Inhalt von
+    Extrahiert aus der Beweiserausgabe \texttt{output} das Überprüfungs"-ergebnis
+    des Beweiseraufrufs und liefert diese Information in einer
+    Instanz von \type{Prover"-Result} zurück. Kann der Inhalt von
     \texttt{output} nicht interpretiert werden, wird
-    \texttt{ProverResult\#satisfiable} auf \texttt{false} gesetzt.%
-
-    Parameter \texttt{output}: Textausgabe nach einem Beweiseraufruf.%
+    \texttt{Prover"-Result\#satisfiability} auf \texttt{UNKNOWN} gesetzt.%
 
 \end{description}%
 
@@ -523,19 +526,22 @@ Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
 
 \end{description}%
 
-\subsection{package Prover::ProgramTransformer}%
+\subsection{package Prover::Program"-Transformer}%
 
-\subsubsection{interface FormulaGenerator}%
+\subsubsection{interface Formula"-Generator}%
 
 Implementierungen dieser Schnittstelle erstellen aus einem
 Worthwhile-""Programmtext eine prädikatenlogische Formel. Diese Formel
 soll nur dann beweisbar sein, wenn das Programm seine Spezifikation
 erfüllt. Diese Korrektheit bezieht sich immer auf ein Kalkül, weshalb
 Implementierungen dieser Schnittstelle meistens die Produktionsregeln
-eines solchen formalen Systems kapseln.%
+eines solchen formalen Systems kapseln. Wegen der Relativität der
+Programmkorrektheit ist erneut die durch das Entwurfsmuster
+"`Strategie"' ermöglichte Austauschbarkeit dieser Implementierungen
+sinnvoll.%
 
 \begin{description}%
-    \method{public transformProgram(program : AST::Program) : AST::Expression} %
+    \method{public transform"-Program(program : AST::Program) : AST::Expression} %
 
     Liefert die aus \texttt{program} transformierte \type{AST::Expression}
     zurück. Die Semantik der Formel ist unbestimmt, falls der
@@ -544,11 +550,6 @@ eines solchen formalen Systems kapseln.%
     Formel nur dann beweisbar, wenn im angewendeten Kalkül das
     WHILE-""Programm für alle Ausführungen seinen Annotationen
     entspricht.%
-
-    Parameter \texttt{program}: Wurzelsprachelement des zu
-    transformierenden Worthwhile-""Programms, d.~h.\ sowohl der
-    WHILE-""Programmtext als auch dessen Annotationen sind im
-    Syntaxbaum enthalten.%
 
 \end{description}%
 
@@ -572,6 +573,16 @@ eines solchen formalen Systems kapseln.%
 
 \subsection{Interaktionsentwurf}%
 
+Das Sequenzdiagramm in Abbildung~\ref{programchecking_sequencediagram}
+zeigt beispielhaft die Verwendung der einzelnen Komponentenklassen
+durch einen \type{Specification"-Checker}, um die
+Programmspezifikation \texttt{program} zu überprüfen. Nicht enthalten
+sind die Worthwhile-""spezifischen Vorbereitungen an \texttt{program}
+und der Systemaufruf für den Beweiser. Des Weiteren ist das
+"`Besuchen"' in \type{SMTLIBStrategy} und \type{WPStrategy} nur für
+den Wurzelknoten skizziert und \type{caller} eine beliebige aufrufende
+Klasseninstanz, z.~B.\ der GUI-""Controller.%
+
 \begin{landscape}%
     \begin{figure}[p]%
         \vspace{-2cm}%
@@ -580,5 +591,6 @@ eines solchen formalen Systems kapseln.%
         \caption{Sequenzdiagramm zum Aufruf der Beweiserschnittstelle,
         um eine Programmspezifikation zu überprüfen.}%
 
+        \label{programchecking_sequencediagram}%
     \end{figure}%
 \end{landscape}%

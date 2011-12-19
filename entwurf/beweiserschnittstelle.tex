@@ -515,16 +515,15 @@ Extrahierung des Beweiser"-ergebnisses aus der Standardausgabe.%
 
 \subsubsection{class Z3Prover}%
 
-\texttt{extends StdProver}%
+\texttt{extends Std"-Prover}%
 
-% TODO Methoden
-
-\begin{description}%
-    \method{public Z3Prover()}%
-
-    \method{public getResult(output : String) : ProverResult}%
-
-\end{description}%
+Überprüft die Erfüllbarkeit prädikatenlogischer Formeln mit Hilfe des
+Beweisers Z3 von Microsoft~Research. Als Eingabeformat wird
+\texttt{SMTLIB} verwendet und zur Übersetzung wird der Compiler
+\type{SMTLIB"-Strategy} eingesetzt. \type{Z3Prover} konfiguriert dazu
+\type{Std"-Prover} mit den entsprechenden Parametern und implementiert
+\texttt{get"-Result()} so, dass es die Erfüllbarkeit der
+Beweiser"-ausgabe entnimmt.%
 
 \subsection{package Prover::Program"-Transformer}%
 
@@ -553,21 +552,30 @@ sinnvoll.%
 
 \end{description}%
 
-\subsubsection{class WPStrategy}%
+\subsubsection{class WP"-Strategy}%
 
-\texttt{implements AST::ASTNodeVisitor, FormulaGenerator}%
+\texttt{implements AST::AST"-Node"-Visitor, Formula"-Generator}%
 
-% TODO Attribute
+Ist eine Implementierung der Schnittstelle \type{Formula"-Generator},
+die im WP-""Kalkül Programmspezifikationen in verifizierende
+prädikatenlogische Formeln transformiert.%
+
+Wie auch \type{SMTLIB"-Strategy} implementiert \type{WP"-Strategy} die
+"`Besucher"-klasse"' \type{AST"-Node"-Visitor}, um die
+\type{AST::Program}-""Bäume in einer selbst definierten Reihenfolge
+abzulaufen. Der innere Zustand einer \type{WP"-Strategy}-""Instanz
+enthält stets die schwächste Vorbedingung für den bereits besuchten
+\type{Program}-""Teil und bei jedem Besuch wird aus dieser und dem
+aktuellen \type{AST::Statement} die neue schwächste Vorbedingung
+berechnet. Nach Abarbeitung des gesamten Baums enthält der Zustand die
+schwächste Vorbedingung für die Korrektheit des \type{Program}s.%
 
 \begin{description}%
     \attr{private weakestPrecondition : AST::Expression}%
 
-\end{description}%
-
-% TODO Methoden
-
-\begin{description}%
-    \method{public transformProgram(program : AST::Program) : AST::Expression}%
+    Repräsentiert stets die schwächste Vorbedingung für den bereits
+    besuchten \type{Program}-Teil, welcher nach Rückkehren von
+    \texttt{transform"-Program} das komplette \type{Program} umfasst.%
 
 \end{description}%
 

@@ -462,60 +462,54 @@ Programm"-ausführung).%
 
 \end{description}%
 
-\subsubsection{abstract class StdProver}%
+\subsubsection{abstract class Std"-Prover}%
 
-\texttt{extends ProverCaller}%
+\texttt{extends Prover"-Caller}%
 
 Instanzen von dieser Abstraktion abgeleiteter Klassen rufen Beweiser
 auf, denen die zu überprüfende Formel auf der Standardeingabe
 übergeben wird. Spezialisierungen dieser Klasse implementieren die
-Extrahierung des Beweiserergebnisses aus der Standardausgabe.%
-
-% TODO Attribute
+Extrahierung des Beweiser"-ergebnisses aus der Standardausgabe.%
 
 \begin{description}%
-    \attr{private proverPath : String}%
+    \attr{private prover"-Path : String}%
 
-    \attr{private compiler : FormulaCompiler}%
+    Aufgerufener Pfad, wenn in \texttt{check"-Formula()} der Beweiser
+    ausgeführt wird.%
+
+    \attr{private compiler : Formula"-Compiler}%
+
+    Aufgerufener \texttt{Formula"-Compiler}, wenn die übergebene
+    \texttt{formula} in die Eingabe"-sprache des Beweisers übersetzt
+    wird.%
 
 \end{description}%
 
-% TODO Methoden
-
 \begin{description}%
-    \method{protected StdProver(path : String, compiler : FormulaCompiler)}%
+    \method{protected StdProver(path : String, compiler : Formula"-Compiler)}%
 
-    Konfiguriert Instanzen so, dass der Beweiser \texttt{path} mit dem
-    Formelkompilat von \texttt{compiler} für zu überprüfende
-    prädikatenlogische Formeln aufgerufen wird.%
+    Konfiguriert Instanzen so, dass der Beweiser"-pfad \texttt{path} mit dem
+    Formelkompilat vom \texttt{compiler} auf der Standardeingabe für zu überprüfende
+    prädikatenlogische Formeln \texttt{formula} aufgerufen wird.%
 
-    Parameter \texttt{path}: Systempfad der ausführbaren Datei eines
-    Beweisers.%
+    \method{public check"-Formula(formula : AST::Expression) : Prover"-Result}%
 
-    Parameter \texttt{compiler}: Wird zur Generierung der
-    Beweisereingabe aus einer angegebenen prädikatenlogischen Formel
-    aufgerufen.%
-
-    \method{public checkFormula(formula : AST::Expression) : ProverResult}%
-
-    Ruft den bei Objekterstellung angegebenen Beweiserpfad auf und
-    füllt die Standardeingabe mit dem vom angegebenen Compiler aus
+    Ruft den bei Objekt"-erstellung angegebenen Beweiser"-pfad \texttt{prover"-Path} auf und
+    füllt die Standardeingabe mit dem vom angegebenen \texttt{compiler} aus
     \texttt{formula} erstellten Kompilat auf.
-    \texttt{ProverResult\#satisfiable} wird auf \texttt{false}
-    gesetzt, falls bei der Beweiserausführung ein Systemfehler
-    aufgetreten ist, und sonst wird die Rückgabe von
+    \texttt{Prover"-Result\#satisfiability} wird auf \texttt{UNKNOWN}
+    gesetzt, falls bei der Beweiser"-ausführung ein Systemfehler
+    aufgetreten ist, und sonst wird der Rückgabewert von
     \texttt{getResult()} zurückgeliefert, welche den Inhalt der
     Standardausgabe nach Beweiseraufruf erhalten hat.%
 
-    \method{abstract public getResult(output : String) : ProverResult}%
+    \method{abstract public get"-Result(output : String) : Prover"-Result}%
 
-    Extrahiert aus \texttt{output} sowohl Ergebnis als auch Fehler
-    eines Beweiseraufrufs und liefert diese Informationen in einer
-    Instanz von \type{ProverResult} zurück. Kann der Inhalt von
+    Extrahiert aus der Beweiserausgabe \texttt{output} das Überprüfungs"-ergebnis
+    des Beweiseraufrufs und liefert diese Information in einer
+    Instanz von \type{Prover"-Result} zurück. Kann der Inhalt von
     \texttt{output} nicht interpretiert werden, wird
-    \texttt{ProverResult\#satisfiable} auf \texttt{false} gesetzt.%
-
-    Parameter \texttt{output}: Textausgabe nach einem Beweiseraufruf.%
+    \texttt{Prover"-Result\#satisfiability} auf \texttt{UNKNOWN} gesetzt.%
 
 \end{description}%
 

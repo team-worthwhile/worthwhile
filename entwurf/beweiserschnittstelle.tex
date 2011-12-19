@@ -182,12 +182,27 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 \subsubsection{enumeration Validity}%
 
+Gibt an, ob die überprüfte Spezifikation bzw.\ Formel valide ist oder
+dass die Validität nicht bestimmt werden konnte. Aufgrund der
+Komplexität von Spezifikation und Beweis"-findung können Überprüfungen
+in allen drei Zuständen enden und reichen die beiden Zustände
+\texttt{VALID} und \texttt{INVALID} nicht aus.%
+
 \begin{description}%
     \literal{VALID}%
 
+    Bedeutet, dass für alle Programm"-durchläufe die Spezifikation
+    bzw.\ für alle Belegungen die Formel erfüllt ist.%
+
     \literal{INVALID}%
 
+    Bedeutet, dass es Programm"-durchläufe bzw.\ Belegungen gibt,
+    sodass die Spezifikation bzw.\ Formel nicht erfüllt ist.%
+
     \literal{UNKNOWN}%
+
+    Bedeutet, dass unbekannt ist, ob nicht erfüllende
+    Programm"-durchläufe bzw.\ Belegungen existieren.%
 
 \end{description}%
 

@@ -32,13 +32,19 @@ Diese Klasse wird ausschließlich innerhalb der Parser-Komponente zur semantisch
     Überprüft den AST mit der übergebenen \texttt{ASTNode}-Wurzel auf Typfehler in Zuweisungen, Operandenangaben und Parameterübergaben.
 
 	\method{public checkFunctionReferences(node : ASTNode)}
-    Untersucht den übergebenen AST auf verwendete und nicht deklarierte Funktionen.
+    Untersucht den übergebenen AST auf verwendete, aber nicht deklarierte Funktionen.
 
 	\method{public checkVariableReferences(node : ASTNode)}
     Überprüft alle vorkommenden Variablen, ob sie vor ihrer Verwendung deklariert wurden.
 
 	\method{public checkReturnStatements(node : ASTNode)}
     Überprüft, ob bei jedem möglichen Funktionsdurchlauf ein \texttt{return}-Statement erreicht wird.
+    
+    \method{public checkReturnStatementsOnlyInFunction(node : ASTNode)}
+    Überprüft, ob keine \texttt{return}-Anweisungen außerhalb von Funktionen stehen.
+    
+    \method{public checkArrayDeclarations(node : ASTNode)}
+    Überprüft, ob in allen Deklarationen von Arrays entweder ein Anfangswert oder eine Arraygröße festgelegt wurde.
 \end{description}
 
 \begin{figure}%

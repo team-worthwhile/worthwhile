@@ -21,10 +21,10 @@ Eine Übersicht über dieses Modell findet sich in Abbildung~\ref{debugmodel}.
 Diese Klasse stellt die Schnittstelle zwischen GUI und Interpreter bereit. Sie übernimmt die Kommandos von der GUI und übersetzt sie in Kommandos für den Interpreter (bzw.\ dessen \texttt{DebugInterface}).
 
 \begin{description}
-	\method{public IProcess getProcess()} Gibt den Prozess zurück, der den Interpreter ausführt.
-	\method{public IThread[] getThreads()} Gibt eine Liste der Threads zurück, die zu diesem Interpreterlauf gehören.
-	\method{public boolean hasThreads()} Gibt an, ob momentan irgendwelche Threads vorhanden sind.
-	\method{public boolean supportsBreakpoint(IBreakpoint breakpoint)} Gibt an, ob das Setzen des angegebenen Breakpoints unterstützt wird.
+	\method{public getProcess() : IProcess} Gibt den Prozess zurück, der den Interpreter ausführt.
+	\method{public getThreads() : IThread[*]} Gibt eine Liste der Threads zurück, die zu diesem Interpreterlauf gehören.
+	\method{public hasThreads() : Boolean} Gibt an, ob momentan irgendwelche Threads vorhanden sind.
+	\method{public supportsBreakpoint(breakpoint : IBreakpoint) : Boolean } Gibt an, ob das Setzen des angegebenen Breakpoints unterstützt wird.
 \end{description}
 
 \subsubsection{class WorthwhileThread}
@@ -32,9 +32,9 @@ Diese Klasse stellt die Schnittstelle zwischen GUI und Interpreter bereit. Sie �
 Ein Thread repräsentiert einen sequentiellen Programmablauf. Da die WHILE-""Sprache kein Multithreading unterstützt, gibt es für jeden Interpreterlauf nur eine Instanz dieser Klasse. Ein Thread ermöglicht den Zugriff auf \texttt{StackFrames}, wenn die Programmausführung pausiert ist.
 
 \begin{description}
-	\method{public IStackFrame[] getStackFrames()} Gibt alle in diesem Thread enthaltenen Stackframes zurück.
-	\method{public IStackFrame getTopStackFrame()} Gibt den obersten Stackframe zurück.
-	\method{public boolean hasStackFrame()} Gibt zurück, ob der Thread im Moment Stackframes besitzt.
+	\method{public getStackFrames() : IStackFrame[*]} Gibt alle in diesem Thread enthaltenen Stackframes zurück.
+	\method{public getTopStackFrame() : IStackFrame} Gibt den obersten Stackframe zurück.
+	\method{public hasStackFrame() : Boolean} Gibt zurück, ob der Thread im Moment Stackframes besitzt.
 \end{description}
 
 \subsubsection{class WorthwhileStackFrame}
@@ -42,8 +42,8 @@ Ein Thread repräsentiert einen sequentiellen Programmablauf. Da die WHILE-""Spr
 Ein Stackframe repräsentiert in der GUI einen Ausführungskontext eines Programms. Dazu gehören insbesondere die an der aktuellen Ausführungsposition sichtbaren Variablen.
 
 \begin{description}
-	\method{public int getLineNumber()} Gibt die Zeilennummer der Ausführungsposition in der Quelldatei zurück.
-	\method{public IVariable[] getVariables()} Gibt die im Ausführungskontext sichtbaren Variablen zurück.
+	\method{public getLineNumber() : Integer} Gibt die Zeilennummer der Ausführungsposition in der Quelldatei zurück.
+	\method{public getVariables() : IVariable[*]} Gibt die im Ausführungskontext sichtbaren Variablen zurück.
 \end{description}
 
 \subsubsection{class WorthwhileVariable}
@@ -51,15 +51,15 @@ Ein Stackframe repräsentiert in der GUI einen Ausführungskontext eines Program
 Diese Klasse repräsentiert eine Variable in einem Ausführungskontext. Jede Variable besitzt einen Typ und einen veränderbaren Wert.
 
 \begin{description}
-	\method{public String getName()} Gibt den Namen der Variablen zurück.
-	\method{public String getReferenceTypeName()} Gibt eine textuelle Repräsentation des Datentyps der Variablen zurück.
-	\method{public IValue getValue()} Gibt den Wert der Variablen zurück.
-	\method{public boolean supportsValueModification()} Gibt an, ob der Wert dieser Variablen verändert werden kann.
-	\method{public void setValue(IValue value)} Setzt den Wert dieser Variablen auf den angegebenen Wert.
-	\method{public void setValue(String expression)} Setzt den Wert dieser Variablen auf den Wert des übergebenen Ausdrucks.
-	\method{public void verifyValue(IValue value)} Prüft, ob der angegebene Wert als neuer Wert für diese Variable gesetzt werden kann.
-	\method{public void verifyValue(String expression)} Prüft, ob das Ergebnis des angegebenen Ausdrucks als neuer Wert für diese Variable gesetzt werden kann
-	\method{public boolean hasValueChanged()} Gibt an, ob sich der Wert der Variablen seit der letzten Pausierung des Programmablaufs geändert hat.
+	\method{public getName() : String} Gibt den Namen der Variablen zurück.
+	\method{public getReferenceTypeName() : String} Gibt eine textuelle Repräsentation des Datentyps der Variablen zurück.
+	\method{public getValue() : IValue} Gibt den Wert der Variablen zurück.
+	\method{public supportsValueModification() : Boolean} Gibt an, ob der Wert dieser Variablen verändert werden kann.
+	\method{public setValue(value : IValue)} Setzt den Wert dieser Variablen auf den angegebenen Wert.
+	\method{public setValue(expression : String)} Setzt den Wert dieser Variablen auf den Wert des übergebenen Ausdrucks.
+	\method{public verifyValue(value : IValue)} Prüft, ob der angegebene Wert als neuer Wert für diese Variable gesetzt werden kann.
+	\method{public verifyValue(expression :String)} Prüft, ob das Ergebnis des angegebenen Ausdrucks als neuer Wert für diese Variable gesetzt werden kann
+	\method{public hasValueChanged() : boolean} Gibt an, ob sich der Wert der Variablen seit der letzten Pausierung des Programmablaufs geändert hat.
 \end{description}
 
 \subsubsection{class WorthwhileValue}
@@ -67,10 +67,10 @@ Diese Klasse repräsentiert eine Variable in einem Ausführungskontext. Jede Var
 Diese Klasse repräsentiert den Wert einer Variablen.
 
 \begin{description}
-	\method{public String getReferenceTypeName()} Gibt eine textuelle Repräsentation des Datentyps des Wertes zurück.
-	\method{public String getValueString()} Gibt eine textuelle Repräsentation des Wertes zurück.
-	\method{public IVariable[] getVariables()} Gibt eine Liste aller enthaltenen Variablen (z.~B.\ Werte in einem Array) zurück.
-	\method{public boolean hasVariables()} Gibt zurück, ob dieser Wert enthaltene Variablen besitzt.
+	\method{public getReferenceTypeName() : String} Gibt eine textuelle Repräsentation des Datentyps des Wertes zurück.
+	\method{public getValueString() : String} Gibt eine textuelle Repräsentation des Wertes zurück.
+	\method{public getVariables() : IVariable[*]} Gibt eine Liste aller enthaltenen Variablen (z.~B.\ Werte in einem Array) zurück.
+	\method{public hasVariables() : Boolean} Gibt zurück, ob dieser Wert enthaltene Variablen besitzt.
 \end{description}
 
 \subsubsection{class WorthwhileExpression}
@@ -78,8 +78,9 @@ Diese Klasse repräsentiert den Wert einer Variablen.
 Diese Klasse repräsentiert einen auszuwertenden benutzerdefinierten Ausdruck.
 
 \begin{description}
-	\method{public String getExpressionText()} Gibt den Quellcode des Ausdrucks zurück.
-	\method{public IValue getValue()} Gibt den aktuellen Wert des Ausdrucks zurück.
+	\method{public getExpressionText() : String} Gibt den Quellcode des Ausdrucks zurück.
+	\method{public setExpressionText(expression : String)} Setzt den Quellcode des Ausdrucks.
+	\method{public getValue() : IValue} Gibt den aktuellen Wert des Ausdrucks zurück.
 \end{description}
 
 \subsubsection{class WorthwhileLineBreakpoint}
@@ -87,8 +88,8 @@ Diese Klasse repräsentiert einen auszuwertenden benutzerdefinierten Ausdruck.
 Diese Klasse repräsentiert einen Breakpoint, der an eine bestimmte Zeile im Programmtext gebunden ist und die Programmausführung anhält, sobald diese Zeile erreicht wird.
 
 \begin{description}
-	\method{public int getLineNumber()} Gibt die Zeilennummer dieses Breakpoints zurück.
-	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
+	\method{public getLineNumber() : Integer} Gibt die Zeilennummer dieses Breakpoints zurück.
+	\method{public setMarker() : IMarker} Setzt die Markierung, die diesem Breakpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Breakpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
 \end{description}
 
 \subsubsection{class WorthwhileWatchpoint}
@@ -96,7 +97,7 @@ Diese Klasse repräsentiert einen Breakpoint, der an eine bestimmte Zeile im Pro
 Diese Klasse repräsentiert einen \textit{Watchpoint}, also einen Breakpoint, der an eine Variable gebunden ist und die Programmausführung anhält, sobald ihr Wert gelesen oder verändert wird.
 
 \begin{description}
-	\method{public IMarker setMarker()} Setzt die Markierung, die diesem Watchpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Watchpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
+	\method{public setMarker() : IMarker} Setzt die Markierung, die diesem Watchpoint zugeordnet ist. Diese Markierung enthält alle notwendigen Informationen zum Watchpoint und wird auch über das Ende einer GUI-""Sitzung hinaus gespeichert.
 \end{description}
 
 \subsection{Launching}
@@ -106,7 +107,7 @@ Diese Klasse repräsentiert einen \textit{Watchpoint}, also einen Breakpoint, de
 Der \texttt{LaunchDelegate} ist dafür verantwortlich, den Interpreter zu starten und zu initialisieren sowie die Verbindung zwischen Interpreter und Debug-""Infrastruktur herzustellen.
 
 \begin{description}
-	\mlmethod{public void launch(ILaunchConfiguration~configuration, String~mode, ILaunch~launch, IProgressMonitor~monitor)}
+	\mlmethod{public launch(configuration~:~ILaunchConfiguration, mode~:~String, launch~:~ILaunch, monitor~:~IProgressMonitor)}
 	Diese Methode wird von der GUI aufgerufen, wenn der Benutzer den Befehl zum Ausführen des Programms wählt. Dabei enthält \texttt{configuration} die nötigen Einstellungen zum Aufruf des Interpreters, etwa den Pfad zur ausführbaren Datei von Z3 oder Optionen für den Interpreter. \texttt{mode} enthält den Modus, in dem das Programm ausgeführt wird, und ist entweder \texttt{run} oder \texttt{debug}. Der Parameter \texttt{launch} enthält Informationen über diese Ausführung des Programms; die Aufgabe der \texttt{launch()}-Methode ist es, sämtliche erzeugten Prozesse und \texttt{DebugTarget}s diesem Objekt bekannt zu machen. Schließlich kann der Fortschritt der Ausführung dem Benutzer über das \texttt{monitor}-""Objekt mitgeteilt werden.
 \end{description}
 
@@ -115,7 +116,7 @@ Der \texttt{LaunchDelegate} ist dafür verantwortlich, den Interpreter zu starte
 Diese Klasse ist dafür verantwortlich, die Pfade zu bestimmen, die auf der Suche nach Quelldateien (Source Lookup) durchsucht werden sollen. Ein Source Lookup wird immer dann nötig, wenn der aktuelle Ausführungszustand des Interpreters auf die Quelldatei zurückgeführt werden soll, etwa bei der Anzeige der aktuell ausgeführten Zeile.
 
 \begin{description}
-	\mlmethod{public ISourceContainer[] computeSourceContainers( ILaunchConfiguration~configuration, IProgressMonitor~monitor)}
+	\mlmethod{public computeSourceContainers(configuration~:~ILaunchConfiguration, monitor~:~IProgressMonitor) : ISourceContainer[*]}
 	Ruft eine Liste aller Pfade ab, die beim Source Lookup nach Quelldateien durchsucht werden.
 \end{description}
 
@@ -124,7 +125,7 @@ Diese Klasse ist dafür verantwortlich, die Pfade zu bestimmen, die auf der Such
 Für den Source Lookup kann sich eine Reihe von Klassen (Participants) registrieren, die ein Objekt einer Quelldatei zuordnen. Ein solcher Participant wird in dieser Klasse implementiert.
 
 \begin{description}
-	\method{public String getSourceName(Object object)} Ruft den Quelldateinamen für \texttt{object} ab, wenn es sich dabei um eine Instanz von \texttt{WorthwhileStackFrame} handelt.
+	\method{public getSourceName(object~:~Object) : String} Ruft den Quelldateinamen für \texttt{object} ab, wenn es sich dabei um eine Instanz von \texttt{WorthwhileStackFrame} handelt.
 \end{description}
 
 \subsubsection{class WorthwhileSourceLookupDirector}
@@ -132,7 +133,7 @@ Für den Source Lookup kann sich eine Reihe von Klassen (Participants) registrie
 Diese Klasse ist dafür verantwortlich, den \texttt{SourceLookupParticipant} der Debugger-""Infrastruktur bekannt zu machen.
 
 \begin{description}
-	\method{public void initializeParticipants()} Macht der Debugger-""Infrastruktur die Objekte bekannt, die am Source Lookup teilnehmen sollen.
+	\method{public initializeParticipants()} Macht der Debugger-""Infrastruktur die Objekte bekannt, die am Source Lookup teilnehmen sollen.
 \end{description}
 
 \begin{figure}

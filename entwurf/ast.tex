@@ -1,7 +1,5 @@
 \section{Abstract-""Syntax-""Tree (AST)}
 
-\begin{landscape}
-
 Der Abstract-""Syntax-""Tree (AST) ist eine zentrale Datenstruktur im Programm, da jede Komponente mit ihr umgehen muss. Ableitungen und Assoziationen spiegeln direkt die Grammatik der WHILE-""Sprache wider. Da der AST von mehreren Komponenten mit unterschiedlichem Verhalten benutzt wird bietet sich hier das Visitor Entwurfsmuster (siehe Kapitel \ref{astvisitor_sec}) an.
 
 \subsection{Visitor Entwurfsmuster}
@@ -33,6 +31,7 @@ Diese Klasse dient dazu um die verschiedenen speziellen Statements (bspw. Return
 \label{astexpr_class}
 Ein Ausdruck spezialisiert sich in verschiedenen Klassen wie QuantifiedExpression, Literal, BinaryExpression, usw. (siehe Abbildung \ref{ast_diag}).
 
+\begin{landscape}
 \begin{figure}%
     \vspace{-2cm}%
     \includegraphics[height=\textheight]{diagrams/ast_component.pdf}

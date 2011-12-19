@@ -6,7 +6,7 @@ Die GUI enthält alle Funktionen, die man von einer modernen integrierten Entwic
 
 Die GUI benutzt das Entwurfsmuster \textit{Model-View-Controller.} Dabei ist der AST das Modell, das von diversen Sichten (Views) wie dem Editor, der Parserfehler-Ansicht oder dem Projektexplorer angezeigt wird. Über GUI-Befehle werden Änderungen am Modell ausgelöst, sodass die GUI selbst hier als Controller fungiert.
 
-Weitere eingesetzte Entwurfsmuster sind \textit{Strategy} etwa bei der Bereitstellung von AutoEdits und bei den Providerklassen (\texttt{LabelProvider}, \texttt{QuickfixProvider}, \texttt{OutlineTreeProvider} etc.) sowie \textit{Plugin}, da die Worthwhile-Komponente in die existierende Eclipse-Plattform über Plugins eingebunden wird. Diese Plugins implementieren Schnittstellen, die durch die Plattform vorgegeben sind.
+Weitere eingesetzte Entwurfsmuster sind \textit{Strategy} etwa bei der Bereitstellung von AutoEdits und bei den Provider"-klassen (\texttt{Label"-Provider}, \texttt{Quickfix"-Provider}, \texttt{Outline"-Tree"-Provider} etc.) sowie \textit{Plugin}, da die Worthwhile-Komponente in die existierende Eclipse-Plattform über Plugins eingebunden wird. Diese Plugins implementieren Schnittstellen, die durch die Plattform vorgegeben sind.
 
 \subsection{Klassenentwurf}
 
@@ -41,7 +41,7 @@ In manchen Fällen müssen Beschriftungstexte und Symbole für Sprachelemente an
 
 Da durch den \texttt{Validator} nicht nur syntaktische, sondern auch semantische Fehler erkannt werden sowie durch den \texttt{SyntaxErrorMessageProvider} die Art eines Syntaxfehlers näher spezifiert werden kann, ist es möglich, für bestimmte Fehler und Warnungen eine Reihe von Korrekturvorschlägen anzubieten. Der Benutzer kann einen dieser Korrekturvorschläge zur automatischen Anwendung auswählen.
 
-Die in dieser Klasse spezifizierten Korrekturfunktionen erhalten als Parameter jeweils eine Fehlerbeschreibung (\texttt{Issue}) sowie eine Referenz auf einen \texttt{IssueResolutionAcceptor}, der die Korrekturvorschläge entgegennimmt und an die GUI weiterleitet.
+Die in dieser Klasse spezifizierten Korrekturfunktionen erhalten als Parameter jeweils eine Fehlerbeschreibung (\texttt{Issue}) sowie eine Referenz auf einen \texttt{Issue"-Resolution"-Acceptor}, der die Korrekturvorschläge entgegennimmt und an die GUI weiterleitet.
 
 \begin{description}
 	\mlmethod{public void addFunctionReturnType(issue : Issue, \\ acceptor : IssueResolutionAcceptor)} Bietet für eine Funktion mit nicht spezifiziertem Rückgabetyp das Hinzufügen eines Rückgabetyps an.

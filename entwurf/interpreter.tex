@@ -2,7 +2,7 @@
 
 Der Interpreter führt in der WHILE-""Sprache formulierte Programme aus und stellt eine Schnittstelle zum Debuggen von Programmen zur Laufzeit bereit. Des Weiteren überprüft er mit Hilfe des Evaluators zur Laufzeit die mittels Annotationen in den Programmtext eingebetteten Annotationen. Der Interpreter-""Prozess kann in einem eigenen Thread gestartet werden und teilt anderen Komponenten mit Hilfe des Entwurfsmusters "`Observer"' bei der Ausführung auftretende Ereignisse mit.
 
-\subsection{Die Fassadenklasse \type{Interpreter}}
+\subsection{class Interpreter}
 Die Klasse \type{Interpreter} ist eine Fassade, die innerhalb der Komponente getroffene Entwurfsentscheidungen abstrahiert und die internen Datenstrukturen in ihrer Komplexität reduziert darstellt.
 
 \begin{description}
@@ -25,12 +25,12 @@ Die Klasse \type{Interpreter} ist eine Fassade, die innerhalb der Komponente get
     Die Methode \texttt{evaluate"-Expression()} wertet die übergebene \type{Expression} im Kontext des aktuellen Programmzustandes aus und gibt den erhaltenen Wert zurück. Um den Programmablauf sowie andere Debug-""Komponenten von diesem externen Eingriff unbeeinträchtigt zu lassen, werden bei der Ausführung der \type{Expression} keine Listener benachrichtigt. Eventuelle Laufzeitfehler bei der Auswertung der \type{Expression} führen zum Werfen einer Exception, die vom Aufrufer gefangen werden kann.
 \end{description}
 
-\subsection{Die Visitor-Klasse \type{Interpreter"-AST"-Node"-Visitor}}
+\subsection{class Interpreter"-AST"-Node"-Visitor}
 Um die im übergebenen AST vorhandenen \type{Statement}s und \type{Expression}s auszuführen bzw.\ auszuwerten, verwendet die Interpreter-""Komponente intern das Entwurfsmuster "`Visitor"'. Der Vorteil dieses Entwurfsmusters ist, dass beim "`Besuchen"' der Knoten noch keine Kenntnis über deren Typ nötig ist, denn jeder Knoten "`entscheidet"' selbst, von welcher Methode des Visitors er verarbeitet werden will. \type{Interpreter"-AST"-Node"-Visitor} implementiert deshalb die Schnittstelle \type{AST"-Node"-Visitor}.
 
 Außerdem implementiert die Klasse \type{Interpreter"-AST"-Node"-Visitor} eine Methode \texttt{clone()}. Diese wird intern von der Interpreter-""Fassade verwendet, um bei der Auswertung einer \type{Expression} nicht das "`richtige"' Objekt verwenden zu müssen, sondern alle Operationen mit einer Kopie durchführen zu können. Dies verhindert die Störung des Debug-""Ablaufs durch unerwartete Benachrichtigungen an Listener während der Auswertung.
 
-\subsection{Event-""Handling mit \type{Debug"-Event"-Listener}-""Objekten}
+\subsection{\type{Debug"-Event"-Listener}-""Objekte}
 Instanzen von Unterklassen von \type{Abstract"-Debug"-Event"-Listener} behandeln Ereignisse, die bei der Ausführung des Programms auftreten. Die Methoden dieser Klasse werden dabei vom Interpreter synchron aufgerufen, was es dem Listener-""Objekt erlaubt, die Ausführung anzuhalten oder zu verzögern. Dabei müssen nicht alle Methoden überschrieben werden, sodass eine Unterklasse von \type{Abstract"-Debug"-Event"-Listener} auch nur auf eine Teilmenge der definierten Ereignisse reagieren kann. Die abstrakte Klasse \type{Abstract"-Debug"-Event"-Listener} stellt aus diesem Grund für jedes mögliche Ereignis "`no-op"'-""Event-""Handler zur Verfügung.
 
 \begin{description}
@@ -50,7 +50,7 @@ Instanzen von Unterklassen von \type{Abstract"-Debug"-Event"-Listener} behandeln
     Wird vom Interpreter nach jeder Auswertung einer \type{Expression} aufgerufen.
 \end{description}
 
-\subsection{Datentyp-""Wrapper-""Klasse \type{Value}}
+\subsection{class Value}
 Die Klasse \type{Value} repräsentiert den Wert einer Variablen im Typsystem des Worthwhile-""Interpreters. Der Typ der Variable kann dabei auch ohne die Verwendung des \texttt{instanceof}-""Operators herausgefunden werden.
 
 \subsection{Breakpoints}

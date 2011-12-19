@@ -168,6 +168,16 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
 
 % TODO Klassenentwurf
 
+\begin{figure}[ph]%
+
+    \caption{Klassendiagramm der Komponente Beweiserschnittstelle mit
+    der Schnittstellenklasse \type{SpecificationChecker}}%
+
+    \hspace{-4cm}%
+    \includegraphics[width=1.5\textwidth]{diagrams/prover_component.pdf}%
+    \label{prover_classdiagram}%
+\end{figure}%
+
 \subsection{package Prover}%
 
 \begin{itemize}%
@@ -185,15 +195,6 @@ Abbildung von Variablen auf Belegungen festlegen könnte, statt.%
     % TODO Spezifikation des unterstützten SMT-LIB-Standards
 
 \end{itemize}%
-
-\begin{figure}[p]%
-
-    \caption{Klassendiagramm der Komponente Beweiserschnittstelle mit
-    der Schnittstellenklasse \type{SpecificationChecker}}%
-
-    \hspace{-4cm}%
-    \includegraphics[width=1.5\textwidth]{diagrams/prover_component.pdf}%
-\end{figure}%
 
 \subsubsection{enumeration Validity}%
 
@@ -589,5 +590,6 @@ eines solchen formalen Systems kapseln.%
         \caption{Sequenzdiagramm zum Aufruf der Beweiserschnittstelle,
         um eine Programmspezifikation zu überprüfen.}%
 
+        \label{programchecking_sequencediagram}%
     \end{figure}%
 \end{landscape}%

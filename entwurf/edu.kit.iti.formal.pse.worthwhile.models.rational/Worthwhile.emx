@@ -13663,8 +13663,8 @@
           <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_RN1_MCdMEeGFNo9enJ-5rQ" covered="_OsZWICdMEeGFNo9enJ-5rQ" event="_RN2mQCdMEeGFNo9enJ-5rQ" message="_RN0xECdMEeGFNo9enJ-5rQ"/>
           <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_zYp4ICdLEeGFNo9enJ-5rQ" covered="_gTL4kCdKEeGFNo9enJ-5rQ" event="_0ODPECdLEeGFNo9enJ-5rQ" message="_zYpRECdLEeGFNo9enJ-5rQ"/>
           <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_zYqfMSdLEeGFNo9enJ-5rQ" covered="_xAft8CdLEeGFNo9enJ-5rQ" event="_zYrGQCdLEeGFNo9enJ-5rQ" message="_zYpRECdLEeGFNo9enJ-5rQ"/>
-          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_SY55kCdLEeGFNo9enJ-5rQ" covered="_gTL4kCdKEeGFNo9enJ-5rQ" event="_zYqfMCdLEeGFNo9enJ-5rQ" message="_SY5SgCdLEeGFNo9enJ-5rQ"/>
-          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_SY55kSdLEeGFNo9enJ-5rQ" covered="_xAft8CdLEeGFNo9enJ-5rQ" event="_-PAWoCdLEeGFNo9enJ-5rQ" message="_SY5SgCdLEeGFNo9enJ-5rQ"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_SY55kCdLEeGFNo9enJ-5rQ" covered="_gTL4kCdKEeGFNo9enJ-5rQ" event="_GdJisCo_EeGNMex8U9cGhw" message="_SY5SgCdLEeGFNo9enJ-5rQ"/>
+          <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_SY55kSdLEeGFNo9enJ-5rQ" covered="_xAft8CdLEeGFNo9enJ-5rQ" event="_GdPCQCo_EeGNMex8U9cGhw" message="_SY5SgCdLEeGFNo9enJ-5rQ"/>
           <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_SY7HsCdLEeGFNo9enJ-5rQ" covered="_xAft8CdLEeGFNo9enJ-5rQ" start="_SY55kSdLEeGFNo9enJ-5rQ" finish="_SY7uwSdLEeGFNo9enJ-5rQ"/>
           <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_z6HUgSdNEeGFNo9enJ-5rQ" covered="_xAft8CdLEeGFNo9enJ-5rQ" event="_1fSikCdNEeGFNo9enJ-5rQ" message="_z6HUgCdNEeGFNo9enJ-5rQ"/>
           <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_z6H7kCdNEeGFNo9enJ-5rQ" covered="_OsZWICdMEeGFNo9enJ-5rQ" event="_1fSikSdNEeGFNo9enJ-5rQ" message="_z6HUgCdNEeGFNo9enJ-5rQ"/>
@@ -13788,7 +13788,7 @@
           <message xmi:id="_1o7uICdKEeGFNo9enJ-5rQ" name="launch()" receiveEvent="_1o_YgCdKEeGFNo9enJ-5rQ" sendEvent="_1o8VMCdKEeGFNo9enJ-5rQ" connector="_ExEx8CdLEeGFNo9enJ-5rQ"/>
           <message xmi:id="_1pBNsCdKEeGFNo9enJ-5rQ" name="launch()" messageSort="reply" receiveEvent="_1pB0wCdKEeGFNo9enJ-5rQ" sendEvent="_1pAmoSdKEeGFNo9enJ-5rQ" connector="_ExEx8CdLEeGFNo9enJ-5rQ"/>
           <message xmi:id="_GvUnUCdLEeGFNo9enJ-5rQ" name="new()" messageSort="createMessage" receiveEvent="_GvVOYCdLEeGFNo9enJ-5rQ" sendEvent="_GvUnUSdLEeGFNo9enJ-5rQ" connector="_GvVOYidLEeGFNo9enJ-5rQ"/>
-          <message xmi:id="_SY5SgCdLEeGFNo9enJ-5rQ" name="run()" messageSort="asynchCall" receiveEvent="_SY55kSdLEeGFNo9enJ-5rQ" sendEvent="_SY55kCdLEeGFNo9enJ-5rQ" connector="_zYrGQSdLEeGFNo9enJ-5rQ"/>
+          <message xmi:id="_SY5SgCdLEeGFNo9enJ-5rQ" name="execute" messageSort="asynchCall" receiveEvent="_SY55kSdLEeGFNo9enJ-5rQ" sendEvent="_SY55kCdLEeGFNo9enJ-5rQ" connector="_zYrGQSdLEeGFNo9enJ-5rQ"/>
           <message xmi:id="_zYpRECdLEeGFNo9enJ-5rQ" name="new()" messageSort="createMessage" receiveEvent="_zYqfMSdLEeGFNo9enJ-5rQ" sendEvent="_zYp4ICdLEeGFNo9enJ-5rQ" connector="_zYrGQSdLEeGFNo9enJ-5rQ"/>
           <message xmi:id="_RN0xECdMEeGFNo9enJ-5rQ" name="&lt;&lt;create>>" messageSort="createMessage" receiveEvent="_RN1_MCdMEeGFNo9enJ-5rQ" sendEvent="_RN1YICdMEeGFNo9enJ-5rQ" connector="_RN2mQSdMEeGFNo9enJ-5rQ"/>
           <message xmi:id="_3SwgwCdMEeGFNo9enJ-5rQ" name="&quot;started&quot;" messageSort="asynchCall" receiveEvent="_3SxH0CdMEeGFNo9enJ-5rQ" sendEvent="_3SwgwSdMEeGFNo9enJ-5rQ" connector="_3Sy9ASdMEeGFNo9enJ-5rQ"/>
@@ -13926,6 +13926,8 @@
       <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_G8otwSdPEeGFNo9enJ-5rQ" name="SendOperationEvent26" operation="_G8otwCdPEeGFNo9enJ-5rQ"/>
       <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_G8pU0CdPEeGFNo9enJ-5rQ" name="ReceiveOperationEvent19" operation="_G8otwCdPEeGFNo9enJ-5rQ"/>
       <packagedElement xmi:type="uml:ExecutionEvent" xmi:id="_JWlnsSdPEeGFNo9enJ-5rQ" name="ExecutionEvent10"/>
+      <packagedElement xmi:type="uml:SendOperationEvent" xmi:id="_GdJisCo_EeGNMex8U9cGhw" name="SendOperationEvent27" operation="_E3QyACZlEeG21b73bxMMnw"/>
+      <packagedElement xmi:type="uml:ReceiveOperationEvent" xmi:id="_GdPCQCo_EeGNMex8U9cGhw" name="ReceiveOperationEvent20" operation="_E3QyACZlEeG21b73bxMMnw"/>
     </packagedElement>
     <profileApplication xmi:id="_TKT2pSAfEeGXqsUcua6Xfg">
       <eAnnotations xmi:id="_TKT2piAfEeGXqsUcua6Xfg" source="http://www.eclipse.org/uml2/2.0.0/UML">

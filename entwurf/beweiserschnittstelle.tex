@@ -575,6 +575,16 @@ eines solchen formalen Systems kapseln.%
 
 \subsection{Interaktionsentwurf}%
 
+Das Sequenzdiagramm in Abbildung~\ref{programchecking_sequencediagram}
+zeigt beispielhaft die Verwendung der einzelnen Komponentenklassen
+durch einen \type{Specification"-Checker}, um die
+Programmspezifikation \texttt{program} zu überprüfen. Nicht enthalten
+sind die Worthwhile-""spezifischen Vorbereitungen an \texttt{program}
+und der Systemaufruf für den Beweiser. Des Weiteren ist das
+"`Besuchen"' in \type{SMTLIBStrategy} und \type{WPStrategy} nur für
+den Wurzelknoten skizziert und \type{caller} eine beliebige aufrufende
+Klasseninstanz, z.~B.\ der GUI-""Controller.%
+
 \begin{landscape}%
     \begin{figure}[p]%
         \vspace{-2cm}%

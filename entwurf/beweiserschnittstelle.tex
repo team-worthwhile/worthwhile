@@ -388,13 +388,16 @@ mitangegeben.%
 
 \end{description}%
 
-\subsubsection{interface FormulaCompiler}%
+\subsubsection{interface Formula"-Compiler}%
 
 Implementierungen dieser Schnittstelle übersetzen eine
-\type{AST::Expression} in die Eingabesprache eines Beweisers, sodass dieser
-mit der zurückgelieferten Zeichenkette die Erfüllbarkeit der
-ursprünglichen Formel prüfen und seine Ausgabe in ein verifizierendes
-Modell zurückübersetzt werden kann.%
+prädikatenlogische Formel \texttt{formula} vom Typ
+\type{AST::Expression} in die Eingabe"-sprache eines Beweisers, sodass
+dieser mit der von \texttt{compile"-Formula()} zurückgelieferten
+Zeichenkette die Erfüllbarkeit von \texttt{formula} prüfen kann. Die
+Abhängigkeit nur von dieser Schnittstelle und nicht von
+Implementierungen ermöglicht die Austauschbarkeit von Compilern und
+Beweiser"-sprachen~("`Strategien"').%
 
 % TODO Methoden
 
@@ -402,54 +405,60 @@ Modell zurückübersetzt werden kann.%
     \method{public compileFormula(formula : AST::Expression) : String}%
 
     Liefert eine Übersetzung von \texttt{formula} in eine
-    Beweisersprache, sodass das erfüllende Modell eines Beweisers, der
+    Beweiser"-sprache, sodass sich ein erfüllendes Modell eines Beweisers, der
     diese Sprache interpretiert, genau auf ein erfüllendes Modell von
-    \texttt{formula} abbilden lässt~(Bedeutungserhalt).%
+    \texttt{formula} abbilden lässt~(Bedeutungs"-erhalt).%
 
     %\method{protected Formula uncompileFormula(String formula)}%
 
 \end{description}%
 
-\subsubsection{class SMTLIBStrategy}%
+\subsubsection{class SMTLIB"-Strategy}%
 
-\texttt{implements AST::ASTNodeVisitor, FormulaCompiler}%
+\texttt{implements AST::AST"-Node"-Visitor, Formula"-Compiler}%
 
-% TODO Attribute
+Ist eine Implementierung der Schnittstelle \type{Formula"-Compiler},
+die prädikatenlogische Formeln nach \texttt{SMTLIB} übersetzt.%
+
+Außerdem implementiert die Klasse die Schnittstelle
+\type{AST::AST"-Node"-Visitor}, um sich selbst als "`Besucher"' dem
+AST-""Teilbaum, dessen Wurzel \texttt{formula} ist, zu übergeben. Der
+Zustand des "`Besuchers"' ist die Ausgabe"-zeichenkette und die
+Implementierungen der \texttt{visit()}-""Methoden hängen an diese den
+dem jeweiligen Knoten entsprechenden \texttt{SMTLIB}-""Funktionsaufruf
+an und übergeben den "`Besucher"' an die Kinderknoten, damit diese die
+Funktionsparameter belegen. Hierbei wird ausgenutzt, dass die
+\texttt{SMTLIB}-""Syntax mit ihrem heftigen Klammergebrauch und der
+Prefixschreibweise auch für alle Operatoren Texte baumartig aufbauen
+lässt.%
 
 \begin{description}%
-    \attr{private compilation : String}%
+    \attr{private compilation : String = ''''}%
+
+    Repräsentiert stets den aktuellen Kompilier"-stand und nach dem
+    Rückkehren das fertige Kompilat.%
 
 \end{description}%
 
-% TODO Methoden
+\subsubsection{interface Prover"-Caller}%
 
-%\begin{description}%
-%
-%\end{description}%
-
-\subsubsection{interface ProverCaller}%
-
-Implementierungen dieser Schnittstelle kapseln Aufrufe eines Beweisers
-für gegebene prädikatenlogische Formeln. Das Ergebnis eines Aufrufs
-besteht aus der Formelerfüllbarkeit, einem Modell zur Verifikation
-derselben und einer Liste semantischer Fehler.%
-
-% TODO Methoden
+Implementierungen dieser Schnittstelle kapseln Beweiser"-aufrufe für
+gegebene prädikatenlogische Formeln \texttt{formula}. Das Ergebnis
+eines Aufrufs wird als \type{Prover"-Result} zurückgegeben. Wie bei
+\type{Formula"-Compiler} ermöglicht die Abhängigkeit von nur dieser
+Schnittstelle sowohl die Austauschbarkeit des tatsächlich verwendeten
+Beweisers als auch des Aufruf"-protokolls~(Bibliotheks"-funktionen,
+Programm"-ausführung).%
 
 \begin{description}%
-    \method{public checkFormula(formula : AST::Expression) : ProverResult}%
+    \method{public check"-Formula(formula : AST::Expression) : Prover"-Result}%
 
-    Aufruf des unterstützten Beweisers für die Überprüfung der
-    prädikatenlogischen Formel \texttt{formula}. Es wird nur dann
-    \texttt{true} in \texttt{ProverResult\#satisfiable}
-    zurückgeliefert, wenn die Formel erfüllbar ist, und \texttt{false}
-    sonst. Ist \texttt{ProverResult\#satisfiable} auf \texttt{true}
-    gesetzt, muss \texttt{ProverResult\#model} mit einem
-    entsprechenden Modell als Zeuge und \texttt{ProverResult\#errors}
-    mit einer leeren Liste initialisiert sein.%
-
-    Parameter \texttt{formula}: Wurzelsprachelement der zu prüfenden
-    prädikatenlogischen Formel.%
+    Ruft den von der Implementierung unterstützten Beweiser zur Überprüfung der
+    prädikatenlogischen Formel \texttt{formula} auf. Es wird nur dann
+    \texttt{SATISFIABLE} in \texttt{Prover"-Result\#satisfiability}
+    zurückgeliefert, wenn die Formel bewiesen erfüllbar ist,
+    \texttt{UNSATISFIABLE} nur dann, wenn bewiesen keine erfüllende
+    Belegung existiert und \texttt{UNKNOWN} sonst.
 
 \end{description}%
 

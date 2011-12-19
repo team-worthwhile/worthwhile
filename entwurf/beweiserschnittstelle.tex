@@ -526,19 +526,22 @@ Extrahierung des Beweiser"-ergebnisses aus der Standardausgabe.%
 
 \end{description}%
 
-\subsection{package Prover::ProgramTransformer}%
+\subsection{package Prover::Program"-Transformer}%
 
-\subsubsection{interface FormulaGenerator}%
+\subsubsection{interface Formula"-Generator}%
 
 Implementierungen dieser Schnittstelle erstellen aus einem
 Worthwhile-""Programmtext eine prädikatenlogische Formel. Diese Formel
 soll nur dann beweisbar sein, wenn das Programm seine Spezifikation
 erfüllt. Diese Korrektheit bezieht sich immer auf ein Kalkül, weshalb
 Implementierungen dieser Schnittstelle meistens die Produktionsregeln
-eines solchen formalen Systems kapseln.%
+eines solchen formalen Systems kapseln. Wegen der Relativität der
+Programmkorrektheit ist erneut die durch das Entwurfsmuster
+"`Strategie"' ermöglichte Austauschbarkeit dieser Implementierungen
+sinnvoll.%
 
 \begin{description}%
-    \method{public transformProgram(program : AST::Program) : AST::Expression} %
+    \method{public transform"-Program(program : AST::Program) : AST::Expression} %
 
     Liefert die aus \texttt{program} transformierte \type{AST::Expression}
     zurück. Die Semantik der Formel ist unbestimmt, falls der
@@ -547,11 +550,6 @@ eines solchen formalen Systems kapseln.%
     Formel nur dann beweisbar, wenn im angewendeten Kalkül das
     WHILE-""Programm für alle Ausführungen seinen Annotationen
     entspricht.%
-
-    Parameter \texttt{program}: Wurzelsprachelement des zu
-    transformierenden Worthwhile-""Programms, d.~h.\ sowohl der
-    WHILE-""Programmtext als auch dessen Annotationen sind im
-    Syntaxbaum enthalten.%
 
 \end{description}%
 

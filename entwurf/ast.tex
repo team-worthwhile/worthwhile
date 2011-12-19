@@ -10,7 +10,7 @@ Das Visitor Pattern lagert die Operationen in externe Klassen (bspw. des Interpr
 Ein geparsted Programm liegt durch die Assoziationen als Baum vor. Dieser lässt sich mithilfe der accept Methode traversieren. Jeder Knoten des Baums kann so erreicht werden und somit ist eine vollständige Abarbeitung des Programms gewährleistet. Der jeweilige Verwendungszweck ergibt sich durch die Benutzung verschiedener Visitors in der entsprechenden Komponente. 
 
 \subsection{Klassenentwurf}
-\subsubsection{class ASTNode}
+\subsubsection{abstract class ASTNode}
 \label{astnode_class}
 Grundsätzlich sind alle Klassen Ableitungen der Klasse ASTNode (siehe Abbildung \ref{ast_diag}). Hierdurch wird sicher gestellt, dass jede Klasse mittels der Methode \texttt{accept ( visitor : ASTNodeVisitor )} von einem Visitor besucht werden kann. Zusätzlich bietet diese Klasse Funktionen um Rückschlüsse (Position, Zeilennummer) auf den ursprünglichen Programmcode zu treffen.
 
@@ -25,11 +25,11 @@ In der Klasse FunctionDeclaration werden zu der jeweiligen Funktion, die Signatu
 \label{astblock_class}
 Ein Block beinhaltet eine beliebige Anzahl an Statements (siehe Kapitel \ref{aststatement_class}).
 
-\subsubsection{class Statement}
+\subsubsection{abstract class Statement}
 \label{aststatement_class}
 Diese Klasse dient dazu um die verschiedenen speziellen Statements (bspw. ReturnStatement, Assignment, VariableDeclaration, usw. siehe Abbildung \ref{ast_diag}) zu gruppieren.
 
-\subsubsection{class Expression}
+\subsubsection{abstract class Expression}
 \label{astexpr_class}
 Ein Ausdruck spezialisiert sich in verschiedenen Klassen wie QuantifiedExpression, Literal, BinaryExpression, usw. (siehe Abbildung \ref{ast_diag}).
 

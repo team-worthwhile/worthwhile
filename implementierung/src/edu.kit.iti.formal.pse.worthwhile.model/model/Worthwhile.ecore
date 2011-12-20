@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Worthwhile"
-    nsURI="http:///Worthwhile.ecore" nsPrefix="Worthwhile">
-  <eSubpackages name="AST" nsURI="http:///Worthwhile/AST.ecore" nsPrefix="Worthwhile.AST">
-    <eClassifiers xsi:type="ecore:EClass" name="Program" eSuperTypes="#//AST/ASTNode">
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="worthwhile"
+    nsURI="http:///edu.kit.iti.formal.pse.worthwhile" nsPrefix="worthwhile">
+  <eSubpackages name="ast" nsURI="http:///ast.model.worthwhile.pse.formal.iti.kit.edu"
+      nsPrefix="edu.kit.iti.formal.pse.worthwhile.model.ast">
+    <eClassifiers xsi:type="ecore:EClass" name="Program" eSuperTypes="#//ast/ASTNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="functionDeclarations"
-          ordered="false" upperBound="-1" eType="#//AST/FunctionDeclaration" containment="true"/>
+          ordered="false" upperBound="-1" eType="#//ast/FunctionDeclaration" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="mainBlock" ordered="false"
-          eType="#//AST/Block" containment="true"/>
+          eType="#//ast/Block" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="axioms" ordered="false"
-          upperBound="-1" eType="#//AST/Axiom" containment="true"/>
+          upperBound="-1" eType="#//ast/Axiom" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ASTNode" abstract="true">
+      <eOperations name="accept">
+        <eParameters name="visitor" lowerBound="1" eType="#//ast/ASTNodeVisitor"/>
+      </eOperations>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="positionInLine" ordered="false"
@@ -20,289 +24,289 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ASTNodeVisitor" abstract="true" interface="true">
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="addition" ordered="false" lowerBound="1" eType="#//AST/Addition"/>
+        <eParameters name="addition" ordered="false" lowerBound="1" eType="#//ast/Addition"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="arrayAccess" ordered="false" lowerBound="1" eType="#//AST/ArrayAccess"/>
+        <eParameters name="arrayAccess" ordered="false" lowerBound="1" eType="#//ast/ArrayAccess"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="arrayLength" ordered="false" lowerBound="1" eType="#//AST/ArrayLength"/>
+        <eParameters name="arrayLength" ordered="false" lowerBound="1" eType="#//ast/ArrayLength"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="arrayLiteral" ordered="false" lowerBound="1" eType="#//AST/ArrayLiteral"/>
+        <eParameters name="arrayLiteral" ordered="false" lowerBound="1" eType="#//ast/ArrayLiteral"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="arrayType" ordered="false" lowerBound="1" eType="#//AST/ArrayType"/>
+        <eParameters name="arrayType" ordered="false" lowerBound="1" eType="#//ast/ArrayType"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="assertion" ordered="false" lowerBound="1" eType="#//AST/Assertion"/>
+        <eParameters name="assertion" ordered="false" lowerBound="1" eType="#//ast/Assertion"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="assignment" ordered="false" lowerBound="1" eType="#//AST/Assignment"/>
+        <eParameters name="assignment" ordered="false" lowerBound="1" eType="#//ast/Assignment"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="assumption" ordered="false" lowerBound="1" eType="#//AST/Assumption"/>
+        <eParameters name="assumption" ordered="false" lowerBound="1" eType="#//ast/Assumption"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="axiom" ordered="false" lowerBound="1" eType="#//AST/Axiom"/>
+        <eParameters name="axiom" ordered="false" lowerBound="1" eType="#//ast/Axiom"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="block" ordered="false" lowerBound="1" eType="#//AST/Block"/>
+        <eParameters name="block" ordered="false" lowerBound="1" eType="#//ast/Block"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="booleanLiteral" ordered="false" lowerBound="1" eType="#//AST/BooleanLiteral"/>
+        <eParameters name="booleanLiteral" ordered="false" lowerBound="1" eType="#//ast/BooleanLiteral"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="booleanType" ordered="false" lowerBound="1" eType="#//AST/BooleanType"/>
+        <eParameters name="booleanType" ordered="false" lowerBound="1" eType="#//ast/BooleanType"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="conditional" ordered="false" lowerBound="1" eType="#//AST/Conditional"/>
+        <eParameters name="conditional" ordered="false" lowerBound="1" eType="#//ast/Conditional"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="conjunction" ordered="false" lowerBound="1" eType="#//AST/Conjunction"/>
+        <eParameters name="conjunction" ordered="false" lowerBound="1" eType="#//ast/Conjunction"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="disjunction" ordered="false" lowerBound="1" eType="#//AST/Disjunction"/>
+        <eParameters name="disjunction" ordered="false" lowerBound="1" eType="#//ast/Disjunction"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="division" ordered="false" lowerBound="1" eType="#//AST/Division"/>
+        <eParameters name="division" ordered="false" lowerBound="1" eType="#//ast/Division"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="equal" ordered="false" lowerBound="1" eType="#//AST/Equal"/>
+        <eParameters name="equal" ordered="false" lowerBound="1" eType="#//ast/Equal"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="equivalence" ordered="false" lowerBound="1" eType="#//AST/Equivalence"/>
+        <eParameters name="equivalence" ordered="false" lowerBound="1" eType="#//ast/Equivalence"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="existsQuantifier" ordered="false" lowerBound="1" eType="#//AST/ExistsQuantifier"/>
+        <eParameters name="existsQuantifier" ordered="false" lowerBound="1" eType="#//ast/ExistsQuantifier"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="forAllQuantifier" ordered="false" lowerBound="1" eType="#//AST/ForAllQuantifier"/>
+        <eParameters name="forAllQuantifier" ordered="false" lowerBound="1" eType="#//ast/ForAllQuantifier"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="functionCall" ordered="false" lowerBound="1" eType="#//AST/FunctionCall"/>
+        <eParameters name="functionCall" ordered="false" lowerBound="1" eType="#//ast/FunctionCall"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="functionDeclaration" ordered="false" lowerBound="1" eType="#//AST/FunctionDeclaration"/>
+        <eParameters name="functionDeclaration" ordered="false" lowerBound="1" eType="#//ast/FunctionDeclaration"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="greater" ordered="false" lowerBound="1" eType="#//AST/Greater"/>
+        <eParameters name="greater" ordered="false" lowerBound="1" eType="#//ast/Greater"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="greaterOrEqual" ordered="false" lowerBound="1" eType="#//AST/GreaterOrEqual"/>
+        <eParameters name="greaterOrEqual" ordered="false" lowerBound="1" eType="#//ast/GreaterOrEqual"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="implication" ordered="false" lowerBound="1" eType="#//AST/Implication"/>
+        <eParameters name="implication" ordered="false" lowerBound="1" eType="#//ast/Implication"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="integerLiteral" ordered="false" lowerBound="1" eType="#//AST/IntegerLiteral"/>
+        <eParameters name="integerLiteral" ordered="false" lowerBound="1" eType="#//ast/IntegerLiteral"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="integerType" ordered="false" lowerBound="1" eType="#//AST/IntegerType"/>
+        <eParameters name="integerType" ordered="false" lowerBound="1" eType="#//ast/IntegerType"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="invariant" ordered="false" lowerBound="1" eType="#//AST/Invariant"/>
+        <eParameters name="invariant" ordered="false" lowerBound="1" eType="#//ast/Invariant"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="less" ordered="false" lowerBound="1" eType="#//AST/Less"/>
+        <eParameters name="less" ordered="false" lowerBound="1" eType="#//ast/Less"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="lessOrEqual" ordered="false" lowerBound="1" eType="#//AST/LessOrEqual"/>
+        <eParameters name="lessOrEqual" ordered="false" lowerBound="1" eType="#//ast/LessOrEqual"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="loop" ordered="false" lowerBound="1" eType="#//AST/Loop"/>
+        <eParameters name="loop" ordered="false" lowerBound="1" eType="#//ast/Loop"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="minus" ordered="false" lowerBound="1" eType="#//AST/Minus"/>
+        <eParameters name="minus" ordered="false" lowerBound="1" eType="#//ast/Minus"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="modulus" ordered="false" lowerBound="1" eType="#//AST/Modulus"/>
+        <eParameters name="modulus" ordered="false" lowerBound="1" eType="#//ast/Modulus"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="multiplication" ordered="false" lowerBound="1" eType="#//AST/Multiplication"/>
+        <eParameters name="multiplication" ordered="false" lowerBound="1" eType="#//ast/Multiplication"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="negation" ordered="false" lowerBound="1" eType="#//AST/Negation"/>
+        <eParameters name="negation" ordered="false" lowerBound="1" eType="#//ast/Negation"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="node" ordered="false" lowerBound="1" eType="#//AST/ASTNode"/>
+        <eParameters name="node" ordered="false" lowerBound="1" eType="#//ast/ASTNode"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="parameter" ordered="false" lowerBound="1" eType="#//AST/Parameter"/>
+        <eParameters name="parameter" ordered="false" lowerBound="1" eType="#//ast/Parameter"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="plus" ordered="false" lowerBound="1" eType="#//AST/Plus"/>
+        <eParameters name="plus" ordered="false" lowerBound="1" eType="#//ast/Plus"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="postcondition" ordered="false" lowerBound="1" eType="#//AST/Postcondition"/>
+        <eParameters name="postcondition" ordered="false" lowerBound="1" eType="#//ast/Postcondition"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="precondition" ordered="false" lowerBound="1" eType="#//AST/Precondition"/>
+        <eParameters name="precondition" ordered="false" lowerBound="1" eType="#//ast/Precondition"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="program" ordered="false" lowerBound="1" eType="#//AST/Program"/>
+        <eParameters name="program" ordered="false" lowerBound="1" eType="#//ast/Program"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="returnStatement" ordered="false" lowerBound="1" eType="#//AST/ReturnStatement"/>
+        <eParameters name="returnStatement" ordered="false" lowerBound="1" eType="#//ast/ReturnStatement"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="subtraction" ordered="false" lowerBound="1" eType="#//AST/Subtraction"/>
+        <eParameters name="subtraction" ordered="false" lowerBound="1" eType="#//ast/Subtraction"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="unequal" ordered="false" lowerBound="1" eType="#//AST/Unequal"/>
+        <eParameters name="unequal" ordered="false" lowerBound="1" eType="#//ast/Unequal"/>
       </eOperations>
       <eOperations name="visit" ordered="false" lowerBound="1">
-        <eParameters name="variableDecleration" ordered="false" lowerBound="1" eType="#//AST/VariableDeclaration"/>
+        <eParameters name="variableDecleration" ordered="false" lowerBound="1" eType="#//ast/VariableDeclaration"/>
       </eOperations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//AST/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//ast/BinaryExpression"/>
     <eClassifiers xsi:type="ecore:EClass" name="BinaryExpression" abstract="true"
-        eSuperTypes="#//AST/Expression">
+        eSuperTypes="#//ast/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="left" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="right" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//AST/ASTNode"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ArrayAccess" eSuperTypes="#//AST/UnaryExpression">
+    <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//ast/ASTNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayAccess" eSuperTypes="#//ast/UnaryExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="index" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true" eSuperTypes="#//AST/Expression">
+    <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true" eSuperTypes="#//ast/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operand" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ArrayLength" eSuperTypes="#//AST/UnaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ArrayLiteral" eSuperTypes="#//AST/Literal">
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayLength" eSuperTypes="#//ast/UnaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayLiteral" eSuperTypes="#//ast/Literal">
       <eStructuralFeatures xsi:type="ecore:EReference" name="values" ordered="false"
-          upperBound="-1" eType="#//AST/Expression"/>
+          upperBound="-1" eType="#//ast/Expression"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//AST/Expression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//AST/Type">
+    <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true" eSuperTypes="#//ast/Expression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//ast/Type">
       <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" ordered="false"
-          lowerBound="1" eType="#//AST/PrimitiveType" containment="true"/>
+          lowerBound="1" eType="#//ast/PrimitiveType" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="size" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//AST/ASTNode"/>
-    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//AST/Type"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Assertion" eSuperTypes="#//AST/Annotation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Annotation" abstract="true" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//ast/ASTNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true" eSuperTypes="#//ast/Type"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Assertion" eSuperTypes="#//ast/Annotation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Annotation" abstract="true" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
-          lowerBound="1" eType="#//AST/VariableReference" containment="true"/>
+          lowerBound="1" eType="#//ast/VariableReference" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="VariableDeclaration" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
-          lowerBound="1" eType="#//AST/Type" containment="true"/>
+          lowerBound="1" eType="#//ast/Type" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" ordered="false"
-          eType="#//AST/Expression" containment="true"/>
+          eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Assumption" eSuperTypes="#//AST/Annotation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Axiom" eSuperTypes="#//AST/Annotation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="Assumption" eSuperTypes="#//ast/Annotation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Axiom" eSuperTypes="#//ast/Annotation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="statements" ordered="false"
-          upperBound="-1" eType="#//AST/Statement" containment="true"/>
+          upperBound="-1" eType="#//ast/Statement" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//AST/Literal">
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//ast/Literal">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//AST/PrimitiveType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="BooleanType" eSuperTypes="#//ast/PrimitiveType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="condition" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="trueBlock" ordered="false"
-          lowerBound="1" eType="#//AST/Block" containment="true"/>
+          lowerBound="1" eType="#//ast/Block" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="falseBlock" ordered="false"
-          eType="#//AST/Block" containment="true"/>
+          eType="#//ast/Block" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Conjunction" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Disjunction" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Equal" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Equivalence" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ExistsQuantifier" eSuperTypes="#//AST/QuantifiedExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Conjunction" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Disjunction" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Equal" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Equivalence" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ExistsQuantifier" eSuperTypes="#//ast/QuantifiedExpression"/>
     <eClassifiers xsi:type="ecore:EClass" name="QuantifiedExpression" abstract="true"
-        eSuperTypes="#//AST/Expression">
+        eSuperTypes="#//ast/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" ordered="false"
-          lowerBound="1" eType="#//AST/Parameter" containment="true"/>
+          lowerBound="1" eType="#//ast/Parameter" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="condition" ordered="false"
-          eType="#//AST/Expression" containment="true"/>
+          eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//AST/ASTNode">
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//ast/ASTNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
-          lowerBound="1" eType="#//AST/Type" containment="true"/>
+          lowerBound="1" eType="#//ast/Type" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="ForAllQuantifier" eSuperTypes="#//AST/QuantifiedExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//AST/Expression">
+    <eClassifiers xsi:type="ecore:EClass" name="ForAllQuantifier" eSuperTypes="#//ast/QuantifiedExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//ast/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="actuals" ordered="false"
-          lowerBound="1" upperBound="-1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" upperBound="-1" eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="function" ordered="false"
-          lowerBound="1" eType="#//AST/FunctionDeclaration"/>
+          lowerBound="1" eType="#//ast/FunctionDeclaration"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="FunctionDeclaration" eSuperTypes="#//AST/ASTNode">
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionDeclaration" eSuperTypes="#//ast/ASTNode">
       <eStructuralFeatures xsi:type="ecore:EReference" name="preconditions" ordered="false"
-          upperBound="-1" eType="#//AST/Precondition" containment="true"/>
+          upperBound="-1" eType="#//ast/Precondition" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="postconditions" ordered="false"
-          upperBound="-1" eType="#//AST/Postcondition" containment="true"/>
+          upperBound="-1" eType="#//ast/Postcondition" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
-          upperBound="-1" eType="#//AST/Parameter" containment="true"/>
+          upperBound="-1" eType="#//ast/Parameter" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false"
-          lowerBound="1" eType="#//AST/Block" containment="true"/>
+          lowerBound="1" eType="#//ast/Block" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" ordered="false"
-          lowerBound="1" eType="#//AST/Type" containment="true"/>
+          lowerBound="1" eType="#//ast/Type" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Precondition" eSuperTypes="#//AST/Annotation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Postcondition" eSuperTypes="#//AST/Annotation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="GreaterOrEqual" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Implication" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//AST/Literal">
+    <eClassifiers xsi:type="ecore:EClass" name="Precondition" eSuperTypes="#//ast/Annotation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Postcondition" eSuperTypes="#//ast/Annotation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="GreaterOrEqual" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Implication" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//ast/Literal">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="IntegerType" eSuperTypes="#//AST/PrimitiveType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Invariant" eSuperTypes="#//AST/Annotation"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Less" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="LessOrEqual" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="IntegerType" eSuperTypes="#//ast/PrimitiveType"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Invariant" eSuperTypes="#//ast/Annotation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Less" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="LessOrEqual" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="condition" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false"
-          lowerBound="1" eType="#//AST/Block" containment="true"/>
+          lowerBound="1" eType="#//ast/Block" containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="invariants" ordered="false"
-          upperBound="-1" eType="#//AST/Invariant" containment="true"/>
+          upperBound="-1" eType="#//ast/Invariant" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//AST/Sign"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Sign" abstract="true" eSuperTypes="#//AST/UnaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Modulus" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//AST/UnaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//AST/Sign"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//AST/Statement">
+    <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//ast/Sign"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Sign" abstract="true" eSuperTypes="#//ast/UnaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Modulus" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//ast/UnaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//ast/Sign"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//ast/Statement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" ordered="false"
-          lowerBound="1" eType="#//AST/Expression" containment="true"/>
+          lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="Unequal" eSuperTypes="#//AST/BinaryExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//AST/Expression">
+    <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Unequal" eSuperTypes="#//ast/BinaryExpression"/>
+    <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//ast/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
-          lowerBound="1" eType="#//AST/VariableDeclaration"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//AST/Expression"
+          lowerBound="1" eType="#//ast/VariableDeclaration"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//ast/Expression"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//AST/ASTNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//ast/ASTNode"/>
   </eSubpackages>
 </ecore:EPackage>

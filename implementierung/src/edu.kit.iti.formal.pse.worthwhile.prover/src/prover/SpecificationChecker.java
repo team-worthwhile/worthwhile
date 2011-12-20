@@ -4,10 +4,10 @@
 package prover;
 
 import static AST.Program.*;
-import static AST.Annotation.*;
+import static AST.Expression.*;
 import static prover.Validity.*;
 import prover.ProgramTransformer.FormulaGenerator;
-import AST.Annotation;
+import AST.Expression;
 import Interpreter.StringToValueMap;
 import AST.Program;
 
@@ -126,11 +126,11 @@ public class SpecificationChecker {
 	}
 
 	/** 
-	 * @param annotation
+	 * @param formula
 	 * @param environment
 	 * @return
 	 */
-	public Validity checkAnnotation(Annotation annotation,
+	public Validity checkFormula(Expression formula,
 			StringToValueMap environment) {
 		// begin-user-code
 		// TODO Auto-generated method stub

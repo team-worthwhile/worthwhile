@@ -161,10 +161,10 @@ public interface AstPackage extends EPackage {
 	int PROGRAM_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getASTNodeVisitor()
 	 * @generated
 	 */
@@ -3028,11 +3028,11 @@ public interface AstPackage extends EPackage {
 	EAttribute getASTNode_PositionInLine();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor <em>AST Node Visitor</em>}'.
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor <em>AST Node Visitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>AST Node Visitor</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor
 	 * @generated
 	 */
 	EClass getASTNodeVisitor();
@@ -4078,10 +4078,10 @@ public interface AstPackage extends EPackage {
 		EAttribute AST_NODE__POSITION_IN_LINE = eINSTANCE.getASTNode_PositionInLine();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getASTNodeVisitor()
 		 * @generated
 		 */

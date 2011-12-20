@@ -6,7 +6,7 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.tests.model.ast;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import junit.framework.TestCase;
 
@@ -17,51 +17,51 @@ import junit.framework.TestCase;
  * <p>
  * The following operations are tested:
  * <ul>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Addition) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Block) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Division) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equal) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Greater) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Implication) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Less) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Loop) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Minus) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Negation) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Plus) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Program) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal) <em>Visit</em>}</li>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Addition) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Block) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Division) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equal) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Greater) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Implication) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Less) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Loop) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Minus) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Negation) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Plus) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Program) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal) <em>Visit</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration) <em>Visit</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -107,10 +107,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Addition) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Addition) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Addition)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Addition)
 	 * @generated
 	 */
 	public void testVisit__Addition() {
@@ -120,10 +120,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess)
 	 * @generated
 	 */
 	public void testVisit__ArrayAccess() {
@@ -133,10 +133,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength)
 	 * @generated
 	 */
 	public void testVisit__ArrayLength() {
@@ -146,10 +146,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral)
 	 * @generated
 	 */
 	public void testVisit__ArrayLiteral() {
@@ -159,10 +159,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType)
 	 * @generated
 	 */
 	public void testVisit__ArrayType() {
@@ -172,10 +172,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion)
 	 * @generated
 	 */
 	public void testVisit__Assertion() {
@@ -185,10 +185,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment)
 	 * @generated
 	 */
 	public void testVisit__Assignment() {
@@ -198,10 +198,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption)
 	 * @generated
 	 */
 	public void testVisit__Assumption() {
@@ -211,10 +211,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom)
 	 * @generated
 	 */
 	public void testVisit__Axiom() {
@@ -224,10 +224,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Block) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Block) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Block)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Block)
 	 * @generated
 	 */
 	public void testVisit__Block() {
@@ -237,10 +237,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral)
 	 * @generated
 	 */
 	public void testVisit__BooleanLiteral() {
@@ -250,10 +250,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType)
 	 * @generated
 	 */
 	public void testVisit__BooleanType() {
@@ -263,10 +263,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional)
 	 * @generated
 	 */
 	public void testVisit__Conditional() {
@@ -276,10 +276,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction)
 	 * @generated
 	 */
 	public void testVisit__Conjunction() {
@@ -289,10 +289,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction)
 	 * @generated
 	 */
 	public void testVisit__Disjunction() {
@@ -302,10 +302,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Division) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Division) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Division)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Division)
 	 * @generated
 	 */
 	public void testVisit__Division() {
@@ -315,10 +315,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equal) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equal) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equal)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equal)
 	 * @generated
 	 */
 	public void testVisit__Equal() {
@@ -328,10 +328,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence)
 	 * @generated
 	 */
 	public void testVisit__Equivalence() {
@@ -341,10 +341,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier)
 	 * @generated
 	 */
 	public void testVisit__ExistsQuantifier() {
@@ -354,10 +354,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier)
 	 * @generated
 	 */
 	public void testVisit__ForAllQuantifier() {
@@ -367,10 +367,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall)
 	 * @generated
 	 */
 	public void testVisit__FunctionCall() {
@@ -380,10 +380,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration)
 	 * @generated
 	 */
 	public void testVisit__FunctionDeclaration() {
@@ -393,10 +393,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Greater) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Greater) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Greater)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Greater)
 	 * @generated
 	 */
 	public void testVisit__Greater() {
@@ -406,10 +406,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual)
 	 * @generated
 	 */
 	public void testVisit__GreaterOrEqual() {
@@ -419,10 +419,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Implication) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Implication) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Implication)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Implication)
 	 * @generated
 	 */
 	public void testVisit__Implication() {
@@ -432,10 +432,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral)
 	 * @generated
 	 */
 	public void testVisit__IntegerLiteral() {
@@ -445,10 +445,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType)
 	 * @generated
 	 */
 	public void testVisit__IntegerType() {
@@ -458,10 +458,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant)
 	 * @generated
 	 */
 	public void testVisit__Invariant() {
@@ -471,10 +471,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Less) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Less) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Less)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Less)
 	 * @generated
 	 */
 	public void testVisit__Less() {
@@ -484,10 +484,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual)
 	 * @generated
 	 */
 	public void testVisit__LessOrEqual() {
@@ -497,10 +497,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Loop) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Loop) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Loop)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Loop)
 	 * @generated
 	 */
 	public void testVisit__Loop() {
@@ -510,10 +510,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Minus) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Minus) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Minus)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Minus)
 	 * @generated
 	 */
 	public void testVisit__Minus() {
@@ -523,10 +523,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus)
 	 * @generated
 	 */
 	public void testVisit__Modulus() {
@@ -536,10 +536,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication)
 	 * @generated
 	 */
 	public void testVisit__Multiplication() {
@@ -549,10 +549,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Negation) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Negation) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Negation)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Negation)
 	 * @generated
 	 */
 	public void testVisit__Negation() {
@@ -562,10 +562,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode)
 	 * @generated
 	 */
 	public void testVisit__ASTNode() {
@@ -575,10 +575,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter)
 	 * @generated
 	 */
 	public void testVisit__Parameter() {
@@ -588,10 +588,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Plus) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Plus) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Plus)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Plus)
 	 * @generated
 	 */
 	public void testVisit__Plus() {
@@ -601,10 +601,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition)
 	 * @generated
 	 */
 	public void testVisit__Postcondition() {
@@ -614,10 +614,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition)
 	 * @generated
 	 */
 	public void testVisit__Precondition() {
@@ -627,10 +627,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Program) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Program) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Program)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Program)
 	 * @generated
 	 */
 	public void testVisit__Program() {
@@ -640,10 +640,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement)
 	 * @generated
 	 */
 	public void testVisit__ReturnStatement() {
@@ -653,10 +653,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction)
 	 * @generated
 	 */
 	public void testVisit__Subtraction() {
@@ -666,10 +666,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal)
 	 * @generated
 	 */
 	public void testVisit__Unequal() {
@@ -679,10 +679,10 @@ public abstract class ASTNodeVisitorTest extends TestCase {
 	}
 
 	/**
-	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration) <em>Visit</em>}' operation.
+	 * Tests the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration) <em>Visit</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor#visit(edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration)
 	 * @generated
 	 */
 	public void testVisit__VariableDeclaration() {

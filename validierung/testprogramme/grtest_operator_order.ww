@@ -1,0 +1,19 @@
+a : Integer := 5
+b : Boolean := 10
+c : Integer := 2
+
+a := b * (a + b / c + 10) // a = 200 
+b := (( a / 100 + 8)*(b % (c + 0 + 0 + 1)) - ( 42 - 21 * 2 )) // b = 10
+
+if (a + c = b) {
+        //should be wrong
+}
+while (a / b / c >= 10 + 1 - 1 / 10 ) {
+        c := c + (5)
+        
+        //break 
+}    // c = 7
+
+if ((a <= a || c >= c) && b = (1+2+3-1) * 2) {
+        a := ( a + 2 ) % b + 1 // a = 3
+} 

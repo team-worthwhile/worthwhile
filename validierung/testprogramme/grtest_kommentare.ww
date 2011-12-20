@@ -1,0 +1,35 @@
+/*
+ * Style guide for Worthwhile.
+ */
+
+/*
+ * VERY important single-line comments look like this.
+ *
+ * // starts single-line comment
+ * /* starts multi-line comment
+ * */ ends multi-line comment
+ */
+
+/* Most single-line comments look like this. Actually not. */
+
+// <del>All</del>Most single-line comment look like this. // single-line comment comment
+                                                          // but multi-line comment
+
+/*
+ * Multi-line comments look like this. Make them real sentences. Fill
+ * them so they look like real paragraphs.
+ */
+
+/*-
+ * Copyright (c) 2011-2053 John Q. Public
+ * All rights reserved.
+ *
+ * Long, boring license goes here, but trimmed for brevity
+ */
+
+/*
+r := 0
+/* return 0 */
+return r
+*/
+return 1

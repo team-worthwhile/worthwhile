@@ -1,0 +1,7 @@
+function a () : Integer {
+   function b () : Integer {
+      return 0
+   }
+
+   return b()
+}

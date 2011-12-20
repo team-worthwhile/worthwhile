@@ -1,0 +1,14 @@
+function division(a : Integer, b : Integer) : Integer {
+	c : Integer := b
+	d : Integer := 0
+	
+	if( b ≥ 0) {
+		while(c ≤ a) {
+			c := c + b
+			d := d + 1
+		}
+	}
+
+	// Note that division(x, 0) is 0 ???
+	return d
+}

@@ -1,0 +1,28 @@
+a : Integer
+a : Integer := 2
+
+b : Integer := 3
+b : Integer
+
+c := 4
+c : Integer
+
+d : Integer
+d := 5
+
+function e() : Boolean
+function e() : Boolean { }
+
+function f() : Boolean { }
+function f() : Boolean { }
+
+function i() : Boolean { }
+function i() : Boolean
+
+function j() : Boolean
+function j() : Boolean
+
+function g() : Boolean {
+   h : Integer
+   }
+   h := 6

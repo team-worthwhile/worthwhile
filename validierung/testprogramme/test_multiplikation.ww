@@ -1,0 +1,21 @@
+// Eingabe: a, b ∈ N
+P : Integer := 0
+
+X : Integer := a
+Y : Integer := b
+x : Integer := X % 2
+
+n : Integer := 1 + [ log a ]
+i : Integer := n - 1
+
+while (i ≥ 0)
+_invariant X · Y + P = a · b
+{
+   P := P + x · Y
+
+   X := X / 2
+   Y := 2 · Y
+   x := X % 2
+
+   i := i - 1
+}

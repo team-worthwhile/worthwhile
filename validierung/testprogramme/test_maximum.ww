@@ -1,0 +1,49 @@
+function sort(int[1337] array, int count) : 
+_requires(count > 0)
+_ensures((forall i in array : \return ≥ i) and (exists i in array : \return = i))
+{
+  max : Integer := array[0];
+  i : Integer := 1;
+
+  while (i < count)
+  _invariant(forall j < i : max ≥ array[j])
+  {
+    if (array[i] > max) {
+      max := array[i]
+    }
+
+    i = i + 1;
+  }
+
+  return max
+}
+
+/*
+(declare-const array (Array Int Int))
+(declare-const count Int)
+(assert (> count 0))
+
+;(define-fun max () Int (select array 0))
+;(define-fun i () Int 1)
+
+(define-fun invariant ((max Int) (i Int)) Bool
+    (forall ((j Int)) (implies (and (>= j 0) (< j i)) (>= max (select array j))))
+)
+
+(assert (not (and (and
+      (invariant (select array 0) 1)
+      (forall ((i Int) (max Int))
+         (implies
+            (and (and (>= i 0) (< i count)) (invariant max i))
+            (invariant (if (> (select array i) max) (select array i) max) (+ i 1))
+         )
+      )
+   )
+   (forall ((i Int) (max Int))
+      (implies
+         (and (and (>= i 0) (not (< i count))) (invariant max i))
+         (invariant max count)
+      )
+   )
+)))
+*/

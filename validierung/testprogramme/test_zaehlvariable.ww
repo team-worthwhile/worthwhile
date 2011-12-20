@@ -1,0 +1,39 @@
+_requires n >= 0
+_ensures \return = n
+
+Integer t
+t := 0
+
+while t < n
+   _invariant t <= n
+{
+   t := t + 1
+}
+
+return t
+
+/*
+(declare-const n Int)
+
+(assert (>= n 0))
+
+(define-fun _inc ((v Int)) Int (+ v 1))
+
+(assert (not
+   (and (and
+      (<= 0 n)
+      (forall ((t Int))
+         (implies
+            (and (< t n) (<= t n))
+            (and (<= (_inc t) n) (> (_inc t) t))
+         )
+      ))
+      (forall ((t Int))
+         (implies
+            (and (not (< t n)) (<= t n))
+            (= t n)
+         )
+      )
+   )
+))
+*/

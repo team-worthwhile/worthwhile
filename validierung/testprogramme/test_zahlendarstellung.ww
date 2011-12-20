@@ -1,0 +1,25 @@
+# Eingabe: k, n ∈ N
+y : Integer := n
+
+m : Integer
+r : Integer
+w : Integer := 0
+
+if (n > 0) {
+   m := 1 + [ log k, n ]
+}
+else {
+   m := 1
+}
+
+i : Integer := 0
+
+while (i ≤ m - 1)
+_invariant w + y · k^i = n
+{
+   r := y modulo k
+   w := w + r · k^i
+   y := y div k
+
+   i := i + 1
+}

@@ -1,0 +1,19 @@
+// missing type or identifier
+function Integer() { }
+Integer := 0
+
+function Boolean() { }
+Boolean := false
+
+function () : Integer { }
+ : Integer := 0
+
+function () : Boolean { }
+ : Boolean := false
+
+// unknown or missing type
+function fun() { }
+var := 0
+
+function () : Fun { }
+ : var := 0

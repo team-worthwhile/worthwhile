@@ -1,0 +1,85 @@
+// Bubble Sort, where the specification says the output is a permutation of
+// the input.
+
+// Introduce a constant 'N' and postulate that it is non-negative
+int N
+_axiom(0 ≤ N)
+
+// Declare a map from integers to integers.  In the procedure below, 'a' will be
+// treated as an array of 'N' elements, indexed from 0 to less than 'N'.
+a : Integer[N]
+
+// This procedure implements Bubble Sort.  One of the postconditions says that,
+// in the final state of the procedure, the array is sorted.  The other
+// postconditions say that the final array is a permutation of the initial
+// array.  To write that part of the specification, the procedure returns that
+// permutation mapping.  That is, out-parameter 'perm' injectively maps the
+// numbers [0..N) to [0..N), as stated by the second and third postconditions.
+// The final postcondition says that 'perm' describes how the elements in
+// 'a' moved:  what is now at index 'i' used to be at index 'perm[i]'.
+// Note, the specification says nothing about the elements of 'a' outside the
+// range [0..N).  Moreover, Boogie does not prove that the program will terminate.
+
+function int[N] BubbleSort(Integer N, Integer[N] a)
+  // array is sorted
+  _ensures (∀ int i ∀ int j, 0 ≤ i ∧ i ≤ j ∧ j < N : \return[i] ≤ \return[j])
+  // perm is a permutation
+  _ensures (∀ int i, 0 ≤ i ∧ i < N : 0 ≤ perm[i] ∧ perm[i] < N)
+  _ensures (∀ int i ∀ int j, 0 ≤ i ∧ i < j ∧ j < N : perm[i] != perm[j])
+  // the final array is that permutation of the input array
+  _ensures (∀ int i, 0 ≤ i ∧ i < N: \return[i] = a[perm[i]])
+{
+  int n := N
+  int p
+  int tmp
+  int[N] result := a
+  int[N] perm
+  
+  int i := N - 1
+  while n > 0 {
+      perm[i] = i
+  }
+
+  _assert (∀ int i, 0 ≤ i ∧ i < N : perm[i] = i)
+
+  while n > 0
+    _invariant 0 ≤ n ∧ n ≤ N;
+    // array is sorted from n onwards
+    _invariant (∀ i, k: int :: n ≤ i ∧ i < N ∧ 0 ≤ k ∧ k < i ==> result[k] ≤ result[i]);
+    // perm is a permutation
+    _invariant (∀ i: int :: 0 ≤ i ∧ i < N ==> 0 ≤ perm[i] ∧ perm[i] < N);
+    _invariant (∀ i, j: int :: 0 ≤ i ∧ i < j ∧ j < N ==> perm[i] != perm[j]);
+    // the current array is that permutation of the input array
+    _invariant (∀ i: int :: 0 ≤ i ∧ i < N ==> result[i] == a[perm[i]]);
+  {
+    n := n - 1
+
+    p := 0
+    while (p < n)
+      _invariant p ≤ n;
+      // array is sorted from n+1 onwards
+      _invariant (∀ int i ∀ int k, n+1 ≤ i ∧ i < N ∧ 0 ≤ k ∧ k < i : result[k] ≤ result[i])
+      // perm is a permutation
+      _invariant (∀ int i, 0 ≤ i ∧ i < N : 0 ≤ perm[i] ∧ perm[i] < N)
+      _invariant (∀ int i ∀ int j, 0 ≤ i ∧ i < j ∧ j < N : perm[i] != perm[j])
+      // the current array is that permutation of the input array
+      _invariant (∀ int i, 0 ≤ i ∧ i < N : result[i] == a[perm[i]])
+      // a[p] is at least as large as any of the first p elements
+      _invariant (∀ int k, 0 ≤ k ∧ k < p : result[k] ≤ result[p])
+    {
+      if result[p+1] < result[p]
+        tmp := result[p]
+        result[p] := result[p+1]
+        result[p+1] := tmp
+        
+        tmp := perm[p]
+        perm[p] := perm[p+1]
+        perm[p+1] := tmp
+      }
+
+      p := p + 1
+    }
+  }
+  
+  return result
+}

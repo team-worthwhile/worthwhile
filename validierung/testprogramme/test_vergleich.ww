@@ -1,0 +1,34 @@
+function max(a : Integer, b : Integer) : Integer
+_ensures((\return ≥ a) and (\return ≥ b) and ((\return = a) or (\return = b)))
+_ensures((forall i in {a, b} : \return ≥ i) and (exists i in {a, b} : \return = i))
+{
+  if (a > b) {
+    return a
+  }
+  if (b ≥ a) {
+    return b
+  }
+}
+
+/*
+(declare-const a Int)
+(declare-const b Int)
+
+(define-fun postcondition ((_return Int)) Bool
+   (and
+      (and (>= _return a) (>= _return b))
+      (or (= _return a) (= _return b))
+   )
+)
+
+(assert (not
+   (and (and
+      (implies (> a b) (postcondition a))
+      (implies (>= b a) (postcondition b)))
+      (implies (not (or (> a b) (>= b a))) false)
+   )
+))
+
+(check-sat)
+(get-model)
+*/

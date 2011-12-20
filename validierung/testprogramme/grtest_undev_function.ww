@@ -1,0 +1,76 @@
+// functions
+
+function funktion1(a : Integer) : Integer {
+	return a
+}
+
+function funktion2(a : Integer) : Boolean {
+	return true
+}
+
+function funktion3(a : Boolean) : Integer {
+	return 1
+}
+
+function funktion4(a : Boolean) : Boolean {
+	return a
+}
+
+function funktion5() : Integer{
+	return 0
+}
+
+function funktion6() : Boolean{
+	return false
+}
+
+
+// main programm
+
+int_var : Integer := 4
+int_result : Integer
+
+bool_var : Boolean := true
+bool_result : Boolean
+
+// Wrong number of arguments
+int_result := funktion1()
+// Wrong argument type
+int_result := funktion1(bool_var)
+// Wrong return type
+bool_result := funktion1(int_var)
+
+// Wrong number of arguments
+bool_result := funktion2()
+// Wrong argument type
+bool_result := funktion2(bool_var)
+// Wrong return type
+int_result := funktion2(int_var)
+
+// Wrong number of arguments
+int_result := funktion3()
+// Wrong argument type
+int_result := funktion3(int_var)
+// Wrong return type
+bool_result := funktion3(bool_var)
+
+// Wrong number of arguments
+bool_result := funktion4()
+// Wrong argument type
+bool_result := funktion4(int_var)
+// Wrong return type
+int_result := funktion4(bool_var)
+
+// Wrong number of arguments
+int_result := funktion5(int_var)
+// Wrong argument type
+int_result := funktion5(bool_var)
+// Wrong return type
+bool_result := funktion5()
+
+// Wrong number of arguments
+bool_result := funktion6(int_var)
+// Wrong argument type
+bool_result := funktion6(bool_var)
+// Wrong return type
+int_result := funktion6()

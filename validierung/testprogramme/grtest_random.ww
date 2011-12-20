@@ -1,0 +1,48 @@
+i : Integer := 8
+
+// return 5
+j : Integer := 6
+
+k : Integer := 8
+
+k := 8
+	
+function test (i : Integer, bla : Boolean[1337]) : Integer {
+	return i < 5
+	return i > 5
+	return i >= 7 + (8 - 9 * 45 % 2)
+		 
+	{
+		
+		return bla
+		return true
+		return true = 4 
+	}
+	
+	
+	test()
+	
+	
+}
+
+true : Boolean := test()
+
+while (i < 5) { }
+
+/* {
+		FIXME
+}*/
+
+while (i < 5) { }
+
+if (i = 5) { }
+
+{
+	{
+		{
+			while (j < 3) {}
+			
+			return true
+		}
+	}
+}

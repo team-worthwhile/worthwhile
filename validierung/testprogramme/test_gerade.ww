@@ -1,0 +1,52 @@
+function even(x : Integer) : Boolean
+_ensures(((exists int k : 2 · k = x) and (\return = true)) or ((exists int k : 2*k - 1 = x) and (\return = false)))
+{
+  temp : Integer := x % 2
+  if (temp = 0) {
+    return true
+  }
+  if (temp = 1) {
+    return false
+  }
+}
+
+/*
+; int x (argument)
+(declare-const x Int)
+
+; ensure
+(define-fun postcondition ((_return Bool)) Bool
+   (not (and
+      (implies (exists ((k Int)) (= (* 2 k) x)) _return)
+      (implies (exists ((k Int)) (= (+ (* 2 k) 1) x)) (not _return))
+   ))
+)
+
+; int temp
+(push)
+   (declare-const temp Int)
+(pop)
+
+; temp := x % 2
+(push)
+   (define-fun temp () Int (mod x 2))
+
+   ; if (temp = 0) { return true; }
+   (push)
+      (define-fun _return () Bool (if (= temp 0) true false))
+
+      (assert (postcondition _return))
+      (check-sat)
+      (get-model)
+   (pop)
+
+   ; if (temp = 1) { return false; }
+   (push)
+      (define-fun _return () Bool (if (= temp 1) false true))
+
+      (assert (postcondition _return))
+      (check-sat)
+      (get-model)
+   (pop)
+(pop)
+*/

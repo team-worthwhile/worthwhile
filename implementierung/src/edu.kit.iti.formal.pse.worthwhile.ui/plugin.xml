@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="ww"
+            id="edu.kit.iti.formal.pse.worthwhile.Worthwhile"
+            name="Worthwhile Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.validate">
+         <activeWhen>
+            <reference
+                    definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="edu.kit.iti.formal.pse.worthwhile.Worthwhile" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="edu.kit.iti.formal.pse.worthwhile.Worthwhile"
+            name="Worthwhile">
+            <keywordReference id="edu.kit.iti.formal.pse.worthwhile.ui.keyword_Worthwhile"/>
+        </page>
+        <page
+            category="edu.kit.iti.formal.pse.worthwhile.Worthwhile"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="edu.kit.iti.formal.pse.worthwhile.ui.keyword_Worthwhile"/>
+        </page>
+        <page
+            category="edu.kit.iti.formal.pse.worthwhile.Worthwhile"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.templates"
+            name="Templates">
+            <keywordReference id="edu.kit.iti.formal.pse.worthwhile.ui.keyword_Worthwhile"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="edu.kit.iti.formal.pse.worthwhile.ui.keyword_Worthwhile"
+            label="Worthwhile"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="ww">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="ww">
+        </resourceServiceProvider>
+    </extension>
+
+
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="edu.kit.iti.formal.pse.worthwhile.Worthwhile.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.compare.contentViewers"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="ww">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.compare.contentMergeViewers"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="ww" label="Worthwhile Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="edu.kit.iti.formal.pse.worthwhile.Worthwhile.editors.documentProviders"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="ww">
+    </provider>
+  </extension>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.xtext.projectwiz"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
+            icon="icons/editor.gif"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
+            name="Worthwhile Project"
+            project="true">
+      </wizard>
+   </extension>
+   <!-- quickfix marker resolution generator -->
+   <extension
+         point="org.eclipse.ui.ide.markerResolution">
+      <markerResolutionGenerator
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+      </markerResolutionGenerator>
+   </extension>
+
+</plugin>

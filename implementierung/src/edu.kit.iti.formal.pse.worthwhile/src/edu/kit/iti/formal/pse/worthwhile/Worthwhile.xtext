@@ -1,6 +1,6 @@
 grammar edu.kit.iti.formal.pse.worthwhile.Worthwhile with org.eclipse.xtext.common.Terminals 
 
-import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.ecore#//AST"
+import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.ecore#//ast"
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
@@ -10,7 +10,7 @@ Program returns Program:
 	NL* // Newline at the beginning of the file is allowed. 
 	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration) NL+)* // All statements need a newline after them. FIXME: End of file?
 	(mainBlock=Block)?
-	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration) NL+)*
+	// ((axioms+=Axiom | functionDeclarations+=FunctionDeclaration) NL+)* // FIXME
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
@@ -186,5 +186,5 @@ Atomic returns Expression:
 
 // A variable reference is used to denote the current content of a variable. 
 VariableReference returns VariableReference:
-		{VariableReference} variable=[VariableDeclaration] ('[' index=Expression ']')?
+		{VariableReference} variable=[VariableDeclaration] // ('[' index=Expression ']')? // FIXME
 ;

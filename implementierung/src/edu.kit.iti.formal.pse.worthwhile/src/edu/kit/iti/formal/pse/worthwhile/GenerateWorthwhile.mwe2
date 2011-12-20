@@ -13,10 +13,8 @@ Workflow {
 	bean = StandaloneSetup {
 		scanClassPath  = true
 		platformUri = "${runtimeProject}/.."
-		registerGeneratedEPackage = "Worthwhile.AST.ASTPackage"
-	
-		// registerGenModelFile = "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.genmodel"
-	
+		// registerGeneratedEPackage = "worthwhile.ast.AstPackage"
+		registerGenModelFile = "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -104,11 +102,10 @@ Workflow {
 			fragment = builder.BuilderIntegrationFragment {}
 
 			// project wizard (optional) 
-
-			// fragment = projectWizard.SimpleProjectWizardFragment {
-			//		generatorProjectName = "${projectName}.generator" 
-			//		modelFileExtension = file.extensions
-			// }
+			fragment = projectWizard.SimpleProjectWizardFragment {
+					generatorProjectName = "${projectName}.generator" 
+					modelFileExtension = file.extensions
+			}
 
 			// quickfix API 
 			fragment = quickfix.QuickfixProviderFragment {}

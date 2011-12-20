@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
@@ -48,16 +47,16 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /** 
  * 
  */
-protected class InterpreterASTNodeVisitor implements ASTNodeVisitor {
+class InterpreterASTNodeVisitor implements ASTNodeVisitor {
 	/** 
 	 * 
 	 */
@@ -178,483 +177,273 @@ protected class InterpreterASTNodeVisitor implements ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Addition addition)
-	 */
+	@Override
 	public void visit(Addition addition) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ArrayAccess arrayAccess)
-	 */
+	@Override
 	public void visit(ArrayAccess arrayAccess) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ArrayLength arrayLength)
-	 */
+	@Override
 	public void visit(ArrayLength arrayLength) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ArrayLiteral arrayLiteral)
-	 */
+	@Override
 	public void visit(ArrayLiteral arrayLiteral) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ArrayType arrayType)
-	 */
+	@Override
 	public void visit(ArrayType arrayType) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Assertion assertion)
-	 */
+	@Override
 	public void visit(Assertion assertion) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Assignment assignment)
-	 */
+	@Override
 	public void visit(Assignment assignment) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Assumption assumption)
-	 */
+	@Override
 	public void visit(Assumption assumption) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Axiom axiom)
-	 */
+	@Override
 	public void visit(Axiom axiom) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Block block)
-	 */
+	@Override
 	public void visit(Block block) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(BooleanLiteral booleanLiteral)
-	 */
+	@Override
 	public void visit(BooleanLiteral booleanLiteral) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(BooleanType booleanType)
-	 */
+	@Override
 	public void visit(BooleanType booleanType) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Conditional conditional)
-	 */
+	@Override
 	public void visit(Conditional conditional) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Conjunction conjunction)
-	 */
+	@Override
 	public void visit(Conjunction conjunction) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Disjunction disjunction)
-	 */
+	@Override
 	public void visit(Disjunction disjunction) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Division division)
-	 */
+	@Override
 	public void visit(Division division) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Equal equal)
-	 */
+	@Override
 	public void visit(Equal equal) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
-	 */
+	@Override
 	public void visit(Equivalence equivalence) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
-	 */
+	@Override
 	public void visit(ExistsQuantifier existsQuantifier) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
-	 */
+	@Override
 	public void visit(ForAllQuantifier forAllQuantifier) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(FunctionCall functionCall)
-	 */
+	@Override
 	public void visit(FunctionCall functionCall) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
-	 */
+	@Override
 	public void visit(FunctionDeclaration functionDeclaration) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Greater greater)
-	 */
+	@Override
 	public void visit(Greater greater) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
-	 */
+	@Override
 	public void visit(GreaterOrEqual greaterOrEqual) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Implication implication)
-	 */
+	@Override
 	public void visit(Implication implication) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
-	 */
+	@Override
 	public void visit(IntegerLiteral integerLiteral) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(IntegerType integerType)
-	 */
+	@Override
 	public void visit(IntegerType integerType) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Invariant invariant)
-	 */
+	@Override
 	public void visit(Invariant invariant) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Less less)
-	 */
+	@Override
 	public void visit(Less less) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
-	 */
+	@Override
 	public void visit(LessOrEqual lessOrEqual) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Loop loop)
-	 */
+	@Override
 	public void visit(Loop loop) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Minus minus)
-	 */
+	@Override
 	public void visit(Minus minus) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Modulus modulus)
-	 */
+	@Override
 	public void visit(Modulus modulus) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
-	 */
+	@Override
 	public void visit(Multiplication multiplication) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Negation negation)
-	 */
+	@Override
 	public void visit(Negation negation) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(ASTNode node)
-	 */
+	@Override
 	public void visit(ASTNode node) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Parameter parameter)
-	 */
+	@Override
 	public void visit(Parameter parameter) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Plus plus)
-	 */
+	@Override
 	public void visit(Plus plus) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
-	 */
+	@Override
 	public void visit(Postcondition postcondition) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Precondition precondition)
-	 */
+	@Override
 	public void visit(Precondition precondition) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Predicates predicates)
-	 */
-	public void visit(Predicates predicates) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	 * @see ASTNodeVisitor#visit(Program program)
-	 */
+	@Override
 	public void visit(Program program) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
-	 */
-	public void visit(QuantifiedExpression quantifiedExpression) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	 * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
-	 */
+	@Override
 	public void visit(ReturnStatement returnStatement) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Subtraction subtraction)
-	 */
+	@Override
 	public void visit(Subtraction subtraction) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(Unequal unequal)
-	 */
+	@Override
 	public void visit(Unequal unequal) {
-		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 
-	/** 
-	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
-	 */
-	public void visit(VariableDeclaration variableDecleration) {
-		// begin-user-code
+	@Override
+	public void visit(VariableDeclaration variableDeclaration) {
 		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	 * @see ASTNodeVisitor#visit(Object variableReference)
-	 */
-	public void visit(Object variableReference) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		
 	}
 }

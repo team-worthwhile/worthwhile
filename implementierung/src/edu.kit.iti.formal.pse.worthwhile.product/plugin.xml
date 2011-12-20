@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="worthwhile"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.eclipse.ui.ide.workbench"
+            name="Worthwhile">
+         <property
+               name="appName"
+               value="Worthwhile">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="000000">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="12,285,478,20">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="10,305,480,15">
+         </property>
+         <property
+               name="aboutImage"
+               value="images/about.bmp">
+         </property>
+         <property
+               name="aboutText"
+               value="One does not simply walk into the about dialog ...">
+         </property>
+         <property
+               name="windowImages"
+               value="icons/icon-16px.png,icons/icon-32px.png,icons/icon-48px.png,icons/icon-64px.png,icons/icon-128px.png">
+         </property>
+      </product>
+   </extension>
+
+</plugin>

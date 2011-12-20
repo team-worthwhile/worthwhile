@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: edu.kit.iti.formal.pse.worthwhile
-Bundle-Vendor: My Company
+Bundle-Vendor: Team Worthwhile
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile; singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -12,7 +12,15 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
- edu.kit.iti.formal.pse.worthwhile.model
+ edu.kit.iti.formal.pse.worthwhile.model;visibility:=reexport,
+ org.eclipse.xtext.util,
+ org.antlr.runtime
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: edu.kit.iti.formal.pse.worthwhile,
+ edu.kit.iti.formal.pse.worthwhile.services,
+ edu.kit.iti.formal.pse.worthwhile.parseTreeConstruction,
+ edu.kit.iti.formal.pse.worthwhile.parser.antlr,
+ edu.kit.iti.formal.pse.worthwhile.parser.antlr.internal,
+ edu.kit.iti.formal.pse.worthwhile.validation

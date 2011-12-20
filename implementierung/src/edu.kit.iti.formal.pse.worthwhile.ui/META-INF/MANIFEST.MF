@@ -1,14 +1,25 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: edu.kit.iti.formal.pse.worthwhile.ui
-Bundle-Vendor: My Company
+Bundle-Vendor: Team Worthwhile
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
- org.eclipse.ui.ide;bundle-version="3.5.0"
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.ui,
+ org.antlr.runtime,
+ org.eclipse.compare,
+ org.eclipse.xtext.builder,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ org.eclipse.xtend,
+ org.eclipse.xpand
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: edu.kit.iti.formal.pse.worthwhile.ui.contentassist.antlr
+Bundle-Activator: edu.kit.iti.formal.pse.worthwhile.ui.internal.WorthwhileActivator

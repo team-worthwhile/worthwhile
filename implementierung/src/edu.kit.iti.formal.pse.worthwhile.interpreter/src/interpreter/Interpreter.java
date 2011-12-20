@@ -4,8 +4,9 @@
 package interpreter;
 
 import java.util.Set;
-import AST.Program;
-import AST.Expression;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /** 
  * 

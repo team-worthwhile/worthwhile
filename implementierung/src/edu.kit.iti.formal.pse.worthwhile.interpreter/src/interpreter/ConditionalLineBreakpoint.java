@@ -3,7 +3,7 @@
  */
 package interpreter;
 
-import AST.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
 /** 
  * 

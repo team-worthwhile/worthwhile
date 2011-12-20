@@ -3,8 +3,8 @@
  */
 package prover;
 
-import AST.Expression;
-import AST.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /** 
  * 

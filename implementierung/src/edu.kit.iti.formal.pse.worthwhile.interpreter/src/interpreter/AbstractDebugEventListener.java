@@ -3,9 +3,9 @@
  */
 package interpreter;
 
-import AST.Statement;
-import AST.Assertion;
-import AST.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /** 
  *

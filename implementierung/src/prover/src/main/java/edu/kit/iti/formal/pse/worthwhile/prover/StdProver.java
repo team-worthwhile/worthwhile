@@ -1,93 +1,75 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
-/** 
- * 
+/**
+ * Implements a prover interface that uses stdin/stdout/stderr
  */
 abstract class StdProver implements ProverCaller {
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	private FormulaCompiler compiler;
-	
-	/** 
-	 * 
-	 */
-	public StdProver() {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
-	}
 
-	/** 
-	 * @param path
-	 * @param compiler
-	 */
-	protected StdProver(String path, FormulaCompiler compiler) {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
-	}
-
-	/** 
-	 * @return the compiler
-	 */
-	public FormulaCompiler getCompiler() {
-		// begin-user-code
-		return compiler;
-		// end-user-code
-	}
-
-	/** 
-	 * @param compiler the compiler to set
-	 */
-	public void setCompiler(FormulaCompiler compiler) {
-		// begin-user-code
-		this.compiler = compiler;
-		// end-user-code
-	}
-
-	/** 
-	 * 
+	/**
+	 * The path to the binary of the prover that should be called
 	 */
 	private String proverPath;
 
-	/** 
-	 * @return the proverPath
+	/**
+	 * Constructs a new caller with the given binary path and compiler object
+	 * 
+	 * @param path the path to the binary to call
+	 * @param compiler the compiler to use to compile valid input for the prover
 	 */
-	public String getProverPath() {
-		// begin-user-code
-		return proverPath;
-		// end-user-code
+	protected StdProver(String path, FormulaCompiler compiler) {
+		this.compiler = compiler;
 	}
 
-	/** 
-	 * @param proverPath the proverPath to set
-	 */
-	public void setProverPath(String proverPath) {
-		// begin-user-code
-		this.proverPath = proverPath;
-		// end-user-code
-	}
-
-	/** 
-	 * @param formula
-	 * @return
+	/**
+	 * Check an the given <code>Expression</code> for its validity
+	 * 
+	 * @param formula the expression to check
+	 * @return the result returned by the prover
 	 */
 	public ProverResult checkFormula(Expression formula) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		return null;
-		// end-user-code
 	}
 
-	/** 
-	 * @param output
-	 * @return
+	/**
+	 * @return the compiler used to compile input for this prover
 	 */
-	public abstract ProverResult getResult(String output);
+	public FormulaCompiler getCompiler() {
+		return this.compiler;
+	}
+
+	/**
+	 * @return the path to the prover binary called by this caller
+	 */
+	public String getProverPath() {
+		return this.proverPath;
+	}
+
+	/**
+	 * Convert output supplied by the prover to machine-readable
+	 * <code>ProverResult</code>
+	 * 
+	 * @param output the String output returned from the called prover
+	 * @return a result extracted from the prover output
+	 */
+	protected abstract ProverResult getResult(String output);
+
+	/**
+	 * @param compiler the compiler to set to compile input for this prover
+	 */
+	public void setCompiler(FormulaCompiler compiler) {
+		this.compiler = compiler;
+	}
+
+	/**
+	 * @param proverPath the path to the binary to call for this prover
+	 */
+	public void setProverPath(String proverPath) {
+		this.proverPath = proverPath;
+	}
 }

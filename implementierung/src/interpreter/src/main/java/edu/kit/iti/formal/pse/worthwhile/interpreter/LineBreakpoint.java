@@ -1,46 +1,31 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
-/** 
- *
+/**
+ * A breakpoint associated with a line that is triggered before any statements
+ * on the line are executed
  */
 public class LineBreakpoint {
+	private Integer line;
 	/**
-	 * 
-	 */
-	public LineBreakpoint() {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
-	}
-	
-	/** 
-	 * @param line
+	 * Constructs a new instance with the given associated line
+	 *
+	 * @param line the line associated with the breakpoint
 	 */
 	public LineBreakpoint(Integer line) {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
+		this.line = line;
 	}
 
-	/** 
-	 * @return
+	/**
+	 * @return the line currently associated with this breakpoint
 	 */
 	public Integer getLine() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.line;
 	}
 
-	/** 
-	 * @param line
+	/**
+	 * @param line the line of code that this breakpoint should trigger on
 	 */
 	public void setLine(Integer line) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		// end-user-code
+		this.line = line;
 	}
 }

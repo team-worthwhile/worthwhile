@@ -1,7 +1,7 @@
 /**
  * 
  */
-package interpreter;
+package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 /** 
 

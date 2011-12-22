@@ -1,8 +1,9 @@
 /**
  * 
  */
-package interpreter;
+package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
+import java.util.Map;
 import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;

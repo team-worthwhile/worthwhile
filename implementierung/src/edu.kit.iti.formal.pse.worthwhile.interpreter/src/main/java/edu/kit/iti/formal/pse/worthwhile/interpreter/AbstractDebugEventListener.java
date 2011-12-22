@@ -1,7 +1,7 @@
 /**
  * 
  */
-package interpreter;
+package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;

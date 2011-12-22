@@ -224,7 +224,7 @@ public class Interpreter {
 	/** 
 	 * @return
 	 */
-	public StringToValueMap getAllSymbols() {
+	public Map<String, Value> getAllSymbols() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;

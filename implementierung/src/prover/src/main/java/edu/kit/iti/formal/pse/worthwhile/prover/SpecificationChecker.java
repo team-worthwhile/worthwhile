@@ -1,15 +1,13 @@
 /**
  * 
  */
-package prover;
+package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import static AST.Program.*;
-import static AST.Expression.*;
-import static prover.Validity.*;
-import prover.ProgramTransformer.FormulaGenerator;
-import AST.Expression;
-import Interpreter.StringToValueMap;
-import AST.Program;
+import java.util.Map;
+
+import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /** 
  * 
@@ -131,7 +129,7 @@ public class SpecificationChecker {
 	 * @return
 	 */
 	public Validity checkFormula(Expression formula,
-			StringToValueMap environment) {
+			Map<String, Value> environment) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;

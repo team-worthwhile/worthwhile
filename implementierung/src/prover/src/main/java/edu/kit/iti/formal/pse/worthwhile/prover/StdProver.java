@@ -1,14 +1,14 @@
 /**
  * 
  */
-package prover;
+package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import AST.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
 /** 
  * 
  */
-protected abstract class StdProver implements ProverCaller {
+abstract class StdProver implements ProverCaller {
 	/** 
 	 * 
 	 */

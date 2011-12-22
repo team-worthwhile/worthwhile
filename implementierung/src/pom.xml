@@ -7,5 +7,6 @@
     <modules>
         <module>model</module>
         <module>interpreter</module>
+        <module>prover</module>
     </modules>
 </project>

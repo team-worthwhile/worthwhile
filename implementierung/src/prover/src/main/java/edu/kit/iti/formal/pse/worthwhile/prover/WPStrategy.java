@@ -1,62 +1,15 @@
 /**
  * 
  */
-package prover;
+package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import AST.ASTNodeVisitor;
-import AST.Expression;
-import AST.Program;
-import AST.Addition;
-import AST.ArrayAccess;
-import AST.ArrayLength;
-import AST.ArrayLiteral;
-import AST.ArrayType;
-import AST.Assertion;
-import AST.Assignment;
-import AST.Assumption;
-import AST.Axiom;
-import AST.Block;
-import AST.BooleanLiteral;
-import AST.BooleanType;
-import AST.Conditional;
-import AST.Conjunction;
-import AST.Disjunction;
-import AST.Division;
-import AST.Equal;
-import AST.Equivalence;
-import AST.ExistsQuantifier;
-import AST.ForAllQuantifier;
-import AST.FunctionCall;
-import AST.FunctionDeclaration;
-import AST.Greater;
-import AST.GreaterOrEqual;
-import AST.Implication;
-import AST.IntegerLiteral;
-import AST.IntegerType;
-import AST.Invariant;
-import AST.Less;
-import AST.LessOrEqual;
-import AST.Loop;
-import AST.Minus;
-import AST.Modulus;
-import AST.Multiplication;
-import AST.Negation;
-import AST.ASTNode;
-import AST.Parameter;
-import AST.Plus;
-import AST.Postcondition;
-import AST.Precondition;
-import AST.Predicates;
-import AST.QuantifiedExpression;
-import AST.ReturnStatement;
-import AST.Subtraction;
-import AST.Unequal;
-import AST.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.*;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /** 
  * 
  */
-protected class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
+class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 	/** 
 	 * 	
 	 */
@@ -502,12 +455,12 @@ protected class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 	/** 
 	 * @see ASTNodeVisitor#visit(Predicates predicates)
 	 */
-	public void visit(Predicates predicates) {
+	/*public void visit(Predicates predicates) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
 		// end-user-code
-	}
+	}*/
 
 	/** 
 	 * @see ASTNodeVisitor#visit(Program program)

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package prover;
+package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
@@ -54,9 +54,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 /** 
  * 
  */
-protected class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
+class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
 	/** 
-	 * 
+	 * r
 	 */
 	private String compilation;
 

@@ -1,10 +1,8 @@
 /**
  * 
  */
-package prover;
+package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import static prover.ProverResult.*;
-import static prover.SMTLIBStrategy.*;
 
 /** 
  * 

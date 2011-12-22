@@ -18,7 +18,7 @@ abstract class StdProver implements ProverCaller {
 
 	/**
 	 * Constructs a new caller with the given binary path and compiler object
-	 * 
+	 *
 	 * @param path the path to the binary to call
 	 * @param compiler the compiler to use to compile valid input for the prover
 	 */
@@ -28,11 +28,24 @@ abstract class StdProver implements ProverCaller {
 
 	/**
 	 * Check an the given <code>Expression</code> for its validity
-	 * 
+	 *
 	 * @param formula the expression to check
 	 * @return the result returned by the prover
 	 */
 	public ProverResult checkFormula(Expression formula) {
+		String in = this.getCompiler().compileFormula(formula);
+		String out = this.executeProverBinary(in);
+		return this.getResult(out);
+	}
+
+	/**
+	 * Call the prover with the given input string
+	 *
+	 * @param input the input string to pass to the prover
+	 * @return the output received on stdout from the prover
+	 */
+	// TODO: Throw some kind of "can't find the binary exception"
+	private String executeProverBinary(String input) {
 		return null;
 	}
 
@@ -53,7 +66,7 @@ abstract class StdProver implements ProverCaller {
 	/**
 	 * Convert output supplied by the prover to machine-readable
 	 * <code>ProverResult</code>
-	 * 
+	 *
 	 * @param output the String output returned from the called prover
 	 * @return a result extracted from the prover output
 	 */

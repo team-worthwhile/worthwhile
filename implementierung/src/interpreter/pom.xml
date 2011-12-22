@@ -2,8 +2,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.kit.iti.formal.pse.worthwhile</groupId>
     <artifactId>interpreter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <name>interpreter</name>
+    <parent>
+        <groupId>edu.kit.iti.formal.pse</groupId>
+        <artifactId>worthwhile</artifactId>
+        <version>0.1</version>
+    </parent>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -11,9 +16,14 @@
             <version>4.10</version>
         </dependency>
         <dependency>
-            <groupId>edu.kit.iti.formal.pse.worthwhile</groupId>
+            <groupId>${pom.groupId}</groupId>
             <artifactId>model</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.eclipse.emf</groupId>
+        	<artifactId>ecore</artifactId>
+        	<version>2.3.0-v200706262000</version>
         </dependency>
     </dependencies>
 </project>

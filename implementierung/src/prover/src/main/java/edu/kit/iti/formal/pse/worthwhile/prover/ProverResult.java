@@ -1,47 +1,33 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-/** 
- * 
+/**
+ * Represents a result of a proof attempt by a prover for a formula
  */
 abstract class ProverResult {
-	/** 
-	 * 
+	/**
+	 * The output of the prover
 	 */
-	private String output;
+	private final String output;
 
-	/** 
-	 * @return the output
-	 */
-	public String getOutput() {
-		// begin-user-code
-		return output;
-		// end-user-code
-	}
-
-	/** 
-	 * @param output the output to set
-	 */
-	public void setOutput(String output) {
-		// begin-user-code
-		this.output = output;
-		// end-user-code
-	}
-
-	/** 
-	 * @return the satisfiability
-	 */
-	public abstract FormulaSatisfiability getSatisfiability();
-
-	/** 
-	 * @param satisfiability
-	 * @param output
+	/**
+	 * Construct a new instance using the given output to deduce the
+	 * satisfiability
+	 *
+	 * @param output the output to construct the result with
 	 */
 	protected ProverResult(String output) {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
+		this.output = output;
 	}
+
+	/**
+	 * @return the raw output of the prover
+	 */
+	public String getOutput() {
+		return this.output;
+	}
+
+	/**
+	 * @return the satisfiability of the formula
+	 */
+	public abstract FormulaSatisfiability getSatisfiability();
 }

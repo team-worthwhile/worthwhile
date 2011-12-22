@@ -1,28 +1,24 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 /**
- * @author Team Worthwhile
+ * Represents a prover result returned by the Z3 Prover
  */
 public class Z3ProverResult extends ProverResult {
 
-    /**
-     * @param output
-     */
-    public Z3ProverResult(String output) {
-	super(output);
-	// TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see ProverResult#ProverResult(String)
+	 */
+	protected Z3ProverResult(String output) {
+		super(output);
+	}
 
-    /* (non-Javadoc)
-     * @see prover.ProverResult#getSatisfiability()
-     */
-    @Override
-    public FormulaSatisfiability getSatisfiability() {
-	// TODO Auto-generated method stub
-	return null;
-    }
+	/**
+	 * @see ProverResult#getSatisfiability()
+	 */
+	@Override
+	public FormulaSatisfiability getSatisfiability() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

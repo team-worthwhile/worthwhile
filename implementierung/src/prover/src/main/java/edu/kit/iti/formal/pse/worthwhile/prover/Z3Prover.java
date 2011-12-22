@@ -17,9 +17,6 @@ public class Z3Prover extends StdProver {
 	 */
 	@Override
 	public ProverResult getResult(String output) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return new Z3ProverResult(output);
 	}
 }

@@ -9,7 +9,7 @@ Program returns Program:
 	{Program}
 	NL* // Newline at the beginning of the file is allowed. 
 	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration) NL+)* // All statements need a newline after them. FIXME: End of file?
-	(mainBlock=Block)?
+	// (mainBlock=Block)?
 	// ((axioms+=Axiom | functionDeclarations+=FunctionDeclaration) NL+)* // FIXME
 ;
 
@@ -42,12 +42,16 @@ Axiom returns Axiom:
 
 // A block consists of one or multiple statements enclosed in curly brackets.
 Block returns Block:
+	{Block} (statements+=Statement NL+)*
+;
+
+BracedBlock returns Block:
 	{Block} '{' NL* (statements+=Statement NL+)* '}'
 ;
 
 // A statement is everything that can be executed in the program.
 Statement returns Statement:
-	(VariableDeclaration | Assignment | Block | Annotation | IfStatement | WhileStatement | ReturnStatement)
+	(VariableDeclaration | Assignment | BracedBlock | Annotation | IfStatement | WhileStatement | ReturnStatement)
 ;
 
 // A return statement returns a value from a function.
@@ -57,7 +61,7 @@ ReturnStatement returns ReturnStatement:
 
 // A while statement specifies a while loop.
 WhileStatement returns Loop:
-	'while' condition=Expression (invariants+=Invariant)* body=Block
+	'while' condition=Expression (invariants+=Invariant)* body=BracedBlock
 ;
 
 // 
@@ -67,12 +71,12 @@ Invariant returns Invariant:
 
 // An if statement specifies a conditional Expression.
 IfStatement returns Conditional:
-	'if' condition=Expression trueBlock=Block ('else' falseBlock=Block)?
+	'if' condition=Expression trueBlock=BracedBlock ('else' falseBlock=BracedBlock)?
 ;
 
 // A function declaration declares a function name, parameters, return type, and function body.
 FunctionDeclaration returns FunctionDeclaration:
-	'function' returnType=Type name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)* )? ')' NL* (preconditions+=Require | postconditions+=Ensure)* body=Block 
+	'function' returnType=Type name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)* )? ')' NL* (preconditions+=Require | postconditions+=Ensure)* body=BracedBlock 
 ;
 
 Require returns Precondition:
@@ -166,12 +170,7 @@ Multiplication returns Expression:
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.
 UnaryOperation returns Expression:
-	 ArrayAccess | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=ArrayAccess) | {ArrayLength} 'length' '(' operand=ArrayAccess ')'
-;
-
-// The access of array items via an index has highest priority.
-ArrayAccess returns Expression:
-	Atomic ({ArrayAccess.operand=current} "[" index=Expression "]")?
+	 Atomic | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=Atomic) | {ArrayLength} 'length' '(' operand=Atomic ')'
 ;
 
 // An atomic value in an Expression is either
@@ -186,5 +185,5 @@ Atomic returns Expression:
 
 // A variable reference is used to denote the current content of a variable. 
 VariableReference returns VariableReference:
-		{VariableReference} variable=[VariableDeclaration] // ('[' index=Expression ']')? // FIXME
+		{VariableReference} variable=[VariableDeclaration] ('[' index=Expression ']')? // FIXME
 ;

@@ -8,6 +8,8 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
 import org.eclipse.emf.ecore.EObject;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>AST Node</b></em>'.
@@ -77,5 +79,12 @@ public interface ASTNode extends EObject {
 	 * @generated
 	 */
 	void setPositionInLine(int value);
+
+	/**
+	 * Accept a visitor and call its corresponding visit method
+	 * 
+	 * @param visitor the visitor to accept
+	 */
+	void accept(ASTNodeVisitor visitor);
 
 } // ASTNode

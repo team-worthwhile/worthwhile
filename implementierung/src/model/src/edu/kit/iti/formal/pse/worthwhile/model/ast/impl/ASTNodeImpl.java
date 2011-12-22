@@ -6,15 +6,14 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,7 +95,7 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	 * @generated
 	 */
 	public int getLineNumber() {
-		return lineNumber;
+		return this.lineNumber;
 	}
 
 	/**
@@ -105,10 +104,10 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	 * @generated
 	 */
 	public void setLineNumber(int newLineNumber) {
-		int oldLineNumber = lineNumber;
-		lineNumber = newLineNumber;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.AST_NODE__LINE_NUMBER, oldLineNumber, lineNumber));
+		int oldLineNumber = this.lineNumber;
+		this.lineNumber = newLineNumber;
+		if (this.eNotificationRequired())
+			this.eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.AST_NODE__LINE_NUMBER, oldLineNumber, this.lineNumber));
 	}
 
 	/**
@@ -117,7 +116,7 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	 * @generated
 	 */
 	public int getPositionInLine() {
-		return positionInLine;
+		return this.positionInLine;
 	}
 
 	/**
@@ -126,10 +125,10 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	 * @generated
 	 */
 	public void setPositionInLine(int newPositionInLine) {
-		int oldPositionInLine = positionInLine;
-		positionInLine = newPositionInLine;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.AST_NODE__POSITION_IN_LINE, oldPositionInLine, positionInLine));
+		int oldPositionInLine = this.positionInLine;
+		this.positionInLine = newPositionInLine;
+		if (this.eNotificationRequired())
+			this.eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.AST_NODE__POSITION_IN_LINE, oldPositionInLine, this.positionInLine));
 	}
 
 	/**
@@ -141,9 +140,9 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AstPackage.AST_NODE__LINE_NUMBER:
-				return getLineNumber();
+				return this.getLineNumber();
 			case AstPackage.AST_NODE__POSITION_IN_LINE:
-				return getPositionInLine();
+				return this.getPositionInLine();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -157,10 +156,10 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case AstPackage.AST_NODE__LINE_NUMBER:
-				setLineNumber((Integer)newValue);
+				this.setLineNumber((Integer)newValue);
 				return;
 			case AstPackage.AST_NODE__POSITION_IN_LINE:
-				setPositionInLine((Integer)newValue);
+				this.setPositionInLine((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -175,10 +174,10 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case AstPackage.AST_NODE__LINE_NUMBER:
-				setLineNumber(LINE_NUMBER_EDEFAULT);
+				this.setLineNumber(LINE_NUMBER_EDEFAULT);
 				return;
 			case AstPackage.AST_NODE__POSITION_IN_LINE:
-				setPositionInLine(POSITION_IN_LINE_EDEFAULT);
+				this.setPositionInLine(POSITION_IN_LINE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -193,9 +192,9 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case AstPackage.AST_NODE__LINE_NUMBER:
-				return lineNumber != LINE_NUMBER_EDEFAULT;
+				return this.lineNumber != LINE_NUMBER_EDEFAULT;
 			case AstPackage.AST_NODE__POSITION_IN_LINE:
-				return positionInLine != POSITION_IN_LINE_EDEFAULT;
+				return this.positionInLine != POSITION_IN_LINE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -207,15 +206,19 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
+		if (this.eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (lineNumber: ");
-		result.append(lineNumber);
+		result.append(this.lineNumber);
 		result.append(", positionInLine: ");
-		result.append(positionInLine);
+		result.append(this.positionInLine);
 		result.append(')');
 		return result.toString();
+	}
+
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //ASTNodeImpl

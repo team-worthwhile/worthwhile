@@ -308,5 +308,11 @@
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//ast/ASTNode"/>
+    <eClassifiers xsi:type="ecore:EClass" name="ParameterReference" eSuperTypes="#//ast/Expression">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" ordered="false"
+          lowerBound="1" eType="#//ast/Parameter"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//ast/Expression"
+          containment="true"/>
+    </eClassifiers>
   </eSubpackages>
 </ecore:EPackage>

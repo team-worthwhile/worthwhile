@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory
+ * @see worthwhile.ast.AstFactory
  * @model kind="package"
  * @generated
  */
@@ -60,11 +60,11 @@ public interface AstPackage extends EPackage {
 	AstPackage eINSTANCE = edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ASTNodeImpl <em>AST Node</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ASTNodeImpl <em>AST Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ASTNodeImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getASTNode()
+	 * @see worthwhile.ast.impl.ASTNodeImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getASTNode()
 	 * @generated
 	 */
 	int AST_NODE = 1;
@@ -97,11 +97,11 @@ public interface AstPackage extends EPackage {
 	int AST_NODE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ProgramImpl <em>Program</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ProgramImpl <em>Program</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ProgramImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getProgram()
+	 * @see worthwhile.ast.impl.ProgramImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getProgram()
 	 * @generated
 	 */
 	int PROGRAM = 0;
@@ -161,11 +161,11 @@ public interface AstPackage extends EPackage {
 	int PROGRAM_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getASTNodeVisitor()
+	 * @see worthwhile.ast.ASTNodeVisitor
+	 * @see worthwhile.ast.impl.AstPackageImpl#getASTNodeVisitor()
 	 * @generated
 	 */
 	int AST_NODE_VISITOR = 2;
@@ -180,11 +180,11 @@ public interface AstPackage extends EPackage {
 	int AST_NODE_VISITOR_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExpressionImpl <em>Expression</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ExpressionImpl <em>Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExpressionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getExpression()
+	 * @see worthwhile.ast.impl.ExpressionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getExpression()
 	 * @generated
 	 */
 	int EXPRESSION = 5;
@@ -217,11 +217,11 @@ public interface AstPackage extends EPackage {
 	int EXPRESSION_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BinaryExpressionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBinaryExpression()
+	 * @see worthwhile.ast.impl.BinaryExpressionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getBinaryExpression()
 	 * @generated
 	 */
 	int BINARY_EXPRESSION = 4;
@@ -272,11 +272,11 @@ public interface AstPackage extends EPackage {
 	int BINARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AdditionImpl <em>Addition</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.AdditionImpl <em>Addition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AdditionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAddition()
+	 * @see worthwhile.ast.impl.AdditionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getAddition()
 	 * @generated
 	 */
 	int ADDITION = 3;
@@ -327,11 +327,11 @@ public interface AstPackage extends EPackage {
 	int ADDITION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnaryExpressionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getUnaryExpression()
+	 * @see worthwhile.ast.impl.UnaryExpressionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getUnaryExpression()
 	 * @generated
 	 */
 	int UNARY_EXPRESSION = 7;
@@ -373,11 +373,11 @@ public interface AstPackage extends EPackage {
 	int UNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayAccessImpl <em>Array Access</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ArrayAccessImpl <em>Array Access</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayAccessImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayAccess()
+	 * @see worthwhile.ast.impl.ArrayAccessImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getArrayAccess()
 	 * @generated
 	 */
 	int ARRAY_ACCESS = 6;
@@ -428,11 +428,11 @@ public interface AstPackage extends EPackage {
 	int ARRAY_ACCESS_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLengthImpl <em>Array Length</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ArrayLengthImpl <em>Array Length</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLengthImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayLength()
+	 * @see worthwhile.ast.impl.ArrayLengthImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getArrayLength()
 	 * @generated
 	 */
 	int ARRAY_LENGTH = 8;
@@ -474,11 +474,11 @@ public interface AstPackage extends EPackage {
 	int ARRAY_LENGTH_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LiteralImpl <em>Literal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.LiteralImpl <em>Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LiteralImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLiteral()
+	 * @see worthwhile.ast.impl.LiteralImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getLiteral()
 	 * @generated
 	 */
 	int LITERAL = 10;
@@ -511,11 +511,11 @@ public interface AstPackage extends EPackage {
 	int LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLiteralImpl <em>Array Literal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ArrayLiteralImpl <em>Array Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLiteralImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayLiteral()
+	 * @see worthwhile.ast.impl.ArrayLiteralImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getArrayLiteral()
 	 * @generated
 	 */
 	int ARRAY_LITERAL = 9;
@@ -557,11 +557,11 @@ public interface AstPackage extends EPackage {
 	int ARRAY_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.TypeImpl <em>Type</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.TypeImpl <em>Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.TypeImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getType()
+	 * @see worthwhile.ast.impl.TypeImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getType()
 	 * @generated
 	 */
 	int TYPE = 12;
@@ -594,11 +594,11 @@ public interface AstPackage extends EPackage {
 	int TYPE_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayTypeImpl <em>Array Type</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ArrayTypeImpl <em>Array Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayTypeImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayType()
+	 * @see worthwhile.ast.impl.ArrayTypeImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getArrayType()
 	 * @generated
 	 */
 	int ARRAY_TYPE = 11;
@@ -649,11 +649,11 @@ public interface AstPackage extends EPackage {
 	int ARRAY_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PrimitiveTypeImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPrimitiveType()
+	 * @see worthwhile.ast.impl.PrimitiveTypeImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getPrimitiveType()
 	 * @generated
 	 */
 	int PRIMITIVE_TYPE = 13;
@@ -686,11 +686,11 @@ public interface AstPackage extends EPackage {
 	int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.StatementImpl <em>Statement</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.StatementImpl <em>Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.StatementImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getStatement()
+	 * @see worthwhile.ast.impl.StatementImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getStatement()
 	 * @generated
 	 */
 	int STATEMENT = 56;
@@ -723,11 +723,11 @@ public interface AstPackage extends EPackage {
 	int STATEMENT_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AnnotationImpl <em>Annotation</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.AnnotationImpl <em>Annotation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AnnotationImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAnnotation()
+	 * @see worthwhile.ast.impl.AnnotationImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getAnnotation()
 	 * @generated
 	 */
 	int ANNOTATION = 15;
@@ -769,11 +769,11 @@ public interface AstPackage extends EPackage {
 	int ANNOTATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssertionImpl <em>Assertion</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.AssertionImpl <em>Assertion</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssertionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAssertion()
+	 * @see worthwhile.ast.impl.AssertionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getAssertion()
 	 * @generated
 	 */
 	int ASSERTION = 14;
@@ -815,11 +815,11 @@ public interface AstPackage extends EPackage {
 	int ASSERTION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssignmentImpl <em>Assignment</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.AssignmentImpl <em>Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssignmentImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAssignment()
+	 * @see worthwhile.ast.impl.AssignmentImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getAssignment()
 	 * @generated
 	 */
 	int ASSIGNMENT = 16;
@@ -870,11 +870,11 @@ public interface AstPackage extends EPackage {
 	int ASSIGNMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableDeclarationImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getVariableDeclaration()
+	 * @see worthwhile.ast.impl.VariableDeclarationImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getVariableDeclaration()
 	 * @generated
 	 */
 	int VARIABLE_DECLARATION = 17;
@@ -934,11 +934,11 @@ public interface AstPackage extends EPackage {
 	int VARIABLE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssumptionImpl <em>Assumption</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.AssumptionImpl <em>Assumption</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssumptionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAssumption()
+	 * @see worthwhile.ast.impl.AssumptionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getAssumption()
 	 * @generated
 	 */
 	int ASSUMPTION = 18;
@@ -980,11 +980,11 @@ public interface AstPackage extends EPackage {
 	int ASSUMPTION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AxiomImpl <em>Axiom</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.AxiomImpl <em>Axiom</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AxiomImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAxiom()
+	 * @see worthwhile.ast.impl.AxiomImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getAxiom()
 	 * @generated
 	 */
 	int AXIOM = 19;
@@ -1026,11 +1026,11 @@ public interface AstPackage extends EPackage {
 	int AXIOM_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BlockImpl <em>Block</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.BlockImpl <em>Block</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BlockImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBlock()
+	 * @see worthwhile.ast.impl.BlockImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getBlock()
 	 * @generated
 	 */
 	int BLOCK = 20;
@@ -1072,11 +1072,11 @@ public interface AstPackage extends EPackage {
 	int BLOCK_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanLiteralImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBooleanLiteral()
+	 * @see worthwhile.ast.impl.BooleanLiteralImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getBooleanLiteral()
 	 * @generated
 	 */
 	int BOOLEAN_LITERAL = 21;
@@ -1118,11 +1118,11 @@ public interface AstPackage extends EPackage {
 	int BOOLEAN_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanTypeImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBooleanType()
+	 * @see worthwhile.ast.impl.BooleanTypeImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getBooleanType()
 	 * @generated
 	 */
 	int BOOLEAN_TYPE = 22;
@@ -1155,11 +1155,11 @@ public interface AstPackage extends EPackage {
 	int BOOLEAN_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConditionalImpl <em>Conditional</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ConditionalImpl <em>Conditional</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConditionalImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getConditional()
+	 * @see worthwhile.ast.impl.ConditionalImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getConditional()
 	 * @generated
 	 */
 	int CONDITIONAL = 23;
@@ -1219,11 +1219,11 @@ public interface AstPackage extends EPackage {
 	int CONDITIONAL_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConjunctionImpl <em>Conjunction</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ConjunctionImpl <em>Conjunction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConjunctionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getConjunction()
+	 * @see worthwhile.ast.impl.ConjunctionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getConjunction()
 	 * @generated
 	 */
 	int CONJUNCTION = 24;
@@ -1274,11 +1274,11 @@ public interface AstPackage extends EPackage {
 	int CONJUNCTION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DisjunctionImpl <em>Disjunction</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.DisjunctionImpl <em>Disjunction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DisjunctionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getDisjunction()
+	 * @see worthwhile.ast.impl.DisjunctionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getDisjunction()
 	 * @generated
 	 */
 	int DISJUNCTION = 25;
@@ -1329,11 +1329,11 @@ public interface AstPackage extends EPackage {
 	int DISJUNCTION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DivisionImpl <em>Division</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.DivisionImpl <em>Division</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DivisionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getDivision()
+	 * @see worthwhile.ast.impl.DivisionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getDivision()
 	 * @generated
 	 */
 	int DIVISION = 26;
@@ -1384,11 +1384,11 @@ public interface AstPackage extends EPackage {
 	int DIVISION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EqualImpl <em>Equal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.EqualImpl <em>Equal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EqualImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getEqual()
+	 * @see worthwhile.ast.impl.EqualImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getEqual()
 	 * @generated
 	 */
 	int EQUAL = 27;
@@ -1439,11 +1439,11 @@ public interface AstPackage extends EPackage {
 	int EQUAL_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EquivalenceImpl <em>Equivalence</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.EquivalenceImpl <em>Equivalence</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EquivalenceImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getEquivalence()
+	 * @see worthwhile.ast.impl.EquivalenceImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getEquivalence()
 	 * @generated
 	 */
 	int EQUIVALENCE = 28;
@@ -1494,11 +1494,11 @@ public interface AstPackage extends EPackage {
 	int EQUIVALENCE_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.QuantifiedExpressionImpl <em>Quantified Expression</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.QuantifiedExpressionImpl <em>Quantified Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.QuantifiedExpressionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getQuantifiedExpression()
+	 * @see worthwhile.ast.impl.QuantifiedExpressionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getQuantifiedExpression()
 	 * @generated
 	 */
 	int QUANTIFIED_EXPRESSION = 30;
@@ -1558,11 +1558,11 @@ public interface AstPackage extends EPackage {
 	int QUANTIFIED_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExistsQuantifierImpl <em>Exists Quantifier</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ExistsQuantifierImpl <em>Exists Quantifier</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExistsQuantifierImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getExistsQuantifier()
+	 * @see worthwhile.ast.impl.ExistsQuantifierImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getExistsQuantifier()
 	 * @generated
 	 */
 	int EXISTS_QUANTIFIER = 29;
@@ -1622,11 +1622,11 @@ public interface AstPackage extends EPackage {
 	int EXISTS_QUANTIFIER_FEATURE_COUNT = QUANTIFIED_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterImpl <em>Parameter</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ParameterImpl <em>Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getParameter()
+	 * @see worthwhile.ast.impl.ParameterImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getParameter()
 	 * @generated
 	 */
 	int PARAMETER = 31;
@@ -1677,11 +1677,11 @@ public interface AstPackage extends EPackage {
 	int PARAMETER_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ForAllQuantifierImpl <em>For All Quantifier</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ForAllQuantifierImpl <em>For All Quantifier</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ForAllQuantifierImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getForAllQuantifier()
+	 * @see worthwhile.ast.impl.ForAllQuantifierImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getForAllQuantifier()
 	 * @generated
 	 */
 	int FOR_ALL_QUANTIFIER = 32;
@@ -1741,11 +1741,11 @@ public interface AstPackage extends EPackage {
 	int FOR_ALL_QUANTIFIER_FEATURE_COUNT = QUANTIFIED_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionCallImpl <em>Function Call</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.FunctionCallImpl <em>Function Call</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionCallImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getFunctionCall()
+	 * @see worthwhile.ast.impl.FunctionCallImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getFunctionCall()
 	 * @generated
 	 */
 	int FUNCTION_CALL = 33;
@@ -1796,11 +1796,11 @@ public interface AstPackage extends EPackage {
 	int FUNCTION_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionDeclarationImpl <em>Function Declaration</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.FunctionDeclarationImpl <em>Function Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionDeclarationImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getFunctionDeclaration()
+	 * @see worthwhile.ast.impl.FunctionDeclarationImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getFunctionDeclaration()
 	 * @generated
 	 */
 	int FUNCTION_DECLARATION = 34;
@@ -1887,11 +1887,11 @@ public interface AstPackage extends EPackage {
 	int FUNCTION_DECLARATION_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PreconditionImpl <em>Precondition</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.PreconditionImpl <em>Precondition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PreconditionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPrecondition()
+	 * @see worthwhile.ast.impl.PreconditionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getPrecondition()
 	 * @generated
 	 */
 	int PRECONDITION = 35;
@@ -1933,11 +1933,11 @@ public interface AstPackage extends EPackage {
 	int PRECONDITION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PostconditionImpl <em>Postcondition</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.PostconditionImpl <em>Postcondition</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PostconditionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPostcondition()
+	 * @see worthwhile.ast.impl.PostconditionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getPostcondition()
 	 * @generated
 	 */
 	int POSTCONDITION = 36;
@@ -1979,11 +1979,11 @@ public interface AstPackage extends EPackage {
 	int POSTCONDITION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterImpl <em>Greater</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.GreaterImpl <em>Greater</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getGreater()
+	 * @see worthwhile.ast.impl.GreaterImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getGreater()
 	 * @generated
 	 */
 	int GREATER = 37;
@@ -2034,11 +2034,11 @@ public interface AstPackage extends EPackage {
 	int GREATER_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterOrEqualImpl <em>Greater Or Equal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.GreaterOrEqualImpl <em>Greater Or Equal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterOrEqualImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getGreaterOrEqual()
+	 * @see worthwhile.ast.impl.GreaterOrEqualImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getGreaterOrEqual()
 	 * @generated
 	 */
 	int GREATER_OR_EQUAL = 38;
@@ -2089,11 +2089,11 @@ public interface AstPackage extends EPackage {
 	int GREATER_OR_EQUAL_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ImplicationImpl <em>Implication</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ImplicationImpl <em>Implication</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ImplicationImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getImplication()
+	 * @see worthwhile.ast.impl.ImplicationImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getImplication()
 	 * @generated
 	 */
 	int IMPLICATION = 39;
@@ -2144,11 +2144,11 @@ public interface AstPackage extends EPackage {
 	int IMPLICATION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerLiteralImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getIntegerLiteral()
+	 * @see worthwhile.ast.impl.IntegerLiteralImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getIntegerLiteral()
 	 * @generated
 	 */
 	int INTEGER_LITERAL = 40;
@@ -2190,11 +2190,11 @@ public interface AstPackage extends EPackage {
 	int INTEGER_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerTypeImpl <em>Integer Type</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.IntegerTypeImpl <em>Integer Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerTypeImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getIntegerType()
+	 * @see worthwhile.ast.impl.IntegerTypeImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getIntegerType()
 	 * @generated
 	 */
 	int INTEGER_TYPE = 41;
@@ -2227,11 +2227,11 @@ public interface AstPackage extends EPackage {
 	int INTEGER_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.InvariantImpl <em>Invariant</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.InvariantImpl <em>Invariant</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.InvariantImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getInvariant()
+	 * @see worthwhile.ast.impl.InvariantImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getInvariant()
 	 * @generated
 	 */
 	int INVARIANT = 42;
@@ -2273,11 +2273,11 @@ public interface AstPackage extends EPackage {
 	int INVARIANT_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessImpl <em>Less</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.LessImpl <em>Less</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLess()
+	 * @see worthwhile.ast.impl.LessImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getLess()
 	 * @generated
 	 */
 	int LESS = 43;
@@ -2328,11 +2328,11 @@ public interface AstPackage extends EPackage {
 	int LESS_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessOrEqualImpl <em>Less Or Equal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.LessOrEqualImpl <em>Less Or Equal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessOrEqualImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLessOrEqual()
+	 * @see worthwhile.ast.impl.LessOrEqualImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getLessOrEqual()
 	 * @generated
 	 */
 	int LESS_OR_EQUAL = 44;
@@ -2383,11 +2383,11 @@ public interface AstPackage extends EPackage {
 	int LESS_OR_EQUAL_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LoopImpl <em>Loop</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.LoopImpl <em>Loop</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LoopImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLoop()
+	 * @see worthwhile.ast.impl.LoopImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getLoop()
 	 * @generated
 	 */
 	int LOOP = 45;
@@ -2447,11 +2447,11 @@ public interface AstPackage extends EPackage {
 	int LOOP_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SignImpl <em>Sign</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.SignImpl <em>Sign</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SignImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getSign()
+	 * @see worthwhile.ast.impl.SignImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getSign()
 	 * @generated
 	 */
 	int SIGN = 47;
@@ -2493,11 +2493,11 @@ public interface AstPackage extends EPackage {
 	int SIGN_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MinusImpl <em>Minus</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.MinusImpl <em>Minus</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MinusImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getMinus()
+	 * @see worthwhile.ast.impl.MinusImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getMinus()
 	 * @generated
 	 */
 	int MINUS = 46;
@@ -2539,11 +2539,11 @@ public interface AstPackage extends EPackage {
 	int MINUS_FEATURE_COUNT = SIGN_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ModulusImpl <em>Modulus</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ModulusImpl <em>Modulus</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ModulusImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getModulus()
+	 * @see worthwhile.ast.impl.ModulusImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getModulus()
 	 * @generated
 	 */
 	int MODULUS = 48;
@@ -2594,11 +2594,11 @@ public interface AstPackage extends EPackage {
 	int MODULUS_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MultiplicationImpl <em>Multiplication</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.MultiplicationImpl <em>Multiplication</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MultiplicationImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getMultiplication()
+	 * @see worthwhile.ast.impl.MultiplicationImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getMultiplication()
 	 * @generated
 	 */
 	int MULTIPLICATION = 49;
@@ -2649,11 +2649,11 @@ public interface AstPackage extends EPackage {
 	int MULTIPLICATION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.NegationImpl <em>Negation</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.NegationImpl <em>Negation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.NegationImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getNegation()
+	 * @see worthwhile.ast.impl.NegationImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getNegation()
 	 * @generated
 	 */
 	int NEGATION = 50;
@@ -2695,11 +2695,11 @@ public interface AstPackage extends EPackage {
 	int NEGATION_FEATURE_COUNT = UNARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PlusImpl <em>Plus</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.PlusImpl <em>Plus</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PlusImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPlus()
+	 * @see worthwhile.ast.impl.PlusImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getPlus()
 	 * @generated
 	 */
 	int PLUS = 51;
@@ -2741,11 +2741,11 @@ public interface AstPackage extends EPackage {
 	int PLUS_FEATURE_COUNT = SIGN_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ReturnStatementImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getReturnStatement()
+	 * @see worthwhile.ast.impl.ReturnStatementImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getReturnStatement()
 	 * @generated
 	 */
 	int RETURN_STATEMENT = 52;
@@ -2787,11 +2787,11 @@ public interface AstPackage extends EPackage {
 	int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SubtractionImpl <em>Subtraction</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.SubtractionImpl <em>Subtraction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SubtractionImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getSubtraction()
+	 * @see worthwhile.ast.impl.SubtractionImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getSubtraction()
 	 * @generated
 	 */
 	int SUBTRACTION = 53;
@@ -2842,11 +2842,11 @@ public interface AstPackage extends EPackage {
 	int SUBTRACTION_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnequalImpl <em>Unequal</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.UnequalImpl <em>Unequal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnequalImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getUnequal()
+	 * @see worthwhile.ast.impl.UnequalImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getUnequal()
 	 * @generated
 	 */
 	int UNEQUAL = 54;
@@ -2897,11 +2897,11 @@ public interface AstPackage extends EPackage {
 	int UNEQUAL_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
+	 * The meta object id for the '{@link worthwhile.ast.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableReferenceImpl
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getVariableReference()
+	 * @see worthwhile.ast.impl.VariableReferenceImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getVariableReference()
 	 * @generated
 	 */
 	int VARIABLE_REFERENCE = 55;
@@ -2951,1049 +2951,1136 @@ public interface AstPackage extends EPackage {
 	 */
 	int VARIABLE_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
+	/**
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterReferenceImpl <em>Parameter Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterReferenceImpl
+	 * @see worthwhile.ast.impl.AstPackageImpl#getParameterReference()
+	 * @generated
+	 */
+	int PARAMETER_REFERENCE = 57;
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program <em>Program</em>}'.
+	 * The feature id for the '<em><b>Line Number</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__LINE_NUMBER = EXPRESSION__LINE_NUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Position In Line</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__POSITION_IN_LINE = EXPRESSION__POSITION_IN_LINE;
+
+	/**
+	 * The feature id for the '<em><b>Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__PARAMETER = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Index</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE__INDEX = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Parameter Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+
+	/**
+	 * Returns the meta object for class '{@link worthwhile.ast.Program <em>Program</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Program</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program
+	 * @see worthwhile.ast.Program
 	 * @generated
 	 */
 	EClass getProgram();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getFunctionDeclarations <em>Function Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.Program#getFunctionDeclarations <em>Function Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Function Declarations</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getFunctionDeclarations()
+	 * @see worthwhile.ast.Program#getFunctionDeclarations()
 	 * @see #getProgram()
 	 * @generated
 	 */
 	EReference getProgram_FunctionDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getMainBlock <em>Main Block</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Program#getMainBlock <em>Main Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Main Block</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getMainBlock()
+	 * @see worthwhile.ast.Program#getMainBlock()
 	 * @see #getProgram()
 	 * @generated
 	 */
 	EReference getProgram_MainBlock();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getAxioms <em>Axioms</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.Program#getAxioms <em>Axioms</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Axioms</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getAxioms()
+	 * @see worthwhile.ast.Program#getAxioms()
 	 * @see #getProgram()
 	 * @generated
 	 */
 	EReference getProgram_Axioms();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode <em>AST Node</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ASTNode <em>AST Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>AST Node</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode
+	 * @see worthwhile.ast.ASTNode
 	 * @generated
 	 */
 	EClass getASTNode();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode#getLineNumber <em>Line Number</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.ASTNode#getLineNumber <em>Line Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Line Number</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode#getLineNumber()
+	 * @see worthwhile.ast.ASTNode#getLineNumber()
 	 * @see #getASTNode()
 	 * @generated
 	 */
 	EAttribute getASTNode_LineNumber();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode#getPositionInLine <em>Position In Line</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.ASTNode#getPositionInLine <em>Position In Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Position In Line</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode#getPositionInLine()
+	 * @see worthwhile.ast.ASTNode#getPositionInLine()
 	 * @see #getASTNode()
 	 * @generated
 	 */
 	EAttribute getASTNode_PositionInLine();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor <em>AST Node Visitor</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ASTNodeVisitor <em>AST Node Visitor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>AST Node Visitor</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor
+	 * @see worthwhile.ast.ASTNodeVisitor
 	 * @generated
 	 */
 	EClass getASTNodeVisitor();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Addition <em>Addition</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Addition <em>Addition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Addition</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Addition
+	 * @see worthwhile.ast.Addition
 	 * @generated
 	 */
 	EClass getAddition();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression <em>Binary Expression</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.BinaryExpression <em>Binary Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Binary Expression</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression
+	 * @see worthwhile.ast.BinaryExpression
 	 * @generated
 	 */
 	EClass getBinaryExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getLeft <em>Left</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.BinaryExpression#getLeft <em>Left</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Left</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getLeft()
+	 * @see worthwhile.ast.BinaryExpression#getLeft()
 	 * @see #getBinaryExpression()
 	 * @generated
 	 */
 	EReference getBinaryExpression_Left();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getRight <em>Right</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.BinaryExpression#getRight <em>Right</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Right</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getRight()
+	 * @see worthwhile.ast.BinaryExpression#getRight()
 	 * @see #getBinaryExpression()
 	 * @generated
 	 */
 	EReference getBinaryExpression_Right();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Expression <em>Expression</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Expression</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Expression
+	 * @see worthwhile.ast.Expression
 	 * @generated
 	 */
 	EClass getExpression();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess <em>Array Access</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ArrayAccess <em>Array Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Access</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess
+	 * @see worthwhile.ast.ArrayAccess
 	 * @generated
 	 */
 	EClass getArrayAccess();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.ArrayAccess#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Index</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess#getIndex()
+	 * @see worthwhile.ast.ArrayAccess#getIndex()
 	 * @see #getArrayAccess()
 	 * @generated
 	 */
 	EReference getArrayAccess_Index();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression <em>Unary Expression</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.UnaryExpression <em>Unary Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Unary Expression</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression
+	 * @see worthwhile.ast.UnaryExpression
 	 * @generated
 	 */
 	EClass getUnaryExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression#getOperand <em>Operand</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.UnaryExpression#getOperand <em>Operand</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Operand</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression#getOperand()
+	 * @see worthwhile.ast.UnaryExpression#getOperand()
 	 * @see #getUnaryExpression()
 	 * @generated
 	 */
 	EReference getUnaryExpression_Operand();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength <em>Array Length</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ArrayLength <em>Array Length</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Length</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength
+	 * @see worthwhile.ast.ArrayLength
 	 * @generated
 	 */
 	EClass getArrayLength();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral <em>Array Literal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ArrayLiteral <em>Array Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Literal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral
+	 * @see worthwhile.ast.ArrayLiteral
 	 * @generated
 	 */
 	EClass getArrayLiteral();
 
 	/**
-	 * Returns the meta object for the reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral#getValues <em>Values</em>}'.
+	 * Returns the meta object for the reference list '{@link worthwhile.ast.ArrayLiteral#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Values</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral#getValues()
+	 * @see worthwhile.ast.ArrayLiteral#getValues()
 	 * @see #getArrayLiteral()
 	 * @generated
 	 */
 	EReference getArrayLiteral_Values();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Literal <em>Literal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Literal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Literal
+	 * @see worthwhile.ast.Literal
 	 * @generated
 	 */
 	EClass getLiteral();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType <em>Array Type</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ArrayType <em>Array Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType
+	 * @see worthwhile.ast.ArrayType
 	 * @generated
 	 */
 	EClass getArrayType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getBaseType <em>Base Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.ArrayType#getBaseType <em>Base Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Base Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getBaseType()
+	 * @see worthwhile.ast.ArrayType#getBaseType()
 	 * @see #getArrayType()
 	 * @generated
 	 */
 	EReference getArrayType_BaseType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getSize <em>Size</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.ArrayType#getSize <em>Size</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Size</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getSize()
+	 * @see worthwhile.ast.ArrayType#getSize()
 	 * @see #getArrayType()
 	 * @generated
 	 */
 	EReference getArrayType_Size();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Type <em>Type</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Type
+	 * @see worthwhile.ast.Type
 	 * @generated
 	 */
 	EClass getType();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType <em>Primitive Type</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.PrimitiveType <em>Primitive Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Primitive Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType
+	 * @see worthwhile.ast.PrimitiveType
 	 * @generated
 	 */
 	EClass getPrimitiveType();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion <em>Assertion</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Assertion <em>Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Assertion</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion
+	 * @see worthwhile.ast.Assertion
 	 * @generated
 	 */
 	EClass getAssertion();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation <em>Annotation</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Annotation <em>Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Annotation</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation
+	 * @see worthwhile.ast.Annotation
 	 * @generated
 	 */
 	EClass getAnnotation();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Annotation#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression()
+	 * @see worthwhile.ast.Annotation#getExpression()
 	 * @see #getAnnotation()
 	 * @generated
 	 */
 	EReference getAnnotation_Expression();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment <em>Assignment</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Assignment <em>Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Assignment</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment
+	 * @see worthwhile.ast.Assignment
 	 * @generated
 	 */
 	EClass getAssignment();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getValue <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Assignment#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getValue()
+	 * @see worthwhile.ast.Assignment#getValue()
 	 * @see #getAssignment()
 	 * @generated
 	 */
 	EReference getAssignment_Value();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Assignment#getVariable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Variable</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getVariable()
+	 * @see worthwhile.ast.Assignment#getVariable()
 	 * @see #getAssignment()
 	 * @generated
 	 */
 	EReference getAssignment_Variable();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration <em>Variable Declaration</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.VariableDeclaration <em>Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable Declaration</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration
+	 * @see worthwhile.ast.VariableDeclaration
 	 * @generated
 	 */
 	EClass getVariableDeclaration();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.VariableDeclaration#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getType()
+	 * @see worthwhile.ast.VariableDeclaration#getType()
 	 * @see #getVariableDeclaration()
 	 * @generated
 	 */
 	EReference getVariableDeclaration_Type();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getInitialValue <em>Initial Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.VariableDeclaration#getInitialValue <em>Initial Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getInitialValue()
+	 * @see worthwhile.ast.VariableDeclaration#getInitialValue()
 	 * @see #getVariableDeclaration()
 	 * @generated
 	 */
 	EReference getVariableDeclaration_InitialValue();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.VariableDeclaration#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getName()
+	 * @see worthwhile.ast.VariableDeclaration#getName()
 	 * @see #getVariableDeclaration()
 	 * @generated
 	 */
 	EAttribute getVariableDeclaration_Name();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption <em>Assumption</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Assumption <em>Assumption</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Assumption</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption
+	 * @see worthwhile.ast.Assumption
 	 * @generated
 	 */
 	EClass getAssumption();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom <em>Axiom</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Axiom <em>Axiom</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Axiom</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom
+	 * @see worthwhile.ast.Axiom
 	 * @generated
 	 */
 	EClass getAxiom();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block <em>Block</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Block <em>Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Block</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Block
+	 * @see worthwhile.ast.Block
 	 * @generated
 	 */
 	EClass getBlock();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block#getStatements <em>Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.Block#getStatements <em>Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Statements</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Block#getStatements()
+	 * @see worthwhile.ast.Block#getStatements()
 	 * @see #getBlock()
 	 * @generated
 	 */
 	EReference getBlock_Statements();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral <em>Boolean Literal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.BooleanLiteral <em>Boolean Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Boolean Literal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral
+	 * @see worthwhile.ast.BooleanLiteral
 	 * @generated
 	 */
 	EClass getBooleanLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.BooleanLiteral#isValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue()
+	 * @see worthwhile.ast.BooleanLiteral#isValue()
 	 * @see #getBooleanLiteral()
 	 * @generated
 	 */
 	EAttribute getBooleanLiteral_Value();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType <em>Boolean Type</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.BooleanType <em>Boolean Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Boolean Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType
+	 * @see worthwhile.ast.BooleanType
 	 * @generated
 	 */
 	EClass getBooleanType();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional <em>Conditional</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Conditional <em>Conditional</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Conditional</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional
+	 * @see worthwhile.ast.Conditional
 	 * @generated
 	 */
 	EClass getConditional();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Conditional#getCondition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getCondition()
+	 * @see worthwhile.ast.Conditional#getCondition()
 	 * @see #getConditional()
 	 * @generated
 	 */
 	EReference getConditional_Condition();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getTrueBlock <em>True Block</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Conditional#getTrueBlock <em>True Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>True Block</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getTrueBlock()
+	 * @see worthwhile.ast.Conditional#getTrueBlock()
 	 * @see #getConditional()
 	 * @generated
 	 */
 	EReference getConditional_TrueBlock();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getFalseBlock <em>False Block</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Conditional#getFalseBlock <em>False Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>False Block</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getFalseBlock()
+	 * @see worthwhile.ast.Conditional#getFalseBlock()
 	 * @see #getConditional()
 	 * @generated
 	 */
 	EReference getConditional_FalseBlock();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction <em>Conjunction</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Conjunction <em>Conjunction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Conjunction</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction
+	 * @see worthwhile.ast.Conjunction
 	 * @generated
 	 */
 	EClass getConjunction();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction <em>Disjunction</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Disjunction <em>Disjunction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Disjunction</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction
+	 * @see worthwhile.ast.Disjunction
 	 * @generated
 	 */
 	EClass getDisjunction();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Division <em>Division</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Division <em>Division</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Division</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Division
+	 * @see worthwhile.ast.Division
 	 * @generated
 	 */
 	EClass getDivision();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equal <em>Equal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Equal <em>Equal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Equal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equal
+	 * @see worthwhile.ast.Equal
 	 * @generated
 	 */
 	EClass getEqual();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence <em>Equivalence</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Equivalence <em>Equivalence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Equivalence</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence
+	 * @see worthwhile.ast.Equivalence
 	 * @generated
 	 */
 	EClass getEquivalence();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier <em>Exists Quantifier</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ExistsQuantifier <em>Exists Quantifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Exists Quantifier</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier
+	 * @see worthwhile.ast.ExistsQuantifier
 	 * @generated
 	 */
 	EClass getExistsQuantifier();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression <em>Quantified Expression</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.QuantifiedExpression <em>Quantified Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Quantified Expression</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression
+	 * @see worthwhile.ast.QuantifiedExpression
 	 * @generated
 	 */
 	EClass getQuantifiedExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getParameter <em>Parameter</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.QuantifiedExpression#getParameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Parameter</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getParameter()
+	 * @see worthwhile.ast.QuantifiedExpression#getParameter()
 	 * @see #getQuantifiedExpression()
 	 * @generated
 	 */
 	EReference getQuantifiedExpression_Parameter();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.QuantifiedExpression#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getExpression()
+	 * @see worthwhile.ast.QuantifiedExpression#getExpression()
 	 * @see #getQuantifiedExpression()
 	 * @generated
 	 */
 	EReference getQuantifiedExpression_Expression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.QuantifiedExpression#getCondition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getCondition()
+	 * @see worthwhile.ast.QuantifiedExpression#getCondition()
 	 * @see #getQuantifiedExpression()
 	 * @generated
 	 */
 	EReference getQuantifiedExpression_Condition();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter <em>Parameter</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Parameter</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter
+	 * @see worthwhile.ast.Parameter
 	 * @generated
 	 */
 	EClass getParameter();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Parameter#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter#getType()
+	 * @see worthwhile.ast.Parameter#getType()
 	 * @see #getParameter()
 	 * @generated
 	 */
 	EReference getParameter_Type();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.Parameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter#getName()
+	 * @see worthwhile.ast.Parameter#getName()
 	 * @see #getParameter()
 	 * @generated
 	 */
 	EAttribute getParameter_Name();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier <em>For All Quantifier</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ForAllQuantifier <em>For All Quantifier</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>For All Quantifier</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier
+	 * @see worthwhile.ast.ForAllQuantifier
 	 * @generated
 	 */
 	EClass getForAllQuantifier();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall <em>Function Call</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.FunctionCall <em>Function Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Function Call</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall
+	 * @see worthwhile.ast.FunctionCall
 	 * @generated
 	 */
 	EClass getFunctionCall();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getActuals <em>Actuals</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.FunctionCall#getActuals <em>Actuals</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Actuals</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getActuals()
+	 * @see worthwhile.ast.FunctionCall#getActuals()
 	 * @see #getFunctionCall()
 	 * @generated
 	 */
 	EReference getFunctionCall_Actuals();
 
 	/**
-	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the reference '{@link worthwhile.ast.FunctionCall#getFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Function</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getFunction()
+	 * @see worthwhile.ast.FunctionCall#getFunction()
 	 * @see #getFunctionCall()
 	 * @generated
 	 */
 	EReference getFunctionCall_Function();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration <em>Function Declaration</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.FunctionDeclaration <em>Function Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Function Declaration</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration
+	 * @see worthwhile.ast.FunctionDeclaration
 	 * @generated
 	 */
 	EClass getFunctionDeclaration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPreconditions <em>Preconditions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.FunctionDeclaration#getPreconditions <em>Preconditions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Preconditions</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPreconditions()
+	 * @see worthwhile.ast.FunctionDeclaration#getPreconditions()
 	 * @see #getFunctionDeclaration()
 	 * @generated
 	 */
 	EReference getFunctionDeclaration_Preconditions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPostconditions <em>Postconditions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.FunctionDeclaration#getPostconditions <em>Postconditions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Postconditions</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPostconditions()
+	 * @see worthwhile.ast.FunctionDeclaration#getPostconditions()
 	 * @see #getFunctionDeclaration()
 	 * @generated
 	 */
 	EReference getFunctionDeclaration_Postconditions();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.FunctionDeclaration#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getParameters()
+	 * @see worthwhile.ast.FunctionDeclaration#getParameters()
 	 * @see #getFunctionDeclaration()
 	 * @generated
 	 */
 	EReference getFunctionDeclaration_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getBody <em>Body</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.FunctionDeclaration#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getBody()
+	 * @see worthwhile.ast.FunctionDeclaration#getBody()
 	 * @see #getFunctionDeclaration()
 	 * @generated
 	 */
 	EReference getFunctionDeclaration_Body();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.FunctionDeclaration#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getReturnType()
+	 * @see worthwhile.ast.FunctionDeclaration#getReturnType()
 	 * @see #getFunctionDeclaration()
 	 * @generated
 	 */
 	EReference getFunctionDeclaration_ReturnType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.FunctionDeclaration#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getName()
+	 * @see worthwhile.ast.FunctionDeclaration#getName()
 	 * @see #getFunctionDeclaration()
 	 * @generated
 	 */
 	EAttribute getFunctionDeclaration_Name();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition <em>Precondition</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Precondition <em>Precondition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Precondition</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition
+	 * @see worthwhile.ast.Precondition
 	 * @generated
 	 */
 	EClass getPrecondition();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition <em>Postcondition</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Postcondition <em>Postcondition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Postcondition</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition
+	 * @see worthwhile.ast.Postcondition
 	 * @generated
 	 */
 	EClass getPostcondition();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Greater <em>Greater</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Greater <em>Greater</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Greater</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Greater
+	 * @see worthwhile.ast.Greater
 	 * @generated
 	 */
 	EClass getGreater();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual <em>Greater Or Equal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.GreaterOrEqual <em>Greater Or Equal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Greater Or Equal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual
+	 * @see worthwhile.ast.GreaterOrEqual
 	 * @generated
 	 */
 	EClass getGreaterOrEqual();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Implication <em>Implication</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Implication <em>Implication</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Implication</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Implication
+	 * @see worthwhile.ast.Implication
 	 * @generated
 	 */
 	EClass getImplication();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral <em>Integer Literal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.IntegerLiteral <em>Integer Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer Literal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral
+	 * @see worthwhile.ast.IntegerLiteral
 	 * @generated
 	 */
 	EClass getIntegerLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.IntegerLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral#getValue()
+	 * @see worthwhile.ast.IntegerLiteral#getValue()
 	 * @see #getIntegerLiteral()
 	 * @generated
 	 */
 	EAttribute getIntegerLiteral_Value();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType <em>Integer Type</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.IntegerType <em>Integer Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer Type</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType
+	 * @see worthwhile.ast.IntegerType
 	 * @generated
 	 */
 	EClass getIntegerType();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant <em>Invariant</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Invariant <em>Invariant</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Invariant</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant
+	 * @see worthwhile.ast.Invariant
 	 * @generated
 	 */
 	EClass getInvariant();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Less <em>Less</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Less <em>Less</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Less</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Less
+	 * @see worthwhile.ast.Less
 	 * @generated
 	 */
 	EClass getLess();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual <em>Less Or Equal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.LessOrEqual <em>Less Or Equal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Less Or Equal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual
+	 * @see worthwhile.ast.LessOrEqual
 	 * @generated
 	 */
 	EClass getLessOrEqual();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop <em>Loop</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Loop <em>Loop</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Loop</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop
+	 * @see worthwhile.ast.Loop
 	 * @generated
 	 */
 	EClass getLoop();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getCondition <em>Condition</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Loop#getCondition <em>Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getCondition()
+	 * @see worthwhile.ast.Loop#getCondition()
 	 * @see #getLoop()
 	 * @generated
 	 */
 	EReference getLoop_Condition();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getBody <em>Body</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.Loop#getBody <em>Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Body</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getBody()
+	 * @see worthwhile.ast.Loop#getBody()
 	 * @see #getLoop()
 	 * @generated
 	 */
 	EReference getLoop_Body();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getInvariants <em>Invariants</em>}'.
+	 * Returns the meta object for the containment reference list '{@link worthwhile.ast.Loop#getInvariants <em>Invariants</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Invariants</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getInvariants()
+	 * @see worthwhile.ast.Loop#getInvariants()
 	 * @see #getLoop()
 	 * @generated
 	 */
 	EReference getLoop_Invariants();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Minus <em>Minus</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Minus <em>Minus</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Minus</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Minus
+	 * @see worthwhile.ast.Minus
 	 * @generated
 	 */
 	EClass getMinus();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Sign <em>Sign</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Sign <em>Sign</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Sign</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Sign
+	 * @see worthwhile.ast.Sign
 	 * @generated
 	 */
 	EClass getSign();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus <em>Modulus</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Modulus <em>Modulus</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Modulus</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus
+	 * @see worthwhile.ast.Modulus
 	 * @generated
 	 */
 	EClass getModulus();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication <em>Multiplication</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Multiplication <em>Multiplication</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Multiplication</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication
+	 * @see worthwhile.ast.Multiplication
 	 * @generated
 	 */
 	EClass getMultiplication();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Negation <em>Negation</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Negation <em>Negation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Negation</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Negation
+	 * @see worthwhile.ast.Negation
 	 * @generated
 	 */
 	EClass getNegation();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Plus <em>Plus</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Plus <em>Plus</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Plus</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Plus
+	 * @see worthwhile.ast.Plus
 	 * @generated
 	 */
 	EClass getPlus();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement <em>Return Statement</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.ReturnStatement <em>Return Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Return Statement</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement
+	 * @see worthwhile.ast.ReturnStatement
 	 * @generated
 	 */
 	EClass getReturnStatement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue <em>Return Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.ReturnStatement#getReturnValue <em>Return Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Value</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue()
+	 * @see worthwhile.ast.ReturnStatement#getReturnValue()
 	 * @see #getReturnStatement()
 	 * @generated
 	 */
 	EReference getReturnStatement_ReturnValue();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Subtraction <em>Subtraction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Subtraction</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction
+	 * @see worthwhile.ast.Subtraction
 	 * @generated
 	 */
 	EClass getSubtraction();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal <em>Unequal</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Unequal <em>Unequal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Unequal</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal
+	 * @see worthwhile.ast.Unequal
 	 * @generated
 	 */
 	EClass getUnequal();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference <em>Variable Reference</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.VariableReference <em>Variable Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable Reference</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference
+	 * @see worthwhile.ast.VariableReference
 	 * @generated
 	 */
 	EClass getVariableReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getVariable <em>Variable</em>}'.
+	 * Returns the meta object for the reference '{@link worthwhile.ast.VariableReference#getVariable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Variable</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getVariable()
+	 * @see worthwhile.ast.VariableReference#getVariable()
 	 * @see #getVariableReference()
 	 * @generated
 	 */
 	EReference getVariableReference_Variable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the containment reference '{@link worthwhile.ast.VariableReference#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Index</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getIndex()
+	 * @see worthwhile.ast.VariableReference#getIndex()
 	 * @see #getVariableReference()
 	 * @generated
 	 */
 	EReference getVariableReference_Index();
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Statement <em>Statement</em>}'.
+	 * Returns the meta object for class '{@link worthwhile.ast.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Statement</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Statement
+	 * @see worthwhile.ast.Statement
 	 * @generated
 	 */
 	EClass getStatement();
+
+	/**
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference <em>Parameter Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Parameter Reference</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference
+	 * @generated
+	 */
+	EClass getParameterReference();
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference#getParameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Parameter</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference#getParameter()
+	 * @see #getParameterReference()
+	 * @generated
+	 */
+	EReference getParameterReference_Parameter();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference#getIndex <em>Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Index</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference#getIndex()
+	 * @see #getParameterReference()
+	 * @generated
+	 */
+	EReference getParameterReference_Index();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -4018,11 +4105,11 @@ public interface AstPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ProgramImpl <em>Program</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ProgramImpl <em>Program</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ProgramImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getProgram()
+		 * @see worthwhile.ast.impl.ProgramImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getProgram()
 		 * @generated
 		 */
 		EClass PROGRAM = eINSTANCE.getProgram();
@@ -4052,11 +4139,11 @@ public interface AstPackage extends EPackage {
 		EReference PROGRAM__AXIOMS = eINSTANCE.getProgram_Axioms();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ASTNodeImpl <em>AST Node</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ASTNodeImpl <em>AST Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ASTNodeImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getASTNode()
+		 * @see worthwhile.ast.impl.ASTNodeImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getASTNode()
 		 * @generated
 		 */
 		EClass AST_NODE = eINSTANCE.getASTNode();
@@ -4078,31 +4165,31 @@ public interface AstPackage extends EPackage {
 		EAttribute AST_NODE__POSITION_IN_LINE = eINSTANCE.getASTNode_PositionInLine();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.ASTNodeVisitor <em>AST Node Visitor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getASTNodeVisitor()
+		 * @see worthwhile.ast.ASTNodeVisitor
+		 * @see worthwhile.ast.impl.AstPackageImpl#getASTNodeVisitor()
 		 * @generated
 		 */
 		EClass AST_NODE_VISITOR = eINSTANCE.getASTNodeVisitor();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AdditionImpl <em>Addition</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.AdditionImpl <em>Addition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AdditionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAddition()
+		 * @see worthwhile.ast.impl.AdditionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getAddition()
 		 * @generated
 		 */
 		EClass ADDITION = eINSTANCE.getAddition();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.BinaryExpressionImpl <em>Binary Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BinaryExpressionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBinaryExpression()
+		 * @see worthwhile.ast.impl.BinaryExpressionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getBinaryExpression()
 		 * @generated
 		 */
 		EClass BINARY_EXPRESSION = eINSTANCE.getBinaryExpression();
@@ -4124,21 +4211,21 @@ public interface AstPackage extends EPackage {
 		EReference BINARY_EXPRESSION__RIGHT = eINSTANCE.getBinaryExpression_Right();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExpressionImpl <em>Expression</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ExpressionImpl <em>Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExpressionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getExpression()
+		 * @see worthwhile.ast.impl.ExpressionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getExpression()
 		 * @generated
 		 */
 		EClass EXPRESSION = eINSTANCE.getExpression();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayAccessImpl <em>Array Access</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ArrayAccessImpl <em>Array Access</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayAccessImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayAccess()
+		 * @see worthwhile.ast.impl.ArrayAccessImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getArrayAccess()
 		 * @generated
 		 */
 		EClass ARRAY_ACCESS = eINSTANCE.getArrayAccess();
@@ -4152,11 +4239,11 @@ public interface AstPackage extends EPackage {
 		EReference ARRAY_ACCESS__INDEX = eINSTANCE.getArrayAccess_Index();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnaryExpressionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getUnaryExpression()
+		 * @see worthwhile.ast.impl.UnaryExpressionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getUnaryExpression()
 		 * @generated
 		 */
 		EClass UNARY_EXPRESSION = eINSTANCE.getUnaryExpression();
@@ -4170,21 +4257,21 @@ public interface AstPackage extends EPackage {
 		EReference UNARY_EXPRESSION__OPERAND = eINSTANCE.getUnaryExpression_Operand();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLengthImpl <em>Array Length</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ArrayLengthImpl <em>Array Length</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLengthImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayLength()
+		 * @see worthwhile.ast.impl.ArrayLengthImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getArrayLength()
 		 * @generated
 		 */
 		EClass ARRAY_LENGTH = eINSTANCE.getArrayLength();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLiteralImpl <em>Array Literal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ArrayLiteralImpl <em>Array Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayLiteralImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayLiteral()
+		 * @see worthwhile.ast.impl.ArrayLiteralImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getArrayLiteral()
 		 * @generated
 		 */
 		EClass ARRAY_LITERAL = eINSTANCE.getArrayLiteral();
@@ -4198,21 +4285,21 @@ public interface AstPackage extends EPackage {
 		EReference ARRAY_LITERAL__VALUES = eINSTANCE.getArrayLiteral_Values();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LiteralImpl <em>Literal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.LiteralImpl <em>Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LiteralImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLiteral()
+		 * @see worthwhile.ast.impl.LiteralImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getLiteral()
 		 * @generated
 		 */
 		EClass LITERAL = eINSTANCE.getLiteral();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayTypeImpl <em>Array Type</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ArrayTypeImpl <em>Array Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ArrayTypeImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getArrayType()
+		 * @see worthwhile.ast.impl.ArrayTypeImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getArrayType()
 		 * @generated
 		 */
 		EClass ARRAY_TYPE = eINSTANCE.getArrayType();
@@ -4234,41 +4321,41 @@ public interface AstPackage extends EPackage {
 		EReference ARRAY_TYPE__SIZE = eINSTANCE.getArrayType_Size();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.TypeImpl <em>Type</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.TypeImpl <em>Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.TypeImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getType()
+		 * @see worthwhile.ast.impl.TypeImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getType()
 		 * @generated
 		 */
 		EClass TYPE = eINSTANCE.getType();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PrimitiveTypeImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPrimitiveType()
+		 * @see worthwhile.ast.impl.PrimitiveTypeImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getPrimitiveType()
 		 * @generated
 		 */
 		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssertionImpl <em>Assertion</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.AssertionImpl <em>Assertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssertionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAssertion()
+		 * @see worthwhile.ast.impl.AssertionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getAssertion()
 		 * @generated
 		 */
 		EClass ASSERTION = eINSTANCE.getAssertion();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AnnotationImpl <em>Annotation</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.AnnotationImpl <em>Annotation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AnnotationImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAnnotation()
+		 * @see worthwhile.ast.impl.AnnotationImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getAnnotation()
 		 * @generated
 		 */
 		EClass ANNOTATION = eINSTANCE.getAnnotation();
@@ -4282,11 +4369,11 @@ public interface AstPackage extends EPackage {
 		EReference ANNOTATION__EXPRESSION = eINSTANCE.getAnnotation_Expression();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssignmentImpl <em>Assignment</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.AssignmentImpl <em>Assignment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssignmentImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAssignment()
+		 * @see worthwhile.ast.impl.AssignmentImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getAssignment()
 		 * @generated
 		 */
 		EClass ASSIGNMENT = eINSTANCE.getAssignment();
@@ -4308,11 +4395,11 @@ public interface AstPackage extends EPackage {
 		EReference ASSIGNMENT__VARIABLE = eINSTANCE.getAssignment_Variable();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableDeclarationImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getVariableDeclaration()
+		 * @see worthwhile.ast.impl.VariableDeclarationImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getVariableDeclaration()
 		 * @generated
 		 */
 		EClass VARIABLE_DECLARATION = eINSTANCE.getVariableDeclaration();
@@ -4342,31 +4429,31 @@ public interface AstPackage extends EPackage {
 		EAttribute VARIABLE_DECLARATION__NAME = eINSTANCE.getVariableDeclaration_Name();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssumptionImpl <em>Assumption</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.AssumptionImpl <em>Assumption</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AssumptionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAssumption()
+		 * @see worthwhile.ast.impl.AssumptionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getAssumption()
 		 * @generated
 		 */
 		EClass ASSUMPTION = eINSTANCE.getAssumption();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AxiomImpl <em>Axiom</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.AxiomImpl <em>Axiom</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AxiomImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getAxiom()
+		 * @see worthwhile.ast.impl.AxiomImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getAxiom()
 		 * @generated
 		 */
 		EClass AXIOM = eINSTANCE.getAxiom();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BlockImpl <em>Block</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.BlockImpl <em>Block</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BlockImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBlock()
+		 * @see worthwhile.ast.impl.BlockImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getBlock()
 		 * @generated
 		 */
 		EClass BLOCK = eINSTANCE.getBlock();
@@ -4380,11 +4467,11 @@ public interface AstPackage extends EPackage {
 		EReference BLOCK__STATEMENTS = eINSTANCE.getBlock_Statements();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanLiteralImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBooleanLiteral()
+		 * @see worthwhile.ast.impl.BooleanLiteralImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getBooleanLiteral()
 		 * @generated
 		 */
 		EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
@@ -4398,21 +4485,21 @@ public interface AstPackage extends EPackage {
 		EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.BooleanTypeImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getBooleanType()
+		 * @see worthwhile.ast.impl.BooleanTypeImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getBooleanType()
 		 * @generated
 		 */
 		EClass BOOLEAN_TYPE = eINSTANCE.getBooleanType();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConditionalImpl <em>Conditional</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ConditionalImpl <em>Conditional</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConditionalImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getConditional()
+		 * @see worthwhile.ast.impl.ConditionalImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getConditional()
 		 * @generated
 		 */
 		EClass CONDITIONAL = eINSTANCE.getConditional();
@@ -4442,71 +4529,71 @@ public interface AstPackage extends EPackage {
 		EReference CONDITIONAL__FALSE_BLOCK = eINSTANCE.getConditional_FalseBlock();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConjunctionImpl <em>Conjunction</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ConjunctionImpl <em>Conjunction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ConjunctionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getConjunction()
+		 * @see worthwhile.ast.impl.ConjunctionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getConjunction()
 		 * @generated
 		 */
 		EClass CONJUNCTION = eINSTANCE.getConjunction();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DisjunctionImpl <em>Disjunction</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.DisjunctionImpl <em>Disjunction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DisjunctionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getDisjunction()
+		 * @see worthwhile.ast.impl.DisjunctionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getDisjunction()
 		 * @generated
 		 */
 		EClass DISJUNCTION = eINSTANCE.getDisjunction();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DivisionImpl <em>Division</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.DivisionImpl <em>Division</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.DivisionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getDivision()
+		 * @see worthwhile.ast.impl.DivisionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getDivision()
 		 * @generated
 		 */
 		EClass DIVISION = eINSTANCE.getDivision();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EqualImpl <em>Equal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.EqualImpl <em>Equal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EqualImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getEqual()
+		 * @see worthwhile.ast.impl.EqualImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getEqual()
 		 * @generated
 		 */
 		EClass EQUAL = eINSTANCE.getEqual();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EquivalenceImpl <em>Equivalence</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.EquivalenceImpl <em>Equivalence</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.EquivalenceImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getEquivalence()
+		 * @see worthwhile.ast.impl.EquivalenceImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getEquivalence()
 		 * @generated
 		 */
 		EClass EQUIVALENCE = eINSTANCE.getEquivalence();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExistsQuantifierImpl <em>Exists Quantifier</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ExistsQuantifierImpl <em>Exists Quantifier</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ExistsQuantifierImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getExistsQuantifier()
+		 * @see worthwhile.ast.impl.ExistsQuantifierImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getExistsQuantifier()
 		 * @generated
 		 */
 		EClass EXISTS_QUANTIFIER = eINSTANCE.getExistsQuantifier();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.QuantifiedExpressionImpl <em>Quantified Expression</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.QuantifiedExpressionImpl <em>Quantified Expression</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.QuantifiedExpressionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getQuantifiedExpression()
+		 * @see worthwhile.ast.impl.QuantifiedExpressionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getQuantifiedExpression()
 		 * @generated
 		 */
 		EClass QUANTIFIED_EXPRESSION = eINSTANCE.getQuantifiedExpression();
@@ -4536,11 +4623,11 @@ public interface AstPackage extends EPackage {
 		EReference QUANTIFIED_EXPRESSION__CONDITION = eINSTANCE.getQuantifiedExpression_Condition();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterImpl <em>Parameter</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ParameterImpl <em>Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getParameter()
+		 * @see worthwhile.ast.impl.ParameterImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getParameter()
 		 * @generated
 		 */
 		EClass PARAMETER = eINSTANCE.getParameter();
@@ -4562,21 +4649,21 @@ public interface AstPackage extends EPackage {
 		EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ForAllQuantifierImpl <em>For All Quantifier</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ForAllQuantifierImpl <em>For All Quantifier</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ForAllQuantifierImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getForAllQuantifier()
+		 * @see worthwhile.ast.impl.ForAllQuantifierImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getForAllQuantifier()
 		 * @generated
 		 */
 		EClass FOR_ALL_QUANTIFIER = eINSTANCE.getForAllQuantifier();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionCallImpl <em>Function Call</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.FunctionCallImpl <em>Function Call</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionCallImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getFunctionCall()
+		 * @see worthwhile.ast.impl.FunctionCallImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getFunctionCall()
 		 * @generated
 		 */
 		EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
@@ -4598,11 +4685,11 @@ public interface AstPackage extends EPackage {
 		EReference FUNCTION_CALL__FUNCTION = eINSTANCE.getFunctionCall_Function();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionDeclarationImpl <em>Function Declaration</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.FunctionDeclarationImpl <em>Function Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.FunctionDeclarationImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getFunctionDeclaration()
+		 * @see worthwhile.ast.impl.FunctionDeclarationImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getFunctionDeclaration()
 		 * @generated
 		 */
 		EClass FUNCTION_DECLARATION = eINSTANCE.getFunctionDeclaration();
@@ -4656,61 +4743,61 @@ public interface AstPackage extends EPackage {
 		EAttribute FUNCTION_DECLARATION__NAME = eINSTANCE.getFunctionDeclaration_Name();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PreconditionImpl <em>Precondition</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.PreconditionImpl <em>Precondition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PreconditionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPrecondition()
+		 * @see worthwhile.ast.impl.PreconditionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getPrecondition()
 		 * @generated
 		 */
 		EClass PRECONDITION = eINSTANCE.getPrecondition();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PostconditionImpl <em>Postcondition</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.PostconditionImpl <em>Postcondition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PostconditionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPostcondition()
+		 * @see worthwhile.ast.impl.PostconditionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getPostcondition()
 		 * @generated
 		 */
 		EClass POSTCONDITION = eINSTANCE.getPostcondition();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterImpl <em>Greater</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.GreaterImpl <em>Greater</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getGreater()
+		 * @see worthwhile.ast.impl.GreaterImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getGreater()
 		 * @generated
 		 */
 		EClass GREATER = eINSTANCE.getGreater();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterOrEqualImpl <em>Greater Or Equal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.GreaterOrEqualImpl <em>Greater Or Equal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.GreaterOrEqualImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getGreaterOrEqual()
+		 * @see worthwhile.ast.impl.GreaterOrEqualImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getGreaterOrEqual()
 		 * @generated
 		 */
 		EClass GREATER_OR_EQUAL = eINSTANCE.getGreaterOrEqual();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ImplicationImpl <em>Implication</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ImplicationImpl <em>Implication</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ImplicationImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getImplication()
+		 * @see worthwhile.ast.impl.ImplicationImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getImplication()
 		 * @generated
 		 */
 		EClass IMPLICATION = eINSTANCE.getImplication();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.IntegerLiteralImpl <em>Integer Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerLiteralImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getIntegerLiteral()
+		 * @see worthwhile.ast.impl.IntegerLiteralImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getIntegerLiteral()
 		 * @generated
 		 */
 		EClass INTEGER_LITERAL = eINSTANCE.getIntegerLiteral();
@@ -4724,51 +4811,51 @@ public interface AstPackage extends EPackage {
 		EAttribute INTEGER_LITERAL__VALUE = eINSTANCE.getIntegerLiteral_Value();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerTypeImpl <em>Integer Type</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.IntegerTypeImpl <em>Integer Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.IntegerTypeImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getIntegerType()
+		 * @see worthwhile.ast.impl.IntegerTypeImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getIntegerType()
 		 * @generated
 		 */
 		EClass INTEGER_TYPE = eINSTANCE.getIntegerType();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.InvariantImpl <em>Invariant</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.InvariantImpl <em>Invariant</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.InvariantImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getInvariant()
+		 * @see worthwhile.ast.impl.InvariantImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getInvariant()
 		 * @generated
 		 */
 		EClass INVARIANT = eINSTANCE.getInvariant();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessImpl <em>Less</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.LessImpl <em>Less</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLess()
+		 * @see worthwhile.ast.impl.LessImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getLess()
 		 * @generated
 		 */
 		EClass LESS = eINSTANCE.getLess();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessOrEqualImpl <em>Less Or Equal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.LessOrEqualImpl <em>Less Or Equal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LessOrEqualImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLessOrEqual()
+		 * @see worthwhile.ast.impl.LessOrEqualImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getLessOrEqual()
 		 * @generated
 		 */
 		EClass LESS_OR_EQUAL = eINSTANCE.getLessOrEqual();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LoopImpl <em>Loop</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.LoopImpl <em>Loop</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.LoopImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getLoop()
+		 * @see worthwhile.ast.impl.LoopImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getLoop()
 		 * @generated
 		 */
 		EClass LOOP = eINSTANCE.getLoop();
@@ -4798,71 +4885,71 @@ public interface AstPackage extends EPackage {
 		EReference LOOP__INVARIANTS = eINSTANCE.getLoop_Invariants();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MinusImpl <em>Minus</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.MinusImpl <em>Minus</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MinusImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getMinus()
+		 * @see worthwhile.ast.impl.MinusImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getMinus()
 		 * @generated
 		 */
 		EClass MINUS = eINSTANCE.getMinus();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SignImpl <em>Sign</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.SignImpl <em>Sign</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SignImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getSign()
+		 * @see worthwhile.ast.impl.SignImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getSign()
 		 * @generated
 		 */
 		EClass SIGN = eINSTANCE.getSign();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ModulusImpl <em>Modulus</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ModulusImpl <em>Modulus</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ModulusImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getModulus()
+		 * @see worthwhile.ast.impl.ModulusImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getModulus()
 		 * @generated
 		 */
 		EClass MODULUS = eINSTANCE.getModulus();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MultiplicationImpl <em>Multiplication</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.MultiplicationImpl <em>Multiplication</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.MultiplicationImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getMultiplication()
+		 * @see worthwhile.ast.impl.MultiplicationImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getMultiplication()
 		 * @generated
 		 */
 		EClass MULTIPLICATION = eINSTANCE.getMultiplication();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.NegationImpl <em>Negation</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.NegationImpl <em>Negation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.NegationImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getNegation()
+		 * @see worthwhile.ast.impl.NegationImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getNegation()
 		 * @generated
 		 */
 		EClass NEGATION = eINSTANCE.getNegation();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PlusImpl <em>Plus</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.PlusImpl <em>Plus</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.PlusImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getPlus()
+		 * @see worthwhile.ast.impl.PlusImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getPlus()
 		 * @generated
 		 */
 		EClass PLUS = eINSTANCE.getPlus();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ReturnStatementImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getReturnStatement()
+		 * @see worthwhile.ast.impl.ReturnStatementImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getReturnStatement()
 		 * @generated
 		 */
 		EClass RETURN_STATEMENT = eINSTANCE.getReturnStatement();
@@ -4876,31 +4963,31 @@ public interface AstPackage extends EPackage {
 		EReference RETURN_STATEMENT__RETURN_VALUE = eINSTANCE.getReturnStatement_ReturnValue();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SubtractionImpl <em>Subtraction</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.SubtractionImpl <em>Subtraction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.SubtractionImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getSubtraction()
+		 * @see worthwhile.ast.impl.SubtractionImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getSubtraction()
 		 * @generated
 		 */
 		EClass SUBTRACTION = eINSTANCE.getSubtraction();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnequalImpl <em>Unequal</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.UnequalImpl <em>Unequal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.UnequalImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getUnequal()
+		 * @see worthwhile.ast.impl.UnequalImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getUnequal()
 		 * @generated
 		 */
 		EClass UNEQUAL = eINSTANCE.getUnequal();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.VariableReferenceImpl <em>Variable Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.VariableReferenceImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getVariableReference()
+		 * @see worthwhile.ast.impl.VariableReferenceImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getVariableReference()
 		 * @generated
 		 */
 		EClass VARIABLE_REFERENCE = eINSTANCE.getVariableReference();
@@ -4922,14 +5009,40 @@ public interface AstPackage extends EPackage {
 		EReference VARIABLE_REFERENCE__INDEX = eINSTANCE.getVariableReference_Index();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.StatementImpl <em>Statement</em>}' class.
+		 * The meta object literal for the '{@link worthwhile.ast.impl.StatementImpl <em>Statement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.StatementImpl
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl#getStatement()
+		 * @see worthwhile.ast.impl.StatementImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getStatement()
 		 * @generated
 		 */
 		EClass STATEMENT = eINSTANCE.getStatement();
+
+		/**
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterReferenceImpl <em>Parameter Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.impl.ParameterReferenceImpl
+		 * @see worthwhile.ast.impl.AstPackageImpl#getParameterReference()
+		 * @generated
+		 */
+		EClass PARAMETER_REFERENCE = eINSTANCE.getParameterReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER_REFERENCE__PARAMETER = eINSTANCE.getParameterReference_Parameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARAMETER_REFERENCE__INDEX = eINSTANCE.getParameterReference_Index();
 
 	}
 

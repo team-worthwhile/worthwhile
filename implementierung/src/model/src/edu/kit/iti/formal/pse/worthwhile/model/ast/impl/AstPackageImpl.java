@@ -6,6 +6,13 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
@@ -49,6 +56,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
@@ -65,14 +73,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -481,6 +481,13 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	private EClass statementEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterReferenceEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -491,7 +498,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#eNS_URI
+	 * @see worthwhile.ast.AstPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
@@ -1446,6 +1453,33 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getParameterReference() {
+		return parameterReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterReference_Parameter() {
+		return (EReference)parameterReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterReference_Index() {
+		return (EReference)parameterReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public AstFactory getAstFactory() {
 		return (AstFactory)getEFactoryInstance();
 	}
@@ -1625,6 +1659,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__INDEX);
 
 		statementEClass = createEClass(STATEMENT);
+
+		parameterReferenceEClass = createEClass(PARAMETER_REFERENCE);
+		createEReference(parameterReferenceEClass, PARAMETER_REFERENCE__PARAMETER);
+		createEReference(parameterReferenceEClass, PARAMETER_REFERENCE__INDEX);
 	}
 
 	/**
@@ -1710,6 +1748,7 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		unequalEClass.getESuperTypes().add(this.getBinaryExpression());
 		variableReferenceEClass.getESuperTypes().add(this.getExpression());
 		statementEClass.getESuperTypes().add(this.getASTNode());
+		parameterReferenceEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1721,9 +1760,12 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEAttribute(getASTNode_LineNumber(), ecorePackage.getEInt(), "lineNumber", null, 1, 1, ASTNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getASTNode_PositionInLine(), ecorePackage.getEInt(), "positionInLine", null, 1, 1, ASTNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		EOperation op = addEOperation(astNodeEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(astNodeVisitorEClass, ASTNodeVisitor.class, "ASTNodeVisitor", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		EOperation op = addEOperation(astNodeVisitorEClass, null, "visit", 1, 1, IS_UNIQUE, !IS_ORDERED);
+		op = addEOperation(astNodeVisitorEClass, null, "visit", 1, 1, IS_UNIQUE, !IS_ORDERED);
 		addEParameter(op, this.getAddition(), "addition", 1, 1, IS_UNIQUE, !IS_ORDERED);
 
 		op = addEOperation(astNodeVisitorEClass, null, "visit", 1, 1, IS_UNIQUE, !IS_ORDERED);
@@ -2003,6 +2045,10 @@ public class AstPackageImpl extends EPackageImpl implements AstPackage {
 		initEReference(getVariableReference_Index(), this.getExpression(), null, "index", null, 0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(parameterReferenceEClass, ParameterReference.class, "ParameterReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterReference_Parameter(), this.getParameter(), null, "parameter", null, 1, 1, ParameterReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getParameterReference_Index(), this.getExpression(), null, "index", null, 0, 1, ParameterReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

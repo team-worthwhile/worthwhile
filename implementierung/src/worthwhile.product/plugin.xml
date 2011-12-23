@@ -33,7 +33,7 @@
          </property>
          <property
                name="aboutText"
-               value="One does not simply walk into the about dialog ...">
+               value="One does not simply walk into the about dialog …">
          </property>
          <property
                name="windowImages"

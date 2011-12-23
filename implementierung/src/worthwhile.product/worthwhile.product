@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Worthwhile" id="edu.kit.iti.formal.pse.worthwhile.product.worthwhile" application="org.eclipse.ui.ide.workbench" useFeatures="false" includeLaunchers="true">
+<product name="Worthwhile" uid="edu.kit.iti.formal.pse.worthwhile" id="edu.kit.iti.formal.pse.worthwhile.product.worthwhile" application="org.eclipse.ui.ide.workbench" version="1.0.0.0" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="/edu.kit.iti.formal.pse.worthwhile.product/images/about.bmp"/>
+      <image path="/worthwhile.product/images/about.bmp"/>
       <text>
-         One does not simply walk into the about dialog ...
+         One does not simply walk into the about dialog …
       </text>
    </aboutInfo>
 
@@ -17,7 +17,7 @@
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
-   <windowImages i16="/edu.kit.iti.formal.pse.worthwhile.product/icons/icon-16px.png" i32="/edu.kit.iti.formal.pse.worthwhile.product/icons/icon-32px.png" i48="/edu.kit.iti.formal.pse.worthwhile.product/icons/icon-48px.png" i64="/edu.kit.iti.formal.pse.worthwhile.product/icons/icon-64px.png" i128="/edu.kit.iti.formal.pse.worthwhile.product/icons/icon-128px.png"/>
+   <windowImages i16="/worthwhile.product/icons/icon-16px.png" i32="/worthwhile.product/icons/icon-32px.png" i48="/worthwhile.product/icons/icon-48px.png" i64="/worthwhile.product/icons/icon-64px.png" i128="/worthwhile.product/icons/icon-128px.png"/>
 
    <splash
       startupProgressRect="10,305,480,15"
@@ -30,6 +30,7 @@
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
    </vm>

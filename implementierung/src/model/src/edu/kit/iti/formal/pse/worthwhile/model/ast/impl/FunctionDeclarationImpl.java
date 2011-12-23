@@ -6,28 +6,24 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -76,7 +72,7 @@ public class FunctionDeclarationImpl extends ASTNodeImpl implements FunctionDecl
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Parameter> parameters;
+	protected EList<VariableDeclaration> parameters;
 
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
@@ -166,9 +162,9 @@ public class FunctionDeclarationImpl extends ASTNodeImpl implements FunctionDecl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Parameter> getParameters() {
+	public EList<VariableDeclaration> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, AstPackage.FUNCTION_DECLARATION__PARAMETERS);
+			parameters = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this, AstPackage.FUNCTION_DECLARATION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -345,7 +341,7 @@ public class FunctionDeclarationImpl extends ASTNodeImpl implements FunctionDecl
 				return;
 			case AstPackage.FUNCTION_DECLARATION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				getParameters().addAll((Collection<? extends VariableDeclaration>)newValue);
 				return;
 			case AstPackage.FUNCTION_DECLARATION__BODY:
 				setBody((Block)newValue);

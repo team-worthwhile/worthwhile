@@ -49,8 +49,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ParameterReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
@@ -126,7 +124,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.EQUAL: return createEqual();
 			case AstPackage.EQUIVALENCE: return createEquivalence();
 			case AstPackage.EXISTS_QUANTIFIER: return createExistsQuantifier();
-			case AstPackage.PARAMETER: return createParameter();
 			case AstPackage.FOR_ALL_QUANTIFIER: return createForAllQuantifier();
 			case AstPackage.FUNCTION_CALL: return createFunctionCall();
 			case AstPackage.FUNCTION_DECLARATION: return createFunctionDeclaration();
@@ -150,7 +147,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 			case AstPackage.SUBTRACTION: return createSubtraction();
 			case AstPackage.UNEQUAL: return createUnequal();
 			case AstPackage.VARIABLE_REFERENCE: return createVariableReference();
-			case AstPackage.PARAMETER_REFERENCE: return createParameterReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -364,16 +360,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public ExistsQuantifier createExistsQuantifier() {
 		ExistsQuantifierImpl existsQuantifier = new ExistsQuantifierImpl();
 		return existsQuantifier;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Parameter createParameter() {
-		ParameterImpl parameter = new ParameterImpl();
-		return parameter;
 	}
 
 	/**
@@ -604,16 +590,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public VariableReference createVariableReference() {
 		VariableReferenceImpl variableReference = new VariableReferenceImpl();
 		return variableReference;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ParameterReference createParameterReference() {
-		ParameterReferenceImpl parameterReference = new ParameterReferenceImpl();
-		return parameterReference;
 	}
 
 	/**

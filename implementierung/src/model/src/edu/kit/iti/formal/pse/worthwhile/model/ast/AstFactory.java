@@ -215,15 +215,6 @@ public interface AstFactory extends EFactory {
 	ExistsQuantifier createExistsQuantifier();
 
 	/**
-	 * Returns a new object of class '<em>Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameter</em>'.
-	 * @generated
-	 */
-	Parameter createParameter();
-
-	/**
 	 * Returns a new object of class '<em>For All Quantifier</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

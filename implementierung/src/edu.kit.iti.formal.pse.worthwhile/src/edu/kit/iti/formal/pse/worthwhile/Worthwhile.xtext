@@ -8,10 +8,8 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 Program returns Program:
 	{Program}
 	NL* // Newline at the beginning of the file is allowed.
-	
 	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
-	
-	mainBlock=Block
+	mainBlock=Block // FIXME: Newline at end of file?
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
@@ -58,7 +56,7 @@ BracedBlock returns Block:
 
 // A statement is everything that can be executed in the program.
 Statement returns Statement:
-	(VariableDeclaration | Assignment | BracedBlock | Annotation | IfStatement | WhileStatement | ReturnStatement)
+	VariableDeclaration | Assignment | BracedBlock | Annotation | IfStatement | WhileStatement | ReturnStatement
 ;
 
 // A return statement returns a value from a function.
@@ -96,9 +94,9 @@ Ensure returns Postcondition:
 	'_ensures' expression=Expression  NL+ 
 ;
  
-// A parameter definition describes a single parameter (type and name) accepted by a function.
-Parameter returns Parameter: // FIXME
-	{Parameter} type=Type name=ID
+// A function parameter definition describes a single parameter (type and name) accepted by a function or introduced by a quantifier
+Parameter returns VariableDeclaration:
+	{VariableDeclaration} type=Type name=ID
 ;
 
 // A type can either be a primitive type or an array of a primitive type
@@ -189,12 +187,10 @@ UnaryOperation returns Expression:
 //  - a reference to a variable
 //  - a whole new Expression in parentheses.
 Atomic returns Expression:
-	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | VarParamReference | '(' Expression ')'
+	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | VariableReference | '(' Expression ')'
 ;
 
 // A variable reference is used to denote the current content of a variable. 
-VarParamReference returns Expression:
-		({VariableReference} variable=[VariableDeclaration] | {ParameterReference} parameter=[Parameter]) ('[' index=Expression ']')?
+VariableReference returns VariableReference:
+	{VariableReference} variable=[VariableDeclaration] ('[' index=Expression ']')?
 ;
-
-// TODO: parameter references

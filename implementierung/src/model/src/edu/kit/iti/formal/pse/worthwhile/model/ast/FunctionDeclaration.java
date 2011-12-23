@@ -64,7 +64,7 @@ public interface FunctionDeclaration extends ASTNode {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter}.
+	 * The list contents are of type {@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -76,7 +76,7 @@ public interface FunctionDeclaration extends ASTNode {
 	 * @model containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<Parameter> getParameters();
+	EList<VariableDeclaration> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.

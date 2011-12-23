@@ -35,12 +35,12 @@ public interface QuantifiedExpression extends Expression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter</em>' containment reference.
-	 * @see #setParameter(Parameter)
+	 * @see #setParameter(VariableDeclaration)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getQuantifiedExpression_Parameter()
 	 * @model containment="true" required="true" ordered="false"
 	 * @generated
 	 */
-	Parameter getParameter();
+	VariableDeclaration getParameter();
 
 	/**
 	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getParameter <em>Parameter</em>}' containment reference.
@@ -50,7 +50,7 @@ public interface QuantifiedExpression extends Expression {
 	 * @see #getParameter()
 	 * @generated
 	 */
-	void setParameter(Parameter value);
+	void setParameter(VariableDeclaration value);
 
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.

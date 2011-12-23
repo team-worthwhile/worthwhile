@@ -40,7 +40,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
@@ -459,16 +458,6 @@ protected class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
 	}
 
 	/** 
-	 * @see ASTNodeVisitor#visit(Parameter parameter)
-	 */
-	public void visit(Parameter parameter) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
 	 * @see ASTNodeVisitor#visit(Plus plus)
 	 */
 	public void visit(Plus plus) {
@@ -492,16 +481,6 @@ protected class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
 	 * @see ASTNodeVisitor#visit(Precondition precondition)
 	 */
 	public void visit(Precondition precondition) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	 * @see ASTNodeVisitor#visit(Predicates predicates)
-	 */
-	public void visit(Predicates predicates) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 

@@ -21,143 +21,7 @@
           <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNode/accept/visitor"/>
         </genOperations>
       </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/ASTNodeVisitor">
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit/addition"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.1">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.1/arrayAccess"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.2">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.2/arrayLength"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.3">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.3/arrayLiteral"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.4">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.4/arrayType"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.5">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.5/assertion"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.6">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.6/assignment"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.7">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.7/assumption"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.8">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.8/axiom"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.9">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.9/block"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.10">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.10/booleanLiteral"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.11">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.11/booleanType"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.12">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.12/conditional"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.13">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.13/conjunction"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.14">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.14/disjunction"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.15">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.15/division"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.16">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.16/equal"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.17">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.17/equivalence"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.18">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.18/existsQuantifier"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.19">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.19/forAllQuantifier"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.20">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.20/functionCall"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.21">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.21/functionDeclaration"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.22">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.22/greater"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.23">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.23/greaterOrEqual"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.24">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.24/implication"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.25">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.25/integerLiteral"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.26">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.26/integerType"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.27">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.27/invariant"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.28">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.28/less"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.29">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.29/lessOrEqual"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.30">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.30/loop"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.31">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.31/minus"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.32">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.32/modulus"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.33">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.33/multiplication"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.34">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.34/negation"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.35">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.35/node"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.36">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.36/parameter"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.37">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.37/plus"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.38">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.38/postcondition"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.39">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.39/precondition"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.40">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.40/program"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.41">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.41/returnStatement"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.42">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.42/subtraction"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.43">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.43/unequal"/>
-        </genOperations>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.44">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNodeVisitor/visit.44/variableDecleration"/>
-        </genOperations>
-      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/ASTNodeVisitor"/>
       <genClasses ecoreClass="Worthwhile.ecore#//ast/Addition"/>
       <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/BinaryExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/BinaryExpression/left"/>
@@ -220,10 +84,6 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/expression"/>
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/condition"/>
       </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Parameter">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Parameter/type"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/Parameter/name"/>
-      </genClasses>
       <genClasses ecoreClass="Worthwhile.ecore#//ast/ForAllQuantifier"/>
       <genClasses ecoreClass="Worthwhile.ecore#//ast/FunctionCall">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionCall/actuals"/>
@@ -272,11 +132,6 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableReference/index"/>
       </genClasses>
       <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Statement"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ParameterReference">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ParameterReference/parameter"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ParameterReference/index"/>
-      </genClasses>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

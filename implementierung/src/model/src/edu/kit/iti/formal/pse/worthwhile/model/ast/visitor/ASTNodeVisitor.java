@@ -42,7 +42,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
@@ -350,14 +349,6 @@ public interface ASTNodeVisitor {
 	 * @generated
 	 */
 	void visit(ASTNode node);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model parameterRequired="true" parameterOrdered="false"
-	 * @generated
-	 */
-	void visit(Parameter parameter);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -394,12 +394,6 @@ class InterpreterASTNodeVisitor implements ASTNodeVisitor {
 	}
 
 
-	public void visit(Parameter parameter) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	public void visit(Plus plus) {
 		// TODO Auto-generated method stub
 		

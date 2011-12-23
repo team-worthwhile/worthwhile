@@ -197,10 +197,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createQuantifiedExpressionAdapter();
 			}
 			@Override
-			public Adapter caseParameter(Parameter object) {
-				return createParameterAdapter();
-			}
-			@Override
 			public Adapter caseForAllQuantifier(ForAllQuantifier object) {
 				return createForAllQuantifierAdapter();
 			}

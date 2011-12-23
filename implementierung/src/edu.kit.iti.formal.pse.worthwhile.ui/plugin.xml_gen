@@ -71,19 +71,6 @@
         </page>
     </extension>
     <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="edu.kit.iti.formal.pse.worthwhile.Worthwhile"
-            name="Worthwhile">
-            <keywordReference id="edu.kit.iti.formal.pse.worthwhile.ui.keyword_Worthwhile"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-    <extension
         point="org.eclipse.ui.keywords">
         <keyword
             id="edu.kit.iti.formal.pse.worthwhile.ui.keyword_Worthwhile"
@@ -210,6 +197,7 @@
       <wizard
             category="org.eclipse.xtext.projectwiz"
             class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
+            icon="icons/editor.gif"
             id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
             name="Worthwhile Project"
             project="true">

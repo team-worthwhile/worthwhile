@@ -6,18 +6,16 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Parameter;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -43,7 +41,7 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected Parameter parameter;
+	protected VariableDeclaration parameter;
 
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -89,7 +87,7 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Parameter getParameter() {
+	public VariableDeclaration getParameter() {
 		return parameter;
 	}
 
@@ -98,8 +96,8 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetParameter(Parameter newParameter, NotificationChain msgs) {
-		Parameter oldParameter = parameter;
+	public NotificationChain basicSetParameter(VariableDeclaration newParameter, NotificationChain msgs) {
+	    VariableDeclaration oldParameter = parameter;
 		parameter = newParameter;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AstPackage.QUANTIFIED_EXPRESSION__PARAMETER, oldParameter, newParameter);
@@ -113,7 +111,7 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParameter(Parameter newParameter) {
+	public void setParameter(VariableDeclaration newParameter) {
 		if (newParameter != parameter) {
 			NotificationChain msgs = null;
 			if (parameter != null)
@@ -258,7 +256,7 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case AstPackage.QUANTIFIED_EXPRESSION__PARAMETER:
-				setParameter((Parameter)newValue);
+				setParameter((VariableDeclaration)newValue);
 				return;
 			case AstPackage.QUANTIFIED_EXPRESSION__EXPRESSION:
 				setExpression((Expression)newValue);
@@ -279,7 +277,7 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case AstPackage.QUANTIFIED_EXPRESSION__PARAMETER:
-				setParameter((Parameter)null);
+				setParameter((VariableDeclaration)null);
 				return;
 			case AstPackage.QUANTIFIED_EXPRESSION__EXPRESSION:
 				setExpression((Expression)null);

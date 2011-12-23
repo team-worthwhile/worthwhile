@@ -1,5 +1,5 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
- 
+
 
 public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 

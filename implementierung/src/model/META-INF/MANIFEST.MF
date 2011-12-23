@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: %pluginName
+Bundle-Name: Worthwhile AST Model
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.model;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.0.0
 Bundle-ClassPath: .
-Bundle-Vendor: %providerName
+Bundle-Vendor: Team Worthwhile
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile.model.ast,

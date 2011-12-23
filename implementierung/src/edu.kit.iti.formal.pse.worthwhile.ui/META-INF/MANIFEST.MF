@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: edu.kit.iti.formal.pse.worthwhile.ui
+Bundle-Name: Worthwhile UI
 Bundle-Vendor: Team Worthwhile
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.0.0
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile;visibility:=reexport,

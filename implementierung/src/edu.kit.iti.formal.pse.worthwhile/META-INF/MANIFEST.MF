@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: edu.kit.iti.formal.pse.worthwhile
+Bundle-Name: Worthwhile Grammar Core
 Bundle-Vendor: Team Worthwhile
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile; singleton:=true

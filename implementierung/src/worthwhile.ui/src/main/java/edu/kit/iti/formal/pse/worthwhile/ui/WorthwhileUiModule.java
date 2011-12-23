@@ -4,9 +4,11 @@
 package edu.kit.iti.formal.pse.worthwhile.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 
 import edu.kit.iti.formal.pse.worthwhile.ui.autoedit.WorthwhileAutoEditStrategyProvider;
+import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
 
 /**
  * Registers components to be used within the IDE.
@@ -25,9 +27,18 @@ public class WorthwhileUiModule extends
     }
 
     /**
+     * Provides an editor part.
+     * 
+     * @return An editor part.
+     */
+    public final Class<? extends XtextEditor> bindEditor() {
+	return WorthwhileEditor.class;
+    }
+
+    /**
      * Provides an auto edit strategy provider.
      * 
-     * @return An auto edit strategy provider.
+     * @return An edit strategy provider instance.
      */
     public final Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
 	return WorthwhileAutoEditStrategyProvider.class;

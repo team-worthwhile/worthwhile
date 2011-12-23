@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="src/main/xml/toc.xml">
+      </toc>
+      <toc
+            file="src/main/xml/testToc.xml"
+            primary="true">
+      </toc>
+   </extension>
+   <extension
+         point="org.eclipse.help.contexts">
+      <contexts
+            file="src/main/xml/context.xml">
+      </contexts>
+   </extension>
+
+</plugin>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.context"?>
+
+<contexts>
+	<context id="keywords.Integer" title="Integers">
+		<topic href="src/main/html/integer" label="Integers"/>
+	</context>
+</contexts>

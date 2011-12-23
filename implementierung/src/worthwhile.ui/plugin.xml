@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="ww"

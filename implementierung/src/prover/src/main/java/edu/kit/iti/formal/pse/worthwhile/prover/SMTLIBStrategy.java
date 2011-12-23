@@ -524,13 +524,5 @@ class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
 
 		// end-user-code
 	}
-	/** 
-	 * @see ASTNodeVisitor#visit(Object variableReference)
-	 */
-	public void visit(Object variableReference) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 
-		// end-user-code
-	}
 }

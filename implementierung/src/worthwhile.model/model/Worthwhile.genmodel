@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/edu.kit.iti.formal.pse.worthwhile.model/src"
+    editDirectory="/edu.kit.iti.formal.pse.worthwhile.model.edit/src-gen" modelPluginID="edu.kit.iti.formal.pse.worthwhile.model"
+    modelName="Worthwhile" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>Worthwhile.ecore</foreignModel>
+  <genPackages prefix="Worthwhile" disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#/">
+    <nestedGenPackages prefix="Ast" basePackage="worthwhile" disposableProviderFactory="true"
+        ecorePackage="Worthwhile.ecore#//ast">
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Program">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Program/functionDeclarations"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Program/mainBlock"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Program/axioms"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/ASTNode">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/ASTNode/lineNumber"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/ASTNode/positionInLine"/>
+        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNode/accept">
+          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNode/accept/visitor"/>
+        </genOperations>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/ASTNodeVisitor"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Addition"/>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/BinaryExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/BinaryExpression/left"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/BinaryExpression/right"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Expression"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayAccess">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayAccess/index"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/UnaryExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/UnaryExpression/operand"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayLength"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayLiteral">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayLiteral/values"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Literal"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayType">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayType/baseType"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayType/size"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Type"/>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/PrimitiveType"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Assertion"/>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Annotation">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Annotation/expression"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Assignment">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Assignment/value"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Assignment/variable"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/VariableDeclaration">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableDeclaration/type"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableDeclaration/initialValue"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/VariableDeclaration/name"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Assumption"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Axiom"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Block">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Block/statements"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/BooleanLiteral">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/BooleanLiteral/value"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/BooleanType"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Conditional">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Conditional/condition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Conditional/trueBlock"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Conditional/falseBlock"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Conjunction"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Disjunction"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Division"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Equal"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Equivalence"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ExistsQuantifier"/>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/QuantifiedExpression">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/parameter"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/expression"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/condition"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ForAllQuantifier"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/FunctionCall">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionCall/actuals"/>
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionCall/function"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/FunctionDeclaration">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/preconditions"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/postconditions"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/parameters"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/body"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/returnType"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/FunctionDeclaration/name"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Precondition"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Postcondition"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Greater"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/GreaterOrEqual"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Implication"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/IntegerLiteral">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/IntegerLiteral/value"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/IntegerType"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Invariant"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Less"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/LessOrEqual"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Loop">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Loop/condition"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Loop/body"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Loop/invariants"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Minus"/>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Sign"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Modulus"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Multiplication"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Negation"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Plus"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/ReturnStatement">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ReturnStatement/returnValue"/>
+      </genClasses>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Subtraction"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/Unequal"/>
+      <genClasses ecoreClass="Worthwhile.ecore#//ast/VariableReference">
+        <genFeatures notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableReference/variable"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableReference/index"/>
+      </genClasses>
+      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Statement"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

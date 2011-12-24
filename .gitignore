@@ -10,6 +10,7 @@
 # pdfs
 pflichtenheft.pdf
 entwurf.pdf
+presentation.pdf
 # java stuff
 *.class
 bin/

@@ -1,0 +1,119 @@
+\documentclass[t]{beamer}
+\usetheme[deutsch]{KIT}
+\setbeamercovered{transparent}
+\setbeamertemplate{navigation symbols}{}
+
+\KITfoot{Worthwhile - Praxis der Softwareentwicklung WS 2011/2012}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usenavigationsymbols
+
+\title{Worthwhile}
+\subtitle{Abschlusspräsentation Entwurfsphase}
+\author{Leon Handreke $\cdot$ Chris Hiatt $\cdot$ Stefan Orf $\cdot$ Joachim Priesner $\cdot$ Fabian Ruch $\cdot$ Matthias Wagner}
+
+\institute[ITI]{Institut für Theoretische Informatik}
+
+\TitleImage[trim=-24mm -35mm 0 0,width=0.9\titleimagewd]{logo.pdf}
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\section{Während der Entwurfsphase}
+
+\begin{frame}
+\frametitle{Die Arbeitsweise während der Entwurfsphase}
+
+\begin{itemize}
+    \item<+-> UML-Notation ist viel Aufwand und lässt sich nicht gut aktuell halten
+    \item<+-> Keine Software mit Versionierung für UML-Modelle bekannt
+    \item<+-> Sequenzdiagramme erlauben nur hinkend Entwurf von Abläufen und Interaktionen
+    \item<+-> UML-Diagramme unterstützen beim Gesamtüberblick, insbesondere gemeinsam in der Gruppe
+    \item<+-> UML-Entwurf fördert die Modualisierung und Anwendung von Entwurfsmustern, weil er nicht lauffähig sein muss
+    \item<+-> Am besten Klassenstummel (mit Dokumentation) schreiben und Diagramme generieren lassen
+\end{itemize}
+\end{frame}
+
+\section{Meilensteine der Entwurfsphase}
+
+\begin{frame}
+\frametitle{Die Meilensteine während der Entwurfsphase}
+
+\begin{enumerate}
+    \item<+-> Testprogramme in Worthwhile geschrieben und spezifiziert
+    \item<+-> Sprachgrammatik festgelegt (Prototyp)
+    \item<+-> Typsystem festgelegt (Prototyp)
+    \item<+-> Transformation spezifischer Syntax und Semantik festgelegt
+    \item<+-> Generiertes AST-Datenmodell in UML notiert
+    \item<+-> Komponenten Interpreter und Beweiser in UML entworfen
+    \item<+-> Eigenes AST-Datenmodell in UML entworfen
+    \item<+-> Parser hinter Schnittstelle versteckt und Validator hinzugefügt
+    \item<+-> Generierte GUI-Klassen in UML notiert
+\end{enumerate}
+\end{frame}
+
+\section{Der Worthwhile-Entwurf}
+
+\begin{frame}
+\frametitle{Der Worthwhile-Entwurf}
+
+\begin{itemize}
+    \item<+-> Modell ist ein Worthwhile-Text aus einem beliebigen Readable-Objekt
+    \item<+-> Parser erstellt mit Lexer AST-Sicht auf das Text-Modell
+    \item<+-> AST-Sicht ist selbst Modell für Editor, Interpreter, Beweiser
+    \item<+-> GUI ist Controller für Edit und Run, Debug, Prove
+    \item<+-> GUI ist \textbf{nur} ein möglicher Controller und wird von Xtext als Eclipse-Plugin erstellt
+\end{itemize}
+\end{frame}
+
+\subsection{AST}
+
+\begin{frame}
+\frametitle{Abstract-Syntax-Tree}
+
+\begin{itemize}
+    \item<+-> Kapselt bis auf Literalwerte ausschließlich Sprachsyntax
+    \item<+-> Entkopplung der Semantik ohne spezialisierte Implementierungen
+    \item<+-> Wendet Entwurfsmuster Besucher zur Modell-Verarbeitung an
+\end{itemize}
+\end{frame}
+
+\subsection{Interpreter}
+
+\begin{frame}
+\frametitle{Interpreter}
+
+\begin{itemize}
+    \item<+-> Implementiert Besucher zur Ausführung und Auswertung
+    \item<+-> Interaktion nach Ausführungsstart mit Beobachtern
+    \item<+-> Keine dedizierte Run-time-Checker-Komponente, benutzt Beweiserschnittstelle selbst
+\end{itemize}
+\end{frame}
+
+\subsection{Beweiserschnittstelle}
+
+\begin{frame}
+\frametitle{Beweiserschnittstelle}
+
+\begin{itemize}
+    \item<+-> Enthält getrennte Funktionseinheiten zur Transformation und Beweiserkommunikation
+    \item<+-> Benutzt AST-Datenmodell zur internen Formelrepräsentation
+    \item<+-> Implementiert Besucher zur Transformation und Übersetzung
+\end{itemize}
+\end{frame}
+
+\section{Die Implementierungsphase}
+
+\begin{frame}
+\frametitle{Die Arbeitsweise während der Implementierungsphase}
+
+\begin{itemize}
+    \item<+-> Ausnutzung der Verfügbarkeit hilfreicher Werkzeuge wie Bug-Tracker, Code-Review, Continuous-Integration mit automatischen Tests und statischer Analyse
+    \item<+-> AST-Attrappenerstellung für Testprogramme
+    \item<+-> Parallele Komponentenentwicklung und ständige Integration durch Attrappenersetzung
+\end{itemize}
+\end{frame}
+\end{document}

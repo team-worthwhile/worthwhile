@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
@@ -9,25 +9,25 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
-/** 
- * 
+/**
+ *
  */
 public class SpecificationChecker {
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	private Integer timeout = 0;
 
-	/** 
+	/**
 	 * @return the timeout
 	 */
 	public Integer getTimeout() {
 		// begin-user-code
-		return timeout;
+		return this.timeout;
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param timeout the timeout to set
 	 */
 	public void setTimeout(Integer timeout) {
@@ -36,21 +36,21 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	private ProverCaller prover;
 
-	/** 
+	/**
 	 * @return the prover
 	 */
 	public ProverCaller getProver() {
 		// begin-user-code
-		return prover;
+		return this.prover;
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param prover the prover to set
 	 */
 	public void setProver(ProverCaller prover) {
@@ -59,21 +59,21 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	private FormulaGenerator transformer;
 
-	/** 
+	/**
 	 * @return the transformer
 	 */
 	public FormulaGenerator getTransformer() {
 		// begin-user-code
-		return transformer;
+		return this.transformer;
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param transformer the transformer to set
 	 */
 	public void setTransformer(FormulaGenerator transformer) {
@@ -82,21 +82,21 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	private ProverResult checkResult;
 
-	/** 
+	/**
 	 * @return the checkResult
 	 */
 	public ProverResult getCheckResult() {
 		// begin-user-code
-		return checkResult;
+		return this.checkResult;
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param checkResult the checkResult to set
 	 */
 	public void setCheckResult(ProverResult checkResult) {
@@ -105,8 +105,8 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	public SpecificationChecker() {
 		// begin-user-code
@@ -114,7 +114,7 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param transformer
 	 */
 	public SpecificationChecker(FormulaGenerator transformer) {
@@ -123,7 +123,7 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param formula
 	 * @param environment
 	 * @return
@@ -136,7 +136,7 @@ public class SpecificationChecker {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param program
 	 * @return
 	 */

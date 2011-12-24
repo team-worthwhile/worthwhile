@@ -60,7 +60,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
  */
 // TODO: This doesn't really implement all of ASTNodeVisitor, it should only
 // compile expressions!
-class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
+class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 
 	private final Stack<String> compileStack = new Stack<String>();
 
@@ -169,6 +169,7 @@ class SMTLIBStrategy implements FormulaCompiler, ASTNodeVisitor {
 	/**
 	 * @see ASTNodeVisitor#visit(ASTNode node)
 	 */
+	@Override
 	public void visit(ASTNode node) {
 		// begin-user-code
 		// TODO Auto-generated method stub

@@ -1,30 +1,77 @@
 /**
- * 
+ *
  */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.*;
+import org.omg.Dynamic.Parameter;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
-/** 
- * 
+/**
+ *
  */
-class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
-	/** 
-	 * 	
+class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
+	/**
+	 *
 	 */
 	private Expression weakestPrecondition;
 
-	/** 
+	/**
 	 * @return the weakestPrecondition
 	 */
 	public Expression getWeakestPrecondition() {
 		// begin-user-code
-		return weakestPrecondition;
+		return this.weakestPrecondition;
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @param weakestPrecondition the weakestPrecondition to set
 	 */
 	public void setWeakestPrecondition(Expression weakestPrecondition) {
@@ -33,8 +80,8 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
-	 * 
+	/**
+	 *
 	 */
 	protected WPStrategy() {
 		// begin-user-code
@@ -42,7 +89,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see FormulaGenerator#transformProgram(Program program)
 	 */
 	public Expression transformProgram(Program program) {
@@ -52,7 +99,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Addition addition)
 	 */
 	public void visit(Addition addition) {
@@ -62,7 +109,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ArrayAccess arrayAccess)
 	 */
 	public void visit(ArrayAccess arrayAccess) {
@@ -72,7 +119,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ArrayLength arrayLength)
 	 */
 	public void visit(ArrayLength arrayLength) {
@@ -82,7 +129,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ArrayLiteral arrayLiteral)
 	 */
 	public void visit(ArrayLiteral arrayLiteral) {
@@ -92,7 +139,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ArrayType arrayType)
 	 */
 	public void visit(ArrayType arrayType) {
@@ -102,7 +149,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Assertion assertion)
 	 */
 	public void visit(Assertion assertion) {
@@ -112,7 +159,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Assignment assignment)
 	 */
 	public void visit(Assignment assignment) {
@@ -122,7 +169,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Assumption assumption)
 	 */
 	public void visit(Assumption assumption) {
@@ -132,7 +179,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Axiom axiom)
 	 */
 	public void visit(Axiom axiom) {
@@ -142,7 +189,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Block block)
 	 */
 	public void visit(Block block) {
@@ -152,7 +199,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(BooleanLiteral booleanLiteral)
 	 */
 	public void visit(BooleanLiteral booleanLiteral) {
@@ -162,7 +209,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(BooleanType booleanType)
 	 */
 	public void visit(BooleanType booleanType) {
@@ -172,7 +219,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Conditional conditional)
 	 */
 	public void visit(Conditional conditional) {
@@ -182,7 +229,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Conjunction conjunction)
 	 */
 	public void visit(Conjunction conjunction) {
@@ -192,7 +239,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Disjunction disjunction)
 	 */
 	public void visit(Disjunction disjunction) {
@@ -202,7 +249,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Division division)
 	 */
 	public void visit(Division division) {
@@ -212,7 +259,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Equal equal)
 	 */
 	public void visit(Equal equal) {
@@ -222,7 +269,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
 	 */
 	public void visit(Equivalence equivalence) {
@@ -232,7 +279,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
 	 */
 	public void visit(ExistsQuantifier existsQuantifier) {
@@ -242,7 +289,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
 	 */
 	public void visit(ForAllQuantifier forAllQuantifier) {
@@ -252,7 +299,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(FunctionCall functionCall)
 	 */
 	public void visit(FunctionCall functionCall) {
@@ -262,7 +309,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
 	 */
 	public void visit(FunctionDeclaration functionDeclaration) {
@@ -272,7 +319,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Greater greater)
 	 */
 	public void visit(Greater greater) {
@@ -282,7 +329,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
 	 */
 	public void visit(GreaterOrEqual greaterOrEqual) {
@@ -292,7 +339,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Implication implication)
 	 */
 	public void visit(Implication implication) {
@@ -302,7 +349,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
 	 */
 	public void visit(IntegerLiteral integerLiteral) {
@@ -312,7 +359,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(IntegerType integerType)
 	 */
 	public void visit(IntegerType integerType) {
@@ -322,7 +369,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Invariant invariant)
 	 */
 	public void visit(Invariant invariant) {
@@ -332,7 +379,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Less less)
 	 */
 	public void visit(Less less) {
@@ -342,7 +389,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
 	 */
 	public void visit(LessOrEqual lessOrEqual) {
@@ -352,7 +399,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Loop loop)
 	 */
 	public void visit(Loop loop) {
@@ -362,7 +409,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Minus minus)
 	 */
 	public void visit(Minus minus) {
@@ -372,7 +419,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Modulus modulus)
 	 */
 	public void visit(Modulus modulus) {
@@ -382,7 +429,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
 	 */
 	public void visit(Multiplication multiplication) {
@@ -392,7 +439,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Negation negation)
 	 */
 	public void visit(Negation negation) {
@@ -402,9 +449,10 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ASTNode node)
 	 */
+	@Override
 	public void visit(ASTNode node) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -412,7 +460,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Parameter parameter)
 	 */
 	public void visit(Parameter parameter) {
@@ -422,7 +470,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Plus plus)
 	 */
 	public void visit(Plus plus) {
@@ -432,7 +480,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
 	 */
 	public void visit(Postcondition postcondition) {
@@ -442,7 +490,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Precondition precondition)
 	 */
 	public void visit(Precondition precondition) {
@@ -452,7 +500,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Predicates predicates)
 	 */
 	/*public void visit(Predicates predicates) {
@@ -462,7 +510,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}*/
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Program program)
 	 */
 	public void visit(Program program) {
@@ -472,7 +520,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
 	 */
 	public void visit(QuantifiedExpression quantifiedExpression) {
@@ -482,7 +530,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
 	 */
 	public void visit(ReturnStatement returnStatement) {
@@ -492,7 +540,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Subtraction subtraction)
 	 */
 	public void visit(Subtraction subtraction) {
@@ -502,7 +550,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Unequal unequal)
 	 */
 	public void visit(Unequal unequal) {
@@ -512,7 +560,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
 	 */
 	public void visit(VariableDeclaration variableDecleration) {
@@ -522,7 +570,7 @@ class WPStrategy implements FormulaGenerator, ASTNodeVisitor {
 		// end-user-code
 	}
 
-	/** 
+	/**
 	 * @see ASTNodeVisitor#visit(Object variableReference)
 	 */
 	public void visit(Object variableReference) {

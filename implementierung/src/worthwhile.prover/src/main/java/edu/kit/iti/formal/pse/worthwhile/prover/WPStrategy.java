@@ -3,8 +3,6 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import org.omg.Dynamic.Parameter;
-
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
@@ -454,16 +452,6 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(ASTNode node) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Parameter parameter)
-	 */
-	public void visit(Parameter parameter) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 

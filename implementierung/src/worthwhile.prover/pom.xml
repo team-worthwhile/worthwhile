@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>edu.kit.iti.formal.pse.worthwhile.model</artifactId>
             <version>0.1</version>
         </dependency>
         <dependency>

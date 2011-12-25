@@ -5,17 +5,15 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="src/main/xml/toc.xml">
-      </toc>
-      <toc
-            file="src/main/xml/testToc.xml"
+            file="src/main/xml/toc.xml"
             primary="true">
       </toc>
    </extension>
    <extension
          point="org.eclipse.help.contexts">
       <contexts
-            file="src/main/xml/context.xml">
+            file="src/main/xml/context.xml"
+            plugin="edu.kit.iti.formal.pse.worthwhile.help">
       </contexts>
    </extension>
 

@@ -11,8 +11,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 
 /**
  * The source code editor used for Worthwhile documents.
@@ -22,8 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 public class WorthwhileEditor extends XtextEditor {
 
     /**
-     * A helper class to determine the AST object at a given position in the
-     * editor.
+     * A helper class to determine the AST object at a given position in the editor.
      */
     @Inject
     private EObjectAtOffsetHelper eObjectAtOffsetHelper;
@@ -35,6 +33,7 @@ public class WorthwhileEditor extends XtextEditor {
 
     @Override
     public final Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
+	// Extend the adapter class to provide a context provider.
 	if (key.equals(IContextProvider.class)) {
 	    if (this.contextProvider == null) {
 		this.contextProvider = new WorthwhileEditorContextProvider(this);
@@ -46,47 +45,32 @@ public class WorthwhileEditor extends XtextEditor {
     }
 
     /**
-     * Gets the keyword the cursor is currently on.
+     * Gets the AST node the cursor is currently on.
      * 
-     * @return The keyword the cursor is currently on.
+     * @return The node the cursor is currently on.
      */
-    public final String getCurrentKeyword() {
+    public final ASTNode getCurrentNode() {
 	ISelection selection = this.getSelectionProvider().getSelection();
 	if (selection instanceof TextSelection) {
-	    EObject currentContext = this
-		    .getContext(((TextSelection) selection).getOffset());
-
-	    if (currentContext != null) {
-		// FIXME too many instanceof's
-		if (currentContext instanceof IntegerType) {
-		    return "Integer";
-		} else if (currentContext instanceof BooleanType) {
-		    return "Boolean";
-		}
-	    }
+	    return (ASTNode) this.getContext(((TextSelection) selection).getOffset());
 	}
 
-	return "";
+	return null;
     }
 
     /**
      * Gets the AST object at the given position in the document.
      * 
      * @param offset
-     *            The position in the document at which to look for an AST
-     *            object.
-     * @return the AST object at the position {@code offset} in the document, if
-     *         one exists.
+     *            The position in the document at which to look for an AST object.
+     * @return the AST object at the position {@code offset} in the document, if one exists.
      */
     private EObject getContext(final int offset) {
-	return this.getDocument().readOnly(
-		new IUnitOfWork<EObject, XtextResource>() {
-		    public EObject exec(final XtextResource localResource)
-			    throws Exception {
-			return eObjectAtOffsetHelper.resolveElementAt(
-				localResource, offset);
-		    }
-		});
+	return this.getDocument().readOnly(new IUnitOfWork<EObject, XtextResource>() {
+	    public EObject exec(final XtextResource localResource) throws Exception {
+		return eObjectAtOffsetHelper.resolveElementAt(localResource, offset);
+	    }
+	});
     }
 
 }

@@ -3,27 +3,26 @@ package edu.kit.iti.formal.pse.worthwhile.ui.editor;
 import org.eclipse.help.HelpSystem;
 import org.eclipse.help.IContext;
 import org.eclipse.help.IContextProvider;
-import org.eclipse.help.internal.HelpPlugin;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
 
 /**
- * Provides help context IDs for a {@link WorthwhileEditor} depending on the
- * current selection.
+ * Provides help context IDs for a {@link WorthwhileEditor} depending on the current selection.
  * 
- * @see {@linkplain http
- *      ://www.eclipse.org/articles/article.php?file=Article-DynamicCSH
- *      /index.html}
+ * @see {@linkplain http://www.eclipse.org/articles/article.php?file=Article-DynamicCSH/index.html}
  * @author jojo
  * 
  */
 public class WorthwhileEditorContextProvider implements IContextProvider {
 
     /**
-     * Creates a new instance of the {@link WorthwhileEditorContextProvider}
-     * class.
+     * Creates a new instance of the {@link WorthwhileEditorContextProvider} class.
      * 
      * @param editor
-     *            The editor for which to provide help context IDs. May not be
-     *            null.
+     *            The editor for which to provide help context IDs. May not be null.
      */
     public WorthwhileEditorContextProvider(final WorthwhileEditor editor) {
 	super();
@@ -47,15 +46,13 @@ public class WorthwhileEditorContextProvider implements IContextProvider {
 
     @Override
     public final IContext getContext(final Object target) {
-	// Get the context for the keyword the cursor is currently on. If there
-	// is no such keyword, return null which displays the generic help for
-	// the editor.
-	String currentKeyword = editor.getCurrentKeyword();
+	// Get the context for the keyword the cursor is currently on. If there is no such keyword, return null which
+	// displays the generic help for the editor.
+	ASTNode currentNode = editor.getCurrentNode();
 
-	if (currentKeyword != "") {
-	    return HelpSystem
-		    .getContext("edu.kit.iti.formal.pse.worthwhile.help.keyword_"
-			    + currentKeyword);
+	if (currentNode != null) {
+	    return HelpSystem.getContext("edu.kit.iti.formal.pse.worthwhile.help.keyword_"
+		    + (new ASTNodeContextSwitch()).doSwitch(currentNode));
 	}
 
 	return null;
@@ -64,6 +61,23 @@ public class WorthwhileEditorContextProvider implements IContextProvider {
     @Override
     public final String getSearchExpression(final Object target) {
 	return null;
+    }
+    
+    /**
+     * Returns a help keyword for the given AST node.
+     */
+    private class ASTNodeContextSwitch extends AstSwitch<String> {
+	
+	@Override
+	public String caseIntegerType(final IntegerType obj) {
+	    return "Integer";
+	}
+	
+	@Override
+	public String caseBooleanType(final BooleanType obj) {
+	    return "Boolean";
+	}
+	
     }
 
 }

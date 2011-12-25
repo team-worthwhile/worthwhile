@@ -52,7 +52,7 @@ public class WorthwhileEditorContextProvider implements IContextProvider {
 
 	if (currentNode != null) {
 	    return HelpSystem.getContext("edu.kit.iti.formal.pse.worthwhile.help.keyword_"
-		    + (new ASTNodeContextSwitch()).doSwitch(currentNode));
+		    + (new ASTNodeKeywordSwitch()).doSwitch(currentNode));
 	}
 
 	return null;
@@ -66,7 +66,7 @@ public class WorthwhileEditorContextProvider implements IContextProvider {
     /**
      * Returns a help keyword for the given AST node.
      */
-    private class ASTNodeContextSwitch extends AstSwitch<String> {
+    private class ASTNodeKeywordSwitch extends AstSwitch<String> {
 	
 	@Override
 	public String caseIntegerType(final IntegerType obj) {

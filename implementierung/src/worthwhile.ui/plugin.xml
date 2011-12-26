@@ -223,5 +223,15 @@
             class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
+   <extension
+         point="org.eclipse.core.runtime.adapters">
+      <factory
+            adaptableType="edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.debugmodel.WorthwhileBreakpointAdapterFactory">
+         <adapter
+               type="org.eclipse.debug.ui.actions.IToggleBreakpointsTarget">
+         </adapter>
+      </factory>
+   </extension>
 
 </plugin>

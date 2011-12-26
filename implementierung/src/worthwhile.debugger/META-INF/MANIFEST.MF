@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Worthwhile Debugger
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.debugger;singleton:=true
+Bundle-Version: 1.0.0.0
+Bundle-Vendor: Team Worthwhile
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.debug.core,
+ org.eclipse.core.runtime;bundle-version="3.7.0"
+Export-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
+ edu.kit.iti.formal.pse.worthwhile.debugger.model

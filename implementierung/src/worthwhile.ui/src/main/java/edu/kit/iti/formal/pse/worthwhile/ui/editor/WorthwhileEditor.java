@@ -33,7 +33,7 @@ public class WorthwhileEditor extends XtextEditor {
 
     @Override
     public final Object getAdapter(@SuppressWarnings("rawtypes") final Class key) {
-	// Extend the adapter class to provide a context provider.
+	// When asked for a context provider, return our own context provider.
 	if (key.equals(IContextProvider.class)) {
 	    if (this.contextProvider == null) {
 		this.contextProvider = new WorthwhileEditorContextProvider(this);

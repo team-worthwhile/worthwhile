@@ -44,6 +44,7 @@
       <plugin id="com.ning.async-http-client"/>
       <plugin id="de.itemis.xtext.antlr"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.debugger"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.help"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.model"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.product"/>
@@ -207,7 +208,7 @@
       <plugin id="org.mortbay.jetty.server"/>
       <plugin id="org.mortbay.jetty.util"/>
       <plugin id="org.slf4j.api"/>
-      <plugin id="worthwhile.debugger"/>
+      <plugin id="worthwhile.debugger" fragment=""/>
    </plugins>
 
    <features>

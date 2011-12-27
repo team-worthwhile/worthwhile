@@ -233,5 +233,11 @@
          </adapter>
       </factory>
    </extension>
-
+<extension  point="org.eclipse.ui.editors.annotationTypes">
+<type
+	markerType="edu.kit.iti.formal.pse.worthwhile.debugger.lineBreakpoint.marker"
+	name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.lineBreakpoint"
+	super="org.eclipse.debug.core.breakpoint">
+</type>
+ </extension>
 </plugin>

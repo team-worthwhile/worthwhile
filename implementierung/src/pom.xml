@@ -10,15 +10,22 @@
     <modules>
         <module>worthwhile</module>
         <module>worthwhile.model</module>
+        <module>worthwhile.ui</module>
+        <module>worthwhile.debugger</module>
+        <module>worthwhile.tests</module>
         <module>worthwhile.interpreter</module>
         <module>worthwhile.prover</module>
-        <module>worthwhile.tests</module>
     </modules>
     <repositories>
         <repository>
             <id>indigo</id>
             <layout>p2</layout>
             <url>http://download.eclipse.org/releases/indigo</url>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
         </repository>
     </repositories>
     <pluginRepositories>

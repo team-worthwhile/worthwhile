@@ -4,11 +4,15 @@
     <artifactId>worthwhile</artifactId>
     <version>0.1</version>
     <packaging>pom</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <modules>
         <module>worthwhile</module>
         <module>worthwhile.model</module>
         <module>worthwhile.interpreter</module>
         <module>worthwhile.prover</module>
+        <module>worthwhile.tests</module>
     </modules>
     <repositories>
         <repository>

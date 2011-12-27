@@ -52,6 +52,8 @@ public class WorthwhileLineBreakpoint extends LineBreakpoint {
 		setMarker(marker);
 		marker.setAttribute(IBreakpoint.ENABLED, Boolean.TRUE);
 		marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);
+		marker.setAttribute(IMarker.CHAR_START, 0);
+		marker.setAttribute(IMarker.CHAR_END, 0);
 		marker.setAttribute(IBreakpoint.ID, getModelIdentifier());
 		marker.setAttribute(IMarker.MESSAGE, "Breakpoint: " + resource.getName() + " [line: " + lineNumber
 			+ "]");

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: edu.kit.iti.formal.pse.worthwhile.tests
 Bundle-Vendor: Team Worthwhile
 Bundle-Version: 0.1
-Bundle-SymbolicName: worthwhile.tests;singleton:=true
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile,
  edu.kit.iti.formal.pse.worthwhile.ui,

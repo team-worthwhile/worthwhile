@@ -14,7 +14,7 @@ Workflow {
 		scanClassPath  = true
 		platformUri = "${runtimeProject}/.."
 		// registerGeneratedEPackage = "worthwhile.ast.AstPackage"
-		registerGenModelFile = "platform:/resource/worthwhile.model/model/Worthwhile.genmodel"
+		registerGenModelFile = "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.genmodel"
 	}
 
 	component = DirectoryCleaner {

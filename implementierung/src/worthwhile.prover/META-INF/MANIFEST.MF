@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Prover
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.prover
+Bundle-Version: 0.1
+Export-Package: edu.kit.iti.formal.pse.worthwhile.prover
+Require-Bundle: edu.kit.iti.formal.pse.worthwhile,
+ edu.kit.iti.formal.pse.worthwhile.interpreter,
+ edu.kit.iti.formal.pse.worthwhile.tests,
+ org.junit4

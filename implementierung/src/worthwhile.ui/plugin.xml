@@ -240,4 +240,18 @@
 	super="org.eclipse.debug.core.breakpoint">
 </type>
  </extension>
+<extension
+      point="org.eclipse.ui.editorActions">
+   <editorContribution
+         id="edu.kit.iti.formal.pse.worthwhile.ui.rulerActions"
+         targetID="edu.kit.iti.formal.pse.worthwhile.Worthwhile">
+      <action
+            actionID="RulerDoubleClick"
+            class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.actions.doubleClickBreakpointAction"
+            label="Toggle Breakpoint (double-click)"
+            style="push">
+      </action>
+   </editorContribution>
+</extension>
 </plugin>

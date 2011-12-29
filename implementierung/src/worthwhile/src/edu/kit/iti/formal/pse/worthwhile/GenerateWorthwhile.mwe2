@@ -18,11 +18,11 @@ Workflow {
 	}
 
 	component = DirectoryCleaner {
-		directory = "${runtimeProject}/target/generated/java"
+		directory = "${runtimeProject}/target/generated"
 	}
 
 	component = DirectoryCleaner {
-		directory = "${runtimeProject}.ui/target/generated/java"
+		directory = "${runtimeProject}.ui/target/generated"
 	}
 
 	component = Generator {
@@ -30,8 +30,8 @@ Workflow {
 		pathUiProject = "${runtimeProject}.ui"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
-		srcPath = "/src/main/java"
-		srcGenPath = "/target/generated/java"
+		srcPath = "/src"
+		srcGenPath = "/target/generated"
 		language = {
 			uri = grammarURI
 			fileExtensions = file.extensions

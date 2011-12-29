@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Worthwhile Grammar Core
+Bundle-Name: edu.kit.iti.formal.pse.worthwhile
 Bundle-Vendor: Team Worthwhile
 Bundle-Version: 0.1
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile;singleton:=true
@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.antlr.runtime
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: edu.kit.iti.formal.pse.worthwhile,
  edu.kit.iti.formal.pse.worthwhile.services,
  edu.kit.iti.formal.pse.worthwhile.parseTreeConstruction,

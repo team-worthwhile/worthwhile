@@ -1,8 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Interpreter
-Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.interpreter
+Bundle-Name: edu.kit.iti.formal.pse.worthwhile.interpreter
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.interpreter;singleton:=true
 Bundle-Version: 0.1
 Export-Package: edu.kit.iti.formal.pse.worthwhile.interpreter
-Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
- org.junit
+Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model

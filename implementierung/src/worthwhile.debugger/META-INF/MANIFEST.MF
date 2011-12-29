@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Worthwhile Debugger
+Bundle-Name: edu.kit.iti.formal.pse.worthwhile.debugger
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.debugger;singleton:=true
 Bundle-Version: 0.1
 Bundle-Vendor: Team Worthwhile

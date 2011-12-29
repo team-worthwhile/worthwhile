@@ -3,7 +3,7 @@
     <groupId>edu.kit.iti.formal.pse.worthwhile</groupId>
     <artifactId>edu.kit.iti.formal.pse.worthwhile.prover</artifactId>
     <version>0.1</version>
-    <packaging>eclipse-plugin</packaging>
+    <packaging>eclipse-test-plugin</packaging>
     <parent>
         <groupId>edu.kit.iti.formal.pse</groupId>
         <artifactId>worthwhile</artifactId>

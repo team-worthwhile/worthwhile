@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-/*import org.junit.Assert;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,4 +27,3 @@ public class FormulaCompilerTest {
 	}
 
 }
-*/

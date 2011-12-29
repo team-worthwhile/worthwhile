@@ -12,9 +12,11 @@
         <module>worthwhile.model</module>
         <module>worthwhile.ui</module>
         <module>worthwhile.debugger</module>
-        <module>worthwhile.tests</module>
         <module>worthwhile.interpreter</module>
         <module>worthwhile.prover</module>
+        <module>worthwhile.interpreter.tests</module>
+        <module>worthwhile.prover.tests</module>
+        <module>worthwhile.common.tests</module>
     </modules>
     <repositories>
         <repository>

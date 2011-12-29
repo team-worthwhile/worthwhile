@@ -5,3 +5,4 @@ Bundle-Version: 0.1
 Fragment-Host: edu.kit.iti.formal.pse.worthwhile.prover
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile.common.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.junit

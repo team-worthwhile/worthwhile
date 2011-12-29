@@ -1,6 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.prover.tests
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.prover.tests;singleton:=true
 Bundle-Version: 0.1
 Fragment-Host: edu.kit.iti.formal.pse.worthwhile.prover
+Require-Bundle: edu.kit.iti.formal.pse.worthwhile.common.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

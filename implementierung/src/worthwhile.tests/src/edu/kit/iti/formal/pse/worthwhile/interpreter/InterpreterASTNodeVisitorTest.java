@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
-import static org.junit.Assert.*;
+/*import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -14,3 +14,4 @@ public class InterpreterASTNodeVisitorTest {
 	}
 
 }
+*/

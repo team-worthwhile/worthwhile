@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.tests;
 
-import java.io.StringReader;
+/*import java.io.StringReader;
 import java.util.List;
 
 import org.eclipse.xtext.parser.IParseResult;
@@ -41,3 +41,4 @@ public class SimpleTestASTProvider {
 		return ((VariableDeclaration) (statements.get(4))).getInitialValue();
 	}
 }
+*/

@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.interpreter.tests
+Bundle-Version: 0.1
+Fragment-Host: edu.kit.iti.formal.pse.worthwhile.interpreter
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

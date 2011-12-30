@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Worthwhile UI
+Bundle-Name: edu.kit.iti.formal.pse.worthwhile.ui
 Bundle-Vendor: Team Worthwhile
 Bundle-Version: 0.1
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.ui;singleton:=true
@@ -20,10 +20,9 @@ Require-Bundle: edu.kit.iti.formal.pse.worthwhile;visibility:=reexport,
  org.eclipse.xpand,
  org.eclipse.help;bundle-version="3.5.100",
  org.eclipse.debug.ui;bundle-version="3.7.0",
- edu.kit.iti.formal.pse.worthwhile.debugger
-Import-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
- org.apache.commons.logging,
+ edu.kit.iti.formal.pse.worthwhile.debugger,
+  edu.kit.iti.formal.pse.worthwhile.model
+Import-Package: org.apache.commons.logging,
  org.apache.log4j
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: edu.kit.iti.formal.pse.worthwhile.ui.contentassist.antlr
 Bundle-Activator: edu.kit.iti.formal.pse.worthwhile.ui.internal.WorthwhileActivator

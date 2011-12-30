@@ -15,7 +15,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue <em>Value</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,14 +38,14 @@ public interface BooleanLiteral extends Literal {
 	 * @model required="true" ordered="false"
 	 * @generated
 	 */
-	boolean isValue();
+	boolean getValue();
 
 	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue <em>Value</em>}' attribute.
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#getValue <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #isValue()
+	 * @see #getValue()
 	 * @generated
 	 */
 	void setValue(boolean value);

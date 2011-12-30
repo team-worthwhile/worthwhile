@@ -3437,11 +3437,11 @@ public interface AstPackage extends EPackage {
 	EClass getBooleanLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link worthwhile.ast.BooleanLiteral#isValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link worthwhile.ast.BooleanLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see worthwhile.ast.BooleanLiteral#isValue()
+	 * @see worthwhile.ast.BooleanLiteral#getValue()
 	 * @see #getBooleanLiteral()
 	 * @generated
 	 */

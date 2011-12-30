@@ -35,7 +35,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	}
 
 	@Override
-	public boolean isValue() {
+	public boolean getValue() {
 		return this.value;
 	}
 
@@ -51,7 +51,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case AstPackage.BOOLEAN_LITERAL__VALUE:
-			return this.isValue();
+			return this.getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.antlr.runtime
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile,
  edu.kit.iti.formal.pse.worthwhile.services,
  edu.kit.iti.formal.pse.worthwhile.parseTreeConstruction,

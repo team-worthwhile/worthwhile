@@ -19,7 +19,7 @@ public class FormulaCompilerTest {
 
 	@Test
 	public void testSimpleTrueFormulaCompilation() {
-		Expression formula = TestASTProvider.getCompleteTestFormula();
+		Expression formula = TestASTProvider.getTestFormula();
 		Assert.assertNotNull(formula);
 		String s = this.compiler.compileFormula(formula);
 		Assert.assertNotNull(s);

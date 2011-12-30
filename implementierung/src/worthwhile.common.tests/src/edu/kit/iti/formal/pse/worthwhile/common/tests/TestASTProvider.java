@@ -32,7 +32,12 @@ public class TestASTProvider {
 		return root;
 	}
 
-	public static Expression getCompleteTestFormula() {
+	/**
+	 * @return A simple, human-readable formula that evaluates to true (i.e. is
+	 *         always satisfiable) and covers a lot of the constructs supported
+	 *         by the language
+	 */
+	public static Expression getTestFormula() {
 		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := " +
 				"((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)\n" +
 				"}");

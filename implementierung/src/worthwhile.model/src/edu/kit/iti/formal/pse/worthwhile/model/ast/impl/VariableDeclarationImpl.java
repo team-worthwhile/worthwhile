@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -311,4 +312,7 @@ public class VariableDeclarationImpl extends StatementImpl implements VariableDe
 		return result.toString();
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //VariableDeclarationImpl

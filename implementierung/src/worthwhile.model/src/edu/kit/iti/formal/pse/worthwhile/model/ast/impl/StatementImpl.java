@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,4 +41,7 @@ public abstract class StatementImpl extends ASTNodeImpl implements Statement {
 		return AstPackage.Literals.STATEMENT;
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //StatementImpl

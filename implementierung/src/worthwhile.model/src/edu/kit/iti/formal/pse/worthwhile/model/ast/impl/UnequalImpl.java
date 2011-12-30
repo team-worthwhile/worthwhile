@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,4 +41,7 @@ public class UnequalImpl extends BinaryExpressionImpl implements Unequal {
 		return AstPackage.Literals.UNEQUAL;
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //UnequalImpl

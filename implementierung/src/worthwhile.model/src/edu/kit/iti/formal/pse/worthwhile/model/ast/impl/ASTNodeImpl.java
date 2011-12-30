@@ -220,5 +220,4 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	public void accept(ASTNodeVisitor visitor) {
 		visitor.visit(this);
 	}
-
 } //ASTNodeImpl

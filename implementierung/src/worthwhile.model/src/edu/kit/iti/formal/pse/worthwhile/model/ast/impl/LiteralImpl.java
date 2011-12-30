@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,4 +41,7 @@ public abstract class LiteralImpl extends ExpressionImpl implements Literal {
 		return AstPackage.Literals.LITERAL;
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //LiteralImpl

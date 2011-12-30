@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,4 +41,7 @@ public class PreconditionImpl extends AnnotationImpl implements Precondition {
 		return AstPackage.Literals.PRECONDITION;
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //PreconditionImpl

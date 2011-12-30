@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -163,4 +164,7 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 		return result.toString();
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //BooleanLiteralImpl

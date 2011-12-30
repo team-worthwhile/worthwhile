@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,4 +41,7 @@ public abstract class SignImpl extends UnaryExpressionImpl implements Sign {
 		return AstPackage.Literals.SIGN;
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //SignImpl

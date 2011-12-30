@@ -7,6 +7,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 
 import org.eclipse.emf.ecore.EClass;
@@ -40,4 +41,7 @@ public class NegationImpl extends UnaryExpressionImpl implements Negation {
 		return AstPackage.Literals.NEGATION;
 	}
 
+    public void accept(ASTNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 } //NegationImpl

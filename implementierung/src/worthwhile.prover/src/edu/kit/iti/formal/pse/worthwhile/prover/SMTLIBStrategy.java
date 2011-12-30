@@ -5,7 +5,6 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.Stack;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
@@ -67,6 +66,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see FormulaCompiler#compileFormula(Expression formula)
 	 */
+	@Override
 	public String compileFormula(Expression formula) {
 		// this should push a String object to the compilation stack
 		formula.accept(this);
@@ -91,16 +91,12 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 				+ ")");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Addition addition)
-	 */
+	@Override
 	public void visit(Addition addition) {
 		this.pushBinaryOperation(addition, "+");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ArrayAccess arrayAccess)
-	 */
+	@Override
 	public void visit(ArrayAccess arrayAccess) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -108,9 +104,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ArrayLength arrayLength)
-	 */
+	@Override
 	public void visit(ArrayLength arrayLength) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -118,9 +112,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ArrayLiteral arrayLiteral)
-	 */
+	@Override
 	public void visit(ArrayLiteral arrayLiteral) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -128,9 +120,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ArrayType arrayType)
-	 */
+	@Override
 	public void visit(ArrayType arrayType) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -138,18 +128,14 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Assertion assertion)
-	 */
+	@Override
 	public void visit(Assertion assertion) {
 		assertion.getExpression().accept(this);
 		String expr = this.compileStack.pop();
 		this.compileStack.push("assert(" + expr + ")");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Assignment assignment)
-	 */
+	@Override
 	public void visit(Assignment assignment) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -157,29 +143,14 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Assumption assumption)
-	 */
+	@Override
 	public void visit(Assumption assumption) {
 		assumption.getExpression().accept(this);
 		String expr = this.compileStack.pop();
 		this.compileStack.push("assume(" + expr + ")");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ASTNode node)
-	 */
 	@Override
-	public void visit(ASTNode node) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Axiom axiom)
-	 */
 	public void visit(Axiom axiom) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -187,9 +158,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Block block)
-	 */
+	@Override
 	public void visit(Block block) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -197,19 +166,17 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(BooleanLiteral booleanLiteral)
-	 */
+	@Override
 	public void visit(BooleanLiteral booleanLiteral) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		if (booleanLiteral.isValue()) {
+			this.compileStack.push("true");
+		}
+		else {
+			this.compileStack.push("false");
+		}
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(BooleanType booleanType)
-	 */
+	@Override
 	public void visit(BooleanType booleanType) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -220,6 +187,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Conditional conditional)
 	 */
+	@Override
 	public void visit(Conditional conditional) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -230,6 +198,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Conjunction conjunction)
 	 */
+	@Override
 	public void visit(Conjunction conjunction) {
 		this.pushBinaryOperation(conjunction, "and");
 	}
@@ -237,6 +206,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Disjunction disjunction)
 	 */
+	@Override
 	public void visit(Disjunction disjunction) {
 		this.pushBinaryOperation(disjunction, "or");
 	}
@@ -244,6 +214,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Division division)
 	 */
+	@Override
 	public void visit(Division division) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -254,16 +225,15 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Equal equal)
 	 */
+	@Override
 	public void visit(Equal equal) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushBinaryOperation(equal, "=");
 	}
 
 	/**
 	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
 	 */
+	@Override
 	public void visit(Equivalence equivalence) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -274,6 +244,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
 	 */
+	@Override
 	public void visit(ExistsQuantifier existsQuantifier) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -284,6 +255,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
 	 */
+	@Override
 	public void visit(ForAllQuantifier forAllQuantifier) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -294,6 +266,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(FunctionCall functionCall)
 	 */
+	@Override
 	public void visit(FunctionCall functionCall) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -304,6 +277,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
 	 */
+	@Override
 	public void visit(FunctionDeclaration functionDeclaration) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -314,6 +288,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Greater greater)
 	 */
+	@Override
 	public void visit(Greater greater) {
 		this.pushBinaryOperation(greater, ">");
 	}
@@ -321,6 +296,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
 	 */
+	@Override
 	public void visit(GreaterOrEqual greaterOrEqual) {
 		this.pushBinaryOperation(greaterOrEqual, ">=");
 	}
@@ -328,6 +304,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Implication implication)
 	 */
+	@Override
 	public void visit(Implication implication) {
 		this.pushBinaryOperation(implication, "=>");
 	}
@@ -335,6 +312,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
 	 */
+	@Override
 	public void visit(IntegerLiteral integerLiteral) {
 		this.compileStack.push(integerLiteral.getValue().toString());
 	}
@@ -342,6 +320,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(IntegerType integerType)
 	 */
+	@Override
 	public void visit(IntegerType integerType) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -352,6 +331,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Invariant invariant)
 	 */
+	@Override
 	public void visit(Invariant invariant) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -362,6 +342,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Less less)
 	 */
+	@Override
 	public void visit(Less less) {
 		this.pushBinaryOperation(less, "<");
 	}
@@ -369,6 +350,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
 	 */
+	@Override
 	public void visit(LessOrEqual lessOrEqual) {
 		this.pushBinaryOperation(lessOrEqual, "<=");
 	}
@@ -376,6 +358,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Loop loop)
 	 */
+	@Override
 	public void visit(Loop loop) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -386,22 +369,19 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Minus minus)
 	 */
+	@Override
 	public void visit(Minus minus) {
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Modulus modulus)
-	 */
+	@Override
 	public void visit(Modulus modulus) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushBinaryOperation(modulus, "mod");
 	}
 
 	/**
 	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
 	 */
+	@Override
 	public void visit(Multiplication multiplication) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -412,6 +392,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Negation negation)
 	 */
+	@Override
 	public void visit(Negation negation) {
 		this.pushUnaryOperation(negation, "not");
 	}
@@ -429,6 +410,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Plus plus)
 	 */
+	@Override
 	public void visit(Plus plus) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -439,6 +421,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
 	 */
+	@Override
 	public void visit(Postcondition postcondition) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -459,6 +442,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Precondition precondition)
 	 */
+	@Override
 	public void visit(Precondition precondition) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -469,6 +453,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Program program)
 	 */
+	@Override
 	public void visit(Program program) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -479,6 +464,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
 	 */
+	@Override
 	public void visit(QuantifiedExpression quantifiedExpression) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -489,6 +475,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
 	 */
+	@Override
 	public void visit(ReturnStatement returnStatement) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -509,6 +496,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(Unequal unequal)
 	 */
+	@Override
 	public void visit(Unequal unequal) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -519,6 +507,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	/**
 	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
 	 */
+	@Override
 	public void visit(VariableDeclaration variableDecleration) {
 		// begin-user-code
 		// TODO Auto-generated method stub

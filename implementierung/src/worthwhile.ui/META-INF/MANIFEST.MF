@@ -5,6 +5,7 @@ Bundle-Vendor: Team Worthwhile
 Bundle-Version: 0.1
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",

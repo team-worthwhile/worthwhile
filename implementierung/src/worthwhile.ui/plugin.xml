@@ -254,4 +254,15 @@
       </action>
    </editorContribution>
 </extension>
+<extension
+      id="edu.kit.iti.formal.pse.worthwhile.ui.contenttype"
+      point="org.eclipse.core.contenttype.contentTypes">
+   <content-type
+         base-type="org.eclipse.core.runtime.text"
+         file-extensions="ww"
+         id="edu.kit.iti.formal.pse.worthwhile.ui.contenttypes.worthwhile"
+         name="Worthwhile File"
+         priority="normal">
+   </content-type>
+</extension>
 </plugin>

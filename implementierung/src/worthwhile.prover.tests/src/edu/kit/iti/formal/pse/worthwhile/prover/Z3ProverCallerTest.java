@@ -9,7 +9,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 public class Z3ProverCallerTest {
 
 	@Test
-	public void test() {
+	public void testWithSimpleFormula() throws ProverCallerException {
 		Expression formula = TestASTProvider.getTestFormula();
 		ProverCaller caller = new Z3Prover();
 		ProverResult result = caller.checkFormula(formula);

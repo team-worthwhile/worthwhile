@@ -1,5 +1,11 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
 /**
@@ -7,7 +13,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
  */
 abstract class StdProver implements ProverCaller {
 	/**
-	 *
+	 * The compiler used to construct an input string from the Expression object
+	 * to be checked for satisfiability
 	 */
 	private FormulaCompiler compiler;
 
@@ -24,6 +31,7 @@ abstract class StdProver implements ProverCaller {
 	 */
 	protected StdProver(String path, FormulaCompiler compiler) {
 		this.compiler = compiler;
+		this.proverPath = path;
 	}
 
 	/**
@@ -31,22 +39,35 @@ abstract class StdProver implements ProverCaller {
 	 *
 	 * @param formula the expression to check
 	 * @return the result returned by the prover
+	 * @throws ProverCallerException
 	 */
-	public ProverResult checkFormula(Expression formula) {
-		String in = this.getCompiler().compileFormula(formula);
-		String out = this.executeProverBinary(in);
-		return this.getResult(out);
-	}
+	@Override
+	public ProverResult checkFormula(Expression formula) throws ProverCallerException {
+		String inputString = this.getCompiler().compileFormula(formula);
+		String outputString = "";
+		try {
+			// instantiate the prover
+			ProcessBuilder builder = new ProcessBuilder(this.proverPath);
+			builder.redirectErrorStream(true);
+			Process proverProcess = builder.start();
 
-	/**
-	 * Call the prover with the given input string
-	 *
-	 * @param input the input string to pass to the prover
-	 * @return the output received on stdout from the prover
-	 */
-	// TODO: Throw some kind of "can't find the binary exception"
-	private String executeProverBinary(String input) {
-		return null;
+			// get the streams that are used to communicate with the prover
+			BufferedReader stdout = new BufferedReader(new InputStreamReader(proverProcess.getInputStream()));
+			BufferedWriter stdin = new BufferedWriter(new OutputStreamWriter(proverProcess.getOutputStream()));
+			// ask the prover what we want to know
+			stdin.write(inputString);
+			stdin.close();
+
+			String line;
+			while ((line = stdout.readLine()) != null) {
+				outputString += line;
+			}
+		} catch (IOException e) {
+			// normally the binary was simply not found
+			e.printStackTrace();
+			throw new ProverCallerException("Error calling prover binary: " + this.proverPath);
+		}
+		return this.getResult(outputString);
 	}
 
 	/**
@@ -70,7 +91,7 @@ abstract class StdProver implements ProverCaller {
 	 * @param output the String output returned from the called prover
 	 * @return a result extracted from the prover output
 	 */
-	protected abstract ProverResult getResult(String output);
+	abstract ProverResult getResult(String output);
 
 	/**
 	 * @param compiler the compiler to set to compile input for this prover

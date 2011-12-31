@@ -5,20 +5,14 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  */
 public class Z3ProverResult extends ProverResult {
 
-	/**
-	 * @see ProverResult#ProverResult(String)
-	 */
 	protected Z3ProverResult(String output) {
 		super(output);
 	}
 
-	/**
-	 * @see ProverResult#getSatisfiability()
-	 */
 	@Override
 	public FormulaSatisfiability getSatisfiability() {
-		// TODO Auto-generated method stub
-		return null;
+		// FIXME: Do something more intelligent here
+		return FormulaSatisfiability.SATISFIABLE;
 	}
 
 }

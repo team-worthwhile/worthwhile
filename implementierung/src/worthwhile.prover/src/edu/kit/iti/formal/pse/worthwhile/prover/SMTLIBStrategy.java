@@ -70,7 +70,13 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	public String compileFormula(Expression formula) {
 		// this should push a String object to the compilation stack
 		formula.accept(this);
-		return this.compileStack.pop();
+		String formulaString = this.compileStack.pop();
+
+		// wrap the formulaString in a command for the prover that tells the prover
+		// what we want to know about the formula
+		// TODO: Make this more intelligent, maybe wrap the Expression in an
+		// Assert and then visit it just like all the other nodes...?
+		return "(assert " + formulaString + ")\n(check-sat)";
 	}
 
 	private void pushBinaryOperation(BinaryExpression binaryExpression,

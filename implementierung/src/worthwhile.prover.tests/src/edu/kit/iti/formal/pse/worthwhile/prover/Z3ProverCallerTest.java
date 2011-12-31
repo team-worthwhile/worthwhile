@@ -10,11 +10,17 @@ public class Z3ProverCallerTest {
 
 	@Test
 	public void testWithSimpleFormula() throws ProverCallerException {
+		ProverResult result;
+
 		Expression formula = TestASTProvider.getTestFormula();
 		ProverCaller caller = new Z3Prover();
-		ProverResult result = caller.checkFormula(formula);
+		result = caller.checkFormula(formula);
 		// the formula is pretty easy and should be satisfiable
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
+
+		// the same formula again, but negated, so it should not be satisfiable
+		result = caller.checkFormula(TestASTProvider.getNegatedTestFormula());
+		Assert.assertEquals(FormulaSatisfiability.UNSATISFIABLE, result.getSatisfiability());
 	}
 
 }

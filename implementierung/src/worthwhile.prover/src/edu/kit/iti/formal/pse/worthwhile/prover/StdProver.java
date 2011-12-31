@@ -58,6 +58,7 @@ abstract class StdProver implements ProverCaller {
 			stdin.write(inputString);
 			stdin.close();
 
+			// read all the output from the prover process
 			String line;
 			while ((line = stdout.readLine()) != null) {
 				outputString += line;

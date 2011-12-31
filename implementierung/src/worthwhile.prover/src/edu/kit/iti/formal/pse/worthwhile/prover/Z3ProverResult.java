@@ -11,8 +11,14 @@ public class Z3ProverResult extends ProverResult {
 
 	@Override
 	public FormulaSatisfiability getSatisfiability() {
-		// FIXME: Do something more intelligent here
-		return FormulaSatisfiability.SATISFIABLE;
+		if (this.getOutput().equals("sat")) {
+			return FormulaSatisfiability.SATISFIABLE;
+		} else if (this.getOutput().equals("unsat")) {
+			return FormulaSatisfiability.UNSATISFIABLE;
+		}
+		// TODO: Do something even more intelligent here
+		// maybe some error checking, but how would we report the error?
+		return FormulaSatisfiability.UNKOWN;
 	}
 
 }

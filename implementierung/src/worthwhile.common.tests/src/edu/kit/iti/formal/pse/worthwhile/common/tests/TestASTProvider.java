@@ -38,8 +38,16 @@ public class TestASTProvider {
 	 *         by the language
 	 */
 	public static Expression getTestFormula() {
+		return parseFormulaString("((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)");
+	}
+
+	public static Expression getNegatedTestFormula() {
+		return parseFormulaString("!((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)");
+	}
+
+	static Expression parseFormulaString(String formulaString) {
 		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := " +
-				"((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)\n" +
+				formulaString + "\n" +
 				"}");
 		List<Statement> statements = ((Block) ((Program) n).getMainBlock()
 				.getStatements().get(0)).getStatements();

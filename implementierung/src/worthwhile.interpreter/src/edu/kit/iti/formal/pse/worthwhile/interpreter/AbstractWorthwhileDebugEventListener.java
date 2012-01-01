@@ -6,7 +6,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 /** 
  * 
  */
-public class WorthwhileDebugEventListener {
+public class AbstractWorthwhileDebugEventListener extends AbstractDebugEventListener {
 	/** 
 	 * 
 	 */

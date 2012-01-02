@@ -14,21 +14,21 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
     protected WorthwhileDebugTarget debugTarget;
 
     @Override
-    public IDebugTarget getDebugTarget() {
+    public final IDebugTarget getDebugTarget() {
 	return this.debugTarget;
     }
 
     @Override
-    public ILaunch getLaunch() {
+    public final ILaunch getLaunch() {
 	return this.debugTarget.getLaunch();
     }
 
     @Override
-    public String getModelIdentifier() {
+    public final String getModelIdentifier() {
 	return IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
     }
 
-    public Object getAdapter(@SuppressWarnings("rawtypes") final Class adapter) {
+    public final Object getAdapter(@SuppressWarnings("rawtypes") final Class adapter) {
 	if (adapter == IDebugElement.class) {
 	    return this;
 	}
@@ -36,19 +36,19 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
     }
 
     /**
-     * Fires a debug event
+     * Fires a debug event.
      * 
      * @param event
      *            the event to be fired
      */
-    protected void fireEvent(final DebugEvent event) {
+    protected final void fireEvent(final DebugEvent event) {
 	DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] { event });
     }
 
     /**
      * Fires a <code>CREATE</code> event for this element.
      */
-    protected void fireCreationEvent() {
+    protected final void fireCreationEvent() {
 	fireEvent(new DebugEvent(this, DebugEvent.CREATE));
     }
 
@@ -58,7 +58,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
      * @param detail
      *            event detail code
      */
-    public void fireResumeEvent(final int detail) {
+    public final void fireResumeEvent(final int detail) {
 	fireEvent(new DebugEvent(this, DebugEvent.RESUME, detail));
     }
 
@@ -68,14 +68,14 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
      * @param detail
      *            event detail code
      */
-    public void fireSuspendEvent(final int detail) {
+    public final void fireSuspendEvent(final int detail) {
 	fireEvent(new DebugEvent(this, DebugEvent.SUSPEND, detail));
     }
 
     /**
      * Fires a <code>TERMINATE</code> event for this element.
      */
-    protected void fireTerminateEvent() {
+    protected final void fireTerminateEvent() {
 	fireEvent(new DebugEvent(this, DebugEvent.TERMINATE));
     }
 

@@ -1,6 +1,9 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
-import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractWorthwhileDebugEventListener;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**
  * An event listener that passes on debug events to the debug target.
@@ -8,7 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractWorthwhileDebugEven
  * @author Joachim
  * 
  */
-public class WorthwhileDebugEventListener extends AbstractWorthwhileDebugEventListener {
+public class WorthwhileDebugEventListener extends AbstractDebugEventListener {
 
     /**
      * The debug target to send messages to.
@@ -28,20 +31,31 @@ public class WorthwhileDebugEventListener extends AbstractWorthwhileDebugEventLi
 
 	this.debugTarget = debugTarget;
     }
+    
+    @Override
+    public final void executionFailed(final Statement statement, final InterpreterError error) {
+	
+    }
 
     @Override
-    public void resume() {
+    public final void executionCompleted() {
+	debugTarget.executionTerminated();
+    }
+
+    @Override
+    public final void executionStarted() {
+	debugTarget.executionStarted();
+    }
+
+    @Override
+    public void statementWillExecute(final Statement statement) {
 	// TODO Auto-generated method stub
     }
 
     @Override
-    public void statementWillExecute() {
-	// TODO Auto-generated method stub
-    }
-
-    @Override
-    public void executionStarted() {
-	// TODO Auto-generated method stub
+    public final void breakpointReached(final Statement statement, final LineBreakpoint breakpoint) {
+	// Just ignore the breakpoint
+	return;
     }
 
 }

@@ -1,7 +1,10 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
 import org.eclipse.core.resources.IMarker;
+
 import org.eclipse.core.resources.IMarkerDelta;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -13,6 +16,7 @@ import org.eclipse.debug.core.model.IThread;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -21,8 +25,6 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
  * 
  */
 public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDebugTarget {
-
-    // EventDispatchJob eventDispatchJob;
 
     /**
      * The (only) thread a program execution consists of.
@@ -119,8 +121,17 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
     @Override
     public final void breakpointAdded(final IBreakpoint breakpoint) {
-	// TODO Auto-generated method stub
-
+	if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
+	    try {
+		this.interpreter.addBreakpoint(new LineBreakpoint(
+			((org.eclipse.debug.core.model.LineBreakpoint) breakpoint).getLineNumber()));
+	    } catch (CoreException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
+	    // TODO
+	}
     }
 
     @Override
@@ -196,7 +207,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
     }
 
     /**
-     * Install the breakpoints that are registered on startup.
+     * Installs the breakpoints that have already registered before the execution of the program (as opposed to
+     * breakpoints added when the program is running).
      */
     private void installDeferredBreakpoints() {
 	IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
@@ -208,9 +220,23 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
     }
 
     /**
-     * Called when this debug target terminates.
+     * Called when the interpreter has been started, before executing the first statement.
      */
-    private void terminated() {
+    protected final void executionStarted() {
+	this.installDeferredBreakpoints();
+    }
+    
+    /**
+     * Called when a breakpoint is hit.
+     */
+    protected final void breakpointHit() {
+	fireSuspendEvent(DebugEvent.BREAKPOINT);
+    }
+
+    /**
+     * Called when the interpreter terminates the execution.
+     */
+    protected final void executionTerminated() {
 	this.terminated = true;
 	this.suspended = false;
 	DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);

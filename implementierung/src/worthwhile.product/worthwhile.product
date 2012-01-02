@@ -46,6 +46,8 @@
       <plugin id="edu.kit.iti.formal.pse.worthwhile"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.debugger"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.help"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.interpreter"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.interpreter.tests" fragment="true"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.model"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.product"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.ui"/>
@@ -204,7 +206,9 @@
       <plugin id="org.eclipse.xtext.util"/>
       <plugin id="org.eclipse.xtext.xbase.lib"/>
       <plugin id="org.eclipse.xtext.xtend2.lib"/>
+      <plugin id="org.hamcrest.core"/>
       <plugin id="org.jboss.netty"/>
+      <plugin id="org.junit"/>
       <plugin id="org.mortbay.jetty.server"/>
       <plugin id="org.mortbay.jetty.util"/>
       <plugin id="org.slf4j.api"/>

@@ -45,7 +45,7 @@ public class TestASTProvider {
 		return parseFormulaString("!((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)");
 	}
 
-	static Expression parseFormulaString(String formulaString) {
+	public static Expression parseFormulaString(String formulaString) {
 		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := " +
 				formulaString + "\n" +
 				"}");

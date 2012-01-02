@@ -317,4 +317,42 @@
             name="Worthwhile File">
       </wizard>
    </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="edu.kit.iti.formal.pse.worthwhile.ui.perspectives.WorthwhilePerspective"
+            icon="icons/editor.gif"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.perspectives.worthwhile"
+            name="Worthwhile">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="edu.kit.iti.formal.pse.worthwhile.ui.perspectives.worthwhile">
+         <actionSet
+               id="org.eclipse.debug.ui.launchActionSet">
+         </actionSet>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.activities">
+      <activity
+            id="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
+            name="Unwanted Action Set 1">
+         <enabledWhen>
+            <with
+                  variable="activePartId">
+               <equals
+                     value="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet">
+               </equals>
+            </with>
+         </enabledWhen>
+      </activity>
+      <activityPatternBinding
+            activityId="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
+            isEqualityPattern="true"
+            pattern="org.eclipse.ui.edit.text.actionSet.navigation">
+      </activityPatternBinding>
+   </extension>
 </plugin>

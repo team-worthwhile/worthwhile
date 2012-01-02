@@ -291,7 +291,7 @@
       <perspectiveExtension
             targetID="*">
          <newWizardShortcut
-               id="edu.kit.iti.formal.pse.worthwhile.ui.newWizard">
+               id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileFileWizard">
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
@@ -303,9 +303,9 @@
       </category>
       <wizard
             category="edu.kit.iti.formal.pse.worthwhile.ui.newWizard.category"
-            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileProjectWizard"
             icon="icons/editor.gif"
-            id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileProjectWizard"
             name="Worthwhile Project"
             project="true">
       </wizard>
@@ -313,7 +313,7 @@
             category="edu.kit.iti.formal.pse.worthwhile.ui.newWizard.category"
             class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileFileWizard"
             icon="icons/editor.gif"
-            id="edu.kit.iti.formal.pse.worthwhile.ui.newWizard"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileFileWizard"
             name="Worthwhile File">
       </wizard>
    </extension>

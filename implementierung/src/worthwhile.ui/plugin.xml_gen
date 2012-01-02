@@ -191,18 +191,6 @@
             extensions="ww">
     </provider>
   </extension>
-
-   <extension
-         point="org.eclipse.ui.newWizards">
-      <wizard
-            category="org.eclipse.xtext.projectwiz"
-            class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
-            icon="icons/editor.gif"
-            id="edu.kit.iti.formal.pse.worthwhile.ui.wizard.WorthwhileNewProjectWizard"
-            name="Worthwhile Project"
-            project="true">
-      </wizard>
-   </extension>
    <!-- quickfix marker resolution generator -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">

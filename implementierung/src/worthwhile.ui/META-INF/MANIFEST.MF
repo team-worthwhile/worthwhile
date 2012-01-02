@@ -25,5 +25,6 @@ Require-Bundle: edu.kit.iti.formal.pse.worthwhile;visibility:=reexport,
   edu.kit.iti.formal.pse.worthwhile.model
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
-Export-Package: edu.kit.iti.formal.pse.worthwhile.ui.contentassist.antlr
+Export-Package: edu.kit.iti.formal.pse.worthwhile.ui.contentassist.antlr,
+ edu.kit.iti.formal.pse.worthwhile.ui.editor
 Bundle-Activator: edu.kit.iti.formal.pse.worthwhile.ui.internal.WorthwhileActivator

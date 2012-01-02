@@ -12,4 +12,5 @@ Require-Bundle: org.eclipse.debug.core,
  org.eclipse.debug.ui,
  org.eclipse.ui;bundle-version="3.7.0"
 Export-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
+ edu.kit.iti.formal.pse.worthwhile.debugger.launching,
  edu.kit.iti.formal.pse.worthwhile.debugger.model

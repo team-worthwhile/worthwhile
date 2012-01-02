@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.debugger.ui.launcher;
+package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
 import org.eclipse.debug.ui.CommonTab;

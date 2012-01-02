@@ -25,37 +25,4 @@
             name="Worthwhile Program">
       </launchConfigurationType>
    </extension>
-   <extension
-         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
-      <launchConfigurationTabGroup
-            class="edu.kit.iti.formal.pse.worthwhile.debugger.ui.launcher.WorthwhileTabGroup"
-            id="edu.kit.iti.formal.pse.worthwhile.debugger.tabgroup"
-            type="edu.kit.iti.formal.pse.worthwhile.debugger.launch">
-      </launchConfigurationTabGroup>
-   </extension>
-   <extension
-         point="org.eclipse.debug.ui.launchShortcuts">
-      <shortcut
-            class="edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchShortcut"
-            id="edu.kit.iti.formal.pse.worthwhile.debugger.launchShortcut"
-            label="Worthwhile Program"
-            modes="run,debug">
-         <contextualLaunch>
-         	<enablement>
-               <with
-                     variable="selection">
-                  <count
-                        value="1">
-                  </count>
-                  <iterate>
-                     <or>
-                        <test property="org.eclipse.debug.ui.matchesPattern" value="*.ww"/>
-                     </or>
-                  </iterate>
-               </with>
-            </enablement>
-         </contextualLaunch>
-      </shortcut>
-   </extension>
-
 </plugin>

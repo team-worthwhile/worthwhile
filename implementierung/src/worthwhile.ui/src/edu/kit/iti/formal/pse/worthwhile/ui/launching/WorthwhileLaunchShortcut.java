@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.debugger.launching;
+package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.debug.ui.ILaunchShortcut;

@@ -276,7 +276,7 @@
    <extension
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
-            class="edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchShortcut"
+            class="edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchShortcut"
             id="edu.kit.iti.formal.pse.worthwhile.debugger.launchShortcut"
             label="Worthwhile Program"
             modes="run,debug">

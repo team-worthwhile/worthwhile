@@ -335,24 +335,19 @@
          </actionSet>
       </perspectiveExtension>
    </extension>
-   <extension
-         point="org.eclipse.ui.activities">
-      <activity
-            id="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
-            name="Unwanted Action Set 1">
-         <enabledWhen>
-            <with
-                  variable="activePartId">
-               <equals
-                     value="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet">
-               </equals>
-            </with>
-         </enabledWhen>
-      </activity>
-      <activityPatternBinding
-            activityId="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
-            isEqualityPattern="true"
-            pattern="org.eclipse.ui.edit.text.actionSet.navigation">
-      </activityPatternBinding>
-   </extension>
+   <extension point="org.eclipse.ui.activities">
+<activity id="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1" name="Unwanted Search ActionSet">
+   <enabledWhen>
+      <with variable="activePartId">  
+<equals value="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet"> 
+</equals>    
+</with></enabledWhen></activity>
+<activityPatternBinding
+      activityId="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
+      pattern="org\.eclipse\.ui\.edit\.text\..*" />
+<activityPatternBinding
+      activityId="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
+      pattern="org\.eclipse\.ui\.navigate\..*" />
+</extension>
+
 </plugin>

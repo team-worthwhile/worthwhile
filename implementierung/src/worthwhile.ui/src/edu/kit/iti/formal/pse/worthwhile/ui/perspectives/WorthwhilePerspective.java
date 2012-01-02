@@ -46,7 +46,7 @@ public class WorthwhilePerspective implements IPerspectiveFactory {
 	layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
 	
 	// Add shortcut to debug perspective (shown in the "open perspective" menu)
-	layout.addPerspectiveShortcut("org.eclipse.debug.ui.DebugPerspective");
+	layout.addPerspectiveShortcut("org.eclipse.debug.ui.DebugPerspective"); 
     }
 
     /**

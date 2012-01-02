@@ -11,7 +11,10 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 
 public class WorthwhileDebugElement extends PlatformObject implements IDebugElement {
 
-    protected WorthwhileDebugTarget debugTarget;
+    /**
+     * The debug target this element belongs to.
+     */
+    private WorthwhileDebugTarget debugTarget;
 
     @Override
     public final IDebugTarget getDebugTarget() {
@@ -28,6 +31,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	return IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
     }
 
+    @Override
     public final Object getAdapter(@SuppressWarnings("rawtypes") final Class adapter) {
 	if (adapter == IDebugElement.class) {
 	    return this;

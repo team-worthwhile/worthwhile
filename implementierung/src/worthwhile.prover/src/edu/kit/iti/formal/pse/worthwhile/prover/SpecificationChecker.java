@@ -1,6 +1,3 @@
-/**
- *
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.Map;
@@ -10,12 +7,12 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**
- *
+ * Facade class for the {@link prover} package.
  */
 public class SpecificationChecker {
     /**
-	 *
-	 */
+     * Time delta in seconds after which a prover call times out.
+     */
     private Integer timeout = 0;
 
     /**
@@ -38,8 +35,8 @@ public class SpecificationChecker {
     }
 
     /**
-	 *
-	 */
+     * The {@link ProverCaller} that is called for checking the satisfiability of formulae.
+     */
     private ProverCaller prover;
 
     /**
@@ -62,8 +59,8 @@ public class SpecificationChecker {
     }
 
     /**
-	 *
-	 */
+     * The {@link FormulaGenerator} that is called for generating a formula from a {@link Program}.
+     */
     private FormulaGenerator transformer;
 
     /**
@@ -86,8 +83,8 @@ public class SpecificationChecker {
     }
 
     /**
-	 *
-	 */
+     * The result of the last call to {@link prover}.
+     */
     private ProverResult checkResult;
 
     /**
@@ -110,8 +107,8 @@ public class SpecificationChecker {
     }
 
     /**
-	 *
-	 */
+     * Uses {@link WPStrategy} as {@link transformer}.
+     */
     public SpecificationChecker() {
 	// begin-user-code
 	// TODO Auto-generated constructor stub
@@ -120,6 +117,7 @@ public class SpecificationChecker {
 
     /**
      * @param transformer
+     *            Is called to transform {@link Program}s into formulae.
      */
     public SpecificationChecker(FormulaGenerator transformer) {
 	// begin-user-code
@@ -129,8 +127,10 @@ public class SpecificationChecker {
 
     /**
      * @param formula
+     *            the {@link Expression} to check
      * @param environment
-     * @return
+     *            a list of variable values and axioms
+     * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
      */
     public Validity checkFormula(Expression formula, Map<String, Value> environment) {
 	// begin-user-code
@@ -141,7 +141,8 @@ public class SpecificationChecker {
 
     /**
      * @param program
-     * @return
+     *            the {@link Program} to check
+     * @return the {@link Validity} of <code>program</code>
      */
     public Validity checkProgram(Program program) {
 	// begin-user-code

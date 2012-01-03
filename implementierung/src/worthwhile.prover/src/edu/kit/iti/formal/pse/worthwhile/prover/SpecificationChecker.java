@@ -12,6 +12,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 public class SpecificationChecker {
     /**
      * Time delta in seconds after which a prover call times out.
+     * 
+     * Defaults to zero.
      */
     private Integer timeout = 0;
 
@@ -24,7 +26,7 @@ public class SpecificationChecker {
 
     /**
      * @param timeout
-     *            the timeout to set
+     *            the timeout to set, zero when negative
      */
     public void setTimeout(Integer timeout) {
 	if (timeout < 0) {
@@ -36,6 +38,8 @@ public class SpecificationChecker {
 
     /**
      * The {@link ProverCaller} that is called for checking the satisfiability of formulae.
+     * 
+     * Defaults to {@link Z3Prover} instance.
      */
     private ProverCaller prover = new Z3Prover();
 

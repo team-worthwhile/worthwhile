@@ -40,25 +40,6 @@ public class SpecificationChecker {
     private ProverCaller prover;
 
     /**
-     * @return the prover
-     */
-    public ProverCaller getProver() {
-	// begin-user-code
-	return this.prover;
-	// end-user-code
-    }
-
-    /**
-     * @param prover
-     *            the prover to set
-     */
-    public void setProver(ProverCaller prover) {
-	// begin-user-code
-	this.prover = prover;
-	// end-user-code
-    }
-
-    /**
      * The {@link FormulaGenerator} that is called for generating a formula from a {@link Program}.
      */
     private FormulaGenerator transformer;
@@ -93,16 +74,6 @@ public class SpecificationChecker {
     public ProverResult getCheckResult() {
 	// begin-user-code
 	return this.checkResult;
-	// end-user-code
-    }
-
-    /**
-     * @param checkResult
-     *            the checkResult to set
-     */
-    public void setCheckResult(ProverResult checkResult) {
-	// begin-user-code
-	this.checkResult = checkResult;
 	// end-user-code
     }
 

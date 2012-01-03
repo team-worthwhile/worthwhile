@@ -10,9 +10,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
  * 
  */
 public interface FormulaGenerator {
-	/** 
-	 * @param program
-	 * @return
-	 */
-	public Expression transformProgram(Program program);
+    /**
+     * @param program
+     * @return
+     */
+    public Expression transformProgram(Program program);
 }

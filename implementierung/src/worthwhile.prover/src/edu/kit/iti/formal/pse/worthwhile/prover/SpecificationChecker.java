@@ -19,9 +19,7 @@ public class SpecificationChecker {
      * @return the timeout
      */
     public Integer getTimeout() {
-	// begin-user-code
 	return this.timeout;
-	// end-user-code
     }
 
     /**
@@ -29,15 +27,17 @@ public class SpecificationChecker {
      *            the timeout to set
      */
     public void setTimeout(Integer timeout) {
-	// begin-user-code
-	this.timeout = timeout;
-	// end-user-code
+	if (timeout < 0) {
+	    this.timeout = 0;
+	} else {
+	    this.timeout = timeout;
+	}
     }
 
     /**
      * The {@link ProverCaller} that is called for checking the satisfiability of formulae.
      */
-    private ProverCaller prover;
+    private ProverCaller prover = new Z3Prover();
 
     /**
      * The {@link FormulaGenerator} that is called for generating a formula from a {@link Program}.
@@ -48,9 +48,7 @@ public class SpecificationChecker {
      * @return the transformer
      */
     public FormulaGenerator getTransformer() {
-	// begin-user-code
 	return this.transformer;
-	// end-user-code
     }
 
     /**
@@ -58,9 +56,7 @@ public class SpecificationChecker {
      *            the transformer to set
      */
     public void setTransformer(FormulaGenerator transformer) {
-	// begin-user-code
 	this.transformer = transformer;
-	// end-user-code
     }
 
     /**
@@ -72,18 +68,14 @@ public class SpecificationChecker {
      * @return the checkResult
      */
     public ProverResult getCheckResult() {
-	// begin-user-code
 	return this.checkResult;
-	// end-user-code
     }
 
     /**
      * Uses {@link WPStrategy} as {@link transformer}.
      */
     public SpecificationChecker() {
-	// begin-user-code
-	// TODO Auto-generated constructor stub
-	// end-user-code
+	this.transformer = new WPStrategy();
     }
 
     /**
@@ -91,9 +83,7 @@ public class SpecificationChecker {
      *            Is called to transform {@link Program}s into formulae.
      */
     public SpecificationChecker(FormulaGenerator transformer) {
-	// begin-user-code
-	// TODO Auto-generated constructor stub
-	// end-user-code
+	this.transformer = transformer;
     }
 
     /**
@@ -104,10 +94,8 @@ public class SpecificationChecker {
      * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
      */
     public Validity checkFormula(Expression formula, Map<String, Value> environment) {
-	// begin-user-code
 	// TODO Auto-generated method stub
 	return null;
-	// end-user-code
     }
 
     /**
@@ -116,9 +104,7 @@ public class SpecificationChecker {
      * @return the {@link Validity} of <code>program</code>
      */
     public Validity checkProgram(Program program) {
-	// begin-user-code
 	// TODO Auto-generated method stub
 	return null;
-	// end-user-code
     }
 }

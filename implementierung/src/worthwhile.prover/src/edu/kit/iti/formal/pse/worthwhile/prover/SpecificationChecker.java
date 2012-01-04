@@ -4,9 +4,16 @@ import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 
 /**
@@ -101,12 +108,38 @@ public class SpecificationChecker {
      * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
      */
     // TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
-    public Validity checkFormula(Expression formula, Map<String, Value> environment) {
+    public Validity checkFormula(Expression formula, Map<VariableDeclaration, Value> environment) {
 	// TODO apply Worthwhile specific runtime assertions
 	// TODO apply axiom list
-	// TODO apply environment
 
-	return getValidity(formula);
+	// apply environment to formula and negate the result: not (var0 = value0 and ... => formula)
+	AstFactory model = new AstFactoryImpl();
+
+	Implication implication = model.createImplication();
+	implication.setRight(formula);
+	BinaryExpression env = implication;
+
+	for (VariableDeclaration variable : environment.keySet()) {
+	    VariableReference varref = model.createVariableReference();
+	    varref.setVariable(variable);
+
+	    Equal equal = model.createEqual();
+	    equal.setLeft(varref);
+	    equal.setRight(environment.get(variable).getLiteral());
+
+	    Conjunction conjunction = model.createConjunction();
+	    conjunction.setRight(equal);
+
+	    env.setLeft(conjunction);
+	    env = conjunction;
+	}
+
+	// insert true literal as missing operand: true and operand <=> operand
+	BooleanLiteral trueLiteral = model.createBooleanLiteral();
+	trueLiteral.setValue(true);
+	env.setLeft(trueLiteral);
+
+	return getValidity(implication);
     }
 
     /**

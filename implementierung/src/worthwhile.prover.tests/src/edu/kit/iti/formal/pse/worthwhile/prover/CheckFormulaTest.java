@@ -106,53 +106,41 @@ final public class CheckFormulaTest {
     @Test
     public void equalSameFreeVariable() {
 	Expression expr = getExpression("x = x");
-	Assert.assertEquals(Validity.VALID,
-		checker.checkFormula(expr, emptyEnv));
+	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, emptyEnv));
 	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xEnv));
 	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, yEnv));
-	Assert.assertEquals(Validity.VALID,
-		checker.checkFormula(expr, xyEqualEnv));
-	Assert.assertEquals(Validity.VALID,
-		checker.checkFormula(expr, xyUnequalEnv));
+	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xyEqualEnv));
+	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
     @Test
     public void unequalSameFreeVariable() {
 	Expression expr = getExpression("x != x");
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, emptyEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, emptyEnv));
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xEnv));
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, yEnv));
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, xyEqualEnv));
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, xyUnequalEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xyEqualEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
     @Test
     public void equalDiffFreeVariable() {
 	Expression expr = getExpression("x = y");
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, emptyEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, emptyEnv));
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xEnv));
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, yEnv));
-	Assert.assertEquals(Validity.VALID,
-		checker.checkFormula(expr, xyEqualEnv));
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, xyUnequalEnv));
+	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xyEqualEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
     @Test
     public void unequalDiffFreeVariable() {
 	Expression expr = getExpression("x != y");
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, emptyEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, emptyEnv));
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xEnv));
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, yEnv));
-	Assert.assertEquals(Validity.INVALID,
-		checker.checkFormula(expr, xyEqualEnv));
-	Assert.assertEquals(Validity.VALID,
-		checker.checkFormula(expr, xyUnequalEnv));
+	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xyEqualEnv));
+	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
     @Test

@@ -154,10 +154,10 @@ public class SpecificationChecker {
      * @return the {@link Validity} of <code>program</code>
      */
     public Validity checkProgram(Program program) {
+	// TODO apply Worthwhile specific runtime assertions
+
 	// generate formula from program
 	Expression formula = this.transformer.transformProgram(program);
-
-	// TODO apply Worthwhile specific runtime assertions
 
 	return this.getValidity(formula);
     }

@@ -68,16 +68,6 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
     }
 
     /**
-     * @param weakestPrecondition
-     *            the weakestPrecondition to set
-     */
-    public void setWeakestPrecondition(Expression weakestPrecondition) {
-	// begin-user-code
-	this.weakestPrecondition = weakestPrecondition;
-	// end-user-code
-    }
-
-    /**
      * @param program
      *            the {@link Program} to calculate the weakest precondition for
      * @return the weakest precondition that implies the correctness of <code>program</code>

@@ -3,8 +3,11 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 
 /**
  * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
@@ -97,9 +100,52 @@ public class SpecificationChecker {
      *            a list of variable values and axioms
      * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
      */
+    // TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
     public Validity checkFormula(Expression formula, Map<String, Value> environment) {
-	// TODO Auto-generated method stub
-	return null;
+	// TODO apply Worthwhile specific runtime assertions
+	// TODO apply axiom list
+	// TODO apply environment
+
+	return getValidity(formula);
+    }
+
+    /**
+     * Checks a formula's validity and returns the result.
+     * 
+     * @param formula
+     *            the {@link Expression} whose {@link Validity} to determine
+     * @return <code>formula</code>'s {@link Validity}
+     */
+    private Validity getValidity(Expression formula) {
+	AstFactory model = new AstFactoryImpl();
+
+	Negation negation = model.createNegation();
+	negation.setOperand(formula);
+
+	// let prover check formula and initialize checkResult with the returned result
+	try {
+	    this.checkResult = this.prover.checkFormula(negation);
+	} catch (ProverCallerException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	    return Validity.UNKNOWN;
+	}
+
+	// determine formula's validity based on negation's satisfiability, which is VALID only if the latter is
+	// UNSATISFIABLE and INVALID only if the latter is SATISFIABLE, UNKNOWN otherwise
+	Validity validity = Validity.UNKNOWN;
+	switch (this.checkResult.getSatisfiability()) {
+	case SATISFIABLE:
+	    validity = Validity.INVALID;
+	    break;
+	case UNSATISFIABLE:
+	    validity = Validity.VALID;
+	    break;
+	default:
+	    validity = Validity.UNKNOWN;
+	}
+
+	return validity;
     }
 
     /**
@@ -108,7 +154,11 @@ public class SpecificationChecker {
      * @return the {@link Validity} of <code>program</code>
      */
     public Validity checkProgram(Program program) {
-	// TODO Auto-generated method stub
-	return null;
+	// generate formula from program
+	Expression formula = this.transformer.transformProgram(program);
+
+	// TODO apply Worthwhile specific runtime assertions
+
+	return this.getValidity(formula);
     }
 }

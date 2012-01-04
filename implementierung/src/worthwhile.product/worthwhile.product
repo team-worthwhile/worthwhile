@@ -100,6 +100,7 @@
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.debug.core"/>
       <plugin id="org.eclipse.debug.ui"/>
+      <plugin id="org.eclipse.emf"/>
       <plugin id="org.eclipse.emf.codegen"/>
       <plugin id="org.eclipse.emf.codegen.ecore"/>
       <plugin id="org.eclipse.emf.common"/>

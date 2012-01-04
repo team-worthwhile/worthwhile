@@ -349,5 +349,21 @@
       activityId="edu.kit.iti.formal.pse.worthwhile.ui.activities.unwantedActionSet1"
       pattern="org\.eclipse\.ui\.navigate\..*" />
 </extension>
-
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="edu.kit.iti.formal.pse.worthwhile.debugger.launch"
+            icon="icons/editor.gif"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.launching.launchConfigurationTypeImage">
+      </launchConfigurationTypeImage>
+   </extension>
+  <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate"
+            id="edu.kit.iti.formal.pse.worthwhile.debugger.launch"
+            modes="run,debug"
+            name="Worthwhile Program">
+      </launchConfigurationType>
+   </extension>
 </plugin>

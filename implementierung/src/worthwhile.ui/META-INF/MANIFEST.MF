@@ -22,7 +22,9 @@ Require-Bundle: edu.kit.iti.formal.pse.worthwhile;visibility:=reexport,
  org.eclipse.help;bundle-version="3.5.100",
  org.eclipse.debug.ui;bundle-version="3.7.0",
  edu.kit.iti.formal.pse.worthwhile.debugger,
-  edu.kit.iti.formal.pse.worthwhile.model
+ edu.kit.iti.formal.pse.worthwhile.model,
+ org.eclipse.core.variables;bundle-version="3.2.500",
+ edu.kit.iti.formal.pse.worthwhile.interpreter;bundle-version="0.1.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Export-Package: edu.kit.iti.formal.pse.worthwhile.ui.contentassist.antlr,

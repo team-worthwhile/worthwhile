@@ -9,6 +9,6 @@ public class WorthwhileTabGroup extends AbstractLaunchConfigurationTabGroup {
 
     @Override
     public final void createTabs(final ILaunchConfigurationDialog dialog, final String mode) {
-	setTabs(new ILaunchConfigurationTab[] { new CommonTab() });
+	setTabs(new ILaunchConfigurationTab[] { new WorthwhileLaunchConfigurationTab(), new CommonTab() });
     }
 }

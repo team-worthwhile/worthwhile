@@ -14,7 +14,11 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
     /**
      * The debug target this element belongs to.
      */
-    private WorthwhileDebugTarget debugTarget;
+    protected WorthwhileDebugTarget debugTarget;
+    
+    public WorthwhileDebugElement(WorthwhileDebugTarget debugTarget) {
+	this.debugTarget = debugTarget;
+    }
 
     @Override
     public final IDebugTarget getDebugTarget() {
@@ -22,8 +26,8 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
     }
 
     @Override
-    public final ILaunch getLaunch() {
-	return this.debugTarget.getLaunch();
+    public ILaunch getLaunch() {
+	return this.debugTarget.doGetLaunch();
     }
 
     @Override

@@ -30,6 +30,11 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
      * The (only) thread a program execution consists of.
      */
     private IThread thread;
+    
+    /**
+     * The launch object that belongs to the execution of this program.
+     */
+    private ILaunch launch;
 
     /**
      * The event listener that manages the debug events from the interpreter.
@@ -60,11 +65,16 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
      *            The interpreter that runs the program.
      */
     public WorthwhileDebugTarget(final ILaunch launch, final Interpreter interpreter) {
-	super();
+	super(null);
+	this.debugTarget = this;
 
 	if (interpreter == null) {
 	    throw new IllegalArgumentException("Interpreter may not be null.");
 	}
+	
+	this.launch = launch;
+	
+	this.thread = new WorthwhileThread(this);
 
 	this.interpreter = interpreter;
 
@@ -74,6 +84,10 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	// Register ourselves as a breakpoint listener.
 	DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
+    }
+    
+    public final ILaunch doGetLaunch() {
+	return this.launch;
     }
 
     @Override

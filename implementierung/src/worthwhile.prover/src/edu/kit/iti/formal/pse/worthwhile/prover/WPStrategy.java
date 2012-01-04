@@ -1,6 +1,3 @@
-/**
- *
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
@@ -53,12 +50,12 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
- *
+ * Applies the Weakest Precondition calculus to a {@link Program}.
  */
 class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
     /**
-	 *
-	 */
+     * The weakest precondition that implies the correctness of the remainder {@link Program}.
+     */
     private Expression weakestPrecondition;
 
     /**
@@ -81,6 +78,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
     }
 
     /**
+     * @param program
+     *            the {@link Program} to calculate the weakest precondition for
+     * @return the weakest precondition that implies the correctness of <code>program</code>
      * @see FormulaGenerator#transformProgram(Program program)
      */
     public Expression transformProgram(Program program) {

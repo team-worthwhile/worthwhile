@@ -117,7 +117,7 @@ public class SpecificationChecker {
      * @return <code>formula</code>'s {@link Validity}
      */
     private Validity getValidity(Expression formula) {
-	AstFactory model = new AstFactoryImpl();
+	AstFactory model = AstFactoryImpl.init();
 
 	Negation negation = model.createNegation();
 	negation.setOperand(formula);

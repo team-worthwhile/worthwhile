@@ -12,7 +12,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 public interface FormulaGenerator {
     /**
      * @param program
-     * @return
+     *            the {@link Program} to be transformed into a formula
+     * @return the transformation formula of <code>program</code> according to some calculus rules
      */
     public Expression transformProgram(Program program);
 }

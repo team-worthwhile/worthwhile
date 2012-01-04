@@ -7,7 +7,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**
- * Facade class for the {@link prover} package.
+ * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
  */
 public class SpecificationChecker {
     /**
@@ -76,7 +76,7 @@ public class SpecificationChecker {
     }
 
     /**
-     * Uses {@link WPStrategy} as {@link transformer}.
+     * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer}.
      */
     public SpecificationChecker() {
 	this.transformer = new WPStrategy();

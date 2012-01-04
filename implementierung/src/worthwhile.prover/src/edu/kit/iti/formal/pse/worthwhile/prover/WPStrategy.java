@@ -81,15 +81,6 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
     }
 
     /**
-	 *
-	 */
-    protected WPStrategy() {
-	// begin-user-code
-	// TODO Auto-generated constructor stub
-	// end-user-code
-    }
-
-    /**
      * @see FormulaGenerator#transformProgram(Program program)
      */
     public Expression transformProgram(Program program) {

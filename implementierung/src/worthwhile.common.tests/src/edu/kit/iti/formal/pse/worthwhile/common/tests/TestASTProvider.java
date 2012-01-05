@@ -18,7 +18,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 public class TestASTProvider {
 
-	private static ASTNode getRootASTNode(String parseText) {
+	public static Program getRootASTNode(String parseText) {
 		// from http://wiki.pse.ndreke.de/proof_of_concept_ast_output
 		Injector guiceInjector = new WorthwhileStandaloneSetup()
 		.createInjectorAndDoEMFRegistration();
@@ -28,7 +28,7 @@ public class TestASTProvider {
 
 		// System.out.println("Getting syntax errors ...");
 		// Iterable<INode> errors = result.getSyntaxErrors();
-		ASTNode root = (ASTNode) result.getRootASTElement();
+		Program root = (Program) result.getRootASTElement();
 		return root;
 	}
 

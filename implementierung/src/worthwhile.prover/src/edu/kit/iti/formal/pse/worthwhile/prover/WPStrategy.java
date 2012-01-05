@@ -181,9 +181,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
     }
 
     /**
-     * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
+     * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
      */
-    public void visit(VariableDeclaration variableDecleration) {
+    public void visit(VariableDeclaration variableDeclaration) {
 	// begin-user-code
 	// TODO Auto-generated method stub
 

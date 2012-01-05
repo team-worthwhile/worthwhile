@@ -15,7 +15,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
@@ -183,16 +182,6 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
      * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
      */
     public void visit(VariableDeclaration variableDeclaration) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    /**
-     * @see ASTNodeVisitor#visit(VariableReference variableReference)
-     */
-    public void visit(VariableReference variableReference) {
 	// begin-user-code
 	// TODO Auto-generated method stub
 

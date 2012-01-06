@@ -14,6 +14,7 @@
         <module>worthwhile.debugger</module>
         <module>worthwhile.interpreter</module>
         <module>worthwhile.prover</module>
+        <module>worthwhile.model.tests</module>
         <module>worthwhile.interpreter.tests</module>
         <module>worthwhile.prover.tests</module>
         <module>worthwhile.common.tests</module>

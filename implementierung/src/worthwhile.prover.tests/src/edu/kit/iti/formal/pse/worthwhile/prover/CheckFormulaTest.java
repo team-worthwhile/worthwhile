@@ -21,12 +21,39 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
  * 
  */
 final public class CheckFormulaTest {
+    /**
+     * The {@link SpecificationChecker} to test.
+     */
     private SpecificationChecker checker;
+
+    /**
+     * An empty formula environment.
+     */
     private Map<String, Value> emptyEnv;
+
+    /**
+     * A formula environment containing only a x assignment.
+     */
     private Map<String, Value> xEnv;
+
+    /**
+     * A formula environment containing only a y assignment.
+     */
     private Map<String, Value> yEnv;
+
+    /**
+     * A formula environment containing both a x and a y assignment so that x and y do not equal.
+     */
     private Map<String, Value> xyEqualEnv;
+
+    /**
+     * A formula environment containing both a x and a y assignment so that x and y do equal.
+     */
     private Map<String, Value> xyUnequalEnv;
+
+    /**
+     * A list of the environments available for these TestCases.
+     */
     private List<Map<String, Value>> envs;
 
     /**
@@ -105,6 +132,9 @@ final public class CheckFormulaTest {
 	envs.add(xyUnequalEnv);
     }
 
+    /**
+     * Tests validity check of <code>x = x</code>.
+     */
     @Test
     public void equalSameFreeVariable() {
 	Expression expr = getExpression("x = x");
@@ -115,6 +145,9 @@ final public class CheckFormulaTest {
 	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
+    /**
+     * Tests validity check of <code>x != x</code>.
+     */
     @Test
     public void unequalSameFreeVariable() {
 	Expression expr = getExpression("x != x");
@@ -125,6 +158,9 @@ final public class CheckFormulaTest {
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
+    /**
+     * Tests validity check of <code>x = y</code>.
+     */
     @Test
     public void equalDiffFreeVariable() {
 	Expression expr = getExpression("x = y");
@@ -135,6 +171,9 @@ final public class CheckFormulaTest {
 	Assert.assertEquals(Validity.INVALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
+    /**
+     * Tests validity check of <code>x != y</code>.
+     */
     @Test
     public void unequalDiffFreeVariable() {
 	Expression expr = getExpression("x != y");
@@ -145,6 +184,9 @@ final public class CheckFormulaTest {
 	Assert.assertEquals(Validity.VALID, checker.checkFormula(expr, xyUnequalEnv));
     }
 
+    /**
+     * Tests validity check of <code>\forall x : x = x and \exists x : x = x</code>.
+     */
     @Test
     public void equalSameBoundVariable() {
 	Expression expr = getExpression("\\forall Integer x : x = x");
@@ -154,6 +196,9 @@ final public class CheckFormulaTest {
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>\forall x : x != x and \exists x : x != x</code>.
+     */
     @Test
     public void unequalSameBoundVariable() {
 	Expression expr = getExpression("\\forall Integer x : x != x");
@@ -163,6 +208,9 @@ final public class CheckFormulaTest {
 	assertEnvIndependentEquals(expr, Validity.INVALID);
     }
 
+    /**
+     * Tests validity check of <code>\forall x \exists y : x = y and \exists x \forall y : x = y</code>.
+     */
     @Test
     public void equalDiffBoundVariable() {
 	Expression expr = getExpression("\\forall Integer x \\exists Integer y : x = y");
@@ -172,6 +220,9 @@ final public class CheckFormulaTest {
 	assertEnvIndependentEquals(expr, Validity.INVALID);
     }
 
+    /**
+     * Tests validity check of <code>\forall x \exists y : x != y and \exists x \forall y : x != y</code>.
+     */
     @Test
     public void unequalDiffBoundVariable() {
 	Expression expr = getExpression("\\forall Integer x \\exists Integer y : x != y");
@@ -181,66 +232,99 @@ final public class CheckFormulaTest {
 	assertEnvIndependentEquals(expr, Validity.INVALID);
     }
 
+    /**
+     * Tests validity check of <code>x = y && y = z => x = z</code>.
+     */
     @Test
     public void equalTransitiveFreeVariables() {
 	Expression expr = getExpression("x = y && y = z => x = z");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x => y = !x || y</code>.
+     */
     @Test
     public void implicationNotOrEquivalence() {
 	Expression expr = getExpression("x => y = !x || y");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>!(x || y) = !x && !y</code>.
+     */
     @Test
     public void notAndNotOrDeMorganEquivalence() {
 	Expression expr = getExpression("!(x || y) = !x && !y");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>!(x && y) = !x || !y</code>.
+     */
     @Test
     public void notOrNotAndDeMorganEquivalence() {
 	Expression expr = getExpression("!(x && y) = !x || !y");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x && (y || z) = x && y || x && z</code>.
+     */
     @Test
     public void andOrDistributivity() {
 	Expression expr = getExpression("x && (y || z) = x && y || x && z");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x || (y && z) = (x || y) && (x || z)</code>.
+     */
     @Test
     public void orAndDistributivity() {
 	Expression expr = getExpression("x || (y && z) = (x || y) && (x || z)");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x || (y || z) = (x || y) || z</code>.
+     */
     @Test
     public void orAssociativity() {
 	Expression expr = getExpression("x || (y || z) = (x || y) || z");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x && (y && z) = (x && y) && z</code>.
+     */
     @Test
     public void andAssociativity() {
 	Expression expr = getExpression("x && (y && z) = (x && y) && z");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x + x = 2 * x</code>.
+     */
     @Test
     public void vectorSpaceNeutralNeutralDistributivity() {
 	Expression expr = getExpression("x + x = 2 * x");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>x = x - 1 <=> x + 1 = x</code>.
+     */
     @Test
     public void groupInverseAdditionEqualityTransformation() {
 	Expression expr = getExpression("x = x - 1 <=> x + 1 = x");
 	assertEnvIndependentEquals(expr, Validity.VALID);
     }
 
+    /**
+     * Tests validity check of <code>\forall x \exists y : y = x + 1</code>.
+     */
     @Test
     public void forallIntegersExistsSuccessor() {
 	Expression expr = getExpression("\\forall Integer x \\exists Integer y : y = x + 1");

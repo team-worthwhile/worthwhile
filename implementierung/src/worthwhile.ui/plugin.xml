@@ -228,6 +228,11 @@
 	name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.lineBreakpoint"
 	super="org.eclipse.debug.core.breakpoint">
 </type>
+<type
+      markerSeverity="2"
+      markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failledAssertion"
+      name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedAssertion">
+</type>
  </extension>
 <extension
       point="org.eclipse.ui.editorActions">

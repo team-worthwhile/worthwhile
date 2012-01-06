@@ -1,70 +1,89 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
 /**
- * A representation of a thread in a Worthwhile program. Since we don't support multithreading, this is a pretty useless
- * class, but it is required by the Eclipse debug model.
+ * A representation of a thread (i.e., the only thread) in a Worthwhile program.
  * 
  * @author Joachim
  * 
  */
 public class WorthwhileThread extends WorthwhileDebugElement implements IThread {
 
-    public WorthwhileThread(WorthwhileDebugTarget debugTarget) {
+    /**
+     * Indicates whether the execution is suspended.
+     */
+    private boolean suspended = false;
+
+    /**
+     * Indicates whether the execution is terminated.
+     */
+    private boolean terminated = false;
+
+    /**
+     * Creates a new instance of the {@link WorthwhileThread} class.
+     * 
+     * @param debugTarget
+     *            The debug target this thread belongs to.
+     */
+    public WorthwhileThread(final WorthwhileDebugTarget debugTarget) {
 	super(debugTarget);
     }
 
     @Override
     public final boolean canResume() {
-	// TODO Auto-generated method stub
-	return false;
+	return !this.terminated && this.suspended;
     }
 
     @Override
     public final boolean canSuspend() {
-	// TODO Auto-generated method stub
-	return false;
+	return !this.terminated && !this.suspended;
     }
 
     @Override
     public final boolean isSuspended() {
-	// TODO Auto-generated method stub
-	return false;
+	return this.suspended;
     }
 
     @Override
     public void resume() throws DebugException {
-	// TODO Auto-generated method stub
-	
+	// TODO: Send resume request to debug event listener, wait for response
+    }
+
+    /**
+     * Called when the execution of the program was resumed.
+     * 
+     * @param detail
+     *            The reason for resuming the program execution.
+     */
+    public final void resumed(final int detail) {
+	this.suspended = false;
+	this.fireResumeEvent(detail);
     }
 
     @Override
-    public void suspend() throws DebugException {
-	// TODO Auto-generated method stub
-	
+    public final void suspend() throws DebugException {
+	this.suspended = true;
+	// TODO
     }
 
     @Override
     public final boolean canStepInto() {
-	// TODO Auto-generated method stub
-	return false;
+	return this.isSuspended();
     }
 
     @Override
     public final boolean canStepOver() {
-	// TODO Auto-generated method stub
-	return false;
+	return this.isSuspended();
     }
 
     @Override
     public final boolean canStepReturn() {
-	// TODO Auto-generated method stub
-	return false;
+	return this.isSuspended();
     }
 
     @Override
@@ -76,37 +95,36 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
     @Override
     public void stepInto() throws DebugException {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void stepOver() throws DebugException {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void stepReturn() throws DebugException {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public final boolean canTerminate() {
-	// TODO Auto-generated method stub
-	return false;
+	return !this.terminated;
     }
 
     @Override
     public final boolean isTerminated() {
-	// TODO Auto-generated method stub
-	return false;
+	return this.terminated;
     }
 
     @Override
-    public void terminate() throws DebugException {
-	// TODO Auto-generated method stub
-	
+    public final void terminate() throws DebugException {
+	this.terminated = true;
+	this.suspended = false;
+	// TODo
     }
 
     @Override
@@ -122,7 +140,6 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
     @Override
     public final int getPriority() throws DebugException {
-	// TODO Auto-generated method stub
 	return 0;
     }
 

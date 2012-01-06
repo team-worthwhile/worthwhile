@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
 import edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
@@ -45,38 +46,25 @@ public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDe
 	IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
 
 	if (file == null) {
-	    // TODO error
-	    return;
+	    DebugHelper.showError("The specified source file cannot be found.", null);
 	}
 
 	// Load the model from the file
 	XtextResourceSet resourceSet = (XtextResourceSet) resourceSetProvider.get(file.getProject());
 	resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true);
 	Resource resource = resourceSet.getResource(URI.createURI(path), true);
-	Program program = (Program) resource.getContents().get(0);
+
+	// Check if there are no parser errors
+	if (!resource.getErrors().isEmpty()) {
+	    DebugHelper.showError("There are errors in the source file.", null);
+	}
 
 	// Create and run the interpreter.
+	Program program = (Program) resource.getContents().get(0);
 	final Interpreter interpreter = new Interpreter(program);
 
-	if (mode.equals(ILaunchManager.DEBUG_MODE)) {
-	    IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
-	    launch.addDebugTarget(target);
-	} else {
-
-	    DebugPlugin.getDefault().asyncExec(new Runnable() {
-		@Override
-		public void run() {
-		    interpreter.execute();
-		    try {
-			Thread.sleep(3000);
-		    } catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		    }
-		}
-
-	    });
-	}
+	IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
+	launch.addDebugTarget(target);
     }
 
 }

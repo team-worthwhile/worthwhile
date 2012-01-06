@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
 import org.eclipse.core.resources.IMarker;
-
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugEvent;
@@ -15,6 +14,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
 
@@ -30,7 +30,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
      * The (only) thread a program execution consists of.
      */
     private IThread thread;
-    
+
     /**
      * The launch object that belongs to the execution of this program.
      */
@@ -39,22 +39,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
     /**
      * The event listener that manages the debug events from the interpreter.
      */
-    private WorthwhileDebugEventListener eventListener;
+    private AbstractDebugEventListener eventListener;
 
     /**
      * The interpreter executing the program.
      */
     private Interpreter interpreter;
-
-    /**
-     * Indicates whether the execution is terminated.
-     */
-    private boolean terminated = false;
-
-    /**
-     * Indicates whether the execution is suspended.
-     */
-    private boolean suspended = false;
 
     /**
      * Creates a new instance of the {@link WorthwhileDebugTarget} class.
@@ -71,70 +61,72 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	if (interpreter == null) {
 	    throw new IllegalArgumentException("Interpreter may not be null.");
 	}
-	
+
 	this.launch = launch;
-	
+
 	this.thread = new WorthwhileThread(this);
 
 	this.interpreter = interpreter;
 
-	// Register our debug event handler with the interpreter.
-	this.eventListener = new WorthwhileDebugEventListener(this);
+	// Register our event handler with the interpreter.
+	if (launch.getLaunchMode().equals("debug")) {
+	    this.eventListener = new WorthwhileDebugEventListener(this);
+	} else {
+	    this.eventListener = new WorthwhileRunEventListener(this);
+	}
 	interpreter.addDebugEventHandler(this.eventListener);
 
 	// Register ourselves as a breakpoint listener.
 	DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
     }
-    
+
     public final ILaunch doGetLaunch() {
 	return this.launch;
     }
 
     @Override
     public final boolean canTerminate() {
-	return !this.terminated;
+	return this.thread.canTerminate();
     }
 
     @Override
     public final boolean isTerminated() {
-	return this.terminated;
+	return this.thread.isTerminated();
     }
 
     @Override
     public final void terminate() throws DebugException {
-	// TODO Auto-generated method stub
-
+	this.thread.terminate();
     }
 
     @Override
     public final boolean canResume() {
-	return !this.terminated && this.suspended;
+	return this.thread.canResume();
     }
 
     @Override
     public final boolean canSuspend() {
-	return !this.terminated && !this.suspended;
+	return this.thread.canSuspend();
     }
 
     @Override
     public final boolean isSuspended() {
-	return this.suspended;
+	return this.thread.isSuspended();
     }
 
     @Override
     public final void resume() throws DebugException {
-	// TODO Auto-generated method stub
-
+	this.thread.resume();
     }
 
     @Override
     public final void suspend() throws DebugException {
-	// TODO Auto-generated method stub
-
+	this.thread.suspend();
     }
 
     @Override
     public final void breakpointAdded(final IBreakpoint breakpoint) {
+	// TODO breakpoint.addToInterpreter()?
 	if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
 	    try {
 		this.interpreter.addBreakpoint(new LineBreakpoint(
@@ -239,7 +231,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
     protected final void executionStarted() {
 	this.installDeferredBreakpoints();
     }
-    
+
     /**
      * Called when a breakpoint is hit.
      */
@@ -251,8 +243,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
      * Called when the interpreter terminates the execution.
      */
     protected final void executionTerminated() {
-	this.terminated = true;
-	this.suspended = false;
+	try {
+	    this.thread.terminate();
+	} catch (DebugException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
 	DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);
 	fireTerminateEvent();
     }

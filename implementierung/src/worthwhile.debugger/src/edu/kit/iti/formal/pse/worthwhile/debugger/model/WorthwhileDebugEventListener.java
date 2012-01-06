@@ -1,6 +1,5 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
-import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -11,27 +10,12 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
  * @author Joachim
  * 
  */
-public class WorthwhileDebugEventListener extends AbstractDebugEventListener {
+public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
-    /**
-     * The debug target to send messages to.
-     */
-    private WorthwhileDebugTarget debugTarget;
-
-    /**
-     * Creates a new instance of the {@link WorthwhileDebugEventListener} class.
-     * 
-     * @param debugTarget
-     *            The debug target to send messages to. May not be null.
-     */
     public WorthwhileDebugEventListener(final WorthwhileDebugTarget debugTarget) {
-	if (debugTarget == null) {
-	    throw new IllegalArgumentException("Debug target may not be null.");
-	}
-
-	this.debugTarget = debugTarget;
+	super(debugTarget);
     }
-    
+
     @Override
     public final void executionFailed(final Statement statement, final InterpreterError error) {
 	
@@ -39,12 +23,12 @@ public class WorthwhileDebugEventListener extends AbstractDebugEventListener {
 
     @Override
     public final void executionCompleted() {
-	debugTarget.executionTerminated();
+	getDebugTarget().executionTerminated();
     }
 
     @Override
     public final void executionStarted() {
-	debugTarget.executionStarted();
+	getDebugTarget().executionStarted();
     }
 
     @Override

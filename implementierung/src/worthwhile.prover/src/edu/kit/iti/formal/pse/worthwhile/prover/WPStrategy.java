@@ -83,7 +83,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
      */
     public void visit(final Assignment assignment) {
 	VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
-	weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
+	weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, assignment.getValue(),
 		new VariableSubstitution.SubstituteCommand() {
 		    @Override
 		    void substitute() {

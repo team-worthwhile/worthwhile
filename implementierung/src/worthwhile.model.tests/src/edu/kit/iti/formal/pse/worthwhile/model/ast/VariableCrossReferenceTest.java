@@ -29,7 +29,9 @@ public final class VariableCrossReferenceTest {
 	Assert.assertTrue(stmts.get(1) instanceof Assignment);
 	Assignment a = (Assignment) stmts.get(1);
 
-	Assert.assertNotNull(a.getVariable());
+	VariableReference v = a.getVariable();
+	Assert.assertNotNull(v);
+	Assert.assertNotNull(v.getVariable());
     }
 
 }

@@ -6,6 +6,7 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
 
 /**
  * JUnit TestCases for {@link WPStrategy#transformProgram}.
@@ -52,10 +53,14 @@ public final class TransformProgramTest {
     public void assignmentRule() {
 	Program p = this.getProgram("Integer x := 1\n_assert x = 1\n");
 	Expression result = this.transformer.transformProgram(p);
-	Assert.assertEquals(this.getExpression("1 = 1 && true"), result);
+	Assert.assertTrue(ASTNodeEqualator.equal(this.getExpression("1 = 1 && true"), result));
 
 	p = this.getProgram("Integer x\nx := 1\n_assert x = 1\n");
 	result = this.transformer.transformProgram(p);
-	Assert.assertEquals(this.getExpression("1 = 1 && true"), result);
+	if (!ASTNodeEqualator.equal(this.getExpression("0 = 1 && true"), result)) {
+	    AstSwitch<?> toString = new ASTNodeToStringHelper();
+	    Assert.fail("expected: " + toString.doSwitch(this.getExpression("0 = 1 && true")) + " was: "
+		    + toString.doSwitch(result));
+	}
     }
 }

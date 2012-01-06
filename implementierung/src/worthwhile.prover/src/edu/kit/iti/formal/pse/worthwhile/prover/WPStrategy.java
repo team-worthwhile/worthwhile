@@ -1,11 +1,17 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
@@ -14,7 +20,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
@@ -42,30 +50,46 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
      * @see FormulaGenerator#transformProgram(Program program)
      */
     public Expression transformProgram(Program program) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-	return null;
-	// end-user-code
+	// initialize the weakest precondition to true
+	BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
+	trueLiteral.setValue(true);
+	this.weakestPrecondition = trueLiteral;
+
+	/*
+	 * pass us as visitor from statement to statement:
+	 * 
+	 * 1. get the weakest precondition, 2. apply the appropriate calculus rule, 3. set the weakest precondition, 4.
+	 * forward us to the next statement
+	 * 
+	 * finally the weakest precondition implies the correctness of the whole program
+	 */
+	program.accept(this);
+
+	return this.weakestPrecondition;
     }
 
     /**
      * @see ASTNodeVisitor#visit(Assertion assertion)
      */
     public void visit(Assertion assertion) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
+	Conjunction conjunction = AstFactoryImpl.init().createConjunction();
+	conjunction.setRight(this.weakestPrecondition);
+	conjunction.setLeft(assertion.getExpression());
+	this.weakestPrecondition = conjunction;
     }
 
     /**
      * @see ASTNodeVisitor#visit(Assignment assignment)
      */
-    public void visit(Assignment assignment) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
+    public void visit(final Assignment assignment) {
+	VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
+	weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
+		new VariableSubstitution.SubstituteCommand() {
+		    @Override
+		    void substitute() {
+			WPStrategy.this.weakestPrecondition = assignment.getValue();
+		    }
+		}));
     }
 
     /**
@@ -162,10 +186,12 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
      * @see ASTNodeVisitor#visit(Program program)
      */
     public void visit(Program program) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
+	// visit all main block statements in the order they were parsed reversed
+	List<Statement> stmts = new ArrayList<Statement>(program.getMainBlock().getStatements());
+	Collections.reverse(stmts);
+	for (Statement stmt : stmts) {
+	    stmt.accept(this);
+	}
     }
 
     /**
@@ -181,10 +207,13 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
     /**
      * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
      */
-    public void visit(VariableDeclaration variableDeclaration) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
+    public void visit(final VariableDeclaration variableDeclaration) {
+	weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
+		new VariableSubstitution.SubstituteCommand() {
+		    @Override
+		    void substitute() {
+			WPStrategy.this.weakestPrecondition = variableDeclaration.getInitialValue();
+		    }
+		}));
     }
 }

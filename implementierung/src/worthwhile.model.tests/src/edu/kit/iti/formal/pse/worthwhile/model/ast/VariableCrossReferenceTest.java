@@ -21,6 +21,7 @@ public class VariableCrossReferenceTest {
     @Test
     public void variableCrossReference() {
 	Program p = TestASTProvider.getRootASTNode("Integer x := 0\nx := x\n");
+	Assert.assertNotNull(p);
 
 	List<Statement> stmts = p.getMainBlock().getStatements();
 	Assert.assertEquals(2, stmts.size());

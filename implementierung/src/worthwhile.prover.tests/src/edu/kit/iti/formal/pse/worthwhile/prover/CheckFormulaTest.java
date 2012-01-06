@@ -56,7 +56,9 @@ final public class CheckFormulaTest {
      * @return {@link Expression} AST representing the exprString
      */
     Expression getExpression(String exprString) {
-	return TestASTProvider.parseFormulaString(exprString);
+	Expression e = TestASTProvider.parseFormulaString(exprString);
+	Assert.assertNotNull(e);
+	return e;
     }
 
     /**

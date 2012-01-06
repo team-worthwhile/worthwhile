@@ -22,7 +22,9 @@ public class TransformProgramTest {
      * @return {@link Expression} AST representing <code>exprString</code>
      */
     Expression getExpression(String exprString) {
-	return TestASTProvider.parseFormulaString(exprString);
+	Expression e = TestASTProvider.parseFormulaString(exprString);
+	Assert.assertNotNull(e);
+	return e;
     }
 
     /**
@@ -33,7 +35,9 @@ public class TransformProgramTest {
      * @return {@link Program} AST representing <code>progString</code>
      */
     Program getProgram(String progString) {
-	return TestASTProvider.getRootASTNode(progString);
+	Program p = TestASTProvider.getRootASTNode(progString);
+	Assert.assertNotNull(p);
+	return p;
     }
 
     /**
@@ -46,10 +50,12 @@ public class TransformProgramTest {
      */
     @Test
     public void assignmentRule() {
-	Expression result = this.transformer.transformProgram(this.getProgram("Integer x := 1\n_assert x = 1\n"));
+	Program p = this.getProgram("Integer x := 1\n_assert x = 1\n");
+	Expression result = this.transformer.transformProgram(p);
 	Assert.assertEquals(this.getExpression("1 = 1 && true"), result);
 
-	result = this.transformer.transformProgram(this.getProgram("Integer x\nx := 1\n_assert x = 1\n"));
+	p = this.getProgram("Integer x\nx := 1\n_assert x = 1\n");
+	result = this.transformer.transformProgram(p);
 	Assert.assertEquals(this.getExpression("1 = 1 && true"), result);
     }
 }

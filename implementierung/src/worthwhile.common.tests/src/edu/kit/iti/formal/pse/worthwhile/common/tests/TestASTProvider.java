@@ -28,7 +28,12 @@ public class TestASTProvider {
 
 		// System.out.println("Getting syntax errors ...");
 		// Iterable<INode> errors = result.getSyntaxErrors();
-		Program root = (Program) result.getRootASTElement();
+		Program root = null;
+		
+		if (!result.hasSyntaxErrors()) {
+		    root = (Program) result.getRootASTElement();
+		}
+		
 		return root;
 	}
 
@@ -49,6 +54,11 @@ public class TestASTProvider {
 		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := " +
 				formulaString + "\n" +
 				"}\n");
+
+		if (n == null) {
+		    return null;
+		}
+
 		List<Statement> statements = ((Block) ((Program) n).getMainBlock()
 				.getStatements().get(0)).getStatements();
 

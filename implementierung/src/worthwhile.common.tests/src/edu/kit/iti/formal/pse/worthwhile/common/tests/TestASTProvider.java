@@ -48,7 +48,7 @@ public class TestASTProvider {
 	public static Expression parseFormulaString(String formulaString) {
 		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := " +
 				formulaString + "\n" +
-				"}");
+				"}\n");
 		List<Statement> statements = ((Block) ((Program) n).getMainBlock()
 				.getStatements().get(0)).getStatements();
 

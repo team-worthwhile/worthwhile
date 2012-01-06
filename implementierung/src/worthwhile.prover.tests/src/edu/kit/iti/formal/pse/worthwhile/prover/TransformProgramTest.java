@@ -46,10 +46,10 @@ public class TransformProgramTest {
      */
     @Test
     public void assignmentRule() {
-	Expression result = this.transformer.transformProgram(this.getProgram("Integer x := 1\n_assert(x = 1)"));
+	Expression result = this.transformer.transformProgram(this.getProgram("{\nInteger x := 1\n_assert x = 1\n}\n"));
 	Assert.assertEquals(this.getExpression("1 = 1 && true"), result);
 
-	result = this.transformer.transformProgram(this.getProgram("Integer x\nx := 1\n_assert(x ) 1)"));
+	result = this.transformer.transformProgram(this.getProgram("{\nInteger x\nx := 1\n_assert x = 1\n}\n"));
 	Assert.assertEquals(this.getExpression("1 = 1 && true"), result);
     }
 }

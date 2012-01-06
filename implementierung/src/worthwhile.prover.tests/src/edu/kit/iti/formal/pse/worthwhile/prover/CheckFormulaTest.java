@@ -14,7 +14,10 @@ import org.junit.Before;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 
 /**
  * @author fabian
@@ -22,12 +25,12 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
  */
 final public class CheckFormulaTest {
     private SpecificationChecker checker;
-    private Map<String, Value> emptyEnv;
-    private Map<String, Value> xEnv;
-    private Map<String, Value> yEnv;
-    private Map<String, Value> xyEqualEnv;
-    private Map<String, Value> xyUnequalEnv;
-    private List<Map<String, Value>> envs;
+    private Map<VariableDeclaration, Value> emptyEnv;
+    private Map<VariableDeclaration, Value> xEnv;
+    private Map<VariableDeclaration, Value> yEnv;
+    private Map<VariableDeclaration, Value> xyEqualEnv;
+    private Map<VariableDeclaration, Value> xyUnequalEnv;
+    private List<Map<VariableDeclaration, Value>> envs;
 
     /**
      * Empty default constructor.
@@ -44,7 +47,7 @@ final public class CheckFormulaTest {
      * @param validity
      */
     void assertEnvIndependentEquals(Expression expr, Validity validity) {
-	for (Map<String, Value> env : envs) {
+	for (Map<VariableDeclaration, Value> env : envs) {
 	    Assert.assertEquals(validity, checker.checkFormula(expr, env));
 	}
     }
@@ -80,22 +83,28 @@ final public class CheckFormulaTest {
      */
     @Before
     public void initEnvs() {
-	emptyEnv = new HashMap<String, Value>();
+	emptyEnv = new HashMap<VariableDeclaration, Value>();
 
-	xEnv = new HashMap<String, Value>();
-	xEnv.put("x", new Value());
-	yEnv = new HashMap<String, Value>();
-	yEnv.put("y", new Value());
+	AstFactory model = new AstFactoryImpl();
+	VariableDeclaration xVar = model.createVariableDeclaration();
+	xVar.setName("x");
+	VariableDeclaration yVar = model.createVariableDeclaration();
+	yVar.setName("y");
 
-	xyEqualEnv = new HashMap<String, Value>();
+	xEnv = new HashMap<VariableDeclaration, Value>();
+	// xEnv.put(xVar, new Value());
+	yEnv = new HashMap<VariableDeclaration, Value>();
+	// yEnv.put(yVar, new Value());
+
+	xyEqualEnv = new HashMap<VariableDeclaration, Value>();
 	xyEqualEnv.putAll(xEnv);
 	xyEqualEnv.putAll(yEnv);
 
-	xyUnequalEnv = new HashMap<String, Value>();
+	xyUnequalEnv = new HashMap<VariableDeclaration, Value>();
 	xyUnequalEnv.putAll(xEnv);
 	xyUnequalEnv.putAll(yEnv);
 
-	envs = new ArrayList<Map<String, Value>>();
+	envs = new ArrayList<Map<VariableDeclaration, Value>>();
 	envs.add(emptyEnv);
 	envs.add(xEnv);
 	envs.add(yEnv);

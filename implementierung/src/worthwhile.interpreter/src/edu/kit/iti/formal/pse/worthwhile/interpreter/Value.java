@@ -6,10 +6,12 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import java.math.BigInteger;
 import java.util.Set;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+
 /** 
  * 
  */
-public class Value {
+public abstract class Value {
     /** 
 	 * 
 	 */
@@ -83,4 +85,6 @@ public class Value {
 	return null;
 	// end-user-code
     }
+
+    public abstract Literal getLiteral();
 }

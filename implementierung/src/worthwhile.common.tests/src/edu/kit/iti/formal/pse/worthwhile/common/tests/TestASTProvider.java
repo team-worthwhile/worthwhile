@@ -1,10 +1,20 @@
 package edu.kit.iti.formal.pse.worthwhile.common.tests;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.ui.internal.Model;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Injector;
 
@@ -20,17 +30,24 @@ public class TestASTProvider {
 
     public static Program getRootASTNode(String parseText) {
 	// from http://wiki.pse.ndreke.de/proof_of_concept_ast_output
+	// see also http://wiki.eclipse.org/Xtext/FAQ#How_do_I_load_my_model_in_a_standalone_Java_application.C2.A0.3F
 	Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
-	IParser parser = guiceInjector.getInstance(IParser.class);
-
-	IParseResult result = parser.parse(new StringReader(parseText));
+	XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
+	resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+	Resource resource = resourceSet.createResource(URI.createURI("dummy:/example.ww"));
+	InputStream in = new ByteArrayInputStream(parseText.getBytes());
+	try {
+	    resource.load(in, resourceSet.getLoadOptions());
+	} catch (IOException e) {
+	    // TODO
+	}
 
 	// System.out.println("Getting syntax errors ...");
-	// Iterable<INode> errors = result.getSyntaxErrors();
+	// Iterable<Diagnostic> errors = resource.getErrors();
 	Program root = null;
 
-	if (!result.hasSyntaxErrors()) {
-	    root = (Program) result.getRootASTElement();
+	if (resource.getErrors().isEmpty()) {
+	    root = (Program) resource.getContents().get(0);
 	}
 
 	return root;

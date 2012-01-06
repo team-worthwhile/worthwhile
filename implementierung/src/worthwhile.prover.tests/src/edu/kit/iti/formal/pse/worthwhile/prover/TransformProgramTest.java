@@ -13,7 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
  * @author fabian
  * 
  */
-public class TransformProgramTest {
+public final class TransformProgramTest {
     /**
      * Generates an {@link Expression} from a Worthwhile {@link String}.
      * 

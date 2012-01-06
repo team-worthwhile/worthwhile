@@ -13,7 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
  * @author fabian
  * 
  */
-public class VariableCrossReferenceTest {
+public final class VariableCrossReferenceTest {
 
     /**
      * Runs the test.

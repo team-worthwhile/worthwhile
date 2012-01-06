@@ -20,7 +20,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
  * @author fabian
  * 
  */
-final public class CheckFormulaTest {
+public final class CheckFormulaTest {
     /**
      * The {@link SpecificationChecker} to test.
      */

@@ -7,7 +7,7 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
-public class FormulaCompilerTest {
+public final class FormulaCompilerTest {
 
     private FormulaCompiler compiler;
 

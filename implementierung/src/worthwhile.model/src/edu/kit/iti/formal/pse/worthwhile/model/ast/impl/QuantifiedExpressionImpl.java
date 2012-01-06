@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -308,7 +307,4 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 		return super.eIsSet(featureID);
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //QuantifiedExpressionImpl

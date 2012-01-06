@@ -8,7 +8,6 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -41,7 +40,4 @@ public class AssumptionImpl extends AnnotationImpl implements Assumption {
 		return AstPackage.Literals.ASSUMPTION;
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //AssumptionImpl

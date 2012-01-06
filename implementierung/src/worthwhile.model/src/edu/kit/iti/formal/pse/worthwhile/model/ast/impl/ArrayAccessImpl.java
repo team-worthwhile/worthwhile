@@ -8,7 +8,6 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -177,7 +176,4 @@ public class ArrayAccessImpl extends UnaryExpressionImpl implements ArrayAccess 
 		return super.eIsSet(featureID);
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //ArrayAccessImpl

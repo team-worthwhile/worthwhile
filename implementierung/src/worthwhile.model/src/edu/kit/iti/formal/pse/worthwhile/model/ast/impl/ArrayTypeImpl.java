@@ -8,7 +8,6 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 
@@ -244,7 +243,4 @@ public class ArrayTypeImpl extends TypeImpl implements ArrayType {
 		return super.eIsSet(featureID);
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //ArrayTypeImpl

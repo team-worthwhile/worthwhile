@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
  * A literal representin a Boolean value
@@ -96,8 +95,4 @@ public class BooleanLiteralImpl extends LiteralImpl implements BooleanLiteral {
 		return result.toString();
 	}
 
-	@Override
-	public void accept(ASTNodeVisitor visitor) {
-		visitor.visit(this);
-	}
 } //BooleanLiteralImpl

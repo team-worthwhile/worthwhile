@@ -6,6 +6,14 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -217,7 +225,55 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 		return result.toString();
 	}
 
-	public void accept(ASTNodeVisitor visitor) {
-		visitor.visit(this);
+    /**
+     * 
+     * @param visitor
+     */
+    public void accept(ASTNodeVisitor visitor) {
+	Deque<Class<?>> classes = new LinkedList<Class<?>>();
+	classes.add(this.getClass());
+	Class<?> c;
+	do {
+	    c = classes.removeFirst();
+
+	    List<Class<?>> ifaces = Arrays.asList(c.getInterfaces());
+	    Collections.reverse(ifaces);
+	    classes.addAll(ifaces);
+
+	    if (c.getSuperclass() != null) {
+		classes.add(c.getSuperclass());
+	    }
+	} while (!tryVisit(visitor, c) && !classes.isEmpty());
+    }
+
+    /**
+     * 
+     * @param visitor
+     * @param c
+     * @return
+     */
+    private Boolean tryVisit(ASTNodeVisitor visitor, Class<?> c) {
+	try {
+	    Method m = visitor.getClass().getMethod("visit", c);
+	    m.setAccessible(true);
+	    m.invoke(visitor, this);
+	    return true;
+	} catch (IllegalAccessException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (IllegalArgumentException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (InvocationTargetException e) {
+	    throw new RuntimeException(e.getCause());
+	} catch (NoSuchMethodException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (SecurityException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
+
+	return false;
+    }
 } //ASTNodeImpl

@@ -7,7 +7,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 
 import java.math.BigInteger;
@@ -166,7 +165,4 @@ public class IntegerLiteralImpl extends LiteralImpl implements IntegerLiteral {
 		return result.toString();
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //IntegerLiteralImpl

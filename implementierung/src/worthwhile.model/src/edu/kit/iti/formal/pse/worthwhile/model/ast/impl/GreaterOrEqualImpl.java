@@ -7,7 +7,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 
 import org.eclipse.emf.ecore.EClass;
@@ -41,7 +40,4 @@ public class GreaterOrEqualImpl extends BinaryExpressionImpl implements GreaterO
 		return AstPackage.Literals.GREATER_OR_EQUAL;
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //GreaterOrEqualImpl

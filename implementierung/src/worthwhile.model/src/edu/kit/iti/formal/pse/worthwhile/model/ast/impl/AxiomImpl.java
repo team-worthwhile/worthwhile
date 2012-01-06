@@ -7,7 +7,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 
 import org.eclipse.emf.ecore.EClass;
@@ -41,7 +40,4 @@ public class AxiomImpl extends AnnotationImpl implements Axiom {
 		return AstPackage.Literals.AXIOM;
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //AxiomImpl

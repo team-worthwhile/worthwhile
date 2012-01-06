@@ -7,7 +7,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 
 import org.eclipse.emf.ecore.EClass;
@@ -41,7 +40,4 @@ public class MultiplicationImpl extends BinaryExpressionImpl implements Multipli
 		return AstPackage.Literals.MULTIPLICATION;
 	}
 
-    public void accept(ASTNodeVisitor visitor) {
-        visitor.visit(this);
-    }
 } //MultiplicationImpl

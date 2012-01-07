@@ -62,223 +62,223 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
  */
 public abstract class ASTNodeVisitor {
 
-    private void throwUnsupportedASTNodeTypeException() {
+    protected void defaultOperation() {
 	throw new UnsupportedOperationException("Visitor cannot Handle this type of ASTNode!");
     }
 
     public void visit(ASTNode node) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Addition conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Annotation conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ArrayAccess conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ArrayLength conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ArrayLiteral conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ArrayType conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Assertion conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Assignment conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Assumption conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Axiom conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(BinaryExpression conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Block conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(BooleanLiteral conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(BooleanType conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Conditional conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Conjunction conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Disjunction conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Division conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Equal conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Equivalence conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ExistsQuantifier conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Expression conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ForAllQuantifier conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(FunctionCall conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(FunctionDeclaration conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Greater conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(GreaterOrEqual conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Implication conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(IntegerLiteral conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(IntegerType conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Invariant conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Less conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(LessOrEqual conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Literal conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Loop conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Minus conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Modulus conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Multiplication conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Negation conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Plus conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Postcondition conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Precondition conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(PrimitiveType conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Program conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(QuantifiedExpression conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(ReturnStatement conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Sign conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Statement conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Type conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(UnaryExpression conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(Unequal conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(VariableDeclaration conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 
     public void visit(VariableReference conjunction) {
-	this.throwUnsupportedASTNodeTypeException();
+	this.defaultOperation();
     }
 }

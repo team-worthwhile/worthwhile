@@ -226,14 +226,23 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	}
 
     /**
+     * Accept a visitor to this ASTNode, choosing the most specific visit(...)
+     * method on the visitor
      * 
-     * @param visitor
+     * @param visitor the visitor to be accepted
      */
+    @Override
     public void accept(ASTNodeVisitor visitor) {
 	Deque<Class<?>> classes = new LinkedList<Class<?>>();
 	classes.add(this.getClass());
+
 	Class<?> c;
 	do {
+	    /*
+	     * Add the superclass and implemented interfaces to classes to try
+	     * and call the visitor with these "less specific" argument types
+	     * next
+	     */
 	    c = classes.removeFirst();
 
 	    List<Class<?>> ifaces = Arrays.asList(c.getInterfaces());
@@ -243,37 +252,57 @@ public abstract class ASTNodeImpl extends EObjectImpl implements ASTNode {
 	    if (c.getSuperclass() != null) {
 		classes.add(c.getSuperclass());
 	    }
-	} while (!tryVisit(visitor, c) && !classes.isEmpty());
+	} while (!this.tryAccept(visitor, c) && !classes.isEmpty());
     }
 
     /**
+     * Check if the visitor implements a visit method with the type
+     * <code>thisClass</code> as an argument and invoke the method if it is
+     * available.
      * 
      * @param visitor
-     * @param c
-     * @return
+     *            the visitor object to be checked
+     * @param thisClass
+     *            the argument type of the visit method to be selected
+     * @return true if the method was available and was successfully invoked,
+     *         else false
      */
-    private Boolean tryVisit(ASTNodeVisitor visitor, Class<?> c) {
+    private Boolean tryAccept(ASTNodeVisitor visitor, Class<?> thisClass) {
+	Method m;
 	try {
-	    Method m = visitor.getClass().getMethod("visit", c);
+	    m = visitor.getClass().getMethod("visit", thisClass);
 	    m.setAccessible(true);
-	    m.invoke(visitor, this);
+	    /*
+	     * TODO: Simply throwing RuntimeExceptions if any of these fail is
+	     * not very nice - maybe there is a better way to handle this?
+	     */
+	    try {
+		m.invoke(visitor, this);
+	    } catch (IllegalAccessException e) {
+		e.printStackTrace();
+		throw new RuntimeException();
+	    } catch (IllegalArgumentException e) {
+		e.printStackTrace();
+		throw new RuntimeException();
+	    } catch (InvocationTargetException e) {
+		e.printStackTrace();
+		throw new RuntimeException();
+	    }
 	    return true;
-	} catch (IllegalAccessException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (IllegalArgumentException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (InvocationTargetException e) {
-	    throw new RuntimeException(e.getCause());
 	} catch (NoSuchMethodException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    /*
+	     * this is normal - the visitor may only implement a visit method
+	     * for one of our superclasses, so we can safely ignore this
+	     */
 	} catch (SecurityException e) {
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
+	    throw new RuntimeException();
 	}
 
+	/*
+	 * if something went wrong when looking up the method, simply return
+	 * false to signal that the visitor was not accepted
+	 */
 	return false;
     }
 } //ASTNodeImpl

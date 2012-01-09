@@ -51,7 +51,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 
 	/**
 	 * @param program
-	 *            the {@link Program} to calculate the weakest precondition for
+	 *                the {@link Program} to calculate the weakest precondition for
 	 * @return the weakest precondition that implies the correctness of <code>program</code>
 	 * @see FormulaGenerator#transformProgram(Program program)
 	 */
@@ -64,8 +64,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 		/*
 		 * pass us as visitor from statement to statement:
 		 * 
-		 * 1. get the weakest precondition, 2. apply the appropriate calculus rule, 3. set the weakest precondition, 4.
-		 * forward us to the next statement
+		 * 1. get the weakest precondition, 2. apply the appropriate calculus rule, 3. set the weakest
+		 * precondition, 4. forward us to the next statement
 		 * 
 		 * finally the weakest precondition implies the correctness of the whole program
 		 */
@@ -77,7 +77,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Assertion}.
 	 * 
-	 * @param assertion the {@link Assertion} to visit
+	 * @param assertion
+	 *                the {@link Assertion} to visit
 	 */
 	public void visit(final Assertion assertion) {
 		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
@@ -89,30 +90,34 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Assignment} to generate the weakest precondition.
 	 * 
-	 * @param assignment the {@link Assignment} to visit
+	 * @param assignment
+	 *                the {@link Assignment} to visit
 	 */
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
 		this.getWeakestPrecondition().accept(
-		        new VariableSubstitution(variableDeclaration, assignment.getValue(),
-		                new VariableSubstitution.SubstituteCommand() {
-			                @Override
-			                void substitute() {
-				                /*
-								 * In case the current postcondition only consists of a VariableReference that has to be
-								 * replaced, substitute it directly
+		                new VariableSubstitution(variableDeclaration, assignment.getValue(),
+		                                new VariableSubstitution.SubstituteCommand() {
+			                                @Override
+			                                void substitute() {
+				                                /*
+								 * In case the current postcondition only consists of a
+								 * VariableReference that has to be replaced, substitute
+								 * it directly
 								 */
-				                WPStrategy.this.weakestPreconditionStack.pop();
-				                WPStrategy.this.weakestPreconditionStack.push(assignment.getValue());
-			                }
-		                }));
+				                                WPStrategy.this.weakestPreconditionStack.pop();
+				                                WPStrategy.this.weakestPreconditionStack
+				                                                .push(assignment.getValue());
+			                                }
+		                                }));
 
 	}
 
 	/**
 	 * Visit a {@link Assumption}.
 	 * 
-	 * @param assumption the {@link Assumption} to visit
+	 * @param assumption
+	 *                the {@link Assumption} to visit
 	 */
 	public void visit(final Assumption assumption) {
 		// begin-user-code
@@ -124,7 +129,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Axiom}.
 	 * 
-	 * @param axiom the {@link Axiom} to visit
+	 * @param axiom
+	 *                the {@link Axiom} to visit
 	 */
 	public void visit(final Axiom axiom) {
 		// begin-user-code
@@ -136,7 +142,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Block} to generate the weakest precondition.
 	 * 
-	 * @param block the {@link Block} to visit
+	 * @param block
+	 *                the {@link Block} to visit
 	 */
 	public void visit(final Block block) {
 		// visit all block statements in the order they were parsed reversed
@@ -150,7 +157,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Conditional} to generate the weakest precondition.
 	 * 
-	 * @param conditional the {@link Conditional} to visit
+	 * @param conditional
+	 *                the {@link Conditional} to visit
 	 */
 	public void visit(final Conditional conditional) {
 		// begin-user-code
@@ -162,7 +170,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link FunctionDeclaration}.
 	 * 
-	 * @param functionDeclaration the {@link FunctionDeclaration} to visit
+	 * @param functionDeclaration
+	 *                the {@link FunctionDeclaration} to visit
 	 */
 	public void visit(final FunctionDeclaration functionDeclaration) {
 		// begin-user-code
@@ -184,7 +193,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Loop} to generate the weakest precondition.
 	 * 
-	 * @param loop the {@link Loop} to visit
+	 * @param loop
+	 *                the {@link Loop} to visit
 	 */
 	public void visit(final Loop loop) {
 		// begin-user-code
@@ -196,7 +206,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Postcondition}.
 	 * 
-	 * @param postcondition the {@link Postcondition} to visit
+	 * @param postcondition
+	 *                the {@link Postcondition} to visit
 	 */
 	public void visit(final Postcondition postcondition) {
 		// begin-user-code
@@ -208,7 +219,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Precondition}.
 	 * 
-	 * @param precondition the {@link Precondition} to visit
+	 * @param precondition
+	 *                the {@link Precondition} to visit
 	 */
 	public void visit(final Precondition precondition) {
 		// begin-user-code
@@ -220,7 +232,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Program} to generate the weakest precondition.
 	 * 
-	 * @param program the {@link Program} to visit
+	 * @param program
+	 *                the {@link Program} to visit
 	 */
 	public void visit(final Program program) {
 		// visit program's main block
@@ -230,7 +243,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link ReturnStatement}.
 	 * 
-	 * @param returnStatement the {@link ReturnStatement} to visit
+	 * @param returnStatement
+	 *                the {@link ReturnStatement} to visit
 	 */
 	public void visit(final ReturnStatement returnStatement) {
 		// begin-user-code
@@ -242,21 +256,25 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link VariableDeclaration} to generate the weakest precondition.
 	 * 
-	 * @param variableDeclaration the {@link VariableDeclaration} to visit
+	 * @param variableDeclaration
+	 *                the {@link VariableDeclaration} to visit
 	 */
 	public void visit(final VariableDeclaration variableDeclaration) {
 		this.getWeakestPrecondition().accept(
-		        new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
-		                new VariableSubstitution.SubstituteCommand() {
-			                @Override
-			                void substitute() {
-				                /*
-								 * In case the current postcondition only consists of a VariableReference that has to be
-								 * replaced, substitute it directly
+		                new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
+		                                new VariableSubstitution.SubstituteCommand() {
+			                                @Override
+			                                void substitute() {
+				                                /*
+								 * In case the current postcondition only consists of a
+								 * VariableReference that has to be replaced, substitute
+								 * it directly
 								 */
-				                WPStrategy.this.weakestPreconditionStack.pop();
-				                WPStrategy.this.weakestPreconditionStack.push(variableDeclaration.getInitialValue());
-			                }
-		                }));
+				                                WPStrategy.this.weakestPreconditionStack.pop();
+				                                WPStrategy.this.weakestPreconditionStack
+				                                                .push(variableDeclaration
+				                                                                .getInitialValue());
+			                                }
+		                                }));
 	}
 }

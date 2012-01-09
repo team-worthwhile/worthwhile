@@ -85,19 +85,9 @@ class InterpreterASTNodeVisitor extends ASTNodeVisitor {
 	private Map<String, Value> symbolMap;
 
 	/**
-	 * @return the symbol map for the current visitor state
-	 */
-	private Map<String, Value> getSymbolMap() {
-		return this.symbolMap;
-	}
-
-	/**
 	 *
 	 */
 	protected InterpreterASTNodeVisitor() {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
 	}
 
 	/**
@@ -105,10 +95,7 @@ class InterpreterASTNodeVisitor extends ASTNodeVisitor {
 	 * @return
 	 */
 	protected Value getSymbol(String key) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.symbolMap.get(key);
 	}
 
 	/**
@@ -116,20 +103,14 @@ class InterpreterASTNodeVisitor extends ASTNodeVisitor {
 	 * @param value
 	 */
 	protected void setSymbol(String key, Value value) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.symbolMap.put(key, value);
 	}
 
 	/**
 	 * @return
 	 */
 	protected Map<String, Value> getAllSymbols() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.symbolMap;
 	}
 
 	/**
@@ -150,10 +131,7 @@ class InterpreterASTNodeVisitor extends ASTNodeVisitor {
 	 * @param handler
 	 */
 	protected void addDebugEventHandler(AbstractDebugEventListener handler) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.debugEventHandlers.add(handler);
 	}
 
 	/**
@@ -162,10 +140,7 @@ class InterpreterASTNodeVisitor extends ASTNodeVisitor {
 	 * @param handler
 	 */
 	protected void removeDebugEventHandler(AbstractDebugEventListener handler) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.debugEventHandlers.remove(handler);
 	}
 
 	/**

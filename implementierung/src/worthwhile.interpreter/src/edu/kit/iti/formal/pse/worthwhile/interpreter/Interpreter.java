@@ -22,7 +22,7 @@ public class Interpreter {
 	 */
 	public Set<AbstractDebugEventListener> getDebugEventHandlers() {
 		// begin-user-code
-		return debugEventHandlers;
+		return this.debugEventHandlers;
 		// end-user-code
 	}
 
@@ -46,7 +46,7 @@ public class Interpreter {
 	 */
 	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
 		// begin-user-code
-		return currentNodeVisitor;
+		return this.currentNodeVisitor;
 		// end-user-code
 	}
 
@@ -70,7 +70,7 @@ public class Interpreter {
 	 */
 	public Set<InterpreterASTNodeVisitor> getNodeVisitors() {
 		// begin-user-code
-		return nodeVisitors;
+		return this.nodeVisitors;
 		// end-user-code
 	}
 
@@ -94,7 +94,7 @@ public class Interpreter {
 	 */
 	public Program getProgram() {
 		// begin-user-code
-		return program;
+		return this.program;
 		// end-user-code
 	}
 
@@ -118,7 +118,7 @@ public class Interpreter {
 	 */
 	public Set<LineBreakpoint> getBreakpoints() {
 		// begin-user-code
-		return breakpoints;
+		return this.breakpoints;
 		// end-user-code
 	}
 
@@ -136,59 +136,42 @@ public class Interpreter {
 	 * @param program
 	 */
 	public Interpreter(Program program) {
-		// begin-user-code
-		// TODO Auto-generated constructor stub
-		// end-user-code
+		this.program = program;
 	}
 
 	/** 
 	 * 
 	 */
 	public void execute() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.program.accept(currentNodeVisitor);
 	}
 
 	/**
 	 * @param breakpoint
 	 */
 	public void addBreakpoint(LineBreakpoint breakpoint) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.breakpoints.add(breakpoint);
 	}
 
 	/**
 	 * @param breakpoint
 	 */
 	public void removeBreakpoint(LineBreakpoint breakpoint) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.breakpoints.remove(breakpoint);
 	}
 
 	/**
 	 * @param handler
 	 */
 	public void addDebugEventHandler(AbstractDebugEventListener handler) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.debugEventHandlers.add(handler);
 	}
 
 	/**
 	 * @param handler
 	 */
 	public void removeDebugEventHandler(AbstractDebugEventListener handler) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.debugEventHandlers.remove(handler);
 	}
 
 	/**
@@ -207,10 +190,7 @@ public class Interpreter {
 	 * @return
 	 */
 	public Value getSymbol(String key) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.currentNodeVisitor.getSymbol(key);
 	}
 
 	/**
@@ -218,19 +198,13 @@ public class Interpreter {
 	 * @param value
 	 */
 	public void setSymbol(String key, Value value) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.currentNodeVisitor.setSymbol(key, value);
 	}
 
 	/**
 	 * @return
 	 */
 	public Map<String, Value> getAllSymbols() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.currentNodeVisitor.getAllSymbols();
 	}
 }

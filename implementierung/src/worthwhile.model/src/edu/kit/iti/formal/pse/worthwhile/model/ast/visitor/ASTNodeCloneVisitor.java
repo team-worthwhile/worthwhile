@@ -72,16 +72,17 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	public final ASTNode getClone() {
 		return this.cloneStack.get(0);
 	}
+
 	/**
 	 * Convenience method to clone the Expressions of a {@link BinaryExpression}.
 	 * 
 	 * @param oldBinaryExpression
-	 *            the {@link BinaryExpression} to take the {@link Expression}s from
+	 *                the {@link BinaryExpression} to take the {@link Expression}s from
 	 * @param newBinaryExpression
-	 *            the {@link BinaryExpression} to clone the {@link Expression}s to
+	 *                the {@link BinaryExpression} to clone the {@link Expression}s to
 	 */
 	private void cloneBinaryExpressionOperands(final BinaryExpression oldBinaryExpression,
-	        final BinaryExpression newBinaryExpression) {
+	                final BinaryExpression newBinaryExpression) {
 		oldBinaryExpression.getLeft().accept(this);
 		oldBinaryExpression.getRight().accept(this);
 		newBinaryExpression.setRight((Expression) this.cloneStack.pop());
@@ -92,12 +93,12 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Convenience method to clone the Expression of a {@link UnaryExpression}.
 	 * 
 	 * @param oldUnaryExpression
-	 *            the {@link UnaryExpression} to take the {@link Expression} from
+	 *                the {@link UnaryExpression} to take the {@link Expression} from
 	 * @param newUnaryExpression
-	 *            the {@link UnaryExpression} to clone the {@link Expression} to
+	 *                the {@link UnaryExpression} to clone the {@link Expression} to
 	 */
 	private void cloneUnaryExpressionOperand(final UnaryExpression oldUnaryExpression,
-	        final UnaryExpression newUnaryExpression) {
+	                final UnaryExpression newUnaryExpression) {
 		oldUnaryExpression.getOperand().accept(this);
 		newUnaryExpression.setOperand((Expression) this.cloneStack.pop());
 	}
@@ -106,9 +107,9 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Convenience method to clone the Expression of an {@link Annotation}.
 	 * 
 	 * @param oldAnnotation
-	 *            the {@link Annotation} to take the {@link Expression} from
+	 *                the {@link Annotation} to take the {@link Expression} from
 	 * @param newAnnotation
-	 *            the {@link Annotation} to clone the {@link Expression} to
+	 *                the {@link Annotation} to clone the {@link Expression} to
 	 */
 	private void cloneAnnotationExpression(final Annotation oldAnnotation, final Annotation newAnnotation) {
 		oldAnnotation.accept(this);
@@ -119,7 +120,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link Addition} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link Addition} to clone
+	 *                the {@link Addition} to clone
 	 */
 	public final void visit(final Addition a) {
 		Addition newAddition = this.nodeFactory.createAddition();
@@ -131,7 +132,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link ArrayLength} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link ArrayLength} to clone
+	 *                the {@link ArrayLength} to clone
 	 */
 	public final void visit(final ArrayLength a) {
 		ArrayLength newArrayLength = this.nodeFactory.createArrayLength();
@@ -144,13 +145,13 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link ArrayLiteral} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link ArrayLiteral} to clone
+	 *                the {@link ArrayLiteral} to clone
 	 */
 	public final void visit(final ArrayLiteral a) {
 		ArrayLiteral newArrayLiteral = this.nodeFactory.createArrayLiteral();
 		for (Expression e : a.getValues()) {
 			e.accept(this);
-			newArrayLiteral.getValues().add((Expression) this.cloneStack.pop()); 
+			newArrayLiteral.getValues().add((Expression) this.cloneStack.pop());
 		}
 		this.cloneStack.push(newArrayLiteral);
 	}
@@ -159,7 +160,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link Assertion} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link Assertion} to clone
+	 *                the {@link Assertion} to clone
 	 */
 	public final void visit(final Assertion a) {
 		Assertion newAnnotation = this.nodeFactory.createAssertion();
@@ -171,7 +172,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link Assignment} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link Assignment} to clone
+	 *                the {@link Assignment} to clone
 	 */
 	public final void visit(final Assignment a) {
 		Assignment newAssignment = this.nodeFactory.createAssignment();
@@ -186,7 +187,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link Assumption} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link Assumption} to clone
+	 *                the {@link Assumption} to clone
 	 */
 	public final void visit(final Assumption a) {
 		Assumption newAssumption = this.nodeFactory.createAssumption();
@@ -198,7 +199,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit an {@link Axiom} to clone it.
 	 * 
 	 * @param a
-	 *            the {@link Axiom} to clone
+	 *                the {@link Axiom} to clone
 	 */
 	public final void visit(final Axiom a) {
 		Axiom newAxiom = this.nodeFactory.createAxiom();
@@ -210,7 +211,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Block} to clone it.
 	 * 
 	 * @param b
-	 *            the {@link Block} to clone
+	 *                the {@link Block} to clone
 	 */
 	public final void visit(final Block b) {
 		Block newBlock = this.nodeFactory.createBlock();
@@ -225,7 +226,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link BooleanLiteral} to clone it.
 	 * 
 	 * @param b
-	 *            the {@link BooleanLiteral} to clone
+	 *                the {@link BooleanLiteral} to clone
 	 */
 	public final void visit(final BooleanLiteral b) {
 		BooleanLiteral newBooleanLiteral = this.nodeFactory.createBooleanLiteral();
@@ -237,7 +238,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link BooleanType} to clone it.
 	 * 
 	 * @param b
-	 *            the {@link BooleanType} to clone
+	 *                the {@link BooleanType} to clone
 	 */
 	public final void visit(final BooleanType b) {
 		BooleanType newBooleanType = this.nodeFactory.createBooleanType();
@@ -248,7 +249,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Conditional} to clone it.
 	 * 
 	 * @param c
-	 *            the {@link Conditional} to clone
+	 *                the {@link Conditional} to clone
 	 */
 	public final void visit(final Conditional c) {
 		Conditional newConditional = this.nodeFactory.createConditional();
@@ -265,7 +266,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Conjunction} to clone it.
 	 * 
 	 * @param c
-	 *            the {@link Conjunction} to clone
+	 *                the {@link Conjunction} to clone
 	 */
 	public final void visit(final Conjunction c) {
 		Conjunction newConjunction = this.nodeFactory.createConjunction();
@@ -277,7 +278,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Disjunction} to clone it.
 	 * 
 	 * @param d
-	 *            the {@link Disjunction} to clone
+	 *                the {@link Disjunction} to clone
 	 */
 	public final void visit(final Disjunction d) {
 		Disjunction newDisjunction = this.nodeFactory.createDisjunction();
@@ -289,7 +290,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Division} to clone it.
 	 * 
 	 * @param d
-	 *            the {@link Division} to clone
+	 *                the {@link Division} to clone
 	 */
 	public final void visit(final Division d) {
 		Division newDivision = this.nodeFactory.createDivision();
@@ -301,7 +302,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Equal} to clone it.
 	 * 
 	 * @param e
-	 *            the {@link Equal} to clone
+	 *                the {@link Equal} to clone
 	 */
 	public final void visit(final Equal e) {
 		Equal newEqual = this.nodeFactory.createEqual();
@@ -313,7 +314,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Greater} to clone it.
 	 * 
 	 * @param g
-	 *            the {@link Greater} to clone
+	 *                the {@link Greater} to clone
 	 */
 	public final void visit(final Greater g) {
 		Greater newGreater = this.nodeFactory.createGreater();
@@ -325,7 +326,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link GreaterOrEqual} to clone it.
 	 * 
 	 * @param g
-	 *            the {@link GreaterOrEqual} to clone
+	 *                the {@link GreaterOrEqual} to clone
 	 */
 	public final void visit(final GreaterOrEqual g) {
 		GreaterOrEqual newGreaterOrEqual = this.nodeFactory.createGreaterOrEqual();
@@ -337,7 +338,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Implication} to clone it.
 	 * 
 	 * @param i
-	 *            the {@link Implication} to clone
+	 *                the {@link Implication} to clone
 	 */
 	public final void visit(final Implication i) {
 		Implication newImplication = this.nodeFactory.createImplication();
@@ -349,7 +350,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link IntegerLiteral} to clone it.
 	 * 
 	 * @param i
-	 *            the {@link IntegerLiteral} to clone
+	 *                the {@link IntegerLiteral} to clone
 	 */
 	public final void visit(final IntegerLiteral i) {
 		IntegerLiteral newIntegerLiteral = this.nodeFactory.createIntegerLiteral();
@@ -361,7 +362,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link IntegerType} to clone it.
 	 * 
 	 * @param i
-	 *            the {@link IntegerType} to clone
+	 *                the {@link IntegerType} to clone
 	 */
 	public final void visit(final IntegerType i) {
 		this.cloneStack.push(this.nodeFactory.createIntegerType());
@@ -371,7 +372,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Invariant} to clone it.
 	 * 
 	 * @param i
-	 *            the {@link Invariant} to clone
+	 *                the {@link Invariant} to clone
 	 */
 	public final void visit(final Invariant i) {
 		Invariant newInvariant = this.nodeFactory.createInvariant();
@@ -383,7 +384,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Less} to clone it.
 	 * 
 	 * @param l
-	 *            the {@link Less} to clone
+	 *                the {@link Less} to clone
 	 */
 	public final void visit(final Less l) {
 		Less newLess = this.nodeFactory.createLess();
@@ -395,7 +396,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link LessOrEqual} to clone it.
 	 * 
 	 * @param l
-	 *            the {@link LessOrEqual} to clone
+	 *                the {@link LessOrEqual} to clone
 	 */
 	public final void visit(final LessOrEqual l) {
 		LessOrEqual newLessOrEqual = this.nodeFactory.createLessOrEqual();
@@ -407,7 +408,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Loop} to clone it.
 	 * 
 	 * @param l
-	 *            the {@link Loop} to clone
+	 *                the {@link Loop} to clone
 	 */
 	public final void visit(final Loop l) {
 		Loop newLoop = this.nodeFactory.createLoop();
@@ -422,7 +423,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Minus} to clone it.
 	 * 
 	 * @param m
-	 *            the {@link Minus} to clone
+	 *                the {@link Minus} to clone
 	 */
 	public final void visit(final Minus m) {
 		Minus newMinus = this.nodeFactory.createMinus();
@@ -434,7 +435,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Modulus} to clone it.
 	 * 
 	 * @param m
-	 *            the {@link Modulus} to clone
+	 *                the {@link Modulus} to clone
 	 */
 	public final void visit(final Modulus m) {
 		Modulus newModulus = this.nodeFactory.createModulus();
@@ -446,7 +447,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Multiplication} to clone it.
 	 * 
 	 * @param m
-	 *            the {@link Multiplication} to clone
+	 *                the {@link Multiplication} to clone
 	 */
 	public final void visit(final Multiplication m) {
 		Multiplication newMultiplication = this.nodeFactory.createMultiplication();
@@ -458,7 +459,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Negation} to clone it.
 	 * 
 	 * @param n
-	 *            the {@link Negation} to clone
+	 *                the {@link Negation} to clone
 	 */
 	public final void visit(final Negation n) {
 		Negation newNegation = this.nodeFactory.createNegation();
@@ -470,7 +471,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Plus} to clone it.
 	 * 
 	 * @param p
-	 *            the {@link Plus} to clone
+	 *                the {@link Plus} to clone
 	 */
 	public final void visit(final Plus p) {
 		Plus newPlus = this.nodeFactory.createPlus();
@@ -482,7 +483,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Postcondition} to clone it.
 	 * 
 	 * @param p
-	 *            the {@link Postcondition} to clone
+	 *                the {@link Postcondition} to clone
 	 */
 	public final void visit(final Postcondition p) {
 		Postcondition newPostcondition = this.nodeFactory.createPostcondition();
@@ -494,7 +495,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Precondition} to clone it.
 	 * 
 	 * @param p
-	 *            the {@link Precondition} to clone
+	 *                the {@link Precondition} to clone
 	 */
 	public final void visit(final Precondition p) {
 		Precondition newPrecondition = this.nodeFactory.createPrecondition();
@@ -506,7 +507,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Program} to clone it.
 	 * 
 	 * @param p
-	 *            the {@link Program} to clone
+	 *                the {@link Program} to clone
 	 */
 	public final void visit(final Program p) {
 		Program newProgram = this.nodeFactory.createProgram();
@@ -520,7 +521,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link ReturnStatement} to clone it.
 	 * 
 	 * @param r
-	 *            the {@link ReturnStatement} to clone
+	 *                the {@link ReturnStatement} to clone
 	 */
 	public final void visit(final ReturnStatement r) {
 		ReturnStatement newReturnStatement = this.nodeFactory.createReturnStatement();
@@ -533,7 +534,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Subtraction} to clone it.
 	 * 
 	 * @param s
-	 *            the {@link Subtraction} to clone
+	 *                the {@link Subtraction} to clone
 	 */
 	public final void visit(final Subtraction s) {
 		Subtraction newSubtraction = this.nodeFactory.createSubtraction();
@@ -545,7 +546,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Unequal} to clone it.
 	 * 
 	 * @param u
-	 *            the {@link Unequal} to clone
+	 *                the {@link Unequal} to clone
 	 */
 	public final void visit(final Unequal u) {
 		Unequal newUnequal = this.nodeFactory.createUnequal();
@@ -557,7 +558,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link VariableDeclaration} to clone it.
 	 * 
 	 * @param v
-	 *            the {@link VariableDeclaration} to clone
+	 *                the {@link VariableDeclaration} to clone
 	 */
 	public final void visit(final VariableDeclaration v) {
 		VariableDeclaration newVariableDeclaration = this.nodeFactory.createVariableDeclaration();
@@ -573,7 +574,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link VariableReference} to clone it.
 	 * 
 	 * @param v
-	 *            the {@link VariableReference} to clone
+	 *                the {@link VariableReference} to clone
 	 */
 	public final void visit(final VariableReference v) {
 		VariableReference newVariableReference = this.nodeFactory.createVariableReference();

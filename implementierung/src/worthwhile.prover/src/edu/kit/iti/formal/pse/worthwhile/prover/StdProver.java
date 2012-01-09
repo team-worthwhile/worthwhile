@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
@@ -18,21 +20,33 @@ abstract class StdProver implements ProverCaller {
 	private FormulaCompiler compiler;
 
 	/**
-	 * The path to the binary of the prover that should be called.
+	 * The command line that is executed to call this prover.
 	 */
-	private String proverPath;
+	private List<String> proverCommand;
 
 	/**
-	 * Constructs a new caller with the given binary path and compiler object.
+	 * Constructs a new caller with the given prover command and compiler object.
 	 * 
-	 * @param path
-	 *                the path to the binary to call
+	 * @param command
+	 *                the command line that is executed to call this prover
 	 * @param compiler
 	 *                the compiler to use to compile valid input for the prover
 	 */
-	protected StdProver(final String path, final FormulaCompiler compiler) {
+	protected StdProver(final String command, final FormulaCompiler compiler) {
+		this(Arrays.asList(command), compiler);
+	}
+
+	/**
+	 * Constructs a new caller with the given prover command and compiler object.
+	 * 
+	 * @param command
+	 *                the command line that is executed to call this prover
+	 * @param compiler
+	 *                the compiler to use to compile valid input for the prover
+	 */
+	protected StdProver(final List<String> command, final FormulaCompiler compiler) {
 		this.compiler = compiler;
-		this.proverPath = path;
+		this.proverCommand = command;
 	}
 
 	/**
@@ -50,7 +64,7 @@ abstract class StdProver implements ProverCaller {
 		String outputString = "";
 		try {
 			// instantiate the prover
-			ProcessBuilder builder = new ProcessBuilder(this.proverPath);
+			ProcessBuilder builder = new ProcessBuilder("z3", "-in", "-smt2");
 			builder.redirectErrorStream(true);
 			Process proverProcess = builder.start();
 
@@ -71,7 +85,7 @@ abstract class StdProver implements ProverCaller {
 		} catch (IOException e) {
 			// normally the binary was simply not found
 			e.printStackTrace();
-			throw new ProverCallerException("Error calling prover binary: " + this.proverPath);
+			throw new ProverCallerException("Error executing the prover command line: " + this.proverCommand);
 		}
 		return this.getResult(outputString);
 	}
@@ -84,10 +98,10 @@ abstract class StdProver implements ProverCaller {
 	}
 
 	/**
-	 * @return the path to the prover binary called by this caller
+	 * @return the command line that is executed to call this prover
 	 */
-	public String getProverPath() {
-		return this.proverPath;
+	public List<String> getProverCommand() {
+		return this.proverCommand;
 	}
 
 	/**
@@ -108,10 +122,20 @@ abstract class StdProver implements ProverCaller {
 	}
 
 	/**
-	 * @param proverPath
-	 *                the path to the binary to call for this prover
+	 * Convenience method for when the prover command line consists of only the program name.
+	 * 
+	 * @param command
+	 *                the command line that is executed to call this prover
 	 */
-	public void setProverPath(final String proverPath) {
-		this.proverPath = proverPath;
+	public void setProverCommand(final String command) {
+		this.setProverCommand(Arrays.asList(command));
+	}
+
+	/**
+	 * @param command
+	 *                the command line that is executed to call this prover
+	 */
+	public void setProverCommand(final List<String> command) {
+		this.proverCommand = command;
 	}
 }

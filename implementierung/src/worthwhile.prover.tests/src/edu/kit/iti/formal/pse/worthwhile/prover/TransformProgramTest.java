@@ -55,7 +55,7 @@ public final class TransformProgramTest {
 	Expression result = this.transformer.transformProgram(p);
 	Assert.assertTrue(ASTNodeEqualator.equal(this.getExpression("1 = 1 && true"), result));
 
-	p = this.getProgram("Integer x\nx := 1\n_assert x = 1\n");
+	p = this.getProgram("Integer x := 1\nx := 0\n_assert x = 1\n");
 	result = this.transformer.transformProgram(p);
 	if (!ASTNodeEqualator.equal(this.getExpression("0 = 1 && true"), result)) {
 	    AstSwitch<?> toString = new ASTNodeToStringHelper();

@@ -63,14 +63,16 @@ public final class CheckFormulaTest {
 	}
 
 	/**
-	 * AssertEquals validity for expr in all available environments.
+	 * AssertEquals validity for an {@link Expression} in all available environments.
 	 * 
 	 * The available environments are defined by {@link initEnvs}.
 	 * 
 	 * @param expr
+	 *                the Expression to be checked for <code>validity</code>
 	 * @param validity
+	 *                the {@link Validity} <code>expr</code>'s Validity must be equal to for the test to pass
 	 */
-	void assertEnvIndependentEquals(Expression expr, Validity validity) {
+	void assertEnvIndependentEquals(final Expression expr, final Validity validity) {
 		for (Map<String, Value> env : envs) {
 			Assert.assertEquals(validity, checker.checkFormula(expr, env));
 		}
@@ -80,9 +82,10 @@ public final class CheckFormulaTest {
 	 * Generates an {@link Expression} from a Worthwhile {@link String}.
 	 * 
 	 * @param exprString
-	 * @return {@link Expression} AST representing the exprString
+	 *                the Worthwhile String to be parsed as Expression
+	 * @return Expression AST representing <code>exprString</code>
 	 */
-	Expression getExpression(String exprString) {
+	Expression getExpression(final String exprString) {
 		Expression e = TestASTProvider.parseFormulaString(exprString);
 		Assert.assertNotNull(e);
 		return e;

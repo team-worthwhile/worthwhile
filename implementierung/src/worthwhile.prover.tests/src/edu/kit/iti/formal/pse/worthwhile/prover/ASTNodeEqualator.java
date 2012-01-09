@@ -26,7 +26,7 @@ public final class ASTNodeEqualator {
 	 * @param arg1
 	 * @return
 	 */
-	public static Boolean equal(ASTNode arg0, ASTNode arg1) {
+	public static Boolean equal(final ASTNode arg0, final ASTNode arg1) {
 		if (arg0 == arg1) {
 			return true;
 		}
@@ -53,7 +53,7 @@ public final class ASTNodeEqualator {
 	 * @param arg1
 	 * @return
 	 */
-	private static Boolean equal(BinaryExpression arg0, BinaryExpression arg1) {
+	private static Boolean equal(final BinaryExpression arg0, final BinaryExpression arg1) {
 		if (arg0 == arg1) {
 			return true;
 		}
@@ -83,7 +83,7 @@ public final class ASTNodeEqualator {
 	 * @param arg1
 	 * @return
 	 */
-	private static Boolean equal(BooleanLiteral arg0, BooleanLiteral arg1) {
+	private static Boolean equal(final BooleanLiteral arg0, final BooleanLiteral arg1) {
 		if (arg0 == arg1) {
 			return true;
 		}
@@ -102,7 +102,7 @@ public final class ASTNodeEqualator {
 	 * @param arg1
 	 * @return
 	 */
-	private static Boolean equal(IntegerLiteral arg0, IntegerLiteral arg1) {
+	private static Boolean equal(final IntegerLiteral arg0, final IntegerLiteral arg1) {
 		if (arg0 == arg1) {
 			return true;
 		}
@@ -125,7 +125,7 @@ public final class ASTNodeEqualator {
 	 * @param arg1
 	 * @return
 	 */
-	private static Boolean equal(UnaryExpression arg0, UnaryExpression arg1) {
+	private static Boolean equal(final UnaryExpression arg0, final UnaryExpression arg1) {
 		if (arg0 == arg1) {
 			return true;
 		}

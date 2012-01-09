@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
@@ -22,7 +23,7 @@ public final class TransformProgramTest {
 	 *            some Worthwhile expression code
 	 * @return {@link Expression} AST representing <code>exprString</code>
 	 */
-	Expression getExpression(String exprString) {
+	Expression getExpression(final String exprString) {
 		Expression e = TestASTProvider.parseFormulaString(exprString);
 		Assert.assertNotNull(e);
 		return e;
@@ -35,7 +36,7 @@ public final class TransformProgramTest {
 	 *            some Worthwhile program code
 	 * @return {@link Program} AST representing <code>progString</code>
 	 */
-	Program getProgram(String progString) {
+	Program getProgram(final String progString) {
 		Program p = TestASTProvider.getRootASTNode(progString);
 		Assert.assertNotNull(p);
 		return p;
@@ -47,20 +48,34 @@ public final class TransformProgramTest {
 	private FormulaGenerator transformer = new WPStrategy();
 
 	/**
+	 * Asserts equality of an expected and actual {@link ASTNode} result.
+	 * 
+	 * Fails the TestCase if <code>expected</code> and <code>was</code> do not equal according to
+	 * {@link ASTNodeEqualator}.
+	 * 
+	 * @param expected
+	 *                the expected ASTNode
+	 * @param was
+	 *                the ASTNode result which must equal <code>expected</code> for the test to pass
+	 */
+	private static void assertASTNodeEqual(final ASTNode expected, final ASTNode was) {
+		if (!ASTNodeEqualator.equal(expected, was)) {
+			AstSwitch<?> toString = new ASTNodeToStringHelper();
+			Assert.fail("expected: " + toString.doSwitch(expected) + " was: " + toString.doSwitch(was));
+		}
+	}
+
+	/**
 	 * Tests the transformation of {@link Assignment}s.
 	 */
 	@Test
 	public void assignmentRule() {
 		Program p = this.getProgram("Integer x := 1\n_assert x = 1\n");
 		Expression result = this.transformer.transformProgram(p);
-		Assert.assertTrue(ASTNodeEqualator.equal(this.getExpression("1 = 1 && true"), result));
+		assertASTNodeEqual(this.getExpression("1 = 1 && true"), result);
 
 		p = this.getProgram("Integer x := 1\nx := 0\n_assert x = 1\n");
 		result = this.transformer.transformProgram(p);
-		if (!ASTNodeEqualator.equal(this.getExpression("0 = 1 && true"), result)) {
-			AstSwitch<?> toString = new ASTNodeToStringHelper();
-			Assert.fail("expected: " + toString.doSwitch(this.getExpression("0 = 1 && true")) + " was: "
-			        + toString.doSwitch(result));
-		}
+		assertASTNodeEqual(this.getExpression("0 = 1 && true"), result);
 	}
 }

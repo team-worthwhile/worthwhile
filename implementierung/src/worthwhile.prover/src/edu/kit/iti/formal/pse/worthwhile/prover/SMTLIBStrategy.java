@@ -6,7 +6,6 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
@@ -95,13 +94,6 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 
 	public void visit(Addition addition) {
 		this.pushBinaryOperation(addition, "+");
-	}
-
-	public void visit(ArrayAccess arrayAccess) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	public void visit(ArrayLength arrayLength) {

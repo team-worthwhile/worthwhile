@@ -32,10 +32,6 @@
           lowerBound="1" eType="#//ast/Expression" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//ast/ASTNode"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ArrayAccess" eSuperTypes="#//ast/UnaryExpression">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="index" ordered="false"
-          lowerBound="1" eType="#//ast/Expression" containment="true"/>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true" eSuperTypes="#//ast/Expression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="operand" ordered="false"
           lowerBound="1" eType="#//ast/Expression" containment="true"/>

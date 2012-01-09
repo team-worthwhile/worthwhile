@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
@@ -105,7 +104,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 		switch (eClass.getClassifierID()) {
 			case AstPackage.PROGRAM: return createProgram();
 			case AstPackage.ADDITION: return createAddition();
-			case AstPackage.ARRAY_ACCESS: return createArrayAccess();
 			case AstPackage.ARRAY_LENGTH: return createArrayLength();
 			case AstPackage.ARRAY_LITERAL: return createArrayLiteral();
 			case AstPackage.ARRAY_TYPE: return createArrayType();
@@ -170,16 +168,6 @@ public class AstFactoryImpl extends EFactoryImpl implements AstFactory {
 	public Addition createAddition() {
 		AdditionImpl addition = new AdditionImpl();
 		return addition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ArrayAccess createArrayAccess() {
-		ArrayAccessImpl arrayAccess = new ArrayAccessImpl();
-		return arrayAccess;
 	}
 
 	/**

@@ -97,10 +97,6 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionAdapter();
 			}
 			@Override
-			public Adapter caseArrayAccess(ArrayAccess object) {
-				return createArrayAccessAdapter();
-			}
-			@Override
 			public Adapter caseUnaryExpression(UnaryExpression object) {
 				return createUnaryExpressionAdapter();
 			}

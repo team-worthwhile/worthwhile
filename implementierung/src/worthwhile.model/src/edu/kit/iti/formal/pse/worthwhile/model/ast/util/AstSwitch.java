@@ -114,15 +114,6 @@ public class AstSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.ARRAY_ACCESS: {
-				ArrayAccess arrayAccess = (ArrayAccess)theEObject;
-				T result = caseArrayAccess(arrayAccess);
-				if (result == null) result = caseUnaryExpression(arrayAccess);
-				if (result == null) result = caseExpression(arrayAccess);
-				if (result == null) result = caseASTNode(arrayAccess);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case AstPackage.UNARY_EXPRESSION: {
 				UnaryExpression unaryExpression = (UnaryExpression)theEObject;
 				T result = caseUnaryExpression(unaryExpression);
@@ -637,21 +628,6 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpression(Expression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Array Access</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Array Access</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArrayAccess(ArrayAccess object) {
 		return null;
 	}
 

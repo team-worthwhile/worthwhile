@@ -44,15 +44,6 @@ public interface AstFactory extends EFactory {
 	Addition createAddition();
 
 	/**
-	 * Returns a new object of class '<em>Array Access</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Array Access</em>'.
-	 * @generated
-	 */
-	ArrayAccess createArrayAccess();
-
-	/**
 	 * Returns a new object of class '<em>Array Length</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

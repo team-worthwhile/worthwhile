@@ -28,9 +28,6 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/BinaryExpression/right"/>
       </genClasses>
       <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Expression"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayAccess">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayAccess/index"/>
-      </genClasses>
       <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/UnaryExpression">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/UnaryExpression/operand"/>
       </genClasses>

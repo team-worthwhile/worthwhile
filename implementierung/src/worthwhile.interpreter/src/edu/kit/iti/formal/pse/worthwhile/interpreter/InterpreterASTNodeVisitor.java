@@ -8,7 +8,6 @@ import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
@@ -181,11 +180,6 @@ class InterpreterASTNodeVisitor extends ASTNodeVisitor {
     }
 
     public void visit(Addition addition) {
-	// TODO Auto-generated method stub
-
-    }
-
-    public void visit(ArrayAccess arrayAccess) {
 	// TODO Auto-generated method stub
 
     }

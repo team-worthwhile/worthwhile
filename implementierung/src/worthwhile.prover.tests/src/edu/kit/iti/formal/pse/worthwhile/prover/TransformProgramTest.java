@@ -20,7 +20,7 @@ public final class TransformProgramTest {
 	 * Generates an {@link Expression} from a Worthwhile {@link String}.
 	 * 
 	 * @param exprString
-	 *            some Worthwhile expression code
+	 *                some Worthwhile expression code
 	 * @return {@link Expression} AST representing <code>exprString</code>
 	 */
 	Expression getExpression(final String exprString) {
@@ -33,7 +33,7 @@ public final class TransformProgramTest {
 	 * Generates an {@link Program} from a Worthwhile {@link String}.
 	 * 
 	 * @param progString
-	 *            some Worthwhile program code
+	 *                some Worthwhile program code
 	 * @return {@link Program} AST representing <code>progString</code>
 	 */
 	Program getProgram(final String progString) {

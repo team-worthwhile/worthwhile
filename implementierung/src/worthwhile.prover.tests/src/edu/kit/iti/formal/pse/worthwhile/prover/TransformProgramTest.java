@@ -23,7 +23,7 @@ public final class TransformProgramTest {
 	 *            some Worthwhile expression code
 	 * @return {@link Expression} AST representing <code>exprString</code>
 	 */
-	Expression getExpression(String exprString) {
+	Expression getExpression(final String exprString) {
 		Expression e = TestASTProvider.parseFormulaString(exprString);
 		Assert.assertNotNull(e);
 		return e;
@@ -36,7 +36,7 @@ public final class TransformProgramTest {
 	 *            some Worthwhile program code
 	 * @return {@link Program} AST representing <code>progString</code>
 	 */
-	Program getProgram(String progString) {
+	Program getProgram(final String progString) {
 		Program p = TestASTProvider.getRootASTNode(progString);
 		Assert.assertNotNull(p);
 		return p;

@@ -23,22 +23,22 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
  */
 class ASTNodeToStringHelper extends AstSwitch<String> {
 	@Override
-	public String caseASTNode(ASTNode aSTNode) {
+	public String caseASTNode(final ASTNode aSTNode) {
 		return aSTNode.toString();
 	}
 
 	@Override
-	public String caseAssertion(Assertion assertion) {
+	public String caseAssertion(final Assertion assertion) {
 		return "_assert " + assertion.getExpression();
 	}
 
 	@Override
-	public String caseAssignment(Assignment assignment) {
+	public String caseAssignment(final Assignment assignment) {
 		return assignment.getVariable() + " := " + assignment.getValue();
 	}
 
 	@Override
-	public String caseBlock(Block block) {
+	public String caseBlock(final Block block) {
 		StringBuffer buf = new StringBuffer();
 		for (Statement stmt : block.getStatements()) {
 			buf.append(this.doSwitch(stmt) + "\n");
@@ -47,43 +47,43 @@ class ASTNodeToStringHelper extends AstSwitch<String> {
 	}
 
 	@Override
-	public String caseBooleanLiteral(BooleanLiteral booleanLiteral) {
+	public String caseBooleanLiteral(final BooleanLiteral booleanLiteral) {
 		return String.valueOf(booleanLiteral.getValue());
 	}
 
 	@Override
-	public String caseConjunction(Conjunction conjunction) {
+	public String caseConjunction(final Conjunction conjunction) {
 		return this.doSwitch(conjunction.getLeft()) + " && " + this.doSwitch(conjunction.getRight());
 	}
 
 	@Override
-	public String caseEqual(Equal equal) {
+	public String caseEqual(final Equal equal) {
 		return this.doSwitch(equal.getLeft()) + " = " + this.doSwitch(equal.getRight());
 	}
 
 	@Override
-	public String caseIntegerLiteral(IntegerLiteral integerLiteral) {
+	public String caseIntegerLiteral(final IntegerLiteral integerLiteral) {
 		return integerLiteral.getValue().toString();
 	}
 
 	@Override
-	public String caseIntegerType(IntegerType integerType) {
+	public String caseIntegerType(final IntegerType integerType) {
 		return "Integer";
 	}
 
 	@Override
-	public String caseProgram(Program program) {
+	public String caseProgram(final Program program) {
 		return this.doSwitch(program.getMainBlock());
 	}
 
 	@Override
-	public String caseVariableDeclaration(VariableDeclaration variableDeclaration) {
+	public String caseVariableDeclaration(final VariableDeclaration variableDeclaration) {
 		return variableDeclaration.getType() + " " + variableDeclaration.getName() + " := "
 		        + variableDeclaration.getInitialValue();
 	}
 
 	@Override
-	public String caseVariableReference(VariableReference variableReference) {
+	public String caseVariableReference(final VariableReference variableReference) {
 		return variableReference.getVariable().getName();
 	}
 }

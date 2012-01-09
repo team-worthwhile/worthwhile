@@ -70,7 +70,7 @@ public final class CheckFormulaTest {
 	 * @param expr
 	 * @param validity
 	 */
-	void assertEnvIndependentEquals(Expression expr, Validity validity) {
+	void assertEnvIndependentEquals(final Expression expr, final Validity validity) {
 		for (Map<String, Value> env : envs) {
 			Assert.assertEquals(validity, checker.checkFormula(expr, env));
 		}
@@ -82,7 +82,7 @@ public final class CheckFormulaTest {
 	 * @param exprString
 	 * @return {@link Expression} AST representing the exprString
 	 */
-	Expression getExpression(String exprString) {
+	Expression getExpression(final String exprString) {
 		Expression e = TestASTProvider.parseFormulaString(exprString);
 		Assert.assertNotNull(e);
 		return e;

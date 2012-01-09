@@ -181,7 +181,10 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Invariant invariant)
+	 * Visit an {@link Invariant}.
+	 * 
+	 * @param invariant
+	 *                the Invariant to visit
 	 */
 	public void visit(final Invariant invariant) {
 		// begin-user-code

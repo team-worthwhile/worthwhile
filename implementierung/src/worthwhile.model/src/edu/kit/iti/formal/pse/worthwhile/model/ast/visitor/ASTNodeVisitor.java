@@ -9,11 +9,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
  */
 public abstract class ASTNodeVisitor {
 
-    private void throwUnsupportedASTNodeTypeException() {
-	throw new UnsupportedOperationException("Visitor cannot Handle this type of ASTNode!");
-    }
+	private void throwUnsupportedASTNodeTypeException() {
+		throw new UnsupportedOperationException("Visitor cannot Handle this type of ASTNode!");
+	}
 
-    public void visit(ASTNode node) {
-	this.throwUnsupportedASTNodeTypeException();
-    }
+	public void visit(ASTNode node) {
+		this.throwUnsupportedASTNodeTypeException();
+	}
 }

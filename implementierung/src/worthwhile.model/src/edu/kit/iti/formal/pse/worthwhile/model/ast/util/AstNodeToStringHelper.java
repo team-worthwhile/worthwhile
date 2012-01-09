@@ -59,7 +59,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		return AstNodeToStringHelper.singleton.buf.toString();
 	}
 
-	private void appendBinaryExpression(BinaryExpression binaryExpression, String operatorString) {
+	private void appendBinaryExpression(final BinaryExpression binaryExpression, final String operatorString) {
 		this.buf.append("(");
 		binaryExpression.getLeft().accept(this);
 		this.buf.append(" " + operatorString + " ");
@@ -91,7 +91,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(Assumption assumption) {
+	public void visit(final Assumption assumption) {
 		this.buf.append("_assume ");
 		assumption.getExpression().accept(this);
 	}

@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
@@ -30,17 +31,19 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
  */
 class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
-	 * The weakest precondition that implies the correctness of the remainder {@link Program}.
+	 * The stack of weakest preconditions that implies the correctness of the remainder {@link Block}.
 	 */
-	private Expression weakestPrecondition;
+	private Stack<Expression> weakestPreconditionStack;
+
+	public WPStrategy() {
+		this.weakestPreconditionStack = new Stack<Expression>();
+	}
 
 	/**
 	 * @return the weakestPrecondition
 	 */
 	public Expression getWeakestPrecondition() {
-		// begin-user-code
-		return this.weakestPrecondition;
-		// end-user-code
+		return this.weakestPreconditionStack.get(0);
 	}
 
 	/**
@@ -53,7 +56,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 		// initialize the weakest precondition to true
 		BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
 		trueLiteral.setValue(true);
-		this.weakestPrecondition = trueLiteral;
+		this.weakestPreconditionStack.push(trueLiteral);
 
 		/*
 		 * pass us as visitor from statement to statement:
@@ -65,7 +68,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 		 */
 		program.accept(this);
 
-		return this.weakestPrecondition;
+		return this.getWeakestPrecondition();
 	}
 
 	/**
@@ -73,9 +76,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	public void visit(Assertion assertion) {
 		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
-		conjunction.setRight(this.weakestPrecondition);
+		conjunction.setRight(this.weakestPreconditionStack.pop());
 		conjunction.setLeft(assertion.getExpression());
-		this.weakestPrecondition = conjunction;
+		this.weakestPreconditionStack.push(conjunction);
 	}
 
 	/**
@@ -83,13 +86,20 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
-		weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, assignment.getValue(),
-		        new VariableSubstitution.SubstituteCommand() {
-			        @Override
-			        void substitute() {
-				        WPStrategy.this.weakestPrecondition = assignment.getValue();
-			        }
-		        }));
+		this.getWeakestPrecondition().accept(
+		        new VariableSubstitution(variableDeclaration, assignment.getValue(),
+		                new VariableSubstitution.SubstituteCommand() {
+			                @Override
+			                void substitute() {
+				                /*
+								 * In case the current postcondition only consists of a VariableReference that has to be
+								 * replaced, substitute it directly
+								 */
+				                WPStrategy.this.weakestPreconditionStack.pop();
+				                WPStrategy.this.weakestPreconditionStack.push(assignment.getValue());
+			                }
+		                }));
+
 	}
 
 	/**
@@ -206,12 +216,18 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
 	 */
 	public void visit(final VariableDeclaration variableDeclaration) {
-		weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
-		        new VariableSubstitution.SubstituteCommand() {
-			        @Override
-			        void substitute() {
-				        WPStrategy.this.weakestPrecondition = variableDeclaration.getInitialValue();
-			        }
-		        }));
+		this.getWeakestPrecondition().accept(
+		        new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
+		                new VariableSubstitution.SubstituteCommand() {
+			                @Override
+			                void substitute() {
+				                /*
+								 * In case the current postcondition only consists of a VariableReference that has to be
+								 * replaced, substitute it directly
+								 */
+				                WPStrategy.this.weakestPreconditionStack.pop();
+				                WPStrategy.this.weakestPreconditionStack.push(variableDeclaration.getInitialValue());
+			                }
+		                }));
 	}
 }

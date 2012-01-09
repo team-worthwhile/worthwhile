@@ -5,4 +5,10 @@ Bundle-Version: 0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
  edu.kit.iti.formal.pse.worthwhile
+Import-Package: edu.kit.iti.formal.pse.worthwhile,
+ edu.kit.iti.formal.pse.worthwhile.model.ast,
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.xtext.resource,
+ com.google.inject
 Export-Package: edu.kit.iti.formal.pse.worthwhile.common.tests

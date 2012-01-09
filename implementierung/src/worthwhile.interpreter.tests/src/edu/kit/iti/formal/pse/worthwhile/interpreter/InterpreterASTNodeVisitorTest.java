@@ -4,7 +4,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-
 public class InterpreterASTNodeVisitorTest {
 
 	@Test
@@ -13,4 +12,3 @@ public class InterpreterASTNodeVisitorTest {
 		assertNotNull(v);
 	}
 }
-

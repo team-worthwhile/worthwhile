@@ -22,68 +22,68 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
  * 
  */
 class ASTNodeToStringHelper extends AstSwitch<String> {
-    @Override
-    public String caseASTNode(ASTNode aSTNode) {
-	return aSTNode.toString();
-    }
-
-    @Override
-    public String caseAssertion(Assertion assertion) {
-	return "_assert " + assertion.getExpression();
-    }
-
-    @Override
-    public String caseAssignment(Assignment assignment) {
-	return assignment.getVariable() + " := " + assignment.getValue();
-    }
-
-    @Override
-    public String caseBlock(Block block) {
-	StringBuffer buf = new StringBuffer();
-	for (Statement stmt : block.getStatements()) {
-	    buf.append(this.doSwitch(stmt) + "\n");
+	@Override
+	public String caseASTNode(ASTNode aSTNode) {
+		return aSTNode.toString();
 	}
-	return buf.toString();
-    }
 
-    @Override
-    public String caseBooleanLiteral(BooleanLiteral booleanLiteral) {
-	return String.valueOf(booleanLiteral.getValue());
-    }
+	@Override
+	public String caseAssertion(Assertion assertion) {
+		return "_assert " + assertion.getExpression();
+	}
 
-    @Override
-    public String caseConjunction(Conjunction conjunction) {
-	return this.doSwitch(conjunction.getLeft()) + " && " + this.doSwitch(conjunction.getRight());
-    }
+	@Override
+	public String caseAssignment(Assignment assignment) {
+		return assignment.getVariable() + " := " + assignment.getValue();
+	}
 
-    @Override
-    public String caseEqual(Equal equal) {
-	return this.doSwitch(equal.getLeft()) + " = " + this.doSwitch(equal.getRight());
-    }
+	@Override
+	public String caseBlock(Block block) {
+		StringBuffer buf = new StringBuffer();
+		for (Statement stmt : block.getStatements()) {
+			buf.append(this.doSwitch(stmt) + "\n");
+		}
+		return buf.toString();
+	}
 
-    @Override
-    public String caseIntegerLiteral(IntegerLiteral integerLiteral) {
-	return integerLiteral.getValue().toString();
-    }
+	@Override
+	public String caseBooleanLiteral(BooleanLiteral booleanLiteral) {
+		return String.valueOf(booleanLiteral.getValue());
+	}
 
-    @Override
-    public String caseIntegerType(IntegerType integerType) {
-	return "Integer";
-    }
+	@Override
+	public String caseConjunction(Conjunction conjunction) {
+		return this.doSwitch(conjunction.getLeft()) + " && " + this.doSwitch(conjunction.getRight());
+	}
 
-    @Override
-    public String caseProgram(Program program) {
-	return this.doSwitch(program.getMainBlock());
-    }
+	@Override
+	public String caseEqual(Equal equal) {
+		return this.doSwitch(equal.getLeft()) + " = " + this.doSwitch(equal.getRight());
+	}
 
-    @Override
-    public String caseVariableDeclaration(VariableDeclaration variableDeclaration) {
-	return variableDeclaration.getType() + " " + variableDeclaration.getName() + " := "
-		+ variableDeclaration.getInitialValue();
-    }
+	@Override
+	public String caseIntegerLiteral(IntegerLiteral integerLiteral) {
+		return integerLiteral.getValue().toString();
+	}
 
-    @Override
-    public String caseVariableReference(VariableReference variableReference) {
-	return variableReference.getVariable().getName();
-    }
+	@Override
+	public String caseIntegerType(IntegerType integerType) {
+		return "Integer";
+	}
+
+	@Override
+	public String caseProgram(Program program) {
+		return this.doSwitch(program.getMainBlock());
+	}
+
+	@Override
+	public String caseVariableDeclaration(VariableDeclaration variableDeclaration) {
+		return variableDeclaration.getType() + " " + variableDeclaration.getName() + " := "
+				+ variableDeclaration.getInitialValue();
+	}
+
+	@Override
+	public String caseVariableReference(VariableReference variableReference) {
+		return variableReference.getVariable().getName();
+	}
 }

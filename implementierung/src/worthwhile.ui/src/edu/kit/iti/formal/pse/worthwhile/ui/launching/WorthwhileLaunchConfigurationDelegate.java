@@ -5,10 +5,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
@@ -33,38 +31,38 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
  */
 public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
-    @Inject
-    private IResourceSetProvider resourceSetProvider; // TODO: This makes the debugger plugin depend on
-						      // xtext.ui, EMF and all sorts of horrible stuff
+	@Inject
+	private IResourceSetProvider resourceSetProvider; // TODO: This makes the debugger plugin depend on
+	                                                  // xtext.ui, EMF and all sorts of horrible stuff
 
-    @Override
-    public final void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
-	    final IProgressMonitor monitor) throws CoreException {
+	@Override
+	public final void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
+	                final IProgressMonitor monitor) throws CoreException {
 
-	// Get the file to execute from the launch configuration.
-	String path = configuration.getAttribute(WorthwhileLaunchConfigurationConstants.ATTR_PATH, "");
-	IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
+		// Get the file to execute from the launch configuration.
+		String path = configuration.getAttribute(WorthwhileLaunchConfigurationConstants.ATTR_PATH, "");
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
 
-	if (file == null) {
-	    DebugHelper.showError("The specified source file cannot be found.", null);
+		if (file == null) {
+			DebugHelper.showError("The specified source file cannot be found.", null);
+		}
+
+		// Load the model from the file
+		XtextResourceSet resourceSet = (XtextResourceSet) resourceSetProvider.get(file.getProject());
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true);
+		Resource resource = resourceSet.getResource(URI.createURI(path), true);
+
+		// Check if there are no parser errors
+		if (!resource.getErrors().isEmpty()) {
+			DebugHelper.showError("There are errors in the source file.", null);
+		}
+
+		// Create and run the interpreter.
+		Program program = (Program) resource.getContents().get(0);
+		final Interpreter interpreter = new Interpreter(program);
+
+		IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
+		launch.addDebugTarget(target);
 	}
-
-	// Load the model from the file
-	XtextResourceSet resourceSet = (XtextResourceSet) resourceSetProvider.get(file.getProject());
-	resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true);
-	Resource resource = resourceSet.getResource(URI.createURI(path), true);
-
-	// Check if there are no parser errors
-	if (!resource.getErrors().isEmpty()) {
-	    DebugHelper.showError("There are errors in the source file.", null);
-	}
-
-	// Create and run the interpreter.
-	Program program = (Program) resource.getContents().get(0);
-	final Interpreter interpreter = new Interpreter(program);
-
-	IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
-	launch.addDebugTarget(target);
-    }
 
 }

@@ -26,231 +26,232 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
  */
 public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDebugTarget {
 
-    /**
-     * The (only) thread a program execution consists of.
-     */
-    private IThread thread;
+	/**
+	 * The (only) thread a program execution consists of.
+	 */
+	private IThread thread;
 
-    /**
-     * The launch object that belongs to the execution of this program.
-     */
-    private ILaunch launch;
+	/**
+	 * The launch object that belongs to the execution of this program.
+	 */
+	private ILaunch launch;
 
-    /**
-     * The event listener that manages the debug events from the interpreter.
-     */
-    private AbstractDebugEventListener eventListener;
+	/**
+	 * The event listener that manages the debug events from the interpreter.
+	 */
+	private AbstractDebugEventListener eventListener;
 
-    /**
-     * The interpreter executing the program.
-     */
-    private Interpreter interpreter;
+	/**
+	 * The interpreter executing the program.
+	 */
+	private Interpreter interpreter;
 
-    /**
-     * Creates a new instance of the {@link WorthwhileDebugTarget} class.
-     * 
-     * @param launch
-     *            The launch object from which the program was launched.
-     * @param interpreter
-     *            The interpreter that runs the program.
-     */
-    public WorthwhileDebugTarget(final ILaunch launch, final Interpreter interpreter) {
-	super(null);
-	this.debugTarget = this;
+	/**
+	 * Creates a new instance of the {@link WorthwhileDebugTarget} class.
+	 * 
+	 * @param launch
+	 *                The launch object from which the program was launched.
+	 * @param interpreter
+	 *                The interpreter that runs the program.
+	 */
+	public WorthwhileDebugTarget(final ILaunch launch, final Interpreter interpreter) {
+		super(null);
+		this.debugTarget = this;
 
-	if (interpreter == null) {
-	    throw new IllegalArgumentException("Interpreter may not be null.");
+		if (interpreter == null) {
+			throw new IllegalArgumentException("Interpreter may not be null.");
+		}
+
+		this.launch = launch;
+
+		this.thread = new WorthwhileThread(this);
+
+		this.interpreter = interpreter;
+
+		// Register our event handler with the interpreter.
+		if (launch.getLaunchMode().equals("debug")) {
+			this.eventListener = new WorthwhileDebugEventListener(this);
+		} else {
+			this.eventListener = new WorthwhileRunEventListener(this);
+		}
+		interpreter.addDebugEventHandler(this.eventListener);
+
+		// Register ourselves as a breakpoint listener.
+		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
 	}
 
-	this.launch = launch;
-
-	this.thread = new WorthwhileThread(this);
-
-	this.interpreter = interpreter;
-
-	// Register our event handler with the interpreter.
-	if (launch.getLaunchMode().equals("debug")) {
-	    this.eventListener = new WorthwhileDebugEventListener(this);
-	} else {
-	    this.eventListener = new WorthwhileRunEventListener(this);
-	}
-	interpreter.addDebugEventHandler(this.eventListener);
-
-	// Register ourselves as a breakpoint listener.
-	DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
-    }
-
-    public final ILaunch doGetLaunch() {
-	return this.launch;
-    }
-
-    @Override
-    public final boolean canTerminate() {
-	return this.thread.canTerminate();
-    }
-
-    @Override
-    public final boolean isTerminated() {
-	return this.thread.isTerminated();
-    }
-
-    @Override
-    public final void terminate() throws DebugException {
-	this.thread.terminate();
-    }
-
-    @Override
-    public final boolean canResume() {
-	return this.thread.canResume();
-    }
-
-    @Override
-    public final boolean canSuspend() {
-	return this.thread.canSuspend();
-    }
-
-    @Override
-    public final boolean isSuspended() {
-	return this.thread.isSuspended();
-    }
-
-    @Override
-    public final void resume() throws DebugException {
-	this.thread.resume();
-    }
-
-    @Override
-    public final void suspend() throws DebugException {
-	this.thread.suspend();
-    }
-
-    @Override
-    public final void breakpointAdded(final IBreakpoint breakpoint) {
-	// TODO breakpoint.addToInterpreter()?
-	if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
-	    try {
-		this.interpreter.addBreakpoint(new LineBreakpoint(
-			((org.eclipse.debug.core.model.LineBreakpoint) breakpoint).getLineNumber()));
-	    } catch (CoreException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	    }
-	} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
-	    // TODO
-	}
-    }
-
-    @Override
-    public final void breakpointChanged(final IBreakpoint breakpoint, final IMarkerDelta delta) {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public final void breakpointRemoved(final IBreakpoint breakpoint, final IMarkerDelta delta) {
-	// TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public final boolean canDisconnect() {
-	return true;
-    }
-
-    @Override
-    public final void disconnect() throws DebugException {
-	this.interpreter.removeDebugEventHandler(this.eventListener);
-	// TODO isDisconnected
-    }
-
-    @Override
-    public final boolean isDisconnected() {
-	// TODO
-	return false;
-    }
-
-    @Override
-    public final IMemoryBlock getMemoryBlock(final long startAddress, final long length) throws DebugException {
-	return null;
-    }
-
-    @Override
-    public final boolean supportsStorageRetrieval() {
-	return false;
-    }
-
-    @Override
-    public final String getName() throws DebugException {
-	// TODO Auto-generated method stub
-	return null;
-    }
-
-    @Override
-    public final IProcess getProcess() {
-	return null;
-    }
-
-    @Override
-    public final IThread[] getThreads() throws DebugException {
-	return new IThread[] { this.thread };
-    }
-
-    @Override
-    public final boolean hasThreads() throws DebugException {
-	return true;
-    }
-
-    @Override
-    public final boolean supportsBreakpoint(final IBreakpoint breakpoint) {
-	// Support a breakpoint if its debug model equals the Worthwhile debug model
-	// and it is set in the program we are currently executing.
-	if (IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL.equals(breakpoint.getModelIdentifier())) {
-	    IMarker marker = breakpoint.getMarker();
-	    // TODO
+	public final ILaunch doGetLaunch() {
+		return this.launch;
 	}
 
-	return false;
-    }
-
-    /**
-     * Installs the breakpoints that have already registered before the execution of the program (as opposed to
-     * breakpoints added when the program is running).
-     */
-    private void installDeferredBreakpoints() {
-	IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
-		.getBreakpoints(IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL);
-
-	for (IBreakpoint breakpoint : breakpoints) {
-	    breakpointAdded(breakpoint);
+	@Override
+	public final boolean canTerminate() {
+		return this.thread.canTerminate();
 	}
-    }
 
-    /**
-     * Called when the interpreter has been started, before executing the first statement.
-     */
-    protected final void executionStarted() {
-	this.installDeferredBreakpoints();
-    }
-
-    /**
-     * Called when a breakpoint is hit.
-     */
-    protected final void breakpointHit() {
-	fireSuspendEvent(DebugEvent.BREAKPOINT);
-    }
-
-    /**
-     * Called when the interpreter terminates the execution.
-     */
-    protected final void executionTerminated() {
-	try {
-	    this.thread.terminate();
-	} catch (DebugException e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	@Override
+	public final boolean isTerminated() {
+		return this.thread.isTerminated();
 	}
-	DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);
-	fireTerminateEvent();
-    }
+
+	@Override
+	public final void terminate() throws DebugException {
+		this.thread.terminate();
+	}
+
+	@Override
+	public final boolean canResume() {
+		return this.thread.canResume();
+	}
+
+	@Override
+	public final boolean canSuspend() {
+		return this.thread.canSuspend();
+	}
+
+	@Override
+	public final boolean isSuspended() {
+		return this.thread.isSuspended();
+	}
+
+	@Override
+	public final void resume() throws DebugException {
+		this.thread.resume();
+	}
+
+	@Override
+	public final void suspend() throws DebugException {
+		this.thread.suspend();
+	}
+
+	@Override
+	public final void breakpointAdded(final IBreakpoint breakpoint) {
+		// TODO breakpoint.addToInterpreter()?
+		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
+			try {
+				this.interpreter.addBreakpoint(new LineBreakpoint(
+				                ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
+				                                .getLineNumber()));
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
+			// TODO
+		}
+	}
+
+	@Override
+	public final void breakpointChanged(final IBreakpoint breakpoint, final IMarkerDelta delta) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public final void breakpointRemoved(final IBreakpoint breakpoint, final IMarkerDelta delta) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public final boolean canDisconnect() {
+		return true;
+	}
+
+	@Override
+	public final void disconnect() throws DebugException {
+		this.interpreter.removeDebugEventHandler(this.eventListener);
+		// TODO isDisconnected
+	}
+
+	@Override
+	public final boolean isDisconnected() {
+		// TODO
+		return false;
+	}
+
+	@Override
+	public final IMemoryBlock getMemoryBlock(final long startAddress, final long length) throws DebugException {
+		return null;
+	}
+
+	@Override
+	public final boolean supportsStorageRetrieval() {
+		return false;
+	}
+
+	@Override
+	public final String getName() throws DebugException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public final IProcess getProcess() {
+		return null;
+	}
+
+	@Override
+	public final IThread[] getThreads() throws DebugException {
+		return new IThread[] { this.thread };
+	}
+
+	@Override
+	public final boolean hasThreads() throws DebugException {
+		return true;
+	}
+
+	@Override
+	public final boolean supportsBreakpoint(final IBreakpoint breakpoint) {
+		// Support a breakpoint if its debug model equals the Worthwhile debug model
+		// and it is set in the program we are currently executing.
+		if (IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL.equals(breakpoint.getModelIdentifier())) {
+			IMarker marker = breakpoint.getMarker();
+			// TODO
+		}
+
+		return false;
+	}
+
+	/**
+	 * Installs the breakpoints that have already registered before the execution of the program (as opposed to
+	 * breakpoints added when the program is running).
+	 */
+	private void installDeferredBreakpoints() {
+		IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
+		                .getBreakpoints(IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL);
+
+		for (IBreakpoint breakpoint : breakpoints) {
+			breakpointAdded(breakpoint);
+		}
+	}
+
+	/**
+	 * Called when the interpreter has been started, before executing the first statement.
+	 */
+	protected final void executionStarted() {
+		this.installDeferredBreakpoints();
+	}
+
+	/**
+	 * Called when a breakpoint is hit.
+	 */
+	protected final void breakpointHit() {
+		fireSuspendEvent(DebugEvent.BREAKPOINT);
+	}
+
+	/**
+	 * Called when the interpreter terminates the execution.
+	 */
+	protected final void executionTerminated() {
+		try {
+			this.thread.terminate();
+		} catch (DebugException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);
+		fireTerminateEvent();
+	}
 
 }

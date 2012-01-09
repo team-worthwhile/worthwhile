@@ -8,9 +8,9 @@ package edu.kit.iti.formal.pse.worthwhile.debugger.launching;
  */
 public interface WorthwhileLaunchConfigurationConstants {
 
-    /**
-     * The attribute that specifies the path of the file to execute.
-     */
-    String ATTR_PATH = "edu.kit.iti.formal.pse.worthwhile.debugger.launching.attributes.path";  
-    
+	/**
+	 * The attribute that specifies the path of the file to execute.
+	 */
+	String ATTR_PATH = "edu.kit.iti.formal.pse.worthwhile.debugger.launching.attributes.path";
+
 }

@@ -8,9 +8,9 @@ package edu.kit.iti.formal.pse.worthwhile.debugger;
  */
 public interface IWorthwhileDebugConstants {
 
-    /**
-     * A unique identifier for the debug model provided by thie plug-in.
-     */
-    String ID_WORTHWHILE_DEBUG_MODEL = "edu.kit.iti.formal.pse.worthwhile";
+	/**
+	 * A unique identifier for the debug model provided by thie plug-in.
+	 */
+	String ID_WORTHWHILE_DEBUG_MODEL = "edu.kit.iti.formal.pse.worthwhile";
 
 }

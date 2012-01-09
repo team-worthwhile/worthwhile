@@ -12,34 +12,34 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
  */
 public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
-    public WorthwhileDebugEventListener(final WorthwhileDebugTarget debugTarget) {
-	super(debugTarget);
-    }
+	public WorthwhileDebugEventListener(final WorthwhileDebugTarget debugTarget) {
+		super(debugTarget);
+	}
 
-    @Override
-    public final void executionFailed(final Statement statement, final InterpreterError error) {
-	
-    }
+	@Override
+	public final void executionFailed(final Statement statement, final InterpreterError error) {
 
-    @Override
-    public final void executionCompleted() {
-	getDebugTarget().executionTerminated();
-    }
+	}
 
-    @Override
-    public final void executionStarted() {
-	getDebugTarget().executionStarted();
-    }
+	@Override
+	public final void executionCompleted() {
+		getDebugTarget().executionTerminated();
+	}
 
-    @Override
-    public void statementWillExecute(final Statement statement) {
-	// TODO Auto-generated method stub
-    }
+	@Override
+	public final void executionStarted() {
+		getDebugTarget().executionStarted();
+	}
 
-    @Override
-    public final void breakpointReached(final Statement statement, final LineBreakpoint breakpoint) {
-	// Just ignore the breakpoint
-	return;
-    }
+	@Override
+	public void statementWillExecute(final Statement statement) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public final void breakpointReached(final Statement statement, final LineBreakpoint breakpoint) {
+		// Just ignore the breakpoint
+		return;
+	}
 
 }

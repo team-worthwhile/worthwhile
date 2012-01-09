@@ -10,13 +10,13 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
  */
 public class NewWorthwhileProjectWizardPage extends WizardNewProjectCreationPage {
 
-    /**
-     * Creates a new instance of the {@link NewWorthwhileProjectWizardPage} class.
-     */
-    public NewWorthwhileProjectWizardPage() {
-	super("NewWorthwhileProjectWizardPage");
-	setTitle("Worthwhile Project");
-	setDescription("Creates a new Worthwhile Project");
-    }
+	/**
+	 * Creates a new instance of the {@link NewWorthwhileProjectWizardPage} class.
+	 */
+	public NewWorthwhileProjectWizardPage() {
+		super("NewWorthwhileProjectWizardPage");
+		setTitle("Worthwhile Project");
+		setDescription("Creates a new Worthwhile Project");
+	}
 
 }

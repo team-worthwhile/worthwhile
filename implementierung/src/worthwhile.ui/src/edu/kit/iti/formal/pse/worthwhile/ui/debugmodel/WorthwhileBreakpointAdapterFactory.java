@@ -12,19 +12,19 @@ import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
  */
 public class WorthwhileBreakpointAdapterFactory implements IAdapterFactory {
 
-    @SuppressWarnings("rawtypes")
-    @Override
-    public final Object getAdapter(final Object adaptableObject, final Class adapterType) {
-	if (adaptableObject instanceof WorthwhileEditor) {
-	    return new WorthwhileLineBreakpointAdapter();
+	@SuppressWarnings("rawtypes")
+	@Override
+	public final Object getAdapter(final Object adaptableObject, final Class adapterType) {
+		if (adaptableObject instanceof WorthwhileEditor) {
+			return new WorthwhileLineBreakpointAdapter();
+		}
+		return null;
 	}
-	return null;
-    }
 
-    @SuppressWarnings("rawtypes")
-    @Override
-    public final Class[] getAdapterList() {
-	return new Class[] {WorthwhileLineBreakpointAdapter.class};
-    }
+	@SuppressWarnings("rawtypes")
+	@Override
+	public final Class[] getAdapterList() {
+		return new Class[] { WorthwhileLineBreakpointAdapter.class };
+	}
 
 }

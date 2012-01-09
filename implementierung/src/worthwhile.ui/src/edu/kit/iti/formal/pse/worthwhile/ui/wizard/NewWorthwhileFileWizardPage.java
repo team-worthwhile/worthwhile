@@ -11,17 +11,17 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
  */
 public class NewWorthwhileFileWizardPage extends WizardNewFileCreationPage {
 
-    /**
-     * Creates a new instance of the {@link NewWorthwhileFileWizardPage} class.
-     * 
-     * @param selection
-     *            The current selection in the workbench.
-     */
-    public NewWorthwhileFileWizardPage(final IStructuredSelection selection) {
-	super("NewWorthwhileFileWizardPage", selection);
-	setTitle("Worthwhile File");
-	setDescription("Creates a new Worthwhile File");
-	setFileExtension("ww");
-    }
+	/**
+	 * Creates a new instance of the {@link NewWorthwhileFileWizardPage} class.
+	 * 
+	 * @param selection
+	 *                The current selection in the workbench.
+	 */
+	public NewWorthwhileFileWizardPage(final IStructuredSelection selection) {
+		super("NewWorthwhileFileWizardPage", selection);
+		setTitle("Worthwhile File");
+		setDescription("Creates a new Worthwhile File");
+		setFileExtension("ww");
+	}
 
 }

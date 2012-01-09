@@ -7,16 +7,16 @@ import org.eclipse.ui.IEditorPart;
 
 public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 
-    @Override
-    public void launch(final ISelection selection, final String mode) {
-	// TODO Auto-generated method stub
-	System.out.println("launching selection");
-    }
+	@Override
+	public void launch(final ISelection selection, final String mode) {
+		// TODO Auto-generated method stub
+		System.out.println("launching selection");
+	}
 
-    @Override
-    public void launch(final IEditorPart editor, final String mode) {
-	IFile file = (IFile) editor.getEditorInput().getAdapter(IFile.class);
-	file.getFullPath();
-    }
+	@Override
+	public void launch(final IEditorPart editor, final String mode) {
+		IFile file = (IFile) editor.getEditorInput().getAdapter(IFile.class);
+		file.getFullPath();
+	}
 
 }

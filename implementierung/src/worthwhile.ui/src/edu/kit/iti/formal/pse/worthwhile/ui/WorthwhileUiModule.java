@@ -13,34 +13,34 @@ import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
 /**
  * Registers components to be used within the IDE.
  */
-public class WorthwhileUiModule extends
-	edu.kit.iti.formal.pse.worthwhile.ui.AbstractWorthwhileUiModule {
+public class WorthwhileUiModule extends edu.kit.iti.formal.pse.worthwhile.ui.AbstractWorthwhileUiModule {
 
-    /**
-     * Creates a new instance of the {@link WorthwhileUiModule} class.
-     * 
-     * @param plugin
-     *            The UI plugin.
-     */
-    public WorthwhileUiModule(final AbstractUIPlugin plugin) {
-	super(plugin);
-    }
+	/**
+	 * Creates a new instance of the {@link WorthwhileUiModule} class.
+	 * 
+	 * @param plugin
+	 *                The UI plugin.
+	 */
+	public WorthwhileUiModule(final AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
-    /**
-     * Provides an editor part.
-     * 
-     * @return An editor part.
-     */
-    public final Class<? extends XtextEditor> bindEditor() {
-	return WorthwhileEditor.class;
-    }
+	/**
+	 * Provides an editor part.
+	 * 
+	 * @return An editor part.
+	 */
+	public final Class<? extends XtextEditor> bindEditor() {
+		return WorthwhileEditor.class;
+	}
 
-    /**
-     * Provides an auto edit strategy provider.
-     * 
-     * @return An edit strategy provider instance.
-     */
-    public final Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
-	return WorthwhileAutoEditStrategyProvider.class;
-    }
+	/**
+	 * Provides an auto edit strategy provider.
+	 * 
+	 * @return An edit strategy provider instance.
+	 */
+	@Override
+	public final Class<? extends AbstractEditStrategyProvider> bindAbstractEditStrategyProvider() {
+		return WorthwhileAutoEditStrategyProvider.class;
+	}
 }

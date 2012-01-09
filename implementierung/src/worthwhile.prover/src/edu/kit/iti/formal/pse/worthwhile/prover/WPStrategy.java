@@ -116,10 +116,12 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
      * @see ASTNodeVisitor#visit(Block block)
      */
     public void visit(Block block) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
+	// visit all block statements in the order they were parsed reversed
+	List<Statement> stmts = new ArrayList<Statement>(block.getStatements());
+	Collections.reverse(stmts);
+	for (Statement stmt : stmts) {
+	    stmt.accept(this);
+	}
     }
 
     /**
@@ -186,12 +188,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
      * @see ASTNodeVisitor#visit(Program program)
      */
     public void visit(Program program) {
-	// visit all main block statements in the order they were parsed reversed
-	List<Statement> stmts = new ArrayList<Statement>(program.getMainBlock().getStatements());
-	Collections.reverse(stmts);
-	for (Statement stmt : stmts) {
-	    stmt.accept(this);
-	}
+	// visit program's main block
+	program.getMainBlock().accept(this);
     }
 
     /**

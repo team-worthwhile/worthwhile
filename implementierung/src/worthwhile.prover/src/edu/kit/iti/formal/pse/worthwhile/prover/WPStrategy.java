@@ -35,6 +35,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	private Stack<Expression> weakestPreconditionStack;
 
+	/**
+	 * Construct a new weakest precondition strategy object.
+	 */
 	public WPStrategy() {
 		this.weakestPreconditionStack = new Stack<Expression>();
 	}
@@ -52,7 +55,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 * @return the weakest precondition that implies the correctness of <code>program</code>
 	 * @see FormulaGenerator#transformProgram(Program program)
 	 */
-	public Expression transformProgram(Program program) {
+	public Expression transformProgram(final Program program) {
 		// initialize the weakest precondition to true
 		BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
 		trueLiteral.setValue(true);
@@ -74,7 +77,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Assertion assertion)
 	 */
-	public void visit(Assertion assertion) {
+	public void visit(final Assertion assertion) {
 		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
 		conjunction.setRight(this.weakestPreconditionStack.pop());
 		conjunction.setLeft(assertion.getExpression());
@@ -105,7 +108,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Assumption assumption)
 	 */
-	public void visit(Assumption assumption) {
+	public void visit(final Assumption assumption) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -115,7 +118,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Axiom axiom)
 	 */
-	public void visit(Axiom axiom) {
+	public void visit(final Axiom axiom) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -125,7 +128,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Block block)
 	 */
-	public void visit(Block block) {
+	public void visit(final Block block) {
 		// visit all block statements in the order they were parsed reversed
 		List<Statement> stmts = new ArrayList<Statement>(block.getStatements());
 		Collections.reverse(stmts);
@@ -137,7 +140,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Conditional conditional)
 	 */
-	public void visit(Conditional conditional) {
+	public void visit(final Conditional conditional) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -147,7 +150,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
 	 */
-	public void visit(FunctionDeclaration functionDeclaration) {
+	public void visit(final FunctionDeclaration functionDeclaration) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -157,7 +160,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Invariant invariant)
 	 */
-	public void visit(Invariant invariant) {
+	public void visit(final Invariant invariant) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -167,7 +170,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Loop loop)
 	 */
-	public void visit(Loop loop) {
+	public void visit(final Loop loop) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -177,7 +180,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
 	 */
-	public void visit(Postcondition postcondition) {
+	public void visit(final Postcondition postcondition) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -187,7 +190,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Precondition precondition)
 	 */
-	public void visit(Precondition precondition) {
+	public void visit(final Precondition precondition) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -197,7 +200,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * @see ASTNodeVisitor#visit(Program program)
 	 */
-	public void visit(Program program) {
+	public void visit(final Program program) {
 		// visit program's main block
 		program.getMainBlock().accept(this);
 	}

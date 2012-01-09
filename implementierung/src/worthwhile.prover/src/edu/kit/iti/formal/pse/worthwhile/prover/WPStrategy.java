@@ -75,7 +75,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Assertion assertion)
+	 * Visit a {@link Assertion}.
+	 * 
+	 * @param assertion the {@link Assertion} to visit
 	 */
 	public void visit(final Assertion assertion) {
 		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
@@ -85,7 +87,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Assignment assignment)
+	 * Visit a {@link Assignment} to generate the weakest precondition.
+	 * 
+	 * @param assignment the {@link Assignment} to visit
 	 */
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
@@ -106,7 +110,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Assumption assumption)
+	 * Visit a {@link Assumption}.
+	 * 
+	 * @param assumption the {@link Assumption} to visit
 	 */
 	public void visit(final Assumption assumption) {
 		// begin-user-code
@@ -116,7 +122,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Axiom axiom)
+	 * Visit a {@link Axiom}.
+	 * 
+	 * @param axiom the {@link Axiom} to visit
 	 */
 	public void visit(final Axiom axiom) {
 		// begin-user-code
@@ -126,7 +134,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Block block)
+	 * Visit a {@link Block} to generate the weakest precondition.
+	 * 
+	 * @param block the {@link Block} to visit
 	 */
 	public void visit(final Block block) {
 		// visit all block statements in the order they were parsed reversed
@@ -138,7 +148,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Conditional conditional)
+	 * Visit a {@link Conditional} to generate the weakest precondition.
+	 * 
+	 * @param conditional the {@link Conditional} to visit
 	 */
 	public void visit(final Conditional conditional) {
 		// begin-user-code
@@ -148,7 +160,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
+	 * Visit a {@link FunctionDeclaration}.
+	 * 
+	 * @param functionDeclaration the {@link FunctionDeclaration} to visit
 	 */
 	public void visit(final FunctionDeclaration functionDeclaration) {
 		// begin-user-code
@@ -168,7 +182,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Loop loop)
+	 * Visit a {@link Loop} to generate the weakest precondition.
+	 * 
+	 * @param loop the {@link Loop} to visit
 	 */
 	public void visit(final Loop loop) {
 		// begin-user-code
@@ -178,7 +194,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
+	 * Visit a {@link Postcondition}.
+	 * 
+	 * @param postcondition the {@link Postcondition} to visit
 	 */
 	public void visit(final Postcondition postcondition) {
 		// begin-user-code
@@ -188,7 +206,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Precondition precondition)
+	 * Visit a {@link Precondition}.
+	 * 
+	 * @param precondition the {@link Precondition} to visit
 	 */
 	public void visit(final Precondition precondition) {
 		// begin-user-code
@@ -198,7 +218,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Program program)
+	 * Visit a {@link Program} to generate the weakest precondition.
+	 * 
+	 * @param program the {@link Program} to visit
 	 */
 	public void visit(final Program program) {
 		// visit program's main block
@@ -206,9 +228,11 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
+	 * Visit a {@link ReturnStatement}.
+	 * 
+	 * @param returnStatement the {@link ReturnStatement} to visit
 	 */
-	public void visit(ReturnStatement returnStatement) {
+	public void visit(final ReturnStatement returnStatement) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
@@ -216,7 +240,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
+	 * Visit a {@link VariableDeclaration} to generate the weakest precondition.
+	 * 
+	 * @param variableDeclaration the {@link VariableDeclaration} to visit
 	 */
 	public void visit(final VariableDeclaration variableDeclaration) {
 		this.getWeakestPrecondition().accept(

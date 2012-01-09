@@ -8,5 +8,5 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  * for all possible interpretations.
  */
 public enum Validity {
-    VALID, INVALID, UNKNOWN
+	VALID, INVALID, UNKNOWN
 }

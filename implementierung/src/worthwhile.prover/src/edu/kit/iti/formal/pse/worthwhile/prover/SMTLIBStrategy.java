@@ -61,415 +61,415 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 // compile expressions!
 class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 
-    private final Stack<String> compileStack = new Stack<String>();
+	private final Stack<String> compileStack = new Stack<String>();
 
-    /**
-     * @see FormulaCompiler#compileFormula(Expression formula)
-     */
-    @Override
-    public String compileFormula(Expression formula) {
-	// this should push a String object to the compilation stack
-	formula.accept(this);
-	String formulaString = this.compileStack.pop();
+	/**
+	 * @see FormulaCompiler#compileFormula(Expression formula)
+	 */
+	@Override
+	public String compileFormula(Expression formula) {
+		// this should push a String object to the compilation stack
+		formula.accept(this);
+		String formulaString = this.compileStack.pop();
 
-	// wrap the formulaString in a command for the prover that tells the prover
-	// what we want to know about the formula
-	// TODO: Make this more intelligent, maybe wrap the Expression in an
-	// Assert and then visit it just like all the other nodes...?
-	return "(assert " + formulaString + ")\n(check-sat)";
-    }
-
-    private void pushBinaryOperation(BinaryExpression binaryExpression, String compiledOperationSymbol) {
-	binaryExpression.getLeft().accept(this);
-	binaryExpression.getRight().accept(this);
-	String right = this.compileStack.pop();
-	String left = this.compileStack.pop();
-	this.compileStack.push("(" + compiledOperationSymbol + " " + left + " " + right + ")");
-    }
-
-    private void pushUnaryOperation(UnaryExpression unaryExpression, String compiledOperationSymbol) {
-	unaryExpression.getOperand().accept(this);
-	String operand = this.compileStack.pop();
-	this.compileStack.push("(" + compiledOperationSymbol + " " + operand + ")");
-    }
-
-    public void visit(Addition addition) {
-	this.pushBinaryOperation(addition, "+");
-    }
-
-    public void visit(ArrayAccess arrayAccess) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(ArrayLength arrayLength) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(ArrayLiteral arrayLiteral) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(ArrayType arrayType) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(Assertion assertion) {
-	assertion.getExpression().accept(this);
-	String expr = this.compileStack.pop();
-	this.compileStack.push("assert(" + expr + ")");
-    }
-
-    public void visit(Assignment assignment) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(Assumption assumption) {
-	assumption.getExpression().accept(this);
-	String expr = this.compileStack.pop();
-	this.compileStack.push("assume(" + expr + ")");
-    }
-
-    public void visit(Axiom axiom) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(Block block) {
-	// begin-user-code
-	// TODO Auto-generated method stub
-
-	// end-user-code
-    }
-
-    public void visit(BooleanLiteral booleanLiteral) {
-	if (booleanLiteral.getValue()) {
-	    this.compileStack.push("true");
-	} else {
-	    this.compileStack.push("false");
+		// wrap the formulaString in a command for the prover that tells the prover
+		// what we want to know about the formula
+		// TODO: Make this more intelligent, maybe wrap the Expression in an
+		// Assert and then visit it just like all the other nodes...?
+		return "(assert " + formulaString + ")\n(check-sat)";
 	}
-    }
 
-    public void visit(BooleanType booleanType) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	private void pushBinaryOperation(BinaryExpression binaryExpression, String compiledOperationSymbol) {
+		binaryExpression.getLeft().accept(this);
+		binaryExpression.getRight().accept(this);
+		String right = this.compileStack.pop();
+		String left = this.compileStack.pop();
+		this.compileStack.push("(" + compiledOperationSymbol + " " + left + " " + right + ")");
+	}
 
-	// end-user-code
-    }
+	private void pushUnaryOperation(UnaryExpression unaryExpression, String compiledOperationSymbol) {
+		unaryExpression.getOperand().accept(this);
+		String operand = this.compileStack.pop();
+		this.compileStack.push("(" + compiledOperationSymbol + " " + operand + ")");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Conditional conditional)
-     */
-    public void visit(Conditional conditional) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	public void visit(Addition addition) {
+		this.pushBinaryOperation(addition, "+");
+	}
 
-	// end-user-code
-    }
+	public void visit(ArrayAccess arrayAccess) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Conjunction conjunction)
-     */
-    public void visit(Conjunction conjunction) {
-	this.pushBinaryOperation(conjunction, "and");
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Disjunction disjunction)
-     */
-    public void visit(Disjunction disjunction) {
-	this.pushBinaryOperation(disjunction, "or");
-    }
+	public void visit(ArrayLength arrayLength) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Division division)
-     */
-    public void visit(Division division) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+		// end-user-code
+	}
 
-	// end-user-code
-    }
+	public void visit(ArrayLiteral arrayLiteral) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Equal equal)
-     */
-    public void visit(Equal equal) {
-	this.pushBinaryOperation(equal, "=");
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Equivalence equivalence)
-     */
-    public void visit(Equivalence equivalence) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	public void visit(ArrayType arrayType) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
-     */
-    public void visit(ExistsQuantifier existsQuantifier) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	public void visit(Assertion assertion) {
+		assertion.getExpression().accept(this);
+		String expr = this.compileStack.pop();
+		this.compileStack.push("assert(" + expr + ")");
+	}
 
-	// end-user-code
-    }
+	public void visit(Assignment assignment) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
-     */
-    public void visit(ForAllQuantifier forAllQuantifier) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+		// end-user-code
+	}
 
-	// end-user-code
-    }
+	public void visit(Assumption assumption) {
+		assumption.getExpression().accept(this);
+		String expr = this.compileStack.pop();
+		this.compileStack.push("assume(" + expr + ")");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(FunctionCall functionCall)
-     */
-    public void visit(FunctionCall functionCall) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	public void visit(Axiom axiom) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
-     */
-    public void visit(FunctionDeclaration functionDeclaration) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	public void visit(Block block) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Greater greater)
-     */
-    public void visit(Greater greater) {
-	this.pushBinaryOperation(greater, ">");
-    }
+	public void visit(BooleanLiteral booleanLiteral) {
+		if (booleanLiteral.getValue()) {
+			this.compileStack.push("true");
+		} else {
+			this.compileStack.push("false");
+		}
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
-     */
-    public void visit(GreaterOrEqual greaterOrEqual) {
-	this.pushBinaryOperation(greaterOrEqual, ">=");
-    }
+	public void visit(BooleanType booleanType) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Implication implication)
-     */
-    public void visit(Implication implication) {
-	this.pushBinaryOperation(implication, "=>");
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
-     */
-    public void visit(IntegerLiteral integerLiteral) {
-	this.compileStack.push(integerLiteral.getValue().toString());
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Conditional conditional)
+	 */
+	public void visit(Conditional conditional) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(IntegerType integerType)
-     */
-    public void visit(IntegerType integerType) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+		// end-user-code
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Conjunction conjunction)
+	 */
+	public void visit(Conjunction conjunction) {
+		this.pushBinaryOperation(conjunction, "and");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Invariant invariant)
-     */
-    public void visit(Invariant invariant) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Disjunction disjunction)
+	 */
+	public void visit(Disjunction disjunction) {
+		this.pushBinaryOperation(disjunction, "or");
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Division division)
+	 */
+	public void visit(Division division) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Less less)
-     */
-    public void visit(Less less) {
-	this.pushBinaryOperation(less, "<");
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
-     */
-    public void visit(LessOrEqual lessOrEqual) {
-	this.pushBinaryOperation(lessOrEqual, "<=");
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Equal equal)
+	 */
+	public void visit(Equal equal) {
+		this.pushBinaryOperation(equal, "=");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Loop loop)
-     */
-    public void visit(Loop loop) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
+	 */
+	public void visit(Equivalence equivalence) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Minus minus)
-     */
-    public void visit(Minus minus) {
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
+	 */
+	public void visit(ExistsQuantifier existsQuantifier) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    public void visit(Modulus modulus) {
-	this.pushBinaryOperation(modulus, "mod");
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Multiplication multiplication)
-     */
-    public void visit(Multiplication multiplication) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
+	 */
+	public void visit(ForAllQuantifier forAllQuantifier) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Negation negation)
-     */
-    public void visit(Negation negation) {
-	this.pushUnaryOperation(negation, "not");
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(FunctionCall functionCall)
+	 */
+	public void visit(FunctionCall functionCall) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Object variableReference)
-     */
-    public void visit(Object variableReference) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+		// end-user-code
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
+	 */
+	public void visit(FunctionDeclaration functionDeclaration) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-    /**
-     * @see ASTNodeVisitor#visit(Plus plus)
-     */
-    public void visit(Plus plus) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+		// end-user-code
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Greater greater)
+	 */
+	public void visit(Greater greater) {
+		this.pushBinaryOperation(greater, ">");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Postcondition postcondition)
-     */
-    public void visit(Postcondition postcondition) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
+	 */
+	public void visit(GreaterOrEqual greaterOrEqual) {
+		this.pushBinaryOperation(greaterOrEqual, ">=");
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Implication implication)
+	 */
+	public void visit(Implication implication) {
+		this.pushBinaryOperation(implication, "=>");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Predicates predicates)
-     */
-    /*
-     * public void visit(Predicates predicates) { // begin-user-code // TODO Auto-generated method stub
-     * 
-     * // end-user-code }
-     */
+	/**
+	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
+	 */
+	public void visit(IntegerLiteral integerLiteral) {
+		this.compileStack.push(integerLiteral.getValue().toString());
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Precondition precondition)
-     */
-    public void visit(Precondition precondition) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(IntegerType integerType)
+	 */
+	public void visit(IntegerType integerType) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Program program)
-     */
-    public void visit(Program program) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Invariant invariant)
+	 */
+	public void visit(Invariant invariant) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
-     */
-    public void visit(QuantifiedExpression quantifiedExpression) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Less less)
+	 */
+	public void visit(Less less) {
+		this.pushBinaryOperation(less, "<");
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
+	 */
+	public void visit(LessOrEqual lessOrEqual) {
+		this.pushBinaryOperation(lessOrEqual, "<=");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
-     */
-    public void visit(ReturnStatement returnStatement) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Loop loop)
+	 */
+	public void visit(Loop loop) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Subtraction subtraction)
-     */
-    public void visit(Subtraction subtraction) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Minus minus)
+	 */
+	public void visit(Minus minus) {
+	}
 
-	// end-user-code
-    }
+	public void visit(Modulus modulus) {
+		this.pushBinaryOperation(modulus, "mod");
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(Unequal unequal)
-     */
-    public void visit(Unequal unequal) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
+	 */
+	public void visit(Multiplication multiplication) {
+		// begin-user-code
+		// TODO Auto-generated method stub
 
-	// end-user-code
-    }
+		// end-user-code
+	}
 
-    /**
-     * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
-     */
-    public void visit(VariableDeclaration variableDecleration) {
-	// begin-user-code
-	// TODO Auto-generated method stub
+	/**
+	 * @see ASTNodeVisitor#visit(Negation negation)
+	 */
+	public void visit(Negation negation) {
+		this.pushUnaryOperation(negation, "not");
+	}
 
-	// end-user-code
-    }
+	/**
+	 * @see ASTNodeVisitor#visit(Object variableReference)
+	 */
+	public void visit(Object variableReference) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(Plus plus)
+	 */
+	public void visit(Plus plus) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
+	 */
+	public void visit(Postcondition postcondition) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(Predicates predicates)
+	 */
+	/*
+	 * public void visit(Predicates predicates) { // begin-user-code // TODO Auto-generated method stub
+	 * 
+	 * // end-user-code }
+	 */
+
+	/**
+	 * @see ASTNodeVisitor#visit(Precondition precondition)
+	 */
+	public void visit(Precondition precondition) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(Program program)
+	 */
+	public void visit(Program program) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
+	 */
+	public void visit(QuantifiedExpression quantifiedExpression) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
+	 */
+	public void visit(ReturnStatement returnStatement) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(Subtraction subtraction)
+	 */
+	public void visit(Subtraction subtraction) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(Unequal unequal)
+	 */
+	public void visit(Unequal unequal) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
+
+	/**
+	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
+	 */
+	public void visit(VariableDeclaration variableDecleration) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+	}
 
 }

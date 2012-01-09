@@ -8,5 +8,5 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  * so that it is true.
  */
 public enum FormulaSatisfiability {
-    SATISFIABLE, UNSATISFIABLE, UNKOWN
+	SATISFIABLE, UNSATISFIABLE, UNKOWN
 }

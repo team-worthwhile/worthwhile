@@ -60,7 +60,7 @@ public final class TransformProgramTest {
 		if (!ASTNodeEqualator.equal(this.getExpression("0 = 1 && true"), result)) {
 			AstSwitch<?> toString = new ASTNodeToStringHelper();
 			Assert.fail("expected: " + toString.doSwitch(this.getExpression("0 = 1 && true")) + " was: "
-					+ toString.doSwitch(result));
+			        + toString.doSwitch(result));
 		}
 	}
 }

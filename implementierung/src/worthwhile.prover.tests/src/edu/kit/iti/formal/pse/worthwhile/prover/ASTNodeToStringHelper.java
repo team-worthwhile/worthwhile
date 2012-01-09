@@ -79,7 +79,7 @@ class ASTNodeToStringHelper extends AstSwitch<String> {
 	@Override
 	public String caseVariableDeclaration(VariableDeclaration variableDeclaration) {
 		return variableDeclaration.getType() + " " + variableDeclaration.getName() + " := "
-				+ variableDeclaration.getInitialValue();
+		        + variableDeclaration.getInitialValue();
 	}
 
 	@Override

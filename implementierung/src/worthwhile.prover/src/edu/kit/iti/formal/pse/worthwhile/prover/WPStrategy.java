@@ -84,12 +84,12 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
 		weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, assignment.getValue(),
-				new VariableSubstitution.SubstituteCommand() {
-			@Override
-			void substitute() {
-				WPStrategy.this.weakestPrecondition = assignment.getValue();
-			}
-		}));
+		        new VariableSubstitution.SubstituteCommand() {
+			        @Override
+			        void substitute() {
+				        WPStrategy.this.weakestPrecondition = assignment.getValue();
+			        }
+		        }));
 	}
 
 	/**
@@ -207,11 +207,11 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	public void visit(final VariableDeclaration variableDeclaration) {
 		weakestPrecondition.accept(new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
-				new VariableSubstitution.SubstituteCommand() {
-			@Override
-			void substitute() {
-				WPStrategy.this.weakestPrecondition = variableDeclaration.getInitialValue();
-			}
-		}));
+		        new VariableSubstitution.SubstituteCommand() {
+			        @Override
+			        void substitute() {
+				        WPStrategy.this.weakestPrecondition = variableDeclaration.getInitialValue();
+			        }
+		        }));
 	}
 }

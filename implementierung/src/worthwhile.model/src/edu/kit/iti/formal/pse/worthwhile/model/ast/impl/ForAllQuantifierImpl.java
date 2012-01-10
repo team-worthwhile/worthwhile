@@ -8,6 +8,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -38,6 +39,17 @@ public class ForAllQuantifierImpl extends QuantifiedExpressionImpl implements Fo
 	@Override
 	protected EClass eStaticClass() {
 		return AstPackage.Literals.FOR_ALL_QUANTIFIER;
+	}
+	
+	/**
+	 * Accept a visitor to this ForAllQuantifier.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //ForAllQuantifierImpl

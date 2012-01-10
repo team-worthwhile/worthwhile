@@ -24,6 +24,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -424,6 +425,17 @@ public class FunctionDeclarationImpl extends ASTNodeImpl implements FunctionDecl
 		result.append(name);
 		result.append(')');
 		return result.toString();
+	}
+	
+	/**
+	 * Accept a visitor to this FunctionDeclaration.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //FunctionDeclarationImpl

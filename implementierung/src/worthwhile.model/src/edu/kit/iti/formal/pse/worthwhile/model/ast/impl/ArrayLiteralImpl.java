@@ -9,6 +9,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import java.util.Collection;
 
@@ -131,6 +132,17 @@ public class ArrayLiteralImpl extends LiteralImpl implements ArrayLiteral {
 				return values != null && !values.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * Accept a visitor to this ArrayLiteral.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //ArrayLiteralImpl

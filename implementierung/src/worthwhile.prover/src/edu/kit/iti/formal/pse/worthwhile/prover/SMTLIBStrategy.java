@@ -51,6 +51,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
@@ -356,9 +357,9 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Object variableReference)
+	 * @see ASTNodeVisitor#visit(VariableReference variableReference)
 	 */
-	public void visit(Object variableReference) {
+	public void visit(VariableReference variableReference) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 

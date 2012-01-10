@@ -108,4 +108,20 @@ public final class TransformProgramTest {
 
 		assertASTNodeEqual(expected, result);
 	}
+
+	/**
+	 * Test the transformation of {@link Assumption}s.
+	 */
+	@Test
+	public void assumptionRule() {
+		Program p = this.getProgram("Integer x := 1\n_assume x = 0\n_assert x = 10\n");
+		Expression result = this.transformer.transformProgram(p);
+
+		// getExpression cannot be used to build expected because `=>' is no valid Worthwhile operator
+		Implication expected = AstFactory.init().createImplication();
+		expected.setLeft(this.getExpression("1 = 0"));
+		expected.setRight(this.getExpression("1 = 10 && true"));
+
+		assertASTNodeEqual(expected, result);
+	}
 }

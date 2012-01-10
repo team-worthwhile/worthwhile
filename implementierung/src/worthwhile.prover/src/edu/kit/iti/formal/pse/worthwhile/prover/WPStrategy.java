@@ -120,16 +120,26 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * Visit a {@link Assumption}.
+	 * Visit an {@link Assumption}.
+	 * 
+	 * <code><pre>
+	 * _assume assumption
+	 * </pre></code>
+	 * 
+	 * to
+	 * 
+	 * <code><pre>
+	 * assumption => wp
+	 * </pre></code>
 	 * 
 	 * @param assumption
-	 *                the {@link Assumption} to visit
+	 *                the <code>Assumption</code> to visit
 	 */
 	public void visit(final Assumption assumption) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		Implication implication = AstFactory.init().createImplication();
+		implication.setLeft(AstNodeCloneHelper.clone(assumption.getExpression()));
+		implication.setRight(this.weakestPreconditionStack.pop());
+		this.weakestPreconditionStack.push(implication);
 	}
 
 	/**

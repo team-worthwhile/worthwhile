@@ -56,6 +56,9 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 * @see FormulaGenerator#transformProgram(Program program)
 	 */
 	public Expression transformProgram(final Program program) {
+		// clear weakestPrecondition state from a previous transformation
+		this.weakestPreconditionStack.clear();
+
 		// initialize the weakest precondition to true
 		BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
 		trueLiteral.setValue(true);

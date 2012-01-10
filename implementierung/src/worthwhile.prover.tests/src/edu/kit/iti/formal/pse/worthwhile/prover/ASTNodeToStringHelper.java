@@ -7,8 +7,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -85,5 +87,15 @@ class ASTNodeToStringHelper extends AstSwitch<String> {
 	@Override
 	public String caseVariableReference(final VariableReference variableReference) {
 		return variableReference.getVariable().getName();
+	}
+
+	@Override
+	public String caseImplication(final Implication implication) {
+		return this.doSwitch(implication.getLeft()) + " => " + this.doSwitch(implication.getRight());
+	}
+
+	@Override
+	public String caseNegation(final Negation negation) {
+		return "!" + this.doSwitch(negation.getOperand());
 	}
 }

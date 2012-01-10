@@ -15,8 +15,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
@@ -160,14 +162,64 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Conditional} to generate the weakest precondition.
 	 * 
+	 * Transforms
+	 * 
+	 * <pre>
+	 * if condition
+	 *     if-block
+	 * else
+	 *     else-block
+	 * </pre>
+	 * 
+	 * to
+	 * 
+	 * <pre>
+	 * condition => wp(if-block, wp) && !condition => wp(else-block, wp)
+	 * </pre>
+	 * 
+	 * If a <code>else-block</code> is missing <code>wp(else-block, wp)</code> is <code>true</code>.
+	 * 
 	 * @param conditional
 	 *                the {@link Conditional} to visit
 	 */
 	public void visit(final Conditional conditional) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		// the updated weakest precondition
+		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
 
-		// end-user-code
+		// build first implication: condition => wp(if-block, wp)
+		Implication implication = AstFactoryImpl.init().createImplication();
+		implication.setLeft(conditional.getCondition());
+
+		Expression wp = this.weakestPreconditionStack.peek();
+
+		// will calculate new wp for if-block and replace wp on top of stack with it
+		conditional.getTrueBlock().accept(this);
+		implication.setRight(this.weakestPreconditionStack.pop());
+
+		conjunction.setLeft(implication);
+
+		// build second implication: !condition => wp(else-block, wp)
+		implication = AstFactoryImpl.init().createImplication();
+		Negation negation = AstFactoryImpl.init().createNegation();
+		negation.setOperand(conditional.getCondition());
+		implication.setLeft(negation);
+
+		if (conditional.getFalseBlock() != null) {
+			this.weakestPreconditionStack.push(wp);
+
+			// will calculate new wp for else-block and replace wp on top of stack with it
+			conditional.getFalseBlock().accept(this);
+			implication.setRight(this.weakestPreconditionStack.pop());
+		} else {
+			BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
+			trueLiteral.setValue(true);
+			implication.setRight(trueLiteral);
+		}
+
+		conjunction.setRight(implication);
+
+		// put updated weakest precondition on top of stack
+		this.weakestPreconditionStack.push(conjunction);
 	}
 
 	/**

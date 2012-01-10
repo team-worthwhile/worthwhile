@@ -5,9 +5,12 @@ import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 
 /**
  * JUnit TestCases for {@link WPStrategy#transformProgram}.
@@ -77,5 +80,29 @@ public final class TransformProgramTest {
 		p = this.getProgram("Integer x := 1\nx := 0\n_assert x = 1\n");
 		result = this.transformer.transformProgram(p);
 		assertASTNodeEqual(this.getExpression("0 = 1 && true"), result);
+	}
+
+	/**
+	 * Tests the transformation of {@link Conditional}s.
+	 */
+	@Test
+	public void conditionalRule() {
+		Program p = this.getProgram("Integer x := 1\nif x = 1 {\nx := 0\n}\n_assert x = 0\n");
+		Expression result = this.transformer.transformProgram(p);
+
+		// getExpression cannot be used to build expected because `=>' is no valid Worthwhile operator
+		Conjunction expected = AstFactoryImpl.init().createConjunction();
+
+		Implication implication = AstFactoryImpl.init().createImplication();
+		implication.setLeft(this.getExpression("1 = 1"));
+		implication.setRight(this.getExpression("0 = 0 && true"));
+		expected.setLeft(implication);
+
+		implication = AstFactoryImpl.init().createImplication();
+		implication.setLeft(this.getExpression("!(1 = 1)"));
+		implication.setRight(this.getExpression("1 = 0 && true"));
+		expected.setRight(implication);
+
+		assertASTNodeEqual(expected, result);
 	}
 }

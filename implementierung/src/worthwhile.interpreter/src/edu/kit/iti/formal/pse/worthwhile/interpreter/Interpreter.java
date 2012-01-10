@@ -108,30 +108,6 @@ public class Interpreter {
 		// end-user-code
 	}
 
-	/** 
-	 * 
-	 */
-	private Set<LineBreakpoint> breakpoints;
-
-	/**
-	 * @return the breakpoints
-	 */
-	public Set<LineBreakpoint> getBreakpoints() {
-		// begin-user-code
-		return this.breakpoints;
-		// end-user-code
-	}
-
-	/**
-	 * @param breakpoints
-	 *            the breakpoints to set
-	 */
-	public void setBreakpoints(Set<LineBreakpoint> breakpoints) {
-		// begin-user-code
-		this.breakpoints = breakpoints;
-		// end-user-code
-	}
-
 	/**
 	 * @param program
 	 */
@@ -144,20 +120,6 @@ public class Interpreter {
 	 */
 	public void execute() {
 		this.program.accept(currentNodeVisitor);
-	}
-
-	/**
-	 * @param breakpoint
-	 */
-	public void addBreakpoint(LineBreakpoint breakpoint) {
-		this.breakpoints.add(breakpoint);
-	}
-
-	/**
-	 * @param breakpoint
-	 */
-	public void removeBreakpoint(LineBreakpoint breakpoint) {
-		this.breakpoints.remove(breakpoint);
 	}
 
 	/**

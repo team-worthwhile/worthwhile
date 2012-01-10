@@ -42,19 +42,6 @@ public abstract class AbstractDebugEventListener {
 	}
 
 	/**
-	 * Called after a breakpoint has interrupted execution
-	 * 
-	 * @param statement
-	 *            the statement that would be executed next
-	 * @param breakpoint
-	 *            the breakpoint that was hit
-	 */
-	public void breakpointReached(Statement statement, LineBreakpoint breakpoint) {
-		// Just ignore the breakpoint
-		return;
-	}
-
-	/**
 	 * Called after the start of the execution of a <code>Program</code>
 	 */
 	public void executionStarted() {

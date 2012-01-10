@@ -16,7 +16,7 @@ import org.eclipse.debug.core.model.IThread;
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
+//import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint; //TODO remember this does not exist anymore
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -128,14 +128,14 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final void breakpointAdded(final IBreakpoint breakpoint) {
 		// TODO breakpoint.addToInterpreter()?
 		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
-			try {
-				this.interpreter.addBreakpoint(new LineBreakpoint(
-				                ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
-				                                .getLineNumber()));
-			} catch (CoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				this.interpreter.addBreakpoint(new LineBreakpoint(
+//				                ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
+//				                                .getLineNumber()));
+//			} catch (CoreException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
 			// TODO
 		}

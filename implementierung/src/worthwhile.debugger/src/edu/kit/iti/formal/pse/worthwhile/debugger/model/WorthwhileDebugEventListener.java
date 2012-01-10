@@ -1,7 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
 import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint;
+//import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint; //TODO remember this does not exist anymore
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**
@@ -36,10 +36,11 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		// TODO Auto-generated method stub
 	}
 
-	@Override
-	public final void breakpointReached(final Statement statement, final LineBreakpoint breakpoint) {
-		// Just ignore the breakpoint
-		return;
-	}
+//	TODO fix this
+//	@Override
+//	public final void breakpointReached(final Statement statement, final LineBreakpoint breakpoint) {
+//		// Just ignore the breakpoint
+//		return;
+//	}
 
 }

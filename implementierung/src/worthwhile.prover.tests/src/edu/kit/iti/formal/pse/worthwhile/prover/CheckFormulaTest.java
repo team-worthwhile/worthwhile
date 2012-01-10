@@ -14,7 +14,10 @@ import org.junit.Before;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**
  * @author fabian
@@ -86,9 +89,20 @@ public final class CheckFormulaTest {
 	 * @return Expression AST representing <code>exprString</code>
 	 */
 	Expression getExpression(final String exprString) {
-		Expression e = TestASTProvider.parseFormulaString(exprString);
-		Assert.assertNotNull(e);
-		return e;
+		// x, y and z are the variables used in these TestCases and they have to be declared first
+		String program = "Boolean x := false\nBoolean y := false\nBoolean z := false\n_assert " + exprString
+		                + "\n";
+		Program p = TestASTProvider.getRootASTNode(program);
+		Assert.assertNotNull(p);
+
+		// the Expression encoded by exprString was encapsulated in an Assertion for parsing, get it from there
+		List<Statement> stmts = p.getMainBlock().getStatements();
+		Assert.assertEquals(4, stmts.size());
+		Statement s = stmts.get(3);
+		Assert.assertTrue(s instanceof Assertion);
+		Assertion a = (Assertion) s;
+
+		return a.getExpression();
 	}
 
 	/**
@@ -240,7 +254,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void equalTransitiveFreeVariables() {
-		Expression expr = getExpression("x = y && y = z => x = z");
+		Expression expr = getExpression("!(x = y && y = z) || x = z");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -249,7 +263,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void implicationNotOrEquivalence() {
-		Expression expr = getExpression("x => y = !x || y");
+		Expression expr = getExpression("(!x || y) = (!x || y)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -276,7 +290,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void andOrDistributivity() {
-		Expression expr = getExpression("x && (y || z) = x && y || x && z");
+		Expression expr = getExpression("(x && (y || z)) = (x && y || x && z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -294,7 +308,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void orAssociativity() {
-		Expression expr = getExpression("x || (y || z) = (x || y) || z");
+		Expression expr = getExpression("(x || (y || z)) = ((x || y) || z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -303,7 +317,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void andAssociativity() {
-		Expression expr = getExpression("x && (y && z) = (x && y) && z");
+		Expression expr = getExpression("(x && (y && z)) = ((x && y) && z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -321,7 +335,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void groupInverseAdditionEqualityTransformation() {
-		Expression expr = getExpression("x = x - 1 <=> x + 1 = x");
+		Expression expr = getExpression("(x = x - 1) = (x + 1 = x)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 

@@ -10,6 +10,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import java.util.Collection;
 
@@ -213,6 +214,17 @@ public class FunctionCallImpl extends ExpressionImpl implements FunctionCall {
 				return function != null;
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * Accept a visitor to this FunctionCall.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //FunctionCallImpl

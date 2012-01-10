@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -305,6 +306,17 @@ public abstract class QuantifiedExpressionImpl extends ExpressionImpl implements
 				return condition != null;
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * Accept a visitor to this QuantifiedExpression.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //QuantifiedExpressionImpl

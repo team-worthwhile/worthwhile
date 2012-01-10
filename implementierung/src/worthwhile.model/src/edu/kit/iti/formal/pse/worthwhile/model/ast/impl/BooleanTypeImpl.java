@@ -8,6 +8,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -38,6 +39,17 @@ public class BooleanTypeImpl extends PrimitiveTypeImpl implements BooleanType {
 	@Override
 	protected EClass eStaticClass() {
 		return AstPackage.Literals.BOOLEAN_TYPE;
+	}
+	
+	/**
+	 * Accept a visitor to this BooleanType.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //BooleanTypeImpl

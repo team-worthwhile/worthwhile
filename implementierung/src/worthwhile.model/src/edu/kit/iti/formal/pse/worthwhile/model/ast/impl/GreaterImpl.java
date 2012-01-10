@@ -8,6 +8,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import org.eclipse.emf.ecore.EClass;
 
@@ -38,6 +39,17 @@ public class GreaterImpl extends BinaryExpressionImpl implements Greater {
 	@Override
 	protected EClass eStaticClass() {
 		return AstPackage.Literals.GREATER;
+	}
+	
+	/**
+	 * Accept a visitor to this Greater.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //GreaterImpl

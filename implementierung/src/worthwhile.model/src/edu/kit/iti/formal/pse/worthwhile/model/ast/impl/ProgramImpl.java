@@ -11,6 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import java.util.Collection;
 
@@ -256,6 +257,17 @@ public class ProgramImpl extends ASTNodeImpl implements Program {
 				return axioms != null && !axioms.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * Accept a visitor to this Program.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //ProgramImpl

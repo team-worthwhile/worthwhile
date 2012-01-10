@@ -11,6 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import java.util.Collection;
 
@@ -286,6 +287,17 @@ public class LoopImpl extends StatementImpl implements Loop {
 				return invariants != null && !invariants.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * Accept a visitor to this Loop.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //LoopImpl

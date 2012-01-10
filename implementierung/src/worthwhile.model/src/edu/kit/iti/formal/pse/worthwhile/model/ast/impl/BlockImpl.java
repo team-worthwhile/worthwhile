@@ -9,6 +9,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.impl;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 import java.util.Collection;
 
@@ -149,6 +150,17 @@ public class BlockImpl extends StatementImpl implements Block {
 				return statements != null && !statements.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+	
+	/**
+	 * Accept a visitor to this Block.
+	 * 
+	 * @param visitor
+	 *                the visitor to be accepted
+	 */
+	@Override
+	public void accept(ASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 } //BlockImpl

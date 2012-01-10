@@ -23,7 +23,7 @@
       startupProgressRect="10,305,480,15"
       startupMessageRect="12,285,478,20"
       startupForegroundColor="000000" />
-   <launcher>
+   <launcher name="worthwhile">
       <solaris/>
       <win useIco="true">
          <ico path="/edu.kit.iti.formal.pse.worthwhile.product/icons/icon.ico"/>

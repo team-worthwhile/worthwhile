@@ -99,20 +99,19 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
 		this.getWeakestPrecondition().accept(
-		                new VariableSubstitution(variableDeclaration, assignment.getValue(),
-		                                new VariableSubstitution.SubstituteCommand() {
-			                                @Override
-			                                void substitute() {
-				                                /*
-								 * In case the current postcondition only consists of a
-								 * VariableReference that has to be replaced, substitute
-								 * it directly
-								 */
-				                                WPStrategy.this.weakestPreconditionStack.pop();
-				                                WPStrategy.this.weakestPreconditionStack
-				                                                .push(assignment.getValue());
-			                                }
-		                                }));
+
+				new VariableSubstitution(variableDeclaration, assignment.getValue(),
+						new VariableSubstitution.SubstituteCommand() {
+					@Override
+					void substitute() {
+						/*
+						 * In case the current postcondition only consists of a VariableReference that has to be
+						 * replaced, substitute it directly
+						 */
+						WPStrategy.this.weakestPreconditionStack.pop();
+						WPStrategy.this.weakestPreconditionStack.push(assignment.getValue());
+					}
+				}));
 
 	}
 
@@ -267,20 +266,18 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	public void visit(final VariableDeclaration variableDeclaration) {
 		this.getWeakestPrecondition().accept(
-		                new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
-		                                new VariableSubstitution.SubstituteCommand() {
-			                                @Override
-			                                void substitute() {
-				                                /*
-								 * In case the current postcondition only consists of a
-								 * VariableReference that has to be replaced, substitute
-								 * it directly
-								 */
-				                                WPStrategy.this.weakestPreconditionStack.pop();
-				                                WPStrategy.this.weakestPreconditionStack
-				                                                .push(variableDeclaration
-				                                                                .getInitialValue());
-			                                }
-		                                }));
+
+				new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
+						new VariableSubstitution.SubstituteCommand() {
+					@Override
+					void substitute() {
+						/*
+						 * In case the current postcondition only consists of a VariableReference that has to be
+						 * replaced, substitute it directly
+						 */
+						WPStrategy.this.weakestPreconditionStack.pop();
+						WPStrategy.this.weakestPreconditionStack.push(variableDeclaration.getInitialValue());
+					}
+				}));
 	}
 }

@@ -147,22 +147,22 @@ Expression returns Expression:
 
 // The boolean or has the lowest priority.
 BooleanOr returns Expression:
-	BooleanAnd ({Disjunction.left=current} ('∨' | '||') right=BooleanAnd)?
+	BooleanAnd ({Disjunction.left=current} ('∨' | '||') right=BooleanAnd)*
 ;
 
 // The boolean and has second lowest priority.
 BooleanAnd returns Expression:
-	EqualsComparison ({Conjunction.left=current} ('∧' | '&&') right=EqualsComparison)?
+	EqualsComparison ({Conjunction.left=current} ('∧' | '&&') right=EqualsComparison)*
 ;
 
 // The equal and unequal comparisons are next in priority.
 EqualsComparison returns Expression:
-	Comparison (({Equal.left=current} '=' | {Unequal.left = current} ('!=' | '≠')) right=Comparison)?
+	Comparison (({Equal.left=current} '=' | {Unequal.left = current} ('!=' | '≠')) right=Comparison)*
 ;
 
 // A comparison of two integer values is next in priority.
 Comparison returns Expression:
-	Addition (({Less.left=current} '<' | {LessOrEqual.left=current} ('<=' | '≤') | {GreaterOrEqual.left=current} ('>=' | '≥') | {Greater.left=current} '>') right=Addition)?
+	Addition (({Less.left=current} '<' | {LessOrEqual.left=current} ('<=' | '≤') | {GreaterOrEqual.left=current} ('>=' | '≥') | {Greater.left=current} '>') right=Addition)*
 ;
 
 // Next in priority are addition and subtraction

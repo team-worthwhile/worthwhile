@@ -62,10 +62,12 @@ class ASTNodeToStringHelper extends ASTNodeVisitor {
 
 	@Override
 	public void visit(final Block block) {
+		buf.append("{\n");
 		for (Statement stmt : block.getStatements()) {
 			stmt.accept(this);
 			buf.append("\n");
 		}
+		buf.append("}");
 	}
 
 	@Override
@@ -75,16 +77,20 @@ class ASTNodeToStringHelper extends ASTNodeVisitor {
 
 	@Override
 	public void visit(final Conjunction conjunction) {
+		buf.append("(");
 		conjunction.getLeft().accept(this);
 		buf.append(" && ");
 		conjunction.getRight().accept(this);
+		buf.append(")");
 	}
 
 	@Override
 	public void visit(final Equal equal) {
+		buf.append("(");
 		equal.getLeft().accept(this);
 		buf.append(" = ");
 		equal.getRight().accept(this);
+		buf.append(")");
 	}
 
 	@Override
@@ -118,9 +124,11 @@ class ASTNodeToStringHelper extends ASTNodeVisitor {
 
 	@Override
 	public void visit(final Implication implication) {
+		buf.append("(");
 		implication.getLeft().accept(this);
 		buf.append(" => ");
 		implication.getRight().accept(this);
+		buf.append(")");
 	}
 
 	@Override

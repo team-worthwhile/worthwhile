@@ -7,128 +7,533 @@
     copyrightFields="false">
   <foreignModel>Worthwhile.ecore</foreignModel>
   <genPackages prefix="Worthwhile" disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#/">
-    <nestedGenPackages prefix="Ast" basePackage="worthwhile" disposableProviderFactory="true"
-        ecorePackage="Worthwhile.ecore#//ast">
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Program">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Program/functionDeclarations"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Program/mainBlock"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Program/axioms"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/ASTNode">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/ASTNode/lineNumber"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/ASTNode/positionInLine"/>
-        <genOperations ecoreOperation="Worthwhile.ecore#//ast/ASTNode/accept">
-          <genParameters ecoreParameter="Worthwhile.ecore#//ast/ASTNode/accept/visitor"/>
-        </genOperations>
-      </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/ASTNodeVisitor"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Addition"/>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/BinaryExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/BinaryExpression/left"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/BinaryExpression/right"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Expression"/>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/UnaryExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/UnaryExpression/operand"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayLength"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayLiteral">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayLiteral/values"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Literal"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ArrayType">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayType/baseType"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ArrayType/size"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Type"/>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/PrimitiveType"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Assertion"/>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Annotation">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Annotation/expression"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Assignment">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Assignment/value"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Assignment/variable"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/VariableDeclaration">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableDeclaration/type"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableDeclaration/initialValue"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/VariableDeclaration/name"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Assumption"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Axiom"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Block">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Block/statements"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/BooleanLiteral">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/BooleanLiteral/value"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/BooleanType"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Conditional">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Conditional/condition"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Conditional/trueBlock"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Conditional/falseBlock"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Conjunction"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Disjunction"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Division"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Equal"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Equivalence"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ExistsQuantifier"/>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/QuantifiedExpression">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/parameter"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/expression"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/QuantifiedExpression/condition"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ForAllQuantifier"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/FunctionCall">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionCall/actuals"/>
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionCall/function"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/FunctionDeclaration">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/preconditions"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/postconditions"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/parameters"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/body"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/FunctionDeclaration/returnType"/>
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/FunctionDeclaration/name"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Precondition"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Postcondition"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Greater"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/GreaterOrEqual"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Implication"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/IntegerLiteral">
-        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//ast/IntegerLiteral/value"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/IntegerType"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Invariant"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Less"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/LessOrEqual"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Loop">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Loop/condition"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Loop/body"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/Loop/invariants"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Minus"/>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Sign"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Modulus"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Multiplication"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Negation"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Plus"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/ReturnStatement">
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/ReturnStatement/returnValue"/>
-      </genClasses>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Subtraction"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/Unequal"/>
-      <genClasses ecoreClass="Worthwhile.ecore#//ast/VariableReference">
-        <genFeatures notify="false" createChild="false" propertySortChoices="true"
-            ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableReference/variable"/>
-        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Worthwhile.ecore#//ast/VariableReference/index"/>
-      </genClasses>
-      <genClasses image="false" ecoreClass="Worthwhile.ecore#//ast/Statement"/>
+    <nestedGenPackages prefix="Kit" basePackage="edu" disposableProviderFactory="true"
+        ecorePackage="Worthwhile.ecore#//kit">
+      <nestedGenPackages prefix="Iti" basePackage="edu.kit" disposableProviderFactory="true"
+          ecorePackage="Worthwhile.ecore#//kit/iti">
+        <nestedGenPackages prefix="Formal" basePackage="edu.kit.iti" disposableProviderFactory="true"
+            ecorePackage="Worthwhile.ecore#//kit/iti/formal">
+          <nestedGenPackages prefix="Pse" basePackage="edu.kit.iti.formal" disposableProviderFactory="true"
+              ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse">
+            <nestedGenPackages prefix="Worthwhile" basePackage="edu.kit.iti.formal.pse"
+                disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile">
+              <nestedGenPackages prefix="Model" basePackage="edu.kit.iti.formal.pse.worthwhile"
+                  disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model">
+                <nestedGenPackages prefix="Ast" basePackage="edu.kit.iti.formal.pse.worthwhile.model"
+                    disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast">
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/functionDeclarations"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/mainBlock"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/axioms"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode">
+                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/lineNumber"/>
+                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/positionInLine"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Addition">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Addition/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Addition/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression/left"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression/right"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Expression">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Expression/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Expression/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression/operand"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLength">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLength/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLength/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLiteral">
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLiteral/values"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLiteral/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLiteral/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Literal">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Literal/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Literal/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayType">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayType/baseType"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayType/size"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayType/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayType/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Type">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Type/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Type/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/PrimitiveType">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/PrimitiveType/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/PrimitiveType/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assertion">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assertion/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assertion/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Annotation">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Annotation/expression"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Annotation/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Annotation/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assignment">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assignment/value"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assignment/variable"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assignment/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assignment/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration/type"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration/initialValue"/>
+                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration/name"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assumption">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assumption/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Assumption/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Axiom">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Axiom/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Axiom/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Block">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Block/statements"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Block/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Block/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanLiteral">
+                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanLiteral/value"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanLiteral/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanLiteral/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanType">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanType/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/BooleanType/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conditional">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conditional/condition"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conditional/trueBlock"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conditional/falseBlock"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conditional/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conditional/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conjunction">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conjunction/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Conjunction/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Disjunction">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Disjunction/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Disjunction/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Division">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Division/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Division/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Equal">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Equal/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Equal/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Equivalence">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Equivalence/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Equivalence/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExistsQuantifier">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExistsQuantifier/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExistsQuantifier/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression/parameter"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression/expression"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression/condition"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ForAllQuantifier">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ForAllQuantifier/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ForAllQuantifier/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCall">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCall/actuals"/>
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCall/function"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCall/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCall/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/preconditions"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/postconditions"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/parameters"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/body"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/returnType"/>
+                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/name"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Precondition">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Precondition/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Precondition/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Postcondition">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Postcondition/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Postcondition/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Greater">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Greater/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Greater/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GreaterOrEqual">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GreaterOrEqual/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GreaterOrEqual/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Implication">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Implication/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Implication/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerLiteral">
+                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerLiteral/value"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerLiteral/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerLiteral/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerType">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerType/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/IntegerType/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Invariant">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Invariant/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Invariant/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Less">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Less/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Less/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LessOrEqual">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LessOrEqual/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LessOrEqual/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop/condition"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop/body"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop/invariants"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Minus"/>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Sign">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Sign/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Sign/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Modulus">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Modulus/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Modulus/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Multiplication">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Multiplication/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Multiplication/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Negation">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Negation/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Negation/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Plus">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Plus/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Plus/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/returnValue"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Subtraction">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Subtraction/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Subtraction/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Unequal">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Unequal/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Unequal/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference">
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/variable"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/index"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Statement">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Statement/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Statement/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
+                      disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor">
+                    <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor">
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.1">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.1/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.2">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.2/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.3">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.3/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.4">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.4/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.5">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.5/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.6">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.6/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.7">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.7/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.8">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.8/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.9">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.9/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.10">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.10/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.11">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.11/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.12">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.12/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.13">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.13/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.14">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.14/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.15">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.15/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.16">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.16/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.17">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.17/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.18">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.18/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.19">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.19/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.20">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.20/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.21">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.21/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.22">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.22/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.23">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.23/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.24">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.24/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.25">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.25/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.26">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.26/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.27">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.27/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.28">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.28/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.29">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.29/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.30">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.30/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.31">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.31/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.32">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.32/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.33">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.33/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.34">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.34/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.35">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.35/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.36">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.36/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.37">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.37/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.38">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.38/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.39">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.39/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.40">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.40/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.41">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.41/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.42">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.42/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.43">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.43/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.44">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.44/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.45">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.45/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.46">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.46/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.47">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.47/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.48">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.48/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.49">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.49/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.50">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.50/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.51">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.51/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.52">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.52/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.53">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.53/node"/>
+                      </genOperations>
+                    </genClasses>
+                  </nestedGenPackages>
+                </nestedGenPackages>
+              </nestedGenPackages>
+            </nestedGenPackages>
+          </nestedGenPackages>
+        </nestedGenPackages>
+      </nestedGenPackages>
     </nestedGenPackages>
   </genPackages>
 </genmodel:GenModel>

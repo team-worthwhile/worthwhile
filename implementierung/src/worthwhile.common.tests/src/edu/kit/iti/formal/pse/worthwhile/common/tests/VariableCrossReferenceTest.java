@@ -1,11 +1,14 @@
-package edu.kit.iti.formal.pse.worthwhile.model.ast;
+package edu.kit.iti.formal.pse.worthwhile.common.tests;
 
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 
 /**
  * Tests that there exists a cross reference from a {@link VariableReference} to a {@link VariableDeclaration}.

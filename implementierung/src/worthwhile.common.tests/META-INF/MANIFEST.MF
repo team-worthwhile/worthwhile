@@ -3,6 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.common.tests
 Bundle-Version: 0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: .,
+ junit.jar
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
  edu.kit.iti.formal.pse.worthwhile
 Import-Package: edu.kit.iti.formal.pse.worthwhile,
@@ -10,5 +12,6 @@ Import-Package: edu.kit.iti.formal.pse.worthwhile,
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore.resource,
  org.eclipse.xtext.resource,
- com.google.inject
+ com.google.inject,
+ org.junit
 Export-Package: edu.kit.iti.formal.pse.worthwhile.common.tests

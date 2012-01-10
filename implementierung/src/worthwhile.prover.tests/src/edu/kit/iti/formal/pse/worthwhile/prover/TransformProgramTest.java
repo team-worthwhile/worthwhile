@@ -9,7 +9,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 
 /**
@@ -63,8 +62,8 @@ public final class TransformProgramTest {
 	 */
 	private static void assertASTNodeEqual(final ASTNode expected, final ASTNode was) {
 		if (!ASTNodeEqualator.equal(expected, was)) {
-			AstSwitch<?> toString = new ASTNodeToStringHelper();
-			Assert.fail("expected: " + toString.doSwitch(expected) + " was: " + toString.doSwitch(was));
+			ASTNodeToStringHelper toString = new ASTNodeToStringHelper();
+			Assert.fail("expected: " + toString.toString(expected) + " was: " + toString.toString(was));
 		}
 	}
 

@@ -15,7 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
  * Implements toString methods for {@link ASTNode}s.
@@ -23,79 +23,109 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstSwitch;
  * @author fabian
  * 
  */
-class ASTNodeToStringHelper extends AstSwitch<String> {
-	@Override
-	public String caseASTNode(final ASTNode aSTNode) {
-		return aSTNode.toString();
-	}
+class ASTNodeToStringHelper extends ASTNodeVisitor {
+	/**
+	 * The state of the {@link String} result returned by {@link toString}.
+	 */
+	private StringBuffer buf;
 
-	@Override
-	public String caseAssertion(final Assertion assertion) {
-		return "_assert " + assertion.getExpression();
-	}
-
-	@Override
-	public String caseAssignment(final Assignment assignment) {
-		return assignment.getVariable() + " := " + assignment.getValue();
-	}
-
-	@Override
-	public String caseBlock(final Block block) {
-		StringBuffer buf = new StringBuffer();
-		for (Statement stmt : block.getStatements()) {
-			buf.append(this.doSwitch(stmt) + "\n");
-		}
+	/**
+	 * Returns a {@link String} representing an {@link ASTNode}.
+	 * 
+	 * @param node
+	 *                the ASTNode that is represented by the returned String
+	 * @return a String representing <code>node</code>
+	 */
+	public String toString(final ASTNode node) {
+		buf = new StringBuffer();
+		node.accept(this);
 		return buf.toString();
 	}
 
 	@Override
-	public String caseBooleanLiteral(final BooleanLiteral booleanLiteral) {
-		return String.valueOf(booleanLiteral.getValue());
+	public void visit(final ASTNode aSTNode) {
+		buf.append(aSTNode.toString());
 	}
 
 	@Override
-	public String caseConjunction(final Conjunction conjunction) {
-		return this.doSwitch(conjunction.getLeft()) + " && " + this.doSwitch(conjunction.getRight());
+	public void visit(final Assertion assertion) {
+		buf.append("_assert ");
+		assertion.getExpression().accept(this);
 	}
 
 	@Override
-	public String caseEqual(final Equal equal) {
-		return this.doSwitch(equal.getLeft()) + " = " + this.doSwitch(equal.getRight());
+	public void visit(final Assignment assignment) {
+		assignment.getVariable().accept(this);
+		buf.append(" := ");
+		assignment.getValue().accept(this);
 	}
 
 	@Override
-	public String caseIntegerLiteral(final IntegerLiteral integerLiteral) {
-		return integerLiteral.getValue().toString();
+	public void visit(final Block block) {
+		for (Statement stmt : block.getStatements()) {
+			stmt.accept(this);
+			buf.append("\n");
+		}
 	}
 
 	@Override
-	public String caseIntegerType(final IntegerType integerType) {
-		return "Integer";
+	public void visit(final BooleanLiteral booleanLiteral) {
+		buf.append(booleanLiteral.getValue());
 	}
 
 	@Override
-	public String caseProgram(final Program program) {
-		return this.doSwitch(program.getMainBlock());
+	public void visit(final Conjunction conjunction) {
+		conjunction.getLeft().accept(this);
+		buf.append(" && ");
+		conjunction.getRight().accept(this);
 	}
 
 	@Override
-	public String caseVariableDeclaration(final VariableDeclaration variableDeclaration) {
-		return variableDeclaration.getType() + " " + variableDeclaration.getName() + " := "
-		                + variableDeclaration.getInitialValue();
+	public void visit(final Equal equal) {
+		equal.getLeft().accept(this);
+		buf.append(" = ");
+		equal.getRight().accept(this);
 	}
 
 	@Override
-	public String caseVariableReference(final VariableReference variableReference) {
-		return variableReference.getVariable().getName();
+	public void visit(final IntegerLiteral integerLiteral) {
+		buf.append(integerLiteral.getValue());
 	}
 
 	@Override
-	public String caseImplication(final Implication implication) {
-		return this.doSwitch(implication.getLeft()) + " => " + this.doSwitch(implication.getRight());
+	public void visit(final IntegerType integerType) {
+		buf.append("Integer");
 	}
 
 	@Override
-	public String caseNegation(final Negation negation) {
-		return "!" + this.doSwitch(negation.getOperand());
+	public void visit(final Program program) {
+		program.getMainBlock().accept(this);
+	}
+
+	@Override
+	public void visit(final VariableDeclaration variableDeclaration) {
+		variableDeclaration.getType().accept(this);
+		buf.append(" ");
+		buf.append(variableDeclaration.getName());
+		buf.append(" := ");
+		variableDeclaration.getInitialValue().accept(this);
+	}
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+		buf.append(variableReference.getVariable().getName());
+	}
+
+	@Override
+	public void visit(final Implication implication) {
+		implication.getLeft().accept(this);
+		buf.append(" => ");
+		implication.getRight().accept(this);
+	}
+
+	@Override
+	public void visit(final Negation negation) {
+		buf.append("!");
+		negation.getOperand().accept(this);
 	}
 }

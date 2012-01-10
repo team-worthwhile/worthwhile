@@ -128,16 +128,26 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * Visit a {@link Axiom}.
+	 * Visit an {@link Axiom}.
+	 * 
+	 * <code><pre>
+	 * _axiom axiom
+	 * </pre></code>
+	 * 
+	 * to
+	 * 
+	 * <code><pre>
+	 * axiom => wp
+	 * </pre></code>
 	 * 
 	 * @param axiom
-	 *                the {@link Axiom} to visit
+	 *                the <code>Axiom</code> to visit
 	 */
 	public void visit(final Axiom axiom) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		Implication implication = AstFactory.init().createImplication();
+		implication.setLeft(AstNodeCloneHelper.clone(axiom.getExpression()));
+		implication.setRight(this.weakestPreconditionStack.pop());
+		this.weakestPreconditionStack.push(implication);
 	}
 
 	/**

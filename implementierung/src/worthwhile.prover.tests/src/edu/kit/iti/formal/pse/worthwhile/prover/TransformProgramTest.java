@@ -122,4 +122,19 @@ public final class TransformProgramTest {
 
 		assertASTNodeEqual(expected, result);
 	}
+
+	/**
+	 * Test the transformation of {@link Axiom}s.
+	 */
+	@Test
+	public void axiomRule() {
+		Program p = this.getProgram("_axiom forall Integer a forall Integer b : a * b = b * a\nInteger x := 2 * 3\n_assert x = 3 * 2\n");
+		Expression result = this.transformer.transformProgram(p);
+
+		Implication expected = AstFactory.init().createImplication();
+		expected.setLeft(this.getExpression("forall Integer a forall Integer b : a * b = b * a"));
+		expected.setRight(this.getExpression("2 * 3 = 3 * 2 && true"));
+
+		assertASTNodeEqual(expected, result);
+	}
 }

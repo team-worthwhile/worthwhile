@@ -188,50 +188,50 @@ public final class CheckFormulaTest {
 	}
 
 	/**
-	 * Tests validity check of <code>\forall x : x = x and \exists x : x = x</code>.
+	 * Tests validity check of <code>forall x : x = x and exists x : x = x</code>.
 	 */
 	@Test
 	public void equalSameBoundVariable() {
-		Expression expr = getExpression("\\forall Integer x : x = x");
+		Expression expr = getExpression("forall Integer x : x = x");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 
-		expr = getExpression("\\exists Integer x : x = x");
+		expr = getExpression("exists Integer x : x = x");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
 	/**
-	 * Tests validity check of <code>\forall x : x != x and \exists x : x != x</code>.
+	 * Tests validity check of <code>forall x : x != x and exists x : x != x</code>.
 	 */
 	@Test
 	public void unequalSameBoundVariable() {
-		Expression expr = getExpression("\\forall Integer x : x != x");
+		Expression expr = getExpression("forall Integer x : x != x");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 
-		expr = getExpression("\\exists Integer x : x != x");
+		expr = getExpression("exists Integer x : x != x");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 	}
 
 	/**
-	 * Tests validity check of <code>\forall x \exists y : x = y and \exists x \forall y : x = y</code>.
+	 * Tests validity check of <code>forall x exists y : x = y and exists x forall y : x = y</code>.
 	 */
 	@Test
 	public void equalDiffBoundVariable() {
-		Expression expr = getExpression("\\forall Integer x \\exists Integer y : x = y");
+		Expression expr = getExpression("forall Integer x exists Integer y : x = y");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 
-		expr = getExpression("\\exists Integer x \\forall Integer y : x = y");
+		expr = getExpression("exists Integer x forall Integer y : x = y");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 	}
 
 	/**
-	 * Tests validity check of <code>\forall x \exists y : x != y and \exists x \forall y : x != y</code>.
+	 * Tests validity check of <code>forall x exists y : x != y and exists x forall y : x != y</code>.
 	 */
 	@Test
 	public void unequalDiffBoundVariable() {
-		Expression expr = getExpression("\\forall Integer x \\exists Integer y : x != y");
+		Expression expr = getExpression("forall Integer x exists Integer y : x != y");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 
-		expr = getExpression("\\exists Integer x \\forall Integer y : x != y");
+		expr = getExpression("exists Integer x forall Integer y : x != y");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 	}
 
@@ -326,11 +326,11 @@ public final class CheckFormulaTest {
 	}
 
 	/**
-	 * Tests validity check of <code>\forall x \exists y : y = x + 1</code>.
+	 * Tests validity check of <code>forall x exists y : y = x + 1</code>.
 	 */
 	@Test
 	public void forallIntegersExistsSuccessor() {
-		Expression expr = getExpression("\\forall Integer x \\exists Integer y : y = x + 1");
+		Expression expr = getExpression("forall Integer x exists Integer y : y = x + 1");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 }

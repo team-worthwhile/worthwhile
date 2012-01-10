@@ -60,11 +60,11 @@ public class TestASTProvider {
 	 *         of the constructs supported by the language
 	 */
 	public static Expression getTestFormula() {
-		return parseFormulaString("((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)");
+		return parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 	}
 
 	public static Expression getNegatedTestFormula() {
-		return parseFormulaString("!((!false || ((9 % 4) = 1)) && true && ((3 + 3) = 6)");
+		return parseFormulaString("!(((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6))");
 	}
 
 	public static Expression parseFormulaString(String formulaString) {

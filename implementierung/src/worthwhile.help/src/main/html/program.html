@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Worthwhile Program</title>
+</head>
+
+<body>
+<h1>Worthwhile Program</h1>
+<!--TODO axioms-->
+A worthwhile program is a piece of code in a simple while programming language. It consists of multiple <a href="statement.html">statements</a> which form the main block of the program where the execution begins. Before the statements of the main block you are able to declare <a href="function.html">functions</a>. There can be <a href="comment.html">comments</a> in the code which are ignored during execution.<br><br>
+<b>Example:</b><br>
+<pre>
+01: //At first there may be function declarations like this:
+02: function Integer pow(Integer base, Integer exponent) {
+03:	Integer result := base
+04:
+05:	if(exponent == 0) {
+06:		return 1
+07:	}
+08:
+09:	while( exponent > 1) {
+10:		result := result * base
+11:		exponent := exponent - 1
+12:	}
+13:
+14:	return base
+15: }
+16:
+17: //After the function declarations follows the main block:
+18: Integer a := 5
+19: Integer b := 3
+20: Integer c := 0
+21:
+22: c := pow(a, b)
+23:
+</pre>
+</body>
+</html>

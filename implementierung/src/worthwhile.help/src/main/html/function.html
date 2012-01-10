@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Functions</title>
+</head>
+
+<body>
+<h1>Functions</h1>
+<!--TODO requires, ensures, syntax etc-->
+In a <a href="program.html">worthwhile program</a> you can declare and call functions. Function declarations must be at the beginning of the code. A function has a return type of either <a href="boolean.html">Boolean</a> or <a href="integer.html">Integer</a>. Each function is identified with an unique name which must start with a letter (A-Z or a-z) and followed by optional letters (A-Z or a-z), numbers (0-9), '-' or '_'. Optional Parameters are allowed in the declaration which can be used in the function block. You have to specify a function block of <a href="statement.html">statements</a> which are executed in their own context when this function is called. Thus it is not possible to manipulate <a href="variable.html">variables</a> of the main block or other functions. It is also not allowed to call a function before it is declared. This prevents recursive use of functions. A function is called in the main block or other functions (after the declaration) by its unique name and by passing the correct parameters to it.<br><br>
+<b>Syntax:</b><br>
+<pre>
+function &lt;type&gt; &lt;name&gt;(&lt;parameters&gt;,...) {
+	&lt;statements&gt;
+}
+</pre>
+<br><br>
+
+<b>Example:</b><br>
+Function declaration:<br>
+<pre>
+01: function Integer pow(Integer base, Integer exponent) {
+02:	Integer result := base
+03:
+04:	if(exponent == 0) {
+05:		return 1
+06:	}
+07:
+08:	while( exponent > 1) {
+09:		result := result * base
+10:		exponent := exponent - 1
+11:	}
+12:
+13:	return base
+14: }
+15:
+16: function Boolean isEqualToSquare(Integer a, Integer b) {
+17:	Integer c := pow(b, 2)
+18:
+19:	if(a == c) {
+20:		return true
+21:	} else {
+22:		return false
+23:	}
+24:
+25: Boolean a := isEqualToSquare(25, 5)
+26:
+</pre>
+</body>
+</html>

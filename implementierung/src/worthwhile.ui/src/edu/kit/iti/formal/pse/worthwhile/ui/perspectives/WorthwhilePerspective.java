@@ -67,8 +67,8 @@ public class WorthwhilePerspective implements IPerspectiveFactory {
 		// Place task, problems, console views to the bottom of the editor area.
 		IFolderLayout bottom = layout
 		                .createFolder("bottom", IPageLayout.BOTTOM, EDITOR_AREA_HEIGHT, editorArea);
-		bottom.addView(IPageLayout.ID_TASK_LIST);
 		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
+		bottom.addView(IPageLayout.ID_TASK_LIST);
 		// TODO: Add console
 	}
 

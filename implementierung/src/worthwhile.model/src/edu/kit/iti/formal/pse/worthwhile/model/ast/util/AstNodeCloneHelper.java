@@ -59,7 +59,18 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * @param <T>
  *                the type of ASTNode to clone
  */
-public class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
+public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
+	/**
+	 * A single instance of this {@link HierarchialASTNodeVisitor}.
+	 */
+	private static AstNodeCloneHelper singleton;
+
+	/**
+	 * Private default constructor.
+	 */
+	private AstNodeCloneHelper() {
+		super();
+	}
 
 	/**
 	 * @param n
@@ -67,9 +78,13 @@ public class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
 	 * @return a clone of the given {@link ASTNode}
 	 */
 	public static final <T extends ASTNode> T clone(final T n) {
-		AstNodeCloneHelper visitor = new AstNodeCloneHelper();
-		n.accept(visitor);
-		return (T) visitor.getClone();
+		if (AstNodeCloneHelper.singleton == null) {
+			AstNodeCloneHelper.singleton = new AstNodeCloneHelper();
+		}
+
+		singleton.cloneStack.clear();
+		n.accept(singleton);
+		return (T) singleton.getClone();
 	}
 
 	/**

@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
@@ -46,6 +47,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -85,12 +87,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	private Map<String, Value> symbolMap;
 
 	/**
-	 *
-	 */
-	protected InterpreterASTNodeVisitor() {
-	}
-
-	/**
 	 * @param key
 	 * @return
 	 */
@@ -111,6 +107,91 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	protected Map<String, Value> getAllSymbols() {
 		return this.symbolMap;
+	}
+	
+	/**
+	 *
+	 */
+	protected InterpreterASTNodeVisitor() {
+	}
+	
+	/**
+	 * 
+	 * @param statement
+	 */
+	private void statementExecuted(Statement statement) {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.statementExecuted(statement);
+		}
+	}
+
+	/**
+	 * 
+	 * @param statement
+	 */
+	private void statementWillExecute(Statement statement) {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.statementWillExecute(statement);
+		}
+	}
+
+	/**
+	 * 
+	 * @param statement
+	 * @param error
+	 */
+	private void executionFailed(Statement statement, InterpreterError error) {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.executionFailed(statement, error);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void executionStarted() {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.executionStarted();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	private void executionCompleted() {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.executionCompleted();
+		}
+	}
+
+	/**
+	 * 
+	 * @param assertion
+	 */
+	private void assertionFailed(Assertion assertion) {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.assertionFailed(assertion);
+		}
+	}
+
+	/**
+	 * 
+	 * @param assertion
+	 */
+	private void assertionSucceeded(Assertion assertion) {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.assertionSucceeded(assertion);
+		}
+	}
+
+	/**
+	 * 
+	 * @param expression
+	 */
+	private void expressionEvaluated(Expression expression) {
+		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
+			listener.expressionEvaluated(expression);
+		}
 	}
 
 	/**
@@ -156,17 +237,17 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Addition addition) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(addition);
 	}
 
 	public void visit(ArrayLength arrayLength) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(arrayLength);
 	}
 
 	public void visit(ArrayLiteral arrayLiteral) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(arrayLiteral);
 	}
 
 	public void visit(ArrayType arrayType) {
@@ -176,12 +257,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Assertion assertion) {
 		// TODO Auto-generated method stub
-
+		this.assertionSucceeded(assertion);
 	}
 
 	public void visit(Assignment assignment) {
 		// TODO Auto-generated method stub
-
+		this.statementWillExecute(assignment);
+		this.statementExecuted(assignment);
 	}
 
 	public void visit(Assumption assumption) {
@@ -201,7 +283,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(BooleanLiteral booleanLiteral) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(booleanLiteral);
 	}
 
 	public void visit(BooleanType booleanType) {
@@ -211,47 +293,48 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Conditional conditional) {
 		// TODO Auto-generated method stub
-
+		this.statementWillExecute(conditional);
+		this.statementExecuted(conditional);
 	}
 
 	public void visit(Conjunction conjunction) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(conjunction);
 	}
 
 	public void visit(Disjunction disjunction) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(disjunction);
 	}
 
 	public void visit(Division division) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(division);
 	}
 
 	public void visit(Equal equal) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(equal);
 	}
 
 	public void visit(Equivalence equivalence) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(equivalence);
 	}
 
 	public void visit(ExistsQuantifier existsQuantifier) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(existsQuantifier);
 	}
 
 	public void visit(ForAllQuantifier forAllQuantifier) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(forAllQuantifier);
 	}
 
 	public void visit(FunctionCall functionCall) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(functionCall);
 	}
 
 	public void visit(FunctionDeclaration functionDeclaration) {
@@ -261,22 +344,22 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Greater greater) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(greater);
 	}
 
 	public void visit(GreaterOrEqual greaterOrEqual) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(greaterOrEqual);
 	}
 
 	public void visit(Implication implication) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(implication);
 	}
 
 	public void visit(IntegerLiteral integerLiteral) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(integerLiteral);
 	}
 
 	public void visit(IntegerType integerType) {
@@ -291,37 +374,38 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Less less) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(less);
 	}
 
 	public void visit(LessOrEqual lessOrEqual) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(lessOrEqual);
 	}
 
 	public void visit(Loop loop) {
 		// TODO Auto-generated method stub
-
+		this.statementWillExecute(loop);
+		this.statementExecuted(loop);
 	}
 
 	public void visit(Minus minus) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(minus);
 	}
 
 	public void visit(Modulus modulus) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(modulus);
 	}
 
 	public void visit(Multiplication multiplication) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(multiplication);
 	}
 
 	public void visit(Negation negation) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(negation);
 	}
 
 	@Override
@@ -332,7 +416,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Plus plus) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(plus);
 	}
 
 	public void visit(Postcondition postcondition) {
@@ -347,26 +431,29 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Program program) {
 		// TODO Auto-generated method stub
-
+		this.executionStarted();
+		this.executionCompleted();
 	}
 
 	public void visit(ReturnStatement returnStatement) {
 		// TODO Auto-generated method stub
-
+		this.statementWillExecute(returnStatement);
+		this.statementExecuted(returnStatement);
 	}
 
 	public void visit(Subtraction subtraction) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(subtraction);
 	}
 
 	public void visit(Unequal unequal) {
 		// TODO Auto-generated method stub
-
+		this.expressionEvaluated(unequal);
 	}
 
 	public void visit(VariableDeclaration variableDeclaration) {
 		// TODO Auto-generated method stub
-
+		this.statementWillExecute(variableDeclaration);
+		this.statementExecuted(variableDeclaration);
 	}
 }

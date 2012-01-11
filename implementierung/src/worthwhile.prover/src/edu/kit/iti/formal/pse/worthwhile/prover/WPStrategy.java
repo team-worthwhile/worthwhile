@@ -184,10 +184,10 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 */
 	public void visit(final Conditional conditional) {
 		// the updated weakest precondition
-		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
+		Conjunction conjunction = AstFactory.init().createConjunction();
 
 		// build first implication: condition => wp(if-block, wp)
-		Implication implication = AstFactoryImpl.init().createImplication();
+		Implication implication = AstFactory.init().createImplication();
 		implication.setLeft(conditional.getCondition());
 
 		Expression wp = this.weakestPreconditionStack.peek();
@@ -199,8 +199,8 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 		conjunction.setLeft(implication);
 
 		// build second implication: !condition => wp(else-block, wp)
-		implication = AstFactoryImpl.init().createImplication();
-		Negation negation = AstFactoryImpl.init().createNegation();
+		implication = AstFactory.init().createImplication();
+		Negation negation = AstFactory.init().createNegation();
 		negation.setOperand(conditional.getCondition());
 		implication.setLeft(negation);
 
@@ -211,7 +211,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 			conditional.getFalseBlock().accept(this);
 			implication.setRight(this.weakestPreconditionStack.pop());
 		} else {
-			BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
+			BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
 			trueLiteral.setValue(true);
 			implication.setRight(trueLiteral);
 		}

@@ -101,7 +101,7 @@ public final class TransformProgramTest {
 
 		implication = AstFactory.init().createImplication();
 		implication.setLeft(this.getExpression("!(1 = 1)"));
-		implication.setRight(this.getExpression("1 = 0 && true"));
+		implication.setRight(this.getExpression("true"));
 		expected.setRight(implication);
 
 		assertASTNodeEqual(expected, result);

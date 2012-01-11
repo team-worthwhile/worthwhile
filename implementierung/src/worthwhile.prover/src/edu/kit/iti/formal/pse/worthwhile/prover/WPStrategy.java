@@ -90,7 +90,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	public void visit(final Assertion assertion) {
 		Conjunction conjunction = AstFactory.init().createConjunction();
 		conjunction.setRight(this.weakestPreconditionStack.pop());
-		conjunction.setLeft(assertion.getExpression());
+		conjunction.setLeft(AstNodeCloneHelper.clone(assertion.getExpression()));
 		this.weakestPreconditionStack.push(conjunction);
 	}
 
@@ -189,7 +189,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		// build first implication: condition => wp(if-block, wp)
 		Implication implication = AstFactory.init().createImplication();
-		implication.setLeft(conditional.getCondition());
+		implication.setLeft(AstNodeCloneHelper.clone(conditional.getCondition()));
 
 		Expression wp = this.weakestPreconditionStack.peek();
 
@@ -202,7 +202,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		// build second implication: !condition => wp(else-block, wp)
 		implication = AstFactory.init().createImplication();
 		Negation negation = AstFactory.init().createNegation();
-		negation.setOperand(conditional.getCondition());
+		negation.setOperand(AstNodeCloneHelper.clone(conditional.getCondition()));
 		implication.setLeft(negation);
 
 		if (conditional.getFalseBlock() != null) {

@@ -26,12 +26,12 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  * Applies the Weakest Precondition calculus to a {@link Program}.
  */
-class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
+class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * The stack of weakest preconditions that implies the correctness of the remainder {@link Block}.
 	 */

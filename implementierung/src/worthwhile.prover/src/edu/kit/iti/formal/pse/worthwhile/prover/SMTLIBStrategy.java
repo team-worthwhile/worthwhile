@@ -53,13 +53,14 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  *
  */
 // TODO: This doesn't really implement all of ASTNodeVisitor, it should only
 // compile expressions!
-class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
+class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
 
 	private final Stack<String> compileStack = new Stack<String>();
 

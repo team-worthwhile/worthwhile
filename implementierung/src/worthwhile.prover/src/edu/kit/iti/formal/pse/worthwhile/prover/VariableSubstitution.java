@@ -6,6 +6,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  * When visiting an {@link Expression} this {@link ASTNodeVisitor} substitutes variable occurrences with some other
@@ -14,7 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
  * @author fabian
  * 
  */
-class VariableSubstitution extends ASTNodeVisitor {
+class VariableSubstitution extends HierarchialASTNodeVisitor {
 	/**
 	 * Encapsulates the substitute process.
 	 * 

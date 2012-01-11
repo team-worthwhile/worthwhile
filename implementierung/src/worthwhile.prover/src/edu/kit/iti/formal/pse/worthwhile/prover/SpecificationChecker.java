@@ -7,7 +7,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 
 /**
  * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
@@ -117,7 +116,7 @@ public class SpecificationChecker {
 	 * @return <code>formula</code>'s {@link Validity}
 	 */
 	private Validity getValidity(Expression formula) {
-		AstFactory model = AstFactoryImpl.init();
+		AstFactory model = AstFactory.init();
 
 		Negation negation = model.createNegation();
 		negation.setOperand(formula);

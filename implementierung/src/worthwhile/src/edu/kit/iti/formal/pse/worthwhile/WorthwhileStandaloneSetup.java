@@ -2,7 +2,7 @@ package edu.kit.iti.formal.pse.worthwhile;
 
 import com.google.inject.Injector;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstPackageImpl;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 
 /**
  * Initialization support for running Xtext languages without equinox extension
@@ -17,7 +17,7 @@ WorthwhileStandaloneSetupGenerated {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
-		AstPackageImpl.init();
+		AstPackage.init();
 		return super.createInjectorAndDoEMFRegistration();
 	}
 }

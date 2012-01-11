@@ -8,6 +8,7 @@ import java.util.Stack;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -25,7 +26,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.impl.AstFactoryImpl;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 
 /**
@@ -62,7 +62,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 		this.weakestPreconditionStack.clear();
 
 		// initialize the weakest precondition to true
-		BooleanLiteral trueLiteral = AstFactoryImpl.init().createBooleanLiteral();
+		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
 		trueLiteral.setValue(true);
 		this.weakestPreconditionStack.push(trueLiteral);
 
@@ -86,7 +86,7 @@ class WPStrategy extends ASTNodeVisitor implements FormulaGenerator {
 	 *                the {@link Assertion} to visit
 	 */
 	public void visit(final Assertion assertion) {
-		Conjunction conjunction = AstFactoryImpl.init().createConjunction();
+		Conjunction conjunction = AstFactory.init().createConjunction();
 		conjunction.setRight(this.weakestPreconditionStack.pop());
 		conjunction.setLeft(assertion.getExpression());
 		this.weakestPreconditionStack.push(conjunction);

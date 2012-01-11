@@ -229,7 +229,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public final void visit(final BooleanLiteral b) {
 		BooleanLiteral newBooleanLiteral = this.nodeFactory.createBooleanLiteral();
-		newBooleanLiteral.setValue(b.isValue());
+		newBooleanLiteral.setValue(b.getValue());
 		this.cloneStack.push(newBooleanLiteral);
 	}
 

@@ -90,7 +90,7 @@ public final class ASTNodeEqualator {
 		if (arg1 == null) {
 			return false;
 		}
-		if (arg0.isValue() != arg1.isValue()) {
+		if (arg0.getValue() != arg1.getValue()) {
 			return false;
 		}
 		return true;

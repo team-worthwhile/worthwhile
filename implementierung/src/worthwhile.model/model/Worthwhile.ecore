@@ -228,6 +228,12 @@
                     </eAnnotations>
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
+                  <eOperations name="getValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+                    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                      <details key="body" value="return this.isValue();"/>
+                      <details key="documentation" value="A helper method to return the value of this {@link BooleanLiteral} since we cannot change the generated getter's name."/>
+                    </eAnnotations>
+                  </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
                       lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
                 </eClassifiers>

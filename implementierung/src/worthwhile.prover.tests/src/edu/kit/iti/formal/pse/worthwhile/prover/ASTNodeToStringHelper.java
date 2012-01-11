@@ -89,7 +89,7 @@ class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final BooleanLiteral booleanLiteral) {
-		buf.append(booleanLiteral.isValue());
+		buf.append(booleanLiteral.getValue());
 	}
 
 	@Override

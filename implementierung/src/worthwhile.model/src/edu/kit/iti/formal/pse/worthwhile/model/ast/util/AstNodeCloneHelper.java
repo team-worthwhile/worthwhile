@@ -10,13 +10,13 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeCloneVisitor;
  *
  * @param <T> the type of ASTNode to clone
  */
-public class AstNodeCloneHelper<T extends ASTNode> {
+public class AstNodeCloneHelper {
 
 	/**
 	 * @param n the {@link ASTNode} to clone.
 	 * @return a clone of the given {@link ASTNode}
 	 */
-	public final T clone(final T n) {
+	public static final <T extends ASTNode> T clone(final T n) {
 		ASTNodeCloneVisitor visitor = new ASTNodeCloneVisitor();
 		n.accept(visitor);
 		return (T) visitor.getClone();

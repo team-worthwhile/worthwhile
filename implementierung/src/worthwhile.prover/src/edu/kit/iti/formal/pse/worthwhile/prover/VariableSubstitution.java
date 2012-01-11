@@ -79,7 +79,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @return a cloned copy of the substitute
 	 */
 	private Expression getClonedSubsitute() {
-		return new AstNodeCloneHelper<Expression>().clone(this.substitute);
+		return AstNodeCloneHelper.clone(this.substitute);
 	}
 
 	/**

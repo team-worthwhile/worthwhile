@@ -273,8 +273,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		// (condition and invariant) implies wp(body, invariant)
 		Conjunction conditionAndInvariant = factory.createConjunction();
-		conditionAndInvariant.setLeft(new AstNodeCloneHelper<Expression>().clone(loop.getCondition()));
-		conditionAndInvariant.setRight(new AstNodeCloneHelper<Expression>().clone(invariant));
+		conditionAndInvariant.setLeft(AstNodeCloneHelper.clone(loop.getCondition()));
+		conditionAndInvariant.setRight(AstNodeCloneHelper.clone(invariant));
 
 		// generate weakest precondition for the body given the invariant as the postcondition
 		this.weakestPreconditionStack.push(invariant);
@@ -283,16 +283,16 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		Implication conditionAndInvariantImpliesBodyPrecondition = factory.createImplication();
 		conditionAndInvariantImpliesBodyPrecondition.setLeft(conditionAndInvariant);
-		conditionAndInvariantImpliesBodyPrecondition.setRight(new AstNodeCloneHelper<Expression>()
+		conditionAndInvariantImpliesBodyPrecondition.setRight(AstNodeCloneHelper
 		                .clone(bodyPrecondition));
 
 		// ((not condition) and invariant) implies postcondition
 		Negation notCondition = factory.createNegation();
-		notCondition.setOperand(new AstNodeCloneHelper<Expression>().clone(loop.getCondition()));
+		notCondition.setOperand(AstNodeCloneHelper.clone(loop.getCondition()));
 
 		Conjunction notConditionAndInvariant = factory.createConjunction();
 		notConditionAndInvariant.setLeft(notCondition);
-		notConditionAndInvariant.setRight(new AstNodeCloneHelper<Expression>().clone(invariant));
+		notConditionAndInvariant.setRight(AstNodeCloneHelper.clone(invariant));
 
 		Implication notConditionAndInvariantImpliesPostcondition = factory.createImplication();
 		notConditionAndInvariantImpliesPostcondition.setLeft(notConditionAndInvariant);
@@ -306,7 +306,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		// assemble the weakest precondition from the three conditions
 		Conjunction invariantAndConditionTrueCase = factory.createConjunction();
-		invariantAndConditionTrueCase.setLeft(new AstNodeCloneHelper<Expression>().clone(invariant));
+		invariantAndConditionTrueCase.setLeft(AstNodeCloneHelper.clone(invariant));
 		invariantAndConditionTrueCase.setRight(conditionAndInvariantImpliesBodyPrecondition);
 
 		Conjunction loopPrecondition = factory.createConjunction();

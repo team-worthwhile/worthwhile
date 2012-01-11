@@ -43,7 +43,7 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 			this.variableMap.put(v.getVariable().getName(), v.getVariable().getName() + "-was-"
 			                + UUID.randomUUID().toString());
 		}
-		VariableDeclaration newVariable = new AstNodeCloneHelper<VariableDeclaration>().clone(v.getVariable());
+		VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());
 		newVariable.setName(this.variableMap.get(v.getVariable().getName()));
 		v.setVariable(newVariable);
 

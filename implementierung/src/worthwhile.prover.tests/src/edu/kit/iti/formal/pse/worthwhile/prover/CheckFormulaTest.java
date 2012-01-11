@@ -129,17 +129,18 @@ public final class CheckFormulaTest {
 		emptyEnv = new HashMap<String, Value>();
 
 		xEnv = new HashMap<String, Value>();
-		xEnv.put("x", new Value());
+		xEnv.put("x", new Value(false));
+
 		yEnv = new HashMap<String, Value>();
-		yEnv.put("y", new Value());
+		yEnv.put("y", new Value(false));
 
 		xyEqualEnv = new HashMap<String, Value>();
-		xyEqualEnv.putAll(xEnv);
-		xyEqualEnv.putAll(yEnv);
+		xyEqualEnv.put("x", new Value(true));
+		xyEqualEnv.put("y", new Value(true));
 
 		xyUnequalEnv = new HashMap<String, Value>();
-		xyUnequalEnv.putAll(xEnv);
-		xyUnequalEnv.putAll(yEnv);
+		xyUnequalEnv.put("x", new Value(false));
+		xyUnequalEnv.put("y", new Value(true));
 
 		envs = new ArrayList<Map<String, Value>>();
 		envs.add(emptyEnv);

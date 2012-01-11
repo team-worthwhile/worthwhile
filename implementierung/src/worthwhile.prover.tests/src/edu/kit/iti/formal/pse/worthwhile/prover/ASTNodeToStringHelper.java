@@ -1,8 +1,10 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
@@ -10,6 +12,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -42,9 +46,22 @@ class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 		return buf.toString();
 	}
 
+	private void appendBinaryExpression(BinaryExpression binaryExpression, String operatorString) {
+		buf.append("(");
+		binaryExpression.getLeft().accept(this);
+		buf.append(" " + operatorString + " ");
+		binaryExpression.getRight().accept(this);
+		buf.append(")");
+	}
+
 	@Override
 	public void visit(final ASTNode aSTNode) {
 		buf.append(aSTNode.toString());
+	}
+
+	@Override
+	public void visit(final Addition addition) {
+		this.appendBinaryExpression(addition, "+");
 	}
 
 	@Override
@@ -77,20 +94,12 @@ class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Conjunction conjunction) {
-		buf.append("(");
-		conjunction.getLeft().accept(this);
-		buf.append(" && ");
-		conjunction.getRight().accept(this);
-		buf.append(")");
+		this.appendBinaryExpression(conjunction, "&&");
 	}
 
 	@Override
 	public void visit(final Equal equal) {
-		buf.append("(");
-		equal.getLeft().accept(this);
-		buf.append(" = ");
-		equal.getRight().accept(this);
-		buf.append(")");
+		this.appendBinaryExpression(equal, "=");
 	}
 
 	@Override
@@ -101,6 +110,16 @@ class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final IntegerType integerType) {
 		buf.append("Integer");
+	}
+
+	@Override
+	public void visit(final Less less) {
+		this.appendBinaryExpression(less, "<");
+	}
+
+	@Override
+	public void visit(final LessOrEqual lessOrEqual) {
+		this.appendBinaryExpression(lessOrEqual, "<=");
 	}
 
 	@Override
@@ -124,11 +143,7 @@ class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Implication implication) {
-		buf.append("(");
-		implication.getLeft().accept(this);
-		buf.append(" => ");
-		implication.getRight().accept(this);
-		buf.append(")");
+		this.appendBinaryExpression(implication, "=>");
 	}
 
 	@Override

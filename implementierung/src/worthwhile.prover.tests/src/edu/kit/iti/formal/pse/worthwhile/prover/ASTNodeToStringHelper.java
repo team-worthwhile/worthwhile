@@ -27,11 +27,23 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * @author fabian
  * 
  */
-class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
+final class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
+	/**
+	 * A single instance of {@link ASTNodeToStringHelper}.
+	 */
+	private static ASTNodeToStringHelper singleton = new ASTNodeToStringHelper();
+
 	/**
 	 * The state of the {@link String} result returned by {@link toString}.
 	 */
 	private StringBuffer buf;
+
+	/**
+	 * Private default constructor.
+	 */
+	private ASTNodeToStringHelper() {
+		super();
+	}
 
 	/**
 	 * Returns a {@link String} representing an {@link ASTNode}.
@@ -40,10 +52,10 @@ class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 	 *                the ASTNode that is represented by the returned String
 	 * @return a String representing <code>node</code>
 	 */
-	public String toString(final ASTNode node) {
-		buf = new StringBuffer();
-		node.accept(this);
-		return buf.toString();
+	public static String toString(final ASTNode node) {
+		singleton.buf = new StringBuffer();
+		node.accept(singleton);
+		return singleton.buf.toString();
 	}
 
 	private void appendBinaryExpression(BinaryExpression binaryExpression, String operatorString) {

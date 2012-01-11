@@ -37,10 +37,6 @@
                     </eAnnotations>
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
-                  <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber"
-                      ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-                  <eStructuralFeatures xsi:type="ecore:EAttribute" name="positionInLine"
-                      ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Addition" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
                   <eOperations name="accept">

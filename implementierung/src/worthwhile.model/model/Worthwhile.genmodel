@@ -34,8 +34,6 @@
                     </genOperations>
                   </genClasses>
                   <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode">
-                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/lineNumber"/>
-                    <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/positionInLine"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ASTNode/accept/visitor"/>
                     </genOperations>

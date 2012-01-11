@@ -5,6 +5,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
@@ -75,6 +76,13 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * @return a cloned copy of the substitute
+	 */
+	private Expression getClonedSubsitute() {
+		return new AstNodeCloneHelper<Expression>().clone(this.substitute);
+	}
+
+	/**
 	 * 
 	 * @param conjunction
 	 *            the node to be visited
@@ -93,7 +101,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 		this.substituteCommand = new SubstituteCommand() {
 			@Override
 			void substitute() {
-				unaryExpression.setOperand(substitute);
+				unaryExpression.setOperand(VariableSubstitution.this.getClonedSubsitute());
 			}
 		};
 		unaryExpression.getOperand().accept(this);
@@ -108,7 +116,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 		this.substituteCommand = new SubstituteCommand() {
 			@Override
 			void substitute() {
-				binaryExpression.setLeft(substitute);
+				binaryExpression.setLeft(VariableSubstitution.this.getClonedSubsitute());
 			}
 		};
 		binaryExpression.getLeft().accept(this);
@@ -116,7 +124,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 		this.substituteCommand = new SubstituteCommand() {
 			@Override
 			void substitute() {
-				binaryExpression.setRight(substitute);
+				binaryExpression.setRight(VariableSubstitution.this.getClonedSubsitute());
 			}
 		};
 		binaryExpression.getRight().accept(this);

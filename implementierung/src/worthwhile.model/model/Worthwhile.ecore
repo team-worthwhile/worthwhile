@@ -18,7 +18,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="functionDeclarations"
                       ordered="false" upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration"
@@ -35,7 +35,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EAttribute" name="lineNumber"
                       ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -47,7 +47,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="BinaryExpression" abstract="true"
@@ -56,7 +56,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="left" ordered="false"
                       lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -71,7 +71,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" abstract="true"
@@ -80,7 +80,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="operand"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -91,7 +91,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ArrayLiteral" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Literal">
@@ -99,7 +99,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="values" ordered="false"
                       upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
@@ -110,7 +110,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ArrayType" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Type">
@@ -118,7 +118,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="baseType"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/PrimitiveType"
@@ -133,7 +133,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" abstract="true"
@@ -142,7 +142,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Assertion" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Annotation">
@@ -150,7 +150,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Annotation" abstract="true"
@@ -159,7 +159,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="expression"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -170,7 +170,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="value" ordered="false"
                       lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -184,7 +184,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false"
                       lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Type"
@@ -199,7 +199,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Axiom" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Annotation">
@@ -207,7 +207,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Statement">
@@ -215,7 +215,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="statements"
                       ordered="false" upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Statement"
@@ -226,7 +226,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
                       lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -236,7 +236,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Conditional" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Statement">
@@ -244,7 +244,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="condition"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -261,7 +261,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Disjunction" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -269,7 +269,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Division" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -277,7 +277,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Equal" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -285,7 +285,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Equivalence" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -293,7 +293,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ExistsQuantifier" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/QuantifiedExpression">
@@ -301,7 +301,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="QuantifiedExpression"
@@ -310,7 +310,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="parameter"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration"
@@ -327,7 +327,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Expression">
@@ -335,7 +335,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="actuals"
                       ordered="false" lowerBound="1" upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -348,7 +348,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="preconditions"
                       ordered="false" upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Precondition"
@@ -373,7 +373,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Postcondition" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Annotation">
@@ -381,7 +381,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Greater" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -389,7 +389,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="GreaterOrEqual" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -397,7 +397,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Implication" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -405,7 +405,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteral" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Literal">
@@ -413,7 +413,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
                       lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigInteger"/>
@@ -423,7 +423,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Invariant" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Annotation">
@@ -431,7 +431,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Less" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -439,7 +439,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="LessOrEqual" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -447,7 +447,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Statement">
@@ -455,7 +455,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="condition"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -474,7 +474,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Modulus" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -482,7 +482,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Multiplication" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -490,7 +490,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression">
@@ -498,7 +498,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Plus" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Sign">
@@ -506,7 +506,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ReturnStatement" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Statement">
@@ -514,7 +514,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
@@ -525,7 +525,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Unequal" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
@@ -533,7 +533,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Expression">
@@ -541,7 +541,7 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="variable"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration"/>
@@ -554,12 +554,12 @@
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
                       <details key="body" value="visitor.visit(this);"/>
                     </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
                 <eSubpackages name="visitor" nsURI="http:///visitor.ast.model.worthwhile.pse.formal.iti.kit.edu"
                     nsPrefix="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor">
-                  <eClassifiers xsi:type="ecore:EClass" name="ASTNodeVisitor" abstract="true"
+                  <eClassifiers xsi:type="ecore:EClass" name="IASTNodeVisitor" abstract="true"
                       interface="true">
                     <eOperations name="visit">
                       <eParameters name="node" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Addition"/>
@@ -724,6 +724,7 @@
                       <eParameters name="node" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference"/>
                     </eOperations>
                   </eClassifiers>
+                  <eClassifiers xsi:type="ecore:EClass" name="ASTNodeVisitor" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                 </eSubpackages>
               </eSubpackages>
             </eSubpackages>

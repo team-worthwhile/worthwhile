@@ -364,170 +364,171 @@
                   </genClasses>
                   <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
                       disposableProviderFactory="true" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor">
-                    <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor">
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit/node"/>
+                    <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor">
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.1">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.1/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.1">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.1/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.2">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.2/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.2">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.2/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.3">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.3/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.3">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.3/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.4">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.4/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.4">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.4/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.5">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.5/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.5">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.5/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.6">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.6/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.6">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.6/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.7">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.7/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.7">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.7/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.8">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.8/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.8">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.8/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.9">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.9/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.9">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.9/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.10">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.10/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.10">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.10/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.11">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.11/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.11">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.11/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.12">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.12/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.12">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.12/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.13">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.13/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.13">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.13/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.14">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.14/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.14">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.14/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.15">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.15/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.15">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.15/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.16">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.16/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.16">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.16/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.17">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.17/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.17">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.17/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.18">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.18/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.18">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.18/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.19">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.19/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.19">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.19/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.20">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.20/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.20">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.20/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.21">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.21/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.21">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.21/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.22">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.22/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.22">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.22/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.23">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.23/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.23">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.23/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.24">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.24/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.24">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.24/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.25">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.25/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.25">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.25/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.26">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.26/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.26">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.26/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.27">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.27/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.27">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.27/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.28">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.28/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.28">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.28/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.29">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.29/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.29">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.29/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.30">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.30/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.30">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.30/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.31">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.31/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.31">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.31/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.32">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.32/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.32">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.32/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.33">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.33/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.33">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.33/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.34">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.34/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.34">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.34/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.35">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.35/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.35">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.35/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.36">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.36/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.36">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.36/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.37">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.37/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.37">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.37/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.38">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.38/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.38">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.38/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.39">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.39/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.39">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.39/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.40">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.40/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.40">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.40/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.41">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.41/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.41">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.41/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.42">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.42/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.42">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.42/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.43">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.43/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.43">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.43/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.44">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.44/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.44">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.44/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.45">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.45/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.45">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.45/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.46">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.46/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.46">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.46/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.47">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.47/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.47">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.47/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.48">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.48/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.48">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.48/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.49">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.49/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.49">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.49/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.50">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.50/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.50">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.50/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.51">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.51/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.51">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.51/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.52">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.52/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.52">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.52/node"/>
                       </genOperations>
-                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.53">
-                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor/visit.53/node"/>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53/node"/>
                       </genOperations>
                     </genClasses>
+                    <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
                   </nestedGenPackages>
                 </nestedGenPackages>
               </nestedGenPackages>

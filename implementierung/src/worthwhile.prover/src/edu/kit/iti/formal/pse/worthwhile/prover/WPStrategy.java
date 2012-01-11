@@ -26,6 +26,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
@@ -115,7 +117,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 				                                                .push(assignment.getValue());
 			                                }
 		                                }));
-
 	}
 
 	/**
@@ -255,10 +256,66 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 *                the {@link Loop} to visit
 	 */
 	public void visit(final Loop loop) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		AstFactory factory = AstFactory.init();
 
-		// end-user-code
+		// and all the loop invariants
+		BooleanLiteral trueLiteral = factory.createBooleanLiteral();
+		trueLiteral.setValue(true);
+		Expression invariant = trueLiteral;
+
+		for (Invariant i : loop.getInvariants()) {
+			Conjunction conj = factory.createConjunction();
+			conj.setLeft(invariant);
+			conj.setRight(i.getExpression());
+			invariant = conj;
+		}
+
+
+		// (condition and invariant) implies wp(body, invariant)
+		Conjunction conditionAndInvariant = factory.createConjunction();
+		conditionAndInvariant.setLeft(new AstNodeCloneHelper<Expression>().clone(loop.getCondition()));
+		conditionAndInvariant.setRight(new AstNodeCloneHelper<Expression>().clone(invariant));
+
+		// generate weakest precondition for the body given the invariant as the postcondition
+		this.weakestPreconditionStack.push(invariant);
+		loop.getBody().accept(this);
+		Expression bodyPrecondition = this.weakestPreconditionStack.pop();
+
+		Implication conditionAndInvariantImpliesBodyPrecondition = factory.createImplication();
+		conditionAndInvariantImpliesBodyPrecondition.setLeft(conditionAndInvariant);
+		conditionAndInvariantImpliesBodyPrecondition.setRight(new AstNodeCloneHelper<Expression>()
+		                .clone(bodyPrecondition));
+
+		// ((not condition) and invariant) implies postcondition
+		Negation notCondition = factory.createNegation();
+		notCondition.setOperand(new AstNodeCloneHelper<Expression>().clone(loop.getCondition()));
+
+		Conjunction notConditionAndInvariant = factory.createConjunction();
+		notConditionAndInvariant.setLeft(notCondition);
+		notConditionAndInvariant.setRight(new AstNodeCloneHelper<Expression>().clone(invariant));
+
+		Implication notConditionAndInvariantImpliesPostcondition = factory.createImplication();
+		notConditionAndInvariantImpliesPostcondition.setLeft(notConditionAndInvariant);
+		notConditionAndInvariantImpliesPostcondition.setRight(this.getWeakestPrecondition());
+
+		// refresh variables
+		ASTNodeVisitor refreshVisitor = new FreshVariableSetVisitor();
+		conditionAndInvariantImpliesBodyPrecondition.accept(refreshVisitor);
+		refreshVisitor = new FreshVariableSetVisitor();
+		notConditionAndInvariantImpliesPostcondition.accept(refreshVisitor);
+
+		// assemble the weakest precondition from the three conditions
+		Conjunction invariantAndConditionTrueCase = factory.createConjunction();
+		invariantAndConditionTrueCase.setLeft(new AstNodeCloneHelper<Expression>().clone(invariant));
+		invariantAndConditionTrueCase.setRight(conditionAndInvariantImpliesBodyPrecondition);
+
+		Conjunction loopPrecondition = factory.createConjunction();
+		loopPrecondition.setLeft(invariantAndConditionTrueCase);
+		loopPrecondition.setRight(notConditionAndInvariantImpliesPostcondition);
+
+		// replace the weakest precondition on the stack
+		this.weakestPreconditionStack.pop();
+		this.weakestPreconditionStack.push(loopPrecondition);
 	}
 
 	/**

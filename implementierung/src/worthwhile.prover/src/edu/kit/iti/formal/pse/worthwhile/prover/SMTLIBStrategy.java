@@ -3,6 +3,8 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
@@ -62,7 +64,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
 // compile expressions!
 class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
 
-	private final Stack<String> compileStack = new Stack<String>();
+	private final Stack<String> formulaCompileStack = new Stack<String>();
+
+	// TODO: use VariableDeclaration here once it's got a better equals method
+	private final Set<String> declarations = new HashSet<String>();
 
 	/**
 	 * @see FormulaCompiler#compileFormula(Expression formula)
@@ -71,27 +76,32 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	public String compileFormula(Expression formula) {
 		// this should push a String object to the compilation stack
 		formula.accept(this);
-		String formulaString = this.compileStack.pop();
+		String formulaString = this.formulaCompileStack.pop();
+
+		String declarationsString = "";
+		for (String s : this.declarations) {
+			declarationsString += s + "\n";
+		}
 
 		// wrap the formulaString in a command for the prover that tells the prover
 		// what we want to know about the formula
 		// TODO: Make this more intelligent, maybe wrap the Expression in an
 		// Assert and then visit it just like all the other nodes...?
-		return "(assert " + formulaString + ")\n(check-sat)";
+		return declarationsString + "(assert " + formulaString + ")\n(check-sat)";
 	}
 
 	private void pushBinaryOperation(BinaryExpression binaryExpression, String compiledOperationSymbol) {
 		binaryExpression.getLeft().accept(this);
 		binaryExpression.getRight().accept(this);
-		String right = this.compileStack.pop();
-		String left = this.compileStack.pop();
-		this.compileStack.push("(" + compiledOperationSymbol + " " + left + " " + right + ")");
+		String right = this.formulaCompileStack.pop();
+		String left = this.formulaCompileStack.pop();
+		this.formulaCompileStack.push("(" + compiledOperationSymbol + " " + left + " " + right + ")");
 	}
 
 	private void pushUnaryOperation(UnaryExpression unaryExpression, String compiledOperationSymbol) {
 		unaryExpression.getOperand().accept(this);
-		String operand = this.compileStack.pop();
-		this.compileStack.push("(" + compiledOperationSymbol + " " + operand + ")");
+		String operand = this.formulaCompileStack.pop();
+		this.formulaCompileStack.push("(" + compiledOperationSymbol + " " + operand + ")");
 	}
 
 	public void visit(Addition addition) {
@@ -121,8 +131,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	public void visit(Assertion assertion) {
 		assertion.getExpression().accept(this);
-		String expr = this.compileStack.pop();
-		this.compileStack.push("assert(" + expr + ")");
+		String expr = this.formulaCompileStack.pop();
+		this.formulaCompileStack.push("assert(" + expr + ")");
 	}
 
 	public void visit(Assignment assignment) {
@@ -134,8 +144,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	public void visit(Assumption assumption) {
 		assumption.getExpression().accept(this);
-		String expr = this.compileStack.pop();
-		this.compileStack.push("assume(" + expr + ")");
+		String expr = this.formulaCompileStack.pop();
+		this.formulaCompileStack.push("assume(" + expr + ")");
 	}
 
 	public void visit(Axiom axiom) {
@@ -154,17 +164,14 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	public void visit(BooleanLiteral booleanLiteral) {
 		if (booleanLiteral.isValue()) {
-			this.compileStack.push("true");
+			this.formulaCompileStack.push("true");
 		} else {
-			this.compileStack.push("false");
+			this.formulaCompileStack.push("false");
 		}
 	}
 
 	public void visit(BooleanType booleanType) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.formulaCompileStack.push("Bool");
 	}
 
 	/**
@@ -283,17 +290,14 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
 	 */
 	public void visit(IntegerLiteral integerLiteral) {
-		this.compileStack.push(integerLiteral.getValue().toString());
+		this.formulaCompileStack.push(integerLiteral.getValue().toString());
 	}
 
 	/**
 	 * @see ASTNodeVisitor#visit(IntegerType integerType)
 	 */
 	public void visit(IntegerType integerType) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.formulaCompileStack.push("Int");
 	}
 
 	/**
@@ -361,10 +365,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(VariableReference variableReference)
 	 */
 	public void visit(VariableReference variableReference) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		variableReference.getVariable().accept(this);
+		this.formulaCompileStack.push(variableReference.getVariable().getName());
 	}
 
 	/**
@@ -386,15 +388,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 		// end-user-code
 	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Predicates predicates)
-	 */
-	/*
-	 * public void visit(Predicates predicates) { // begin-user-code // TODO Auto-generated method stub
-	 * 
-	 * // end-user-code }
-	 */
 
 	/**
 	 * @see ASTNodeVisitor#visit(Precondition precondition)
@@ -457,13 +450,12 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDecleration)
+	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
 	 */
-	public void visit(VariableDeclaration variableDecleration) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void visit(VariableDeclaration variableDeclaration) {
+		variableDeclaration.getType().accept(this);
+		this.declarations.add("(declare-const " + variableDeclaration.getName() + " "
+		                + this.formulaCompileStack.pop() + ")");
 	}
 
 }

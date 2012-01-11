@@ -55,7 +55,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
  * @author Leon Handreke
  * 
  */
-public class ASTNodeCloneVisitor extends ASTNodeVisitor {
+public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * The "return stack" for visit methods.
 	 */

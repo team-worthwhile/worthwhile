@@ -122,6 +122,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link Addition} to clone
 	 */
+	@Override
 	public final void visit(final Addition a) {
 		Addition newAddition = this.nodeFactory.createAddition();
 		this.cloneBinaryExpressionOperands(a, newAddition);
@@ -134,6 +135,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link ArrayLength} to clone
 	 */
+	@Override
 	public final void visit(final ArrayLength a) {
 		ArrayLength newArrayLength = this.nodeFactory.createArrayLength();
 		a.getOperand().accept(this);
@@ -147,6 +149,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link ArrayLiteral} to clone
 	 */
+	@Override
 	public final void visit(final ArrayLiteral a) {
 		ArrayLiteral newArrayLiteral = this.nodeFactory.createArrayLiteral();
 		for (Expression e : a.getValues()) {
@@ -162,6 +165,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link Assertion} to clone
 	 */
+	@Override
 	public final void visit(final Assertion a) {
 		Assertion newAnnotation = this.nodeFactory.createAssertion();
 		this.cloneAnnotationExpression(a, newAnnotation);
@@ -174,6 +178,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link Assignment} to clone
 	 */
+	@Override
 	public final void visit(final Assignment a) {
 		Assignment newAssignment = this.nodeFactory.createAssignment();
 		a.getValue().accept(this);
@@ -189,6 +194,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link Assumption} to clone
 	 */
+	@Override
 	public final void visit(final Assumption a) {
 		Assumption newAssumption = this.nodeFactory.createAssumption();
 		this.cloneAnnotationExpression(a, newAssumption);
@@ -201,6 +207,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param a
 	 *                the {@link Axiom} to clone
 	 */
+	@Override
 	public final void visit(final Axiom a) {
 		Axiom newAxiom = this.nodeFactory.createAxiom();
 		this.cloneAnnotationExpression(a, newAxiom);
@@ -213,6 +220,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param b
 	 *                the {@link Block} to clone
 	 */
+	@Override
 	public final void visit(final Block b) {
 		Block newBlock = this.nodeFactory.createBlock();
 		for (Statement s : b.getStatements()) {
@@ -228,6 +236,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param b
 	 *                the {@link BooleanLiteral} to clone
 	 */
+	@Override
 	public final void visit(final BooleanLiteral b) {
 		BooleanLiteral newBooleanLiteral = this.nodeFactory.createBooleanLiteral();
 		newBooleanLiteral.setValue(b.getValue());
@@ -240,6 +249,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param b
 	 *                the {@link BooleanType} to clone
 	 */
+	@Override
 	public final void visit(final BooleanType b) {
 		BooleanType newBooleanType = this.nodeFactory.createBooleanType();
 		this.cloneStack.push(newBooleanType);
@@ -251,6 +261,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param c
 	 *                the {@link Conditional} to clone
 	 */
+	@Override
 	public final void visit(final Conditional c) {
 		Conditional newConditional = this.nodeFactory.createConditional();
 		c.getCondition().accept(this);
@@ -268,6 +279,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param c
 	 *                the {@link Conjunction} to clone
 	 */
+	@Override
 	public final void visit(final Conjunction c) {
 		Conjunction newConjunction = this.nodeFactory.createConjunction();
 		this.cloneBinaryExpressionOperands(c, newConjunction);
@@ -280,6 +292,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param d
 	 *                the {@link Disjunction} to clone
 	 */
+	@Override
 	public final void visit(final Disjunction d) {
 		Disjunction newDisjunction = this.nodeFactory.createDisjunction();
 		this.cloneBinaryExpressionOperands(d, newDisjunction);
@@ -292,6 +305,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param d
 	 *                the {@link Division} to clone
 	 */
+	@Override
 	public final void visit(final Division d) {
 		Division newDivision = this.nodeFactory.createDivision();
 		this.cloneBinaryExpressionOperands(d, newDivision);
@@ -304,6 +318,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param e
 	 *                the {@link Equal} to clone
 	 */
+	@Override
 	public final void visit(final Equal e) {
 		Equal newEqual = this.nodeFactory.createEqual();
 		this.cloneBinaryExpressionOperands(e, newEqual);
@@ -316,6 +331,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param g
 	 *                the {@link Greater} to clone
 	 */
+	@Override
 	public final void visit(final Greater g) {
 		Greater newGreater = this.nodeFactory.createGreater();
 		this.cloneBinaryExpressionOperands(g, newGreater);
@@ -328,6 +344,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param g
 	 *                the {@link GreaterOrEqual} to clone
 	 */
+	@Override
 	public final void visit(final GreaterOrEqual g) {
 		GreaterOrEqual newGreaterOrEqual = this.nodeFactory.createGreaterOrEqual();
 		this.cloneBinaryExpressionOperands(g, newGreaterOrEqual);
@@ -340,6 +357,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param i
 	 *                the {@link Implication} to clone
 	 */
+	@Override
 	public final void visit(final Implication i) {
 		Implication newImplication = this.nodeFactory.createImplication();
 		this.cloneBinaryExpressionOperands(i, newImplication);
@@ -352,6 +370,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param i
 	 *                the {@link IntegerLiteral} to clone
 	 */
+	@Override
 	public final void visit(final IntegerLiteral i) {
 		IntegerLiteral newIntegerLiteral = this.nodeFactory.createIntegerLiteral();
 		newIntegerLiteral.setValue(new BigInteger(i.getValue().toString()));
@@ -364,6 +383,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param i
 	 *                the {@link IntegerType} to clone
 	 */
+	@Override
 	public final void visit(final IntegerType i) {
 		this.cloneStack.push(this.nodeFactory.createIntegerType());
 	}
@@ -374,6 +394,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param i
 	 *                the {@link Invariant} to clone
 	 */
+	@Override
 	public final void visit(final Invariant i) {
 		Invariant newInvariant = this.nodeFactory.createInvariant();
 		this.cloneAnnotationExpression(i, newInvariant);
@@ -386,6 +407,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param l
 	 *                the {@link Less} to clone
 	 */
+	@Override
 	public final void visit(final Less l) {
 		Less newLess = this.nodeFactory.createLess();
 		this.cloneBinaryExpressionOperands(l, newLess);
@@ -398,6 +420,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param l
 	 *                the {@link LessOrEqual} to clone
 	 */
+	@Override
 	public final void visit(final LessOrEqual l) {
 		LessOrEqual newLessOrEqual = this.nodeFactory.createLessOrEqual();
 		this.cloneBinaryExpressionOperands(l, newLessOrEqual);
@@ -410,6 +433,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param l
 	 *                the {@link Loop} to clone
 	 */
+	@Override
 	public final void visit(final Loop l) {
 		Loop newLoop = this.nodeFactory.createLoop();
 		l.getCondition().accept(this);
@@ -425,6 +449,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param m
 	 *                the {@link Minus} to clone
 	 */
+	@Override
 	public final void visit(final Minus m) {
 		Minus newMinus = this.nodeFactory.createMinus();
 		this.cloneUnaryExpressionOperand(m, newMinus);
@@ -437,6 +462,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param m
 	 *                the {@link Modulus} to clone
 	 */
+	@Override
 	public final void visit(final Modulus m) {
 		Modulus newModulus = this.nodeFactory.createModulus();
 		this.cloneBinaryExpressionOperands(m, newModulus);
@@ -449,6 +475,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param m
 	 *                the {@link Multiplication} to clone
 	 */
+	@Override
 	public final void visit(final Multiplication m) {
 		Multiplication newMultiplication = this.nodeFactory.createMultiplication();
 		this.cloneBinaryExpressionOperands(m, newMultiplication);
@@ -461,6 +488,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param n
 	 *                the {@link Negation} to clone
 	 */
+	@Override
 	public final void visit(final Negation n) {
 		Negation newNegation = this.nodeFactory.createNegation();
 		this.cloneUnaryExpressionOperand(n, newNegation);
@@ -473,6 +501,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param p
 	 *                the {@link Plus} to clone
 	 */
+	@Override
 	public final void visit(final Plus p) {
 		Plus newPlus = this.nodeFactory.createPlus();
 		this.cloneUnaryExpressionOperand(p, newPlus);
@@ -485,6 +514,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param p
 	 *                the {@link Postcondition} to clone
 	 */
+	@Override
 	public final void visit(final Postcondition p) {
 		Postcondition newPostcondition = this.nodeFactory.createPostcondition();
 		this.cloneAnnotationExpression(p, newPostcondition);
@@ -497,6 +527,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param p
 	 *                the {@link Precondition} to clone
 	 */
+	@Override
 	public final void visit(final Precondition p) {
 		Precondition newPrecondition = this.nodeFactory.createPrecondition();
 		this.cloneAnnotationExpression(p, newPrecondition);
@@ -509,6 +540,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param p
 	 *                the {@link Program} to clone
 	 */
+	@Override
 	public final void visit(final Program p) {
 		Program newProgram = this.nodeFactory.createProgram();
 		p.getMainBlock().accept(this);
@@ -523,6 +555,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param r
 	 *                the {@link ReturnStatement} to clone
 	 */
+	@Override
 	public final void visit(final ReturnStatement r) {
 		ReturnStatement newReturnStatement = this.nodeFactory.createReturnStatement();
 		r.getReturnValue().accept(this);
@@ -536,6 +569,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param s
 	 *                the {@link Subtraction} to clone
 	 */
+	@Override
 	public final void visit(final Subtraction s) {
 		Subtraction newSubtraction = this.nodeFactory.createSubtraction();
 		this.cloneBinaryExpressionOperands(s, newSubtraction);
@@ -548,6 +582,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param u
 	 *                the {@link Unequal} to clone
 	 */
+	@Override
 	public final void visit(final Unequal u) {
 		Unequal newUnequal = this.nodeFactory.createUnequal();
 		this.cloneBinaryExpressionOperands(u, newUnequal);
@@ -560,6 +595,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param v
 	 *                the {@link VariableDeclaration} to clone
 	 */
+	@Override
 	public final void visit(final VariableDeclaration v) {
 		VariableDeclaration newVariableDeclaration = this.nodeFactory.createVariableDeclaration();
 		v.getType().accept(this);
@@ -576,6 +612,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 * @param v
 	 *                the {@link VariableReference} to clone
 	 */
+	@Override
 	public final void visit(final VariableReference v) {
 		VariableReference newVariableReference = this.nodeFactory.createVariableReference();
 		newVariableReference.setVariable(v.getVariable());

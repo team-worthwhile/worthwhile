@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
-import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractExecutionEventListener;
 
 /**
  * An event listener base class that works with the Eclipse debug model.
@@ -8,7 +8,7 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
  * @author Joachim
  * 
  */
-public class WorthwhileEventListener extends AbstractDebugEventListener {
+public class WorthwhileEventListener extends AbstractExecutionEventListener {
 
 	/**
 	 * The debug target to send messages to.

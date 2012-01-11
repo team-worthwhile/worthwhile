@@ -58,24 +58,24 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 *
 	 */
-	private Set<AbstractDebugEventListener> debugEventHandlers;
+	private Set<AbstractExecutionEventListener> executionEventHandlers;
 
 	/**
-	 * @return the debugEventHandlers
+	 * @return the executionEventHandlers
 	 */
-	public Set<AbstractDebugEventListener> getDebugEventHandlers() {
+	public Set<AbstractExecutionEventListener> getExecutionEventHandlers() {
 		// begin-user-code
-		return this.debugEventHandlers;
+		return this.executionEventHandlers;
 		// end-user-code
 	}
 
 	/**
-	 * @param debugEventHandlers
-	 *                the debugEventHandlers to set
+	 * @param executionEventHandlers
+	 *                the executionEventHandlers to set
 	 */
-	public void setDebugEventHandlers(Set<AbstractDebugEventListener> debugEventHandlers) {
+	public void setExecutionEventHandlers(Set<AbstractExecutionEventListener> executionEventHandlers) {
 		// begin-user-code
-		this.debugEventHandlers = debugEventHandlers;
+		this.executionEventHandlers = executionEventHandlers;
 		// end-user-code
 	}
 
@@ -130,8 +130,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * 
 	 * @param handler
 	 */
-	protected void addDebugEventHandler(AbstractDebugEventListener handler) {
-		this.debugEventHandlers.add(handler);
+	protected void addExecutionEventHandler(AbstractExecutionEventListener handler) {
+		this.executionEventHandlers.add(handler);
 	}
 
 	/**
@@ -139,8 +139,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * 
 	 * @param handler
 	 */
-	protected void removeDebugEventHandler(AbstractDebugEventListener handler) {
-		this.debugEventHandlers.remove(handler);
+	protected void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
+		this.executionEventHandlers.remove(handler);
 	}
 
 	/**

@@ -14,7 +14,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractDebugEventListener;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractExecutionEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 //import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint; //TODO remember this does not exist anymore
 
@@ -39,7 +39,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	/**
 	 * The event listener that manages the debug events from the interpreter.
 	 */
-	private AbstractDebugEventListener eventListener;
+	private AbstractExecutionEventListener eventListener;
 
 	/**
 	 * The interpreter executing the program.
@@ -74,7 +74,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		} else {
 			this.eventListener = new WorthwhileRunEventListener(this);
 		}
-		interpreter.addDebugEventHandler(this.eventListener);
+		interpreter.addExecutionEventHandler(this.eventListener);
 
 		// Register ourselves as a breakpoint listener.
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
@@ -160,7 +160,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void disconnect() throws DebugException {
-		this.interpreter.removeDebugEventHandler(this.eventListener);
+		this.interpreter.removeExecutionEventHandler(this.eventListener);
 		// TODO isDisconnected
 	}
 

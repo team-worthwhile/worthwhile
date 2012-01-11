@@ -7,7 +7,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
-public abstract class AbstractDebugEventListener {
+public abstract class AbstractExecutionEventListener {
 	/**
 	 * Called every time a Statement has been executed by the Interpreter
 	 * 

@@ -7,7 +7,6 @@ Bundle-Vendor: Team Worthwhile
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile.model.ast,
- edu.kit.iti.formal.pse.worthwhile.model.ast.impl,
  edu.kit.iti.formal.pse.worthwhile.model.ast.util,
  edu.kit.iti.formal.pse.worthwhile.model.ast.visitor
 Require-Bundle: org.eclipse.core.runtime,

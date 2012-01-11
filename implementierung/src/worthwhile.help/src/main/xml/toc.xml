@@ -2,8 +2,21 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Worthwhile">
-	<topic label="Main Topic"  href="src/main/html/maintopic.html"> 
-		<topic label="Sub Topic" href="src/main/html/subtopic.html"/> 
-	</topic>
-	<topic label="Main Topic 2"/>
+   <topic label="Language reference">
+      <topic label="Data Types">
+      	<topic href="src/main/html/boolean.html" label="Boolean" />
+      	<topic href="src/main/html/integer.html" label="Integer" />
+      </topic>
+      <topic label="Program structure">
+      	<topic href="src/main/html/program.html" label="Programs" />
+      	<topic href="src/main/html/function.html" label="Functions" />
+      	<topic href="src/main/html/comment.html" label="Comments" />
+      	<topic href="src/main/html/expression.html" label="Expressions" />
+      	<topic href="src/main/html/quantifiedexpression.html" label="Quantified Expressions" />
+      </topic>
+      <topic label="Assertions">
+      	<topic href="src/main/html/assert.html" label="Assertions" />
+      	<topic href="src/main/html/assume.html" label="Assumptions" />
+      </topic>
+   </topic>
 </toc>

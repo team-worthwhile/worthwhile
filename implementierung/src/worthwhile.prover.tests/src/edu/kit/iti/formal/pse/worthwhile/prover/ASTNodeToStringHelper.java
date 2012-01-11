@@ -72,7 +72,7 @@ class ASTNodeToStringHelper extends ASTNodeVisitor {
 
 	@Override
 	public void visit(final BooleanLiteral booleanLiteral) {
-		buf.append(booleanLiteral.getValue());
+		buf.append(booleanLiteral.isValue());
 	}
 
 	@Override

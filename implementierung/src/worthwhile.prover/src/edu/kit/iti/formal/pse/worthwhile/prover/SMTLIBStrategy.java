@@ -152,7 +152,7 @@ class SMTLIBStrategy extends ASTNodeVisitor implements FormulaCompiler {
 	}
 
 	public void visit(BooleanLiteral booleanLiteral) {
-		if (booleanLiteral.getValue()) {
+		if (booleanLiteral.isValue()) {
 			this.compileStack.push("true");
 		} else {
 			this.compileStack.push("false");

@@ -16,7 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
 
 public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 
-	private Map<String, String> variableMap = new HashMap<String, String>();
+	private Map<VariableDeclaration, VariableDeclaration> variableMap = new HashMap<VariableDeclaration, VariableDeclaration>();
 
 	private Stack<Expression> substituteExpressionStack = new Stack<Expression>();
 
@@ -39,13 +39,12 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(VariableReference v) {
-		if(!this.variableMap.containsKey(v.getVariable().getName())) {
-			this.variableMap.put(v.getVariable().getName(), v.getVariable().getName() + "-was-"
-			                + UUID.randomUUID().toString());
+		if(!this.variableMap.containsKey(v.getVariable())) {
+			VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());
+			newVariable.setName(v.getVariable().getName() + "-fresh-" + UUID.randomUUID().toString());
+			this.variableMap.put(v.getVariable(), newVariable);
 		}
-		VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());
-		newVariable.setName(this.variableMap.get(v.getVariable().getName()));
-		v.setVariable(newVariable);
+		v.setVariable(this.variableMap.get(v.getVariable()));
 
 		this.substituteExpressionStack.push(v);
 	}

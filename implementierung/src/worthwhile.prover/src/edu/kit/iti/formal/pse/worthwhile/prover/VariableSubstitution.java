@@ -136,7 +136,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 *            the node to be visited
 	 */
 	public void visit(VariableReference variableReference) {
-		if (variableReference.getVariable().getName().equals(variable.getName())) {
+		if (variableReference.getVariable().equals(variable)) {
 			this.substituteCommand.substitute();
 		}
 	}

@@ -577,8 +577,7 @@ public class ASTNodeCloneVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public final void visit(final VariableReference v) {
 		VariableReference newVariableReference = this.nodeFactory.createVariableReference();
-		v.getVariable().accept(this);
-		newVariableReference.setVariable((VariableDeclaration) this.cloneStack.pop());
+		newVariableReference.setVariable(v.getVariable());
 		if (v.getIndex() != null) {
 			v.getIndex().accept(this);
 			newVariableReference.setIndex((Expression) this.cloneStack.pop());

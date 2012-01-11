@@ -84,7 +84,7 @@ public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
 
 		singleton.cloneStack.clear();
 		n.accept(singleton);
-		return (T) singleton.getClone();
+		return (T) singleton.cloneStack.get(0);
 	}
 
 	/**
@@ -96,14 +96,6 @@ public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
 	 * Factory used to construct new nodes.
 	 */
 	private AstFactory nodeFactory = AstFactory.init();
-
-	/**
-	 * @return the cloned ASTNode that was last visited
-	 */
-	public final ASTNode getClone() {
-		return this.cloneStack.get(0);
-	}
-
 	/**
 	 * Convenience method to clone the Expressions of a {@link BinaryExpression}.
 	 * 

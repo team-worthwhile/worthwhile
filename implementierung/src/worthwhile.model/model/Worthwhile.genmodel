@@ -528,7 +528,6 @@
                         <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53/node"/>
                       </genOperations>
                     </genClasses>
-                    <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/ASTNodeVisitor"/>
                   </nestedGenPackages>
                 </nestedGenPackages>
               </nestedGenPackages>

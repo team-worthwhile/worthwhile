@@ -56,279 +56,296 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 
 /**
- * A visitor that can visit any ASTNode object. If the visit() method for a specific type is not implemented, the
- * supertype’s visit() method is tried and so forth.
+ * A default implementation of the {@link IASTNodeVisitor} interface.
+ * 
+ * Implementors can specify a default operation that is executed when no other operation is defined.
  * 
  * @author Joachim
  * 
  * @nocheckstyle:designforextension
  * 
  */
-public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
+public abstract class ASTNodeVisitor implements IASTNodeVisitor {
+
+	/**
+	 * The default operation to be executed when no operation is defined for a type of AST node.
+	 * 
+	 * @param node
+	 *                The node for which the operation was called.
+	 */
+	protected final void defaultOperation(final ASTNode node) {
+		throw new UnsupportedOperationException("Visitor cannot handle this type of AST node: "
+		                + node.eClass().toString());
+	}
 
 	@Override
 	public void visit(final Addition node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Annotation node) {
-		this.visit((Statement) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final ArrayLength node) {
-		this.visit((UnaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final ArrayLiteral node) {
-		this.visit((Literal) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final ArrayType node) {
-		this.visit((Type) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Assertion node) {
-		this.visit((Annotation) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Assignment node) {
-		this.visit((Statement) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Assumption node) {
-		this.visit((Annotation) node);
+		this.defaultOperation(node);
+	}
+
+	@Override
+	public void visit(final ASTNode node) {
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Axiom node) {
-		this.visit((Annotation) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final BinaryExpression node) {
-		this.visit((Expression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Block node) {
-		this.visit((ASTNode) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final BooleanLiteral node) {
-		this.visit((Literal) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final BooleanType node) {
-		this.visit((PrimitiveType) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Conditional node) {
-		this.visit((Statement) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Conjunction node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Disjunction node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Division node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Equal node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Equivalence node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final ExistsQuantifier node) {
-		this.visit((QuantifiedExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Expression node) {
-		this.visit((ASTNode) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final ForAllQuantifier node) {
-		this.visit((QuantifiedExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final FunctionCall node) {
-		this.visit((Expression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final FunctionDeclaration node) {
-		this.visit((ASTNode) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Greater node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final GreaterOrEqual node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Implication node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final IntegerLiteral node) {
-		this.visit((Literal) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final IntegerType node) {
-		this.visit((PrimitiveType) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Invariant node) {
-		this.visit((Annotation) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Less node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final LessOrEqual node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Literal node) {
-		this.visit((Expression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Loop node) {
-		this.visit((Statement) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Minus node) {
-		this.visit((Sign) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Modulus node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Multiplication node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Negation node) {
-		this.visit((UnaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Plus node) {
-		this.visit((Sign) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Postcondition node) {
-		this.visit((Annotation) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Precondition node) {
-		this.visit((Annotation) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final PrimitiveType node) {
-		this.visit((Type) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Program node) {
-		this.visit((ASTNode) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final QuantifiedExpression node) {
-		this.visit((Expression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final ReturnStatement node) {
-		this.visit((Statement) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Sign node) {
-		this.visit((UnaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Statement node) {
-		this.visit((ASTNode) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Subtraction node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Type node) {
-		this.visit((ASTNode) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final UnaryExpression node) {
-		this.visit((Expression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final Unequal node) {
-		this.visit((BinaryExpression) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final VariableDeclaration node) {
-		this.visit((Statement) node);
+		this.defaultOperation(node);
 	}
 
 	@Override
 	public void visit(final VariableReference node) {
-		this.visit((Expression) node);
+		this.defaultOperation(node);
 	}
 
 }

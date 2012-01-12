@@ -108,13 +108,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	protected Map<String, Value> getAllSymbols() {
 		return this.symbolMap;
 	}
-	
+
 	/**
 	 *
 	 */
 	protected InterpreterASTNodeVisitor() {
 	}
-	
+
 	/**
 	 * 
 	 * @param statement

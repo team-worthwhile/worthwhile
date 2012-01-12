@@ -28,7 +28,7 @@ public class Interpreter {
 
 	/**
 	 * @param executionEventHandlers
-	 *            the executionEventHandlers to set
+	 *                the executionEventHandlers to set
 	 */
 	public void setExecutionEventHandlers(Set<AbstractExecutionEventListener> executionEventHandlers) {
 		// begin-user-code
@@ -52,7 +52,7 @@ public class Interpreter {
 
 	/**
 	 * @param currentNodeVisitor
-	 *            the currentNodeVisitor to set
+	 *                the currentNodeVisitor to set
 	 */
 	public void setCurrentNodeVisitor(InterpreterASTNodeVisitor currentNodeVisitor) {
 		// begin-user-code
@@ -76,7 +76,7 @@ public class Interpreter {
 
 	/**
 	 * @param nodeVisitors
-	 *            the nodeVisitors to set
+	 *                the nodeVisitors to set
 	 */
 	public void setNodeVisitors(Set<InterpreterASTNodeVisitor> nodeVisitors) {
 		// begin-user-code
@@ -100,7 +100,7 @@ public class Interpreter {
 
 	/**
 	 * @param program
-	 *            the program to set
+	 *                the program to set
 	 */
 	public void setProgram(Program program) {
 		// begin-user-code

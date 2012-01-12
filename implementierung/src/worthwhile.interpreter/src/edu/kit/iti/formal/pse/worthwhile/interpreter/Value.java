@@ -203,7 +203,9 @@ public class Value {
 	 * This method checks whether this value and a given object are equal. The method returns true if the given
 	 * object is of type Value and its valueType is equal to the valueType of this value, also the corresponding
 	 * values of both, the given value and this value have to be the same. Otherwise this method returns false.
-	 * @param value the object to be checked for equality with this value.
+	 * 
+	 * @param value
+	 *                the object to be checked for equality with this value.
 	 * @return returns true if the this and the given objects are equal, otherwise false.
 	 */
 	public boolean equals(final Object value) {

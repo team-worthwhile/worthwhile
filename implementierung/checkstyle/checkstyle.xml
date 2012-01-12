@@ -13,6 +13,7 @@ Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that 
   <property name="severity" value="warning"/>
   <module name="TreeWalker">
     <property name="tabWidth" value="4"/>
+    <module name="FileContentsHolder"/>
     <module name="JavadocMethod">
       <property name="suppressLoadErrors" value="true"/>
     </module>
@@ -101,5 +102,10 @@ Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that 
     <property name="format" value="\s+$"/>
     <property name="message" value="Line has trailing spaces."/>
     <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+  </module>
+  <module name="SuppressionCommentFilter">
+    <property name="offCommentFormat" value="@nocheckstyle:designforextension"/>
+    <property name="onCommentFormat" value="@checkstyle:designforextension"/>
+    <property name="checkFormat" value="DesignForExtension"/>
   </module>
 </module>

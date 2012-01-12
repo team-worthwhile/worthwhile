@@ -3,11 +3,15 @@
  */
 package edu.kit.iti.formal.pse.worthwhile;
 
+import de.itemis.xtext.typesystem.ITypesystem;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.*;
 /**
  * Use this class to register components to be used at runtime / without the
  * Equinox extension registry.
  */
 public class WorthwhileRuntimeModule extends
 	edu.kit.iti.formal.pse.worthwhile.AbstractWorthwhileRuntimeModule {
-
+	public Class<? extends ITypesystem> bindITypestem() {
+		      return WorthwhileTypesystem.class;
+		}
 }

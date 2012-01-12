@@ -119,6 +119,7 @@ public class Interpreter {
 	 * 
 	 */
 	public void execute() {
+		this.currentNodeVisitor = new InterpreterASTNodeVisitor();
 		this.program.accept(currentNodeVisitor);
 	}
 

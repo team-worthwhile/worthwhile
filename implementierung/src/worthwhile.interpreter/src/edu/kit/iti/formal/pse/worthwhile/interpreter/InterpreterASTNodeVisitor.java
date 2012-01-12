@@ -6,6 +6,8 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
@@ -277,8 +279,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Block block) {
-		// TODO Auto-generated method stub
-
+		EList<Statement> statements = block.getStatements();
+		for (Statement statement : statements) {
+			statement.accept(this);
+		}
 	}
 
 	public void visit(BooleanLiteral booleanLiteral) {
@@ -430,8 +434,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Program program) {
-		// TODO Auto-generated method stub
 		this.executionStarted();
+		program.getMainBlock().accept(this);
 		this.executionCompleted();
 	}
 

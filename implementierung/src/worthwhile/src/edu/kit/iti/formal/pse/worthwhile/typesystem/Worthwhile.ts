@@ -1,9 +1,8 @@
 typesystem edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystem
-	ecore file "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model.Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast"
-	language package edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage
-	
-	
-	section "BaseTypes"
+ecore file "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/WorthwhilePlain.ecore"
+language package edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage
+
+section "BaseTypes"
 		typeof Type -> abstract
 		typeof PrimitiveType -> abstract
 		typeof ArrayType -> feature baseType
@@ -13,7 +12,7 @@ typesystem edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystem
 	section "Literals"
 		typeof Literal -> abstract
 		typeof BooleanLiteral + -> BooleanType
-		typeof NumberLiteral -> IntegerType
+		typeof IntegerLiteral -> IntegerType
 		typeof ArrayLiteral -> ArrayType
 		
 	section "Variables"
@@ -22,7 +21,7 @@ typesystem edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystem
 	    	ensureCompatibility variable :<=>: value
 	    }
 	    typeof VariableReference -> feature variable
-	    typeof  -> javacode { // FIXME
+	    /*typeof  -> javacode { // FIXME
 	    	ensureType expr :<=: ArrayType
 	    	ensureType index :<=: IntType "Array index must be an Integer"
-	    }
+	    }*/

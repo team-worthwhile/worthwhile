@@ -4,14 +4,14 @@
 package edu.kit.iti.formal.pse.worthwhile;
 
 import de.itemis.xtext.typesystem.ITypesystem;
-import edu.kit.iti.formal.pse.worthwhile.typesystem.*;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
+
 /**
- * Use this class to register components to be used at runtime / without the
- * Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-public class WorthwhileRuntimeModule extends
-	edu.kit.iti.formal.pse.worthwhile.AbstractWorthwhileRuntimeModule {
+public class WorthwhileRuntimeModule extends edu.kit.iti.formal.pse.worthwhile.AbstractWorthwhileRuntimeModule {
+	
 	public Class<? extends ITypesystem> bindITypestem() {
-		      return WorthwhileTypesystem.class;
-		}
+		return WorthwhileTypesystem.class;
+	}
 }

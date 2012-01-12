@@ -1,11 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import static org.junit.Assert.*;
-
 import java.math.BigInteger;
-
 import org.junit.Test;
-
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 
 /**

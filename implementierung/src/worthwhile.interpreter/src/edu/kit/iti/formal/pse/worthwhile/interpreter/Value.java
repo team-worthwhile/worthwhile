@@ -42,7 +42,7 @@ public class Value {
 	 * @param integerValue
 	 *                the value for this Value.
 	 */
-	public Value(BigInteger integerValue) {
+	public Value(final BigInteger integerValue) {
 		this.setIntegerValue(integerValue);
 	}
 
@@ -52,7 +52,7 @@ public class Value {
 	 * @param booleanValue
 	 *                the value for this Value.
 	 */
-	public Value(Boolean booleanValue) {
+	public Value(final Boolean booleanValue) {
 		this.setBooleanValue(booleanValue);
 	}
 
@@ -62,7 +62,7 @@ public class Value {
 	 * @param integerArray
 	 *                the value for this array.
 	 */
-	public Value(BigInteger[] integerArray) {
+	public Value(final BigInteger[] integerArray) {
 		this.setIntegerArray(integerArray);
 	}
 
@@ -72,7 +72,7 @@ public class Value {
 	 * @param booleanArray
 	 *                the value for this array.
 	 */
-	public Value(Boolean[] booleanArray) {
+	public Value(final Boolean[] booleanArray) {
 		this.setBooleanArray(booleanArray);
 	}
 
@@ -81,7 +81,7 @@ public class Value {
 	 * 
 	 * @return the valueType of this Value.
 	 */
-	public ValueType getValueType() {
+	public final ValueType getValueType() {
 		return valueType;
 	}
 
@@ -91,7 +91,7 @@ public class Value {
 	 * @param valueType
 	 *                the type of this Value.
 	 */
-	private void setValueType(ValueType valueType) {
+	private void setValueType(final ValueType valueType) {
 		this.valueType = valueType;
 	}
 
@@ -101,7 +101,7 @@ public class Value {
 	 * 
 	 * @return returns the integer value of this Value or null.
 	 */
-	public BigInteger getIntegerValue() {
+	public final BigInteger getIntegerValue() {
 		if (this.getValueType() == ValueType.INTEGER_TYPE) {
 			return this.integerValue;
 		} else {
@@ -115,7 +115,7 @@ public class Value {
 	 * 
 	 * @return returns the boolean value of this Value or null.
 	 */
-	public Boolean getBooleanValue() {
+	public final Boolean getBooleanValue() {
 		if (this.getValueType() == ValueType.BOOLEAN_TYPE) {
 			return this.booleanValue;
 		} else {
@@ -129,7 +129,7 @@ public class Value {
 	 * 
 	 * @return returns the boolean array of this Value or null.
 	 */
-	public Boolean[] getBooleanArray() {
+	public final Boolean[] getBooleanArray() {
 		if (this.getValueType() == ValueType.BOOLEAN_ARRAY_TYPE) {
 			return this.booleanArray;
 		} else {
@@ -143,7 +143,7 @@ public class Value {
 	 * 
 	 * @return returns the integer array of this Value or null.
 	 */
-	public BigInteger[] getIntegerArray() {
+	public final BigInteger[] getIntegerArray() {
 		if (this.getValueType() == ValueType.INTEGER_ARRAY_TYPE) {
 			return this.integerArray;
 		} else {
@@ -158,7 +158,7 @@ public class Value {
 	 * @param integerValue
 	 *                the integer value to be set.
 	 */
-	public void setIntegerValue(BigInteger integerValue) {
+	public final void setIntegerValue(final BigInteger integerValue) {
 		this.setValueType(ValueType.INTEGER_TYPE);
 		this.integerValue = integerValue;
 	}
@@ -170,7 +170,7 @@ public class Value {
 	 * @param booleanValue
 	 *                the boolean value to be set.
 	 */
-	public void setBooleanValue(Boolean booleanValue) {
+	public final void setBooleanValue(final Boolean booleanValue) {
 		this.setValueType(ValueType.BOOLEAN_TYPE);
 		this.booleanValue = booleanValue;
 	}
@@ -182,7 +182,7 @@ public class Value {
 	 * @param integerArray
 	 *                the integer array to be set.
 	 */
-	public void setIntegerArray(BigInteger[] integerArray) {
+	public final void setIntegerArray(final BigInteger[] integerArray) {
 		this.setValueType(ValueType.INTEGER_ARRAY_TYPE);
 		this.integerArray = integerArray;
 	}
@@ -194,7 +194,7 @@ public class Value {
 	 * @param booleanArray
 	 *                the boolean array to be set.
 	 */
-	public void setBooleanArray(Boolean[] booleanArray) {
+	public final void setBooleanArray(final Boolean[] booleanArray) {
 		this.setValueType(ValueType.BOOLEAN_ARRAY_TYPE);
 		this.booleanArray = booleanArray;
 	}
@@ -202,13 +202,15 @@ public class Value {
 	/**
 	 * This method checks whether this value and a given object are equal. The method returns true if the given
 	 * object is of type Value and its valueType is equal to the valueType of this value, also the corresponding
-	 * values of both, the given value and this value have to be the same. Otherwise this method returns false.
+	 * values of both, the given value and this value have to be the same. If the value is either
+	 * {@link ValueType#INTEGER_ARRAY_TYPE} or {@link ValueType#BOOLEAN_ARRAY_TYPE} the size and each element of the
+	 * array is compared. Otherwise this method returns false.
 	 * 
 	 * @param value
 	 *                the object to be checked for equality with this value.
 	 * @return returns true if the this and the given objects are equal, otherwise false.
 	 */
-	public boolean equals(final Object value) {
+	public final boolean equals(final Object value) {
 		if (value instanceof Value) {
 			if (((Value) value).getValueType() == (this.getValueType())) {
 				switch (((Value) value).getValueType()) {
@@ -217,9 +219,9 @@ public class Value {
 				case BOOLEAN_TYPE:
 					return this.getBooleanValue().equals(((Value) value).getBooleanValue());
 				case INTEGER_ARRAY_TYPE:
-					return this.getIntegerArray().equals(((Value) value).getIntegerArray());
+					return this.equalsArray(((Value) value).getIntegerArray());
 				case BOOLEAN_ARRAY_TYPE:
-					return this.getBooleanArray().equals(((Value) value).getBooleanArray());
+					return this.equalsArray(((Value) value).getBooleanArray());
 				default:
 					return false;
 				}
@@ -228,6 +230,65 @@ public class Value {
 			}
 		} else {
 			return super.equals(value);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public final int hashCode() {
+		return super.hashCode();
+	}
+
+	/**
+	 * This method checks whether this and a given array are equal. Equal means in this context that the size of
+	 * both arrays and every element in the first array is equal to its corresponding element of the other array.
+	 * 
+	 * @param array
+	 *                the array to check equality with the array of this object.
+	 * @return returns true if this and the given array are equal, otherwise false.
+	 */
+	private boolean equalsArray(final BigInteger[] array) {
+		if (this.getIntegerArray().length == array.length) {
+			for (int i = 0; i < array.length; i++) {
+				if (this.getIntegerArray()[i] != null && array[i] != null
+				                && !this.getIntegerArray()[i].equals(array[i])) {
+					return false;
+				} else if (this.getIntegerArray()[i] != null && array[i] == null) {
+					return false;
+				} else if (this.getIntegerArray()[i] == null && array[i] != null) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * This method checks whether this and a given array are equal. Equal means in this context that the size of
+	 * both arrays and every element in the first array is equal to its corresponding element of the other array.
+	 * 
+	 * @param array
+	 *                the array to check equality with the array of this object.
+	 * @return returns true if this and the given array are equal, otherwise false.
+	 */
+	private boolean equalsArray(final Boolean[] array) {
+		if (this.getBooleanArray().length == array.length) {
+			for (int i = 0; i < array.length; i++) {
+				if (this.getBooleanArray()[i] != null && array[i] != null
+				                && !this.getBooleanArray()[i].equals(array[i])) {
+					return false;
+				} else if (this.getBooleanArray()[i] != null && array[i] == null) {
+					return false;
+				} else if (this.getBooleanArray()[i] == null && array[i] != null) {
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

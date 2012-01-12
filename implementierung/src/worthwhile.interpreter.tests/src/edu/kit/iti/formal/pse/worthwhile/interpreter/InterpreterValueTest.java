@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNotNull;
 
 import java.math.BigInteger;
 
@@ -13,6 +15,93 @@ import org.junit.Test;
  * @author matthias and stefan
  */
 public class InterpreterValueTest {
+
+	@Test
+	public void test() {
+		assertNotNull(new Value(new BigInteger("42")));
+		assertNotNull(new Value(true));
+		BigInteger[] array1 = new BigInteger[2];
+		assertNotNull(new Value(array1));
+		Boolean[] array2 = new Boolean[2];
+		assertNotNull(new Value(array2));
+	}
+
+	@Test
+	public void testGetValueType() {
+		Value value1 = new Value(new BigInteger("42"));
+		assertEquals(value1.getValueType(), ValueType.INTEGER_TYPE);
+
+		Value value2 = new Value(new Boolean(true));
+		assertEquals(value2.getValueType(), ValueType.BOOLEAN_TYPE);
+
+		BigInteger[] array1 = new BigInteger[1];
+		Value value3 = new Value(array1);
+		assertEquals(value3.getValueType(), ValueType.INTEGER_ARRAY_TYPE);
+
+		Boolean[] array2 = new Boolean[2];
+		Value value4 = new Value(array2);
+		assertEquals(value4.getValueType(), ValueType.BOOLEAN_ARRAY_TYPE);
+	}
+
+	@Test
+	public void testGetIntegerValue() {
+		Value value1 = new Value(new BigInteger("42"));
+		assertEquals(value1.getIntegerValue(), new BigInteger("42"));
+	}
+
+	@Test
+	public void testGetBooleanValue() {
+		Value value1 = new Value(true);
+		assertEquals(value1.getBooleanValue(), true);
+	}
+
+	@Test
+	public void testGetIntegerArray() {
+		BigInteger[] array1 = new BigInteger[2];
+		Value value1 = new Value(array1);
+		assertSame(value1.getIntegerArray(), array1);
+	}
+
+	@Test
+	public void testGetBooleanArray() {
+		Boolean[] array1 = new Boolean[2];
+		Value value1 = new Value(array1);
+		assertSame(value1.getBooleanArray(), array1);
+	}
+
+	@Test
+	public void testSetIntegerValue() {
+		Value value1 = new Value(true);
+		value1.setIntegerValue(new BigInteger("42"));
+		assertEquals(value1.getValueType(), ValueType.INTEGER_TYPE);
+		assertEquals(value1.getIntegerValue(), new BigInteger("42"));
+	}
+
+	@Test
+	public void testSetBooleanValue() {
+		Value value1 = new Value(new BigInteger("42"));
+		value1.setBooleanValue(true);
+		assertEquals(value1.getValueType(), ValueType.BOOLEAN_TYPE);
+		assertEquals(value1.getBooleanValue(), true);
+	}
+
+	@Test
+	public void testSetIntegerArray() {
+		Value value1 = new Value(true);
+		BigInteger[] array1 = new BigInteger[2];
+		value1.setIntegerArray(array1);
+		assertEquals(value1.getValueType(), ValueType.INTEGER_ARRAY_TYPE);
+		assertSame(value1.getIntegerArray(), array1);
+	}
+
+	@Test
+	public void testSetBooleanArray() {
+		Value value1 = new Value(new BigInteger("42"));
+		Boolean[] array1 = new Boolean[2];
+		value1.setBooleanArray(array1);
+		assertEquals(value1.getValueType(), ValueType.BOOLEAN_ARRAY_TYPE);
+		assertSame(value1.getBooleanArray(), array1);
+	}
 
 	@Test
 	public void testEquals() {
@@ -97,6 +186,5 @@ public class InterpreterValueTest {
 		value7.setBooleanArray(array3);
 		assertFalse(value5.equals(value6));
 		assertFalse(value7.equals(value8));
-
 	}
 }

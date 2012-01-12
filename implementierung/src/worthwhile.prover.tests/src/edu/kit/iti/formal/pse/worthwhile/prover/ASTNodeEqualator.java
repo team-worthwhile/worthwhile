@@ -15,7 +15,7 @@ public final class ASTNodeEqualator {
 	 * Private default constructor.
 	 */
 	private ASTNodeEqualator() {
-		// left empty intentionally
+		super();
 	}
 
 	/**

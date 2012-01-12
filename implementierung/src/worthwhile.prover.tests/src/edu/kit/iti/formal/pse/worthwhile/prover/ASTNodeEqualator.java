@@ -27,7 +27,7 @@ public final class ASTNodeEqualator {
 	 *                the ASTNode to be compared to <code>arg0</code>
 	 * @return whether <code>arg0</code> and <code>arg1</code> are equal
 	 */
-	public static Boolean equal(final ASTNode arg0, final ASTNode arg1) {
+	public static Boolean equals(final ASTNode arg0, final ASTNode arg1) {
 		return EcoreUtil.equals(arg0, arg1);
 	}
 }

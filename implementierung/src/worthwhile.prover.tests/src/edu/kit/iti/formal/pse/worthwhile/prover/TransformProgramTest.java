@@ -63,7 +63,7 @@ public final class TransformProgramTest {
 	 *                the ASTNode result which must equal <code>expected</code> for the test to pass
 	 */
 	private static void assertASTNodeEqual(final ASTNode expected, final ASTNode was) {
-		if (!ASTNodeEqualator.equal(expected, was)) {
+		if (!ASTNodeEqualator.equals(expected, was)) {
 			ASTNodeToStringHelper toString = new ASTNodeToStringHelper();
 			Assert.fail("expected: " + toString.toString(expected) + " was: " + toString.toString(was));
 		}

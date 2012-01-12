@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -10,11 +10,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
  * @author fabian
  * 
  */
-public final class ASTNodeEqualator {
+public final class AstNodeEqualsHelper {
 	/**
 	 * Private default constructor.
 	 */
-	private ASTNodeEqualator() {
+	private AstNodeEqualsHelper() {
 		super();
 	}
 

@@ -12,6 +12,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 
 /**
  * JUnit TestCases for {@link WPStrategy#transformProgram}.
@@ -63,7 +64,7 @@ public final class TransformProgramTest {
 	 *                the ASTNode result which must equal <code>expected</code> for the test to pass
 	 */
 	private static void assertASTNodeEqual(final ASTNode expected, final ASTNode was) {
-		if (!ASTNodeEqualator.equals(expected, was)) {
+		if (!AstNodeEqualsHelper.equals(expected, was)) {
 			ASTNodeToStringHelper toString = new ASTNodeToStringHelper();
 			Assert.fail("expected: " + toString.toString(expected) + " was: " + toString.toString(was));
 		}

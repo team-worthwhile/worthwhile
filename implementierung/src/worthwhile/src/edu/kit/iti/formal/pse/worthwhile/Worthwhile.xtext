@@ -131,7 +131,7 @@ QuantifiedExpression returns QuantifiedExpression:
 
 // A variable declaration declares a new variable and assigns it a value.
 VariableDeclaration returns VariableDeclaration:
-	{VariableDeclaration} type=Type name=ID ':=' initialValue=Expression
+	{VariableDeclaration} type=Type name=ID (':=' initialValue=Expression)?
 ;
 
 // An assignment assigns a value to a variable.

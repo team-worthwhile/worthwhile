@@ -73,7 +73,7 @@ public abstract class ASTNodeVisitor implements IASTNodeVisitor {
 	 * @param node
 	 *                The node for which the operation was called.
 	 */
-	protected final void defaultOperation(final ASTNode node) {
+	protected void defaultOperation(final ASTNode node) {
 		throw new UnsupportedOperationException("Visitor cannot handle this type of AST node: "
 		                + node.eClass().toString());
 	}

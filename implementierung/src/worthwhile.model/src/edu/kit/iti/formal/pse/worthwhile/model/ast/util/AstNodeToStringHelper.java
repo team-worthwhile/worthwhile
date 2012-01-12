@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
@@ -27,11 +27,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * @author fabian
  * 
  */
-final class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
+public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	/**
 	 * A single instance of {@link ASTNodeToStringHelper}.
 	 */
-	private static ASTNodeToStringHelper singleton = new ASTNodeToStringHelper();
+	private static AstNodeToStringHelper singleton = new AstNodeToStringHelper();
 
 	/**
 	 * The state of the {@link String} result returned by {@link toString}.
@@ -41,7 +41,7 @@ final class ASTNodeToStringHelper extends HierarchialASTNodeVisitor {
 	/**
 	 * Private default constructor.
 	 */
-	private ASTNodeToStringHelper() {
+	private AstNodeToStringHelper() {
 		super();
 	}
 

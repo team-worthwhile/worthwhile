@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
-import edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants;
+import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
@@ -40,7 +40,7 @@ public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDe
 	                final IProgressMonitor monitor) throws CoreException {
 
 		// Get the file to execute from the launch configuration.
-		String path = configuration.getAttribute(WorthwhileLaunchConfigurationConstants.ATTR_PATH, "");
+		String path = configuration.getAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH, "");
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
 
 		if (file == null) {

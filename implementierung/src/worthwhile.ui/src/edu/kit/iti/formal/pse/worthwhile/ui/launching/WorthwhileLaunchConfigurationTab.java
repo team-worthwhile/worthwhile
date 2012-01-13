@@ -26,7 +26,7 @@ import org.eclipse.ui.internal.ide.dialogs.ResourceComparator;
 import org.eclipse.ui.model.WorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants;
+import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
 
 /**
  * A launch configuration tab in which the user can enter the path to the file to be executed.
@@ -101,7 +101,7 @@ public class WorthwhileLaunchConfigurationTab extends AbstractLaunchConfiguratio
 	@Override
 	public final void initializeFrom(final ILaunchConfiguration configuration) {
 		try {
-			pathText.setText(configuration.getAttribute(WorthwhileLaunchConfigurationConstants.ATTR_PATH,
+			pathText.setText(configuration.getAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH,
 			                ""));
 		} catch (CoreException e) {
 			pathText.setText("");
@@ -110,12 +110,12 @@ public class WorthwhileLaunchConfigurationTab extends AbstractLaunchConfiguratio
 
 	@Override
 	public final void performApply(final ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(WorthwhileLaunchConfigurationConstants.ATTR_PATH, pathText.getText());
+		configuration.setAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH, pathText.getText());
 	}
 
 	@Override
 	public final void setDefaults(final ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(WorthwhileLaunchConfigurationConstants.ATTR_PATH, "");
+		configuration.setAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH, "");
 	}
 
 }

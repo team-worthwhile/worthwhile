@@ -5,6 +5,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
@@ -167,7 +168,7 @@ public class Interpreter {
 	/**
 	 * @return
 	 */
-	public Map<String, Value> getAllSymbols() {
+	public Stack<Map<String, Value>> getAllSymbols() {
 		return this.currentNodeVisitor.getAllSymbols();
 	}
 }

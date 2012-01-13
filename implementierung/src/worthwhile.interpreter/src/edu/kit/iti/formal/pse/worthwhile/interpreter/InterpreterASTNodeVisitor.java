@@ -3,6 +3,7 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -93,14 +94,23 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 *
 	 */
-	private Map<String, Value> symbolMap;
+	// private Map<String, Value> symbolMap;
+	private Stack<Map<String, Value>> symbolStack;
 
 	/**
 	 * @param key
 	 * @return
 	 */
 	protected Value getSymbol(String key) {
-		return this.symbolMap.get(key);
+		Value temp = null;
+		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take the 'nice' variant here because
+									 // I want to start at the top of the stack
+			temp = symbolStack.get(i).get(key);
+			if (temp.getClass().equals(Value.class)) {
+				return temp;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -108,14 +118,14 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @param value
 	 */
 	protected void setSymbol(String key, Value value) {
-		this.symbolMap.put(key, value);
+		this.symbolStack.peek().put(key, value);
 	}
 
 	/**
 	 * @return
 	 */
-	protected Map<String, Value> getAllSymbols() {
-		return this.symbolMap;
+	protected Stack<Map<String, Value>> getAllSymbols() {
+		return this.symbolStack;
 	}
 
 	/**
@@ -290,10 +300,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Block block) {
+		Map<String, Value> symbolMap = new HashMap<String, Value>();
+		this.symbolStack.push(symbolMap);
 		EList<Statement> statements = block.getStatements();
 		for (Statement statement : statements) {
 			statement.accept(this);
 		}
+		this.symbolStack.pop();
 	}
 
 	public void visit(BooleanLiteral booleanLiteral) {
@@ -378,7 +391,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(FunctionCall functionCall) {
-		// TODO scoping
 		InterpreterASTNodeVisitor functionVisitor = new InterpreterASTNodeVisitor();
 		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		FunctionDeclaration functionDeclaration = functionCall.getFunction();
@@ -473,6 +485,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Modulus modulus) {
+		// TODO handle modulo by zero
 		modulus.getLeft().accept(this);
 		Value left = this.resultStack.pop();
 		modulus.getRight().accept(this);

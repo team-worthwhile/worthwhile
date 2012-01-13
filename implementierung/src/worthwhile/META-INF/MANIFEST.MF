@@ -21,10 +21,11 @@ Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile,
- edu.kit.iti.formal.pse.worthwhile.services,
+ edu.kit.iti.formal.pse.worthwhile.formatting,
  edu.kit.iti.formal.pse.worthwhile.parseTreeConstruction,
  edu.kit.iti.formal.pse.worthwhile.parser.antlr,
  edu.kit.iti.formal.pse.worthwhile.parser.antlr.internal,
- edu.kit.iti.formal.pse.worthwhile.validation,
  edu.kit.iti.formal.pse.worthwhile.scoping,
- edu.kit.iti.formal.pse.worthwhile.formatting
+ edu.kit.iti.formal.pse.worthwhile.services,
+ edu.kit.iti.formal.pse.worthwhile.util,
+ edu.kit.iti.formal.pse.worthwhile.validation

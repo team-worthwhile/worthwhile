@@ -3,6 +3,7 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +19,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -89,13 +91,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * 
 	 */
-	private Stack<Value> resultStack;
+	private Stack<Value> resultStack = new Stack<Value>();
 
 	/**
 	 *
 	 */
 	// private Map<String, Value> symbolMap;
-	private Stack<Map<String, Value>> symbolStack;
+	private Stack<Map<String, Value>> symbolStack = new Stack<Map<String, Value>>();
 
 	/**
 	 * @param key
@@ -437,6 +439,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(IntegerLiteral integerLiteral) {
 		// TODO Auto-generated method stub
+		this.resultStack.push(new Value(integerLiteral.getValue()));
 		this.expressionEvaluated(integerLiteral);
 	}
 
@@ -571,6 +574,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(VariableDeclaration variableDeclaration) {
 		this.statementWillExecute(variableDeclaration);
+		/*if (variableDeclaration.getInitialValue() == null) {
+			IntegerLiteral defaultValue = AstFactory.eINSTANCE.createIntegerLiteral();
+			defaultValue.setValue(BigInteger.valueOf(42));
+			variableDeclaration.setInitialValue(defaultValue);
+		}*/
 		variableDeclaration.getInitialValue().accept(this);
 		this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
 		this.statementExecuted(variableDeclaration);

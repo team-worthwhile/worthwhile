@@ -72,17 +72,25 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		// Register our event listener with the interpreter.
 		if (launch.getLaunchMode().equals("debug")) {
 			this.eventListener = new WorthwhileDebugEventListener(this);
+
+			// Register ourselves as a breakpoint listener.
+			DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
+
+			// Get the breakpoints that are already defined and add them to the debug target.
+			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
+			                .getBreakpoints(IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL);
+			for (int i = 0; i < breakpoints.length; i++) {
+				breakpointAdded(breakpoints[i]);
+			}
 		} else {
 			this.eventListener = new WorthwhileRunEventListener(this);
 		}
-		interpreter.addExecutionEventHandler(this.eventListener);
 
-		// Register ourselves as a breakpoint listener.
-		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
+		interpreter.addExecutionEventHandler(this.eventListener);
 
 		// Execute the program.
 		DebugPlugin.getDefault().asyncExec(new Runnable() {
-			
+
 			// TODO: auslagern in eigene Klasse
 
 			@Override
@@ -139,16 +147,15 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void breakpointAdded(final IBreakpoint breakpoint) {
-		// TODO breakpoint.addToInterpreter()?
 		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
-			// try {
-			// this.interpreter.addBreakpoint(new LineBreakpoint(
-			// ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
-			// .getLineNumber()));
-			// } catch (CoreException e) {
-			// // TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
+			try {
+	                        ((WorthwhileDebugEventListener) this.eventListener).addBreakpoint(
+	                                        ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint).getLineNumber(),
+	                                        breakpoint);
+                        } catch (CoreException e) {
+	                        // TODO Auto-generated catch block
+	                        e.printStackTrace();
+                        }
 		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
 			// TODO
 		}
@@ -227,23 +234,10 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
-	 * Installs the breakpoints that have already registered before the execution of the program (as opposed to
-	 * breakpoints added when the program is running).
-	 */
-	private void installDeferredBreakpoints() {
-		IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
-		                .getBreakpoints(IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL);
-
-		for (IBreakpoint breakpoint : breakpoints) {
-			breakpointAdded(breakpoint);
-		}
-	}
-
-	/**
 	 * Called when the interpreter has been started, before executing the first statement.
 	 */
 	protected final void executionStarted() {
-		this.installDeferredBreakpoints();
+		
 	}
 
 	/**

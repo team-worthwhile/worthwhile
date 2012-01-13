@@ -20,8 +20,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -247,19 +245,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	}
 
 	/**
-	 * Visit an {@link Invariant}.
-	 * 
-	 * @param invariant
-	 *                the Invariant to visit
-	 */
-	public void visit(final Invariant invariant) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
 	 * Visit a {@link Loop} to generate the weakest precondition.
 	 * 
 	 * @param loop
@@ -326,32 +311,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		// replace the weakest precondition on the stack
 		this.weakestPreconditionStack.pop();
 		this.weakestPreconditionStack.push(loopPrecondition);
-	}
-
-	/**
-	 * Visit a {@link Postcondition}.
-	 * 
-	 * @param postcondition
-	 *                the {@link Postcondition} to visit
-	 */
-	public void visit(final Postcondition postcondition) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * Visit a {@link Precondition}.
-	 * 
-	 * @param precondition
-	 *                the {@link Precondition} to visit
-	 */
-	public void visit(final Precondition precondition) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	/**

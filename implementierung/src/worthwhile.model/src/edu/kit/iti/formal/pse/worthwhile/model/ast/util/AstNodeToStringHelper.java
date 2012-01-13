@@ -4,6 +4,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -87,6 +88,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		assignment.getVariable().accept(this);
 		buf.append(" := ");
 		assignment.getValue().accept(this);
+	}
+
+	@Override
+	public void visit(Assumption assumption) {
+		this.buf.append("_assume ");
+		assumption.getExpression().accept(this);
 	}
 
 	@Override

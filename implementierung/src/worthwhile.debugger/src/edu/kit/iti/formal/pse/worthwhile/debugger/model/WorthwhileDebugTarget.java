@@ -16,6 +16,7 @@ import org.eclipse.debug.core.model.IThread;
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractExecutionEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
+
 //import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint; //TODO remember this does not exist anymore
 
 /**
@@ -68,7 +69,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		this.interpreter = interpreter;
 
-		// Register our event handler with the interpreter.
+		// Register our event listener with the interpreter.
 		if (launch.getLaunchMode().equals("debug")) {
 			this.eventListener = new WorthwhileDebugEventListener(this);
 		} else {
@@ -78,6 +79,18 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		// Register ourselves as a breakpoint listener.
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
+
+		// Execute the program.
+		DebugPlugin.getDefault().asyncExec(new Runnable() {
+			
+			// TODO: auslagern in eigene Klasse
+
+			@Override
+			public void run() {
+				interpreter.execute();
+			}
+
+		});
 	}
 
 	public final ILaunch doGetLaunch() {
@@ -128,14 +141,14 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final void breakpointAdded(final IBreakpoint breakpoint) {
 		// TODO breakpoint.addToInterpreter()?
 		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
-//			try {
-//				this.interpreter.addBreakpoint(new LineBreakpoint(
-//				                ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
-//				                                .getLineNumber()));
-//			} catch (CoreException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+			// try {
+			// this.interpreter.addBreakpoint(new LineBreakpoint(
+			// ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
+			// .getLineNumber()));
+			// } catch (CoreException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
 		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
 			// TODO
 		}

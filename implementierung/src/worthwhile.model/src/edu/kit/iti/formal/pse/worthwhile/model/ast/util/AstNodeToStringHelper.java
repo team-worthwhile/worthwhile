@@ -22,6 +22,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
@@ -208,5 +209,10 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 		this.buf.append(" : ");
 		forAllQuantifier.getExpression().accept(this);
+	}
+
+	@Override
+	public void visit(Unequal unequal) {
+		this.appendBinaryExpression(unequal, "!=");
 	}
 }

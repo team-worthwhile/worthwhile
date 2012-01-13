@@ -21,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeParentHelper;
 
 /**
  * This class contains custom scoping description.
@@ -36,83 +37,73 @@ public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * @param context
 	 *                The function call to provide the scope for.
 	 * @param reference
-	 *                TODO
+	 *                The corresponding EReference in the Ecore model.
 	 * @return A scope in which to look for the referenced function.
 	 */
 	public final IScope scope_FunctionCall_function(final FunctionCall context, final EReference reference) {
-		// Traverse the AST up to the Program.
-		EObject current = context;
+		// Find the containing program.
+		Program containingProgram = AstNodeParentHelper.findParentProgram(context);
+		FunctionDeclaration containingFunctionDeclaration = AstNodeParentHelper
+		                .findParentFunctionDeclaration(context);
 
-		while (current != null && !(current instanceof Program)) {
-			current = current.eContainer();
+		// Collect all function declarations until the containing function declaration
+		ScopeFinder scopeFinder = new ScopeFinder(containingFunctionDeclaration);
+		containingProgram.accept(scopeFinder);
+		
+		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
+		for (FunctionDeclaration funcdecl: scopeFinder.getFunctionDeclarations()) {
+			descriptions.add(EObjectDescription.create(funcdecl.getName(), funcdecl));
 		}
 
-		// Return the Program's function declarations as a scope.
-		if (current instanceof Program) {
-			return new SimpleScope(IScope.NULLSCOPE, getFunctionDeclarations((Program) current));
-		} else {
-			return IScope.NULLSCOPE;
-		}
+		return new SimpleScope(IScope.NULLSCOPE, descriptions);
 	}
 
 	/**
+	 * Provides the scope for a variable reference.
 	 * 
 	 * @param context
+	 *                The variable reference to provide the scope for.
 	 * @param reference
+	 *                The corresponding EReference in the Ecore model.
 	 * @return
 	 */
 	public final IScope scope_VariableReference_variable(final VariableReference context, final EReference reference) {
-		// Traverse the AST up to the containing function or program.
-		EObject container = context;
-
-		while (container != null && !(container instanceof Program) && !(container instanceof FunctionDeclaration)) {
-			container = container.eContainer();
-		}
-
-		IScope parent = IScope.NULLSCOPE;
-
-		// If we have a function declaration, add its parameters to the scope.
-		if (container instanceof FunctionDeclaration) {
-			parent = new SimpleScope(IScope.NULLSCOPE, getParameters((FunctionDeclaration) container));
-		}
-
-		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
-
-		// Traverse the AST up to the containing statement.
-		EObject statement = context;
-
-		while (statement  != null && !(statement  instanceof Statement)) {
-			statement  = statement .eContainer();
-		}
-
-		if (statement instanceof Statement) {
-			// Traverse the containing AST node depth-first until we arrive at the original variable
-			// reference.
-			VariableDeclarationFinder varDeclFinder = new VariableDeclarationFinder((Statement) statement);
+		// Find the containing statement
+		ASTNode current = context;
+		ASTNode container = AstNodeParentHelper.findParentStatement(context);
+		IScope scope = IScope.NULLSCOPE;
+		
+		// Traverse the AST up to the containing program or function.
+		while (container != null && !(container instanceof Program)
+		                && !(container instanceof FunctionDeclaration)) {
+		
+			// On each level of the AST, find the preceding statements of the current one.
+			current = container;
+			container = (ASTNode) container.eContainer();
 			
-			((ASTNode) container).accept(varDeclFinder);
-
-			for (VariableDeclaration vardec : varDeclFinder.getVariableDeclarations()) {
+			ScopeFinder scopeFinder = new ScopeFinder(current);
+			container.accept(scopeFinder);
+			
+			// Collect all variable descriptions from these statements
+			List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
+			
+			for (VariableDeclaration vardec : scopeFinder.getVariableDeclarations()) {
 				descriptions.add(EObjectDescription.create(vardec.getName(), vardec));
+			}
+			
+			for (IEObjectDescription e : scope.getAllElements()) {
+				System.out.println(e.getName());
+			}
+			
+			// Create a new scope.
+			scope = new SimpleScope(scope, descriptions);
+			
+			for (IEObjectDescription e : scope.getAllElements()) {
+				System.out.println(e.getName());
 			}
 		}
 
-		return new SimpleScope(parent, descriptions);
-	}
-
-	/**
-	 * Gets a list of the function declaration descriptions of a {@link Program}.
-	 * 
-	 * @param program
-	 *                The program whose function declarations to return.
-	 * @return A list of the {@link IEObjectDescription}s of the given program's functions.
-	 */
-	private Iterable<IEObjectDescription> getFunctionDeclarations(final Program program) {
-		List<IEObjectDescription> result = new ArrayList<IEObjectDescription>();
-		for (FunctionDeclaration funcdec : program.getFunctionDeclarations()) {
-			result.add(EObjectDescription.create(funcdec.getName(), funcdec));
-		}
-		return result;
+		return scope;
 	}
 
 	/**

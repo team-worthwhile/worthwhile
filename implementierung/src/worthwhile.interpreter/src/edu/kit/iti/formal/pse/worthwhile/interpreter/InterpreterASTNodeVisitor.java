@@ -5,6 +5,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 import org.eclipse.emf.common.util.EList;
 
@@ -53,6 +54,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
@@ -82,6 +84,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.executionEventHandlers = executionEventHandlers;
 		// end-user-code
 	}
+
+	/**
+	 * 
+	 */
+	private Stack<Value> resultStack;
 
 	/**
 	 *
@@ -238,7 +245,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Addition addition) {
-		// TODO Auto-generated method stub
+		addition.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		addition.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getIntegerValue().add(right.getIntegerValue())));
 		this.expressionEvaluated(addition);
 	}
 
@@ -296,33 +307,63 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Conditional conditional) {
-		// TODO Auto-generated method stub
 		this.statementWillExecute(conditional);
+		conditional.getCondition().accept(this);
+		if (this.resultStack.pop().getBooleanValue()) {
+			conditional.getTrueBlock().accept(this);
+		} else {
+			conditional.getFalseBlock().accept(this);
+		}
 		this.statementExecuted(conditional);
 	}
 
 	public void visit(Conjunction conjunction) {
-		// TODO Auto-generated method stub
+		conjunction.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		conjunction.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getBooleanValue() && right.getBooleanValue()));
 		this.expressionEvaluated(conjunction);
 	}
 
 	public void visit(Disjunction disjunction) {
-		// TODO Auto-generated method stub
+		disjunction.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		disjunction.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getBooleanValue() || right.getBooleanValue()));
 		this.expressionEvaluated(disjunction);
 	}
 
 	public void visit(Division division) {
-		// TODO Auto-generated method stub
+		// TODO handle division by zero
+		division.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		division.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getIntegerValue().divide(right.getIntegerValue())));
 		this.expressionEvaluated(division);
 	}
 
 	public void visit(Equal equal) {
-		// TODO Auto-generated method stub
+		equal.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		equal.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		if (left.getValueType() == ValueType.BOOLEAN_TYPE) {
+			this.resultStack.push(new Value(left.getBooleanValue() == (right.getBooleanValue())));
+		} else {
+			this.resultStack.push(new Value(left.getIntegerValue().equals(right.getIntegerValue())));
+		}
 		this.expressionEvaluated(equal);
 	}
 
 	public void visit(Equivalence equivalence) {
-		// TODO Auto-generated method stub
+		equivalence.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		equivalence.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getBooleanValue() == right.getBooleanValue()));
 		this.expressionEvaluated(equivalence);
 	}
 
@@ -337,27 +378,48 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(FunctionCall functionCall) {
-		// TODO Auto-generated method stub
+		// TODO scoping
+		InterpreterASTNodeVisitor functionVisitor = new InterpreterASTNodeVisitor();
+		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
+		FunctionDeclaration functionDeclaration = functionCall.getFunction();
+		EList<Expression> actuals = functionCall.getActuals();
+		for (int i = 0; i < actuals.size(); i++) {
+			actuals.get(i).accept(this);
+			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i).getName(),
+			                resultStack.pop());
+		}
+		functionVisitor.visit(functionDeclaration.getBody());
 		this.expressionEvaluated(functionCall);
 	}
 
 	public void visit(FunctionDeclaration functionDeclaration) {
-		// TODO Auto-generated method stub
-
+		// TODO Auto-generated method stub - does this even have to do anything?
 	}
 
 	public void visit(Greater greater) {
-		// TODO Auto-generated method stub
+		greater.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		greater.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) == 1)));
 		this.expressionEvaluated(greater);
 	}
 
 	public void visit(GreaterOrEqual greaterOrEqual) {
-		// TODO Auto-generated method stub
+		greaterOrEqual.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		greaterOrEqual.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) != -1)));
 		this.expressionEvaluated(greaterOrEqual);
 	}
 
 	public void visit(Implication implication) {
-		// TODO Auto-generated method stub
+		implication.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		implication.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(!(left.getBooleanValue() && !right.getBooleanValue())));
 		this.expressionEvaluated(implication);
 	}
 
@@ -377,38 +439,59 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Less less) {
-		// TODO Auto-generated method stub
+		less.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		less.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) == -1)));
 		this.expressionEvaluated(less);
 	}
 
 	public void visit(LessOrEqual lessOrEqual) {
-		// TODO Auto-generated method stub
+		lessOrEqual.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		lessOrEqual.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) != 1)));
 		this.expressionEvaluated(lessOrEqual);
 	}
 
 	public void visit(Loop loop) {
-		// TODO Auto-generated method stub
+		// TODO incorporate invariant
 		this.statementWillExecute(loop);
+		loop.getCondition().accept(this);
+		while (this.resultStack.pop().getBooleanValue()) {
+			loop.getBody().accept(this);
+			loop.getCondition().accept(this);
+		}
 		this.statementExecuted(loop);
 	}
 
 	public void visit(Minus minus) {
-		// TODO Auto-generated method stub
+		this.resultStack.push(new Value(this.resultStack.pop().getIntegerValue().negate()));
 		this.expressionEvaluated(minus);
 	}
 
 	public void visit(Modulus modulus) {
-		// TODO Auto-generated method stub
+		modulus.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		modulus.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getIntegerValue().mod(right.getIntegerValue())));
 		this.expressionEvaluated(modulus);
 	}
 
 	public void visit(Multiplication multiplication) {
-		// TODO Auto-generated method stub
+		multiplication.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		multiplication.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getIntegerValue().multiply(right.getIntegerValue())));
 		this.expressionEvaluated(multiplication);
 	}
 
 	public void visit(Negation negation) {
-		// TODO Auto-generated method stub
+		this.resultStack.push(new Value(!(this.resultStack.pop().getBooleanValue())));
 		this.expressionEvaluated(negation);
 	}
 
@@ -419,7 +502,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Plus plus) {
-		// TODO Auto-generated method stub
+		plus.accept(this);
 		this.expressionEvaluated(plus);
 	}
 
@@ -434,6 +517,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Program program) {
+		// TODO FIX THIS
+		/*
+		 * EList<FunctionDeclaration> functionDeclarations = program.getFunctionDeclarations(); for
+		 * (FunctionDeclaration functionDeclaration : functionDeclarations) { functionDeclaration.accept(this);
+		 * }
+		 */
 		this.executionStarted();
 		program.getMainBlock().accept(this);
 		this.executionCompleted();
@@ -446,18 +535,36 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Subtraction subtraction) {
-		// TODO Auto-generated method stub
+		subtraction.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		subtraction.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		this.resultStack.push(new Value(left.getIntegerValue().subtract(right.getIntegerValue())));
 		this.expressionEvaluated(subtraction);
 	}
 
 	public void visit(Unequal unequal) {
-		// TODO Auto-generated method stub
+		unequal.getLeft().accept(this);
+		Value left = this.resultStack.pop();
+		unequal.getRight().accept(this);
+		Value right = this.resultStack.pop();
+		if (left.getValueType() == ValueType.BOOLEAN_TYPE) {
+			this.resultStack.push(new Value(!(left.getBooleanValue() == (right.getBooleanValue()))));
+		} else {
+			this.resultStack.push(new Value(!(left.getIntegerValue().equals(right.getIntegerValue()))));
+		}
 		this.expressionEvaluated(unequal);
 	}
 
 	public void visit(VariableDeclaration variableDeclaration) {
-		// TODO Auto-generated method stub
 		this.statementWillExecute(variableDeclaration);
+		variableDeclaration.getInitialValue().accept(this);
+		this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
 		this.statementExecuted(variableDeclaration);
+	}
+
+	public void visit(VariableReference variableReference) {
+		this.resultStack.push(this.getSymbol(variableReference.getVariable().getName()));
+		this.expressionEvaluated(variableReference);
 	}
 }

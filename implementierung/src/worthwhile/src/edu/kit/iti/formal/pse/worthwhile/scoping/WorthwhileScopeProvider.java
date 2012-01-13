@@ -91,16 +91,8 @@ public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 				descriptions.add(EObjectDescription.create(vardec.getName(), vardec));
 			}
 			
-			for (IEObjectDescription e : scope.getAllElements()) {
-				System.out.println(e.getName());
-			}
-			
 			// Create a new scope.
 			scope = new SimpleScope(scope, descriptions);
-			
-			for (IEObjectDescription e : scope.getAllElements()) {
-				System.out.println(e.getName());
-			}
 		}
 
 		return scope;

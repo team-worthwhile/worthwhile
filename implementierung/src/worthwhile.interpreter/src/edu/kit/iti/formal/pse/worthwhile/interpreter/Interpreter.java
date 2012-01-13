@@ -3,6 +3,7 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -16,7 +17,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 public class Interpreter {
 	/**
 	 */
-	private Set<AbstractExecutionEventListener> executionEventHandlers;
+	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
 	/**
 	 * @return the executionEventHandlers
@@ -121,6 +122,7 @@ public class Interpreter {
 	 */
 	public void execute() {
 		this.currentNodeVisitor = new InterpreterASTNodeVisitor();
+		this.currentNodeVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		this.program.accept(currentNodeVisitor);
 	}
 

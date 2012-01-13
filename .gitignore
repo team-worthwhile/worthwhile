@@ -14,7 +14,6 @@ presentation.pdf
 # java stuff
 *.class
 bin/
-src-gen/
 xtend-gen/
 # automatic backups
 *~

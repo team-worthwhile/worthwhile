@@ -38,6 +38,8 @@
       <plugin id="com.google.collect"/>
       <plugin id="com.google.inject"/>
       <plugin id="com.ibm.icu"/>
+      <plugin id="de.itemis.xtext.typesystem"/>
+      <plugin id="de.itemis.xtext.typesystem.dsl"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.debugger"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.help"/>
@@ -156,6 +158,8 @@
       <plugin id="org.eclipse.xtext.ui"/>
       <plugin id="org.eclipse.xtext.ui.shared"/>
       <plugin id="org.eclipse.xtext.util"/>
+      <plugin id="org.eclipse.xtext.xbase.lib"/>
+      <plugin id="org.eclipse.xtext.xtend2.lib"/>
       <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
       <plugin id="org.mortbay.jetty.server"/>

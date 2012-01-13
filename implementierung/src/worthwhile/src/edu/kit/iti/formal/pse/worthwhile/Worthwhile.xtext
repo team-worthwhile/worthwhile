@@ -111,7 +111,7 @@ PrimitiveType returns PrimitiveType:
 
 // An array type represents an array of a primitive type.
 ArrayType returns ArrayType:
-	{ArrayType} baseType=PrimitiveType '[' size=Expression ']'
+	{ArrayType} baseType=PrimitiveType '[' (size=Expression)? ']'
 ;
 
 // A function call simply calls a function without returning a value.

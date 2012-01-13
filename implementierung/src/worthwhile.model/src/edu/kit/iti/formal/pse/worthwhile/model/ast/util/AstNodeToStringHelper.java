@@ -1,5 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
+import java.util.Iterator;
+import java.util.List;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -10,9 +13,13 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
@@ -21,6 +28,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -153,6 +161,10 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 			this.buf.append("\n");
 		}
 
+		for (final FunctionDeclaration f : program.getFunctionDeclarations()) {
+			f.accept(this);
+		}
+
 		program.getMainBlock().accept(this);
 	}
 
@@ -212,7 +224,50 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
+	public void visit(FunctionDeclaration functionDeclaration) {
+		this.buf.append("function ");
+		this.buf.append(functionDeclaration.getName());
+		this.buf.append("(");
+
+		List<VariableDeclaration> params = functionDeclaration.getParameters();
+		if (!params.isEmpty()) {
+			Iterator<VariableDeclaration> i = functionDeclaration.getParameters().iterator();
+			// params is not empty, i has next
+			i.next().accept(this);
+			while (i.hasNext()) {
+				this.buf.append(", ");
+				i.next().accept(this);
+			}
+		}
+
+		this.buf.append(") ");
+
+		functionDeclaration.getBody().accept(this);
+	}
+
+	@Override
+	public void visit(ReturnStatement returnStatement) {
+		this.buf.append("return ");
+		returnStatement.accept(this);
+	}
+
+	@Override
 	public void visit(Unequal unequal) {
 		this.appendBinaryExpression(unequal, "!=");
+	}
+
+	@Override
+	public void visit(GreaterOrEqual greaterOrEqual) {
+		this.appendBinaryExpression(greaterOrEqual, ">=");
+	}
+
+	@Override
+	public void visit(Greater greater) {
+		this.appendBinaryExpression(greater, ">");
+	}
+
+	@Override
+	public void visit(Disjunction disjunction) {
+		this.appendBinaryExpression(disjunction, "||");
 	}
 }

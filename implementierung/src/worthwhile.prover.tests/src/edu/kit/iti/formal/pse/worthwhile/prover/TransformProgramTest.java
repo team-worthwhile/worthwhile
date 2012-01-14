@@ -5,9 +5,7 @@ import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;

@@ -10,9 +10,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * Cloner for an ASTNode.
  * 
  * @author Leon Handreke, fabian
- * 
- * @param <T>
- *                the type of ASTNode to clone
  */
 public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
 	/**
@@ -25,9 +22,11 @@ public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
 	/**
 	 * @param n
 	 *                the {@link ASTNode} to clone.
+	 * @param <T>
+	 *                The type of the {@link ASTNode} to clone.
 	 * @return a clone of the given {@link ASTNode}
 	 */
-	public static final <T extends ASTNode> T clone(final T n) {
+	public static <T extends ASTNode> T clone(final T n) {
 		return EcoreUtil.copy(n);
 	}
 }

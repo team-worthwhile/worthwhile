@@ -6,8 +6,20 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 
+/**
+ * Represents a stack frame in a suspended Worthwhile program.
+ * 
+ * @author Joachim
+ * 
+ */
 public class WorthwhileStackFrame extends WorthwhileDebugElement implements IStackFrame {
 
+	/**
+	 * Creates a new instance of the {@link WorthwhileStackFrame} class.
+	 * 
+	 * @param debugTarget
+	 *                The debug target.
+	 */
 	public WorthwhileStackFrame(final WorthwhileDebugTarget debugTarget) {
 		super(debugTarget);
 	}
@@ -18,7 +30,7 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 	 * @return the name of the source file that is associated with this stack frame.
 	 */
 	public final String getSourceName() {
-		return this.debugTarget.getSourceName();
+		return this.getDebugTarget().getSourceName();
 	}
 
 	@Override

@@ -27,29 +27,29 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
 	@Override
 	public final boolean canResume() {
-		return !this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED)
-		                && this.debugTarget.getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED)
+		                && this.getDebugTarget().getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean canSuspend() {
-		return !this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED)
-		                && !this.debugTarget.getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED)
+		                && !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean isSuspended() {
-		return this.debugTarget.getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return this.getDebugTarget().getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
         public final void resume() throws DebugException {
-		this.debugTarget.getEventListener().resume();
+		this.getDebugTarget().getEventListener().resume();
 	}
 
 	@Override
 	public final void suspend() throws DebugException {
-		this.debugTarget.suspend();
+		this.getDebugTarget().suspend();
 	}
 
 	@Override
@@ -69,8 +69,8 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
 	@Override
 	public final boolean isStepping() {
-		return this.debugTarget.getEventListener().getMode().equals(DebugMode.STEP)
-		                || this.debugTarget.getEventListener().getMode().equals(DebugMode.STEP_OVER);
+		return this.getDebugTarget().getEventListener().getMode().equals(DebugMode.STEP)
+		                || this.getDebugTarget().getEventListener().getMode().equals(DebugMode.STEP_OVER);
 	}
 
 	@Override
@@ -92,17 +92,17 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
 	@Override
 	public final boolean canTerminate() {
-		return !this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED);
+		return !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final boolean isTerminated() {
-		return this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED);
+		return this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final void terminate() throws DebugException {
-		this.debugTarget.getEventListener().terminate();
+		this.getDebugTarget().getEventListener().terminate();
 	}
 
 	@Override

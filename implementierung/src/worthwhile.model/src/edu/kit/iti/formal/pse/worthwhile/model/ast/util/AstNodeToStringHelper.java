@@ -185,18 +185,18 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(Multiplication multiplication) {
+	public void visit(final Multiplication multiplication) {
 		this.appendBinaryExpression(multiplication, "*");
 	}
 
 	@Override
-	public void visit(Axiom axiom) {
+	public void visit(final Axiom axiom) {
 		this.buf.append("_axiom ");
 		axiom.getExpression().accept(this);
 	}
 
 	@Override
-	public void visit(ForAllQuantifier forAllQuantifier) {
+	public void visit(final ForAllQuantifier forAllQuantifier) {
 		this.buf.append("forall ");
 		forAllQuantifier.getParameter().accept(this);
 

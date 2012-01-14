@@ -22,6 +22,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
  * 
  * @author Joachim
  * 
+ * @nocheckstyle:methodname (convention requires the method names to contain underscores)
+ * 
  */
 public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 
@@ -37,7 +39,7 @@ public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 	public final IScope scope_FunctionCall_function(final FunctionCall context, final EReference reference) {
 		ScopeFinder scopeFinder = new ScopeFinder(context);
 		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
-				
+
 		for (FunctionDeclaration funcdec : scopeFinder.getFunctionDeclarations()) {
 			descriptions.add(EObjectDescription.create(funcdec.getName(), funcdec));
 		}
@@ -52,7 +54,7 @@ public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 	 *                The variable reference to provide the scope for.
 	 * @param reference
 	 *                The corresponding EReference in the Ecore model.
-	 * @return
+	 * @return A scope in which to look for the referenced variable.
 	 */
 	public final IScope scope_VariableReference_variable(final VariableReference context, final EReference reference) {
 		ScopeFinder scopeFinder = new ScopeFinder(context);

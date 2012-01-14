@@ -29,14 +29,20 @@ public final class NodeHelper {
 	public static int getLine(final ASTNode node) {
 		return NodeModelUtils.findActualNodeFor(node).getStartLine();
 	}
-	
+
+	/**
+	 * Returns whether the node {@code node} is a direct ancestor in the AST of the node {@code child}.
+	 * @param node The node for which to check whether it is an ancestor of {@code child}
+	 * @param child The child node for which to check for ancestors.
+	 * @return Whether the node {@code node} is a direct ancestor in the AST of the node {@code child}.
+	 */
 	public static boolean isAncestor(final ASTNode node, final ASTNode child) {
 		ASTNode current = child;
-		
-		while (current != null && !(node.equals(current)) ) {
+
+		while (current != null && !(node.equals(current))) {
 			current = (ASTNode) current.eContainer();
 		}
-		
+
 		return node.equals(current);
 	}
 

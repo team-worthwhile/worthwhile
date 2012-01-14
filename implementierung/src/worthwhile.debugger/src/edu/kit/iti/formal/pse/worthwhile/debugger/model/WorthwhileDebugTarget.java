@@ -16,10 +16,7 @@ import org.eclipse.debug.core.model.IThread;
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractExecutionEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
-
-//import edu.kit.iti.formal.pse.worthwhile.interpreter.LineBreakpoint; //TODO remember this does not exist anymore
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -45,11 +42,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	private WorthwhileDebugEventListener eventListener;
 
 	/**
-	 * The interpreter executing the program.
-	 */
-	private Interpreter interpreter;
-
-	/**
 	 * Creates a new instance of the {@link WorthwhileDebugTarget} class.
 	 * 
 	 * @param launch
@@ -59,7 +51,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	public WorthwhileDebugTarget(final ILaunch launch, final Interpreter interpreter) {
 		super(null);
-		this.debugTarget = this;
+		this.setDebugTarget(this);
 
 		if (interpreter == null) {
 			throw new IllegalArgumentException("Interpreter may not be null.");
@@ -67,7 +59,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		this.launch = launch;
 		this.thread = new WorthwhileThread(this);
-		this.interpreter = interpreter;
 
 		// Create a new event listener.
 		if (launch.getLaunchMode().equals("debug")) {

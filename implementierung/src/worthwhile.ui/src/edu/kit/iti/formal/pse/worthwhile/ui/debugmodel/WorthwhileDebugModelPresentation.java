@@ -10,10 +10,16 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
 
+/**
+ * The UI presentation (providing labels, descriptions, editors etc.) for the Worthwhile debug model.
+ * 
+ * @author Joachim
+ * 
+ */
 public class WorthwhileDebugModelPresentation implements IDebugModelPresentation {
 
 	@Override
-	public void addListener(final ILabelProviderListener arg0) {
+	public void addListener(final ILabelProviderListener listener) {
 		// TODO Auto-generated method stub
 
 	}
@@ -25,13 +31,13 @@ public class WorthwhileDebugModelPresentation implements IDebugModelPresentation
 	}
 
 	@Override
-	public final boolean isLabelProperty(final Object arg0, final String arg1) {
+	public final boolean isLabelProperty(final Object element, final String property) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void removeListener(final ILabelProviderListener arg0) {
+	public void removeListener(final ILabelProviderListener listener) {
 		// TODO Auto-generated method stub
 
 	}
@@ -47,34 +53,34 @@ public class WorthwhileDebugModelPresentation implements IDebugModelPresentation
 	@Override
 	public final IEditorInput getEditorInput(final Object element) {
 		if (element instanceof IFile) {
-	                return new FileEditorInput((IFile) element);
-                }
+			return new FileEditorInput((IFile) element);
+		}
 		if (element instanceof ILineBreakpoint) {
-	                return new FileEditorInput((IFile) ((ILineBreakpoint) element).getMarker().getResource());
-                }
+			return new FileEditorInput((IFile) ((ILineBreakpoint) element).getMarker().getResource());
+		}
 		return null;
 	}
 
 	@Override
-	public void computeDetail(final IValue arg0, final IValueDetailListener arg1) {
+	public void computeDetail(final IValue value, final IValueDetailListener listener) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public final Image getImage(final Object arg0) {
+	public final Image getImage(final Object element) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public final String getText(final Object arg0) {
+	public final String getText(final Object element) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setAttribute(final String arg0, final Object arg1) {
+	public void setAttribute(final String attribute, final Object value) {
 		// TODO Auto-generated method stub
 
 	}

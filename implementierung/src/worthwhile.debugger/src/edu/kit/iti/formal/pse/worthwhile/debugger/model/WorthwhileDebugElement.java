@@ -5,28 +5,49 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugElement;
-import org.eclipse.debug.core.model.IDebugTarget;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 
+/**
+ * A base class for all elements of the Worthwhile debug model.
+ * 
+ * @author Joachim
+ * 
+ */
 public class WorthwhileDebugElement extends PlatformObject implements IDebugElement {
 
 	/**
 	 * The debug target this element belongs to.
 	 */
-	protected WorthwhileDebugTarget debugTarget;
+	private WorthwhileDebugTarget debugTarget;
 
-	public WorthwhileDebugElement(WorthwhileDebugTarget debugTarget) {
+	/**
+	 * Creates a new instance of the {@link WorthwhileDebugElement} class.
+	 * 
+	 * @param debugTarget
+	 *                The debug target this element belongs to.
+	 */
+	public WorthwhileDebugElement(final WorthwhileDebugTarget debugTarget) {
 		this.debugTarget = debugTarget;
 	}
 
 	@Override
-	public final IDebugTarget getDebugTarget() {
+	public final WorthwhileDebugTarget getDebugTarget() {
 		return this.debugTarget;
 	}
 
+	/**
+	 * Sets the debug target.
+	 * 
+	 * @param debugTarget
+	 *                The debug target
+	 */
+	public final void setDebugTarget(final WorthwhileDebugTarget debugTarget) {
+		this.debugTarget = debugTarget;
+	}
+
 	@Override
-	public ILaunch getLaunch() {
+	public final ILaunch getLaunch() {
 		return this.debugTarget.doGetLaunch();
 	}
 

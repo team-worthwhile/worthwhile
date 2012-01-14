@@ -16,7 +16,7 @@ WorthwhileStandaloneSetupGenerated {
 	}
 
 	@Override
-	public Injector createInjectorAndDoEMFRegistration() {
+        public final Injector createInjectorAndDoEMFRegistration() {
 		AstPackage.init();
 		return super.createInjectorAndDoEMFRegistration();
 	}

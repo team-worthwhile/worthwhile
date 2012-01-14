@@ -30,7 +30,7 @@ class ReplaceKeywordAutoEditStrategy implements IAutoEditStrategy {
 	 * @param replacement
 	 *                The string with which to replace the keyword.
 	 */
-	public ReplaceKeywordAutoEditStrategy(String keyword, String replacement) {
+	public ReplaceKeywordAutoEditStrategy(final String keyword, final String replacement) {
 		if (keyword == null || keyword.length() < 1) {
 			throw new IllegalArgumentException("Keyword must be longer than one character.");
 		}

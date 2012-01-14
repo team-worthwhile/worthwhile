@@ -8,7 +8,7 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileStackFrame;
 public class WorthwhileSourceLookupParticipant extends AbstractSourceLookupParticipant {
 
 	@Override
-	public String getSourceName(Object object) throws CoreException {
+        public final String getSourceName(final Object object) throws CoreException {
 		if (object instanceof WorthwhileStackFrame) {
 			return ((WorthwhileStackFrame) object).getSourceName();
 		}

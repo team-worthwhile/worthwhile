@@ -15,8 +15,14 @@ import com.google.inject.Inject;
  */
 public class WorthwhileLabelProvider extends DefaultEObjectLabelProvider {
 
+	/**
+	 * Creates a new instance of the {@link WorthwhileLabelProvider} class.
+	 * 
+	 * @param delegate
+	 *                This is not even documented in the Xtext documentation, so who knows what this does?
+	 */
 	@Inject
-	public WorthwhileLabelProvider(AdapterFactoryLabelProvider delegate) {
+	public WorthwhileLabelProvider(final AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 

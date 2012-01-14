@@ -79,4 +79,17 @@ public abstract class AbstractExecutionEventListener {
 	 */
 	public void expressionEvaluated(final Expression expression) {
 	}
+	
+	/**
+	 * Signals that the execution of a {@link Expression} failed.
+	 * 
+	 * @param expression
+	 *                the <code>Expression</code> that failed to execute
+	 * @param error
+	 *                an {@link InterpreterError} object that describes the error
+	 */
+	public void expressionFailed(final Expression expression, final InterpreterError error) {
+		throw new RuntimeException("Failed to execute " + expression.toString() + "; Got error "
+                + error.toString());
+	}
 }

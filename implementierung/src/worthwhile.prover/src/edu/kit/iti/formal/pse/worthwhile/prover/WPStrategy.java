@@ -48,7 +48,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @return the weakestPrecondition
 	 */
 	public Expression getWeakestPrecondition() {
-		return this.weakestPreconditionStack.get(0);
+		return this.weakestPreconditionStack.peek();
 	}
 
 	/**
@@ -100,7 +100,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
-		this.getWeakestPrecondition().accept(
+		this.weakestPreconditionStack.peek().accept(
 		                new VariableSubstitution(variableDeclaration, assignment.getValue(),
 		                                new VariableSubstitution.SubstituteCommand() {
 			                                @Override
@@ -344,7 +344,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 *                the {@link VariableDeclaration} to visit
 	 */
 	public void visit(final VariableDeclaration variableDeclaration) {
-		this.getWeakestPrecondition().accept(
+		this.weakestPreconditionStack.peek().accept(
 		                new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
 		                                new VariableSubstitution.SubstituteCommand() {
 			                                @Override

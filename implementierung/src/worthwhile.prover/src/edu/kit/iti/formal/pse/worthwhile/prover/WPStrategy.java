@@ -61,19 +61,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		// clear weakestPrecondition state from a previous transformation
 		this.weakestPreconditionStack.clear();
 
-		// initialize the weakest precondition to true
-		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
-		trueLiteral.setValue(true);
-		this.weakestPreconditionStack.push(trueLiteral);
-
-		/*
-		 * pass us as visitor from statement to statement:
-		 * 
-		 * 1. get the weakest precondition, 2. apply the appropriate calculus rule, 3. set the weakest
-		 * precondition, 4. forward us to the next statement
-		 * 
-		 * finally the weakest precondition implies the correctness of the whole program
-		 */
 		program.accept(this);
 
 		return this.getWeakestPrecondition();
@@ -238,10 +225,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 *                the {@link FunctionDeclaration} to visit
 	 */
 	public void visit(final FunctionDeclaration functionDeclaration) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
+		trueLiteral.setValue(true);
+		this.weakestPreconditionStack.push(trueLiteral);
 	}
 
 	/**
@@ -320,8 +306,53 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 *                the {@link Program} to visit
 	 */
 	public void visit(final Program program) {
+		// if there are FunctionDeclarations specified this will hold a conjunction of the function bodies' and
+		// main block's weakest preconditions, otherwise the program's weakest precondition will consist of the
+		// main block's one, which is always defined, only
+		Conjunction conjunction = null;
+
+		/*
+		 * pass us as visitor from statement to statement in function body or main block:
+		 * 
+		 * 1. get the weakest precondition, 2. apply the appropriate calculus rule, 3. set the weakest
+		 * precondition, 4. forward us to the next statement
+		 * 
+		 * finally the weakest precondition implies the correctness of the function body or main block
+		 */
+
+		for (FunctionDeclaration f : program.getFunctionDeclarations()) {
+			if (conjunction == null) {
+				conjunction = AstFactory.init().createConjunction();
+			}
+
+			// visit function declaration, pushes its weakest precondition on top (does not replace)
+			f.accept(this);
+
+			// add function declaration's weakest precondition to program's weakest precondition
+			Conjunction c = AstFactory.init().createConjunction();
+			c.setLeft(this.weakestPreconditionStack.pop());
+			conjunction.setRight(c);
+			conjunction = c;
+		}
+
+		// initialize the weakest precondition of the main block to true
+		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
+		trueLiteral.setValue(true);
+		this.weakestPreconditionStack.push(AstNodeCloneHelper.clone(trueLiteral));
+
 		// visit program's main block
 		program.getMainBlock().accept(this);
+
+		// add main block's weakest precondition to program's weakest precondition
+		if (conjunction != null) {
+			conjunction.setRight(this.weakestPreconditionStack.pop());
+			this.weakestPreconditionStack.push(conjunction);
+		}
+
+		// assume axioms for the function bodies' and main block's weakest preconditions
+		for (Axiom a : program.getAxioms()) {
+			a.accept(this);
+		}
 	}
 
 	/**

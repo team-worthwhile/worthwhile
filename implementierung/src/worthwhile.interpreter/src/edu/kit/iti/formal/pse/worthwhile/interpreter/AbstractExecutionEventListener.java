@@ -15,8 +15,7 @@ public abstract class AbstractExecutionEventListener {
 	 *                the Statement that was executed
 	 */
 
-	public void statementExecuted(Statement statement) {
-		return;
+	public void statementExecuted(final Statement statement) {
 	}
 
 	/**
@@ -25,8 +24,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param statement
 	 *                the Statement that will be executed
 	 */
-	public void statementWillExecute(Statement statement) {
-		return;
+	public void statementWillExecute(final Statement statement) {
 	}
 
 	/**
@@ -37,7 +35,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param error
 	 *                an InterpreterError object that describes the error
 	 */
-	public void executionFailed(Statement statement, InterpreterError error) {
+	public void executionFailed(final Statement statement, final InterpreterError error) {
 		throw new RuntimeException("Failed to execute " + statement.toString() + "; Got error "
 		                + error.toString());
 	}
@@ -46,14 +44,12 @@ public abstract class AbstractExecutionEventListener {
 	 * Called after the start of the execution of a <code>Program</code>
 	 */
 	public void executionStarted() {
-		return;
 	}
 
 	/**
 	 * Called after the successful completion of execution of a <code>Program</code>
 	 */
 	public void executionCompleted() {
-		return;
 	}
 
 	/**
@@ -62,7 +58,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param assertion
 	 *                the invalid assertion
 	 */
-	public void assertionFailed(Assertion assertion) {
+	public void assertionFailed(final Assertion assertion) {
 		throw new RuntimeException(assertion.toString() + " is invalid.");
 	}
 
@@ -72,8 +68,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param assertion
 	 *                the valid assertion
 	 */
-	public void assertionSucceeded(Assertion assertion) {
-		return;
+	public void assertionSucceeded(final Assertion assertion) {
 	}
 
 	/**
@@ -82,7 +77,6 @@ public abstract class AbstractExecutionEventListener {
 	 * @param expression
 	 *                the expression that was evaluated
 	 */
-	public void expressionEvaluated(Expression expression) {
-		return;
+	public void expressionEvaluated(final Expression expression) {
 	}
 }

@@ -138,7 +138,7 @@ public class InterpreterExecutionEventListenerTest {
 			}
 		};
 		// Check division by zero
-		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 ÷ 0 \n")), listener);
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 Ã· 0 \n")), listener);
 		this.interpreter.execute();
 		assertTrue(this.test);
 

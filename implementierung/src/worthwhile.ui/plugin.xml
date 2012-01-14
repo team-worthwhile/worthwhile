@@ -368,7 +368,16 @@
             delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate"
             id="edu.kit.iti.formal.pse.worthwhile.debugger.launch"
             modes="run,debug"
-            name="Worthwhile Program">
+            name="Worthwhile Program"
+            sourceLocatorId="edu.kit.iti.formal.pse.worthwhile.debugger.sourceLookupDirector"
+            sourcePathComputerId="edu.kit.iti.formal.pse.worthwhile.debugger.sourcePathComputer">
       </launchConfigurationType>
    </extension>
+  <extension
+        point="org.eclipse.debug.ui.debugModelPresentations">
+     <debugModelPresentation
+           class="edu.kit.iti.formal.pse.worthwhile.ui.debugmodel.WorthwhileDebugModelPresentation"
+           id="edu.kit.iti.formal.pse.worthwhile.ui.debugModelPresentation">
+     </debugModelPresentation>
+  </extension>
 </plugin>

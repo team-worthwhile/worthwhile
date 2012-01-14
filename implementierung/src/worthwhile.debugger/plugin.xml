@@ -21,4 +21,19 @@
          name="Failed Assertion"
          point="org.eclipse.core.resources.markers">
    </extension>
+   <extension
+         point="org.eclipse.debug.core.sourceLocators">
+      <sourceLocator
+            class="edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileSourceLookupDirector"
+            id="edu.kit.iti.formal.pse.worthwhile.debugger.sourceLookupDirector"
+            name="Worthwhile Source Lookup Director">
+      </sourceLocator>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.sourcePathComputers">
+      <sourcePathComputer
+            class="edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileSourcePathComputerDelegate"
+            id="edu.kit.iti.formal.pse.worthwhile.debugger.sourcePathComputer">
+      </sourcePathComputer>
+   </extension>
 </plugin>

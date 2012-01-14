@@ -70,7 +70,7 @@ public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 	public final IScope scope_VariableReference_variable(final VariableReference context, final EReference reference) {
 		// Find the containing statement
 		ASTNode current = context;
-		ASTNode container = AstNodeParentHelper.findParentStatement(context);
+		ASTNode container = (ASTNode) current.eContainer();
 		IScope scope = IScope.NULLSCOPE;
 		
 		// Traverse the AST up to the containing program or function.

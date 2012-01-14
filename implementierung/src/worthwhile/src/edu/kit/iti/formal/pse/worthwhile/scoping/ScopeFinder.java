@@ -4,11 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
@@ -90,7 +94,8 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 					}
 				}
 			}
-		}	}
+		}
+	}
 
 	@Override
 	public final void visit(final FunctionDeclaration node) {
@@ -108,7 +113,41 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
+	public final void visit(final Annotation node) {
+		if (node.equals(this.sentinel)) {
+			this.stop = true;
+		} else {
+			if (!this.stop) {
+				node.getExpression().accept(this);
+			}
+		}
+	}
+
+	@Override
+	public final void visit(final Expression node) {
+
+	}
+
+	@Override
+	public final void visit(final QuantifiedExpression node) {
+		if (node.equals(this.sentinel)) {
+			this.stop = true;
+		} else {
+			if (!this.stop) {
+				node.getParameter().accept(this);
+			}
+		}
+	}
+
+	@Override
 	public final void visit(final Program node) {
+		// Visit all axioms.
+		for (Axiom axiom : node.getAxioms()) {
+			if (!this.stop) {
+				axiom.accept(this);
+			}
+		}
+
 		// Visit all function declarations.
 		for (FunctionDeclaration funcdec : node.getFunctionDeclarations()) {
 			if (!this.stop) {
@@ -139,7 +178,7 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(Conditional node) {
+	public final void visit(final Conditional node) {
 		if (node.equals(this.sentinel)) {
 			this.stop = true;
 		} else {
@@ -155,7 +194,7 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(Loop node) {
+	public final void visit(final Loop node) {
 		if (node.equals(this.sentinel)) {
 			this.stop = true;
 		} else {

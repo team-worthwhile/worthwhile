@@ -54,22 +54,22 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	 * @return a String representing <code>node</code>
 	 */
 	public static String toString(final ASTNode node) {
-		singleton.buf = new StringBuffer();
-		node.accept(singleton);
-		return singleton.buf.toString();
+		AstNodeToStringHelper.singleton.buf = new StringBuffer();
+		node.accept(AstNodeToStringHelper.singleton);
+		return AstNodeToStringHelper.singleton.buf.toString();
 	}
 
 	private void appendBinaryExpression(BinaryExpression binaryExpression, String operatorString) {
-		buf.append("(");
+		this.buf.append("(");
 		binaryExpression.getLeft().accept(this);
-		buf.append(" " + operatorString + " ");
+		this.buf.append(" " + operatorString + " ");
 		binaryExpression.getRight().accept(this);
-		buf.append(")");
+		this.buf.append(")");
 	}
 
 	@Override
 	public void visit(final ASTNode aSTNode) {
-		buf.append(aSTNode.toString());
+		this.buf.append(aSTNode.toString());
 	}
 
 	@Override
@@ -79,14 +79,14 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Assertion assertion) {
-		buf.append("_assert ");
+		this.buf.append("_assert ");
 		assertion.getExpression().accept(this);
 	}
 
 	@Override
 	public void visit(final Assignment assignment) {
 		assignment.getVariable().accept(this);
-		buf.append(" := ");
+		this.buf.append(" := ");
 		assignment.getValue().accept(this);
 	}
 
@@ -98,17 +98,17 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Block block) {
-		buf.append("{\n");
+		this.buf.append("{\n");
 		for (Statement stmt : block.getStatements()) {
 			stmt.accept(this);
-			buf.append("\n");
+			this.buf.append("\n");
 		}
-		buf.append("}");
+		this.buf.append("}");
 	}
 
 	@Override
 	public void visit(final BooleanLiteral booleanLiteral) {
-		buf.append(booleanLiteral.getValue());
+		this.buf.append(booleanLiteral.getValue());
 	}
 
 	@Override
@@ -123,12 +123,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final IntegerLiteral integerLiteral) {
-		buf.append(integerLiteral.getValue());
+		this.buf.append(integerLiteral.getValue());
 	}
 
 	@Override
 	public void visit(final IntegerType integerType) {
-		buf.append("Integer");
+		this.buf.append("Integer");
 	}
 
 	@Override
@@ -149,15 +149,15 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
 		variableDeclaration.getType().accept(this);
-		buf.append(" ");
-		buf.append(variableDeclaration.getName());
-		buf.append(" := ");
+		this.buf.append(" ");
+		this.buf.append(variableDeclaration.getName());
+		this.buf.append(" := ");
 		variableDeclaration.getInitialValue().accept(this);
 	}
 
 	@Override
 	public void visit(final VariableReference variableReference) {
-		buf.append(variableReference.getVariable().getName());
+		this.buf.append(variableReference.getVariable().getName());
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Negation negation) {
-		buf.append("!");
+		this.buf.append("!");
 		negation.getOperand().accept(this);
 	}
 }

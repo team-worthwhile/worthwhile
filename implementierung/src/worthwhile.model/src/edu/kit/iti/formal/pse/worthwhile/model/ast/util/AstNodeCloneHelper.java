@@ -78,9 +78,9 @@ public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
 	 * @return a clone of the given {@link ASTNode}
 	 */
 	public static final <T extends ASTNode> T clone(final T n) {
-		singleton.cloneStack.clear();
-		n.accept(singleton);
-		return (T) singleton.cloneStack.get(0);
+		AstNodeCloneHelper.singleton.cloneStack.clear();
+		n.accept(AstNodeCloneHelper.singleton);
+		return (T) AstNodeCloneHelper.singleton.cloneStack.get(0);
 	}
 
 	/**

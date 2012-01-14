@@ -1,39 +1,39 @@
-/**
- * Default listener for interpreter events.
- */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
+/**
+ * Default listener for {@link Interpreter} events.
+ */
 public abstract class AbstractExecutionEventListener {
 	/**
-	 * Called every time a Statement has been executed by the Interpreter
+	 * Signals that a {@link Statement} has been executed by the {@link Interpreter}.
 	 * 
 	 * @param statement
-	 *                the Statement that was executed
+	 *                the <code>Statement</code> that was executed
 	 */
 
 	public void statementExecuted(final Statement statement) {
 	}
 
 	/**
-	 * Called every time a Statement will be executed
+	 * Signals that a {@link Statement} will be executed.
 	 * 
 	 * @param statement
-	 *                the Statement that will be executed
+	 *                the <code>Statement</code> that will be executed
 	 */
 	public void statementWillExecute(final Statement statement) {
 	}
 
 	/**
-	 * Called after the execution of a Statement failed
+	 * Signals that the execution of a {@link Statement} failed.
 	 * 
 	 * @param statement
-	 *                the Statement that failed to execute
+	 *                the <code>Statement</code> that failed to execute
 	 * @param error
-	 *                an InterpreterError object that describes the error
+	 *                an {@link InterpreterError} object that describes the error
 	 */
 	public void executionFailed(final Statement statement, final InterpreterError error) {
 		throw new RuntimeException("Failed to execute " + statement.toString() + "; Got error "
@@ -41,41 +41,41 @@ public abstract class AbstractExecutionEventListener {
 	}
 
 	/**
-	 * Called after the start of the execution of a <code>Program</code>
+	 * Signals the start of the execution of a {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
 	 */
 	public void executionStarted() {
 	}
 
 	/**
-	 * Called after the successful completion of execution of a <code>Program</code>
+	 * Signals the successful completion of execution of a {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
 	 */
 	public void executionCompleted() {
 	}
 
 	/**
-	 * Called after the execution of an assertion that was not valid
+	 * Signals the execution of an {@link Assertion} that was not valid.
 	 * 
 	 * @param assertion
-	 *                the invalid assertion
+	 *                the invalid <code>Assertion</code>
 	 */
 	public void assertionFailed(final Assertion assertion) {
 		throw new RuntimeException(assertion.toString() + " is invalid.");
 	}
 
 	/**
-	 * Called after the execution of an assertion that was valid
+	 * Signals the execution of an {@link Assertion} that was valid.
 	 * 
 	 * @param assertion
-	 *                the valid assertion
+	 *                the valid <code>Assertion</code>
 	 */
 	public void assertionSucceeded(final Assertion assertion) {
 	}
 
 	/**
-	 * Called after the evaluation of a <code>Expression</code>
+	 * Signals the evaluation of a {@link Expression}.
 	 * 
 	 * @param expression
-	 *                the expression that was evaluated
+	 *                the <code>Expression</code> that was evaluated
 	 */
 	public void expressionEvaluated(final Expression expression) {
 	}

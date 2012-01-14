@@ -10,7 +10,7 @@
 <body>
 <h1>Functions</h1>
 <!--TODO-->
-In a <a href="program.html">worthwhile program</a> you can declare and call functions. Function declarations must be at the beginning of the code. A function has a return type of either <a href="boolean.html">Boolean</a> or <a href="integer.html">Integer</a>. Each function is identified with an unique name which must start with a letter (A-Z or a-z) and followed by optional letters (A-Z or a-z), numbers (0-9), '-' or '_'. Optional Parameters are allowed in the declaration which can be used in the function block. You have to specify a function block of <a href="statement.html">statements</a> which are executed in their own context when this function is called. Thus it is not possible to manipulate <a href="variable.html">variables</a> of the main block or other functions. It is also not allowed to call a function before it is declared. This prevents recursive use of functions. A function is called in the main block or other functions (after the declaration) by its unique name and by passing the correct parameters to it. Also a function can have multiple pre- and postconditions (<a href="requires.html">_requires</a> and <a href="ensures.html">_ensures</a>) which have to be placed after the parameters and before the function block.<br><br>
+In a <a href="program.html">Worthwhile program</a> you can declare and call functions. Function declarations must be at the beginning of the code. A function has a return type of either <a href="boolean.html">Boolean</a> or <a href="integer.html">Integer</a>. Each function is identified with an unique name which must start with a letter (A-Z or a-z) and followed by optional letters (A-Z or a-z), numbers (0-9), '-' or '_'. Optional Parameters are allowed in the declaration which can be used in the function block. You have to specify a function block of <a href="statement.html">statements</a> which are executed in their own context when this function is called. Thus it is not possible to manipulate <a href="variable.html">variables</a> of the main block or other functions. It is also not allowed to call a function before it is declared. This prevents recursive use of functions. A function is called in the main block or other functions (after the declaration) by its unique name and by passing the correct parameters to it. Also a function can have multiple pre- and postconditions (<a href="requires.html">_requires</a> and <a href="ensures.html">_ensures</a>) which have to be placed after the parameters and before the function block.<br><br>
 <b>Syntax:</b><br>
 <pre>
 function &lt;type&gt; &lt;name&gt;(&lt;parameters&gt;,...)
@@ -24,34 +24,34 @@ function &lt;type&gt; &lt;name&gt;(&lt;parameters&gt;,...)
 <b>Example:</b><br>
 Function declaration:<br>
 <pre>
-01: function Integer pow(Integer base, Integer exponent)
-02:	_requires(exponent >= 0)
-03:	{
-04:	Integer result := base
-05:
-06:	if(exponent == 0) {
-07:		return 1
-08:	}
-09:
-10:	while( exponent > 1) {
-11:		result := result * base
-12:		exponent := exponent - 1
-13:	}
-14:
-15:	return base
-16: }
-17:
-18: function Boolean isEqualToSquare(Integer a, Integer b) {
-19:	Integer c := pow(b, 2)
-20:
-21:	if(a == c) {
-22:		return true
-23:	} else {
-24:		return false
-25:	}
-26:
-27: Boolean a := isEqualToSquare(25, 5)
-28:
+function Integer pow(Integer base, Integer exponent)
+_requires(exponent >= 0)
+{
+Integer result := base
+
+if(exponent == 0) {
+	return 1
+}
+
+while( exponent > 1) {
+	result := result * base
+	exponent := exponent - 1
+}
+
+return base
+}
+
+function Boolean isEqualToSquare(Integer a, Integer b) {
+Integer c := pow(b, 2)
+	if(a = c) {
+		return true
+	} else {
+		return false
+	}
+}
+
+Boolean a := isEqualToSquare(25, 5)
+
 </pre>
 </body>
 </html>

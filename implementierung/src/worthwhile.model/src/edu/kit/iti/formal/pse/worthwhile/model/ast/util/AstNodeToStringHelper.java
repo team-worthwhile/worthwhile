@@ -10,6 +10,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
@@ -151,8 +152,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		variableDeclaration.getType().accept(this);
 		this.buf.append(" ");
 		this.buf.append(variableDeclaration.getName());
-		this.buf.append(" := ");
-		variableDeclaration.getInitialValue().accept(this);
+
+		Expression initialValue = variableDeclaration.getInitialValue();
+		if (initialValue != null) {
+			this.buf.append(" := ");
+			initialValue.accept(this);
+		}
 	}
 
 	@Override

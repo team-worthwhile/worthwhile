@@ -29,5 +29,15 @@ public final class NodeHelper {
 	public static int getLine(final ASTNode node) {
 		return NodeModelUtils.findActualNodeFor(node).getStartLine();
 	}
+	
+	public static boolean isAncestor(final ASTNode node, final ASTNode child) {
+		ASTNode current = child;
+		
+		while (current != null && !(node.equals(current)) ) {
+			current = (ASTNode) current.eContainer();
+		}
+		
+		return node.equals(current);
+	}
 
 }

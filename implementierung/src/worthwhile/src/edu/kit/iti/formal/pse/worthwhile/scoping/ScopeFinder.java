@@ -3,23 +3,19 @@ package edu.kit.iti.formal.pse.worthwhile.scoping;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
- * A visitor that looks for variable and function declarations in the direct child nodes of a given AST node, until
- * reaching one "sentinel" statement.
+ * A visitor that looks for variable and function declarations that are valid for a given AST node.
  * 
  * @author Joachim
  * 
@@ -27,19 +23,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
 public class ScopeFinder extends HierarchialASTNodeVisitor {
 
 	/**
-	 * Whether to recurse into statements containing other statements.
+	 * The node for which to compute the scope.
 	 */
-	private boolean recurse = true;
-
-	/**
-	 * Whether to stop looking for variable declarations.
-	 */
-	private boolean stop = false;
-
-	/**
-	 * The node to stop at.
-	 */
-	private final ASTNode sentinel;
+	private ASTNode node;
 
 	/**
 	 * A list of the found variable declarations.
@@ -50,16 +36,6 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	 * A list of the found function declarations.
 	 */
 	private List<FunctionDeclaration> functionDeclarations = new ArrayList<FunctionDeclaration>();
-
-	/**
-	 * Creates a new instance of the {@link VariableDeclarationFinder} type.
-	 * 
-	 * @param sentinel
-	 *                The variable declaration to stop at.
-	 */
-	public ScopeFinder(final ASTNode sentinel) {
-		this.sentinel = sentinel;
-	}
 
 	/**
 	 * Returns the list of found variable declarations.
@@ -79,129 +55,110 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 		return this.functionDeclarations;
 	}
 
-	@Override
-	public final void visit(final Block node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
-			if (this.recurse) {
-				this.recurse = false;
+	/**
+	 * Creates a new instance of the {@link ScopeFinder} class.
+	 * 
+	 * @param node
+	 *                The AST node for which to compute the scope.
+	 */
+	public ScopeFinder(final ASTNode node) {
+		// Get the node in the parse tree that equals the given AST node.
+		this.node = node;
+		computeScope();
+	}
 
-				// Visit the statements that this block contains.
-				for (Statement statement : node.getStatements()) {
-					if (!this.stop) {
-						statement.accept(this);
-					}
+	/**
+	 * Computes the scope of the node.
+	 */
+	private void computeScope() {
+		ASTNode current = this.node;
+
+		while (current != null) {
+
+			// Check all siblings preceding this node.
+			ASTNode prevSibling = (ASTNode) getPreviousSibling(current);
+
+			while (prevSibling != null) {
+				prevSibling.accept(this);
+				current = prevSibling;
+				prevSibling = (ASTNode) getPreviousSibling(current);
+			}
+
+			// Check the parent of this node.
+			if (current.eContainer() != null) {
+				current = (ASTNode) current.eContainer();
+				current.accept(this);
+			} else {
+				current = null;
+			}
+		}
+	}
+
+	/**
+	 * Gets the previous sibling of a given AST node in the AST.
+	 * 
+	 * Partially copied from Xtext 2.1 sources (EcoreUtil2.java).
+	 * 
+	 * @param eObject
+	 *                The node to get the sibling of.
+	 * @return The previous sibling, if it exists, {@code null} otherwise.
+	 */
+	private static EObject getPreviousSibling(final EObject eObject) {
+		EObject previous = null;
+
+		// special treatment for the main block: treat the function declarations as its siblings
+		if (eObject instanceof Block && eObject.eContainer() instanceof Program) {
+			Program program = (Program) (eObject.eContainer());
+
+			// The previous sibling is the last function declaration of the program.
+			if (!program.getFunctionDeclarations().isEmpty()) {
+				previous = program.getFunctionDeclarations().get(
+				                program.getFunctionDeclarations().size() - 1);
+			}
+		} else {
+			if (eObject.eContainingFeature() != null && eObject.eContainingFeature().isMany()) {
+				@SuppressWarnings("unchecked")
+				List<EObject> siblings = (List<EObject>) eObject.eContainer().eGet(
+				                eObject.eContainingFeature());
+
+				int indexOf = siblings.indexOf(eObject);
+				if (indexOf > 0) {
+					previous = siblings.get(indexOf - 1);
 				}
 			}
 		}
+		
+		return previous;
+	}
+
+	@Override
+	protected final void defaultOperation(final ASTNode node) {
+		// Do nothing.
 	}
 
 	@Override
 	public final void visit(final FunctionDeclaration node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
-			if (!this.stop) {
-				this.functionDeclarations.add(node);
-
-				if (this.recurse) {
-					node.getBody().accept(this);
-				}
-			}
+		// Direct ancestors cannot be called as a function.
+		if (!NodeHelper.isAncestor(node, this.node)) {
+			this.functionDeclarations.add(node);
 		}
-	}
 
-	@Override
-	public final void visit(final Annotation node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
-			if (!this.stop) {
-				node.getExpression().accept(this);
-			}
+		// However, the parameters of the function are always visible.
+		for (VariableDeclaration param : node.getParameters()) {
+			this.variableDeclarations.add(param);
 		}
-	}
-
-	@Override
-	public final void visit(final Expression node) {
-
 	}
 
 	@Override
 	public final void visit(final QuantifiedExpression node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
-			if (!this.stop) {
-				node.getParameter().accept(this);
-			}
-		}
-	}
-
-	@Override
-	public final void visit(final Program node) {
-		// Visit all axioms.
-		for (Axiom axiom : node.getAxioms()) {
-			if (!this.stop) {
-				axiom.accept(this);
-			}
-		}
-
-		// Visit all function declarations.
-		for (FunctionDeclaration funcdec : node.getFunctionDeclarations()) {
-			if (!this.stop) {
-				funcdec.accept(this);
-			}
-		}
-
-		// Visit the main block.
-		if (!this.stop) {
-			node.getMainBlock().accept(this);
-		}
-	}
-
-	@Override
-	public final void visit(final Statement node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		}
+		this.variableDeclarations.add(node.getParameter());
 	}
 
 	@Override
 	public final void visit(final VariableDeclaration node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
+		// Direct ancestors are not allowed to provide a variable declaration
+		if (!NodeHelper.isAncestor(node, this.node)) {
 			this.variableDeclarations.add(node);
-		}
-	}
-
-	@Override
-	public final void visit(final Conditional node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
-			// Visit the true and the false block, in that order.
-			if (!this.stop && this.recurse) {
-				node.getTrueBlock().accept(this);
-
-				if (!this.stop) {
-					node.getFalseBlock().accept(this);
-				}
-			}
-		}
-	}
-
-	@Override
-	public final void visit(final Loop node) {
-		if (node.equals(this.sentinel)) {
-			this.stop = true;
-		} else {
-			// Visit the body of the loop
-			if (!this.stop && this.recurse) {
-				node.getBody().accept(this);
-			}
 		}
 	}
 

@@ -14,6 +14,8 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
+import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
+import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.AbstractExecutionEventListener;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 
@@ -40,7 +42,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	/**
 	 * The event listener that manages the debug events from the interpreter.
 	 */
-	private AbstractExecutionEventListener eventListener;
+	private WorthwhileDebugEventListener eventListener;
 
 	/**
 	 * The interpreter executing the program.
@@ -64,14 +66,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		}
 
 		this.launch = launch;
-
 		this.thread = new WorthwhileThread(this);
-
 		this.interpreter = interpreter;
 
-		// Register our event listener with the interpreter.
+		// Create a new event listener.
 		if (launch.getLaunchMode().equals("debug")) {
-			this.eventListener = new WorthwhileDebugEventListener(this);
+			this.eventListener = new WorthwhileDebugEventListener(this, true);
 
 			// Register ourselves as a breakpoint listener.
 			DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
@@ -83,9 +83,10 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 				breakpointAdded(breakpoints[i]);
 			}
 		} else {
-			this.eventListener = new WorthwhileRunEventListener(this);
+			this.eventListener = new WorthwhileDebugEventListener(this, false);
 		}
 
+		// Register our event listener with the interpreter.
 		interpreter.addExecutionEventHandler(this.eventListener);
 
 		// Execute the program.
@@ -101,6 +102,11 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		});
 	}
 
+	/**
+	 * Returns the launch this debug target belongs to.
+	 * 
+	 * @return The launch this debug target belongs to.
+	 */
 	public final ILaunch doGetLaunch() {
 		return this.launch;
 	}
@@ -149,13 +155,13 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final void breakpointAdded(final IBreakpoint breakpoint) {
 		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
 			try {
-	                        ((WorthwhileDebugEventListener) this.eventListener).addBreakpoint(
-	                                        ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint).getLineNumber(),
-	                                        breakpoint);
-                        } catch (CoreException e) {
-	                        // TODO Auto-generated catch block
-	                        e.printStackTrace();
-                        }
+				((WorthwhileDebugEventListener) this.eventListener).addBreakpoint(
+				                ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
+				                                .getLineNumber(), breakpoint);
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
 			// TODO
 		}
@@ -169,25 +175,31 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void breakpointRemoved(final IBreakpoint breakpoint, final IMarkerDelta delta) {
-		// TODO Auto-generated method stub
-
+		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
+			try {
+				((WorthwhileDebugEventListener) this.eventListener)
+				                .removeBreakpoint(((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
+				                                .getLineNumber());
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public final boolean canDisconnect() {
-		return true;
+		return this.eventListener.getMode().equals(DebugMode.DEBUG);
 	}
 
 	@Override
 	public final void disconnect() throws DebugException {
-		this.interpreter.removeExecutionEventHandler(this.eventListener);
-		// TODO isDisconnected
+		// TODO
 	}
 
 	@Override
 	public final boolean isDisconnected() {
-		// TODO
-		return false;
+		return this.eventListener.getMode().equals(DebugMode.RUN);
 	}
 
 	@Override
@@ -202,8 +214,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final String getName() throws DebugException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getSourceName();
 	}
 
 	@Override
@@ -234,17 +245,20 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
-	 * Called when the interpreter has been started, before executing the first statement.
+	 * Called when a breakpoint is hit.
 	 */
-	protected final void executionStarted() {
-		
+	protected final void breakpointHit(final IBreakpoint breakpoint) {
+		suspended(DebugEvent.BREAKPOINT);
 	}
 
 	/**
-	 * Called when a breakpoint is hit.
+	 * Notifies the UI that the target has suspended for the given detail reason.
+	 * 
+	 * @param detail
+	 *                The detail reason for the suspend
 	 */
-	protected final void breakpointHit() {
-		fireSuspendEvent(DebugEvent.BREAKPOINT);
+	public final void suspended(final int detail) {
+		this.fireSuspendEvent(detail);
 	}
 
 	/**
@@ -259,6 +273,24 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		}
 		DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);
 		fireTerminateEvent();
+	}
+
+	/**
+	 * Returns the path to the source file of the program that is executed.
+	 * 
+	 * @return The path to the source file of the program that is executed.
+	 */
+	public final String getSourceName() {
+		return this.launch.getAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH);
+	}
+
+	/**
+	 * Returns the event listener.
+	 * 
+	 * @return The event listener.
+	 */
+	public final WorthwhileDebugEventListener getEventListener() {
+		return this.eventListener;
 	}
 
 }

@@ -5,6 +5,8 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
+
 /**
  * A representation of a thread (i.e., the only thread) in a Worthwhile program.
  * 
@@ -12,16 +14,6 @@ import org.eclipse.debug.core.model.IThread;
  * 
  */
 public class WorthwhileThread extends WorthwhileDebugElement implements IThread {
-
-	/**
-	 * Indicates whether the execution is suspended.
-	 */
-	private boolean suspended = false;
-
-	/**
-	 * Indicates whether the execution is terminated.
-	 */
-	private boolean terminated = false;
 
 	/**
 	 * Creates a new instance of the {@link WorthwhileThread} class.
@@ -35,39 +27,29 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
 	@Override
 	public final boolean canResume() {
-		return !this.terminated && this.suspended;
+		return !this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED)
+		                && this.debugTarget.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean canSuspend() {
-		return !this.terminated && !this.suspended;
+		return !this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED)
+		                && !this.debugTarget.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean isSuspended() {
-		return this.suspended;
+		return this.debugTarget.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
-	public void resume() throws DebugException {
-		// TODO: Send resume request to debug event listener, wait for response
-	}
-
-	/**
-	 * Called when the execution of the program was resumed.
-	 * 
-	 * @param detail
-	 *                The reason for resuming the program execution.
-	 */
-	public final void resumed(final int detail) {
-		this.suspended = false;
-		this.fireResumeEvent(detail);
+        public final void resume() throws DebugException {
+		this.debugTarget.getEventListener().resume();
 	}
 
 	@Override
 	public final void suspend() throws DebugException {
-		this.suspended = true;
-		// TODO
+		this.debugTarget.suspend();
 	}
 
 	@Override
@@ -87,8 +69,8 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
 	@Override
 	public final boolean isStepping() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.debugTarget.getEventListener().getMode().equals(DebugMode.STEP)
+		                || this.debugTarget.getEventListener().getMode().equals(DebugMode.STEP_OVER);
 	}
 
 	@Override
@@ -106,28 +88,26 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 	@Override
 	public void stepReturn() throws DebugException {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public final boolean canTerminate() {
-		return !this.terminated;
+		return !this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final boolean isTerminated() {
-		return this.terminated;
+		return this.debugTarget.getEventListener().getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final void terminate() throws DebugException {
-		this.terminated = true;
-		this.suspended = false;
-		// TODo
+		this.debugTarget.getEventListener().terminate();
 	}
 
 	@Override
 	public final IBreakpoint[] getBreakpoints() {
+		// Return the breakpoints the thread is currently suspended at (!)
 		// TODO Auto-generated method stub
 		return null;
 	}

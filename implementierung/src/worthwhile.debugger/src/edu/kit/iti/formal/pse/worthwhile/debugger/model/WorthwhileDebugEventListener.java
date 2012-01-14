@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.model.IBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
@@ -19,6 +20,51 @@ import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	/**
+	 * The mode a debugger can be in.
+	 */
+	public enum DebugMode {
+		/**
+		 * The debugger is running. Nothing can stop it, not even breakpoints (only forced termination)
+		 */
+		RUN,
+
+		/**
+		 * The debugger is running the program, but listening for suspend events (such as breakpoints).
+		 */
+		DEBUG,
+
+		/**
+		 * The debugger has been asked to suspend, but has not suspended yet.
+		 */
+		SUSPEND,
+
+		/**
+		 * The debugger is suspended and currently not executing any commands.
+		 */
+		SUSPENDED,
+
+		/**
+		 * The debugger is currently stepping to the next statement.
+		 */
+		STEP,
+
+		/**
+		 * The debugger is currently stepping over a statement.
+		 */
+		STEP_OVER,
+
+		/**
+		 * The execution of the program has terminated.
+		 */
+		TERMINATED
+	}
+
+	/**
+	 * The mode the debugger is currently in.
+	 */
+	private DebugMode mode;
+
+	/**
 	 * The active breakpoints, where the map index is the 1-based line number (allows for faster access).
 	 */
 	private Map<Integer, IBreakpoint> breakpoints;
@@ -28,10 +74,18 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 * 
 	 * @param debugTarget
 	 *                The debug target.
+	 * @param debug
+	 *                Whether to start in debug mode (otherwise: in run mode).
 	 */
-	public WorthwhileDebugEventListener(final WorthwhileDebugTarget debugTarget) {
+	public WorthwhileDebugEventListener(final WorthwhileDebugTarget debugTarget, final boolean debug) {
 		super(debugTarget);
 		this.breakpoints = new HashMap<Integer, IBreakpoint>();
+
+		if (debug) {
+			this.mode = DebugMode.DEBUG;
+		} else {
+			this.mode = DebugMode.RUN;
+		}
 	}
 
 	/**
@@ -48,7 +102,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		}
 
 		System.out.println("Breakpoint added at line " + lineNumber);
-		
+
 		this.breakpoints.put(lineNumber, breakpoint);
 	}
 
@@ -62,6 +116,15 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		this.breakpoints.remove(lineNumber);
 	}
 
+	/**
+	 * Returns the mode the debugger is currently in.
+	 * 
+	 * @return the mode the debugger is currently in.
+	 */
+	public final DebugMode getMode() {
+		return this.mode;
+	}
+
 	@Override
 	public final void executionFailed(final Statement statement, final InterpreterError error) {
 
@@ -70,28 +133,92 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	@Override
 	public final void executionCompleted() {
 		System.out.println("Execution completed.");
-		getDebugTarget().executionTerminated();
+		this.terminate();
 	}
 
 	@Override
-	public final void executionStarted() {
-		System.out.println("Execution started.");
-		getDebugTarget().executionStarted();
-	}
-
-	@Override
-        public final void statementWillExecute(final Statement statement) {
+	public final void statementWillExecute(final Statement statement) {
 		System.out.println("statement will execute: " + statement.toString());
-		
+
+		Boolean doSuspend = false;
+		Integer suspendReason = 0;
+
 		// Check if there is a breakpoint in this statement's line
 		int lineNumber = NodeHelper.getLine(statement);
 		if (this.breakpoints.containsKey(lineNumber)) {
 			// TODO breakpoint condition
 			System.out.println("Breakpoint hit at line " + lineNumber);
 			// Suspend execution
-			this.getDebugTarget().breakpointHit();
-			// this.suspendExecution();
+			this.getDebugTarget().breakpointHit(this.breakpoints.get(lineNumber));
+
+			doSuspend = true;
+			suspendReason = DebugEvent.BREAKPOINT;
+		} else {
+			// Check if we want to suspend anyway
+			if (this.mode.equals(DebugMode.STEP)) {
+				doSuspend = true;
+				suspendReason = DebugEvent.STEP_END;
+			} else if (this.mode.equals(DebugMode.SUSPEND)) {
+				doSuspend = true;
+				suspendReason = DebugEvent.CLIENT_REQUEST;
+			}
 		}
+
+		if (doSuspend) {
+			this.getDebugTarget().suspended(suspendReason);
+			this.mode = DebugMode.SUSPENDED;
+
+			// Wait until someone wakes us up.
+			synchronized (this) {
+				while (this.mode.equals(DebugMode.SUSPENDED)) {
+					try {
+						this.wait();
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+
+			// TODO fire resumed event
+		}
+	}
+
+	/**
+	 * Suspends the execution.
+	 */
+	public final void suspend() {
+		// We will suspend at the next execution of a statement.
+		this.mode = DebugMode.SUSPEND;
+	}
+
+	/**
+	 * Steps into the following statement.
+	 */
+	public final void stepInto() {
+		synchronized (this) {
+			this.mode = DebugMode.STEP;
+			notifyAll();
+		}
+	}
+	
+	/**
+	 * Resumes the execution.
+	 */
+	public final void resume() {
+		System.out.println("Trying to resume execution …");
+		synchronized (this) {
+			this.mode = DebugMode.DEBUG;
+			notifyAll();
+		}
+	}
+
+	/**
+	 * Terminates the execution.
+	 */
+	public final void terminate() {
+		this.mode = DebugMode.TERMINATED;
+		// TODO
 	}
 
 }

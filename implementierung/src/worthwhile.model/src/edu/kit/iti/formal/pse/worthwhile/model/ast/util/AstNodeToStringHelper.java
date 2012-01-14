@@ -5,17 +5,20 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -144,6 +147,11 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Program program) {
+		for (final Axiom a : program.getAxioms()) {
+			a.accept(this);
+			this.buf.append("\n");
+		}
+
 		program.getMainBlock().accept(this);
 	}
 
@@ -174,5 +182,31 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	public void visit(final Negation negation) {
 		this.buf.append("!");
 		negation.getOperand().accept(this);
+	}
+
+	@Override
+	public void visit(Multiplication multiplication) {
+		this.appendBinaryExpression(multiplication, "*");
+	}
+
+	@Override
+	public void visit(Axiom axiom) {
+		this.buf.append("_axiom ");
+		axiom.getExpression().accept(this);
+	}
+
+	@Override
+	public void visit(ForAllQuantifier forAllQuantifier) {
+		this.buf.append("forall ");
+		forAllQuantifier.getParameter().accept(this);
+
+		Expression condition = forAllQuantifier.getCondition();
+		if (condition != null) {
+			this.buf.append(", ");
+			condition.accept(this);
+		}
+
+		this.buf.append(" : ");
+		forAllQuantifier.getExpression().accept(this);
 	}
 }

@@ -49,21 +49,21 @@ public class InterpreterExecutionEventListenerTest {
 		assertEquals(this.counter, 2);
 
 		// Loop
-		this.reset(new Interpreter(TestASTProvider.getRootASTNode("while(false)\n")), listener);
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("while(false) { }\n")), listener);
 		assertFalse(this.test);
 		this.interpreter.execute();
 		assertTrue(this.test);
 
 		// Precondition Annotation
 		this.reset(new Interpreter(TestASTProvider
-		                .getRootASTNode("function Boolean test()\n_requires(true)\n{\n}\ntest()\n")), listener);
+		                .getRootASTNode("function Boolean test()\n_requires(true)\n{\n}\nInteger result := test()\n")), listener);
 		assertEquals(this.counter, 0);
 		this.interpreter.execute();
 		assertEquals(this.counter, 2);
 
 		// Postcondition Annotation
 		this.reset(new Interpreter(TestASTProvider
-		                .getRootASTNode("function Boolean test()\n{\n}\n_ensures(true)\ntest()\n")), listener);
+		                .getRootASTNode("function Boolean test()\n{\n}\n_ensures(true)\nInteger result := test()\n")), listener);
 		assertEquals(this.counter, 0);
 		this.interpreter.execute();
 		assertEquals(this.counter, 2);
@@ -181,7 +181,7 @@ public class InterpreterExecutionEventListenerTest {
 				test = true;
 			}
 		};
-		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a > 10)")),
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a > 10)\n")),
 		                listener);
 		this.interpreter.execute();
 		assertTrue(this.test);
@@ -194,7 +194,7 @@ public class InterpreterExecutionEventListenerTest {
 				test = true;
 			}
 		};
-		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a >= 10)")),
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a >= 10)\n")),
 		                listener);
 		this.interpreter.execute();
 		assertTrue(this.test);

@@ -22,7 +22,7 @@ public class InterpreterASTNodeVisitorTest {
 		assertNotNull(interpreter);
 		interpreter.execute();
 		Value value = new Value(new BigInteger("42"));
-		assertEquals(interpreter.getSymbol("a"), value);
+		assertEquals(value, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -31,7 +31,7 @@ public class InterpreterASTNodeVisitorTest {
 		assertNotNull(interpreter);
 		interpreter.execute();
 		Value value = new Value(new BigInteger("42"));
-		assertEquals(interpreter.getSymbol("a"), value);
+		assertEquals(value, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class InterpreterASTNodeVisitorTest {
 		assertNotNull(interpreter);
 		interpreter.execute();
 		Value value = new Value(new BigInteger("42"));
-		assertEquals(interpreter.getSymbol("a"), value);
+		assertEquals(value, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class InterpreterASTNodeVisitorTest {
 		assertNotNull(interpreter);
 		interpreter.execute();
 		Value value = new Value(new BigInteger("42"));
-		assertEquals(interpreter.getSymbol("a"), value);
+		assertEquals(value, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class InterpreterASTNodeVisitorTest {
 		assertNotNull(interpreter);
 		interpreter.execute();
 		Value value = new Value(new BigInteger("42"));
-		assertEquals(interpreter.getSymbol("a"), value);
+		assertEquals(value, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -113,7 +113,7 @@ public class InterpreterASTNodeVisitorTest {
 
 	@Test
 	public void testInterpreterContexEqual() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 == 42\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 = 42\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
 		assertTrue(interpreter.getSymbol("a").getBooleanValue());

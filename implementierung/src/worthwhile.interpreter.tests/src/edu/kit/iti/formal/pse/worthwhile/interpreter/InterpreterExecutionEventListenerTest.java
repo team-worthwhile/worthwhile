@@ -11,46 +11,51 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 public class InterpreterExecutionEventListenerTest {
 	
 	public boolean test;
-	public Interpreter interpreter;
-	public AbstractExecutionEventListener listener;
+	Interpreter interpreter;
 	
 	@Before
 	public void intitialize() {
-		this.interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := true\n"));
 		this.test = false;
-		this.listener = new AbstractExecutionEventListener() {
-			public void statementExecuted(Statement statement) {
-				test = true;
-			}
-			public void statementWillExecute(Statement statement) {
-				test = true;
-			}
-			public void executionFailed(Statement statement, InterpreterError error) {
-				test = true;
-			}
-		};
 	}
 	
 	@Test
-	public void testStatementExuted() {	
-		this.interpreter.addExecutionEventHandler(this.listener);
+	public void testStatementExecuted() {
+		AbstractExecutionEventListener listener = new AbstractExecutionEventListener() {
+			public void statementExecuted(Statement statement) {
+				test = true;
+			}
+		};
+		
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Boolean a := true\n")), listener);
 		this.interpreter.execute();
 		assertTrue(this.test);
-		reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 5\n")), this.listener);
+		//this.reset(new Interpreter(TestASTProvider.getRootASTNode("Integer a := 5\n")), listener);
 		
 	}
 	
 	@Test
-	public void testStatementWillExecuted() {
-		this.interpreter.addExecutionEventHandler(this.listener);
+	public void testStatementWillExecute() {
+		AbstractExecutionEventListener listener = new AbstractExecutionEventListener() {
+			public void statementWillExecute(Statement statement) {
+				test = true;
+			}
+		};
+		
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Boolean a := true\n")), listener);
 		this.interpreter.execute();
 		assertTrue(this.test);
 	}
 	
 	
 	@Test
-	public void testExecutionFailed() {	
-		this.interpreter.addExecutionEventHandler(this.listener);
+	public void testExecutionFailed() {
+		AbstractExecutionEventListener listener = new AbstractExecutionEventListener() {
+			public void executionFailed(Statement statement, InterpreterError interpreterError) {
+				test = true;
+			}
+		};
+		
+		this.reset(new Interpreter(TestASTProvider.getRootASTNode("Boolean a := true\n")), listener);
 		this.interpreter.execute();
 		assertTrue(this.test);
 	}

@@ -15,5 +15,5 @@ public interface FormulaGenerator {
 	 *            the {@link Program} to be transformed into a formula
 	 * @return the transformation formula of <code>program</code> according to some calculus rules
 	 */
-	public Expression transformProgram(Program program);
+	Expression transformProgram(Program program);
 }

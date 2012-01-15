@@ -15,5 +15,5 @@ public interface ProverCaller {
 	 * @return some prover's satisfiability checking result for <code>formula</code>
 	 * @throws ProverCallerException
 	 */
-	public ProverResult checkFormula(Expression formula) throws ProverCallerException;
+	ProverResult checkFormula(Expression formula) throws ProverCallerException;
 }

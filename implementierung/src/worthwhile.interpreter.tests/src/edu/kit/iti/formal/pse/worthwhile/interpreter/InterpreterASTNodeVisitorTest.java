@@ -2,6 +2,8 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import static org.junit.Assert.*;
 import java.math.BigInteger;
+
+import org.junit.Assert;
 import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 
@@ -9,6 +11,37 @@ import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
  * @author matthias and stefan
  */
 public class InterpreterASTNodeVisitorTest {
+	/**
+	 * Tests whether a {@link Value} is of boolean type and equals a given boolean value.
+	 * 
+	 * Also asserts that <code>actual</code> is not <code>null</code>.
+	 * 
+	 * @param expected
+	 *                the expected boolean value for <code>actual</code> to equal
+	 * @param actual
+	 *                the Value to be checked to be of boolean type and equal <code>expected</code>
+	 */
+	private static void assertBooleanValueEquals(final Boolean expected, final Value actual) {
+		Assert.assertNotNull(actual);
+		Assert.assertEquals(actual.getValueType(), ValueType.BOOLEAN_TYPE);
+		Assert.assertEquals(expected, actual.getBooleanValue());
+	}
+
+	/**
+	 * Tests whether a {@link Value} is of integer type and equals a given integer value.
+	 * 
+	 * Also asserts that <code>actual</code> is not <code>null</code>.
+	 * 
+	 * @param expected
+	 *                the expected integer value for <code>actual</code> to equal
+	 * @param actual
+	 *                the Value to be checked to be of integer type and equal <code>expected</code>
+	 */
+	private static void assertIntegerValueEquals(final Integer expected, final Value actual) {
+		Assert.assertNotNull(actual);
+		Assert.assertEquals(actual.getValueType(), ValueType.INTEGER_TYPE);
+		Assert.assertEquals(BigInteger.valueOf(expected), actual.getIntegerValue());
+	}
 
 	@Test
 	public void test() {
@@ -21,8 +54,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 42\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		Value value = new Value(new BigInteger("42"));
-		assertEquals(value, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -30,8 +62,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 21 + 21\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		Value value = new Value(new BigInteger("42"));
-		assertEquals(value, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -39,8 +70,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 * 21\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		Value value = new Value(new BigInteger("42"));
-		assertEquals(value, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -48,8 +78,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 84 / 2\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		Value value = new Value(new BigInteger("42"));
-		assertEquals(value, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -57,8 +86,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 85 % 43\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		Value value = new Value(new BigInteger("42"));
-		assertEquals(value, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -67,7 +95,7 @@ public class InterpreterASTNodeVisitorTest {
 		                TestASTProvider.getRootASTNode("Boolean a := true && false\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertFalse(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(false, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -76,7 +104,7 @@ public class InterpreterASTNodeVisitorTest {
 		                TestASTProvider.getRootASTNode("Boolean a := true || false\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertTrue(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -84,7 +112,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 < 45\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertTrue(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -92,7 +120,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 > 41\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertFalse(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(false, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -100,7 +128,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 <= 52\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertTrue(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -108,7 +136,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 >= 52\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertFalse(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(false, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -116,7 +144,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 = 42\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertTrue(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -124,7 +152,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 != 52\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertTrue(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 
 	@Test
@@ -132,6 +160,6 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := !false\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		assertTrue(interpreter.getSymbol("a").getBooleanValue());
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 }

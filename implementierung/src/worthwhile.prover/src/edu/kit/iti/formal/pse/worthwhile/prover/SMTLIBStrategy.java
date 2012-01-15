@@ -12,14 +12,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
@@ -29,26 +25,19 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -60,8 +49,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
 /**
  * @author Leon Handreke, fabian
  */
-// TODO: This doesn't really implement all of ASTNodeVisitor, it should only
-// compile expressions!
 class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
 
 	private final Stack<String> formulaCompileStack = new Stack<String>();
@@ -177,31 +164,10 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		this.formulaCompileStack.push("assert(" + expr + ")");
 	}
 
-	public void visit(final Assignment assignment) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
 	public void visit(final Assumption assumption) {
 		assumption.getExpression().accept(this);
 		String expr = this.formulaCompileStack.pop();
 		this.formulaCompileStack.push("assume(" + expr + ")");
-	}
-
-	public void visit(final Axiom axiom) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	public void visit(final Block block) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	public void visit(final BooleanLiteral booleanLiteral) {
@@ -214,16 +180,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	public void visit(final BooleanType booleanType) {
 		this.formulaCompileStack.push("Bool");
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Conditional conditional)
-	 */
-	public void visit(final Conditional conditional) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	/**
@@ -286,16 +242,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(FunctionDeclaration functionDeclaration)
-	 */
-	public void visit(final FunctionDeclaration functionDeclaration) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
 	 * @see ASTNodeVisitor#visit(Greater greater)
 	 */
 	public void visit(final Greater greater) {
@@ -331,16 +277,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Invariant invariant)
-	 */
-	public void visit(final Invariant invariant) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
 	 * @see ASTNodeVisitor#visit(Less less)
 	 */
 	public void visit(final Less less) {
@@ -352,16 +288,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 */
 	public void visit(final LessOrEqual lessOrEqual) {
 		this.pushBinaryOperation(lessOrEqual, "<=");
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Loop loop)
-	 */
-	public void visit(final Loop loop) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	/**
@@ -405,49 +331,9 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	}
 
 	/**
-	 * @see ASTNodeVisitor#visit(Postcondition postcondition)
-	 */
-	public void visit(final Postcondition postcondition) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Precondition precondition)
-	 */
-	public void visit(final Precondition precondition) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Program program)
-	 */
-	public void visit(final Program program) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
 	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
 	 */
 	public void visit(final QuantifiedExpression quantifiedExpression) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(ReturnStatement returnStatement)
-	 */
-	public void visit(final ReturnStatement returnStatement) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 

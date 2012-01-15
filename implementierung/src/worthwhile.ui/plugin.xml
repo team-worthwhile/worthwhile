@@ -377,7 +377,7 @@
         point="org.eclipse.debug.ui.debugModelPresentations">
      <debugModelPresentation
            class="edu.kit.iti.formal.pse.worthwhile.ui.debugmodel.WorthwhileDebugModelPresentation"
-           id="edu.kit.iti.formal.pse.worthwhile.ui.debugModelPresentation">
+           id="edu.kit.iti.formal.pse.worthwhile">
      </debugModelPresentation>
   </extension>
 </plugin>

@@ -6,6 +6,9 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
+
 /**
  * Represents a stack frame in a suspended Worthwhile program.
  * 
@@ -19,10 +22,18 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 	 * 
 	 * @param debugTarget
 	 *                The debug target.
+	 * @param node
+	 *                The AST node this stack frame represents.
 	 */
-	public WorthwhileStackFrame(final WorthwhileDebugTarget debugTarget) {
+	public WorthwhileStackFrame(final WorthwhileDebugTarget debugTarget, final ASTNode node) {
 		super(debugTarget);
+		this.node = node;
 	}
+
+	/**
+	 * The AST node this stack frame represents. (FIXME?)
+	 */
+	private final ASTNode node;
 
 	/**
 	 * Returns the name of the source file that is associated with this stack frame.
@@ -35,139 +46,124 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 
 	@Override
 	public final boolean canStepInto() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().canStepInto();
 	}
 
 	@Override
 	public final boolean canStepOver() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().canStepOver();
 	}
 
 	@Override
 	public final boolean canStepReturn() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().canStepReturn();
 	}
 
 	@Override
 	public final boolean isStepping() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().isStepping();
 	}
 
 	@Override
-	public void stepInto() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void stepInto() throws DebugException {
+		this.getThread().stepInto();
 	}
 
 	@Override
-	public void stepOver() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void stepOver() throws DebugException {
+		this.getThread().stepOver();
 	}
 
 	@Override
-	public void stepReturn() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void stepReturn() throws DebugException {
+		this.getThread().stepReturn();
 	}
 
 	@Override
 	public final boolean canResume() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().canResume();
 	}
 
 	@Override
 	public final boolean canSuspend() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().canSuspend();
 	}
 
 	@Override
 	public final boolean isSuspended() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().isSuspended();
 	}
 
 	@Override
-	public void resume() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void resume() throws DebugException {
+		this.getThread().resume();
 	}
 
 	@Override
-	public void suspend() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void suspend() throws DebugException {
+		this.getThread().suspend();
 	}
 
 	@Override
 	public final boolean canTerminate() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().canTerminate();
 	}
 
 	@Override
 	public final boolean isTerminated() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getThread().isTerminated();
 	}
 
 	@Override
-	public void terminate() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void terminate() throws DebugException {
+		this.getThread().terminate();
 	}
 
 	@Override
 	public final int getCharEnd() throws DebugException {
-		// TODO Auto-generated method stub
-		return 0;
+		return -1;
 	}
 
 	@Override
 	public final int getCharStart() throws DebugException {
-		// TODO Auto-generated method stub
-		return 0;
+		return -1;
 	}
 
 	@Override
 	public final int getLineNumber() throws DebugException {
-		// TODO Auto-generated method stub
-		return 0;
+		return NodeHelper.getLine(this.node);
 	}
 
 	@Override
 	public final String getName() throws DebugException {
-		// TODO Auto-generated method stub
-		return null;
+		return "Statement at line " + NodeHelper.getLine(this.node);
 	}
 
 	@Override
 	public final IRegisterGroup[] getRegisterGroups() throws DebugException {
-		// TODO Auto-generated method stub
-		return null;
+		return new IRegisterGroup[0];
 	}
 
 	@Override
 	public final IThread getThread() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			// FIXME
+			return this.getDebugTarget().getThreads()[0];
+		} catch (DebugException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
 	public final IVariable[] getVariables() throws DebugException {
 		// TODO Auto-generated method stub
-		return null;
+		return new IVariable[0];
 	}
 
 	@Override
 	public final boolean hasRegisterGroups() throws DebugException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

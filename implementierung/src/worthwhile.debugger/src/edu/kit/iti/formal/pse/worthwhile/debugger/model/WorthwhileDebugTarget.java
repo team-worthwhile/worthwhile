@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
@@ -272,7 +273,15 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @return The path to the source file of the program that is executed.
 	 */
 	public final String getSourceName() {
-		return this.launch.getAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH);
+		try {
+			Path path = new Path(this.launch.getLaunchConfiguration().getAttribute(
+			                IWorthwhileLaunchConfigurationConstants.ATTR_PATH, ""));
+			return path.lastSegment();
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "";
+		}
 	}
 
 	/**

@@ -47,7 +47,7 @@ public class WorthwhileLineBreakpoint extends LineBreakpoint {
 		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 			@Override
 			public void run(final IProgressMonitor monitor) throws CoreException {
-				// create a new marker for this breakpoint
+				// Create a new marker for this breakpoint
 				IMarker marker = resource
 				                .createMarker("edu.kit.iti.formal.pse.worthwhile.debugger.lineBreakpoint.marker");
 				setMarker(marker);

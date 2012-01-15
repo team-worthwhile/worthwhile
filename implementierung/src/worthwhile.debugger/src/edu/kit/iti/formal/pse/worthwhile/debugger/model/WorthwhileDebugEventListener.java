@@ -7,8 +7,9 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.model.IBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
-
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
@@ -68,6 +69,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 * The active breakpoints, where the map index is the 1-based line number (allows for faster access).
 	 */
 	private Map<Integer, IBreakpoint> breakpoints;
+
+	private ASTNode currentNode;
 
 	/**
 	 * Creates a new instance of the {@link WorthwhileDebugEventListener} class.
@@ -138,7 +141,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void statementWillExecute(final Statement statement) {
-		System.out.println("statement will execute: " + statement.toString());
+		System.out.println("statement will execute: " + AstNodeToStringHelper.toString(statement)
+		                + " at line " + NodeHelper.getLine(statement));
 
 		Boolean doSuspend = false;
 		Integer suspendReason = 0;
@@ -167,6 +171,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		if (doSuspend) {
 			this.getDebugTarget().suspended(suspendReason);
 			this.mode = DebugMode.SUSPENDED;
+			this.currentNode = statement;
 
 			// Wait until someone wakes us up.
 			synchronized (this) {
@@ -181,6 +186,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			}
 
 			// TODO fire resumed event
+			this.currentNode = null;
 		}
 	}
 
@@ -201,7 +207,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			notifyAll();
 		}
 	}
-	
+
 	/**
 	 * Resumes the execution.
 	 */
@@ -219,6 +225,10 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	public final void terminate() {
 		this.mode = DebugMode.TERMINATED;
 		// TODO
+	}
+
+	public ASTNode getCurrentNode() {
+		return this.currentNode;
 	}
 
 }

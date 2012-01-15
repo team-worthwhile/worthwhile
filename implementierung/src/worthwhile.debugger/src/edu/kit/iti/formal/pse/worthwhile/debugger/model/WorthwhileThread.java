@@ -43,7 +43,7 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 	}
 
 	@Override
-        public final void resume() throws DebugException {
+	public final void resume() throws DebugException {
 		this.getDebugTarget().getEventListener().resume();
 	}
 
@@ -122,22 +122,26 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 		return 0;
 	}
 
+	// FIXME
+	private WorthwhileStackFrame buildStackFrame() {
+		WorthwhileStackFrame result = new WorthwhileStackFrame(this.getDebugTarget(), this.getDebugTarget()
+		                .getEventListener().getCurrentNode());
+		return result;
+	}
+
 	@Override
 	public final IStackFrame[] getStackFrames() throws DebugException {
-		// TODO Auto-generated method stub
-		return null;
+		return new IStackFrame[] { this.buildStackFrame() };
 	}
 
 	@Override
 	public final IStackFrame getTopStackFrame() throws DebugException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.buildStackFrame();
 	}
 
 	@Override
 	public final boolean hasStackFrames() throws DebugException {
-		// TODO Auto-generated method stub
-		return false;
+		return this.isSuspended();
 	}
 
 }

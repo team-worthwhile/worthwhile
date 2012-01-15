@@ -24,21 +24,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 public class TestASTProvider {
 
 	public static Program getRootASTNode(String parseText) {
-		// from http://wiki.pse.ndreke.de/proof_of_concept_ast_output
-		// see also
-		// http://wiki.eclipse.org/Xtext/FAQ#How_do_I_load_my_model_in_a_standalone_Java_application.C2.A0.3F
-		Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
-		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
-		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		Resource resource = resourceSet.createResource(URI.createURI("dummy:/example.ww"));
-		InputStream in = new ByteArrayInputStream(parseText.getBytes());
-		try {
-			resource.load(in, resourceSet.getLoadOptions());
-		} catch (IOException e) {
-			// TODO
-		}
-
-		// System.out.println("Getting syntax errors ...");
+		Resource resource = loadProgram(parseText);
 		Program root = null;
 
 		if (resource.getErrors().isEmpty()) {
@@ -53,6 +39,18 @@ public class TestASTProvider {
 			throw new IllegalArgumentException("Program contains errors:" + errorStringBuilder.toString());
 		}
 		return root;
+	}
+
+	/**
+	 * Returns the number of parser/validator errors in the specified code.
+	 * 
+	 * @param parseText
+	 *                The program code to parse.
+	 * @return The number of parser/validator errors in the specified code.
+	 */
+	public static int getErrorCount(String parseText) {
+		Resource resource = loadProgram(parseText);
+		return resource.getErrors().size();
 	}
 
 	/**
@@ -78,5 +76,27 @@ public class TestASTProvider {
 		                .getStatements();
 
 		return ((VariableDeclaration) (statements.get(0))).getInitialValue();
+	}
+
+	/**
+	 * Creates an Xtext resource from a program text.
+	 * 
+	 * @param parseText
+	 *                The program code.
+	 * @return An Xtext resource that represents the program text.
+	 */
+	private static Resource loadProgram(String parseText) {
+		// http://wiki.eclipse.org/Xtext/FAQ#How_do_I_load_my_model_in_a_standalone_Java_application.C2.A0.3F
+		Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
+		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		Resource resource = resourceSet.createResource(URI.createURI("dummy:/example.ww"));
+		InputStream in = new ByteArrayInputStream(parseText.getBytes());
+		try {
+			resource.load(in, resourceSet.getLoadOptions());
+		} catch (IOException e) {
+			return null;
+		}
+		return resource;
 	}
 }

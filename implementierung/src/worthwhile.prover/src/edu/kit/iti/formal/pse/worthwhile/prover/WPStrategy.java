@@ -98,8 +98,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 								 * it directly
 								 */
 				                                WPStrategy.this.weakestPreconditionStack.pop();
-				                                WPStrategy.this.weakestPreconditionStack
-				                                                .push(assignment.getValue());
+				                                WPStrategy.this.weakestPreconditionStack.push(AstNodeCloneHelper
+				                                                .clone(assignment.getValue()));
 			                                }
 		                                }));
 	}
@@ -396,9 +396,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 								 * it directly
 								 */
 				                                WPStrategy.this.weakestPreconditionStack.pop();
-				                                WPStrategy.this.weakestPreconditionStack
-				                                                .push(variableDeclaration
-				                                                                .getInitialValue());
+				                                WPStrategy.this.weakestPreconditionStack.push(AstNodeCloneHelper
+				                                                .clone(variableDeclaration
+				                                                                .getInitialValue()));
 			                                }
 		                                }));
 	}

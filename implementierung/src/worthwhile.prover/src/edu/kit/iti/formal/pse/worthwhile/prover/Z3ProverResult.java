@@ -1,7 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 /**
- * Represents a prover result returned by the Z3 Prover
+ * Represents a prover result returned by the Z3 Prover.
  */
 public class Z3ProverResult extends ProverResult {
 

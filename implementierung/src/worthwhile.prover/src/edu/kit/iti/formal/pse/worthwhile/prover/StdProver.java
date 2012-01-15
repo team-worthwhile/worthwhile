@@ -9,21 +9,21 @@ import java.io.OutputStreamWriter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
 /**
- * Implements a prover interface that uses stdin/stdout/stderr
+ * Implements a prover interface that uses stdin/stdout/stderr.
  */
 abstract class StdProver implements ProverCaller {
 	/**
-	 * The compiler used to construct an input string from the Expression object to be checked for satisfiability
+	 * The compiler used to construct an input string from the Expression object to be checked for satisfiability.
 	 */
 	private FormulaCompiler compiler;
 
 	/**
-	 * The path to the binary of the prover that should be called
+	 * The path to the binary of the prover that should be called.
 	 */
 	private String proverPath;
 
 	/**
-	 * Constructs a new caller with the given binary path and compiler object
+	 * Constructs a new caller with the given binary path and compiler object.
 	 * 
 	 * @param path
 	 *            the path to the binary to call
@@ -36,7 +36,7 @@ abstract class StdProver implements ProverCaller {
 	}
 
 	/**
-	 * Check an the given <code>Expression</code> for its validity
+	 * Check an the given <code>Expression</code> for its validity.
 	 * 
 	 * @param formula
 	 *            the expression to check
@@ -88,7 +88,7 @@ abstract class StdProver implements ProverCaller {
 	}
 
 	/**
-	 * Convert output supplied by the prover to machine-readable <code>ProverResult</code>
+	 * Convert output supplied by the prover to machine-readable <code>ProverResult</code>.
 	 * 
 	 * @param output
 	 *            the String output returned from the called prover

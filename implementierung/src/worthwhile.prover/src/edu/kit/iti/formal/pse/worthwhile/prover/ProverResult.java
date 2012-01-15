@@ -1,16 +1,16 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 /**
- * Represents a result of a proof attempt by a prover for a formula
+ * Represents a result of a proof attempt by a prover for a formula.
  */
 abstract class ProverResult {
 	/**
-	 * The output of the prover
+	 * The output of the prover.
 	 */
 	private final String output;
 
 	/**
-	 * Construct a new instance using the given output to deduce the satisfiability
+	 * Construct a new instance using the given output to deduce the satisfiability.
 	 * 
 	 * @param output
 	 *            the output to construct the result with

@@ -184,10 +184,16 @@ UnaryOperation returns Expression:
 //  - a function call or
 //  - a number or
 //  - a Boolean literal or
+//  - an Array literal
 //  - a reference to a variable
 //  - a whole new Expression in parentheses.
 Atomic returns Expression:
-	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | VariableReference | '(' Expression ')'
+	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | ArrayLiteral | VariableReference | '(' Expression ')'
+;
+
+// An array literal is an enumeration of the array's values in curly brackets.
+ArrayLiteral returns ArrayLiteral:
+	{ArrayLiteral} '{' (values+=Expression (',' values+=Expression)*)? '}'
 ;
 
 // A variable reference is used to denote the current content of a variable. 

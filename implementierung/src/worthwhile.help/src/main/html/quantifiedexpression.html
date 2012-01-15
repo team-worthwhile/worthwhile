@@ -12,9 +12,15 @@
 <!--TODO-->
 <br><br>
 A quantified expression is used within some statements like <a href="axiom.html">axioms</a>, <a href="assume.html">assumptions</a>, <a href="assert.html">assertions</a>, <a href="requires.html">preconditions</a> or <a href="ensures.html">postconditions</a>. These type of expression allows the user to make statements with quantors (&#8704 or &#8707).<br><br>
+
 <b>Syntax:</b><br>
 <pre>
 &lt;&#8704&gt;&lt;type&gt;&lt;name&gt;,... &lt;&#8707&gt;&lt;type&gt;&lt;name&gt;,... : &lt;expression&gt;
+</pre><br><br>
+
+<b>Example:</b><br>
+<pre>
+&#8704 Integer a, &#8704 Integer b : a + b + 1 > a
 </pre>
 </body>
 </html>

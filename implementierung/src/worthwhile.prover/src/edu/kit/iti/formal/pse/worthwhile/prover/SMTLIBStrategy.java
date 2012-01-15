@@ -58,7 +58,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
- *
+ * @author Leon Handreke, fabian
  */
 // TODO: This doesn't really implement all of ASTNodeVisitor, it should only
 // compile expressions!
@@ -102,6 +102,48 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		unaryExpression.getOperand().accept(this);
 		String operand = this.formulaCompileStack.pop();
 		this.formulaCompileStack.push("(" + compiledOperationSymbol + " " + operand + ")");
+	}
+
+	/**
+	 * Pushes <code>(type identifier)</code> on top of {@link formulaCompileStack}.
+	 * 
+	 * @param variableDeclaration
+	 *                the {@link VariableDeclaration} that defines <code>type</code> and <code>identifier</code> in
+	 *                <code>(type identifier)</code>
+	 */
+	private void pushParameter(final VariableDeclaration variableDeclaration) {
+		variableDeclaration.getType().accept(this);
+		this.formulaCompileStack.push("(" + " " + variableDeclaration.getName()
+		                + this.formulaCompileStack.pop() + ")");
+	}
+
+	/**
+	 * Pushes <code>(quantifier (param) (expr))</code> on top of {@link formulaCompileStack}.
+	 * 
+	 * @param quantifiedExpression
+	 *                the {@link QuantifiedExpression} that defines <code>param</code> and <code>expr</code> in
+	 *                <code>(quantifier (param) (expr))</code>
+	 * @param quantifierString
+	 *                the {@link String} that defines <code>quantifier</code> in
+	 *                <code>(quantifier (param) (expr))</code>
+	 */
+	private void pushQuantifier(final QuantifiedExpression quantifiedExpression, final String quantifierString) {
+		quantifiedExpression.getExpression().accept(this);
+
+		String expression;
+		Expression condition = quantifiedExpression.getCondition();
+		if (condition != null) {
+			quantifiedExpression.getCondition().accept(this);
+			// condition is a constraint on the type domain elements and compiled into an implication
+			expression = "(=> " + this.formulaCompileStack.pop() + " " + this.formulaCompileStack.pop()
+			                + ")";
+		} else {
+			expression = this.formulaCompileStack.pop();
+		}
+
+		this.pushParameter(quantifiedExpression.getParameter());
+		this.formulaCompileStack.push("(" + quantifierString + "(" + this.formulaCompileStack.pop() + ") "
+		                + expression + ")");
 	}
 
 	public void visit(final Addition addition) {
@@ -202,10 +244,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(Division division)
 	 */
 	public void visit(final Division division) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushBinaryOperation(division, "/");
 	}
 
 	/**
@@ -219,30 +258,21 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
 	 */
 	public void visit(final Equivalence equivalence) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushBinaryOperation(equivalence, "iff");
 	}
 
 	/**
 	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
 	 */
 	public void visit(final ExistsQuantifier existsQuantifier) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushQuantifier(existsQuantifier, "exists");
 	}
 
 	/**
 	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
 	 */
 	public void visit(final ForAllQuantifier forAllQuantifier) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushQuantifier(forAllQuantifier, "forall");
 	}
 
 	/**
@@ -338,6 +368,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(Minus minus)
 	 */
 	public void visit(final Minus minus) {
+		this.pushUnaryOperation(minus, "-");
 	}
 
 	public void visit(final Modulus modulus) {
@@ -348,10 +379,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
 	 */
 	public void visit(final Multiplication multiplication) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushBinaryOperation(multiplication, "*");
 	}
 
 	/**
@@ -373,10 +401,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(Plus plus)
 	 */
 	public void visit(final Plus plus) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushUnaryOperation(plus, "+");
 	}
 
 	/**
@@ -433,20 +458,17 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @see ASTNodeVisitor#visit(Subtraction subtraction)
 	 */
 	public void visit(final Subtraction subtraction) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.pushBinaryOperation(subtraction, "-");
 	}
 
 	/**
 	 * @see ASTNodeVisitor#visit(Unequal unequal)
 	 */
 	public void visit(final Unequal unequal) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		this.pushBinaryOperation(unequal, "=");
 
-		// end-user-code
+		// there is no function `!=' in SMTLIB
+		this.formulaCompileStack.push("(not (" + this.formulaCompileStack.pop() + ")");
 	}
 
 	/**

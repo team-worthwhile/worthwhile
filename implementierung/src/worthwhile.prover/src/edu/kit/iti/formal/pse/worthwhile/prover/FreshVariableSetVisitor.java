@@ -20,7 +20,7 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 
 	private Stack<Expression> substituteExpressionStack = new Stack<Expression>();
 
-	public void visit(BinaryExpression b) {
+	public void visit(final BinaryExpression b) {
 		b.getLeft().accept(this);
 		b.setLeft(this.substituteExpressionStack.pop());
 		b.getRight().accept(this);
@@ -28,17 +28,17 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 		this.substituteExpressionStack.push(b);
 	}
 
-	public void visit(Literal a) {
+	public void visit(final Literal a) {
 		this.substituteExpressionStack.push(a);
 	}
 
-	public void visit(UnaryExpression u) {
+	public void visit(final UnaryExpression u) {
 		u.getOperand().accept(this);
 		u.setOperand(this.substituteExpressionStack.pop());
 		this.substituteExpressionStack.push(u);
 	}
 
-	public void visit(VariableReference v) {
+	public void visit(final VariableReference v) {
 		if(!this.variableMap.containsKey(v.getVariable())) {
 			VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());
 			newVariable.setName(v.getVariable().getName() + "-fresh-" + UUID.randomUUID().toString());

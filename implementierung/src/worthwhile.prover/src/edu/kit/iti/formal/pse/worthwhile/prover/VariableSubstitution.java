@@ -69,7 +69,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param substituteCommand
 	 *            the {@link SubstituteCommand} to be called when an occurrence of <code>variable</code> is visited
 	 */
-	public VariableSubstitution(VariableDeclaration variable, Expression substitute, SubstituteCommand substituteCommand) {
+	public VariableSubstitution(final VariableDeclaration variable, final Expression substitute, final SubstituteCommand substituteCommand) {
 		this.variable = variable;
 		this.substitute = substitute;
 		this.substituteCommand = substituteCommand;
@@ -87,7 +87,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param conjunction
 	 *            the node to be visited
 	 */
-	public void visit(Expression conjunction) {
+	public void visit(final Expression conjunction) {
 		// ignore Expressions for that no children have to be substituted and that do not have to be tested for variable
 		// occurrence
 	}
@@ -135,7 +135,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param variableReference
 	 *            the node to be visited
 	 */
-	public void visit(VariableReference variableReference) {
+	public void visit(final VariableReference variableReference) {
 		if (variableReference.getVariable().equals(variable)) {
 			this.substituteCommand.substitute();
 		}

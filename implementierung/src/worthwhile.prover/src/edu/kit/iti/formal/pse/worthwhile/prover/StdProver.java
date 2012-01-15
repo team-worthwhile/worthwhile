@@ -30,7 +30,7 @@ abstract class StdProver implements ProverCaller {
 	 * @param compiler
 	 *            the compiler to use to compile valid input for the prover
 	 */
-	protected StdProver(String path, FormulaCompiler compiler) {
+	protected StdProver(final String path, final FormulaCompiler compiler) {
 		this.compiler = compiler;
 		this.proverPath = path;
 	}
@@ -44,7 +44,7 @@ abstract class StdProver implements ProverCaller {
 	 * @throws ProverCallerException
 	 */
 	@Override
-	public ProverResult checkFormula(Expression formula) throws ProverCallerException {
+	public ProverResult checkFormula(final Expression formula) throws ProverCallerException {
 		String inputString = this.getCompiler().compileFormula(formula);
 		String outputString = "";
 		try {
@@ -100,7 +100,7 @@ abstract class StdProver implements ProverCaller {
 	 * @param compiler
 	 *            the compiler to set to compile input for this prover
 	 */
-	public void setCompiler(FormulaCompiler compiler) {
+	public void setCompiler(final FormulaCompiler compiler) {
 		this.compiler = compiler;
 	}
 
@@ -108,7 +108,7 @@ abstract class StdProver implements ProverCaller {
 	 * @param proverPath
 	 *            the path to the binary to call for this prover
 	 */
-	public void setProverPath(String proverPath) {
+	public void setProverPath(final String proverPath) {
 		this.proverPath = proverPath;
 	}
 }

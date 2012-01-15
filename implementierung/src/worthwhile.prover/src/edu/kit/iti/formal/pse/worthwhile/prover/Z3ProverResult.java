@@ -5,7 +5,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  */
 public class Z3ProverResult extends ProverResult {
 
-	protected Z3ProverResult(String output) {
+	protected Z3ProverResult(final String output) {
 		super(output);
 	}
 

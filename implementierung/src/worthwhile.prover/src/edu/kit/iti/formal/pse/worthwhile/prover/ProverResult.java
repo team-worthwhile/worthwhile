@@ -15,7 +15,7 @@ abstract class ProverResult {
 	 * @param output
 	 *            the output to construct the result with
 	 */
-	protected ProverResult(String output) {
+	protected ProverResult(final String output) {
 		this.output = output;
 	}
 

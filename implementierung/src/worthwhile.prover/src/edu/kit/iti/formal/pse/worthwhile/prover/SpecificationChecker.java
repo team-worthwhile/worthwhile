@@ -30,7 +30,7 @@ public class SpecificationChecker {
 	 * @param timeout
 	 *            the timeout to set, zero when negative
 	 */
-	public void setTimeout(Integer timeout) {
+	public void setTimeout(final Integer timeout) {
 		if (timeout < 0) {
 			this.timeout = 0;
 		} else {
@@ -61,7 +61,7 @@ public class SpecificationChecker {
 	 * @param transformer
 	 *            the transformer to set
 	 */
-	public void setTransformer(FormulaGenerator transformer) {
+	public void setTransformer(final FormulaGenerator transformer) {
 		this.transformer = transformer;
 	}
 
@@ -88,7 +88,7 @@ public class SpecificationChecker {
 	 * @param transformer
 	 *            Is called to transform {@link Program}s into formulae.
 	 */
-	public SpecificationChecker(FormulaGenerator transformer) {
+	public SpecificationChecker(final FormulaGenerator transformer) {
 		this.transformer = transformer;
 	}
 
@@ -100,7 +100,7 @@ public class SpecificationChecker {
 	 * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
 	 */
 	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
-	public Validity checkFormula(Expression formula, Map<String, Value> environment) {
+	public Validity checkFormula(final Expression formula, final Map<String, Value> environment) {
 		// TODO apply Worthwhile specific runtime assertions
 		// TODO apply axiom list
 		// TODO apply environment
@@ -115,7 +115,7 @@ public class SpecificationChecker {
 	 *            the {@link Expression} whose {@link Validity} to determine
 	 * @return <code>formula</code>'s {@link Validity}
 	 */
-	private Validity getValidity(Expression formula) {
+	private Validity getValidity(final Expression formula) {
 		AstFactory model = AstFactory.init();
 
 		Negation negation = model.createNegation();
@@ -152,7 +152,7 @@ public class SpecificationChecker {
 	 *            the {@link Program} to check
 	 * @return the {@link Validity} of <code>program</code>
 	 */
-	public Validity checkProgram(Program program) {
+	public Validity checkProgram(final Program program) {
 		// TODO apply Worthwhile specific runtime assertions
 
 		// generate formula from program

@@ -506,6 +506,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Negation negation) {
+		negation.getOperand().accept(this);
 		this.resultStack.push(new Value(!(this.resultStack.pop().getBooleanValue())));
 		this.expressionEvaluated(negation);
 	}

@@ -133,10 +133,12 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		                + expression + ")");
 	}
 
+	@Override
 	public void visit(final Addition addition) {
 		this.pushBinaryOperation(addition, "+");
 	}
 
+	@Override
 	public void visit(final ArrayLength arrayLength) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -144,6 +146,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// end-user-code
 	}
 
+	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -151,6 +154,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// end-user-code
 	}
 
+	@Override
 	public void visit(final ArrayType arrayType) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -158,18 +162,21 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// end-user-code
 	}
 
+	@Override
 	public void visit(final Assertion assertion) {
 		assertion.getExpression().accept(this);
 		String expr = this.formulaCompileStack.pop();
 		this.formulaCompileStack.push("assert(" + expr + ")");
 	}
 
+	@Override
 	public void visit(final Assumption assumption) {
 		assumption.getExpression().accept(this);
 		String expr = this.formulaCompileStack.pop();
 		this.formulaCompileStack.push("assume(" + expr + ")");
 	}
 
+	@Override
 	public void visit(final BooleanLiteral booleanLiteral) {
 		if (booleanLiteral.isValue()) {
 			this.formulaCompileStack.push("true");
@@ -178,6 +185,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		}
 	}
 
+	@Override
 	public void visit(final BooleanType booleanType) {
 		this.formulaCompileStack.push("Bool");
 	}
@@ -185,6 +193,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Conjunction conjunction)
 	 */
+	@Override
 	public void visit(final Conjunction conjunction) {
 		this.pushBinaryOperation(conjunction, "and");
 	}
@@ -192,6 +201,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Disjunction disjunction)
 	 */
+	@Override
 	public void visit(final Disjunction disjunction) {
 		this.pushBinaryOperation(disjunction, "or");
 	}
@@ -199,6 +209,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Division division)
 	 */
+	@Override
 	public void visit(final Division division) {
 		this.pushBinaryOperation(division, "/");
 	}
@@ -206,6 +217,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Equal equal)
 	 */
+	@Override
 	public void visit(final Equal equal) {
 		this.pushBinaryOperation(equal, "=");
 	}
@@ -213,6 +225,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
 	 */
+	@Override
 	public void visit(final Equivalence equivalence) {
 		this.pushBinaryOperation(equivalence, "iff");
 	}
@@ -220,6 +233,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
 	 */
+	@Override
 	public void visit(final ExistsQuantifier existsQuantifier) {
 		this.pushQuantifier(existsQuantifier, "exists");
 	}
@@ -227,6 +241,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
 	 */
+	@Override
 	public void visit(final ForAllQuantifier forAllQuantifier) {
 		this.pushQuantifier(forAllQuantifier, "forall");
 	}
@@ -234,6 +249,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(FunctionCall functionCall)
 	 */
+	@Override
 	public void visit(final FunctionCall functionCall) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -244,6 +260,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Greater greater)
 	 */
+	@Override
 	public void visit(final Greater greater) {
 		this.pushBinaryOperation(greater, ">");
 	}
@@ -251,6 +268,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
 	 */
+	@Override
 	public void visit(final GreaterOrEqual greaterOrEqual) {
 		this.pushBinaryOperation(greaterOrEqual, ">=");
 	}
@@ -258,6 +276,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Implication implication)
 	 */
+	@Override
 	public void visit(final Implication implication) {
 		this.pushBinaryOperation(implication, "=>");
 	}
@@ -265,6 +284,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
 	 */
+	@Override
 	public void visit(final IntegerLiteral integerLiteral) {
 		this.formulaCompileStack.push(integerLiteral.getValue().toString());
 	}
@@ -272,6 +292,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(IntegerType integerType)
 	 */
+	@Override
 	public void visit(final IntegerType integerType) {
 		this.formulaCompileStack.push("Int");
 	}
@@ -279,6 +300,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Less less)
 	 */
+	@Override
 	public void visit(final Less less) {
 		this.pushBinaryOperation(less, "<");
 	}
@@ -286,6 +308,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
 	 */
+	@Override
 	public void visit(final LessOrEqual lessOrEqual) {
 		this.pushBinaryOperation(lessOrEqual, "<=");
 	}
@@ -293,10 +316,12 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Minus minus)
 	 */
+	@Override
 	public void visit(final Minus minus) {
 		this.pushUnaryOperation(minus, "-");
 	}
 
+	@Override
 	public void visit(final Modulus modulus) {
 		this.pushBinaryOperation(modulus, "mod");
 	}
@@ -304,6 +329,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
 	 */
+	@Override
 	public void visit(final Multiplication multiplication) {
 		this.pushBinaryOperation(multiplication, "*");
 	}
@@ -311,6 +337,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Negation negation)
 	 */
+	@Override
 	public void visit(final Negation negation) {
 		this.pushUnaryOperation(negation, "not");
 	}
@@ -318,6 +345,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(VariableReference variableReference)
 	 */
+	@Override
 	public void visit(final VariableReference variableReference) {
 		variableReference.getVariable().accept(this);
 		this.formulaCompileStack.push(variableReference.getVariable().getName());
@@ -326,6 +354,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Plus plus)
 	 */
+	@Override
 	public void visit(final Plus plus) {
 		this.pushUnaryOperation(plus, "+");
 	}
@@ -333,6 +362,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
 	 */
+	@Override
 	public void visit(final QuantifiedExpression quantifiedExpression) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -343,6 +373,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Subtraction subtraction)
 	 */
+	@Override
 	public void visit(final Subtraction subtraction) {
 		this.pushBinaryOperation(subtraction, "-");
 	}
@@ -350,6 +381,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(Unequal unequal)
 	 */
+	@Override
 	public void visit(final Unequal unequal) {
 		this.pushBinaryOperation(unequal, "=");
 
@@ -360,6 +392,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	/**
 	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
 	 */
+	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
 		variableDeclaration.getType().accept(this);
 		this.declarations.add("(declare-const " + variableDeclaration.getName() + " "

@@ -57,6 +57,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @return the weakest precondition that implies the correctness of <code>program</code>
 	 * @see FormulaGenerator#transformProgram(Program program)
 	 */
+	@Override
 	public Expression transformProgram(final Program program) {
 		// clear weakestPrecondition state from a previous transformation
 		this.weakestPreconditionStack.clear();
@@ -72,6 +73,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param assertion
 	 *                the {@link Assertion} to visit
 	 */
+	@Override
 	public void visit(final Assertion assertion) {
 		Conjunction conjunction = AstFactory.init().createConjunction();
 		conjunction.setRight(this.weakestPreconditionStack.pop());
@@ -85,6 +87,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param assignment
 	 *                the {@link Assignment} to visit
 	 */
+	@Override
 	public void visit(final Assignment assignment) {
 		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
 		this.weakestPreconditionStack.peek().accept(
@@ -120,6 +123,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param assumption
 	 *                the <code>Assumption</code> to visit
 	 */
+	@Override
 	public void visit(final Assumption assumption) {
 		Implication implication = AstFactory.init().createImplication();
 		implication.setLeft(AstNodeCloneHelper.clone(assumption.getExpression()));
@@ -143,6 +147,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param axiom
 	 *                the <code>Axiom</code> to visit
 	 */
+	@Override
 	public void visit(final Axiom axiom) {
 		Implication implication = AstFactory.init().createImplication();
 		implication.setLeft(AstNodeCloneHelper.clone(axiom.getExpression()));
@@ -156,6 +161,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param block
 	 *                the {@link Block} to visit
 	 */
+	@Override
 	public void visit(final Block block) {
 		// visit all block statements in the order they were parsed reversed
 		List<Statement> stmts = new ArrayList<Statement>(block.getStatements());
@@ -188,6 +194,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param conditional
 	 *                the {@link Conditional} to visit
 	 */
+	@Override
 	public void visit(final Conditional conditional) {
 		// the updated weakest precondition
 		Conjunction conjunction = AstFactory.init().createConjunction();
@@ -234,6 +241,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param functionDeclaration
 	 *                the {@link FunctionDeclaration} to visit
 	 */
+	@Override
 	public void visit(final FunctionDeclaration functionDeclaration) {
 		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
 		trueLiteral.setValue(true);
@@ -246,6 +254,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param loop
 	 *                the {@link Loop} to visit
 	 */
+	@Override
 	public void visit(final Loop loop) {
 		AstFactory factory = AstFactory.init();
 
@@ -315,6 +324,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param program
 	 *                the {@link Program} to visit
 	 */
+	@Override
 	public void visit(final Program program) {
 		// if there are FunctionDeclarations specified this will hold a conjunction of the function bodies' and
 		// main block's weakest preconditions, otherwise the program's weakest precondition will consist of the
@@ -371,6 +381,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param returnStatement
 	 *                the {@link ReturnStatement} to visit
 	 */
+	@Override
 	public void visit(final ReturnStatement returnStatement) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -384,6 +395,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * @param variableDeclaration
 	 *                the {@link VariableDeclaration} to visit
 	 */
+	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
 		this.weakestPreconditionStack.peek().accept(
 		                new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),

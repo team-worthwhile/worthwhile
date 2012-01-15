@@ -87,6 +87,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param conjunction
 	 *            the node to be visited
 	 */
+	@Override
 	public void visit(final Expression conjunction) {
 		// ignore Expressions for that no children have to be substituted and that do not have to be tested for variable
 		// occurrence
@@ -97,6 +98,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param unaryExpression
 	 *            the node to be visited
 	 */
+	@Override
 	public void visit(final UnaryExpression unaryExpression) {
 		this.substituteCommand = new SubstituteCommand() {
 			@Override
@@ -112,6 +114,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param binaryExpression
 	 *            the node to be visited
 	 */
+	@Override
 	public void visit(final BinaryExpression binaryExpression) {
 		this.substituteCommand = new SubstituteCommand() {
 			@Override
@@ -135,6 +138,7 @@ class VariableSubstitution extends HierarchialASTNodeVisitor {
 	 * @param variableReference
 	 *            the node to be visited
 	 */
+	@Override
 	public void visit(final VariableReference variableReference) {
 		if (variableReference.getVariable().equals(variable)) {
 			this.substituteCommand.substitute();

@@ -5,5 +5,4 @@ Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.interpreter;singleton:=tr
 Bundle-Version: 0.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile.interpreter
-Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
- edu.kit.iti.formal.pse.worthwhile.prover
+Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model

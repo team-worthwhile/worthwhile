@@ -58,7 +58,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
-import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  *
@@ -68,11 +67,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *
 	 */
 	private Set<AbstractExecutionEventListener> executionEventHandlers;
-	
-	/**
-	 * 
-	 */
-	private SpecificationChecker prover;
 
 	/**
 	 * @return the executionEventHandlers
@@ -139,7 +133,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *
 	 */
 	protected InterpreterASTNodeVisitor() {
-		prover = new SpecificationChecker();
 	}
 
 	/**
@@ -284,8 +277,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Assertion assertion) {
-		// TODO I have no clue what I am doing here
-		prover.checkFormula(assertion.getExpression(), symbolStack.peek());
+		// TODO Auto-generated method stub
 		this.assertionSucceeded(assertion);
 	}
 

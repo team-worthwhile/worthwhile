@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 
 import com.google.inject.Inject;
@@ -7,13 +8,15 @@ import com.google.inject.Inject;
 import de.itemis.xtext.typesystem.ITypesystem;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 
 /**
  * Performs semantic validation on a Worthwhile program.
  * 
  */
 public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
-	
+
 	/**
 	 * The language typesystem.
 	 */
@@ -27,11 +30,31 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	 *                The function declaration to check.
 	 */
 	@Check
-	public final void checkFunctionDeclerationValidReturnStatment(final FunctionDeclaration functionDeclaration) {
+	public final void checkFunctionDeclarationValidReturnStatment(final FunctionDeclaration functionDeclaration) {
 		ValidatorASTNodeVisitor validatorASTNodeVisitor = new ValidatorASTNodeVisitor();
 		validatorASTNodeVisitor.visit(functionDeclaration);
 		if (!validatorASTNodeVisitor.getValidReturnFound()) {
 			error("Function has no valid return statement.", null);
+		}
+	}
+
+	/**
+	 * Checks that a return value reference is only used in the postcondition of a function.
+	 * 
+	 * @param returnValueReference
+	 *                The return value reference to check.
+	 */
+	@Check
+	public final void checkReturnValueReference(final ReturnValueReference returnValueReference) {
+		EObject current = returnValueReference;
+
+		do {
+			current = current.eContainer();
+		} while (current != null && !(current instanceof Postcondition));
+
+		if (current == null) {
+			error("The return value of a function may only be referenced in the postcondition.",
+			                returnValueReference, null, -1);
 		}
 	}
 

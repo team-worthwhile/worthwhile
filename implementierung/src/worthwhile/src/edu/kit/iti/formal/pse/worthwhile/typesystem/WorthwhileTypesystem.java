@@ -2,6 +2,9 @@ package edu.kit.iti.formal.pse.worthwhile.typesystem;
 
 import org.eclipse.emf.ecore.EObject;
 
+import de.itemis.xtext.typesystem.exceptions.EClassDoesntHaveFeatureException;
+import de.itemis.xtext.typesystem.exceptions.FeatureMustBeSingleValuedException;
+import de.itemis.xtext.typesystem.exceptions.InvalidTypeSpecification;
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
@@ -12,8 +15,22 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	@Override
 	protected void initialize() {
 		super.initialize();
-				
+		
+		try {
+			ensureFeatureType(p.getFunctionCall(), p.getFunctionCall_Actuals(),
+			                new FunctionCallActualParameterTypeChecker(null));
+		} catch (FeatureMustBeSingleValuedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EClassDoesntHaveFeatureException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidTypeSpecification e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
 	@Override
 	protected EObject type(ReturnStatement element, TypeCalculationTrace trace) {
 		EObject obj = element;

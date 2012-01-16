@@ -46,6 +46,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
@@ -329,6 +330,11 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 	@Override
 	public void visit(final VariableReference node) {
 		this.visit((Expression) node);
+	}
+	
+	@Override
+	public void visit(final ReturnValueReference node) {
+		this.visit((VariableReference) node);
 	}
 
 }

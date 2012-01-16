@@ -11,6 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 
 public class InterpreterExecutionEventListenerTest {
 
@@ -84,7 +85,7 @@ public class InterpreterExecutionEventListenerTest {
 		this.reset(new Interpreter(TestASTProvider.getRootASTNode("_axiom(true)\n")), listener);
 		assertFalse(this.test);
 		this.interpreter.execute();
-		assertTrue(this.test);
+		assertTrue("Statement was not executed", this.test);
 
 		// Condition
 		this.reset(new Interpreter(TestASTProvider.getRootASTNode("if(true) {\n}\n")), listener);

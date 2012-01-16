@@ -547,7 +547,7 @@
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="variable"
-                      ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration"/>
+                      ordered="false" eType="#//kit/iti/formal/pse/worthwhile/model/ast/VariableDeclaration"/>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
                       containment="true"/>
                 </eClassifiers>
@@ -560,6 +560,8 @@
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                 </eClassifiers>
+                <eClassifiers xsi:type="ecore:EClass" name="ReturnValueReference"
+                    eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference"/>
                 <eSubpackages name="visitor" nsURI="http:///visitor.ast.model.worthwhile.pse.formal.iti.kit.edu"
                     nsPrefix="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor">
                   <eClassifiers xsi:type="ecore:EClass" name="IASTNodeVisitor" instanceClassName="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor"

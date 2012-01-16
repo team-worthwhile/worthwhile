@@ -279,6 +279,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(Assertion assertion) {
 		// TODO Auto-generated method stub
 		this.assertionSucceeded(assertion);
+		this.statementExecuted(assertion);
 	}
 
 	public void visit(Assignment assignment) {
@@ -290,12 +291,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Assumption assumption) {
 		// TODO Auto-generated method stub
-
+		this.statementExecuted(assumption);
 	}
 
 	public void visit(Axiom axiom) {
 		// TODO Auto-generated method stub
-
+		this.statementExecuted(axiom);
 	}
 
 	public void visit(Block block) {
@@ -447,7 +448,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Invariant invariant) {
 		// TODO Auto-generated method stub
-
+		this.statementExecuted(invariant);
 	}
 
 	public void visit(Less less) {
@@ -520,12 +521,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Postcondition postcondition) {
 		// TODO Auto-generated method stub
-
+		this.statementExecuted(postcondition);
 	}
 
 	public void visit(Precondition precondition) {
 		// TODO Auto-generated method stub
-
+		this.statementExecuted(precondition);
 	}
 
 	public void visit(Program program) {

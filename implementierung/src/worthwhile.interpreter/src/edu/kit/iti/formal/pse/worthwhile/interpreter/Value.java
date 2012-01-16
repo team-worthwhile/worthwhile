@@ -43,6 +43,7 @@ public class Value {
 	 *                the value for this Value.
 	 */
 	public Value(final BigInteger integerValue) {
+		this.setValueType(ValueType.INTEGER_TYPE);
 		this.setIntegerValue(integerValue);
 	}
 
@@ -53,6 +54,7 @@ public class Value {
 	 *                the value for this Value.
 	 */
 	public Value(final Boolean booleanValue) {
+		this.setValueType(ValueType.BOOLEAN_TYPE);
 		this.setBooleanValue(booleanValue);
 	}
 
@@ -63,6 +65,7 @@ public class Value {
 	 *                the value for this array.
 	 */
 	public Value(final BigInteger[] integerArray) {
+		this.setValueType(ValueType.INTEGER_ARRAY_TYPE);
 		this.setIntegerArray(integerArray);
 	}
 
@@ -73,6 +76,7 @@ public class Value {
 	 *                the value for this array.
 	 */
 	public Value(final Boolean[] booleanArray) {
+		this.setValueType(ValueType.BOOLEAN_ARRAY_TYPE);
 		this.setBooleanArray(booleanArray);
 	}
 

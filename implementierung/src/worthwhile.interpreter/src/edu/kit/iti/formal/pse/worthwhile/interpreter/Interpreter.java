@@ -170,7 +170,7 @@ public class Interpreter {
 	/**
 	 * @return
 	 */
-	public Stack<Map<String, Value>> getAllSymbols() {
+	public Map<String, Value> getAllSymbols() {
 		return this.currentNodeVisitor.getAllSymbols();
 	}
 }

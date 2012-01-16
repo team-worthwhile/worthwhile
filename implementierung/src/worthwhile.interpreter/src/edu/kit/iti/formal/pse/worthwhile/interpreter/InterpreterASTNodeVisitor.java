@@ -3,6 +3,7 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -57,6 +58,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  *
@@ -66,6 +68,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *
 	 */
 	private Set<AbstractExecutionEventListener> executionEventHandlers;
+	
+	/**
+	 * 
+	 */
+	private SpecificationChecker prover;
 
 	/**
 	 * @return the executionEventHandlers
@@ -124,14 +131,15 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * @return
 	 */
-	protected Stack<Map<String, Value>> getAllSymbols() {
-		return this.symbolStack;
+	protected Map<String, Value> getAllSymbols() {
+		return this.symbolStack.peek();
 	}
 
 	/**
 	 *
 	 */
 	protected InterpreterASTNodeVisitor() {
+		prover = new SpecificationChecker();
 	}
 
 	/**
@@ -219,10 +227,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return the return value or null if none is available
 	 */
 	protected Value getReturnValue() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		return this.resultStack.pop();
 	}
 
 	/**
@@ -279,13 +284,15 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Assertion assertion) {
-		// TODO Auto-generated method stub
+		// TODO I have no clue what I am doing here
+		prover.checkFormula(assertion.getExpression(), symbolStack.peek());
 		this.assertionSucceeded(assertion);
 	}
 
 	public void visit(Assignment assignment) {
-		// TODO Auto-generated method stub
 		this.statementWillExecute(assignment);
+		assignment.getValue().accept(this);
+		symbolStack.peek().put(assignment.getVariable().getVariable().getName(), resultStack.pop());
 		this.statementExecuted(assignment);
 	}
 
@@ -311,7 +318,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(BooleanLiteral booleanLiteral) {
 		this.resultStack.push(new Value(booleanLiteral.getValue()));
-		// TODO Auto-generated method stub
 		this.expressionEvaluated(booleanLiteral);
 	}
 
@@ -399,10 +405,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
 			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i).getName(),
-			                resultStack.pop());
+			                this.resultStack.pop());
 		}
-		functionDeclaration.getBody().accept(functionVisitor);
-		// TODO push return value onto the resultStack
+		functionVisitor.visit(functionDeclaration.getBody());
+		this.resultStack.push(functionVisitor.getReturnValue());
 		this.expressionEvaluated(functionCall);
 	}
 
@@ -438,7 +444,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(IntegerLiteral integerLiteral) {
-		// TODO Auto-generated method stub
 		this.resultStack.push(new Value(integerLiteral.getValue()));
 		this.expressionEvaluated(integerLiteral);
 	}
@@ -514,8 +519,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(ASTNode node) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void visit(Plus plus) {
@@ -548,6 +551,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(ReturnStatement returnStatement) {
 		// TODO Auto-generated method stub
 		this.statementWillExecute(returnStatement);
+		returnStatement.getReturnValue().accept(this);
 		this.statementExecuted(returnStatement);
 	}
 
@@ -575,13 +579,22 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(VariableDeclaration variableDeclaration) {
 		this.statementWillExecute(variableDeclaration);
-		/*if (variableDeclaration.getInitialValue() == null) {
-			IntegerLiteral defaultValue = AstFactory.eINSTANCE.createIntegerLiteral();
-			defaultValue.setValue(BigInteger.valueOf(42));
-			variableDeclaration.setInitialValue(defaultValue);
-		}*/
-		variableDeclaration.getInitialValue().accept(this);
-		this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
+		if (variableDeclaration.getInitialValue().getClass().equals(Expression.class)) {
+			variableDeclaration.getInitialValue().accept(this);
+			this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
+		}
+		else {
+			if (variableDeclaration.getType().getClass().equals(ArrayType.class)) {
+				//if(variableDeclaration.getType().)
+				//this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
+			}
+			else if (variableDeclaration.getType().getClass().equals(BooleanType.class)) {
+				this.setSymbol(variableDeclaration.getName(), new Value(false));
+			}
+			else if (variableDeclaration.getType().getClass().equals(IntegerType.class)) {
+				this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
+			}
+		}
 		this.statementExecuted(variableDeclaration);
 	}
 

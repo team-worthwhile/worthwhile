@@ -220,7 +220,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return the return value or null if none is available
 	 */
 	protected Value getReturnValue() {
-		return this.resultStack.pop();
+		return this.resultStack.peek();
 	}
 
 	/**

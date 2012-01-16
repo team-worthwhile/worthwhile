@@ -258,16 +258,17 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	public void visit(final Loop loop) {
 		AstFactory factory = AstFactory.init();
 
-		// and all the loop invariants
-		BooleanLiteral trueLiteral = factory.createBooleanLiteral();
-		trueLiteral.setValue(true);
-		Expression invariant = trueLiteral;
-
+		Expression invariant = null;
 		for (Invariant i : loop.getInvariants()) {
-			Conjunction conj = factory.createConjunction();
-			conj.setLeft(invariant);
-			conj.setRight(i.getExpression());
-			invariant = conj;
+			// and the new invariant with the existing if needed
+			if (invariant == null) {
+				invariant = i.getExpression();
+			} else {
+				Conjunction conj = factory.createConjunction();
+				conj.setLeft(invariant);
+				conj.setRight(i.getExpression());
+				invariant = conj;
+			}
 		}
 
 

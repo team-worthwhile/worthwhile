@@ -16,10 +16,12 @@ section "Literals"
 		typeof Literal -> abstract
 		typeof BooleanLiteral -> BooleanType
 		typeof IntegerLiteral -> IntegerType
-		typeof ArrayLiteral -> ArrayType
-		
+		typeof ArrayLiteral -> ArrayType 
 section "Variables"
-		typeof VariableDeclaration -> feature type
+		typeof VariableDeclaration -> feature type {
+			ensureType type :<=: Type
+			ensureCompatibility initialValue :<=>: type
+		}
 	    typeof Assignment -> feature variable {
 	    	ensureType value :<=: Type
 	    	ensureCompatibility variable :<=>: value

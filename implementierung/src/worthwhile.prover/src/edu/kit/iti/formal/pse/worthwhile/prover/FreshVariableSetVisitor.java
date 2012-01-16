@@ -3,7 +3,6 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
-import java.util.UUID;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
@@ -19,6 +18,10 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	private Map<VariableDeclaration, VariableDeclaration> variableMap = new HashMap<VariableDeclaration, VariableDeclaration>();
 
 	private Stack<Expression> substituteExpressionStack = new Stack<Expression>();
+
+	public Map<VariableDeclaration, VariableDeclaration> getVariableMap() {
+		return this.variableMap;
+	}
 
 	@Override
 	public void visit(final BinaryExpression b) {
@@ -44,10 +47,12 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final VariableReference v) {
 		if(!this.variableMap.containsKey(v.getVariable())) {
+			// if the VariableDeclaration was first seen, create a new one with the same name
 			VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());
-			newVariable.setName(v.getVariable().getName() + "-fresh-" + UUID.randomUUID().toString());
+			newVariable.setInitialValue(null);
 			this.variableMap.put(v.getVariable(), newVariable);
 		}
+		// substitute the old VariableDeclaration with a fresh one
 		v.setVariable(this.variableMap.get(v.getVariable()));
 
 		this.substituteExpressionStack.push(v);

@@ -21,11 +21,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
@@ -299,20 +299,42 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		notConditionAndInvariantImpliesPostcondition.setLeft(notConditionAndInvariant);
 		notConditionAndInvariantImpliesPostcondition.setRight(this.getWeakestPrecondition());
 
-		// refresh variables
-		ASTNodeVisitor refreshVisitor = new FreshVariableSetVisitor();
+		/*
+		 * the two implications have to be true for all values of all referenced variables because we don't look
+		 * inside the loop body. Therefore, we have to choose a fresh set of VariableDeclarations and modify the
+		 * expression so that it has to hold for all possible values of these new variables
+		 */
+		FreshVariableSetVisitor refreshVisitor = new FreshVariableSetVisitor();
 		conditionAndInvariantImpliesBodyPrecondition.accept(refreshVisitor);
+
+		Expression forAllValuesConditionAndInvariantImpliesBodyPrecondition = conditionAndInvariantImpliesBodyPrecondition;
+		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
+			QuantifiedExpression forAllValuesOfNewDeclaration = factory.createForAllQuantifier();
+			forAllValuesOfNewDeclaration.setParameter(newDeclaration);
+			forAllValuesOfNewDeclaration.setExpression(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
+			forAllValuesConditionAndInvariantImpliesBodyPrecondition = forAllValuesOfNewDeclaration;
+		}
+
+		// TODO: figure out a way to remove this copy-paste from above
 		refreshVisitor = new FreshVariableSetVisitor();
 		notConditionAndInvariantImpliesPostcondition.accept(refreshVisitor);
+
+		Expression forAllValuesNotConditionAndInvariantImpliesPostcondition = notConditionAndInvariantImpliesPostcondition;
+		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
+			QuantifiedExpression forAllValuesOfNewDeclaration = factory.createForAllQuantifier();
+			forAllValuesOfNewDeclaration.setParameter(newDeclaration);
+			forAllValuesOfNewDeclaration.setExpression(forAllValuesNotConditionAndInvariantImpliesPostcondition);
+			forAllValuesNotConditionAndInvariantImpliesPostcondition = forAllValuesOfNewDeclaration;
+		}
 
 		// assemble the weakest precondition from the three conditions
 		Conjunction invariantAndConditionTrueCase = factory.createConjunction();
 		invariantAndConditionTrueCase.setLeft(AstNodeCloneHelper.clone(invariant));
-		invariantAndConditionTrueCase.setRight(conditionAndInvariantImpliesBodyPrecondition);
+		invariantAndConditionTrueCase.setRight(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
 
 		Conjunction loopPrecondition = factory.createConjunction();
 		loopPrecondition.setLeft(invariantAndConditionTrueCase);
-		loopPrecondition.setRight(notConditionAndInvariantImpliesPostcondition);
+		loopPrecondition.setRight(forAllValuesNotConditionAndInvariantImpliesPostcondition);
 
 		// replace the weakest precondition on the stack
 		this.weakestPreconditionStack.pop();

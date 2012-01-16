@@ -1,6 +1,5 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
 
-import org.apache.tools.ant.taskdefs.optional.testing.Funtest;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 

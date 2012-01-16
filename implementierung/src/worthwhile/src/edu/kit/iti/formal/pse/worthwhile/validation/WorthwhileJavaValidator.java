@@ -1,5 +1,14 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
 
+import org.apache.tools.ant.taskdefs.optional.testing.Funtest;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.Check;
+
+import com.google.inject.Inject;
+
+import de.itemis.xtext.typesystem.ITypesystem;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+
 
 public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 
@@ -9,5 +18,23 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 //			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
 //		}
 //	}
+	
+	
+	@Check
+	public void checkFunctionDeclerationValidReturnStatment(FunctionDeclaration functionDeclaration) {
+		ValidatorASTNodeVisitor validatorASTNodeVisitor = new ValidatorASTNodeVisitor();
+		validatorASTNodeVisitor.visit(functionDeclaration);
+		if(!validatorASTNodeVisitor.getValidReturnFound()) {
+			error("Function has no valid return statement.", null);
+		}
+	}
+	@Inject
+	private ITypesystem ts;
+	
+	@Check
+	public void checkTypesystemRules( EObject x ) {
+	  ts.checkTypesystemConstraints(x, this);
+	}
+
 
 }

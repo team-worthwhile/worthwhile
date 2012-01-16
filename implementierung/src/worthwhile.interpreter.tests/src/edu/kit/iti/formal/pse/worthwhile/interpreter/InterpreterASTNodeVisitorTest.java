@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import org.junit.Assert;
 import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**
  * @author matthias and stefan
@@ -43,6 +44,52 @@ public class InterpreterASTNodeVisitorTest {
 		Assert.assertEquals(BigInteger.valueOf(expected), actual.getIntegerValue());
 	}
 
+	/**
+	 * Tests whether a Worthwhile expression is evaluated to an expected {@link Integer} by the {@link Interpreter}.
+	 * 
+	 * @param expression
+	 *                the expression to be evaluated by the <code>Interpreter</code> and whose evaluation result
+	 *                must equal <code>expected</code> in order for the test to pass
+	 * @param expected
+	 *                the <code>Integer</code> value the evaluated <code>expression</code> must equal
+	 */
+	private static void assertIntegerExpressionValueEquals(final String expression, final Integer expected) {
+		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := "
+		                + expression + "\n"));
+		assertNotNull(interpreter);
+		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
+			@Override
+			public void statementExecuted(final Statement statement) {
+				InterpreterASTNodeVisitorTest.assertIntegerValueEquals(expected,
+				                interpreter.getSymbol("a"));
+			}
+		});
+		interpreter.execute();
+	}
+
+	/**
+	 * Tests whether a Worthwhile expression is evaluated to an expected {@link Boolean} by the {@link Interpreter}.
+	 * 
+	 * @param expression
+	 *                the expression to be evaluated by the <code>Interpreter</code> and whose evaluation result
+	 *                must equal <code>expected</code> in order for the test to pass
+	 * @param expected
+	 *                the <code>Boolean</code> value the evaluated <code>expression</code> must equal
+	 */
+	private static void assertBooleanExpressionValueEquals(final String expression, final Boolean expected) {
+		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := "
+		                + expression + "\n"));
+		assertNotNull(interpreter);
+		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
+			@Override
+			public void statementExecuted(final Statement statement) {
+				InterpreterASTNodeVisitorTest.assertBooleanValueEquals(expected,
+				                interpreter.getSymbol("a"));
+			}
+		});
+		interpreter.execute();
+	}
+
 	@Test
 	public void test() {
 		InterpreterASTNodeVisitor v = new InterpreterASTNodeVisitor();
@@ -51,115 +98,71 @@ public class InterpreterASTNodeVisitorTest {
 
 	@Test
 	public void testInterpreterContextAssignment() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 42\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("42", 42);
 	}
 
 	@Test
 	public void testInterpreterContexAddition() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 21 + 21\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("21 + 21", 42);
 	}
 
 	@Test
 	public void testInterpreterContexMultiplication() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 * 21\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("2 * 21", 42);
 	}
 
 	@Test
 	public void testInterpreterContexDivision() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 84 / 2\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("84 / 2", 42);
 	}
 
 	@Test
 	public void testInterpreterContexModulus() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 85 % 43\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertIntegerValueEquals(42, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("85 % 43", 42);
 	}
 
 	@Test
 	public void testInterpreterContexAnd() {
-		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("Boolean a := true && false\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(false, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("true && false", false);
 	}
 
 	@Test
 	public void testInterpreterContexOr() {
-		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("Boolean a := true || false\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("true || false", true);
 	}
 
 	@Test
 	public void testInterpreterContexLess() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 < 45\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("42 < 45", true);
 	}
 
 	@Test
 	public void testInterpreterContexGreater() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 > 41\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("42 > 41", true);
 	}
 
 	@Test
 	public void testInterpreterContexLessEqual() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 <= 52\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("42 <= 52", true);
 	}
 
 	@Test
 	public void testInterpreterContexGreaterEqual() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 >= 52\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(false, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("42 >= 52", false);
 	}
 
 	@Test
 	public void testInterpreterContexEqual() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 = 42\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("42 = 42", true);
 	}
 
 	@Test
 	public void testInterpreterContexNotEqual() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 != 52\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("42 != 52", true);
 	}
 
 	@Test
 	public void testInterpreterContexNot() {
-		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := !false\n"));
-		assertNotNull(interpreter);
-		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("!false", true);
 	}
 }

@@ -56,14 +56,14 @@ public class InterpreterExecutionEventListenerTest {
 
 		// Precondition Annotation
 		this.reset(new Interpreter(TestASTProvider
-		                .getRootASTNode("function Boolean test()\n_requires(true)\n{\n}\nInteger result := test()\n")), listener);
+		                .getRootASTNode("function Boolean test()\n_requires(true)\n{return false\n}\nInteger result := test()\n")), listener);
 		assertEquals(this.counter, 0);
 		this.interpreter.execute();
 		assertEquals(this.counter, 2);
 
 		// Postcondition Annotation
 		this.reset(new Interpreter(TestASTProvider
-		                .getRootASTNode("function Boolean test()\n{\n}\n_ensures(true)\nInteger result := test()\n")), listener);
+		                .getRootASTNode("function Boolean test()\n_ensures(true)\n{return false\n}\nInteger result := test()\n")), listener);
 		assertEquals(this.counter, 0);
 		this.interpreter.execute();
 		assertEquals(this.counter, 2);

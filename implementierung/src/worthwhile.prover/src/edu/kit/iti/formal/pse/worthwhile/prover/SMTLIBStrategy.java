@@ -100,7 +100,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 */
 	private void pushParameter(final VariableDeclaration variableDeclaration) {
 		variableDeclaration.getType().accept(this);
-		this.formulaCompileStack.push("(" + " " + variableDeclaration.getName()
+		this.formulaCompileStack.push("(" + variableDeclaration.getName() + " "
 		                + this.formulaCompileStack.pop() + ")");
 	}
 
@@ -129,7 +129,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		}
 
 		this.pushParameter(quantifiedExpression.getParameter());
-		this.formulaCompileStack.push("(" + quantifierString + "(" + this.formulaCompileStack.pop() + ") "
+		this.formulaCompileStack.push("(" + quantifierString + " (" + this.formulaCompileStack.pop() + ") "
 		                + expression + ")");
 	}
 

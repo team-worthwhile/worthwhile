@@ -29,6 +29,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	 */
 	public WorthwhileDebugElement(final WorthwhileDebugTarget debugTarget) {
 		this.debugTarget = debugTarget;
+		this.fireCreationEvent();
 	}
 
 	@Override
@@ -71,6 +72,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	 *                the event to be fired
 	 */
 	protected final void fireEvent(final DebugEvent event) {
+		System.out.println(event.toString());
 		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] { event });
 	}
 
@@ -87,7 +89,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	 * @param detail
 	 *                event detail code
 	 */
-	public final void fireResumeEvent(final int detail) {
+	protected final void fireResumeEvent(final int detail) {
 		fireEvent(new DebugEvent(this, DebugEvent.RESUME, detail));
 	}
 
@@ -97,7 +99,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	 * @param detail
 	 *                event detail code
 	 */
-	public final void fireSuspendEvent(final int detail) {
+	protected final void fireSuspendEvent(final int detail) {
 		fireEvent(new DebugEvent(this, DebugEvent.SUSPEND, detail));
 	}
 

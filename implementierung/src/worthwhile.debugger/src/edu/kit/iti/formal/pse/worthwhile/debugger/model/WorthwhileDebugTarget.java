@@ -30,7 +30,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	/**
 	 * The (only) thread a program execution consists of.
 	 */
-	private IThread thread;
+	private WorthwhileThread thread;
 
 	/**
 	 * The launch object that belongs to the execution of this program.
@@ -244,27 +244,31 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
-	 * Notifies the UI that the target has suspended for the given detail reason.
+	 * Called when the execution has suspended for the given detail reason.
 	 * 
 	 * @param detail
 	 *                The detail reason for the suspend
 	 */
 	public final void suspended(final int detail) {
-		this.fireSuspendEvent(detail);
+		this.thread.fireSuspendEvent(detail);
+	}
+
+	/**
+	 * Called when the execution has resumed for the given detail reason.
+	 * 
+	 * @param detail
+	 *                The detail reason for the resume.
+	 */
+	public final void resumed(final int detail) {
+		this.thread.fireResumeEvent(detail);
 	}
 
 	/**
 	 * Called when the interpreter terminates the execution.
 	 */
-	protected final void executionTerminated() {
-		try {
-			this.thread.terminate();
-		} catch (DebugException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	protected final void terminated() {
 		DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);
-		fireTerminateEvent();
+		this.fireTerminateEvent();
 	}
 
 	/**

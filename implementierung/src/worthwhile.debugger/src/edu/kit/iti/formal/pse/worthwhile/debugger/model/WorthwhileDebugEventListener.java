@@ -136,23 +136,23 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	@Override
 	public final void executionCompleted() {
 		System.out.println("Execution completed.");
-		this.terminate();
+		this.getDebugTarget().terminated();
 	}
 
 	@Override
 	public final void statementWillExecute(final Statement statement) {
-		System.out.println("statement will execute: " + AstNodeToStringHelper.toString(statement)
-		                + " at line " + NodeHelper.getLine(statement));
+		System.out.println("statement will execute: " + AstNodeToStringHelper.toString(statement) + " at line "
+		                + NodeHelper.getLine(statement));
 
-		Boolean doSuspend = false;
-		Integer suspendReason = 0;
+		boolean doSuspend = false;
+		int suspendReason = 0;
 
 		// Check if there is a breakpoint in this statement's line
 		int lineNumber = NodeHelper.getLine(statement);
-		if (this.breakpoints.containsKey(lineNumber)) {
+		if (!this.mode.equals(DebugMode.RUN) && this.breakpoints.containsKey(lineNumber)) {
 			// TODO breakpoint condition
 			System.out.println("Breakpoint hit at line " + lineNumber);
-			// Suspend execution
+			// Notify the debu target that a breakpoint has been hit
 			this.getDebugTarget().breakpointHit(this.breakpoints.get(lineNumber));
 
 			doSuspend = true;
@@ -169,12 +169,15 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		}
 
 		if (doSuspend) {
-			this.getDebugTarget().suspended(suspendReason);
-			this.mode = DebugMode.SUSPENDED;
-			this.currentNode = statement;
+			if (suspendReason != DebugEvent.BREAKPOINT) {
+				this.getDebugTarget().suspended(suspendReason);
+			}
 
 			// Wait until someone wakes us up.
 			synchronized (this) {
+				this.mode = DebugMode.SUSPENDED;
+				this.currentNode = statement;
+				
 				while (this.mode.equals(DebugMode.SUSPENDED)) {
 					try {
 						this.wait();
@@ -183,10 +186,28 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 						e.printStackTrace();
 					}
 				}
-			}
 
-			// TODO fire resumed event
-			this.currentNode = null;
+				int resumeReason = 0;
+
+				switch (this.mode) {
+				case DEBUG:
+					resumeReason = DebugEvent.RESUME;
+					break;
+				case STEP:
+					resumeReason = DebugEvent.STEP_INTO;
+					break;
+				case STEP_OVER:
+					resumeReason = DebugEvent.STEP_OVER;
+					break;
+				default:
+					break;
+				}
+
+				System.out.println("Resumed execution.");
+
+				this.getDebugTarget().resumed(resumeReason);
+				this.currentNode = null;
+			}
 		}
 	}
 

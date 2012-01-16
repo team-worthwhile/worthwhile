@@ -173,4 +173,26 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 		return false;
 	}
 
+	@Override
+	public final boolean equals(final Object other) {
+		if (other instanceof WorthwhileStackFrame) {
+			try {
+				return this.getLineNumber() == ((WorthwhileStackFrame) other).getLineNumber();
+			} catch (DebugException e) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public final int hashCode() {
+		try {
+			return this.getLineNumber();
+		} catch (DebugException e) {
+			return -1;
+		}
+	}
+
 }

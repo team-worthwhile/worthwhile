@@ -571,7 +571,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(VariableDeclaration variableDeclaration) {
 		this.statementWillExecute(variableDeclaration);
-		if (variableDeclaration.getInitialValue().getClass().equals(Expression.class)) {
+		if (variableDeclaration.getInitialValue() != null) {
 			variableDeclaration.getInitialValue().accept(this);
 			this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
 		}

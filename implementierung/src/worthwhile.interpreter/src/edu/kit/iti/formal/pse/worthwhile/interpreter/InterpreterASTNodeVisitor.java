@@ -407,7 +407,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i).getName(),
 			                this.resultStack.pop());
 		}
-		functionVisitor.visit(functionDeclaration.getBody());
+		functionDeclaration.getBody().accept(functionVisitor);
 		this.resultStack.push(functionVisitor.getReturnValue());
 		this.expressionEvaluated(functionCall);
 	}

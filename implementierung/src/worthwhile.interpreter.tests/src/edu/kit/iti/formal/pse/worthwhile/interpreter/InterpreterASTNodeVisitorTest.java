@@ -120,7 +120,7 @@ public class InterpreterASTNodeVisitorTest {
 		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := 42 > 41\n"));
 		assertNotNull(interpreter);
 		interpreter.execute();
-		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(false, interpreter.getSymbol("a"));
+		InterpreterASTNodeVisitorTest.assertBooleanValueEquals(true, interpreter.getSymbol("a"));
 	}
 
 	@Test

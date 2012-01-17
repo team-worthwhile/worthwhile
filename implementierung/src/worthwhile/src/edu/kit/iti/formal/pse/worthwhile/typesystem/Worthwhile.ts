@@ -7,7 +7,7 @@ section "BaseTypes"
 		typeof PrimitiveType -> abstract
 		typeof ArrayType -> feature baseType {
 			ensureType size :<=: IntegerType
-			ensureType baseType :<=: PrimitiveType
+			ensureType baseType :<=: BooleanType, IntegerType
 		}
 		typeof IntegerType -> clone
 		typeof BooleanType -> clone
@@ -19,11 +19,11 @@ section "Literals"
 		typeof ArrayLiteral -> ArrayType 
 section "Variables"
 		typeof VariableDeclaration -> feature type {
-			ensureType type :<=: Type
+			ensureType type :<=: BooleanType, IntegerType, ArrayType
 			ensureCompatibility initialValue :<=>: type
 		}
 	    typeof Assignment -> feature variable {
-	    	ensureType value :<=: Type
+	    	ensureType value :<=: BooleanType, IntegerType, ArrayType
 	    	ensureCompatibility variable :<=>: value
 	    }
 	    typeof VariableReference -> feature variable
@@ -32,8 +32,31 @@ section "Variables"
 	    
 section "Expressions"
 		typeof Expression + -> abstract
-		typeof QuantifiedExpression +->  feature expression {
-		ensureType condition :<=: BooleanType //TODO
+		typeof QuantifiedExpression -> clone {
+			
+			ensureType parameter :<=: BooleanType, IntegerType
+			ensureType expression :<=: BooleanType, ForAllQuantifier, ExistsQuantifier
+			ensureType condition :<=: BooleanType 
+			
+		}
+		typeof ForAllQuantifier -> clone
+		typeof ExistsQuantifier -> clone
+		
+section "Annotation"
+		typeof Assumption -> abstract {
+			ensureType expression :<=: BooleanType, QuantifiedExpression			
+		}
+		typeof Assertion -> abstract {
+			ensureType expression :<=: BooleanType, QuantifiedExpression
+		}
+		typeof Postcondition -> abstract {
+			ensureType expression :<=: BooleanType, QuantifiedExpression
+		}
+		typeof Precondition -> abstract {
+			ensureType expression :<=: BooleanType, QuantifiedExpression
+		}
+		typeof Invariant -> abstract {
+			ensureType expression :<=: BooleanType, QuantifiedExpression
 		}
 
 section "Binary Expression with integer operands"
@@ -104,8 +127,13 @@ section "Binary Expression with boolean operands"
 section "Binary Expression with boolean operands or integer operands"
 
 		  typeof Equal -> BooleanType {
-			ensureType left :<=: PrimitiveType
-		 	ensureType right :<=: PrimitiveType
+			ensureType left :<=: BooleanType, IntegerType
+		 	ensureType right :<=: BooleanType, IntegerType
+		 	ensureCompatibility left :<=>: right "Both operands have to be be of the same type"
+		 }
+		 typeof Unequal -> BooleanType {
+		 	ensureType left :<=: BooleanType, IntegerType
+		 	ensureType right :<=: BooleanType, IntegerType
 		 	ensureCompatibility left :<=>: right "Both operands have to be be of the same type"
 		 }
 section "Unary Expression"
@@ -128,22 +156,19 @@ section "Conditional"
 		typeof Conditional -> abstract {
 			ensureType condition :<=: BooleanType "Has to be be a value of Boolean or an expression which returns an value of Boolean"
 		}
-		
+		typeof Loop -> abstract {
+			ensureType condition :<=: BooleanType "Has to be be a value of Boolean or an expression which returns an value of Boolean"
+		}
 		
 		
 section "Functions"
 	typeof FunctionDeclaration -> feature returnType {
-		ensureType returnType :<=: Type
-	
+		ensureType returnType :<=: BooleanType, IntegerType, ArrayType
 		
 	}
 	typeof ReturnStatement -> javacode {
-		ensureType returnValue :<=: Type
+		ensureType returnValue :<=: BooleanType, IntegerType, ArrayType
 	}
 	typeof FunctionCall -> feature function 
-
-	
-		
-		 
-		 
+	 
 		 

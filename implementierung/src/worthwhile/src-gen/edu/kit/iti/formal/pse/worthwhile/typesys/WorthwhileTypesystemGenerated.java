@@ -17,7 +17,7 @@
 
 						useTypeOfFeature( p.getArrayType(), p.getArrayType_BaseType() );
 						ensureFeatureType( p.getArrayType(), p.getArrayType_Size(), p.getIntegerType() );
-						ensureFeatureType( p.getArrayType(), p.getArrayType_BaseType(), p.getPrimitiveType() );
+						ensureFeatureType( p.getArrayType(), p.getArrayType_BaseType(), p.getBooleanType(), p.getIntegerType() );
 						useCloneAsType( p.getIntegerType() );
 						useCloneAsType( p.getBooleanType() );
 
@@ -32,10 +32,10 @@
 						// Section: Variables
 
 						useTypeOfFeature( p.getVariableDeclaration(), p.getVariableDeclaration_Type() );
-						ensureFeatureType( p.getVariableDeclaration(), p.getVariableDeclaration_Type(), p.getType() );
+						ensureFeatureType( p.getVariableDeclaration(), p.getVariableDeclaration_Type(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( p.getVariableDeclaration(), p.getVariableDeclaration_InitialValue(), p.getVariableDeclaration_Type() );
 						useTypeOfFeature( p.getAssignment(), p.getAssignment_Variable() );
-						ensureFeatureType( p.getAssignment(), p.getAssignment_Value(), p.getType() );
+						ensureFeatureType( p.getAssignment(), p.getAssignment_Value(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( p.getAssignment(), p.getAssignment_Variable(), p.getAssignment_Value() );
 						useTypeOfFeature( p.getVariableReference(), p.getVariableReference_Variable() );
 
@@ -44,13 +44,21 @@
 
 						// include subtypes!
 						// ------
-						// include subtypes!
-						useTypeOfFeature( p.getQuantifiedExpression(), p.getQuantifiedExpression_Expression() );
-						useTypeOfFeature( p.getExistsQuantifier(), p.getQuantifiedExpression_Expression() );
-						ensureFeatureType( p.getExistsQuantifier(), p.getQuantifiedExpression_Condition(), p.getBooleanType() );
-						useTypeOfFeature( p.getForAllQuantifier(), p.getQuantifiedExpression_Expression() );
-						ensureFeatureType( p.getForAllQuantifier(), p.getQuantifiedExpression_Condition(), p.getBooleanType() );
-						// ------
+						useCloneAsType( p.getQuantifiedExpression() );
+						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Parameter(), p.getBooleanType(), p.getIntegerType() );
+						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Expression(), p.getBooleanType(), p.getForAllQuantifier(), p.getExistsQuantifier() );
+						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Condition(), p.getBooleanType() );
+						useCloneAsType( p.getForAllQuantifier() );
+						useCloneAsType( p.getExistsQuantifier() );
+
+						// ----------------------------------------------------------------
+						// Section: Annotation
+
+						ensureFeatureType( p.getAssumption(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
+						ensureFeatureType( p.getAssertion(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
+						ensureFeatureType( p.getPostcondition(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
+						ensureFeatureType( p.getPrecondition(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
+						ensureFeatureType( p.getInvariant(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
 
 						// ----------------------------------------------------------------
 						// Section: Binary Expression with integer operands
@@ -108,9 +116,13 @@
 						// Section: Binary Expression with boolean operands or integer operands
 
 						useFixedType( p.getEqual(), p.getBooleanType() );
-						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Left(), p.getPrimitiveType() );
-						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Right(), p.getPrimitiveType() );
+						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType() );
+						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType() );
 						ensureUnorderedCompatibility( "Both operands have to be be of the same type", p.getEqual(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						useFixedType( p.getUnequal(), p.getBooleanType() );
+						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType() );
+						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType() );
+						ensureUnorderedCompatibility( "Both operands have to be be of the same type", p.getUnequal(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 
 						// ----------------------------------------------------------------
 						// Section: Unary Expression
@@ -128,13 +140,14 @@
 						// Section: Conditional
 
 						ensureFeatureType( "Has to be be a value of Boolean or an expression which returns an value of Boolean", p.getConditional(), p.getConditional_Condition(), p.getBooleanType() );
+						ensureFeatureType( "Has to be be a value of Boolean or an expression which returns an value of Boolean", p.getLoop(), p.getLoop_Condition(), p.getBooleanType() );
 
 						// ----------------------------------------------------------------
 						// Section: Functions
 
 						useTypeOfFeature( p.getFunctionDeclaration(), p.getFunctionDeclaration_ReturnType() );
-						ensureFeatureType( p.getFunctionDeclaration(), p.getFunctionDeclaration_ReturnType(), p.getType() );
-						ensureFeatureType( p.getReturnStatement(), p.getReturnStatement_ReturnValue(), p.getType() );
+						ensureFeatureType( p.getFunctionDeclaration(), p.getFunctionDeclaration_ReturnType(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
+						ensureFeatureType( p.getReturnStatement(), p.getReturnStatement_ReturnValue(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						useTypeOfFeature( p.getFunctionCall(), p.getFunctionCall_Function() );
 
 				} catch ( TypesystemConfigurationException ex ) {

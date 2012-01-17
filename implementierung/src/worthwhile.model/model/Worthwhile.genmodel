@@ -361,7 +361,11 @@
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Statement/accept/visitor"/>
                     </genOperations>
                   </genClasses>
-                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference"/>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
                   <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
                       disposableProviderFactory="true" adapterFactory="false" literalsInterface="false"
                       contentTypeIdentifier="" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor">

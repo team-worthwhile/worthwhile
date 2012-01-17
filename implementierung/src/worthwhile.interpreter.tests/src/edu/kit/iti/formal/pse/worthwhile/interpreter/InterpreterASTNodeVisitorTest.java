@@ -6,6 +6,8 @@ import java.math.BigInteger;
 import org.junit.Assert;
 import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ValueType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**

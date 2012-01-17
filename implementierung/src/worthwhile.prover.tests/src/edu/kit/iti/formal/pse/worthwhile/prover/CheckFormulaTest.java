@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.Before;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;

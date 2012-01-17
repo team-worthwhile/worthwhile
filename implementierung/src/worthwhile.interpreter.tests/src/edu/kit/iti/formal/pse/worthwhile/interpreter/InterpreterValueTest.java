@@ -11,6 +11,9 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ValueType;
+
 /**
  * @author matthias and stefan
  */

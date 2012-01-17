@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.kit.iti.formal.pse.worthwhile.interpreter;
+package edu.kit.iti.formal.pse.worthwhile.model;
 
 import java.math.BigInteger;
 

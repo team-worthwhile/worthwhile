@@ -2,7 +2,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.Map;
 
-import edu.kit.iti.formal.pse.worthwhile.interpreter.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;

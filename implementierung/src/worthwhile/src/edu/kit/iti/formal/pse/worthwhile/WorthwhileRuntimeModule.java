@@ -3,8 +3,10 @@
  */
 package edu.kit.iti.formal.pse.worthwhile;
 
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
 import de.itemis.xtext.typesystem.ITypesystem;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
+import edu.kit.iti.formal.pse.worthwhile.validation.WorthwhileSyntaxErrorMessageProvider;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -19,4 +21,14 @@ public class WorthwhileRuntimeModule extends edu.kit.iti.formal.pse.worthwhile.A
 	public final Class<? extends ITypesystem> bindITypestem() {
 		return WorthwhileTypesystem.class;
 	}
+
+	/**
+	 * Provides a syntax error message provider implementation.
+	 * 
+	 * @return A syntax error message provider.
+	 */
+	public final Class<? extends ISyntaxErrorMessageProvider> bindISyntaxErrorMessageProvider() {
+		return WorthwhileSyntaxErrorMessageProvider.class;
+	}
+
 }

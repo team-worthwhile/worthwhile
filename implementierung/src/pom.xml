@@ -88,6 +88,9 @@
                 <version>2.8</version>
                 <configuration>
                     <pde>true</pde>
+                    <sourceIncludes>
+                        <sourceInclude>edu/kit/iti/formal/pse/worthwhile/Worthwhile.xmi</sourceInclude>
+                    </sourceIncludes>
                 </configuration>
             </plugin>
             <plugin>

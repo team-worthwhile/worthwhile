@@ -13,6 +13,7 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.core.model.LineBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
@@ -41,7 +42,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * The event listener that manages the debug events from the interpreter.
 	 */
 	private WorthwhileDebugEventListener eventListener;
-	
+
 	/**
 	 * The runner which runs the interpreter.
 	 */
@@ -208,13 +209,11 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void breakpointAdded(final IBreakpoint breakpoint) {
-		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
+		if (breakpoint instanceof LineBreakpoint) {
 			try {
-				((WorthwhileDebugEventListener) this.eventListener).addBreakpoint(
-				                ((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
-				                                .getLineNumber(), breakpoint);
+				this.eventListener.addBreakpoint(((LineBreakpoint) breakpoint).getLineNumber(),
+				                breakpoint);
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
@@ -224,19 +223,25 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void breakpointChanged(final IBreakpoint breakpoint, final IMarkerDelta delta) {
-		// TODO Auto-generated method stub
-
+		if (supportsBreakpoint(breakpoint)) {
+			try {
+				if (breakpoint.isEnabled()) {
+					breakpointAdded(breakpoint);
+				} else {
+					breakpointRemoved(breakpoint, null);
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	@Override
 	public final void breakpointRemoved(final IBreakpoint breakpoint, final IMarkerDelta delta) {
 		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
 			try {
-				((WorthwhileDebugEventListener) this.eventListener)
-				                .removeBreakpoint(((org.eclipse.debug.core.model.LineBreakpoint) breakpoint)
-				                                .getLineNumber());
+				this.eventListener.removeBreakpoint(((LineBreakpoint) breakpoint).getLineNumber());
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

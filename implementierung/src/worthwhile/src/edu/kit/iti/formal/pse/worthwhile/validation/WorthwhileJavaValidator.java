@@ -9,6 +9,7 @@ import de.itemis.xtext.typesystem.ITypesystem;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 
 /**
@@ -56,6 +57,26 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 			error("The return value of a function may only be referenced in the postcondition.",
 			                returnValueReference, null, -1);
 		}
+	}
+
+	/**
+	 * Checks if a return statement is only contained by a function block.
+	 * 
+	 * @param returnStatement
+	 *                The return statement to check.
+	 */
+	@Check
+	public final void checkReturnStatementOnlyFunction(final ReturnStatement returnStatement) {
+		EObject current = returnStatement;
+
+		do {
+			current = current.eContainer();
+		} while (current != null && !(current instanceof FunctionDeclaration));
+
+		if (current == null) {
+			error("The return statement has to be in a function block.", returnStatement, null, -1);
+		}
+
 	}
 
 	/**

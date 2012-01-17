@@ -105,42 +105,108 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final boolean canTerminate() {
-		return this.thread.canTerminate();
+		return !this.getEventListener().getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final boolean isTerminated() {
-		return this.thread.isTerminated();
+		return this.getEventListener().getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final void terminate() throws DebugException {
-		this.thread.terminate();
+		this.getEventListener().terminate();
 	}
 
 	@Override
 	public final boolean canResume() {
-		return this.thread.canResume();
+		return !this.getEventListener().getMode().equals(DebugMode.TERMINATED)
+		                && this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean canSuspend() {
-		return this.thread.canSuspend();
+		return  !this.getEventListener().getMode().equals(DebugMode.TERMINATED)
+		                && !this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean isSuspended() {
-		return this.thread.isSuspended();
+		return this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final void resume() throws DebugException {
-		this.thread.resume();
+		this.getEventListener().resume();
 	}
 
 	@Override
 	public final void suspend() throws DebugException {
-		this.thread.suspend();
+		this.getEventListener().suspend();
+	}
+
+	/**
+	 * Returns whether the debug target can step into a statement.
+	 * 
+	 * @return whether the debug target can step into a statement.
+	 */
+	public final boolean canStepInto() {
+		return this.isSuspended();
+	}
+
+	/**
+	 * Returns whether the debug target can step over a statement.
+	 * 
+	 * @return whether the debug target can step over a statement.
+	 */
+	public final boolean canStepOver() {
+		return this.isSuspended();
+	}
+
+	/**
+	 * Returns whether the debug target can step to the next return statement.
+	 * 
+	 * @return whether the debug target can step to the next return statement.
+	 */
+	public final boolean canStepReturn() {
+		return this.isSuspended();
+	}
+
+	/**
+	 * Returns whether we are currently in stepping mode.
+	 * 
+	 * @return whether we are currently in stepping mode.
+	 */
+	public final boolean isStepping() {
+		return this.getEventListener().getMode().equals(DebugMode.STEP)
+		                || this.getEventListener().getMode().equals(DebugMode.STEP_OVER);
+	}
+
+	/**
+	 * Steps into the current statement.
+	 * 
+	 * @throws DebugException
+	 */
+	public void stepInto() throws DebugException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * Steps over the current statement.
+	 * 
+	 * @throws DebugException
+	 */
+	public void stepOver() throws DebugException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * Steps until the next return statement.
+	 * 
+	 * @throws DebugException
+	 */
+	public void stepReturn() throws DebugException {
+		// TODO Auto-generated method stub
 	}
 
 	@Override

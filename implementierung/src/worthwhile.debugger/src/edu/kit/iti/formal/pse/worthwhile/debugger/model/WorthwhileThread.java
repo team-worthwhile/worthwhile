@@ -5,10 +5,9 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
-
 /**
- * A representation of a thread (i.e., the only thread) in a Worthwhile program.
+ * A representation of a thread (i.e., the only thread) in a Worthwhile program. It delegates all operations to the
+ * debug target.
  * 
  * @author Joachim
  * 
@@ -25,26 +24,39 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 		super(debugTarget);
 	}
 
+	/**
+	 * The breakpoint this thread is currently suspended at, if applicable.
+	 */
+	private IBreakpoint breakpoint;
+
+	/**
+	 * Sets the breakpoint this thread is currently suspended at.
+	 * 
+	 * @param breakpoint
+	 *                The breakpoint this thread is currently suspended at.
+	 */
+	public final void setBreakpoint(final IBreakpoint breakpoint) {
+		this.breakpoint = breakpoint;
+	}
+
 	@Override
 	public final boolean canResume() {
-		return !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED)
-		                && this.getDebugTarget().getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return this.getDebugTarget().canResume();
 	}
 
 	@Override
 	public final boolean canSuspend() {
-		return !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED)
-		                && !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return this.getDebugTarget().canSuspend();
 	}
 
 	@Override
 	public final boolean isSuspended() {
-		return this.getDebugTarget().getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return this.getDebugTarget().isSuspended();
 	}
 
 	@Override
 	public final void resume() throws DebugException {
-		this.getDebugTarget().getEventListener().resume();
+		this.getDebugTarget().resume();
 	}
 
 	@Override
@@ -54,62 +66,57 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 
 	@Override
 	public final boolean canStepInto() {
-		return this.isSuspended();
+		return this.getDebugTarget().canStepInto();
 	}
 
 	@Override
 	public final boolean canStepOver() {
-		return this.isSuspended();
+		return this.getDebugTarget().canStepOver();
 	}
 
 	@Override
 	public final boolean canStepReturn() {
-		return this.isSuspended();
+		return this.getDebugTarget().canStepReturn();
 	}
 
 	@Override
 	public final boolean isStepping() {
-		return this.getDebugTarget().getEventListener().getMode().equals(DebugMode.STEP)
-		                || this.getDebugTarget().getEventListener().getMode().equals(DebugMode.STEP_OVER);
+		return this.getDebugTarget().isStepping();
 	}
 
 	@Override
-	public void stepInto() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void stepInto() throws DebugException {
+		this.getDebugTarget().stepInto();
 	}
 
 	@Override
-	public void stepOver() throws DebugException {
-		// TODO Auto-generated method stub
-
+	public final void stepOver() throws DebugException {
+		this.getDebugTarget().stepOver();
 	}
 
 	@Override
-	public void stepReturn() throws DebugException {
-		// TODO Auto-generated method stub
+	public final void stepReturn() throws DebugException {
+		this.getDebugTarget().stepReturn();
 	}
 
 	@Override
 	public final boolean canTerminate() {
-		return !this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED);
+		return this.getDebugTarget().canTerminate();
 	}
 
 	@Override
 	public final boolean isTerminated() {
-		return this.getDebugTarget().getEventListener().getMode().equals(DebugMode.TERMINATED);
+		return this.getDebugTarget().isTerminated();
 	}
 
 	@Override
 	public final void terminate() throws DebugException {
-		this.getDebugTarget().getEventListener().terminate();
+		this.getDebugTarget().terminate();
 	}
 
 	@Override
 	public final IBreakpoint[] getBreakpoints() {
-		// Return the breakpoints the thread is currently suspended at (!)
-		// TODO Auto-generated method stub
-		return null;
+		return new IBreakpoint[] { this.breakpoint };
 	}
 
 	@Override

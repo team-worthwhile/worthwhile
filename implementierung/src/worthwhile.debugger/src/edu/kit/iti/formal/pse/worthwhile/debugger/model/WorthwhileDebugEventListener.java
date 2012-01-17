@@ -245,7 +245,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 */
 	public final void terminate() {
 		this.mode = DebugMode.TERMINATED;
-		// TODO
 	}
 
 	public ASTNode getCurrentNode() {

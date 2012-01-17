@@ -41,6 +41,11 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * The event listener that manages the debug events from the interpreter.
 	 */
 	private WorthwhileDebugEventListener eventListener;
+	
+	/**
+	 * The runner which runs the interpreter.
+	 */
+	private InterpreterRunner interpreterRunner;
 
 	/**
 	 * Creates a new instance of the {@link WorthwhileDebugTarget} class.
@@ -82,16 +87,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		interpreter.addExecutionEventHandler(this.eventListener);
 
 		// Execute the program.
-		DebugPlugin.getDefault().asyncExec(new Runnable() {
-
-			// TODO: auslagern in eigene Klasse
-
-			@Override
-			public void run() {
-				interpreter.execute();
-			}
-
-		});
+		this.interpreterRunner = new InterpreterRunner(interpreter);
+		DebugPlugin.getDefault().asyncExec(this.interpreterRunner);
 	}
 
 	/**
@@ -126,7 +123,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final boolean canSuspend() {
-		return  !this.getEventListener().getMode().equals(DebugMode.TERMINATED)
+		return !this.getEventListener().getMode().equals(DebugMode.TERMINATED)
 		                && !this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
 	}
 
@@ -304,8 +301,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	/**
 	 * Called when a breakpoint is hit.
+	 * 
+	 * @param breakpoint
+	 *                The breakpoint that has been hit.
 	 */
 	protected final void breakpointHit(final IBreakpoint breakpoint) {
+		this.thread.setBreakpoint(breakpoint);
 		suspended(DebugEvent.BREAKPOINT);
 	}
 
@@ -326,6 +327,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                The detail reason for the resume.
 	 */
 	public final void resumed(final int detail) {
+		this.thread.setBreakpoint(null);
 		this.thread.fireResumeEvent(detail);
 	}
 

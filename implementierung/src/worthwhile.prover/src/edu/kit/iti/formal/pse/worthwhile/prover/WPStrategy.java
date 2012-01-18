@@ -278,7 +278,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		conditionAndInvariant.setRight(AstNodeCloneHelper.clone(invariant));
 
 		// generate weakest precondition for the body given the invariant as the postcondition
-		this.weakestPreconditionStack.push(invariant);
+		// we have to copy the invariant because what happens inside the loop should not be reflected outside of
+		// it
+		this.weakestPreconditionStack.push(AstNodeCloneHelper.clone(invariant));
 		loop.getBody().accept(this);
 		Expression bodyPrecondition = this.weakestPreconditionStack.pop();
 

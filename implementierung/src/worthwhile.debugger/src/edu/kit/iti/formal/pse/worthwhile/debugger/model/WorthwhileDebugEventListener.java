@@ -142,10 +142,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	@Override
 	public final void statementWillExecute(final Statement statement) {
 		synchronized (this) {
-			System.out.println("statement will execute: " + AstNodeToStringHelper.toString(statement)
-			                + " at line " + NodeHelper.getLine(statement));
-			
-			System.out.println("setting current node");
 			this.currentNode = statement;
 
 			boolean doSuspend = false;
@@ -155,8 +151,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			int lineNumber = NodeHelper.getLine(statement);
 			if (!this.mode.equals(DebugMode.RUN) && this.breakpoints.containsKey(lineNumber)) {
 				// TODO breakpoint condition
-				System.out.println("Breakpoint hit at line " + lineNumber);
-				// Notify the debu target that a breakpoint has been hit
+				
+				// Notify the debug target that a breakpoint has been hit
 				this.getDebugTarget().breakpointHit(this.breakpoints.get(lineNumber));
 
 				doSuspend = true;
@@ -202,11 +198,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 					break;
 				}
 
-				System.out.println("Resumed execution.");
-
 				this.getDebugTarget().resumed(resumeReason);
-				
-				System.out.println("resetting current node");
 				this.currentNode = null;
 			}
 		}
@@ -234,7 +226,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 * Resumes the execution.
 	 */
 	public final void resume() {
-		System.out.println("Trying to resume execution …");
 		synchronized (this) {
 			this.mode = DebugMode.DEBUG;
 			notifyAll();
@@ -249,7 +240,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	}
 
 	public ASTNode getCurrentNode() {
-		System.out.println("getting current node: " + this.currentNode);
 		return this.currentNode;
 	}
 

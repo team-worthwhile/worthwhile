@@ -1,11 +1,16 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
-import java.io.IOException;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -18,6 +23,7 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
+import edu.kit.iti.formal.pse.worthwhile.debugger.events.WorthwhileDebugEvent;
 import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
@@ -91,7 +97,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		// Execute the program.
 		this.interpreterRunner = new InterpreterRunner(interpreter);
-		DebugPlugin.getDefault().asyncExec(this.interpreterRunner);
+		this.interpreterRunner.schedule();
 	}
 
 	/**
@@ -312,7 +318,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @param breakpoint
 	 *                The breakpoint that has been hit.
 	 */
-	protected final void breakpointHit(final IBreakpoint breakpoint) {
+	public final void breakpointHit(final IBreakpoint breakpoint) {
 		this.thread.setBreakpoint(breakpoint);
 	}
 

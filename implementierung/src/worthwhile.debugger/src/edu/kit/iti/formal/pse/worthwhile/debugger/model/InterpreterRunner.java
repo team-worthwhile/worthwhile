@@ -1,5 +1,10 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 
 /**
@@ -8,7 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
  * @author Joachim
  * 
  */
-public class InterpreterRunner implements Runnable {
+public class InterpreterRunner extends Job {
 
 	/**
 	 * The interpreter to be run.
@@ -22,12 +27,13 @@ public class InterpreterRunner implements Runnable {
 	 *                The interpreter to be run.
 	 */
 	public InterpreterRunner(final Interpreter interpreter) {
+		super("Worthwhile Interpreter runner");
 		this.interpreter = interpreter;
 	}
 
 	@Override
-        public final void run() {
+        protected final IStatus run(final IProgressMonitor monitor) {
 		this.interpreter.execute();
-	}
-
+		return Status.OK_STATUS;
+        }
 }

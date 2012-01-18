@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Stack;
 
@@ -15,7 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
 
 public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 
-	private Map<VariableDeclaration, VariableDeclaration> variableMap = new HashMap<VariableDeclaration, VariableDeclaration>();
+	private Map<VariableDeclaration, VariableDeclaration> variableMap = new LinkedHashMap<VariableDeclaration, VariableDeclaration>();
 
 	private Stack<Expression> substituteExpressionStack = new Stack<Expression>();
 

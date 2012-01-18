@@ -129,21 +129,22 @@ public class WorthwhileThread extends WorthwhileDebugElement implements IThread 
 		return 0;
 	}
 
-	// FIXME
-	private WorthwhileStackFrame buildStackFrame() {
-		WorthwhileStackFrame result = new WorthwhileStackFrame(this.getDebugTarget(), this.getDebugTarget()
-		                .getEventListener().getCurrentNode());
-		return result;
-	}
-
 	@Override
 	public final IStackFrame[] getStackFrames() throws DebugException {
-		return new IStackFrame[] { this.buildStackFrame() };
+		if (isSuspended()) {
+			return this.getDebugTarget().getStackFrames();
+		} else {
+			return new IStackFrame[0];
+		}
 	}
 
 	@Override
 	public final IStackFrame getTopStackFrame() throws DebugException {
-		return this.buildStackFrame();
+		IStackFrame[] frames = getStackFrames();
+		if (frames.length > 0) {
+			return frames[0];
+		}
+		return null;
 	}
 
 	@Override

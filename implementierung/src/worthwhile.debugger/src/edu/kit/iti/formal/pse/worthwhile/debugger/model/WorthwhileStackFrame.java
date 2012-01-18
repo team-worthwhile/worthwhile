@@ -7,6 +7,7 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
@@ -27,6 +28,13 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 	 */
 	public WorthwhileStackFrame(final WorthwhileDebugTarget debugTarget, final ASTNode node) {
 		super(debugTarget);
+		
+		if (node == null) {
+			throw new IllegalArgumentException("Stack frame must have a non-null node.");
+		}
+		
+		System.out.println("Creating new WorthwhileStackFrame for " + node.toString() + " at line "
+		                + NodeHelper.getLine(node));
 		this.node = node;
 	}
 
@@ -175,10 +183,12 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 
 	@Override
 	public final boolean equals(final Object other) {
+		System.out.println("WWStackFrame.equals(" + this + " <=> " + other + ")");
 		if (other instanceof WorthwhileStackFrame) {
 			try {
 				return this.getLineNumber() == ((WorthwhileStackFrame) other).getLineNumber();
 			} catch (DebugException e) {
+				e.printStackTrace();
 				return false;
 			}
 		} else {
@@ -193,6 +203,11 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 		} catch (DebugException e) {
 			return -1;
 		}
+	}
+	
+	@Override
+	public final String toString() {
+		return "Stack Frame for " + (node == null ? "NULL" : AstNodeToStringHelper.toString(node)) + " at line " + NodeHelper.getLine(node);
 	}
 
 }

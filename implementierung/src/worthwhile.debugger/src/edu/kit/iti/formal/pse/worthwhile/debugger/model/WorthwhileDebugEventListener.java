@@ -141,43 +141,42 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void statementWillExecute(final Statement statement) {
-		System.out.println("statement will execute: " + AstNodeToStringHelper.toString(statement) + " at line "
-		                + NodeHelper.getLine(statement));
+		synchronized (this) {
+			System.out.println("statement will execute: " + AstNodeToStringHelper.toString(statement)
+			                + " at line " + NodeHelper.getLine(statement));
+			
+			System.out.println("setting current node");
+			this.currentNode = statement;
 
-		boolean doSuspend = false;
-		int suspendReason = 0;
+			boolean doSuspend = false;
+			int suspendReason = 0;
 
-		// Check if there is a breakpoint in this statement's line
-		int lineNumber = NodeHelper.getLine(statement);
-		if (!this.mode.equals(DebugMode.RUN) && this.breakpoints.containsKey(lineNumber)) {
-			// TODO breakpoint condition
-			System.out.println("Breakpoint hit at line " + lineNumber);
-			// Notify the debu target that a breakpoint has been hit
-			this.getDebugTarget().breakpointHit(this.breakpoints.get(lineNumber));
+			// Check if there is a breakpoint in this statement's line
+			int lineNumber = NodeHelper.getLine(statement);
+			if (!this.mode.equals(DebugMode.RUN) && this.breakpoints.containsKey(lineNumber)) {
+				// TODO breakpoint condition
+				System.out.println("Breakpoint hit at line " + lineNumber);
+				// Notify the debu target that a breakpoint has been hit
+				this.getDebugTarget().breakpointHit(this.breakpoints.get(lineNumber));
 
-			doSuspend = true;
-			suspendReason = DebugEvent.BREAKPOINT;
-		} else {
-			// Check if we want to suspend anyway
-			if (this.mode.equals(DebugMode.STEP)) {
 				doSuspend = true;
-				suspendReason = DebugEvent.STEP_END;
-			} else if (this.mode.equals(DebugMode.SUSPEND)) {
-				doSuspend = true;
-				suspendReason = DebugEvent.CLIENT_REQUEST;
+				suspendReason = DebugEvent.BREAKPOINT;
+			} else {
+				// Check if we want to suspend anyway
+				if (this.mode.equals(DebugMode.STEP)) {
+					doSuspend = true;
+					suspendReason = DebugEvent.STEP_END;
+				} else if (this.mode.equals(DebugMode.SUSPEND)) {
+					doSuspend = true;
+					suspendReason = DebugEvent.CLIENT_REQUEST;
+				}
 			}
-		}
 
-		if (doSuspend) {
-			if (suspendReason != DebugEvent.BREAKPOINT) {
-				this.getDebugTarget().suspended(suspendReason);
-			}
-
-			// Wait until someone wakes us up.
-			synchronized (this) {
+			if (doSuspend) {
 				this.mode = DebugMode.SUSPENDED;
-				this.currentNode = statement;
-				
+				this.getDebugTarget().suspended(suspendReason);
+
+				// Wait until someone wakes us up.
 				while (this.mode.equals(DebugMode.SUSPENDED)) {
 					try {
 						this.wait();
@@ -206,6 +205,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				System.out.println("Resumed execution.");
 
 				this.getDebugTarget().resumed(resumeReason);
+				
+				System.out.println("resetting current node");
 				this.currentNode = null;
 			}
 		}
@@ -248,6 +249,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	}
 
 	public ASTNode getCurrentNode() {
+		System.out.println("getting current node: " + this.currentNode);
 		return this.currentNode;
 	}
 

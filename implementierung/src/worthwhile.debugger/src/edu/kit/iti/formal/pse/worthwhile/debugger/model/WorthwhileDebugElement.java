@@ -5,6 +5,8 @@ import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugElement;
+import org.eclipse.debug.internal.ui.viewers.model.provisional.IModelDelta;
+import org.eclipse.debug.internal.ui.viewers.model.provisional.ModelDelta;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
 
@@ -29,7 +31,6 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	 */
 	public WorthwhileDebugElement(final WorthwhileDebugTarget debugTarget) {
 		this.debugTarget = debugTarget;
-		this.fireCreationEvent();
 	}
 
 	@Override
@@ -74,6 +75,9 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	protected final void fireEvent(final DebugEvent event) {
 		System.out.println(event.toString());
 		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] { event });
+		// TODO: fire model changed event
+		// ModelDelta delta = new ModelDelta(DebugPlugin.getDefault().getLaunchManager(), IModelDelta.CONTENT);
+		// DebugPlugin.getDefault().
 	}
 
 	/**

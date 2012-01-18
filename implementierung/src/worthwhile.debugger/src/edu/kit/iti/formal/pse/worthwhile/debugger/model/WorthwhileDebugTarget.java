@@ -1,10 +1,11 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
+import java.io.IOException;
+
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
@@ -12,6 +13,7 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
@@ -312,7 +314,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	protected final void breakpointHit(final IBreakpoint breakpoint) {
 		this.thread.setBreakpoint(breakpoint);
-		suspended(DebugEvent.BREAKPOINT);
 	}
 
 	/**
@@ -359,6 +360,17 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			e.printStackTrace();
 			return "";
 		}
+	}
+
+	/**
+	 * Returns the current stack frames in this target.
+	 * 
+	 * @return The current stack frames in this target
+	 * @throws DebugException
+	 *                 if unable to perform the request
+	 */
+	protected final IStackFrame[] getStackFrames() throws DebugException {
+		return new IStackFrame[] { new WorthwhileStackFrame(this, this.getEventListener().getCurrentNode()) };
 	}
 
 	/**

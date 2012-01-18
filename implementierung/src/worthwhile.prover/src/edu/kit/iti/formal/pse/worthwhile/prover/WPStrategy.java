@@ -271,7 +271,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			}
 		}
 
-
 		// (condition and invariant) implies wp(body, invariant)
 		Conjunction conditionAndInvariant = factory.createConjunction();
 		conditionAndInvariant.setLeft(AstNodeCloneHelper.clone(loop.getCondition()));
@@ -286,8 +285,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		Implication conditionAndInvariantImpliesBodyPrecondition = factory.createImplication();
 		conditionAndInvariantImpliesBodyPrecondition.setLeft(conditionAndInvariant);
-		conditionAndInvariantImpliesBodyPrecondition.setRight(AstNodeCloneHelper
-		                .clone(bodyPrecondition));
+		conditionAndInvariantImpliesBodyPrecondition.setRight(AstNodeCloneHelper.clone(bodyPrecondition));
 
 		// ((not condition) and invariant) implies postcondition
 		Negation notCondition = factory.createNegation();
@@ -313,7 +311,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
 			QuantifiedExpression forAllValuesOfNewDeclaration = factory.createForAllQuantifier();
 			forAllValuesOfNewDeclaration.setParameter(newDeclaration);
-			forAllValuesOfNewDeclaration.setExpression(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
+			forAllValuesOfNewDeclaration
+			                .setExpression(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
 			forAllValuesConditionAndInvariantImpliesBodyPrecondition = forAllValuesOfNewDeclaration;
 		}
 
@@ -325,7 +324,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
 			QuantifiedExpression forAllValuesOfNewDeclaration = factory.createForAllQuantifier();
 			forAllValuesOfNewDeclaration.setParameter(newDeclaration);
-			forAllValuesOfNewDeclaration.setExpression(forAllValuesNotConditionAndInvariantImpliesPostcondition);
+			forAllValuesOfNewDeclaration
+			                .setExpression(forAllValuesNotConditionAndInvariantImpliesPostcondition);
 			forAllValuesNotConditionAndInvariantImpliesPostcondition = forAllValuesOfNewDeclaration;
 		}
 

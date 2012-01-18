@@ -5,10 +5,14 @@ import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
@@ -136,5 +140,32 @@ public final class TransformProgramTest {
 		expected.setRight(this.getExpression("2 * 3 = 3 * 2 && true"));
 
 		assertASTNodeEqual(expected, result);
+	}
+
+	/**
+	 * Tests the transformation of {@link Loop}s.
+	 */
+	@Test
+	public void loopRule() {
+		// from http://wiki.pse.ndreke.de/test_zaehlvariable
+		Program p = this.getProgram("Integer n := 42\n"
+				+ "Integer t := 0\n"
+				+ "while t < n _invariant t <=n\n"
+				+ "{\n"
+				+ "    t := t + 1\n"
+				+ "}\n"
+				+ "_assert t = n\n");
+		Expression result = this.transformer.transformProgram(p);
+
+		String expectedResultString = "(((0 <= 42) " +
+				// condition true implies weakest block precondition
+				"&& forall Integer n : forall Integer t : (((t < n) && (t <= n)) => " +
+				"((t + 1) <= n))) " +
+				// condition not true implies postcondition
+				"&& forall Integer n : forall Integer t : ((!(t < n) && (t <= n)) => " +
+				"((t = n) && true)))";
+		String resultString = AstNodeToStringHelper.toString(result);
+
+		Assert.assertEquals(expectedResultString, resultString);
 	}
 }

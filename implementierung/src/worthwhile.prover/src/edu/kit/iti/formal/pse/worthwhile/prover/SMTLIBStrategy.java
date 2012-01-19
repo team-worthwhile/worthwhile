@@ -45,11 +45,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  */
 class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
 
+	/**
+	 * Stack to pass compiled formula elements up to caller.
+	 */
 	private final Stack<String> formulaCompileStack = new Stack<String>();
 
-	/**
-	 * @see FormulaCompiler#compileFormula(Expression formula)
-	 */
 	@Override
 	public String compileFormula(final Expression formula) {
 		// this should push a String object to the compilation stack
@@ -73,6 +73,14 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		return declarationsString + "(assert " + formulaString + ")\n(check-sat)";
 	}
 
+	/**
+	 * Push a compiled {@link BinaryExpression} to the stack.
+	 * 
+	 * @param binaryExpression
+	 *                the {@link BinaryExpression} to compile
+	 * @param compiledOperationSymbol
+	 *                the symbol to use in the SMTLIB compiled expression
+	 */
 	private void pushBinaryOperation(final BinaryExpression binaryExpression, final String compiledOperationSymbol) {
 		binaryExpression.getLeft().accept(this);
 		binaryExpression.getRight().accept(this);
@@ -81,6 +89,14 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		this.formulaCompileStack.push("(" + compiledOperationSymbol + " " + left + " " + right + ")");
 	}
 
+	/**
+	 * Push a compiled {@link UnaryExpression} to the stack
+	 * 
+	 * @param unaryExpression
+	 *                the {@link UnaryExpression} to compile
+	 * @param compiledOperationSymbol
+	 *                the symbol to use in the SMTLIB compiled expression
+	 */
 	private void pushUnaryOperation(final UnaryExpression unaryExpression, final String compiledOperationSymbol) {
 		unaryExpression.getOperand().accept(this);
 		String operand = this.formulaCompileStack.pop();
@@ -186,65 +202,41 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		this.formulaCompileStack.push("Bool");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Conjunction conjunction)
-	 */
 	@Override
 	public void visit(final Conjunction conjunction) {
 		this.pushBinaryOperation(conjunction, "and");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Disjunction disjunction)
-	 */
 	@Override
 	public void visit(final Disjunction disjunction) {
 		this.pushBinaryOperation(disjunction, "or");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Division division)
-	 */
 	@Override
 	public void visit(final Division division) {
 		this.pushBinaryOperation(division, "/");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Equal equal)
-	 */
 	@Override
 	public void visit(final Equal equal) {
 		this.pushBinaryOperation(equal, "=");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Equivalence equivalence)
-	 */
 	@Override
 	public void visit(final Equivalence equivalence) {
 		this.pushBinaryOperation(equivalence, "iff");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ExistsQuantifier existsQuantifier)
-	 */
 	@Override
 	public void visit(final ExistsQuantifier existsQuantifier) {
 		this.pushQuantifier(existsQuantifier, "exists");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(ForAllQuantifier forAllQuantifier)
-	 */
 	@Override
 	public void visit(final ForAllQuantifier forAllQuantifier) {
 		this.pushQuantifier(forAllQuantifier, "forall");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(FunctionCall functionCall)
-	 */
 	@Override
 	public void visit(final FunctionCall functionCall) {
 		// begin-user-code
@@ -253,65 +245,41 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// end-user-code
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Greater greater)
-	 */
 	@Override
 	public void visit(final Greater greater) {
 		this.pushBinaryOperation(greater, ">");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(GreaterOrEqual greaterOrEqual)
-	 */
 	@Override
 	public void visit(final GreaterOrEqual greaterOrEqual) {
 		this.pushBinaryOperation(greaterOrEqual, ">=");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Implication implication)
-	 */
 	@Override
 	public void visit(final Implication implication) {
 		this.pushBinaryOperation(implication, "=>");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(IntegerLiteral integerLiteral)
-	 */
 	@Override
 	public void visit(final IntegerLiteral integerLiteral) {
 		this.formulaCompileStack.push(integerLiteral.getValue().toString());
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(IntegerType integerType)
-	 */
 	@Override
 	public void visit(final IntegerType integerType) {
 		this.formulaCompileStack.push("Int");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Less less)
-	 */
 	@Override
 	public void visit(final Less less) {
 		this.pushBinaryOperation(less, "<");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(LessOrEqual lessOrEqual)
-	 */
 	@Override
 	public void visit(final LessOrEqual lessOrEqual) {
 		this.pushBinaryOperation(lessOrEqual, "<=");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Minus minus)
-	 */
 	@Override
 	public void visit(final Minus minus) {
 		this.pushUnaryOperation(minus, "-");
@@ -322,60 +290,31 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		this.pushBinaryOperation(modulus, "mod");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Multiplication multiplication)
-	 */
 	@Override
 	public void visit(final Multiplication multiplication) {
 		this.pushBinaryOperation(multiplication, "*");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Negation negation)
-	 */
 	@Override
 	public void visit(final Negation negation) {
 		this.pushUnaryOperation(negation, "not");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(VariableReference variableReference)
-	 */
 	@Override
 	public void visit(final VariableReference variableReference) {
 		this.formulaCompileStack.push(variableReference.getVariable().getName());
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Plus plus)
-	 */
 	@Override
 	public void visit(final Plus plus) {
 		this.pushUnaryOperation(plus, "+");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(QuantifiedExpression quantifiedExpression)
-	 */
-	@Override
-	public void visit(final QuantifiedExpression quantifiedExpression) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(Subtraction subtraction)
-	 */
 	@Override
 	public void visit(final Subtraction subtraction) {
 		this.pushBinaryOperation(subtraction, "-");
 	}
 
-	/**
-	 * @see ASTNodeVisitor#visit(Unequal unequal)
-	 */
 	@Override
 	public void visit(final Unequal unequal) {
 		this.pushBinaryOperation(unequal, "=");

@@ -6,8 +6,7 @@
 -->
 <!--
     Checkstyle-Configuration: Worthwhile
-    Description: 
-Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that better matches the default code formatter setting of Eclipse.
+    Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -56,7 +55,10 @@ Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that 
     <module name="LeftCurly"/>
     <module name="NeedBraces"/>
     <module name="RightCurly"/>
-    <module name="AvoidInlineConditionals"/>
+    <module name="AvoidInlineConditionals">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module>
     <module name="DoubleCheckedLocking"/>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode"/>

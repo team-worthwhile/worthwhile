@@ -19,22 +19,28 @@ import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 public class WorthwhileStackFrame extends WorthwhileDebugElement implements IStackFrame {
 
 	/**
+	 * The thread this stack frame belongs to.
+	 */
+	private final IThread thread;
+
+	/**
 	 * Creates a new instance of the {@link WorthwhileStackFrame} class.
 	 * 
 	 * @param debugTarget
 	 *                The debug target.
+	 * @param thread
+	 *                The thread this stack frame belongs to.
 	 * @param node
 	 *                The AST node this stack frame represents.
 	 */
-	public WorthwhileStackFrame(final WorthwhileDebugTarget debugTarget, final ASTNode node) {
+	public WorthwhileStackFrame(final WorthwhileDebugTarget debugTarget, final IThread thread, final ASTNode node) {
 		super(debugTarget);
-		
+
 		if (node == null) {
 			throw new IllegalArgumentException("Stack frame must have a non-null node.");
 		}
-		
-		System.out.println("Creating new WorthwhileStackFrame for " + node.toString() + " at line "
-		                + NodeHelper.getLine(node));
+
+		this.thread = thread;
 		this.node = node;
 	}
 
@@ -154,14 +160,7 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 
 	@Override
 	public final IThread getThread() {
-		try {
-			// FIXME
-			return this.getDebugTarget().getThreads()[0];
-		} catch (DebugException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
+		return this.thread;
 	}
 
 	@Override
@@ -183,7 +182,6 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 
 	@Override
 	public final boolean equals(final Object other) {
-		System.out.println("WWStackFrame.equals(" + this + " <=> " + other + ")");
 		if (other instanceof WorthwhileStackFrame) {
 			try {
 				return this.getLineNumber() == ((WorthwhileStackFrame) other).getLineNumber();
@@ -204,10 +202,11 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 			return -1;
 		}
 	}
-	
+
 	@Override
 	public final String toString() {
-		return "Stack Frame for " + (node == null ? "NULL" : AstNodeToStringHelper.toString(node)) + " at line " + NodeHelper.getLine(node);
+		return "Stack Frame for " + (node == null ? "NULL" : AstNodeToStringHelper.toString(node))
+		                + " at line " + NodeHelper.getLine(node);
 	}
 
 }

@@ -6,7 +6,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IDebugElement;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
 
 /**
  * A base class for all elements of the Worthwhile debug model.
@@ -53,7 +53,7 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 
 	@Override
 	public final String getModelIdentifier() {
-		return IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+		return ID_WORTHWHILE_DEBUG_MODEL;
 	}
 
 	@Override

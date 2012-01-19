@@ -13,6 +13,7 @@ import org.eclipse.debug.core.sourcelookup.ISourcePathComputerDelegate;
 import org.eclipse.debug.core.sourcelookup.containers.FolderSourceContainer;
 import org.eclipse.debug.core.sourcelookup.containers.ProjectSourceContainer;
 import org.eclipse.debug.core.sourcelookup.containers.WorkspaceSourceContainer;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
 /**
  * Computes the source file path from a launch configuration.
@@ -29,8 +30,7 @@ public class WorthwhileSourcePathComputerDelegate implements ISourcePathComputer
 		// see also http://www.eclipse.org/articles/Article-Debugger/how-to.html
 
 		// Get the path to the source file from the launch configuration
-		String path = configuration.getAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH,
-		                (String) null);
+		String path = configuration.getAttribute(ATTR_PATH, (String) null);
 		ISourceContainer sourceContainer = null;
 
 		// Try to find the specified file in the workspace.

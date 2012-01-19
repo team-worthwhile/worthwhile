@@ -15,10 +15,10 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
-import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -76,7 +76,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 			// Get the breakpoints that are already defined and add them to the debug target.
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
-			                .getBreakpoints(IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL);
+			                .getBreakpoints(ID_WORTHWHILE_DEBUG_MODEL);
 			for (int i = 0; i < breakpoints.length; i++) {
 				breakpointAdded(breakpoints[i]);
 			}
@@ -184,6 +184,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * Steps into the current statement.
 	 * 
 	 * @throws DebugException
+	 *                 when the desired operation cannot be performed.
 	 */
 	public void stepInto() throws DebugException {
 		// TODO Auto-generated method stub
@@ -193,6 +194,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * Steps over the current statement.
 	 * 
 	 * @throws DebugException
+	 *                 when the desired operation cannot be performed.
 	 */
 	public void stepOver() throws DebugException {
 		// TODO Auto-generated method stub
@@ -202,6 +204,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * Steps until the next return statement.
 	 * 
 	 * @throws DebugException
+	 *                 when the desired operation cannot be performed.
 	 */
 	public void stepReturn() throws DebugException {
 		// TODO Auto-generated method stub
@@ -296,7 +299,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final boolean supportsBreakpoint(final IBreakpoint breakpoint) {
 		// Support a breakpoint if its debug model equals the Worthwhile debug model
 		// and it is set in the program we are currently executing.
-		if (IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL.equals(breakpoint.getModelIdentifier())) {
+		if (ID_WORTHWHILE_DEBUG_MODEL.equals(breakpoint.getModelIdentifier())) {
 			IMarker marker = breakpoint.getMarker();
 			// TODO
 		}
@@ -350,8 +353,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	public final String getSourceName() {
 		try {
-			Path path = new Path(this.launch.getLaunchConfiguration().getAttribute(
-			                IWorthwhileLaunchConfigurationConstants.ATTR_PATH, ""));
+			Path path = new Path(this.launch.getLaunchConfiguration().getAttribute(ATTR_PATH, ""));
 			return path.lastSegment();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
@@ -368,7 +370,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                 if unable to perform the request
 	 */
 	protected final IStackFrame[] getStackFrames() throws DebugException {
-		return new IStackFrame[] { new WorthwhileStackFrame(this, this.getEventListener().getCurrentNode()) };
+		return new IStackFrame[] { new WorthwhileStackFrame(this, this.thread,
+		                this.eventListener.getCurrentNode()) };
 	}
 
 	/**

@@ -8,7 +8,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
 
 /**
  * The implementation of a line breakpoint that the Worthwhile debugger uses.
@@ -63,7 +63,7 @@ public class WorthwhileLineBreakpoint extends LineBreakpoint {
 
 	@Override
 	public final String getModelIdentifier() {
-		return IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+		return ID_WORTHWHILE_DEBUG_MODEL;
 	}
 
 }

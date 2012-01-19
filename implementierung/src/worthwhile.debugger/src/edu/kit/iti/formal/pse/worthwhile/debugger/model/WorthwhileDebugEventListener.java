@@ -9,7 +9,6 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
@@ -70,7 +69,19 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 */
 	private Map<Integer, IBreakpoint> breakpoints;
 
+	/**
+	 * The node currently being executed.
+	 */
 	private ASTNode currentNode;
+	
+	/**
+	 * Returns the node currently being executed.
+	 * 
+	 * @return the node currently being executed.
+	 */
+	public final ASTNode getCurrentNode() {
+		return this.currentNode;
+	}
 
 	/**
 	 * Creates a new instance of the {@link WorthwhileDebugEventListener} class.
@@ -151,7 +162,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			int lineNumber = NodeHelper.getLine(statement);
 			if (!this.mode.equals(DebugMode.RUN) && this.breakpoints.containsKey(lineNumber)) {
 				// TODO breakpoint condition
-				
+
 				// Notify the debug target that a breakpoint has been hit
 				this.getDebugTarget().breakpointHit(this.breakpoints.get(lineNumber));
 
@@ -237,10 +248,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 */
 	public final void terminate() {
 		this.mode = DebugMode.TERMINATED;
-	}
-
-	public ASTNode getCurrentNode() {
-		return this.currentNode;
 	}
 
 }

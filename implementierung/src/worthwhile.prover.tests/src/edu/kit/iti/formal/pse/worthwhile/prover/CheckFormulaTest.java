@@ -256,7 +256,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void equalTransitiveFreeVariables() {
-		Expression expr = getExpression("!(x = y && y = z) || x = z");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x = y && y = z) || x = z");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -265,7 +265,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void implicationNotOrEquivalence() {
-		Expression expr = getExpression("(!x || y) = (!x || y)");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : (!x || y) = (!x || y)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -274,7 +274,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void notAndNotOrDeMorganEquivalence() {
-		Expression expr = getExpression("!(x || y) = !x && !y");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x || y) = !x && !y");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -283,7 +283,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void notOrNotAndDeMorganEquivalence() {
-		Expression expr = getExpression("!(x && y) = !x || !y");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x && y) = !x || !y");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -292,7 +292,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void andOrDistributivity() {
-		Expression expr = getExpression("(x && (y || z)) = (x && y || x && z)");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x && (y || z)) = (x && y || x && z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -301,7 +301,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void orAndDistributivity() {
-		Expression expr = getExpression("x || (y && z) = (x || y) && (x || z)");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : x || (y && z) = (x || y) && (x || z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -310,7 +310,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void orAssociativity() {
-		Expression expr = getExpression("(x || (y || z)) = ((x || y) || z)");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x || (y || z)) = ((x || y) || z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -319,7 +319,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void andAssociativity() {
-		Expression expr = getExpression("(x && (y && z)) = ((x && y) && z)");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x && (y && z)) = ((x && y) && z)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -328,7 +328,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void vectorSpaceNeutralNeutralDistributivity() {
-		Expression expr = getExpression("x + x = 2 * x");
+		Expression expr = getExpression("forall Integer x : x + x = 2 * x");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -337,7 +337,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void groupInverseAdditionEqualityTransformation() {
-		Expression expr = getExpression("(x = x - 1) = (x + 1 = x)");
+		Expression expr = getExpression("forall Integer x : (x = x - 1) = (x + 1 = x)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 

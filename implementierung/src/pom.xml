@@ -90,6 +90,8 @@
                     <pde>true</pde>
                     <sourceIncludes>
                         <sourceInclude>edu/kit/iti/formal/pse/worthwhile/Worthwhile.xmi</sourceInclude>
+			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/parser/antlr/internal/InternalWorthwhile.tokens</sourceInclude>
+			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/parser/antlr/internal/InternalWorthwhile.g</sourceInclude>
                     </sourceIncludes>
                 </configuration>
             </plugin>

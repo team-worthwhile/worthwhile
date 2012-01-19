@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 
 import de.itemis.xtext.typesystem.ITypesystem;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
@@ -35,7 +36,7 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 		ValidatorASTNodeVisitor validatorASTNodeVisitor = new ValidatorASTNodeVisitor();
 		validatorASTNodeVisitor.visit(functionDeclaration);
 		if (!validatorASTNodeVisitor.getValidReturnFound()) {
-			error("Function has no valid return statement.", null);
+			error("Function has no valid return statement.", functionDeclaration, AstPackage.eINSTANCE.getFunctionDeclaration_Name(), 0);
 		}
 	}
 

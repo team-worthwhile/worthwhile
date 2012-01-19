@@ -2,9 +2,11 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -15,6 +17,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
@@ -36,6 +39,11 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 * The stack of weakest preconditions that implies the correctness of the remainder {@link Block}.
 	 */
 	private Stack<Expression> weakestPreconditionStack;
+
+	/**
+	 * The postcondition when visitor is inside an {@link FunctionDeclaration}.
+	 */
+	private Expression postcondition;
 
 	/**
 	 * Construct a new weakest precondition strategy object.
@@ -234,9 +242,63 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final FunctionDeclaration functionDeclaration) {
-		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
+		// the factory used to create ASTNodes in the following
+		AstFactory model = AstFactory.init();
+
+		BooleanLiteral trueLiteral = model.createBooleanLiteral();
 		trueLiteral.setValue(true);
-		this.weakestPreconditionStack.push(trueLiteral);
+
+		List<List<? extends Annotation>> lists = new ArrayList<List<? extends Annotation>>();
+		lists.add(functionDeclaration.getPreconditions());
+		lists.add(functionDeclaration.getPostconditions());
+
+		for (List<? extends Annotation> l : lists) {
+			if (l.isEmpty()) {
+				this.weakestPreconditionStack.push(AstNodeCloneHelper.clone(trueLiteral));
+			} else {
+				Expression conjunction;
+
+				Iterator<? extends Annotation> i = l.iterator();
+				conjunction = AstNodeCloneHelper.clone(i.next().getExpression());
+				while (i.hasNext()) {
+					Conjunction c = model.createConjunction();
+					c.setLeft(conjunction);
+					c.setRight(AstNodeCloneHelper.clone(i.next().getExpression()));
+					conjunction = c;
+				}
+
+				this.weakestPreconditionStack.push(conjunction);
+			}
+		}
+
+		this.postcondition = this.weakestPreconditionStack.peek();
+
+		// postconditions conjunction is on top of weakestPreconditionStack
+		functionDeclaration.getBody().accept(this);
+
+		this.postcondition = null;
+
+		// build the weakest precondition for this function: preconditions => wp(body, postconditions)
+		Implication implication = model.createImplication();
+
+		// pops body weakest precondition wp(body, postconditions)
+		implication.setRight(this.weakestPreconditionStack.pop());
+
+		// pops preconditions conjunction
+		implication.setLeft(this.weakestPreconditionStack.pop());
+
+		Expression wp = implication;
+
+		final FreshVariableSetVisitor freshVariableSet = new FreshVariableSetVisitor();
+		wp.accept(freshVariableSet);
+
+		for (final VariableDeclaration v : freshVariableSet.getVariableMap().values()) {
+			ForAllQuantifier forall = model.createForAllQuantifier();
+			forall.setParameter(v);
+			forall.setExpression(wp);
+			wp = forall;
+		}
+		this.weakestPreconditionStack.push(wp);
 	}
 
 	/**
@@ -399,10 +461,14 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final ReturnStatement returnStatement) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		final Expression returnValue = returnStatement.getReturnValue();
 
-		// end-user-code
+		this.weakestPreconditionStack.pop();
+
+		Expression postcondition = AstNodeCloneHelper.clone(this.postcondition);
+		postcondition = ReturnValueReferenceSubstitution.substitute(postcondition, returnValue);
+
+		this.weakestPreconditionStack.push(postcondition);
 	}
 
 	/**

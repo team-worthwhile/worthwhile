@@ -9,11 +9,13 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 
@@ -54,6 +56,7 @@ public final class TransformProgramTest {
 	 * The {@link FormulaGenerator} implementation to test.
 	 */
 	private FormulaGenerator transformer = new WPStrategy();
+	private AstFactory model = AstFactory.init();
 
 	/**
 	 * Asserts equality of an expected and actual {@link ASTNode} result.
@@ -167,5 +170,69 @@ public final class TransformProgramTest {
 		String resultString = AstNodeToStringHelper.toString(result);
 
 		Assert.assertEquals(expectedResultString, resultString);
+	}
+
+	/**
+	 * Test the transformation of {@link FunctionDeclaration}s.
+	 */
+	@Test
+	public void functionDeclarationRule() {
+		Program p = this.getProgram("function Integer max(Integer a, Integer b)\n"
+		                + "_ensures _return = a || _return = b\n_ensures _return >= a && _return >= b\n"
+		                + "{\nif (a > b) {\nreturn a\n}\nreturn b\n}\n");
+		Expression result = this.transformer.transformProgram(p);
+
+		// some implications are specified as conjunctions because they cannot be parsed
+		Expression expected = this.getExpression("(forall Integer a : forall Integer b : true && "
+		                + "(((a > b) && ((a = a || a = b) && (a >= a && a >= b))) "
+		                + "&& (!(a > b) && true))) && true");
+
+		Assert.assertTrue(expected instanceof Conjunction);
+		BinaryExpression binary = (BinaryExpression) expected;
+		Assert.assertTrue(binary.getLeft() instanceof QuantifiedExpression);
+		QuantifiedExpression quantifier = (QuantifiedExpression) binary.getLeft();
+		Assert.assertTrue(quantifier.getExpression() instanceof QuantifiedExpression);
+		quantifier = (QuantifiedExpression) quantifier.getExpression();
+		Assert.assertTrue(quantifier.getExpression() instanceof Conjunction);
+
+		// the first implication: precondition => wp(body, postcondition)
+		binary = (BinaryExpression) quantifier.getExpression();
+		Implication implication = model.createImplication();
+		Expression left = binary.getLeft();
+		binary.setLeft(null);
+		implication.setLeft(left);
+		Expression right = binary.getRight();
+		binary.setRight(null);
+		implication.setRight(right);
+		quantifier.setExpression(implication);
+
+		Assert.assertTrue(implication.getRight() instanceof Conjunction);
+		Conjunction conjunction = (Conjunction) implication.getRight();
+
+		// the second implication: a > b => (a = a || a = b) && (a >= a && a >= b)
+		Assert.assertTrue(conjunction.getLeft() instanceof Conjunction);
+		binary = (BinaryExpression) conjunction.getLeft();
+		implication = model.createImplication();
+		left = binary.getLeft();
+		binary.setLeft(null);
+		implication.setLeft(left);
+		right = binary.getRight();
+		binary.setRight(null);
+		implication.setRight(right);
+		conjunction.setLeft(implication);
+
+		// the third implication: !(a > b) => (b = a || b = b) && (b >= a && b >= b)
+		Assert.assertTrue(conjunction.getRight() instanceof Conjunction);
+		binary = (BinaryExpression) conjunction.getRight();
+		implication = model.createImplication();
+		left = binary.getLeft();
+		binary.setLeft(null);
+		implication.setLeft(left);
+		right = binary.getRight();
+		binary.setRight(null);
+		implication.setRight(right);
+		conjunction.setRight(implication);
+
+		TransformProgramTest.assertASTNodeEqual(expected, result);
 	}
 }

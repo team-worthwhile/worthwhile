@@ -54,6 +54,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -279,25 +280,49 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Assertion assertion) {
-		// TODO Auto-generated method stub
+		try {
+			// TODO Auto-generated method stub
+		}
+		catch (StatementException e) {
+			this.executionFailed(assertion, e.getError());
+			return;
+		}
 		this.assertionSucceeded(assertion);
 		this.statementExecuted(assertion);
 	}
 
 	public void visit(Assignment assignment) {
 		this.statementWillExecute(assignment);
-		assignment.getValue().accept(this);
-		symbolStack.peek().put(assignment.getVariable().getVariable().getName(), resultStack.pop());
+		try {
+			assignment.getValue().accept(this);
+			symbolStack.peek().put(assignment.getVariable().getVariable().getName(), resultStack.pop());
+		}
+		catch (StatementException e) {
+			this.executionFailed(assignment, e.getError());
+			return;
+		}
 		this.statementExecuted(assignment);
 	}
 
 	public void visit(Assumption assumption) {
-		// TODO Auto-generated method stub
+		try {
+			// TODO Auto-generated method stub
+		}
+		catch (StatementException e) {
+			this.executionFailed(assumption, e.getError());
+			return;
+		}
 		this.statementExecuted(assumption);
 	}
 
 	public void visit(Axiom axiom) {
-		// TODO Auto-generated method stub
+		try {
+			// TODO Auto-generated method stub
+		}
+		catch (StatementException e) {
+			this.executionFailed(axiom, e.getError());
+			return;
+		}
 		this.statementExecuted(axiom);
 	}
 
@@ -323,11 +348,17 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Conditional conditional) {
 		this.statementWillExecute(conditional);
-		conditional.getCondition().accept(this);
-		if (this.resultStack.pop().getBooleanValue()) {
-			conditional.getTrueBlock().accept(this);
-		} else {
-			conditional.getFalseBlock().accept(this);
+		try {
+			conditional.getCondition().accept(this);
+			if (this.resultStack.pop().getBooleanValue()) {
+				conditional.getTrueBlock().accept(this);
+			} else {
+				conditional.getFalseBlock().accept(this);
+			}
+		}
+		catch (StatementException e) {
+			this.executionFailed(conditional, e.getError());
+			return;
 		}
 		this.statementExecuted(conditional);
 	}
@@ -351,13 +382,17 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Division division) {
-		// TODO handle division by zero
 		division.getLeft().accept(this);
 		Value left = this.resultStack.pop();
 		division.getRight().accept(this);
 		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getIntegerValue().divide(right.getIntegerValue())));
-		this.expressionEvaluated(division);
+		if (right.getIntegerValue().equals(BigInteger.ZERO)) {
+			throw new StatementException(new DivisionByZeroInterpreterError());
+		}
+		else {
+			this.resultStack.push(new Value(left.getIntegerValue().divide(right.getIntegerValue())));
+			this.expressionEvaluated(division);
+		}
 	}
 
 	public void visit(Equal equal) {
@@ -393,6 +428,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(FunctionCall functionCall) {
+		//TODO incorporate pre/postconditions
 		InterpreterASTNodeVisitor functionVisitor = new InterpreterASTNodeVisitor();
 		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		FunctionDeclaration functionDeclaration = functionCall.getFunction();
@@ -449,7 +485,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Invariant invariant) {
-		// TODO Auto-generated method stub
+		try {
+			// TODO Auto-generated method stub
+		}
+		catch (StatementException e) {
+			this.executionFailed(invariant, e.getError());
+			return;
+		}
 		this.statementExecuted(invariant);
 	}
 
@@ -474,10 +516,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(Loop loop) {
 		// TODO incorporate invariant
 		this.statementWillExecute(loop);
-		loop.getCondition().accept(this);
-		while (this.resultStack.pop().getBooleanValue()) {
-			loop.getBody().accept(this);
+		try {
 			loop.getCondition().accept(this);
+			while (this.resultStack.pop().getBooleanValue()) {
+				loop.getBody().accept(this);
+				loop.getCondition().accept(this);
+			}
+		}
+		catch (StatementException e) {
+			this.executionFailed(loop, e.getError());
+			return;
 		}
 		this.statementExecuted(loop);
 	}
@@ -488,13 +536,17 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Modulus modulus) {
-		// TODO handle modulo by zero
 		modulus.getLeft().accept(this);
 		Value left = this.resultStack.pop();
 		modulus.getRight().accept(this);
 		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getIntegerValue().mod(right.getIntegerValue())));
-		this.expressionEvaluated(modulus);
+		if (right.getIntegerValue().equals(BigInteger.ZERO)) {
+			throw new StatementException(new DivisionByZeroInterpreterError());
+		}
+		else {
+			this.resultStack.push(new Value(left.getIntegerValue().mod(right.getIntegerValue())));
+			this.expressionEvaluated(modulus);
+		}
 	}
 
 	public void visit(Multiplication multiplication) {
@@ -522,32 +574,46 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Postcondition postcondition) {
-		// TODO Auto-generated method stub
+		try {
+			// TODO Auto-generated method stub
+		}
+		catch (StatementException e) {
+			this.executionFailed(postcondition, e.getError());
+			return;
+		}
 		this.statementExecuted(postcondition);
 	}
 
 	public void visit(Precondition precondition) {
-		// TODO Auto-generated method stub
+		try {
+			// TODO Auto-generated method stub
+		}
+		catch (StatementException e) {
+			this.executionFailed(precondition, e.getError());
+			return;
+		}
 		this.statementExecuted(precondition);
 	}
 
 	public void visit(Program program) {
-		// TODO FIX THIS
-		/*
-		 * EList<FunctionDeclaration> functionDeclarations = program.getFunctionDeclarations(); for
-		 * (FunctionDeclaration functionDeclaration : functionDeclarations) { functionDeclaration.accept(this);
-		 * }
-		 */
 		this.executionStarted();
 		program.getMainBlock().accept(this);
 		this.executionCompleted();
 	}
 
 	public void visit(ReturnStatement returnStatement) {
-		// TODO Auto-generated method stub
 		this.statementWillExecute(returnStatement);
-		returnStatement.getReturnValue().accept(this);
+		try {
+			returnStatement.getReturnValue().accept(this);
+		}
+		catch (StatementException e) {
+			this.executionFailed(returnStatement, e.getError());
+			return;
+		}
 		this.statementExecuted(returnStatement);
+	}
+	
+	public void visit(ReturnValueReference returnValueReference) {
 	}
 
 	public void visit(Subtraction subtraction) {
@@ -574,21 +640,28 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(VariableDeclaration variableDeclaration) {
 		this.statementWillExecute(variableDeclaration);
-		if (variableDeclaration.getInitialValue() != null) {
-			variableDeclaration.getInitialValue().accept(this);
-			this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
+		try {
+			if (variableDeclaration.getInitialValue() != null) {
+				variableDeclaration.getInitialValue().accept(this);
+				this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
+			}
+			else {
+				if (variableDeclaration.getType().getClass().equals(ArrayType.class)) {
+					//TODO arrays
+					//if(variableDeclaration.getType().)
+					//this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
+				}
+				else if (variableDeclaration.getType().getClass().equals(BooleanType.class)) {
+					this.setSymbol(variableDeclaration.getName(), new Value(false));
+				}
+				else if (variableDeclaration.getType().getClass().equals(IntegerType.class)) {
+					this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
+				}
+			}
 		}
-		else {
-			if (variableDeclaration.getType().getClass().equals(ArrayType.class)) {
-				//if(variableDeclaration.getType().)
-				//this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
-			}
-			else if (variableDeclaration.getType().getClass().equals(BooleanType.class)) {
-				this.setSymbol(variableDeclaration.getName(), new Value(false));
-			}
-			else if (variableDeclaration.getType().getClass().equals(IntegerType.class)) {
-				this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
-			}
+		catch (StatementException e) {
+			this.executionFailed(variableDeclaration, e.getError());
+			return;
 		}
 		this.statementExecuted(variableDeclaration);
 	}

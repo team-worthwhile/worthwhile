@@ -90,7 +90,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	}
 
 	/**
-	 * Push a compiled {@link UnaryExpression} to the stack
+	 * Push a compiled {@link UnaryExpression} to the stack.
 	 * 
 	 * @param unaryExpression
 	 *                the {@link UnaryExpression} to compile

@@ -10,28 +10,41 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 
-public final class FormulaCompilerTest {
+/**
+ * Test SMTLIBStrategy for proper compilation of formulas to SMTLIB syntax.
+ * 
+ * @author Leon Handreke
+ */
+public final class SMTLIBStrategyTest {
 
+	/**
+	 * The compiler to use for testing.
+	 */
 	private FormulaCompiler compiler;
 
 	/**
-	 * Set up the compiler to test in the tests
+	 * Set up the compiler to test with before running the tests.
 	 */
 	@Before
 	public void setUp() {
 		this.compiler = new SMTLIBStrategy();
 	}
 
+	/**
+	 * Test the proper compilation of a simple formula.
+	 */
 	@Test
-	public void testSimpleTrueFormulaCompilation() {
+	public void simpleLiteralOnlyFormula() {
 		Expression formula = TestASTProvider.getTestFormula();
 		Assert.assertNotNull(formula);
-		String s = this.compiler.compileFormula(formula);
-		Assert.assertNotNull(s);
+		String compiled = this.compiler.compileFormula(formula);
+		String expectedCompiled = "(assert (and (and (or (not false) (= (mod 9 4) 1)) true) (= (+ 3 3) 6)))\n"
+		                + "(check-sat)";
+		Assert.assertEquals(expectedCompiled, compiled);
 	}
 
 	/**
-	 * Test the compilation of a formula with unbound variables
+	 * Test the compilation of a formula with unbound variables.
 	 */
 	@Test
 	public void unboundVariable() {

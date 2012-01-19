@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 /**
@@ -8,5 +5,16 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  * for all possible interpretations.
  */
 public enum Validity {
-	VALID, INVALID, UNKNOWN
+	/**
+	 * Indicates validity.
+	 */
+	VALID,
+	/**
+	 * Indicates invalidity.
+	 */
+	INVALID,
+	/**
+	 * Indicates unknown validity.
+	 */
+	UNKNOWN
 }

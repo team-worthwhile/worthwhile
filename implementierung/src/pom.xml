@@ -18,7 +18,6 @@
         <module>worthwhile.interpreter.tests</module>
         <module>worthwhile.prover.tests</module>
         <module>worthwhile.common.tests</module>
-        <module>worthwhile.product</module>
     </modules>
     <repositories>
         <repository>

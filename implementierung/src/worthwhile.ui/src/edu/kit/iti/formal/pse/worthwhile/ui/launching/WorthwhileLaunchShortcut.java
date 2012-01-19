@@ -1,5 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
+import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.LAUNCH_CONFIG_TYPE;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugPlugin;
@@ -11,8 +14,6 @@ import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
-
-import edu.kit.iti.formal.pse.worthwhile.debugger.launching.IWorthwhileLaunchConfigurationConstants;
 
 /**
  * Provides a shortcut to launch a Worthwhile program from a selection or from the editor.
@@ -46,7 +47,7 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 		// Get the launch configuration type from the launch manager
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType launchConfigurationType = launchManager
-		                .getLaunchConfigurationType(IWorthwhileLaunchConfigurationConstants.LAUNCH_CONFIG_TYPE);
+		                .getLaunchConfigurationType(LAUNCH_CONFIG_TYPE);
 		final String launchConfigurationName = file.getFullPath().toString().replace("/", "_");
 
 		try {
@@ -64,8 +65,7 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 			// Create a new instance of the launch configuration type and set the path to the file.
 			ILaunchConfigurationWorkingCopy workingCopy = launchConfigurationType.newInstance(null,
 			                launchConfigurationName);
-			workingCopy.setAttribute(IWorthwhileLaunchConfigurationConstants.ATTR_PATH, file.getFullPath()
-			                .toString());
+			workingCopy.setAttribute(ATTR_PATH, file.getFullPath().toString());
 
 			// Create a new launchable configuration and launch it.
 			ILaunchConfiguration launchConfiguration = workingCopy.doSave();

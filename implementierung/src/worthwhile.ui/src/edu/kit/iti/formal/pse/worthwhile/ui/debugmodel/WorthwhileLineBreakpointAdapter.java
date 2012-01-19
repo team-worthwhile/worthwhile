@@ -10,7 +10,7 @@ import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.IWorthwhileDebugConstants;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileLineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
 
@@ -28,7 +28,7 @@ public class WorthwhileLineBreakpointAdapter implements IToggleBreakpointsTarget
 			ITextSelection textSelection = (ITextSelection) selection;
 			int lineNumber = textSelection.getStartLine();
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
-			                .getBreakpoints(IWorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL);
+			                .getBreakpoints(ID_WORTHWHILE_DEBUG_MODEL);
 			for (int i = 0; i < breakpoints.length; i++) {
 				IBreakpoint breakpoint = breakpoints[i];
 				if (resource.equals(breakpoint.getMarker().getResource())) {

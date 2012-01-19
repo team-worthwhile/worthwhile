@@ -103,44 +103,45 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final boolean canTerminate() {
-		return !this.getEventListener().getMode().equals(DebugMode.TERMINATED);
+		return !this.eventListener.getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final boolean isTerminated() {
-		return this.getEventListener().getMode().equals(DebugMode.TERMINATED);
+		return this.eventListener.getMode().equals(DebugMode.TERMINATED);
 	}
 
 	@Override
 	public final void terminate() throws DebugException {
-		this.getEventListener().terminate();
+		this.eventListener.terminate();
+		this.interpreterRunner.cancel();
 	}
 
 	@Override
 	public final boolean canResume() {
-		return !this.getEventListener().getMode().equals(DebugMode.TERMINATED)
-		                && this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return !this.eventListener.getMode().equals(DebugMode.TERMINATED)
+		                && this.eventListener.getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean canSuspend() {
-		return !this.getEventListener().getMode().equals(DebugMode.TERMINATED)
-		                && !this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return !this.eventListener.getMode().equals(DebugMode.TERMINATED)
+		                && !this.eventListener.getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final boolean isSuspended() {
-		return this.getEventListener().getMode().equals(DebugMode.SUSPENDED);
+		return this.eventListener.getMode().equals(DebugMode.SUSPENDED);
 	}
 
 	@Override
 	public final void resume() throws DebugException {
-		this.getEventListener().resume();
+		this.eventListener.resume();
 	}
 
 	@Override
 	public final void suspend() throws DebugException {
-		this.getEventListener().suspend();
+		this.eventListener.suspend();
 	}
 
 	/**
@@ -176,8 +177,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @return whether we are currently in stepping mode.
 	 */
 	public final boolean isStepping() {
-		return this.getEventListener().getMode().equals(DebugMode.STEP)
-		                || this.getEventListener().getMode().equals(DebugMode.STEP_OVER);
+		return this.eventListener.getMode().equals(DebugMode.STEP)
+		                || this.eventListener.getMode().equals(DebugMode.STEP_OVER);
 	}
 
 	/**
@@ -186,8 +187,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @throws DebugException
 	 *                 when the desired operation cannot be performed.
 	 */
-	public void stepInto() throws DebugException {
-		// TODO Auto-generated method stub
+	public final void stepInto() throws DebugException {
+		this.eventListener.stepInto();
 	}
 
 	/**
@@ -197,7 +198,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                 when the desired operation cannot be performed.
 	 */
 	public void stepOver() throws DebugException {
-		// TODO Auto-generated method stub
+		this.eventListener.stepOver();
 	}
 
 	/**

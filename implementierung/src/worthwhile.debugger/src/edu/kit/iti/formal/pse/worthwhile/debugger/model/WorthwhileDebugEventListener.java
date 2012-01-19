@@ -250,4 +250,12 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		this.mode = DebugMode.TERMINATED;
 	}
 
+	/**
+	 * Steps over the current statement.
+	 */
+	public void stepOver() {
+	        // TODO Auto-generated method stub
+	        
+        }
+
 }

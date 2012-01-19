@@ -18,6 +18,7 @@
         <module>worthwhile.interpreter.tests</module>
         <module>worthwhile.prover.tests</module>
         <module>worthwhile.common.tests</module>
+        <module>worthwhile.product</module>
     </modules>
     <repositories>
         <repository>
@@ -71,6 +72,9 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <excludes>
+                        <exclude>**/package-info.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>

@@ -98,13 +98,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 *
 	 */
-	private Stack<Map<String, Value>> symbolStack = new Stack<Map<String, Value>>();
+	private Stack<Map<VariableDeclaration, Value>> symbolStack = new Stack<Map<VariableDeclaration, Value>>();
 
 	/**
 	 * @param key
 	 * @return
 	 */
-	protected Value getSymbol(String key) {
+	protected Value getSymbol(VariableDeclaration key) {
 		Value temp = null;
 		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take the 'nice' variant here because
 			                                                 // I want to start at the top of the stack
@@ -117,17 +117,32 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * Get the value of a symbol by its name
+	 * @param key the name of the Symbol to look up the value for
+	 * @return the current value of the Symbol or null if no such symbol exists
+	 */
+	protected Value getSymbol(String key) {
+		for (VariableDeclaration declaration : this.getAllSymbols().keySet()) {
+			if (declaration.getName().equals(key)) {
+				return this.getSymbol(declaration);
+			}
+		}
+		// no such symbol
+		return null;
+	}
+
+	/**
 	 * @param key
 	 * @param value
 	 */
-	protected void setSymbol(String key, Value value) {
+	protected void setSymbol(VariableDeclaration key, Value value) {
 		this.symbolStack.peek().put(key, value);
 	}
 
 	/**
 	 * @return
 	 */
-	protected Map<String, Value> getAllSymbols() {
+	protected Map<VariableDeclaration, Value> getAllSymbols() {
 		return this.symbolStack.peek();
 	}
 
@@ -293,7 +308,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(assignment);
 		try {
 			assignment.getValue().accept(this);
-			symbolStack.peek().put(assignment.getVariable().getVariable().getName(), resultStack.pop());
+			symbolStack.peek().put(assignment.getVariable().getVariable(), resultStack.pop());
 		} catch (StatementException e) {
 			this.executionFailed(assignment, e.getError());
 			return;
@@ -322,7 +337,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Block block) {
-		Map<String, Value> symbolMap = new HashMap<String, Value>();
+		Map<VariableDeclaration, Value> symbolMap = new HashMap<VariableDeclaration, Value>();
 		this.symbolStack.push(symbolMap);
 		EList<Statement> statements = block.getStatements();
 		for (Statement statement : statements) {
@@ -428,7 +443,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		EList<Expression> actuals = functionCall.getActuals();
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
-			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i).getName(),
+			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i),
 			                this.resultStack.pop());
 		}
 		functionDeclaration.getBody().accept(functionVisitor);
@@ -629,24 +644,24 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		try {
 			if (variableDeclaration.getInitialValue() != null) {
 				variableDeclaration.getInitialValue().accept(this);
-				this.setSymbol(variableDeclaration.getName(), this.resultStack.pop());
+				this.setSymbol(variableDeclaration, this.resultStack.pop());
 			} else {
 				if (variableDeclaration.getType() instanceof ArrayType) {
 					((ArrayType) variableDeclaration.getType()).getSize().accept(this);
 					if (((ArrayType) variableDeclaration.getType()).getBaseType() instanceof BooleanType) {
 
-						this.setSymbol(variableDeclaration.getName(), new Value(
+						this.setSymbol(variableDeclaration, new Value(
 						                new Boolean[resultStack.pop().getIntegerValue()
 						                                .intValue()]));
 					} else {
-						this.setSymbol(variableDeclaration.getName(), new Value(
+						this.setSymbol(variableDeclaration, new Value(
 						                new BigInteger[resultStack.pop().getIntegerValue()
 						                                .intValue()]));
 					}
 				} else if (variableDeclaration.getType() instanceof BooleanType) {
-					this.setSymbol(variableDeclaration.getName(), new Value(Boolean.FALSE));
+					this.setSymbol(variableDeclaration, new Value(Boolean.FALSE));
 				} else {
-					this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
+					this.setSymbol(variableDeclaration, new Value(BigInteger.ZERO));
 				}
 			}
 		} catch (StatementException e) {
@@ -657,7 +672,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(VariableReference variableReference) {
-		this.resultStack.push(this.getSymbol(variableReference.getVariable().getName()));
+		this.resultStack.push(this.getSymbol(variableReference.getVariable()));
 		this.expressionEvaluated(variableReference);
 	}
 }

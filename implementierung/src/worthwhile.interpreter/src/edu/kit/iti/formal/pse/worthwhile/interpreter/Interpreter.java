@@ -6,11 +6,11 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /** 
  * 
@@ -156,6 +156,15 @@ public class Interpreter {
 	 * @param key
 	 * @return
 	 */
+	public Value getSymbol(VariableDeclaration key) {
+		return this.currentNodeVisitor.getSymbol(key);
+	}
+
+	/**
+	 * Get the value of a symbol by its name
+	 * @param key the name of the Symbol to look up the value for
+	 * @return the current value of the Symbol or null if no such symbol exists
+	 */
 	public Value getSymbol(String key) {
 		return this.currentNodeVisitor.getSymbol(key);
 	}
@@ -164,14 +173,14 @@ public class Interpreter {
 	 * @param key
 	 * @param value
 	 */
-	public void setSymbol(String key, Value value) {
+	public void setSymbol(VariableDeclaration key, Value value) {
 		this.currentNodeVisitor.setSymbol(key, value);
 	}
 
 	/**
 	 * @return
 	 */
-	public Map<String, Value> getAllSymbols() {
+	public Map<VariableDeclaration, Value> getAllSymbols() {
 		return this.currentNodeVisitor.getAllSymbols();
 	}
 }

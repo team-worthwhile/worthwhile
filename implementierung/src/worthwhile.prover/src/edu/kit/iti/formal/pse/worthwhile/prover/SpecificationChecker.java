@@ -22,7 +22,7 @@ public class SpecificationChecker {
 	/**
 	 * @return the timeout
 	 */
-	public Integer getTimeout() {
+	public final Integer getTimeout() {
 		return this.timeout;
 	}
 
@@ -30,7 +30,7 @@ public class SpecificationChecker {
 	 * @param timeout
 	 *            the timeout to set, zero when negative
 	 */
-	public void setTimeout(final Integer timeout) {
+	public final void setTimeout(final Integer timeout) {
 		if (timeout < 0) {
 			this.timeout = 0;
 		} else {
@@ -53,7 +53,7 @@ public class SpecificationChecker {
 	/**
 	 * @return the transformer
 	 */
-	public FormulaGenerator getTransformer() {
+	public final FormulaGenerator getTransformer() {
 		return this.transformer;
 	}
 
@@ -61,7 +61,7 @@ public class SpecificationChecker {
 	 * @param transformer
 	 *            the transformer to set
 	 */
-	public void setTransformer(final FormulaGenerator transformer) {
+	public final void setTransformer(final FormulaGenerator transformer) {
 		this.transformer = transformer;
 	}
 
@@ -73,7 +73,7 @@ public class SpecificationChecker {
 	/**
 	 * @return the checkResult
 	 */
-	public ProverResult getCheckResult() {
+	public final ProverResult getCheckResult() {
 		return this.checkResult;
 	}
 
@@ -100,7 +100,7 @@ public class SpecificationChecker {
 	 * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
 	 */
 	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
-	public Validity checkFormula(final Expression formula, final Map<String, Value> environment) {
+	public final Validity checkFormula(final Expression formula, final Map<String, Value> environment) {
 		// TODO apply Worthwhile specific runtime assertions
 		// TODO apply axiom list
 		// TODO apply environment
@@ -152,7 +152,7 @@ public class SpecificationChecker {
 	 *            the {@link Program} to check
 	 * @return the {@link Validity} of <code>program</code>
 	 */
-	public Validity checkProgram(final Program program) {
+	public final Validity checkProgram(final Program program) {
 		// TODO apply Worthwhile specific runtime assertions
 
 		// generate formula from program

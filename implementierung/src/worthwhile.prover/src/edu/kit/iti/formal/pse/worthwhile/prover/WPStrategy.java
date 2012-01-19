@@ -89,22 +89,13 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final Assignment assignment) {
-		VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
-		this.weakestPreconditionStack.peek().accept(
-		                new VariableSubstitution(variableDeclaration, assignment.getValue(),
-		                                new VariableSubstitution.SubstituteCommand() {
-			                                @Override
-			                                void substitute() {
-				                                /*
-								 * In case the current postcondition only consists of a
-								 * VariableReference that has to be replaced, substitute
-								 * it directly
-								 */
-				                                WPStrategy.this.weakestPreconditionStack.pop();
-				                                WPStrategy.this.weakestPreconditionStack.push(AstNodeCloneHelper
-				                                                .clone(assignment.getValue()));
-			                                }
-		                                }));
+		final Expression value = assignment.getValue();
+		final VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();
+
+		Expression wp = this.weakestPreconditionStack.pop();
+		wp = VariableReferenceSubstitution.substitute(wp, variableDeclaration, value);
+
+		this.weakestPreconditionStack.push(wp);
 	}
 
 	/**
@@ -422,21 +413,12 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
-		this.weakestPreconditionStack.peek().accept(
-		                new VariableSubstitution(variableDeclaration, variableDeclaration.getInitialValue(),
-		                                new VariableSubstitution.SubstituteCommand() {
-			                                @Override
-			                                void substitute() {
-				                                /*
-								 * In case the current postcondition only consists of a
-								 * VariableReference that has to be replaced, substitute
-								 * it directly
-								 */
-				                                WPStrategy.this.weakestPreconditionStack.pop();
-				                                WPStrategy.this.weakestPreconditionStack.push(AstNodeCloneHelper
-				                                                .clone(variableDeclaration
-				                                                                .getInitialValue()));
-			                                }
-		                                }));
+		// TODO treat missing initial value
+		final Expression initialValue = variableDeclaration.getInitialValue();
+
+		Expression wp = this.weakestPreconditionStack.pop();
+		wp = VariableReferenceSubstitution.substitute(wp, variableDeclaration, initialValue);
+
+		this.weakestPreconditionStack.push(wp);
 	}
 }

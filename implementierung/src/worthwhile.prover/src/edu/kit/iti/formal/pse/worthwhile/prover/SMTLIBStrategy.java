@@ -1,10 +1,5 @@
-/**
- *
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
@@ -43,7 +38,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
@@ -52,9 +46,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
 class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
 
 	private final Stack<String> formulaCompileStack = new Stack<String>();
-
-	// TODO: use VariableDeclaration here once it's got a better equals method
-	private final Set<String> declarations = new HashSet<String>();
 
 	/**
 	 * @see FormulaCompiler#compileFormula(Expression formula)
@@ -65,9 +56,14 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		formula.accept(this);
 		String formulaString = this.formulaCompileStack.pop();
 
+		// declare unbound variables ahead of all assertions
+		UnboundVariableFinderVisitor unboundVariableFinder = new UnboundVariableFinderVisitor();
+		formula.accept(unboundVariableFinder);
 		String declarationsString = "";
-		for (String s : this.declarations) {
-			declarationsString += s + "\n";
+		for (VariableDeclaration declaration : unboundVariableFinder.getUnboundVariables()) {
+			declaration.getType().accept(this);
+			declarationsString += "(declare-const " + declaration.getName() + " "
+			                + this.formulaCompileStack.pop() + ")\n";
 		}
 
 		// wrap the formulaString in a command for the prover that tells the prover
@@ -347,7 +343,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 */
 	@Override
 	public void visit(final VariableReference variableReference) {
-		variableReference.getVariable().accept(this);
 		this.formulaCompileStack.push(variableReference.getVariable().getName());
 	}
 
@@ -388,15 +383,4 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// there is no function `!=' in SMTLIB
 		this.formulaCompileStack.push("(not (" + this.formulaCompileStack.pop() + ")");
 	}
-
-	/**
-	 * @see ASTNodeVisitor#visit(VariableDeclaration variableDeclaration)
-	 */
-	@Override
-	public void visit(final VariableDeclaration variableDeclaration) {
-		variableDeclaration.getType().accept(this);
-		this.declarations.add("(declare-const " + variableDeclaration.getName() + " "
-		                + this.formulaCompileStack.pop() + ")");
-	}
-
 }

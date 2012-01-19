@@ -1,13 +1,16 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+
 import java.math.BigInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
-import edu.kit.iti.formal.pse.worthwhile.model.ValueType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**
@@ -26,8 +29,8 @@ public class InterpreterASTNodeVisitorTest {
 	 */
 	private static void assertBooleanValueEquals(final Boolean expected, final Value actual) {
 		Assert.assertNotNull(actual);
-		Assert.assertEquals(actual.getValueType(), ValueType.BOOLEAN_TYPE);
-		Assert.assertEquals(expected, actual.getBooleanValue());
+		Assert.assertTrue(actual instanceof BooleanValue);
+		Assert.assertEquals(expected, ((BooleanValue) actual).getValue());
 	}
 
 	/**
@@ -42,8 +45,8 @@ public class InterpreterASTNodeVisitorTest {
 	 */
 	private static void assertIntegerValueEquals(final Integer expected, final Value actual) {
 		Assert.assertNotNull(actual);
-		Assert.assertEquals(actual.getValueType(), ValueType.INTEGER_TYPE);
-		Assert.assertEquals(BigInteger.valueOf(expected), actual.getIntegerValue());
+		Assert.assertTrue(actual instanceof IntegerValue);
+		Assert.assertEquals(BigInteger.valueOf(expected), ((IntegerValue) actual).getValue());
 	}
 
 	/**

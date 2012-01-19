@@ -11,8 +11,10 @@ import java.util.Stack;
 
 import org.eclipse.emf.common.util.EList;
 
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
-import edu.kit.iti.formal.pse.worthwhile.model.ValueType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
@@ -128,7 +130,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return
 	 */
 	protected Map<String, Value> getAllSymbols() {
-		return this.symbolStack.peek();
+		Map<String, Value> result = new HashMap<String, Value>();
+		for (Map<String, Value> item : this.symbolStack) {
+			result.putAll(item);
+		}
+		return result;
 	}
 
 	/**
@@ -254,12 +260,45 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		// end-user-code
 	}
 
+	/**
+	 * Pops a boolean value from the result stack. Fails the execution if there is no boolean value on the stack.
+	 * 
+	 * @return the {@link BooleanValue} that is on top of the stack.
+	 */
+	private BooleanValue popBooleanValue() {
+		synchronized (this.resultStack) {
+			if (this.resultStack.peek() instanceof BooleanValue) {
+				return (BooleanValue) this.resultStack.pop();
+			} else {
+				// TODO executionFailed
+				return null;
+			}
+		}
+	}
+
+	/**
+	 * Pops an integer value from the result stack. Fails the execution if there is no integer value on the stack.
+	 * 
+	 * @return the {@link IntegerValue} that is on top of the stack.
+	 */
+	private IntegerValue popIntegerValue() {
+		synchronized (this.resultStack) {
+			if (this.resultStack.peek() instanceof IntegerValue) {
+				return (IntegerValue) this.resultStack.pop();
+			} else {
+				// TODO executionFailed
+				return null;
+			}
+		}
+	}
+
 	public void visit(Addition addition) {
 		addition.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
+		;
 		addition.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getIntegerValue().add(right.getIntegerValue())));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new IntegerValue(left.getValue().add(right.getValue())));
 		this.expressionEvaluated(addition);
 	}
 
@@ -332,7 +371,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(BooleanLiteral booleanLiteral) {
-		this.resultStack.push(new Value(booleanLiteral.getValue()));
+		this.resultStack.push(new BooleanValue(booleanLiteral.getValue()));
 		this.expressionEvaluated(booleanLiteral);
 	}
 
@@ -345,7 +384,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(conditional);
 		try {
 			conditional.getCondition().accept(this);
-			if (this.resultStack.pop().getBooleanValue()) {
+			if (this.popBooleanValue().getValue()) {
 				conditional.getTrueBlock().accept(this);
 			} else {
 				conditional.getFalseBlock().accept(this);
@@ -359,31 +398,31 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Conjunction conjunction) {
 		conjunction.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		BooleanValue left = this.popBooleanValue();
 		conjunction.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getBooleanValue() && right.getBooleanValue()));
+		BooleanValue right = this.popBooleanValue();
+		this.resultStack.push(new BooleanValue(left.getValue() && right.getValue()));
 		this.expressionEvaluated(conjunction);
 	}
 
 	public void visit(Disjunction disjunction) {
 		disjunction.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		BooleanValue left = this.popBooleanValue();
 		disjunction.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getBooleanValue() || right.getBooleanValue()));
+		BooleanValue right = this.popBooleanValue();
+		this.resultStack.push(new BooleanValue(left.getValue() || right.getValue()));
 		this.expressionEvaluated(disjunction);
 	}
 
 	public void visit(Division division) {
 		division.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		division.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		if (right.getIntegerValue().equals(BigInteger.ZERO)) {
+		IntegerValue right = this.popIntegerValue();
+		if (right.getValue().equals(BigInteger.ZERO)) {
 			throw new StatementException(new DivisionByZeroInterpreterError());
 		} else {
-			this.resultStack.push(new Value(left.getIntegerValue().divide(right.getIntegerValue())));
+			this.resultStack.push(new IntegerValue(left.getValue().divide(right.getValue())));
 			this.expressionEvaluated(division);
 		}
 	}
@@ -393,20 +432,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		Value left = this.resultStack.pop();
 		equal.getRight().accept(this);
 		Value right = this.resultStack.pop();
-		if (left.getValueType() == ValueType.BOOLEAN_TYPE) {
-			this.resultStack.push(new Value(left.getBooleanValue() == (right.getBooleanValue())));
-		} else {
-			this.resultStack.push(new Value(left.getIntegerValue().equals(right.getIntegerValue())));
-		}
+		this.resultStack.push(new BooleanValue(left.equals(right)));
 		this.expressionEvaluated(equal);
 	}
 
 	public void visit(Equivalence equivalence) {
 		equivalence.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		BooleanValue left = this.popBooleanValue();
 		equivalence.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getBooleanValue() == right.getBooleanValue()));
+		BooleanValue right = this.popBooleanValue();
+		this.resultStack.push(new BooleanValue(left.getValue() == right.getValue()));
 		this.expressionEvaluated(equivalence);
 	}
 
@@ -442,33 +477,33 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Greater greater) {
 		greater.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		greater.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) == 1)));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) == 1)));
 		this.expressionEvaluated(greater);
 	}
 
 	public void visit(GreaterOrEqual greaterOrEqual) {
 		greaterOrEqual.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		greaterOrEqual.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) != -1)));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) != -1)));
 		this.expressionEvaluated(greaterOrEqual);
 	}
 
 	public void visit(Implication implication) {
 		implication.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		BooleanValue left = this.popBooleanValue();
 		implication.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(!(left.getBooleanValue() && !right.getBooleanValue())));
+		BooleanValue right = this.popBooleanValue();
+		this.resultStack.push(new BooleanValue(!(left.getValue() && !right.getValue())));
 		this.expressionEvaluated(implication);
 	}
 
 	public void visit(IntegerLiteral integerLiteral) {
-		this.resultStack.push(new Value(integerLiteral.getValue()));
+		this.resultStack.push(new IntegerValue(integerLiteral.getValue()));
 		this.expressionEvaluated(integerLiteral);
 	}
 
@@ -488,19 +523,19 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Less less) {
 		less.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		less.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) == -1)));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) == -1)));
 		this.expressionEvaluated(less);
 	}
 
 	public void visit(LessOrEqual lessOrEqual) {
 		lessOrEqual.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		lessOrEqual.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value((left.getIntegerValue().compareTo(right.getIntegerValue()) != 1)));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) != 1)));
 		this.expressionEvaluated(lessOrEqual);
 	}
 
@@ -509,7 +544,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(loop);
 		try {
 			loop.getCondition().accept(this);
-			while (this.resultStack.pop().getBooleanValue()) {
+			while (this.popBooleanValue().getValue()) {
 				loop.getBody().accept(this);
 				loop.getCondition().accept(this);
 			}
@@ -521,35 +556,35 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Minus minus) {
-		this.resultStack.push(new Value(this.resultStack.pop().getIntegerValue().negate()));
+		this.resultStack.push(new IntegerValue(this.popIntegerValue().getValue().negate()));
 		this.expressionEvaluated(minus);
 	}
 
 	public void visit(Modulus modulus) {
 		modulus.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		modulus.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		if (right.getIntegerValue().equals(BigInteger.ZERO)) {
+		IntegerValue right = this.popIntegerValue();
+		if (right.getValue().equals(BigInteger.ZERO)) {
 			throw new StatementException(new DivisionByZeroInterpreterError());
 		} else {
-			this.resultStack.push(new Value(left.getIntegerValue().mod(right.getIntegerValue())));
+			this.resultStack.push(new IntegerValue(left.getValue().mod(right.getValue())));
 			this.expressionEvaluated(modulus);
 		}
 	}
 
 	public void visit(Multiplication multiplication) {
 		multiplication.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		multiplication.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getIntegerValue().multiply(right.getIntegerValue())));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new IntegerValue(left.getValue().multiply(right.getValue())));
 		this.expressionEvaluated(multiplication);
 	}
 
 	public void visit(Negation negation) {
 		negation.getOperand().accept(this);
-		this.resultStack.push(new Value(!(this.resultStack.pop().getBooleanValue())));
+		this.resultStack.push(new BooleanValue(!(this.popBooleanValue().getValue())));
 		this.expressionEvaluated(negation);
 	}
 
@@ -604,10 +639,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Subtraction subtraction) {
 		subtraction.getLeft().accept(this);
-		Value left = this.resultStack.pop();
+		IntegerValue left = this.popIntegerValue();
 		subtraction.getRight().accept(this);
-		Value right = this.resultStack.pop();
-		this.resultStack.push(new Value(left.getIntegerValue().subtract(right.getIntegerValue())));
+		IntegerValue right = this.popIntegerValue();
+		this.resultStack.push(new IntegerValue(left.getValue().subtract(right.getValue())));
 		this.expressionEvaluated(subtraction);
 	}
 
@@ -616,11 +651,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		Value left = this.resultStack.pop();
 		unequal.getRight().accept(this);
 		Value right = this.resultStack.pop();
-		if (left.getValueType() == ValueType.BOOLEAN_TYPE) {
-			this.resultStack.push(new Value(!(left.getBooleanValue() == (right.getBooleanValue()))));
-		} else {
-			this.resultStack.push(new Value(!(left.getIntegerValue().equals(right.getIntegerValue()))));
-		}
+		this.resultStack.push(new BooleanValue(!(left.equals(right))));
 		this.expressionEvaluated(unequal);
 	}
 
@@ -635,18 +666,20 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 					((ArrayType) variableDeclaration.getType()).getSize().accept(this);
 					if (((ArrayType) variableDeclaration.getType()).getBaseType() instanceof BooleanType) {
 
-						this.setSymbol(variableDeclaration.getName(), new Value(
-						                new Boolean[resultStack.pop().getIntegerValue()
+						this.setSymbol(variableDeclaration.getName(),
+						                new CompositeValue<BooleanValue>(new BooleanValue[this
+						                                .popIntegerValue().getValue()
 						                                .intValue()]));
 					} else {
-						this.setSymbol(variableDeclaration.getName(), new Value(
-						                new BigInteger[resultStack.pop().getIntegerValue()
+						this.setSymbol(variableDeclaration.getName(),
+						                new CompositeValue<IntegerValue>(new IntegerValue[this
+						                                .popIntegerValue().getValue()
 						                                .intValue()]));
 					}
 				} else if (variableDeclaration.getType() instanceof BooleanType) {
-					this.setSymbol(variableDeclaration.getName(), new Value(Boolean.FALSE));
+					this.setSymbol(variableDeclaration.getName(), new BooleanValue(Boolean.FALSE));
 				} else {
-					this.setSymbol(variableDeclaration.getName(), new Value(BigInteger.ZERO));
+					this.setSymbol(variableDeclaration.getName(), new IntegerValue(BigInteger.ZERO));
 				}
 			}
 		} catch (StatementException e) {

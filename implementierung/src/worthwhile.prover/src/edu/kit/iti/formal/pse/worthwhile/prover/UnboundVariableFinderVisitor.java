@@ -56,7 +56,9 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 	public final void visit(final QuantifiedExpression quantifiedExpression) {
 		// a quantifiedExpression binds a variable
 		this.boundVariables.add(quantifiedExpression.getParameter());
-		quantifiedExpression.getCondition().accept(this);
+		if (quantifiedExpression.getCondition() != null) {
+			quantifiedExpression.getCondition().accept(this);
+		}
 		quantifiedExpression.getExpression().accept(this);
 		this.boundVariables.remove(quantifiedExpression.getParameter());
 	}

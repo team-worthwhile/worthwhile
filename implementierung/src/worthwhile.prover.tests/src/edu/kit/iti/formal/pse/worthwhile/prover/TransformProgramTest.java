@@ -183,7 +183,7 @@ public final class TransformProgramTest {
 		Expression result = this.transformer.transformProgram(p);
 
 		// some implications are specified as conjunctions because they cannot be parsed
-		Expression expected = this.getExpression("(forall Integer a : forall Integer b : true && "
+		Expression expected = this.getExpression("(forall Integer b : forall Integer a : true && "
 		                + "(((a > b) && ((a = a || a = b) && (a >= a && a >= b))) "
 		                + "&& (!(a > b) && true))) && true");
 

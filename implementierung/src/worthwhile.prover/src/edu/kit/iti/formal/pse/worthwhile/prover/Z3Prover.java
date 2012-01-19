@@ -12,13 +12,18 @@ public class Z3Prover extends StdProver {
 		this("z3");
 	}
 
+	/**
+	 * Construct a new {@link Z3Prover} with the given path.
+	 * 
+	 * @param path the path to the z3 prover binary
+	 */
 	public Z3Prover(final String path) {
 		/* we will use SMTLib as the input format */
 		super(path, new SMTLIBStrategy());
 	}
 
 	@Override
-	public ProverResult getResult(final String output) {
+	public final ProverResult getResult(final String output) {
 		return new Z3ProverResult(output);
 	}
 }

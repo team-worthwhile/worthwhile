@@ -5,12 +5,18 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  */
 public class Z3ProverResult extends ProverResult {
 
+	/**
+	 * Construct a new {@link Z3ProverResult} from the given prover output.
+	 * 
+	 * @param output
+	 *                the output to interpret as a result
+	 */
 	protected Z3ProverResult(final String output) {
 		super(output);
 	}
 
 	@Override
-	public FormulaSatisfiability getSatisfiability() {
+	public final FormulaSatisfiability getSatisfiability() {
 		if (this.getOutput().equals("sat")) {
 			return FormulaSatisfiability.SATISFIABLE;
 		} else if (this.getOutput().equals("unsat")) {

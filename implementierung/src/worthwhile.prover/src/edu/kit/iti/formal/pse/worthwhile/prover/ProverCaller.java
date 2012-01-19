@@ -13,7 +13,7 @@ public interface ProverCaller {
 	 * @param formula
 	 *            the {@link Expression} to be checked
 	 * @return some prover's satisfiability checking result for <code>formula</code>
-	 * @throws ProverCallerException
+	 * @throws ProverCallerException when there is an error executing the prover
 	 */
 	ProverResult checkFormula(Expression formula) throws ProverCallerException;
 }

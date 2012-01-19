@@ -41,7 +41,7 @@ abstract class StdProver implements ProverCaller {
 	 * @param formula
 	 *            the expression to check
 	 * @return the result returned by the prover
-	 * @throws ProverCallerException
+	 * @throws ProverCallerException if an error occurs while executing the prover binary
 	 */
 	@Override
 	public ProverResult checkFormula(final Expression formula) throws ProverCallerException {

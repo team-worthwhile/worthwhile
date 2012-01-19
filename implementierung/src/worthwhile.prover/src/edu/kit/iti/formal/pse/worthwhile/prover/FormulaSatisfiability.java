@@ -8,5 +8,18 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
  * so that it is true.
  */
 public enum FormulaSatisfiability {
-	SATISFIABLE, UNSATISFIABLE, UNKOWN
+	/**
+	 * Indicates satisfiability.
+	 */
+	SATISFIABLE,
+
+	/**
+	 * Indicates unsatisfiability.
+	 */
+	UNSATISFIABLE,
+
+	/**
+	 * Indicates unknown satisfiability.
+	 */
+	UNKOWN
 }

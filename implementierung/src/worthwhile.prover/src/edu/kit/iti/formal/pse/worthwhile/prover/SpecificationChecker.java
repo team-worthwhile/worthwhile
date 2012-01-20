@@ -2,11 +2,21 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.Map;
 
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 
 /**
  * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
@@ -100,12 +110,51 @@ public class SpecificationChecker {
 	 * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
 	 */
 	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
-	public final Validity checkFormula(final Expression formula, final Map<String, Value> environment) {
+	public final Validity checkFormula(final Expression formula, final Map<VariableDeclaration, Value> environment) {
 		// TODO apply Worthwhile specific runtime assertions
 		// TODO apply axiom list
-		// TODO apply environment
 
-		return getValidity(formula);
+		AstFactory factory = AstFactory.init();
+
+		BooleanLiteral trueExpression = factory.createBooleanLiteral();
+		trueExpression.setValue(true);
+		Expression environmentExpression = trueExpression;
+		for (VariableDeclaration environmentVariable : environment.keySet()) {
+			// create a reference to the variable
+			VariableReference variableReference = factory.createVariableReference();
+			variableReference.setVariable(environmentVariable);
+
+			Value variableValue = environment.get(environmentVariable);
+			// create the literal that epxresses the value of the symbol
+			Literal variableValueLiteral = null;
+			// TODO: array symbols
+			if (variableValue instanceof BooleanValue) {
+				BooleanLiteral l = factory.createBooleanLiteral();
+				l.setValue(((BooleanValue) variableValue).getValue());
+				variableValueLiteral = l;
+			} else if (variableValue instanceof IntegerValue) {
+				IntegerLiteral l = factory.createIntegerLiteral();
+				l.setValue(((IntegerValue) variableValue).getValue());
+				variableValueLiteral = l;
+			}
+
+			// create the ref = literal expression
+			Equal equal = factory.createEqual();
+			equal.setLeft(variableReference);
+			equal.setRight(variableValueLiteral);
+
+			// conjunctively add the equals to the expression expressing the environment
+			Conjunction c = factory.createConjunction();
+			c.setLeft(environmentExpression);
+			c.setRight(equal);
+			environmentExpression = c;
+		}
+
+		// create the environment => expression implication
+		Implication environmentImpliesFormula = factory.createImplication();
+		environmentImpliesFormula.setLeft(environmentExpression);
+		environmentImpliesFormula.setRight(formula);
+		return getValidity(environmentImpliesFormula);
 	}
 
 	/**

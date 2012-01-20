@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.model;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
@@ -8,7 +5,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 /**
  * This class represents a value of a variable.
  * 
- * @author matthias and stefan
+ * @author Joachim
  */
 public abstract class Value {
 

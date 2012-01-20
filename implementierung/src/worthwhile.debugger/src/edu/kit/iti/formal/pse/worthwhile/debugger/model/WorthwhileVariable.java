@@ -69,8 +69,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 
 	@Override
 	public final String getReferenceTypeName() throws DebugException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getValue().getReferenceTypeName();
 	}
 
 	@Override

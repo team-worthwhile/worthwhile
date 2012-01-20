@@ -3,10 +3,122 @@ package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
+import org.eclipse.jdt.core.dom.ThisExpression;
 
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
 
+/**
+ * Represents a value of a variable in a Worthwhile program.
+ * 
+ * @author Joachim
+ * 
+ */
 public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
+
+	/**
+	 * A visitor that returns the sub-variables for a specific value (if present).
+	 * 
+	 * @author Joachim
+	 * 
+	 */
+	private class GetVariablesVisitor extends ValueReturnVisitor<IVariable[]> {
+
+		@Override
+		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
+			IVariable[] result = new IVariable[value.getSubValues().length];
+
+			int i = 0;
+			for (T subvalue : value.getSubValues()) {
+				// TODO result[i++] = new WorthwhileVariable(this.getDebugTarget);
+			}
+
+			this.setReturnValue(result);
+		}
+
+		@Override
+		public void visitIntegerValue(final IntegerValue value) {
+			this.setReturnValue(new IVariable[0]);
+		}
+
+		@Override
+		public void visitBooleanValue(final BooleanValue value) {
+			this.setReturnValue(new IVariable[0]);
+		}
+
+	}
+
+	/**
+	 * A visitor that returns a string representation of a value.
+	 * 
+	 * @author Joachim
+	 * 
+	 */
+	private class ValueToStringVisitor extends ValueReturnVisitor<String> {
+
+		@Override
+		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
+			StringBuilder sb = new StringBuilder();
+			sb.append("{");
+
+			for (int i = 0; i < value.getSubValues().length; i++) {
+				sb.append(this.apply(value.getSubValues()[i]));
+
+				if (i < value.getSubValues().length - 1) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append("}");
+			this.setReturnValue(sb.toString());
+		}
+
+		@Override
+		public void visitIntegerValue(final IntegerValue value) {
+			this.setReturnValue(value.getValue().toString());
+		}
+
+		@Override
+		public void visitBooleanValue(final BooleanValue value) {
+			this.setReturnValue(value.getValue() ? "true" : "false");
+		}
+
+	}
+
+	/**
+	 * A visitor that returns a string representation of a value’s type.
+	 * 
+	 * @author Joachim
+	 * 
+	 */
+	private class ValueTypeVisitor extends ValueReturnVisitor<String> {
+
+		@Override
+		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
+			StringBuilder sb = new StringBuilder();
+			if (value.getSubValues().length > 0) {
+				sb.append(this.apply(value.getSubValues()[0]));
+			} else {
+				sb.append("?"); // FIXME
+			}
+			sb.append("[]");
+			this.setReturnValue(sb.toString());
+		}
+
+		@Override
+		public void visitIntegerValue(final IntegerValue value) {
+			this.setReturnValue("Integer");
+		}
+
+		@Override
+		public void visitBooleanValue(final BooleanValue value) {
+			this.setReturnValue("Boolean");
+		}
+
+	}
 
 	/**
 	 * The value represented by this object.
@@ -28,12 +140,12 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 
 	@Override
 	public final String getReferenceTypeName() throws DebugException {
-		return ""; // return this.value.getValueType().toString();
+		return (new ValueTypeVisitor()).apply(this.value);
 	}
 
 	@Override
 	public final String getValueString() throws DebugException {
-		return this.value.toString();
+		return (new ValueToStringVisitor()).apply(this.value);
 	}
 
 	@Override
@@ -43,14 +155,12 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 
 	@Override
 	public final IVariable[] getVariables() throws DebugException {
-		// TODO Auto-generated method stub
-		return new IVariable[0];
+		return (new GetVariablesVisitor()).apply(this.value);
 	}
 
 	@Override
 	public final boolean hasVariables() throws DebugException {
-		// TODO Auto-generated method stub
-		return false;
+		return (new GetVariablesVisitor()).apply(this.value).length > 0;
 	}
 
 }

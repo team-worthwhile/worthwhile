@@ -16,9 +16,11 @@ import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
  * @author fabian
@@ -33,32 +35,32 @@ public final class CheckFormulaTest {
 	/**
 	 * An empty formula environment.
 	 */
-	private Map<String, Value> emptyEnv;
+	private Map<VariableDeclaration, Value> emptyEnv;
 
 	/**
 	 * A formula environment containing only a x assignment.
 	 */
-	private Map<String, Value> xEnv;
+	private Map<VariableDeclaration, Value> xEnv;
 
 	/**
 	 * A formula environment containing only a y assignment.
 	 */
-	private Map<String, Value> yEnv;
+	private Map<VariableDeclaration, Value> yEnv;
 
 	/**
 	 * A formula environment containing both a x and a y assignment so that x and y do not equal.
 	 */
-	private Map<String, Value> xyEqualEnv;
+	private Map<VariableDeclaration, Value> xyEqualEnv;
 
 	/**
 	 * A formula environment containing both a x and a y assignment so that x and y do equal.
 	 */
-	private Map<String, Value> xyUnequalEnv;
+	private Map<VariableDeclaration, Value> xyUnequalEnv;
 
 	/**
 	 * A list of the environments available for these TestCases.
 	 */
-	private List<Map<String, Value>> envs;
+	private List<Map<VariableDeclaration, Value>> envs;
 
 	/**
 	 * Empty default constructor.
@@ -77,7 +79,7 @@ public final class CheckFormulaTest {
 	 *                the {@link Validity} <code>expr</code>'s Validity must be equal to for the test to pass
 	 */
 	void assertEnvIndependentEquals(final Expression expr, final Validity validity) {
-		for (Map<String, Value> env : envs) {
+		for (Map<VariableDeclaration, Value> env : envs) {
 			Assert.assertEquals(validity, checker.checkFormula(expr, env));
 		}
 	}
@@ -127,23 +129,31 @@ public final class CheckFormulaTest {
 	 */
 	@Before
 	public void initEnvs() {
-		emptyEnv = new HashMap<String, Value>();
+		final VariableDeclaration x = AstFactory.init().createVariableDeclaration();
+		x.setName("x");
+		x.setType(AstFactory.init().createBooleanType());
 
-		xEnv = new HashMap<String, Value>();
-		xEnv.put("x", new BooleanValue(false));
+		final VariableDeclaration y = AstFactory.init().createVariableDeclaration();
+		y.setName("y");
+		y.setType(AstFactory.init().createBooleanType());
 
-		yEnv = new HashMap<String, Value>();
-		yEnv.put("y", new BooleanValue(false));
+		emptyEnv = new HashMap<VariableDeclaration, Value>();
 
-		xyEqualEnv = new HashMap<String, Value>();
-		xyEqualEnv.put("x", new BooleanValue(true));
-		xyEqualEnv.put("y", new BooleanValue(true));
+		xEnv = new HashMap<VariableDeclaration, Value>();
+		xEnv.put(x, new BooleanValue(false));
 
-		xyUnequalEnv = new HashMap<String, Value>();
-		xyUnequalEnv.put("x", new BooleanValue(false));
-		xyUnequalEnv.put("y", new BooleanValue(true));
+		yEnv = new HashMap<VariableDeclaration, Value>();
+		yEnv.put(y, new BooleanValue(false));
 
-		envs = new ArrayList<Map<String, Value>>();
+		xyEqualEnv = new HashMap<VariableDeclaration, Value>();
+		xyEqualEnv.put(x, new BooleanValue(true));
+		xyEqualEnv.put(y, new BooleanValue(true));
+
+		xyUnequalEnv = new HashMap<VariableDeclaration, Value>();
+		xyUnequalEnv.put(x, new BooleanValue(false));
+		xyUnequalEnv.put(y, new BooleanValue(true));
+
+		envs = new ArrayList<Map<VariableDeclaration, Value>>();
 		envs.add(emptyEnv);
 		envs.add(xEnv);
 		envs.add(yEnv);

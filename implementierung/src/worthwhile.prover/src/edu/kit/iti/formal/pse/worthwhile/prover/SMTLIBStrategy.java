@@ -320,6 +320,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		this.pushBinaryOperation(unequal, "=");
 
 		// there is no function `!=' in SMTLIB
-		this.formulaCompileStack.push("(not (" + this.formulaCompileStack.pop() + ")");
+		this.formulaCompileStack.push("(not " + this.formulaCompileStack.pop() + ")");
 	}
 }

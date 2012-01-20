@@ -3,7 +3,6 @@ package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.jdt.core.dom.ThisExpression;
 
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;

@@ -107,11 +107,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return
 	 */
 	protected Value getSymbol(VariableDeclaration key) {
-		Value temp = null;
 		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take the 'nice' variant here because
 			                                                 // I want to start at the top of the stack
-			temp = symbolStack.get(i).get(key);
-			if (temp instanceof Value) {
+			Value temp = this.symbolStack.get(i).get(key);
+			if (temp != null) {
 				return temp;
 			}
 		}
@@ -140,6 +139,14 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @param value
 	 */
 	protected void setSymbol(VariableDeclaration key, Value value) {
+		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take the 'nice' variant here because
+			                                                 // I want to start at the top of the stack
+			Map<VariableDeclaration, Value> temp = this.symbolStack.get(i);
+			if(temp.get(key) != null) {
+				temp.put(key, value);
+				return;
+			}
+		}
 		this.symbolStack.peek().put(key, value);
 	}
 
@@ -312,7 +319,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(Addition addition) {
 		addition.getLeft().accept(this);
 		IntegerValue left = this.popIntegerValue();
-		;
 		addition.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		this.resultStack.push(new IntegerValue(left.getValue().add(right.getValue())));

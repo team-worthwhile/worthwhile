@@ -63,7 +63,7 @@ abstract class StdProver implements ProverCaller {
 			// read all the output from the prover process
 			String line;
 			while ((line = stdout.readLine()) != null) {
-				outputString += line;
+				outputString += line + "\n";
 			}
 		} catch (IOException e) {
 			// normally the binary was simply not found

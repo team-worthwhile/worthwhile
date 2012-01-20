@@ -274,7 +274,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void notAndNotOrDeMorganEquivalence() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x || y) = !x && !y");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x || y) = (!x && !y)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -301,7 +301,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void orAndDistributivity() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : x || (y && z) = (x || y) && (x || z)");
+		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x || (y && z)) = ((x || y) && (x || z))");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 

@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.junit.Test;
 import org.junit.Before;
+import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
@@ -129,18 +130,18 @@ public final class CheckFormulaTest {
 		emptyEnv = new HashMap<String, Value>();
 
 		xEnv = new HashMap<String, Value>();
-		xEnv.put("x", new Value(false));
+		xEnv.put("x", new BooleanValue(false));
 
 		yEnv = new HashMap<String, Value>();
-		yEnv.put("y", new Value(false));
+		yEnv.put("y", new BooleanValue(false));
 
 		xyEqualEnv = new HashMap<String, Value>();
-		xyEqualEnv.put("x", new Value(true));
-		xyEqualEnv.put("y", new Value(true));
+		xyEqualEnv.put("x", new BooleanValue(true));
+		xyEqualEnv.put("y", new BooleanValue(true));
 
 		xyUnequalEnv = new HashMap<String, Value>();
-		xyUnequalEnv.put("x", new Value(false));
-		xyUnequalEnv.put("y", new Value(true));
+		xyUnequalEnv.put("x", new BooleanValue(false));
+		xyUnequalEnv.put("y", new BooleanValue(true));
 
 		envs = new ArrayList<Map<String, Value>>();
 		envs.add(emptyEnv);

@@ -106,6 +106,16 @@ public final class CheckFormulaTest {
 		Assert.assertTrue(s instanceof Assertion);
 		Assertion a = (Assertion) s;
 
+		s = stmts.get(0);
+		Assert.assertTrue(s instanceof VariableDeclaration);
+		final VariableDeclaration x = (VariableDeclaration) s;
+
+		s = stmts.get(1);
+		Assert.assertTrue(s instanceof VariableDeclaration);
+		final VariableDeclaration y = (VariableDeclaration) s;
+
+		this.initEnvs(x, y);
+
 		return a.getExpression();
 	}
 
@@ -128,16 +138,7 @@ public final class CheckFormulaTest {
 	 * <li>Integer x and y set and unequal</li>
 	 * </ul>
 	 */
-	@Before
-	public void initEnvs() {
-		final VariableDeclaration x = AstFactory.init().createVariableDeclaration();
-		x.setName("x");
-		x.setType(AstFactory.init().createBooleanType());
-
-		final VariableDeclaration y = AstFactory.init().createVariableDeclaration();
-		y.setName("y");
-		y.setType(AstFactory.init().createBooleanType());
-
+	public void initEnvs(final VariableDeclaration x, final VariableDeclaration y) {
 		emptyEnv = new HashMap<VariableDeclaration, Value>();
 
 		xEnv = new HashMap<VariableDeclaration, Value>();

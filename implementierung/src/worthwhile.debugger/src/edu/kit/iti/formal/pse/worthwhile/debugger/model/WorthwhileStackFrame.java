@@ -165,8 +165,7 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 
 	@Override
 	public final IVariable[] getVariables() throws DebugException {
-		// TODO Auto-generated method stub
-		return new IVariable[0];
+		return this.getDebugTarget().getVariables();
 	}
 
 	@Override
@@ -176,8 +175,7 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 
 	@Override
 	public final boolean hasVariables() throws DebugException {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

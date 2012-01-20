@@ -1,5 +1,10 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
+
+import java.util.Set;
+
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
@@ -13,12 +18,13 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.debug.core.model.IValue;
+import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
-import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
-import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -382,6 +388,27 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	public final WorthwhileDebugEventListener getEventListener() {
 		return this.eventListener;
+	}
+
+	/**
+	 * Returns a list of all variables in the current execution context.
+	 * 
+	 * @return A list of all variables in the current execution context.
+	 */
+	public final IVariable[] getVariables() {
+		Set<VariableDeclaration> variables = this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
+		IVariable[] result = new IVariable[variables.size()];
+
+		int i = 0;
+		for (VariableDeclaration vardecl : variables) {
+			result[i++] = new WorthwhileVariable(this, vardecl.getName());
+		}
+
+		return result;
+	}
+
+	public IValue getVariableValue(String name) {
+		return new WorthwhileValue(this, this.interpreterRunner.getInterpreter().getSymbol(name));
 	}
 
 }

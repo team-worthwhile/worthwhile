@@ -19,6 +19,14 @@ public class InterpreterRunner extends Job {
 	 * The interpreter to be run.
 	 */
 	private final Interpreter interpreter;
+	
+	/**
+	 * Returns the interpreter being run.
+	 * @return The interpreter being run.
+	 */
+	public final Interpreter getInterpreter() {
+		return this.interpreter;
+	}
 
 	/**
 	 * Creates a new instance of the {@link InterpreterRunner} class.

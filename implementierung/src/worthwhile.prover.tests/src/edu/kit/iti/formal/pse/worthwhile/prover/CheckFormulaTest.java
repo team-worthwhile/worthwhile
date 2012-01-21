@@ -80,7 +80,8 @@ public final class CheckFormulaTest {
 	 */
 	void assertEnvIndependentEquals(final Expression expr, final Validity validity) {
 		for (Map<VariableDeclaration, Value> env : envs) {
-			Assert.assertEquals(validity, checker.checkFormula(expr, env));
+			Validity actual = checker.checkFormula(expr, env);
+			Assert.assertEquals(checker.getCheckResult().getOutput(), validity, actual);
 		}
 	}
 

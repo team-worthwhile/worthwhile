@@ -11,6 +11,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
@@ -97,8 +98,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			// Get the breakpoints that are already defined and add them to the debug target.
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
 			                .getBreakpoints(ID_WORTHWHILE_DEBUG_MODEL);
-			for (int i = 0; i < breakpoints.length; i++) {
-				breakpointAdded(breakpoints[i]);
+			for (IBreakpoint breakpoint : breakpoints) {
+				breakpointAdded(breakpoint);
 			}
 		} else {
 			this.eventListener = new WorthwhileDebugEventListener(this, false);
@@ -421,23 +422,67 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		return result;
 	}
 
+	/**
+	 * Returns the value of a variable referenced by its name.
+	 * 
+	 * @param name
+	 *                The name of the variable.
+	 * @return The value of the variable.
+	 */
 	public final IValue getVariableValue(final String name) {
 		return new WorthwhileValue(this, this.interpreterRunner.getInterpreter().getSymbol(name));
 	}
 
+	/**
+	 * Returns a set of all variable declarations in the current context.
+	 * 
+	 * @return a set of all variable declarations in the current context.
+	 */
 	public final Set<VariableDeclaration> getVariableDeclarations() {
 		return this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
 	}
 
-	public final Value evaluateExpression(String expressionText) throws DebugException {
-		return this.interpreterRunner.getInterpreter().evaluateExpression(
-		                this.getExpressionFromString(expressionText));
+	/**
+	 * Sets the value of the given variable.
+	 * 
+	 * @param variable
+	 *                The variable whose value to set.
+	 * @param value
+	 *                The value to set.
+	 */
+	public final void setVariableValue(final VariableDeclaration variable, final Value value) {
+		this.interpreterRunner.getInterpreter().setSymbol(variable, value);
 	}
 
-	private Expression getExpressionFromString(final String expressionText) throws DebugException {
-		String expressionProgramText = "_axiom(" + expressionText + ")"; // FIXME oh my eyes!!
+	/**
+	 * Evaluates an expression string and returns the result.
+	 * 
+	 * @param expressionText
+	 *                The expression to evaluate
+	 * @return The result of the expression evaluation
+	 * @throws DebugException
+	 *                 when there is an error in the expression
+	 */
+	public final Value evaluateExpression(final String expressionText) throws DebugException {
+		return this.interpreterRunner.getInterpreter().evaluateExpression(
+		                this.parseExpressionString(expressionText));
+	}
 
-		Injector guiceInjector = new WorthwhileDebuggerStandaloneSetup(this).createInjectorAndDoEMFRegistration();
+	/**
+	 * Parses an expression string and returns the corresponding AST node.
+	 * 
+	 * @param expressionText
+	 *                The expression string.
+	 * @return An {@link Expression} object that represents this expression
+	 * @throws DebugException
+	 *                 if the expression contains syntax errors.
+	 */
+	private Expression parseExpressionString(final String expressionText) throws DebugException {
+		String expressionProgramText = "_axiom(" + expressionText + ")\n"; // FIXME oh my eyes!!
+
+		// Obtain an injector and create an Xtext resource
+		Injector guiceInjector = new WorthwhileDebuggerStandaloneSetup(this)
+		                .createInjectorAndDoEMFRegistration();
 		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.ww"));
@@ -448,6 +493,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			return null;
 		}
 
+		// Check whether there are errors in the expression string
 		if (resource.getErrors().isEmpty()) {
 			Program root = (Program) resource.getContents().get(0);
 			return root.getAxioms().get(0).getExpression();
@@ -455,12 +501,73 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			StringBuilder errorStringBuilder = new StringBuilder();
 
 			for (Diagnostic diag : resource.getErrors()) {
-				errorStringBuilder.append("\n Line " + diag.getLine() + ": " + diag.getMessage());
+				errorStringBuilder.append("\n" + diag.getMessage());
 			}
 
-			throw new IllegalArgumentException("Program contains errors:" + errorStringBuilder.toString());
-			// FIXME throw DebugException instead
+			throw new DebugException(new ExpressionEvaluationError(new IllegalArgumentException(
+			                "Expression contains errors:" + errorStringBuilder.toString())));
 		}
+	}
+
+	private class ExpressionEvaluationError implements IStatus {
+
+		private final Exception exception;
+
+		public ExpressionEvaluationError(final Exception exception) {
+			this.exception = exception;
+		}
+
+		@Override
+		public IStatus[] getChildren() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public int getCode() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Throwable getException() {
+			return this.exception;
+		}
+
+		@Override
+		public String getMessage() {
+			return this.exception.getMessage();
+		}
+
+		@Override
+		public String getPlugin() {
+			return "";
+		}
+
+		@Override
+		public int getSeverity() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public boolean isMultiStatus() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean isOK() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
+		@Override
+		public boolean matches(final int arg0) {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
 	}
 
 }

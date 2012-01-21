@@ -1,7 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.runtime;
 
 import edu.kit.iti.formal.pse.worthwhile.WorthwhileRuntimeModule;
-import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugScopeProvider;
+import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
 
 /**
  * Runtime module for a Worthwhile environment in the debugger.
@@ -11,8 +11,27 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugScopeProv
  */
 public class WorthwhileDebuggerRuntimeModule extends WorthwhileRuntimeModule {
 
-	@Override
-	public final Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
-		return WorthwhileDebugScopeProvider.class;
+	/**
+	 * The debug target to use.
+	 */
+	private final WorthwhileDebugTarget debugTarget;
+
+	/**
+	 * Creates a new instance of the {@link WorthwhileDebuggerRuntimeModule} class.
+	 * 
+	 * @param debugTarget
+	 *                The debug target to use.
+	 */
+	public WorthwhileDebuggerRuntimeModule(final WorthwhileDebugTarget debugTarget) {
+		this.debugTarget = debugTarget;
+	}
+
+	/**
+	 * Returns an instance of a {@link WorthwhileDebugTarget}.
+	 * 
+	 * @return an instance of a {@link WorthwhileDebugTarget}.
+	 */
+	public final WorthwhileDebugTarget bindWorthwhileDebugTarget() {
+		return this.debugTarget;
 	}
 }

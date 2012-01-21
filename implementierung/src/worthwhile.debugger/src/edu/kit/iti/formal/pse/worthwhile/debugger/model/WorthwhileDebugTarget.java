@@ -3,6 +3,9 @@ package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
 import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
@@ -21,9 +24,20 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.debug.core.model.LineBreakpoint;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+
+import com.google.inject.Injector;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
+import edu.kit.iti.formal.pse.worthwhile.debugger.runtime.WorthwhileDebuggerStandaloneSetup;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
@@ -203,7 +217,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @throws DebugException
 	 *                 when the desired operation cannot be performed.
 	 */
-	public void stepOver() throws DebugException {
+	public final void stepOver() throws DebugException {
 		this.eventListener.stepOver();
 	}
 
@@ -407,8 +421,46 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		return result;
 	}
 
-	public IValue getVariableValue(String name) {
+	public final IValue getVariableValue(final String name) {
 		return new WorthwhileValue(this, this.interpreterRunner.getInterpreter().getSymbol(name));
+	}
+
+	public final Set<VariableDeclaration> getVariableDeclarations() {
+		return this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
+	}
+
+	public final Value evaluateExpression(String expressionText) throws DebugException {
+		return this.interpreterRunner.getInterpreter().evaluateExpression(
+		                this.getExpressionFromString(expressionText));
+	}
+
+	private Expression getExpressionFromString(final String expressionText) throws DebugException {
+		String expressionProgramText = "_axiom(" + expressionText + ")"; // FIXME oh my eyes!!
+
+		Injector guiceInjector = new WorthwhileDebuggerStandaloneSetup(this).createInjectorAndDoEMFRegistration();
+		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.ww"));
+		InputStream in = new ByteArrayInputStream(expressionProgramText.getBytes());
+		try {
+			resource.load(in, resourceSet.getLoadOptions());
+		} catch (IOException e) {
+			return null;
+		}
+
+		if (resource.getErrors().isEmpty()) {
+			Program root = (Program) resource.getContents().get(0);
+			return root.getAxioms().get(0).getExpression();
+		} else {
+			StringBuilder errorStringBuilder = new StringBuilder();
+
+			for (Diagnostic diag : resource.getErrors()) {
+				errorStringBuilder.append("\n Line " + diag.getLine() + ": " + diag.getMessage());
+			}
+
+			throw new IllegalArgumentException("Program contains errors:" + errorStringBuilder.toString());
+			// FIXME throw DebugException instead
+		}
 	}
 
 }

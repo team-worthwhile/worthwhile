@@ -4,6 +4,8 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+
 /**
  * Represents a variable in a suspended Worthwhile program.
  * 
@@ -29,9 +31,10 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 	}
 
 	@Override
-	public void setValue(final String expression) throws DebugException {
+        public final void setValue(final String expression) throws DebugException {
 		// TODO Auto-generated method stub
-
+		Value value = this.getDebugTarget().evaluateExpression(expression);
+		System.out.println(value.toString());
 	}
 
 	@Override
@@ -48,13 +51,13 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 	@Override
 	public final boolean verifyValue(final String expression) throws DebugException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public final boolean verifyValue(final IValue value) throws DebugException {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

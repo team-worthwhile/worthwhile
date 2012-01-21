@@ -109,12 +109,16 @@ public class InterpreterValueTest {
 		assertEquals(value5, value6);
 		assertTrue(value5.equals(value6));
 
-		Boolean[] array3 = new Boolean[3];
-		Boolean[] array4 = new Boolean[3];
+		Boolean[] array3 = new Boolean[4];
+		Boolean[] array4 = new Boolean[4];
 		array3[0] = true;
 		array4[0] = true;
 		array3[1] = false;
 		array4[1] = false;
+		array3[2] = false;
+		array4[2] = false;
+		array3[3] = false;
+		array4[3] = false;
 
 		BooleanValue[] val_array3 = new BooleanValue[] { new BooleanValue(array3[0]),
 		                new BooleanValue(array3[1]), new BooleanValue(array3[2]), new BooleanValue(array3[3]) };

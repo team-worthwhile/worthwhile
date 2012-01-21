@@ -5,7 +5,7 @@ language package edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage
 section "BaseTypes"
 		typeof Type -> abstract
 		typeof PrimitiveType -> abstract
-		typeof ArrayType -> feature baseType {
+		typeof ArrayType -> clone {
 			ensureType size :<=: IntegerType
 			ensureType baseType :<=: BooleanType, IntegerType
 		}
@@ -166,7 +166,7 @@ section "Functions"
 		ensureType returnType :<=: BooleanType, IntegerType, ArrayType
 		
 	}
-	typeof ReturnStatement -> javacode {
+	typeof ReturnStatement -> abstract {
 		ensureType returnValue :<=: BooleanType, IntegerType, ArrayType
 	}
 	typeof FunctionCall -> feature function 

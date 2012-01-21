@@ -4,7 +4,7 @@
 		import de.itemis.xtext.typesystem.exceptions.TypesystemConfigurationException;
 		import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 
-		public  abstract class WorthwhileTypesystemGenerated extends de.itemis.xtext.typesystem.DefaultTypesystem {
+		public class WorthwhileTypesystemGenerated extends de.itemis.xtext.typesystem.DefaultTypesystem {
 
 			protected edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage p = edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage.eINSTANCE;
 
@@ -15,7 +15,7 @@
 						// ----------------------------------------------------------------
 						// Section: BaseTypes
 
-						useTypeOfFeature( p.getArrayType(), p.getArrayType_BaseType() );
+						useCloneAsType( p.getArrayType() );
 						ensureFeatureType( p.getArrayType(), p.getArrayType_Size(), p.getIntegerType() );
 						ensureFeatureType( p.getArrayType(), p.getArrayType_BaseType(), p.getBooleanType(), p.getIntegerType() );
 						useCloneAsType( p.getIntegerType() );
@@ -154,6 +154,5 @@
 				}
 			}
 
-			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement element, TypeCalculationTrace trace );
 
 		}

@@ -21,11 +21,15 @@ public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProv
 	 */
 	@Override
 	public final SyntaxErrorMessage getSyntaxErrorMessage(final IParserErrorContext context) {
+		System.out.println(context.getDefaultMessage());
+		if (context.getDefaultMessage().contains("loop did not match anything at input '<EOF>'")) {
 
-		if (context.getDefaultMessage().contains("EOF")) {
-			return new SyntaxErrorMessage("Newline is missing", "NoFunctionReturnType");
-		} else if (context.getDefaultMessage().contains("loop did not match anything")) {
-			return new SyntaxErrorMessage("Delete this token.", "NoFunctionReturnType");
+			return new SyntaxErrorMessage("Newline is missing", "missingEOF");
+
+		} else if (context.getDefaultMessage().contains("loop did not match anything")
+		                || context.getDefaultMessage().contains("missing EOF")) {
+
+			return new SyntaxErrorMessage("Delete this token.", "deleteToken");
 		}
 		return super.getSyntaxErrorMessage(context);
 

@@ -356,7 +356,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(assignment);
 		try {
 			assignment.getValue().accept(this);
-			symbolStack.peek().put(assignment.getVariable().getVariable(), resultStack.pop());
+			this.setSymbol(assignment.getVariable().getVariable(), resultStack.pop());
 		} catch (StatementException e) {
 			this.executionFailed(assignment, e.getError());
 			return;

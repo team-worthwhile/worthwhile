@@ -15,7 +15,8 @@ public class Z3Prover extends StdProver {
 	/**
 	 * Construct a new {@link Z3Prover} with the given path.
 	 * 
-	 * @param path the path to the z3 prover binary
+	 * @param path
+	 *                the path to the z3 prover binary
 	 */
 	public Z3Prover(final String path) {
 		/* we will use SMTLib as the input format */

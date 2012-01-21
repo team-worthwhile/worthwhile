@@ -26,9 +26,9 @@ abstract class StdProver implements ProverCaller {
 	 * Constructs a new caller with the given binary path and compiler object.
 	 * 
 	 * @param path
-	 *            the path to the binary to call
+	 *                the path to the binary to call
 	 * @param compiler
-	 *            the compiler to use to compile valid input for the prover
+	 *                the compiler to use to compile valid input for the prover
 	 */
 	protected StdProver(final String path, final FormulaCompiler compiler) {
 		this.compiler = compiler;
@@ -39,9 +39,10 @@ abstract class StdProver implements ProverCaller {
 	 * Check an the given <code>Expression</code> for its validity.
 	 * 
 	 * @param formula
-	 *            the expression to check
+	 *                the expression to check
 	 * @return the result returned by the prover
-	 * @throws ProverCallerException if an error occurs while executing the prover binary
+	 * @throws ProverCallerException
+	 *                 if an error occurs while executing the prover binary
 	 */
 	@Override
 	public ProverResult checkFormula(final Expression formula) throws ProverCallerException {
@@ -54,8 +55,10 @@ abstract class StdProver implements ProverCaller {
 			Process proverProcess = builder.start();
 
 			// get the streams that are used to communicate with the prover
-			BufferedReader stdout = new BufferedReader(new InputStreamReader(proverProcess.getInputStream()));
-			BufferedWriter stdin = new BufferedWriter(new OutputStreamWriter(proverProcess.getOutputStream()));
+			BufferedReader stdout = new BufferedReader(
+			                new InputStreamReader(proverProcess.getInputStream()));
+			BufferedWriter stdin = new BufferedWriter(new OutputStreamWriter(
+			                proverProcess.getOutputStream()));
 			// ask the prover what we want to know
 			stdin.write(inputString);
 			stdin.close();
@@ -91,14 +94,14 @@ abstract class StdProver implements ProverCaller {
 	 * Convert output supplied by the prover to machine-readable <code>ProverResult</code>.
 	 * 
 	 * @param output
-	 *            the String output returned from the called prover
+	 *                the String output returned from the called prover
 	 * @return a result extracted from the prover output
 	 */
 	abstract ProverResult getResult(String output);
 
 	/**
 	 * @param compiler
-	 *            the compiler to set to compile input for this prover
+	 *                the compiler to set to compile input for this prover
 	 */
 	public void setCompiler(final FormulaCompiler compiler) {
 		this.compiler = compiler;
@@ -106,7 +109,7 @@ abstract class StdProver implements ProverCaller {
 
 	/**
 	 * @param proverPath
-	 *            the path to the binary to call for this prover
+	 *                the path to the binary to call for this prover
 	 */
 	public void setProverPath(final String proverPath) {
 		this.proverPath = proverPath;

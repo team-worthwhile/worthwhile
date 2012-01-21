@@ -45,7 +45,7 @@ public class InterpreterValueTest {
 
 	@Test
 	public void testGetIntegerArray() {
-		BigInteger[] array1 = new BigInteger[2];
+		BigInteger[] array1 = new BigInteger[] { BigInteger.valueOf(0), BigInteger.valueOf(42) };
 		IntegerValue[] val_array1 = new IntegerValue[] { new IntegerValue(array1[0]),
 		                new IntegerValue(array1[1]) };
 		CompositeValue<IntegerValue> value1 = new CompositeValue<IntegerValue>(val_array1);
@@ -54,7 +54,7 @@ public class InterpreterValueTest {
 
 	@Test
 	public void testGetBooleanArray() {
-		Boolean[] array1 = new Boolean[2];
+		Boolean[] array1 = new Boolean[] { false, true };
 		BooleanValue[] val_array1 = new BooleanValue[] { new BooleanValue(array1[0]),
 		                new BooleanValue(array1[1]) };
 		CompositeValue<BooleanValue> value1 = new CompositeValue<BooleanValue>(val_array1);
@@ -84,8 +84,10 @@ public class InterpreterValueTest {
 		array2[0] = new BigInteger("1");
 		array1[1] = new BigInteger("2");
 		array2[1] = new BigInteger("2");
-		array1[3] = new BigInteger("3");
-		array2[3] = new BigInteger("3");
+		array1[2] = new BigInteger("3");
+		array2[2] = new BigInteger("3");
+		array1[3] = new BigInteger("4");
+		array2[3] = new BigInteger("4");
 
 		IntegerValue[] val_array1 = new IntegerValue[] { new IntegerValue(array1[0]),
 		                new IntegerValue(array1[1]), new IntegerValue(array1[2]), new IntegerValue(array1[3]) };

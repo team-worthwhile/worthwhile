@@ -341,6 +341,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Assertion assertion) {
+		statementWillExecute(assertion);
 		try {
 			// TODO Auto-generated method stub
 		} catch (StatementException e) {
@@ -364,6 +365,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Assumption assumption) {
+		statementWillExecute(assumption);
 		try {
 			// TODO Auto-generated method stub
 		} catch (StatementException e) {
@@ -374,6 +376,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Axiom axiom) {
+		statementWillExecute(axiom);
 		try {
 			// TODO Auto-generated method stub
 		} catch (StatementException e) {
@@ -479,7 +482,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(FunctionCall functionCall) {
-		// TODO incorporate pre/postconditions
 		InterpreterASTNodeVisitor functionVisitor = new InterpreterASTNodeVisitor();
 		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		FunctionDeclaration functionDeclaration = functionCall.getFunction();
@@ -488,7 +490,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			actuals.get(i).accept(this);
 			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i), this.resultStack.pop());
 		}
+		for (Precondition precondition : functionDeclaration.getPreconditions()) {
+			precondition.accept(this);
+		}
 		functionDeclaration.getBody().accept(functionVisitor);
+		for (Postcondition postcondition : functionDeclaration.getPostconditions()) {
+			postcondition.accept(this);
+		}
 		this.resultStack.push(functionVisitor.getReturnValue());
 		this.expressionEvaluated(functionCall);
 	}
@@ -620,6 +628,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Postcondition postcondition) {
+		statementWillExecute(postcondition);
 		try {
 			// TODO Auto-generated method stub
 		} catch (StatementException e) {
@@ -630,6 +639,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Precondition precondition) {
+		statementWillExecute(precondition);
 		try {
 			// TODO Auto-generated method stub
 		} catch (StatementException e) {
@@ -641,6 +651,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	public void visit(Program program) {
 		this.executionStarted();
+		for (Axiom axiom : program.getAxioms()) {
+			axiom.accept(this);
+		}
 		program.getMainBlock().accept(this);
 		this.executionCompleted();
 	}

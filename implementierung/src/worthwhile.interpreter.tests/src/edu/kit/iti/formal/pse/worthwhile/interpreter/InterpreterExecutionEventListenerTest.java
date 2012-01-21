@@ -84,8 +84,10 @@ public class InterpreterExecutionEventListenerTest {
 	/**
 	 * Convenience method to launch a Program and listen to the execution events with an event listener.
 	 * 
-	 * @param listener the listener to attach to the running {@link Program}
-	 * @param program the {@link Program} to run
+	 * @param listener
+	 *                the listener to attach to the running {@link Program}
+	 * @param program
+	 *                the {@link Program} to run
 	 */
 	public static void listenProgram(final AbstractExecutionEventListener listener, final Program program) {
 		Interpreter interpreter = new Interpreter(program);
@@ -123,8 +125,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementExecutedBooleanAssignment() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("Boolean a := true\na := false\n"));
+		                TestASTProvider.getRootASTNode("Boolean a := true\na := false\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -137,13 +138,12 @@ public class InterpreterExecutionEventListenerTest {
 		interpreter.addExecutionEventHandler(listener);
 		interpreter.execute();
 		assertTrue(listener.counter == 1); // There is really only 1 assignment
-											// statement in this program
+		                                   // statement in this program
 	}
 
 	@Test
 	public void testStatementExecutedIntegerAssignment() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 5\na := 4\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 5\na := 4\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -156,13 +156,12 @@ public class InterpreterExecutionEventListenerTest {
 		interpreter.addExecutionEventHandler(listener);
 		interpreter.execute();
 		assertTrue(listener.counter == 1); // There is really only 1 assignment
-											// statement in this program
+		                                   // statement in this program
 	}
 
 	@Test
 	public void testStatementExecutedLoop() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("while(false) { }\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("while(false) { }\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -180,7 +179,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementExecutedPreCondition() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("function Boolean test()\n_requires true\n{\nreturn false\n}\nBoolean result := test()\n"));
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_requires true\n{\nreturn false\n}\nBoolean result := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -198,7 +197,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementExecutedPostCondition() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nInteger result := test()\n"));
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nInteger result := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -215,8 +214,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementExecutedAssertion() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("_assert true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("_assert true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -233,8 +231,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementExecutedAssumption() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("_assume true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("_assume true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -251,8 +248,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementExecutedAxiom() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("_axiom true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("_axiom true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -269,8 +265,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementExecutedCondition() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("if(true) {\n}\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("if(true) {\n}\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -288,8 +283,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementExecutedBooleanReturn() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("function Boolean test() {\nreturn true\n}\nBoolean a := test()\n"));
+		                TestASTProvider.getRootASTNode("function Boolean test() {\nreturn true\n}\nBoolean a := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -307,8 +301,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementExecutedIntegerReturn() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("function Integer test() {\nreturn 3\n}\nInteger a := test()\n"));
+		                TestASTProvider.getRootASTNode("function Integer test() {\nreturn 3\n}\nInteger a := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -325,8 +318,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementWillExecuteBooleanVariableDeclaration() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Boolean a := true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -342,8 +334,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementWillExecuteIntegerVariableDeclaration() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 5\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 5\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -360,8 +351,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecuteBooleanAssignment() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("Boolean a := true\na := false\n"));
+		                TestASTProvider.getRootASTNode("Boolean a := true\na := false\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -374,13 +364,12 @@ public class InterpreterExecutionEventListenerTest {
 		interpreter.addExecutionEventHandler(listener);
 		interpreter.execute();
 		assertTrue(listener.counter == 1); // There is really only 1 assignment
-											// statement in this program
+		                                   // statement in this program
 	}
 
 	@Test
 	public void testStatementWillExecuteIntegerAssignment() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 5\na := 4\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 5\na := 4\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -393,13 +382,12 @@ public class InterpreterExecutionEventListenerTest {
 		interpreter.addExecutionEventHandler(listener);
 		interpreter.execute();
 		assertTrue(listener.counter == 1); // There is really only 1 assignment
-											// statement in this program
+		                                   // statement in this program
 	}
 
 	@Test
 	public void testStatementWillExecuteLoop() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("while(false) { }\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("while(false) { }\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -417,7 +405,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecutePreCondition() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("function Boolean test()\n_requires true\n{\nreturn false\n}\nInteger result := test()\n"));
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_requires true\n{\nreturn false\n}\nInteger result := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -435,7 +423,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecutePostCondition() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nInteger result := test()\n"));
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nInteger result := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -452,8 +440,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementWillExecuteAssertion() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("_assert true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("_assert true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -470,8 +457,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementWillExecuteAssumption() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("_assume true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("_assume true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -488,8 +474,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementWillExecuteAxiom() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("_axiom true\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("_axiom true\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -506,8 +491,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testStatementWillExecuteCondition() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("if(true) {\n}\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("if(true) {\n}\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -525,8 +509,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecuteBooleanReturn() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("function Boolean test() {\nreturn true\n}\nBoolean a := test()\n"));
+		                TestASTProvider.getRootASTNode("function Boolean test() {\nreturn true\n}\nBoolean a := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -544,8 +527,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecuteIntegerReturn() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("function Integer test() {\nreturn 3\n}\nInteger a := test()\n"));
+		                TestASTProvider.getRootASTNode("function Integer test() {\nreturn 3\n}\nInteger a := test()\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -563,8 +545,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testExecutionFailedDivisionByZero() {
 		TestExecutionListener listener = new TestExecutionListener();
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 2 ÷ 0 \n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 ÷ 0 \n"));
 		interpreter.addExecutionEventHandler(listener);
 		try {
 			interpreter.execute();
@@ -576,8 +557,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testExecutionFailedModuloZero() {
 		TestExecutionListener listener = new TestExecutionListener();
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 2 % 0 \n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 % 0 \n"));
 		interpreter.addExecutionEventHandler(listener);
 		try {
 			interpreter.execute();
@@ -588,8 +568,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testExecutionStarted() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 2\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void executionStarted() {
@@ -603,8 +582,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testExecutionCompleted() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 2\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void executionCompleted() {
@@ -620,8 +598,7 @@ public class InterpreterExecutionEventListenerTest {
 	public void testAssertionFailed() {
 		TestExecutionListener listener = new TestExecutionListener();
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("Integer a := 10\n_assert(a > 10)\n"));
+		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a > 10)\n"));
 		interpreter.addExecutionEventHandler(listener);
 		try {
 			interpreter.execute();
@@ -633,8 +610,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testAssertionSucceeded() {
 		Interpreter interpreter = new Interpreter(
-				TestASTProvider
-						.getRootASTNode("Integer a := 10\n_assert(a >= 10)\n"));
+		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a >= 10)\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
 			public void assertionSucceeded(Assertion assertion) {
 				this.check = true;
@@ -647,8 +623,7 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testExpressionEvaluated() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := (19 + 23)\n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := (19 + 23)\n"));
 
 		TestExecutionListener listener = new TestExecutionListener() {
 			public void expressionEvaluated(Expression expression) {
@@ -663,8 +638,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testExpressionFailedDivisionByZero() {
 		TestExecutionListener listener = new TestExecutionListener();
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 2 ÷ 0 \n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 ÷ 0 \n"));
 		interpreter.addExecutionEventHandler(listener);
 		try {
 			interpreter.execute();
@@ -676,8 +650,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testExpressionFailedModuloZero() {
 		TestExecutionListener listener = new TestExecutionListener();
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 2 % 0 \n"));
+		Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := 2 % 0 \n"));
 		interpreter.addExecutionEventHandler(listener);
 		try {
 			interpreter.execute();

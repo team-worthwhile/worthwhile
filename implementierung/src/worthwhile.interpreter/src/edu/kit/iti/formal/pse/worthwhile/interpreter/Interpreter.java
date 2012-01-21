@@ -146,10 +146,9 @@ public class Interpreter {
 	 * @return
 	 */
 	public Value evaluateExpression(Expression expression) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		InterpreterASTNodeVisitor visitor = new InterpreterASTNodeVisitor();
+		visitor.visit(expression);
+		return visitor.getReturnValue();
 	}
 
 	/**

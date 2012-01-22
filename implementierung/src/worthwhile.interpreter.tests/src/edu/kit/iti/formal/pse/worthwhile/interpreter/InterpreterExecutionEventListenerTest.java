@@ -1,49 +1,123 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import static org.junit.Assert.assertTrue;
+
+import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.*;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 public class InterpreterExecutionEventListenerTest {
 
 	public boolean test;
 	public int counter;
 
-	@Test
-	public void testStatementExecutedBooleanVariableDeclaration() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Boolean a := true\n"));
-		TestExecutionListener listener = new TestExecutionListener() {
-			@Override
-			public void statementExecuted(Statement statement) {
-				if (statement instanceof VariableDeclaration) {
-					this.check = true;
-				}
+	/**
+	 * Test listener that captures statement execution events.
+	 */
+	final class TestStatementExecutionEventListener extends AbstractExecutionEventListener {
+
+		/**
+		 * Type of statement to listen for events for.
+		 */
+		private Class<? extends Statement> statementType;
+
+		/**
+		 * Construct a new listener with the given statement type to listen for.
+		 */
+		public TestStatementExecutionEventListener(Class<? extends Statement> statementType) {
+			this.statementType = statementType;
+		}
+
+		/**
+		 * Indicates if the statementWillExecute event has already fired.
+		 */
+		private int statementWillExecuteCount = 0;
+
+		/**
+		 * @return true if statementWillExecute already fired, else false
+		 */
+		public int getStatementWillExecuteCount() {
+			return this.statementWillExecuteCount;
+		}
+
+		@Override
+		public void statementWillExecute(final Statement statement) {
+			if (statementType.isInstance(statement)) {
+				this.statementWillExecuteCount++;
 			}
-		};
-		interpreter.addExecutionEventHandler(listener);
-		interpreter.execute();
-		assertTrue(listener.check);
+		}
+
+		/**
+		 * Indicates if the statementExecuted event has already fired.
+		 */
+		private int statementExecutedCount = 0;
+
+		/**
+		 * @return true if statementExecuted already fired, else false
+		 */
+		public int getStatementExecutedCount() {
+			return this.statementExecutedCount;
+		}
+
+		@Override
+		public void statementExecuted(final Statement statement) {
+			if (statementType.isInstance(statement)) {
+				this.statementExecutedCount++;
+			}
+		}
 	}
 
-	@Test
-	public void testStatementExecutedIntegerVariableDeclaration() {
-		Interpreter interpreter = new Interpreter(
-				TestASTProvider.getRootASTNode("Integer a := 5\n"));
-		TestExecutionListener listener = new TestExecutionListener() {
-			@Override
-			public void statementExecuted(Statement statement) {
-				if (statement instanceof VariableDeclaration) {
-					this.check = true;
-				}
-			}
-		};
+	/**
+	 * Convenience method to launch a Program and listen to the execution events with an event listener.
+	 * 
+	 * @param listener the listener to attach to the running {@link Program}
+	 * @param program the {@link Program} to run
+	 */
+	public static void listenProgram(final AbstractExecutionEventListener listener, final Program program) {
+		Interpreter interpreter = new Interpreter(program);
 		interpreter.addExecutionEventHandler(listener);
 		interpreter.execute();
-		assertTrue(listener.check);
+	}
+
+	/**
+	 * Test if execution events are correctly fired for a boolean variable declaration.
+	 */
+	@Test
+	public final void testBooleanVariableDeclarationStatementExecutionEvents() {
+		TestStatementExecutionEventListener listener = new TestStatementExecutionEventListener(
+		                VariableDeclaration.class);
+		InterpreterExecutionEventListenerTest.listenProgram(listener,
+		                TestASTProvider.getRootASTNode("Boolean a := true\n"));
+		Assert.assertEquals(1, listener.getStatementWillExecuteCount());
+		Assert.assertEquals(1, listener.getStatementExecutedCount());
+
+	}
+
+	/**
+	 * Test if execution events are correctly fired for an integer variable declaration.
+	 */
+	@Test
+	public final void testIntegerVariableDeclarationStatementExecutionEvents() {
+		TestStatementExecutionEventListener listener = new TestStatementExecutionEventListener(
+		                VariableDeclaration.class);
+		InterpreterExecutionEventListenerTest.listenProgram(listener,
+		                TestASTProvider.getRootASTNode("Integer a := 42\n"));
+		Assert.assertEquals(1, listener.getStatementWillExecuteCount());
+		Assert.assertEquals(1, listener.getStatementExecutedCount());
 	}
 
 	@Test

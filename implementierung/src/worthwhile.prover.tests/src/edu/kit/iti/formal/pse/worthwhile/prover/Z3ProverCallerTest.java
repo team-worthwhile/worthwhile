@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
@@ -13,10 +14,23 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
  */
 public final class Z3ProverCallerTest {
 	/**
+	 * The prover to use for testing.
+	 */
+	private ProverCaller prover;
+
+	/**
+	 * Instantiates the appropriate Z3 prover before every test.
+	 */
+	@Before
+	public void instantiateProverCaller() {
+		this.prover = new Z3Prover();
+	}
+
+	/**
 	 * Test the prover caller with a simple formula containing only literals.
 	 * 
 	 * @throws ProverCallerException
-	 *                 if calling the prover failed
+	 *                 if calling the prover fails
 	 */
 	@Test
 	public void testLiteralFormula() throws ProverCallerException {
@@ -37,4 +51,14 @@ public final class Z3ProverCallerTest {
 		Assert.assertEquals(FormulaSatisfiability.UNSATISFIABLE, result.getSatisfiability());
 	}
 
-}
+	/**
+	 * Test if two literal integer array compare equal.
+	 * @throws ProverCallerException if calling the prover fails
+	 */
+	@Test
+	public void testIntegerArrayEquals() throws ProverCallerException {
+		Expression formula = TestASTProvider.parseFormulaString("{1, 2, 3} = {1, 2, 3}");
+		ProverResult result = this.prover.checkFormula(formula);
+		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
+	}
+ }

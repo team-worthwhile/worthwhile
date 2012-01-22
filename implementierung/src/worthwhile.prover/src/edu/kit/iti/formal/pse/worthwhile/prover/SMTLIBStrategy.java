@@ -160,10 +160,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		this.formulaCompileStack.push("");
 	}
 
 	@Override

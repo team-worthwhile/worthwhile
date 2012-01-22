@@ -6,8 +6,18 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
+/**
+ * Test the prover caller and result parser for the prover Z3.
+ * 
+ * @author Leon Handreke
+ */
 public final class Z3ProverCallerTest {
-
+	/**
+	 * Test the prover caller with a simple formula containing only literals.
+	 * 
+	 * @throws ProverCallerException
+	 *                 if calling the prover failed
+	 */
 	@Test
 	public void testLiteralFormula() throws ProverCallerException {
 		ProverResult result;

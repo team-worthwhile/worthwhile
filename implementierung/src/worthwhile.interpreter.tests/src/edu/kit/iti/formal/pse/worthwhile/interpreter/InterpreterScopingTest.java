@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 import java.math.BigInteger;
 import org.junit.Before;
 import org.junit.Test;
+
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 
@@ -35,8 +39,8 @@ public class InterpreterScopingTest {
 				"\n}" +
 				"\n");
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(new BigInteger("42")));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new IntegerValue(new BigInteger("42")));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -51,8 +55,8 @@ public class InterpreterScopingTest {
 				"\n}" +
 				"\n");
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(true));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new BooleanValue(true));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -65,14 +69,14 @@ public class InterpreterScopingTest {
 				"\na[1] := 4" +
 				"\n}" +
 				"\n");
-		BigInteger[] array = new BigInteger[4];
-		array[0] = new BigInteger("42");
-		array[1] = new BigInteger("12");
-		array[2] = new BigInteger("100");
-		array[3] = new BigInteger("1");
+		IntegerValue[] array = new IntegerValue[4];
+		array[0] = new IntegerValue(new BigInteger("42"));
+		array[1] = new IntegerValue(new BigInteger("12"));
+		array[2] = new IntegerValue(new BigInteger("100"));
+		array[3] = new IntegerValue(new BigInteger("1"));
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(array));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new CompositeValue<IntegerValue>(array));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -85,14 +89,14 @@ public class InterpreterScopingTest {
 				"\na[1] := true" +
 				"\n}" +
 				"\n");
-		Boolean[] array = new Boolean[4];
-		array[0] = new Boolean(true);
-		array[1] = new Boolean(false);
-		array[2] = new Boolean(false);
-		array[3] = new Boolean(true);
+		BooleanValue[] array = new BooleanValue[4];
+		array[0] = new BooleanValue(true);
+		array[1] = new BooleanValue(false);
+		array[2] = new BooleanValue(false);
+		array[3] = new BooleanValue(true);
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(array));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new CompositeValue<BooleanValue>(array));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -107,8 +111,8 @@ public class InterpreterScopingTest {
 				"\n}" +
 				"\n");
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(new BigInteger("42")));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new IntegerValue(new BigInteger("42")));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -123,8 +127,8 @@ public class InterpreterScopingTest {
 				"\n}" +
 				"\n");
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(true));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new BooleanValue(true));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -137,14 +141,14 @@ public class InterpreterScopingTest {
 				"\na[1] := true" +
 				"\n}" +
 				"\n");
-		BigInteger[] array = new BigInteger[4];
-		array[0] = new BigInteger("42");
-		array[1] = new BigInteger("12");
-		array[2] = new BigInteger("100");
-		array[3] = new BigInteger("1");
+		IntegerValue[] array = new IntegerValue[4];
+		array[0] = new IntegerValue(new BigInteger("42"));
+		array[1] = new IntegerValue(new BigInteger("12"));
+		array[2] = new IntegerValue(new BigInteger("100"));
+		array[3] = new IntegerValue(new BigInteger("1"));
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(array));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new CompositeValue<IntegerValue>(array));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -157,14 +161,14 @@ public class InterpreterScopingTest {
 				"\na[1] := true" +
 				"\n}" +
 				"\n");
-		Boolean[] array = new Boolean[4];
-		array[0] = new Boolean(true);
-		array[1] = new Boolean(false);
-		array[2] = new Boolean(false);
-		array[3] = new Boolean(true);
+		BooleanValue[] array = new BooleanValue[4];
+		array[0] = new BooleanValue(true);
+		array[1] = new BooleanValue(false);
+		array[2] = new BooleanValue(false);
+		array[3] = new BooleanValue(true);
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(array));
-		this.assertVariableEqualsValue("i", new Value(new BigInteger("10")));
+		this.assertVariableEqualsValue("a", new CompositeValue<BooleanValue>(array));
+		this.assertVariableEqualsValue("i", new IntegerValue(new BigInteger("10")));
 	}
 	
 	@Test
@@ -178,7 +182,7 @@ public class InterpreterScopingTest {
 				"\nInteger b := test()" +
 				"\n");
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(new BigInteger("42")));
+		this.assertVariableEqualsValue("a", new IntegerValue(new BigInteger("42")));
 	}
 	
 	@Test
@@ -192,7 +196,7 @@ public class InterpreterScopingTest {
 				"\nBoolean b := test()" +
 				"\n");
 		this.interpreter.execute();
-		this.assertVariableEqualsValue("a", new Value(true));
+		this.assertVariableEqualsValue("a", new BooleanValue(true));
 	}
 	
 	@Test
@@ -207,18 +211,18 @@ public class InterpreterScopingTest {
 				"\nInteger[] b := {1, 2, 3, 4}" +
 				"\nInteger[] c := test()" +
 				"\n");
-		BigInteger[] array1 = new BigInteger[4];
-		array1[0] = new BigInteger("42");
-		array1[1] = new BigInteger("12");
-		array1[2] = new BigInteger("100");
-		array1[3] = new BigInteger("1");
-		BigInteger[] array2 = new BigInteger[4];
-		array2[0] = new BigInteger("1");
-		array2[1] = new BigInteger("3");
-		array2[2] = new BigInteger("101");
-		array2[3] = new BigInteger("99");
-		this.assertVariableEqualsValue("a", new Value(array1));
-		this.assertVariableEqualsValue("b", new Value(array2));
+		IntegerValue[] array1 = new IntegerValue[4];
+		array1[0] = new IntegerValue(new BigInteger("42"));
+		array1[1] = new IntegerValue(new BigInteger("12"));
+		array1[2] = new IntegerValue(new BigInteger("100"));
+		array1[3] = new IntegerValue(new BigInteger("1"));
+		IntegerValue[] array2 = new IntegerValue[4];
+		array2[0] = new IntegerValue(new BigInteger("1"));
+		array2[1] = new IntegerValue(new BigInteger("3"));
+		array2[2] = new IntegerValue(new BigInteger("101"));
+		array2[3] = new IntegerValue(new BigInteger("99"));
+		this.assertVariableEqualsValue("a", new CompositeValue<IntegerValue>(array1));
+		this.assertVariableEqualsValue("b", new CompositeValue<IntegerValue>(array2));
 	}
 	
 	@Test
@@ -233,17 +237,17 @@ public class InterpreterScopingTest {
 				"\nBoolean[] b := {false, true, true, true}" +
 				"\nBoolean[] c := test()" +
 				"\n");
-		Boolean[] array1 = new Boolean[4];
-		array1[0] = new Boolean(true);
-		array1[1] = new Boolean(false);
-		array1[2] = new Boolean(false);
-		array1[3] = new Boolean(true);
-		Boolean[] array2 = new Boolean[4];
-		array2[0] = new Boolean(true);
-		array2[1] = new Boolean(true);
-		array2[2] = new Boolean(true);
-		array2[3] = new Boolean(true);
-		this.assertVariableEqualsValue("a", new Value(array1));
-		this.assertVariableEqualsValue("b", new Value(array2));
+		BooleanValue[] array1 = new BooleanValue[4];
+		array1[0] = new BooleanValue(true);
+		array1[1] = new BooleanValue(false);
+		array1[2] = new BooleanValue(false);
+		array1[3] = new BooleanValue(true);
+		BooleanValue[] array2 = new BooleanValue[4];
+		array2[0] = new BooleanValue(true);
+		array2[1] = new BooleanValue(true);
+		array2[2] = new BooleanValue(true);
+		array2[3] = new BooleanValue(true);
+		this.assertVariableEqualsValue("a", new CompositeValue<BooleanValue>(array1));
+		this.assertVariableEqualsValue("b", new CompositeValue<BooleanValue>(array2));
 	}
 }

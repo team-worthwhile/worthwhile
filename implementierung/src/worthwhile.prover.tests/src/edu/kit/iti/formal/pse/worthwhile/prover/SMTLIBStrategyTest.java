@@ -34,7 +34,7 @@ public final class SMTLIBStrategyTest {
 	 * Test the proper compilation of a simple formula.
 	 */
 	@Test
-	public void simpleLiteralOnlyFormula() {
+	public void testLiteralOnlyFormula() {
 		Expression formula = TestASTProvider.parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 		Assert.assertNotNull(formula);
 		String compiled = this.compiler.compileFormula(formula);

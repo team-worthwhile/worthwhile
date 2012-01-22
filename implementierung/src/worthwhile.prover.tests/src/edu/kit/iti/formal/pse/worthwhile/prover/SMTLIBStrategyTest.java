@@ -35,7 +35,7 @@ public final class SMTLIBStrategyTest {
 	 */
 	@Test
 	public void simpleLiteralOnlyFormula() {
-		Expression formula = TestASTProvider.getTestFormula();
+		Expression formula = TestASTProvider.parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 		Assert.assertNotNull(formula);
 		String compiled = this.compiler.compileFormula(formula);
 		String expectedCompiled = "(assert (and (and (or (not false) (= (mod 9 4) 1)) true) (= (+ 3 3) 6)))\n"

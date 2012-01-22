@@ -53,18 +53,6 @@ public class TestASTProvider {
 		return resource.getErrors().size();
 	}
 
-	/**
-	 * @return A simple, human-readable formula that evaluates to true (i.e. is always satisfiable) and covers a lot
-	 *         of the constructs supported by the language
-	 */
-	public static Expression getTestFormula() {
-		return parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
-	}
-
-	public static Expression getNegatedTestFormula() {
-		return parseFormulaString("!(((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6))");
-	}
-
 	public static Expression parseFormulaString(String formulaString) {
 		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := (" + formulaString + ")\n" + "}\n");
 

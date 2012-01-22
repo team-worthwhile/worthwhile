@@ -9,10 +9,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 public final class Z3ProverCallerTest {
 
 	@Test
-	public void testWithSimpleFormula() throws ProverCallerException {
+	public void testLiteralFormula() throws ProverCallerException {
 		ProverResult result;
 
-		Expression formula = TestASTProvider.getTestFormula();
+		Expression formula = TestASTProvider
+		                .parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 		Assert.assertNotNull(formula);
 		ProverCaller caller = new Z3Prover();
 		result = caller.checkFormula(formula);
@@ -20,7 +21,7 @@ public final class Z3ProverCallerTest {
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
 
 		// the same formula again, but negated, so it should not be satisfiable
-		formula = TestASTProvider.getNegatedTestFormula();
+		formula = TestASTProvider.parseFormulaString("!((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 		Assert.assertNotNull(formula);
 		result = caller.checkFormula(formula);
 		Assert.assertEquals(FormulaSatisfiability.UNSATISFIABLE, result.getSatisfiability());

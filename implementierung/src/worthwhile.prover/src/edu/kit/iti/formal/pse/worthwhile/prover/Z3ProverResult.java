@@ -18,7 +18,9 @@ public class Z3ProverResult extends ProverResult {
 	@Override
 	public final FormulaSatisfiability getSatisfiability() {
 		for (final String s : this.getOutput().split("\n")) {
-			if (s.equals("sat")) {
+			if (s.contains("error")) {
+				return FormulaSatisfiability.UNKOWN;
+			} else if (s.equals("sat")) {
 				return FormulaSatisfiability.SATISFIABLE;
 			} else if (s.equals("unsat")) {
 				return FormulaSatisfiability.UNSATISFIABLE;

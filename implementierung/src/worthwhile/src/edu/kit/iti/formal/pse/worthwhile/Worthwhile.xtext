@@ -69,7 +69,7 @@ ReturnStatement returns ReturnStatement:
 
 // A while statement specifies a while loop.
 WhileStatement returns Loop:
-	'while' condition=Expression (invariants+=Invariant)* body=BracedBlock
+	'while' condition=Expression NL* (invariants+=Invariant)* body=BracedBlock
 ;
 
 // An invariant can be used to specify the invariants of a WHILE loop.

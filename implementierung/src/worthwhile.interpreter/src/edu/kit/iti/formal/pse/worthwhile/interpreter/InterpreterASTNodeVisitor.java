@@ -5,7 +5,9 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -165,9 +167,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return
 	 */
 	protected Map<VariableDeclaration, Value> getAllSymbols() {
-		Map<VariableDeclaration, Value> result = new HashMap<VariableDeclaration, Value>();
-		for (Map<VariableDeclaration, Value> item : this.symbolStack) {
-			result.putAll(item);
+		Map<VariableDeclaration, Value> result = new LinkedHashMap<VariableDeclaration, Value>();
+		ListIterator<Map<VariableDeclaration, Value>> i = this.symbolStack
+		                .listIterator(this.symbolStack.size());
+		while (i.hasPrevious()) {
+			result.putAll(i.previous());
 		}
 		return result;
 	}

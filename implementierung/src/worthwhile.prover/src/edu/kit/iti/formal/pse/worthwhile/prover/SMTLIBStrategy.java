@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.math.BigInteger;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
@@ -259,7 +260,11 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final IntegerLiteral integerLiteral) {
-		this.formulaCompileStack.push(integerLiteral.getValue().toString());
+		String literalString = integerLiteral.getValue().abs().toString();
+		if (integerLiteral.getValue().compareTo(new BigInteger("0")) < 0) {
+			literalString = "(- " + literalString + ")";
+		}
+		this.formulaCompileStack.push(literalString);
 	}
 
 	@Override

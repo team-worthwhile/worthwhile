@@ -42,50 +42,13 @@ public class Interpreter {
 	/** 
 	 * 
 	 */
-	private InterpreterASTNodeVisitor currentNodeVisitor;
+	private InterpreterASTNodeVisitor executingVisitor;
 
 	/**
 	 * @return the currentNodeVisitor
 	 */
 	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
-		// begin-user-code
-		return this.currentNodeVisitor;
-		// end-user-code
-	}
-
-	/**
-	 * @param currentNodeVisitor
-	 *            the currentNodeVisitor to set
-	 */
-	public void setCurrentNodeVisitor(
-			InterpreterASTNodeVisitor currentNodeVisitor) {
-		// begin-user-code
-		this.currentNodeVisitor = currentNodeVisitor;
-		// end-user-code
-	}
-
-	/** 
-	 * 
-	 */
-	private Set<InterpreterASTNodeVisitor> nodeVisitors;
-
-	/**
-	 * @return the nodeVisitors
-	 */
-	public Set<InterpreterASTNodeVisitor> getNodeVisitors() {
-		// begin-user-code
-		return this.nodeVisitors;
-		// end-user-code
-	}
-
-	/**
-	 * @param nodeVisitors
-	 *            the nodeVisitors to set
-	 */
-	public void setNodeVisitors(Set<InterpreterASTNodeVisitor> nodeVisitors) {
-		// begin-user-code
-		this.nodeVisitors = nodeVisitors;
-		// end-user-code
+		return this.executingVisitor.getExecutingVisitor();
 	}
 
 	/** 
@@ -123,10 +86,9 @@ public class Interpreter {
 	 * 
 	 */
 	public void execute() {
-		this.currentNodeVisitor = new InterpreterASTNodeVisitor();
-		this.currentNodeVisitor
-				.setExecutionEventHandlers(this.executionEventHandlers);
-		this.program.accept(currentNodeVisitor);
+		this.executingVisitor = new InterpreterASTNodeVisitor();
+		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
+		this.program.accept(executingVisitor);
 	}
 
 	/**
@@ -158,7 +120,7 @@ public class Interpreter {
 	 * @return
 	 */
 	public Value getSymbol(VariableDeclaration key) {
-		return this.currentNodeVisitor.getSymbol(key);
+		return this.getCurrentNodeVisitor().getSymbol(key);
 	}
 
 	/**
@@ -169,7 +131,7 @@ public class Interpreter {
 	 * @return the current value of the Symbol or null if no such symbol exists
 	 */
 	public Value getSymbol(String key) {
-		return this.currentNodeVisitor.getSymbol(key);
+		return this.getCurrentNodeVisitor().getSymbol(key);
 	}
 
 	/**
@@ -177,13 +139,13 @@ public class Interpreter {
 	 * @param value
 	 */
 	public void setSymbol(VariableDeclaration key, Value value) {
-		this.currentNodeVisitor.setSymbol(key, value);
+		this.getCurrentNodeVisitor().setSymbol(key, value);
 	}
 
 	/**
 	 * @return
 	 */
 	public Map<VariableDeclaration, Value> getAllSymbols() {
-		return this.currentNodeVisitor.getAllSymbols();
+		return this.getCurrentNodeVisitor().getAllSymbols();
 	}
 }

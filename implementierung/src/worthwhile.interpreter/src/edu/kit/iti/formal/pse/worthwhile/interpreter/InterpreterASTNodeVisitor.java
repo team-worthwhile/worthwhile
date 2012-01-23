@@ -96,6 +96,28 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * The {@link InterpreterASTNodeVisitor} that was created to execute a function.
+	 * 
+	 * <code>executingVisitor</code> is not <code>null</code> if and only if this
+	 * <code>InterpreterASTNodeVisitor</code> has instantiated another <code>InterpreterASTNodeVisitor</code> and
+	 * waits for that to finish the execution of a {@link FunctionDeclaration}.
+	 */
+	private InterpreterASTNodeVisitor executingVisitor = null;
+
+	/**
+	 * Determine the currently executing {@link InterpreterASTNodeVisitor}.
+	 * 
+	 * @return the currently executing <code>InterpreterASTNodeVisitor</code>
+	 */
+	InterpreterASTNodeVisitor getExecutingVisitor() {
+		if (this.executingVisitor != null) {
+			return this.executingVisitor.getExecutingVisitor();
+		} else {
+			return this;
+		}
+	}
+
+	/**
 	 * 
 	 */
 	private Stack<Value> resultStack = new Stack<Value>();
@@ -488,10 +510,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		for (Precondition precondition : functionDeclaration.getPreconditions()) {
 			precondition.accept(this);
 		}
+
+		// pass the execution control over to the newly created function visitor
+		this.executingVisitor = functionVisitor;
+
 		functionDeclaration.getBody().accept(functionVisitor);
 		for (Postcondition postcondition : functionDeclaration.getPostconditions()) {
 			postcondition.accept(this);
 		}
+
+		// get execution control back from the function visitor that just returned
+		this.executingVisitor = null;
+
 		this.resultStack.push(functionVisitor.getReturnValue());
 		this.expressionEvaluated(functionCall);
 	}

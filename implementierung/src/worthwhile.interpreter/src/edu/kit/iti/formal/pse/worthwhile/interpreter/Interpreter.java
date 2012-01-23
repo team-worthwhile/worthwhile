@@ -31,9 +31,10 @@ public class Interpreter {
 
 	/**
 	 * @param executionEventHandlers
-	 *                the executionEventHandlers to set
+	 *            the executionEventHandlers to set
 	 */
-	public void setExecutionEventHandlers(Set<AbstractExecutionEventListener> executionEventHandlers) {
+	public void setExecutionEventHandlers(
+			Set<AbstractExecutionEventListener> executionEventHandlers) {
 		// begin-user-code
 		this.executionEventHandlers = executionEventHandlers;
 		// end-user-code
@@ -55,9 +56,10 @@ public class Interpreter {
 
 	/**
 	 * @param currentNodeVisitor
-	 *                the currentNodeVisitor to set
+	 *            the currentNodeVisitor to set
 	 */
-	public void setCurrentNodeVisitor(InterpreterASTNodeVisitor currentNodeVisitor) {
+	public void setCurrentNodeVisitor(
+			InterpreterASTNodeVisitor currentNodeVisitor) {
 		// begin-user-code
 		this.currentNodeVisitor = currentNodeVisitor;
 		// end-user-code
@@ -79,7 +81,7 @@ public class Interpreter {
 
 	/**
 	 * @param nodeVisitors
-	 *                the nodeVisitors to set
+	 *            the nodeVisitors to set
 	 */
 	public void setNodeVisitors(Set<InterpreterASTNodeVisitor> nodeVisitors) {
 		// begin-user-code
@@ -103,7 +105,7 @@ public class Interpreter {
 
 	/**
 	 * @param program
-	 *                the program to set
+	 *            the program to set
 	 */
 	public void setProgram(Program program) {
 		// begin-user-code
@@ -123,7 +125,8 @@ public class Interpreter {
 	 */
 	public void execute() {
 		this.currentNodeVisitor = new InterpreterASTNodeVisitor();
-		this.currentNodeVisitor.setExecutionEventHandlers(this.executionEventHandlers);
+		this.currentNodeVisitor
+				.setExecutionEventHandlers(this.executionEventHandlers);
 		this.program.accept(currentNodeVisitor);
 	}
 
@@ -137,7 +140,8 @@ public class Interpreter {
 	/**
 	 * @param handler
 	 */
-	public void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
+	public void removeExecutionEventHandler(
+			AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.remove(handler);
 	}
 
@@ -161,7 +165,9 @@ public class Interpreter {
 
 	/**
 	 * Get the value of a symbol by its name
-	 * @param key the name of the Symbol to look up the value for
+	 * 
+	 * @param key
+	 *            the name of the Symbol to look up the value for
 	 * @return the current value of the Symbol or null if no such symbol exists
 	 */
 	public Value getSymbol(String key) {

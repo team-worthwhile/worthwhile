@@ -25,7 +25,7 @@ public class StatementInterpreterError extends InterpreterError {
 
 	/**
 	 * @param statement
-	 *                the statement to set
+	 *            the statement to set
 	 */
 	public void setStatement(Statement statement) {
 		// begin-user-code

@@ -3,11 +3,13 @@ package edu.kit.iti.formal.pse.worthwhile.typesystem;
 import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EObject;
+
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 
@@ -40,11 +42,11 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 
 		if (element.getIndex() != null
 		                && isInstanceOf(element.getVariable().getType(), p.getArrayType(), trace)) {
-			trace.add(element, "variableRefernce_arrayAccess");
+			trace.add(element, "variableReference_arrayAccess");
 
 			return ((ArrayType) element.getVariable().getType()).getBaseType();
 		} else {
-			trace.add(element, "variableRefernce");
+			trace.add(element, "variableReference");
 			return typeof(element.getVariable().getType(), trace);
 		}
 	}
@@ -66,10 +68,8 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 		ArrayType at = AstFactory.eINSTANCE.createArrayType();
 		if (element.getValues().size() == 0) {
 			at.setBaseType(null);
-		} else if (isInstanceOf(typeof(element.getValues().get(0), trace), p.getIntegerType(), trace)) {
-			at.setBaseType(AstFactory.eINSTANCE.createIntegerType());
-		} else if (isInstanceOf(typeof(element.getValues().get(0), trace), p.getBooleanType(), trace)) {
-			at.setBaseType(AstFactory.eINSTANCE.createBooleanType());
+		} else {
+			at.setBaseType((PrimitiveType) typeof(element.getValues().get(0), trace));
 		}
 		IntegerLiteral it = AstFactory.eINSTANCE.createIntegerLiteral();
 		it.setValue(BigInteger.valueOf(element.getValues().size()));

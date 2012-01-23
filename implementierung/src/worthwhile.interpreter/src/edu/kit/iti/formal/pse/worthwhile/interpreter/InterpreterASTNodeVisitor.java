@@ -5,6 +5,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -330,8 +331,19 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(arrayLength);
 	}
 
-	public void visit(ArrayLiteral arrayLiteral) {
-		// TODO Auto-generated method stub
+	@Override
+	public void visit(final ArrayLiteral arrayLiteral) {
+		final List<Expression> values = arrayLiteral.getValues();
+		final Value[] subValues = new Value[values.size()];
+
+		int i = 0;
+		for (Expression e : values) {
+			e.accept(this);
+			subValues[i++] = this.resultStack.pop();
+		}
+
+		this.resultStack.push(new CompositeValue<Value>(subValues));
+
 		this.expressionEvaluated(arrayLiteral);
 	}
 

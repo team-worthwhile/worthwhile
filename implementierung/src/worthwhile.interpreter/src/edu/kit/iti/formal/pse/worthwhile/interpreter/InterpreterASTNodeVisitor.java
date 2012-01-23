@@ -42,7 +42,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
@@ -335,11 +334,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(arrayLiteral);
 	}
 
-	public void visit(ArrayType arrayType) {
-		// does this even have to do anything?
-
-	}
-
 	public void visit(Assertion assertion) {
 		statementWillExecute(assertion);
 		try {
@@ -399,11 +393,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(BooleanLiteral booleanLiteral) {
 		this.resultStack.push(new BooleanValue(booleanLiteral.getValue()));
 		this.expressionEvaluated(booleanLiteral);
-	}
-
-	public void visit(BooleanType booleanType) {
-		// does this even have to do anything?
-
 	}
 
 	public void visit(Conditional conditional) {
@@ -535,10 +524,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(IntegerLiteral integerLiteral) {
 		this.resultStack.push(new IntegerValue(integerLiteral.getValue()));
 		this.expressionEvaluated(integerLiteral);
-	}
-
-	public void visit(IntegerType integerType) {
-		// does this even have to do anything?
 	}
 
 	public void visit(Invariant invariant) {

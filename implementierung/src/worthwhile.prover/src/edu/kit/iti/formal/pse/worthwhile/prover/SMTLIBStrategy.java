@@ -166,26 +166,29 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
 		String literalString = "";
-		ArrayType arrayType = (ArrayType) (new WorthwhileTypesystem()).typeof(arrayLiteral, new TypeCalculationTrace());
-		
-		literalString = (new ASTNodeReturnVisitor<String>() {
+		ArrayType arrayType = (ArrayType) (new WorthwhileTypesystem()).typeof(arrayLiteral);
 
-			@Override
-                        public void visit(BooleanType node) {
-				this.setReturnValue("boolean_array");
-                        }
+		if (arrayType.getBaseType() != null) {
+			literalString = (new ASTNodeReturnVisitor<String>() {
 
-			@Override
-                        public void visit(IntegerType node) {
-				this.setReturnValue("integer_array");
-                        }
-			
-		}).apply(arrayType.getBaseType());
+				@Override
+				public void visit(BooleanType node) {
+					this.setReturnValue("boolean_array");
+				}
+
+				@Override
+				public void visit(IntegerType node) {
+					this.setReturnValue("integer_array");
+				}
+
+			}).apply(arrayType.getBaseType());
+		}
 
 		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
 			arrayLiteral.getValues().get(i).accept(this);
 			String valueAtIndex = this.formulaCompileStack.pop();
-			literalString = "(store " + literalString + " " + Integer.toString(i) + " " + valueAtIndex + ")";
+			literalString = "(store " + literalString + " " + Integer.toString(i) + " " + valueAtIndex
+			                + ")";
 		}
 		this.formulaCompileStack.push(literalString);
 	}

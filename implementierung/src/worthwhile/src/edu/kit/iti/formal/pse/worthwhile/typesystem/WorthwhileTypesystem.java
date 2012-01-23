@@ -10,6 +10,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 
@@ -107,6 +108,17 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			return super.isSameType(at1, at1.getBaseType(), at2, at2.getBaseType(), trace);
 		}
 		return super.isSameType(element1, type1, element2, type2, trace);
+	}
+
+	/**
+	 * Returns the type of the specified EObject
+	 * 
+	 * @param element
+	 *                The element whose type to return.
+	 * @return the type of the specified EObject
+	 */
+	public final Type typeof(EObject element) {
+		return (Type) typeof(element, new TypeCalculationTrace());
 	}
 
 }

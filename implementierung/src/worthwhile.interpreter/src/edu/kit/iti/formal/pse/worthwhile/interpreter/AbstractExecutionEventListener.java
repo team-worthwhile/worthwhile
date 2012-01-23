@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -62,8 +63,8 @@ public abstract class AbstractExecutionEventListener {
 	 * @param assertion
 	 *            the invalid <code>Assertion</code>
 	 */
-	public void assertionFailed(final Assertion assertion) {
-		throw new RuntimeException(assertion.toString() + " is invalid.");
+	public void annotationFailed(final Annotation annotation) {
+		throw new RuntimeException(annotation.toString() + " is invalid.");
 	}
 
 	/**
@@ -72,7 +73,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param assertion
 	 *            the valid <code>Assertion</code>
 	 */
-	public void assertionSucceeded(final Assertion assertion) {
+	public void annotationSucceeded(final Annotation annotation) {
 	}
 
 	/**

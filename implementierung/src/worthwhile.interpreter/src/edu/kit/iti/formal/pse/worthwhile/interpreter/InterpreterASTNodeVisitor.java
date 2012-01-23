@@ -18,12 +18,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
@@ -35,9 +34,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
@@ -56,6 +53,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -64,6 +62,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
 
 /**
  *
@@ -230,21 +230,21 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	/**
 	 * 
-	 * @param assertion
+	 * @param annotation
 	 */
-	private void assertionFailed(Assertion assertion) {
+	private void annotationFailed(Annotation annotation) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
-			listener.assertionFailed(assertion);
+			listener.annotationFailed(annotation);
 		}
 	}
 
 	/**
 	 * 
-	 * @param assertion
+	 * @param annotation
 	 */
-	private void assertionSucceeded(Assertion assertion) {
+	private void annotationSucceeded(Annotation annotation) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
-			listener.assertionSucceeded(assertion);
+			listener.annotationSucceeded(annotation);
 		}
 	}
 
@@ -343,6 +343,22 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(addition);
 	}
 
+	public void visit(Annotation annotation) {
+		statementWillExecute(annotation);
+		try {
+			annotation.getExpression().accept(this);
+			if (this.popBooleanValue().getValue()) {
+				annotationSucceeded(annotation);
+			} else {
+				annotationFailed(annotation);
+			}
+		} catch (StatementException e) {
+			this.executionFailed(annotation, e.getError());
+			return;
+		}
+		this.statementExecuted(annotation);
+	}
+
 	@Override
 	public void visit(final ArrayLength arrayLength) {
 		// the casts should be safe after validation
@@ -370,18 +386,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(arrayLiteral);
 	}
 
-	public void visit(Assertion assertion) {
-		statementWillExecute(assertion);
-		try {
-			// TODO Auto-generated method stub
-		} catch (StatementException e) {
-			this.executionFailed(assertion, e.getError());
-			return;
-		}
-		this.assertionSucceeded(assertion);
-		this.statementExecuted(assertion);
-	}
-
 	public void visit(Assignment assignment) {
 		this.statementWillExecute(assignment);
 		try {
@@ -393,28 +397,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			return;
 		}
 		this.statementExecuted(assignment);
-	}
-
-	public void visit(Assumption assumption) {
-		statementWillExecute(assumption);
-		try {
-			// TODO Auto-generated method stub
-		} catch (StatementException e) {
-			this.executionFailed(assumption, e.getError());
-			return;
-		}
-		this.statementExecuted(assumption);
-	}
-
-	public void visit(Axiom axiom) {
-		statementWillExecute(axiom);
-		try {
-			// TODO Auto-generated method stub
-		} catch (StatementException e) {
-			this.executionFailed(axiom, e.getError());
-			return;
-		}
-		this.statementExecuted(axiom);
 	}
 
 	public void visit(Block block) {
@@ -503,16 +485,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(equivalence);
 	}
 
-	public void visit(ExistsQuantifier existsQuantifier) {
-		// TODO Auto-generated method stub
-		this.expressionEvaluated(existsQuantifier);
-	}
-
-	public void visit(ForAllQuantifier forAllQuantifier) {
-		// TODO Auto-generated method stub
-		this.expressionEvaluated(forAllQuantifier);
-	}
-
 	public void visit(FunctionCall functionCall) {
 		InterpreterASTNodeVisitor functionVisitor = new InterpreterASTNodeVisitor();
 		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
@@ -574,16 +546,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(integerLiteral);
 	}
 
-	public void visit(Invariant invariant) {
-		try {
-			// TODO Auto-generated method stub
-		} catch (StatementException e) {
-			this.executionFailed(invariant, e.getError());
-			return;
-		}
-		this.statementExecuted(invariant);
-	}
-
 	public void visit(Less less) {
 		less.getLeft().accept(this);
 		IntegerValue left = this.popIntegerValue();
@@ -605,12 +567,17 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(Loop loop) {
-		// TODO incorporate invariant
 		this.statementWillExecute(loop);
 		try {
+			for (Invariant invariant : loop.getInvariants()) {
+				invariant.accept(this);
+			}
 			loop.getCondition().accept(this);
 			while (this.popBooleanValue().getValue()) {
 				loop.getBody().accept(this);
+				for (Invariant invariant : loop.getInvariants()) {
+					invariant.accept(this);
+				}
 				loop.getCondition().accept(this);
 			}
 		} catch (StatementException e) {
@@ -666,28 +633,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(plus);
 	}
 
-	public void visit(Postcondition postcondition) {
-		statementWillExecute(postcondition);
-		try {
-			// TODO Auto-generated method stub
-		} catch (StatementException e) {
-			this.executionFailed(postcondition, e.getError());
-			return;
-		}
-		this.statementExecuted(postcondition);
-	}
-
-	public void visit(Precondition precondition) {
-		statementWillExecute(precondition);
-		try {
-			// TODO Auto-generated method stub
-		} catch (StatementException e) {
-			this.executionFailed(precondition, e.getError());
-			return;
-		}
-		this.statementExecuted(precondition);
-	}
-
 	public void visit(Program program) {
 		this.executionStarted();
 		for (Axiom axiom : program.getAxioms()) {
@@ -695,6 +640,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		}
 		program.getMainBlock().accept(this);
 		this.executionCompleted();
+	}
+
+	public void visit(QuantifiedExpression quantifiedExpression) {
+		Validity validity = (new SpecificationChecker()).checkFormula(
+				quantifiedExpression, this.getAllSymbols());
+		if (validity.equals(Validity.UNKNOWN)) {
+			throw new StatementException(new UnknownValidityInterpreterError());
+		} else {
+			this.resultStack.push(new BooleanValue(validity
+					.equals(Validity.VALID)));
+			this.expressionEvaluated(quantifiedExpression);
+		}
 	}
 
 	public void visit(ReturnStatement returnStatement) {

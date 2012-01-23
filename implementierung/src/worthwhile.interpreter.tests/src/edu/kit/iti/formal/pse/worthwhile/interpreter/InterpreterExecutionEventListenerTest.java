@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -624,7 +625,7 @@ public class InterpreterExecutionEventListenerTest {
 		Interpreter interpreter = new Interpreter(
 		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a >= 10)\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
-			public void assertionSucceeded(Assertion assertion) {
+			public void annotationSucceeded(Annotation annotation) {
 				this.check = true;
 			}
 		};

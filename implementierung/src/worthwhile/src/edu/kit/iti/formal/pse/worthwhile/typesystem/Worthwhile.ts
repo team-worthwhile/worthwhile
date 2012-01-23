@@ -32,6 +32,7 @@ section "Variables"
 		   typeof VariableReference -> javacode {
 	    	ensureType index :<=: IntegerType
 	    }
+	    typeof ReturnValueReference -> javacode
 	
 	    
 	    

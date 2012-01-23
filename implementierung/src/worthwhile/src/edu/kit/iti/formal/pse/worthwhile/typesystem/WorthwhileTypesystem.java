@@ -8,8 +8,12 @@ import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
@@ -20,13 +24,13 @@ import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 
 	/**
-	 * Returns the type of the variable reference. If the variable reference is an array access return the base type
+	 * Returns the type of the {@link VariableReference}. If the variable reference is an array access return the base type
 	 * of the array.
 	 * 
 	 * @param element
-	 *                the variable reference from which you want to get the type.
+	 *                The variable reference from which you want to get the type.
 	 * @param trace
-	 *                a type calculation trace.
+	 *                A type calculation trace.
 	 * 
 	 * @return the type of the variable reference.
 	 */
@@ -45,13 +49,13 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	}
 
 	/**
-	 * Returns the type of the array literal. Sets the base type of the array literal to the type of the first
+	 * Returns the type of the {@link ArrayLiteral}. Sets the base type of the array literal to the type of the first
 	 * element of the array. If the array has no elements the base type is null.
 	 * 
 	 * @param element
 	 *                The array literal from which you want to get the type.
 	 * @param trace
-	 *                a type calculation trace.
+	 *                A type calculation trace.
 	 * 
 	 * @return The type of the array literal.
 	 */
@@ -70,6 +74,29 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 		trace.add(element, "arrayType");
 		return at;
 	}
+	/**
+	 * @param element The {@link ReturnValueReference} of which you want to get the type.
+	 * 
+	 * @param trace A type calculation trace. 
+	 * 
+	 * @return The type of the return value reference.
+	 */
+	@Override
+	protected final EObject type(final ReturnValueReference element, final TypeCalculationTrace trace) {
+		EObject current = element;
+		do {
+			current = current.eContainer();
+			System.out.println("current:" + current);
+			
+		} while (current != null && !(current instanceof FunctionDeclaration));
+
+		if (current == null) {
+			return null;
+		} else {
+			trace.add(element, "returnValueRefernce");
+			return ((FunctionDeclaration) current).getReturnType();
+		}
+	}
 
 	/**
 	 * Checks whether the two elements have the same type.
@@ -86,9 +113,9 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	 * @param type2
 	 *                The type of the second element.
 	 * @param trace
-	 *                a type calculation trace
+	 *                A type calculation trace
 	 * 
-	 * @return true if both have the same type, otherwise false.
+	 * @return True if both have the same type, otherwise false.
 	 */
 	@Override
 	public final boolean isSameType(final EObject element1, final EObject type1, final EObject element2,
@@ -107,7 +134,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	 * 
 	 * @param element
 	 *                The element whose type to return.
-	 * @return the type of the specified EObject
+	 * @return The type of the specified EObject
 	 */
 	public final Type typeof(final EObject element) {
 		return (Type) typeof(element, new TypeCalculationTrace());

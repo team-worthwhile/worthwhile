@@ -17,6 +17,7 @@ section "Literals"
 		typeof BooleanLiteral -> BooleanType
 		typeof IntegerLiteral -> IntegerType
 		typeof ArrayLiteral -> javacode
+ 
 	
 
 section "Variables"
@@ -36,12 +37,12 @@ section "Variables"
 	    
 section "Expressions"
 		typeof Expression + -> abstract
-		typeof ForAllQuantifier -> clone
-		typeof ExistsQuantifier -> clone
-		typeof QuantifiedExpression -> clone {
+		typeof ForAllQuantifier -> BooleanType
+		typeof ExistsQuantifier -> BooleanType		
+		typeof QuantifiedExpression -> BooleanType {
 			
 			ensureType parameter :<=: BooleanType, IntegerType
-			ensureType expression :<=: BooleanType, ForAllQuantifier, ExistsQuantifier
+			ensureType expression :<=: BooleanType
 			ensureType condition :<=: BooleanType 
 			
 		}
@@ -49,19 +50,19 @@ section "Expressions"
 		
 section "Annotation"
 		typeof Assumption -> abstract {
-			ensureType expression :<=: BooleanType, QuantifiedExpression			
+			ensureType expression :<=: BooleanType			
 		}
 		typeof Assertion -> abstract {
-			ensureType expression :<=: BooleanType, QuantifiedExpression
+			ensureType expression :<=: BooleanType
 		}
 		typeof Postcondition -> abstract {
-			ensureType expression :<=: BooleanType, QuantifiedExpression
+			ensureType expression :<=: BooleanType
 		}
 		typeof Precondition -> abstract {
-			ensureType expression :<=: BooleanType, QuantifiedExpression
+			ensureType expression :<=: BooleanType
 		}
 		typeof Invariant -> abstract {
-			ensureType expression :<=: BooleanType, QuantifiedExpression
+			ensureType expression :<=: BooleanType
 		}
 
 section "Binary Expression with integer operands"

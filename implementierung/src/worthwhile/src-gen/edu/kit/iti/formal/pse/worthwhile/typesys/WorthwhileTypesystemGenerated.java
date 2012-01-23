@@ -43,21 +43,21 @@
 
 						// include subtypes!
 						// ------
-						useCloneAsType( p.getForAllQuantifier() );
-						useCloneAsType( p.getExistsQuantifier() );
-						useCloneAsType( p.getQuantifiedExpression() );
+						useFixedType( p.getForAllQuantifier(), p.getBooleanType() );
+						useFixedType( p.getExistsQuantifier(), p.getBooleanType() );
+						useFixedType( p.getQuantifiedExpression(), p.getBooleanType() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Parameter(), p.getBooleanType(), p.getIntegerType() );
-						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Expression(), p.getBooleanType(), p.getForAllQuantifier(), p.getExistsQuantifier() );
+						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Expression(), p.getBooleanType() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Condition(), p.getBooleanType() );
 
 						// ----------------------------------------------------------------
 						// Section: Annotation
 
-						ensureFeatureType( p.getAssumption(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
-						ensureFeatureType( p.getAssertion(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
-						ensureFeatureType( p.getPostcondition(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
-						ensureFeatureType( p.getPrecondition(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
-						ensureFeatureType( p.getInvariant(), p.getAnnotation_Expression(), p.getBooleanType(), p.getQuantifiedExpression() );
+						ensureFeatureType( p.getAssumption(), p.getAnnotation_Expression(), p.getBooleanType() );
+						ensureFeatureType( p.getAssertion(), p.getAnnotation_Expression(), p.getBooleanType() );
+						ensureFeatureType( p.getPostcondition(), p.getAnnotation_Expression(), p.getBooleanType() );
+						ensureFeatureType( p.getPrecondition(), p.getAnnotation_Expression(), p.getBooleanType() );
+						ensureFeatureType( p.getInvariant(), p.getAnnotation_Expression(), p.getBooleanType() );
 
 						// ----------------------------------------------------------------
 						// Section: Binary Expression with integer operands

@@ -5,11 +5,14 @@ import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwh
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 // A program consists of a sequence of statements and/or function declarations.
+// Alternatively, it can consist of exactly one expression evaluation.
 Program returns Program:
 	{Program}
-	NL* // Newline at the beginning of the file is allowed.
-	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
-	mainBlock=Block // FIXME: Newline at end of file?
+	(
+		NL* // Newline at the beginning of the file is allowed.
+		((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
+		mainBlock=Block // FIXME: Newline at end of file?
+	) | "__eval" expressionEvaluation=ExpressionEvaluation
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 
@@ -204,4 +207,9 @@ VariableReference returns VariableReference:
 // A special variable reference is needed to point to the return value of a function.
 ReturnValueReference returns ReturnValueReference:
 	{ReturnValueReference} "_return"
+;
+
+// An expression evaluation is a special helper rule to allow a program consisting only of one expression
+ExpressionEvaluation returns ExpressionEvaluation:
+	expression=Expression
 ;

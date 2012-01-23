@@ -29,6 +29,9 @@
                   <eStructuralFeatures xsi:type="ecore:EReference" name="axioms" ordered="false"
                       upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Axiom"
                       containment="true"/>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="expressionEvaluation"
+                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionEvaluation"
+                      containment="true"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ASTNode" abstract="true">
                   <eOperations name="accept">
@@ -568,6 +571,12 @@
                     </eAnnotations>
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
+                </eClassifiers>
+                <eClassifiers xsi:type="ecore:EClass" name="ExpressionEvaluation"
+                    eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Statement">
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="expression"
+                      lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
+                      containment="true"/>
                 </eClassifiers>
                 <eSubpackages name="visitor" nsURI="http:///visitor.ast.model.worthwhile.pse.formal.iti.kit.edu"
                     nsPrefix="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor">

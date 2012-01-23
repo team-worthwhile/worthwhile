@@ -29,6 +29,8 @@
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/mainBlock"/>
                     <genFeatures property="None" children="true" createChild="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/axioms"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/expressionEvaluation"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/accept/visitor"/>
                     </genOperations>
@@ -365,6 +367,10 @@
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference/accept/visitor"/>
                     </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionEvaluation">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionEvaluation/expression"/>
                   </genClasses>
                   <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
                       disposableProviderFactory="true" adapterFactory="false" literalsInterface="false"

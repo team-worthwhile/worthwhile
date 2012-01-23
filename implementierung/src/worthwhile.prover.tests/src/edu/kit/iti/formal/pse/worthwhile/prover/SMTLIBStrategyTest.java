@@ -35,12 +35,13 @@ public final class SMTLIBStrategyTest {
 	 */
 	@Test
 	public void testLiteralOnlyFormula() {
-		Expression formula = TestASTProvider.parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
+		Expression formula = TestASTProvider
+		                .parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 		Assert.assertNotNull(formula);
 		String compiled = this.compiler.compileFormula(formula);
 		String expectedCompiled = "(assert (and (and (or (not false) (= (mod 9 4) 1)) true) (= (+ 3 3) 6)))\n"
 		                + "(check-sat)";
-		Assert.assertEquals(expectedCompiled, compiled);
+		Assert.assertTrue(compiled.contains(expectedCompiled));
 	}
 
 	/**
@@ -57,8 +58,8 @@ public final class SMTLIBStrategyTest {
 		// try to compile it to SMTLIB
 		String compiledFormula = compiler.compileFormula(aRef);
 		// expect the compiler to declare the variable a before using it
-		String expectedCompiledFormula = "(declare-const a Bool)\n" + "(assert a)\n" + "(check-sat)";
-		Assert.assertEquals(expectedCompiledFormula, compiledFormula);
+		String expectedCompiledFormula = "(declare-const a Bool)\n(assert a)\n(check-sat)";
+		Assert.assertTrue(compiledFormula.contains(expectedCompiledFormula));
 	}
 
 	/**
@@ -69,6 +70,6 @@ public final class SMTLIBStrategyTest {
 		Expression formula = TestASTProvider.parseFormulaString("-1 = 1 + (-2)");
 		String compiledFormula = this.compiler.compileFormula(formula);
 		String expectedCompiledFormula = "(assert (= (- 1) (+ 1 (- 2))))\n(check-sat)";
-		Assert.assertEquals(expectedCompiledFormula, compiledFormula);
+		Assert.assertTrue(compiledFormula.contains(expectedCompiledFormula));
 	}
 }

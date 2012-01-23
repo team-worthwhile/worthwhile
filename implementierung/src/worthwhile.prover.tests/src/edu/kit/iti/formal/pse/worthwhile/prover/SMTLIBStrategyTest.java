@@ -61,4 +61,14 @@ public final class SMTLIBStrategyTest {
 		Assert.assertEquals(expectedCompiledFormula, compiledFormula);
 	}
 
+	/**
+	 * Tests the compilation of a negative integer literal.
+	 */
+	@Test
+	public void testNegativeIntegerEquals() {
+		Expression formula = TestASTProvider.parseFormulaString("-1 = 1 + (-2)");
+		String compiledFormula = this.compiler.compileFormula(formula);
+		String expectedCompiledFormula = "(assert (= (- 1) (+ 1 (- 2))))\n(check-sat)";
+		Assert.assertEquals(expectedCompiledFormula, compiledFormula);
+	}
 }

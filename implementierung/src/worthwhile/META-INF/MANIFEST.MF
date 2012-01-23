@@ -28,4 +28,6 @@ Export-Package: edu.kit.iti.formal.pse.worthwhile,
  edu.kit.iti.formal.pse.worthwhile.scoping,
  edu.kit.iti.formal.pse.worthwhile.services,
  edu.kit.iti.formal.pse.worthwhile.util,
- edu.kit.iti.formal.pse.worthwhile.validation
+ edu.kit.iti.formal.pse.worthwhile.validation,
+ edu.kit.iti.formal.pse.worthwhile.typesystem
+

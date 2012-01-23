@@ -37,22 +37,22 @@ public class InterpreterScopingTest {
 	}
 
 	static void assertLocalVariablesHaveExpectedValues(final Interpreter interpreter) {
-		assertTrue(interpreter.getSymbol("localUsedBool").equals(new BooleanValue(true)));
-		assertTrue(interpreter.getSymbol("localUsedInt").equals(new IntegerValue(new BigInteger("42"))));
+		assertEquals(interpreter.getSymbol("localUsedBool"), new BooleanValue(false));
+		assertEquals(interpreter.getSymbol("localUsedInt"), new IntegerValue(new BigInteger("24")));
 
 		BooleanValue[] array1 = new BooleanValue[4];
 		array1[0] = new BooleanValue(true);
-		array1[1] = new BooleanValue(false);
+		array1[1] = new BooleanValue(true);
 		array1[2] = new BooleanValue(false);
-		array1[3] = new BooleanValue(true);
-		assertTrue(interpreter.getSymbol("localUsedBoolArray").equals(new CompositeValue<BooleanValue>(array1)));
+		array1[3] = new BooleanValue(false);
+		assertEquals(interpreter.getSymbol("localUsedBoolArray"), new CompositeValue<BooleanValue>(array1));
 
 		IntegerValue[] array2 = new IntegerValue[4];
-		array2[0] = new IntegerValue(new BigInteger("42"));
-		array2[1] = new IntegerValue(new BigInteger("100"));
-		array2[2] = new IntegerValue(new BigInteger("99"));
-		array2[3] = new IntegerValue(new BigInteger("1"));
-		assertTrue(interpreter.getSymbol("localUsedIntArray").equals(new CompositeValue<IntegerValue>(array2)));
+		array2[0] = new IntegerValue(new BigInteger("1"));
+		array2[1] = new IntegerValue(new BigInteger("2"));
+		array2[2] = new IntegerValue(new BigInteger("3"));
+		array2[3] = new IntegerValue(new BigInteger("4"));
+		assertEquals(interpreter.getSymbol("localUsedIntArray"), new CompositeValue<IntegerValue>(array2));
 	}
 
 	static void assertGlobalVariablesHaveExpectedValues(final Interpreter interpreter) {

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="../css/book.css" type="text/css" />
+	<title>Array</title>
+</head>
+
+<body>
+<h1>Array</h1>
+Arrays are a indexed collection of elements of a given base type, which can be either <a href="integer.html">Integer</a> or <a href="boolean.html">Boolean</a>. Note that because of this limitation there exists no such things like arrays of arrays.<br>
+<a href="variabledeclaration.html">Declaration</a> of an array works just like primitive variable declaration. If there is no <a href="assignment.html">assignment</a> on declaration, the array is empty and single elements can not be referenced.<br>
+An array element can be referenced with the specified name of the array and an positive Integer index. Possible index values begin at zero and reach until the lenght of the array minus one.<br>
+There exists an array literal which can be used to assign values to an array. The values of an array literal can be of type Integer or Boolean but must be uniform. The length of an array literal is the number of elements held by it.<br>
+The length of an array can be found out by using the built in function length()<br><br>
+
+<b>Syntax: (Array declaration)</b><br>
+<pre>
+Integer[] &lt;<a href="identifier.html">name</a>&gt;
+Boolean[] &lt;<a href="identifier.html">name</a>&gt;
+</pre><br>
+<b>Syntax: (Array usage)</b><br>
+<pre>
+&lt;<a href="identifier.html">name</a>&gt;[&lt;index&gt;]
+</pre><br>
+<b>Syntax: (Array literal)</b><br>
+<pre>
+{&lt;value&gt;*}
+</pre><br>
+<b>Syntax: (Array length)</b><br>
+<pre>
+length(&lt;<a href="identifier.html">name</a>&gt;)
+</pre><br>
+<b>Example:</b><br>
+<pre>
+Boolean[] d := {1, 2, 3}
+Integer i := 0
+
+for(i < length(d)) {
+	d[i] := 0
+}
+</pre>
+</body>
+</html>

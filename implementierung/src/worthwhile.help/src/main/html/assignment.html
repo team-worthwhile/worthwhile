@@ -9,23 +9,27 @@
 
 <body>
 <h1>Assignment</h1>
-<!--TODO-->
-Assignments are used to alter the value of <a href="boolean.html">Boolean</a> and <a href="integer.html">Integer</a> variables or arrays.<br><br>
+Assignments are used to alter the value of primitive <a href="variabledeclaration.html">variables</a>, single <a href="array.html">array</a> elements or whole arrays. The new value of the variable is the value of the given <a href="expression.html">expression</a>. Note that the types of both the variable and the expression must be the same. It is also possible to alter a whole array by assigning an array literal to it.<br><br>
 
 <b>Syntax</b><br>
 <pre>
-&lt;name&gt; := &lt;<a href="expression.html">expression</a>&gt;
+&lt;<a href="identifier.html">name</a>&gt; := &lt;<a href="expression.html">expression</a> | <a href="array.html">array</a> literal&gt;
 </pre><br><br>
 
 <b>Example:</b><br>
-<!--TODO Arrays-->
 <pre>
 Integer a
 Integer b
 Boolean c
+Integer[] d := {21, 2}
+Boolean[2] e
+
 a := 5
 b := a + a
 c := true
+d := {42, 4}
+e[0] := d[1]
+e[1] := d[0]
 </pre>
 </body>
 </html>

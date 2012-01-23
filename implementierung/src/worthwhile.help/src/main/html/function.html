@@ -9,14 +9,14 @@
 
 <body>
 <h1>Functions</h1>
-<!--TODO-->
-In a <a href="program.html">Worthwhile program</a> you can declare and call functions. Function declarations must be at the beginning of the code. A function has a return type of either <a href="boolean.html">Boolean</a> or <a href="integer.html">Integer</a>. Each function is identified with an unique name which must start with a letter (A-Z or a-z) and followed by optional letters (A-Z or a-z), numbers (0-9), '-' or '_'. Optional Parameters are allowed in the declaration which can be used in the function block. You have to specify a function block of <a href="statement.html">statements</a> which are executed in their own context when this function is called. Thus it is not possible to manipulate <a href="variable.html">variables</a> of the main block or other functions. It is also not allowed to call a function before it is declared. This prevents recursive use of functions. A function is called in the main block or other functions (after the declaration) by its unique name and by passing the correct parameters to it. Also a function can have multiple pre- and postconditions (<a href="requires.html">_requires</a> and <a href="ensures.html">_ensures</a>) which have to be placed after the parameters and before the function block.<br><br>
+In a <a href="program.html">Worthwhile program</a> you can declare and call functions.
+To declare functions the 'function' keyword is used. Function declarations must be at the beginning of the code. The return type of either <a href="boolean.html">Boolean</a> or <a href="integer.html">Integer</a> must be specified. Also a function is identified with a specified unique <a href="identifier.html">name</a>. Optional Parameters are allowed in the declaration which can be used in the function block. You have to specify a function block that may hold <a href="statement.html">statements</a> which are executed in their own scope when this function is called. Thus it is not possible to manipulate <a href="variabledeclaration.html">variables</a> of the main block or other functions. It is also not allowed to call a function before it is declared. This prevents recursive use of functions. A function is called in the main block or other functions (after the declaration) by its unique name and by passing parameters with the correct type to it. Also a function can have multiple pre- and postconditions (<a href="requires.html">_requires</a> and <a href="ensures.html">_ensures</a>) which have to be placed after the parameters and before the function block. In a function block every execution flow must have a <a href="return.html">return</a> statement. In particular this means the function block itself must have at least one return statement or every <a href="condition.html">if-else</a> must have a return statement in both, the if block and the else block.<br><br>
 <b>Syntax:</b><br>
 <pre>
-function &lt;type&gt; &lt;name&gt;(&lt;parameters&gt;,...)
-	&lt;_requires&gt;,... &lt;_ensures&gt;,...
+function &lt;type&gt; &lt;<a href="identifier.html">name</a>&gt;(&lt;type <a href="identifier.html">name</a>&gt; &lt;,type <a href="identifier.html">name</a>&gt;*)
+&lt;<a href="requires.html">precondition</a> | <a href="ensures.html">postcondition</a>&gt;*
 {
-	&lt;statements&gt;
+	&lt;<a href="statement.html">statements</a>&gt;
 }
 </pre>
 <br><br>
@@ -27,22 +27,23 @@ Function declaration:<br>
 function Integer pow(Integer base, Integer exponent)
 _requires(exponent >= 0)
 {
-Integer result := base
+	Integer result := base
 
-if(exponent == 0) {
-	return 1
-}
+	if(exponent == 0) {
+		return 1
+	}
 
-while( exponent > 1) {
-	result := result * base
-	exponent := exponent - 1
-}
+	while( exponent > 1) {
+		result := result * base
+		exponent := exponent - 1
+	}
 
-return base
+	return base
 }
 
 function Boolean isEqualToSquare(Integer a, Integer b) {
-Integer c := pow(b, 2)
+	Integer c := pow(b, 2)
+
 	if(a = c) {
 		return true
 	} else {

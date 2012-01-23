@@ -9,16 +9,16 @@
 
 <body>
 <h1>_assume</h1>
-The given <a href="expression.html">expression</a>, which must be of type <a href="boolean_type.html">Boolean</a>, is taken for granted or accepted as true by the prover.<br><br>
+The given <a href="expression.html">expression</a>, which must be of type <a href="boolean.html">Boolean</a>, or <a href="quantifiedexpression.html">quantified expression</a> is taken for granted or accepted as true by the prover.<br><br>
 <b>Syntax:</b><br>
 <pre>
-_assume(&lt;<a href="expression.html">expression</a>&gt;)
+_assume &lt;<a href="boolean.html">boolean</a> <a href="expression.html">expression</a> | <a href="quantifiedexpression.html">quantified expression</a>&gt;
 </pre><br><br>
 
 <b>Example:</b><br>
 <pre>
 Integer i := 42
-_assume(i &gt= 42)
+_assume i &gt= 42
 </pre>
 </body>
 </html>

@@ -9,13 +9,12 @@
 
 <body>
 <h1>while loop</h1>
-<!--TODO-->
-To repeatedly execute <a href="statement.html">statements</a> while a certain <a href="expression.html">expression</a> is true there exists the while loop. A while loop has a block which is executed repeatedly if the given expression is true at the beginning of each cycle. <!--TODO invariant--><br><br>
+To repeatedly execute <a href="statement.html">statements</a> while a certain <a href="expression.html">expression</a> is true there exists the while loop. A while loop has a block which is executed frequently if the given expression is true at the beginning of each cycle. In front of the block there may be <a href="invariant.html">invariants</a> which tell the prover that the given expressions are true at the beginning of each loop cycle and at the end.<br><br>
 
 <b>Syntax:</b><br>
 <pre>
 while(&lt;<a href="expression.html">expression</a>&gt;)
-<!--TODO invariant-->
+&lt;<a href="invariant.html">invariant</a>&gt;+
 {
 &lt;block&gt;
 }
@@ -24,7 +23,9 @@ while(&lt;<a href="expression.html">expression</a>&gt;)
 <b>Example:</b><br>
 <pre>
 Integer i := 0
-while(i < 10) {
+while(i < 10)
+_invariant i <= 10
+{
 	i = i + 1
 }
 </pre>

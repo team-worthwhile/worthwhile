@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="../css/book.css" type="text/css" />
+	<title>Conditions</title>
+</head>
+
+<body>
+<h1>Conditions</h1>
+To alter the control flow of the program, there are existing conditional statements. These statements are used to execute a certain block of statements if the given <a href="boolean.html">boolean</a> <a href="expression.html">expression</a> is true. There may be an alternative block which will be executed only if the given expression is false.<br><br>
+<b>Syntax:</b><br>
+<pre>
+if(&lt;<a href="boolean.html">boolean</a> <a href="expression.html">expression</a>&gt;) {
+	&lt;if-block&gt;
+}
+
+if(&lt;<a href="boolean.html">boolean</a> <a href="expression.html">expression</a>&gt;) {
+	&lt;if-block&gt;
+} else {
+	&lt;else-block&gt;
+}
+</pre>
+<b>Example:</b><br>
+<pre>
+Integer a := 1
+Integer b := 5
+
+if( a > b) {
+	a := b
+} else {
+	b := a
+}
+</pre>
+</body>
+</html>

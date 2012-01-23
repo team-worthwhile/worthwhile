@@ -9,18 +9,18 @@
 
 <body>
 <h1>Quantified Expression</h1>
-<!--TODO-->
-<br><br>
-A quantified expression is used within some statements like <a href="axiom.html">axioms</a>, <a href="assume.html">assumptions</a>, <a href="assert.html">assertions</a>, <a href="requires.html">preconditions</a> or <a href="ensures.html">postconditions</a>. These type of expression allows the user to make statements with quantors (&#8704 or &#8707).<br><br>
+A quantified expression is used within some statements like <a href="axiom.html">axioms</a>, <a href="assume.html">assumptions</a>, <a href="assert.html">assertions</a>, <a href="requires.html">preconditions</a>, <a href="ensures.html">postconditions</a> or <a href="invariant.html">invariants</a>. These type of expression allows the user to make statements with quantors (&#8704 or &#8707, alternative: <b>forall</b> or <b>exists</b>). The type of a quantified expression is <a href="boolean.html">Boolean</a>.<br><br>
 
 <b>Syntax:</b><br>
 <pre>
-&lt;&#8704&gt;&lt;type&gt;&lt;name&gt;,... &lt;&#8707&gt;&lt;type&gt;&lt;name&gt;,... : &lt;expression&gt;
-</pre><br><br>
+&lt;&lt;&#8704|forall|&#8707|exists&gt; &lt;type&gt; &lt;<a href="identifier.html">name</a>&gt; &lt;,&lt;<a href="boolean.html">boolean</a> <a href="expression.html">expression</a>&gt;&gt;?&gt;+ : &lt;<a href="expression.html">expression</a>&gt;
+</pre>
+Note: &lt;type&gt; can only be <a href="integer.html">Integer</a> or <a href="boolean.html">Boolean</a>.
+<br><br>
 
 <b>Example:</b><br>
 <pre>
-&#8704 Integer a, &#8704 Integer b : a + b + 1 > a
+&#8704 Integer a, &#8704 Integer b,(b > 0) : a + b + 1 > a
 </pre>
 </body>
 </html>

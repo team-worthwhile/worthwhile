@@ -9,22 +9,23 @@
 
 <body>
 <h1>Variable declaration</h1>
-<!--TODO-->
-Variable declarations are used to introduce new variables either of type <a href="boolean.html">Boolean</a> or <a href="integer.html">Integer</a> to the program. <!--TODO arrays--> These variables are visible in the block in which they are declared and all sub blocks. It is also possible to directly <a href="assignment.html">assign</a> a value to the variable.<br><br>
+Variable declarations are used to introduce new variables either of type <a href="boolean.html">Boolean</a>, <a href="integer.html">Integer</a> or <a href="array.html">Array</a> to the program. These variables are visible in the block in which they are declared and all sub blocks. It is also possible to directly <a href="assignment.html">assign</a> a value at a variable declaration.<br>
+Within the program a variable is referenced with the given name.<br><br>
 
 <b>Syntax:</b><br>
 <pre>
-Integer &lt;name&gt;
-Boolean &lt;name&gt;
-<!--TODO arrays-->
+Integer &lt;<a href="identifier.html">name</a>&gt;
+Boolean &lt;<a href="identifier.html">name</a>&gt;
+Integer[] &lt;<a href="identifier.html">name</a>&gt;
+Boolean[] &lt;<a href="identifier.html">name</a>&gt;
 </pre><br>
-
 <b>Example:</b><br>
 <pre>
 Integer a
 Integer b := 4
 Integer c := b + 38
-<!--TODO arrays-->
+Boolean[] d := {1, 2, 3}
+Boolean e := d[2]
 </pre>
 </body>
 </html>

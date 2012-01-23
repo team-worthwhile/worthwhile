@@ -4,7 +4,7 @@
 		import de.itemis.xtext.typesystem.exceptions.TypesystemConfigurationException;
 		import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 
-		public class WorthwhileTypesystemGenerated extends de.itemis.xtext.typesystem.DefaultTypesystem {
+		public  abstract class WorthwhileTypesystemGenerated extends de.itemis.xtext.typesystem.DefaultTypesystem {
 
 			protected edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage p = edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage.eINSTANCE;
 
@@ -26,7 +26,6 @@
 
 						useFixedType( p.getBooleanLiteral(), p.getBooleanType() );
 						useFixedType( p.getIntegerLiteral(), p.getIntegerType() );
-						useFixedType( p.getArrayLiteral(), p.getArrayType() );
 
 						// ----------------------------------------------------------------
 						// Section: Variables
@@ -37,19 +36,19 @@
 						useTypeOfFeature( p.getAssignment(), p.getAssignment_Variable() );
 						ensureFeatureType( p.getAssignment(), p.getAssignment_Value(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( p.getAssignment(), p.getAssignment_Variable(), p.getAssignment_Value() );
-						useTypeOfFeature( p.getVariableReference(), p.getVariableReference_Variable() );
+						ensureFeatureType( p.getVariableReference(), p.getVariableReference_Index(), p.getIntegerType() );
 
 						// ----------------------------------------------------------------
 						// Section: Expressions
 
 						// include subtypes!
 						// ------
+						useCloneAsType( p.getForAllQuantifier() );
+						useCloneAsType( p.getExistsQuantifier() );
 						useCloneAsType( p.getQuantifiedExpression() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Parameter(), p.getBooleanType(), p.getIntegerType() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Expression(), p.getBooleanType(), p.getForAllQuantifier(), p.getExistsQuantifier() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Condition(), p.getBooleanType() );
-						useCloneAsType( p.getForAllQuantifier() );
-						useCloneAsType( p.getExistsQuantifier() );
 
 						// ----------------------------------------------------------------
 						// Section: Annotation
@@ -154,5 +153,7 @@
 				}
 			}
 
+			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral element, TypeCalculationTrace trace );
+			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference element, TypeCalculationTrace trace );
 
 		}

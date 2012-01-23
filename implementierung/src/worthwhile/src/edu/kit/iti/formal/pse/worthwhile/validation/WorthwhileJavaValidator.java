@@ -7,7 +7,11 @@ import org.eclipse.xtext.validation.Check;
 import com.google.inject.Inject;
 
 import de.itemis.xtext.typesystem.ITypesystem;
+import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
@@ -83,12 +87,17 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 		} while (current != null && !(current instanceof FunctionDeclaration));
 
 		if (current == null) {
+			// No FunctionDeclaration found
 			error("The return statement has to be in a function block.", returnStatement, null, -1);
 		} else {
-			WorthwhileTypesystem wts = (WorthwhileTypesystem) ts;
-			if (!equalTypes(wts.type(returnStatement), wts.type((FunctionDeclaration) current))) {
-				error("The return type has to be the same as the type of its function.",
-				                returnStatement, null, -1);
+			// Check if the type of the return statement is the same as the type of the function
+			TypeCalculationTrace trace = new TypeCalculationTrace();
+			if (!ts.isSameType(returnStatement, ts.typeof(returnStatement.getReturnValue(), trace),
+			                current, ts.typeof(current, trace), trace)) {
+				error("Type mismatch. Expected " + ts.typeString(ts.typeof(current, trace))
+				                + ", but found "
+				                + ts.typeString(ts.typeof(returnStatement.getReturnValue(), trace))
+				                + ".", returnStatement.getReturnValue(), null, -1);
 			}
 		}
 	}
@@ -103,19 +112,68 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	public final void checkFunctionCallParameter(final FunctionCall functionCall) {
 
 		if (functionCall.getActuals().size() != functionCall.getFunction().getParameters().size()) {
-			error("The amount of parameters is incorrect.", functionCall, null, -1);
+			error("The amount of parameters is incorrect. Expecting "
+			                + functionCall.getFunction().getParameters().size() + " parameters, but found "
+			                + functionCall.getActuals().size() + ".", functionCall, null, -1);
 		} else {
-			WorthwhileTypesystem wts = (WorthwhileTypesystem) ts;
+			TypeCalculationTrace trace = new TypeCalculationTrace();
 			EList<Expression> actuals = functionCall.getActuals();
 			EList<VariableDeclaration> parameters = functionCall.getFunction().getParameters();
 
 			for (int i = 0; i < actuals.size(); i++) {
-				if (!equalTypes(wts.type(actuals.get(i)), wts.type(parameters.get(i)))) {
-					error("The " + (i + 1) + ". parameter has the wrong type.", functionCall, null,
-					                -1);
+				if (!((WorthwhileTypesystem) ts).isSameType(functionCall,
+				                ts.typeof(actuals.get(i), trace), functionCall.getFunction(),
+				                ts.typeof(parameters.get(i), trace), trace)) {
+					error("Expected parameter " + ts.typeString(ts.typeof(parameters.get(i), trace))
+					                + " , but found " + ts.typeString(ts.typeof(actuals.get(i), trace)) + ".",
+					                actuals.get(i), null, -1);
+
 				}
 			}
 		}
+	}
+
+	/**
+	 * Checks if the arrayLiteral is used in an initialization and if all entries have the same type as the variable
+	 * which get initialized.
+	 * 
+	 * @param arrayLiteral
+	 *                The array literal to be checked.
+	 */
+	@Check
+	public final void checkArrayLiteral(final ArrayLiteral arrayLiteral) {
+		EObject current = arrayLiteral;
+		boolean inVariableDec = false;
+		boolean inAssignment = false;
+		EList<Expression> actuals = arrayLiteral.getValues();
+		TypeCalculationTrace trace = new TypeCalculationTrace();
+		// Check which container the arrayLiteral has
+		current = current.eContainer();
+		if (current instanceof VariableDeclaration) {
+			inVariableDec = true;
+		} else if (current instanceof Assignment) {
+			inAssignment = true;
+		}
+		EObject type = ts.typeof(actuals.get(0), trace);
+
+		if (ts.isInstanceOf(ts.typeof(current, trace), AstPackage.eINSTANCE.getArrayType(), trace)) {
+
+			if (inAssignment) {
+
+				type = ((ArrayType) ((Assignment) current).getVariable().getVariable().getType())
+				                .getBaseType();
+			} else if (inVariableDec) {
+				type = ((ArrayType) ((VariableDeclaration) current).getType()).getBaseType();
+			}
+		}
+		for (int i = 0; i < actuals.size(); i++) {
+			if (!ts.isSameType(type, type, actuals.get(i), ts.typeof(actuals.get(i), trace), trace)) {
+				error("Element doesn't match type of the array. Expected " + ts.typeString(type)
+				                + ", but found " + ts.typeString(ts.typeof(actuals.get(i), trace))
+				                + ".", actuals.get(i), null, -1);
+			}
+		}
+
 	}
 
 	/**
@@ -128,19 +186,5 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	public final void checkTypesystemRules(final ASTNode node) {
 		ts.checkTypesystemConstraints(node, this);
 
-	}
-
-	/**
-	 * Checks if the the two given types are the same.
-	 * 
-	 * @param type1
-	 *                the first type to be checked
-	 * @param type2
-	 *                the second type to be checked
-	 * @return true if the types are the same, otherwise false
-	 */
-	private boolean equalTypes(final EObject type1, final EObject type2) {
-		String type = type1.toString().substring(0, type1.toString().indexOf("@"));
-		return type2.toString().contains(type);
 	}
 }

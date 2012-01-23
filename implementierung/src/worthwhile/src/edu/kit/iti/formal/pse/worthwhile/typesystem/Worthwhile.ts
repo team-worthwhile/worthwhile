@@ -16,22 +16,28 @@ section "Literals"
 		typeof Literal -> abstract
 		typeof BooleanLiteral -> BooleanType
 		typeof IntegerLiteral -> IntegerType
-		typeof ArrayLiteral -> ArrayType 
+		typeof ArrayLiteral -> javacode
+	
+
 section "Variables"
-		typeof VariableDeclaration -> feature type {
+		typeof VariableDeclaration -> feature  type {
 			ensureType type :<=: BooleanType, IntegerType, ArrayType
-			ensureCompatibility initialValue :<=>: type
+			ensureCompatibility initialValue :<=>: type 
 		}
 	    typeof Assignment -> feature variable {
 	    	ensureType value :<=: BooleanType, IntegerType, ArrayType
 	    	ensureCompatibility variable :<=>: value
 	    }
-	    typeof VariableReference -> feature variable
+		   typeof VariableReference -> javacode {
+	    	ensureType index :<=: IntegerType
+	    }
 	
 	    
 	    
 section "Expressions"
 		typeof Expression + -> abstract
+		typeof ForAllQuantifier -> clone
+		typeof ExistsQuantifier -> clone
 		typeof QuantifiedExpression -> clone {
 			
 			ensureType parameter :<=: BooleanType, IntegerType
@@ -39,8 +45,7 @@ section "Expressions"
 			ensureType condition :<=: BooleanType 
 			
 		}
-		typeof ForAllQuantifier -> clone
-		typeof ExistsQuantifier -> clone
+		
 		
 section "Annotation"
 		typeof Assumption -> abstract {

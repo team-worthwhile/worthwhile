@@ -2,7 +2,70 @@
 <?NLS TYPE="org.eclipse.help.contexts"?>
 
 <contexts>
+	<context id="keyword_Array" title="Arrays">
+		<topic href="src/main/html/integer.html" label="Arrays"/>
+	</context>
+	<context id="keyword_Assertion" title="Assertions">
+		<topic href="src/main/html/integer.html" label="Assertions"/>
+	</context>
+	<context id="keyword_Assignment" title="Assignments">
+		<topic href="src/main/html/integer.html" label="Assignments"/>
+	</context>
+	<context id="keyword_Assumption" title="Assumptions">
+		<topic href="src/main/html/integer.html" label="Assumptions"/>
+	</context>
+	<context id="keyword_Axiom" title="Axioms">
+		<topic href="src/main/html/integer.html" label="Axioms"/>
+	</context>
+	<context id="keyword_Boolean" title="Booleans">
+		<topic href="src/main/html/integer.html" label="Booleans"/>
+	</context>
+	<context id="keyword_Comment" title="Comments">
+		<topic href="src/main/html/integer.html" label="Comments"/>
+	</context>
+	<context id="keyword_Condition" title="Conditions">
+		<topic href="src/main/html/integer.html" label="Conditions"/>
+	</context>
+	<context id="keyword_Expression" title="Expressions">
+		<topic href="src/main/html/integer.html" label="Expressions"/>
+	</context>
+	<context id="keyword_Function" title="Functions">
+		<topic href="src/main/html/integer.html" label="Functions"/>
+	</context>
+	<context id="keyword_Identifier" title="Identifiers">
+		<topic href="src/main/html/integer.html" label="Identifiers"/>
+	</context>
 	<context id="keyword_Integer" title="Integers">
 		<topic href="src/main/html/integer.html" label="Integers"/>
+	</context>
+	<context id="keyword_Invariant" title="Invariants">
+		<topic href="src/main/html/integer.html" label="Invariants"/>
+	</context>
+	<context id="keyword_Loop" title="Loops">
+		<topic href="src/main/html/integer.html" label="Loops"/>
+	</context>
+	<context id="keyword_Operator" title="Operators">
+		<topic href="src/main/html/integer.html" label="Operators"/>
+	</context>
+	<context id="keyword_Postcondition" title="Postconditions">
+		<topic href="src/main/html/integer.html" label="Postconditions"/>
+	</context>
+	<context id="keyword_Precondition" title="Preconditions">
+		<topic href="src/main/html/integer.html" label="Preconditions"/>
+	</context>
+	<context id="keyword_Program" title="Programs">
+		<topic href="src/main/html/integer.html" label="Programs"/>
+	</context>
+	<context id="keyword_Quantified_Expression" title="Quantified Expressions">
+		<topic href="src/main/html/integer.html" label="Quantified_Expressions"/>
+	</context>
+	<context id="keyword_Return" title="Returns">
+		<topic href="src/main/html/integer.html" label="Returns"/>
+	</context>
+	<context id="keyword_Statement" title="Statements">
+		<topic href="src/main/html/integer.html" label="Statements"/>
+	</context>
+	<context id="keyword_Variable_Declaration" title="Variable Declarations">
+		<topic href="src/main/html/integer.html" label="Variable_Declarations"/>
 	</context>
 </contexts>

@@ -6,17 +6,30 @@
       <topic label="Data Types">
       	<topic href="src/main/html/boolean.html" label="Boolean" />
       	<topic href="src/main/html/integer.html" label="Integer" />
+	<topic href="src/main/html/array.html" label="Arrays" />
       </topic>
       <topic label="Program structure">
       	<topic href="src/main/html/program.html" label="Programs" />
       	<topic href="src/main/html/function.html" label="Functions" />
       	<topic href="src/main/html/comment.html" label="Comments" />
+	<topic href="src/main/html/statement.html" label="Statements" />
+	<topic href="src/main/html/variabledeclaration.html" label="Variable Declarations" />
+	<topic href="src/main/html/assignment.html" label="Assignments" />
+	<topic href="src/main/html/condition.html" label="Conditions" />
+	<topic href="src/main/html/loop.html" label="Loops" />
+	<topic href="src/main/html/return.html" label="Returns" />
       	<topic href="src/main/html/expression.html" label="Expressions" />
+	<topic href="src/main/html/operators.html" label="Operators" />	
       	<topic href="src/main/html/quantifiedexpression.html" label="Quantified Expressions" />
+	<topic href="src/main/html/identifier.html" label="Indentifiers" />
       </topic>
-      <topic label="Assertions">
+      <topic label="Annotation">
       	<topic href="src/main/html/assert.html" label="Assertions" />
       	<topic href="src/main/html/assume.html" label="Assumptions" />
+	<topic href="src/main/html/axiom.html" label="Axioms" />
+	<topic href="src/main/html/ensures.html" label="Postconditions" />
+	<topic href="src/main/html/invariant.html" label="Invariants" />
+	<topic href="src/main/html/requires.html" label="Preconditions" />
       </topic>
    </topic>
 </toc>

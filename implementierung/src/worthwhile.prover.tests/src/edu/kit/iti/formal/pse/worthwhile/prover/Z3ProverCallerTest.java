@@ -57,7 +57,18 @@ public final class Z3ProverCallerTest {
 	 */
 	@Test
 	public void testIntegerArrayEquals() throws ProverCallerException {
-		Expression formula = TestASTProvider.parseFormulaString("{1, 2, 3} = {1, 2, 3}");
+		Expression formula = TestASTProvider.parseFormulaString("{1, 2, 3} = {1 + 3 - 2, 2 * 1, 2 + 1}");
+		ProverResult result = this.prover.checkFormula(formula);
+		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
+	}
+
+	/**
+	 * Test if two literal boolean arrays compare equal.
+	 * @throws ProverCallerException if calling the prover fails
+	 */
+	@Test
+	public void testBooleanArrayEquals() throws ProverCallerException {
+		Expression formula = TestASTProvider.parseFormulaString("{true, false} = { true || false, 5 + 1 = 3}");
 		ProverResult result = this.prover.checkFormula(formula);
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
 	}

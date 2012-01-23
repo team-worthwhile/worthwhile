@@ -16,16 +16,8 @@ import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 
 /**
  * The type system for validation.
- * 
  */
 public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
-
-	@Override
-	protected final void initialize() {
-
-		super.initialize();
-
-	}
 
 	/**
 	 * Returns the type of the variable reference. If the variable reference is an array access return the base type
@@ -111,13 +103,13 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	}
 
 	/**
-	 * Returns the type of the specified EObject
+	 * Returns the type of the specified EObject.
 	 * 
 	 * @param element
 	 *                The element whose type to return.
 	 * @return the type of the specified EObject
 	 */
-	public final Type typeof(EObject element) {
+	public final Type typeof(final EObject element) {
 		return (Type) typeof(element, new TypeCalculationTrace());
 	}
 

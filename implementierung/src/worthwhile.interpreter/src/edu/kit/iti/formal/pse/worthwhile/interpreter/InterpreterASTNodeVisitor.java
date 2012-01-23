@@ -23,6 +23,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -685,8 +686,15 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				this.setSymbol(variableDeclaration, this.resultStack.pop());
 			} else {
 				if (variableDeclaration.getType() instanceof ArrayType) {
-					((ArrayType) variableDeclaration.getType()).getSize().accept(this);
-					if (((ArrayType) variableDeclaration.getType()).getBaseType() instanceof BooleanType) {
+					final ArrayType arrayType = ((ArrayType) variableDeclaration.getType());
+
+					// evaluate the size expression and assign the size value as literal
+					arrayType.getSize().accept(this);
+					final IntegerLiteral sizeLiteral = AstFactory.init().createIntegerLiteral();
+					sizeLiteral.setValue(((IntegerValue) this.resultStack.pop()).getValue());
+					arrayType.setSize(sizeLiteral);
+
+					if (arrayType.getBaseType() instanceof BooleanType) {
 						this.setSymbol(variableDeclaration, new CompositeValue<BooleanValue>(
 						                new BooleanValue[this.popIntegerValue().getValue()
 						                                .intValue()]));

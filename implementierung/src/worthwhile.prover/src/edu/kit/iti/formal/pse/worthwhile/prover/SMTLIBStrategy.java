@@ -71,7 +71,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// what we want to know about the formula
 		// TODO: Make this more intelligent, maybe wrap the Expression in an
 		// Assert and then visit it just like all the other nodes...?
-		return declarationsString + "(assert " + formulaString + ")\n(check-sat)";
+		return "(declare-const integer_array (Array Int Int))\n" + declarationsString + "(assert "
+		                + formulaString + ")\n(check-sat)";
 	}
 
 	/**
@@ -161,7 +162,13 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
-		this.formulaCompileStack.push("");
+		String literalString = "integer_array";
+		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
+			arrayLiteral.getValues().get(i).accept(this);
+			String valueAtIndex = this.formulaCompileStack.pop();
+			literalString = "(store " + literalString + " " + Integer.toString(i) + " " + valueAtIndex + ")";
+		}
+		this.formulaCompileStack.push(literalString);
 	}
 
 	@Override

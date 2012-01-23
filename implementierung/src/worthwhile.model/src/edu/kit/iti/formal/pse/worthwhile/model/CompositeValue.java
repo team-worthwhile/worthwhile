@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
@@ -48,7 +49,7 @@ public class CompositeValue<T extends Value> extends Value {
         public final boolean equals(final Object other) {
 		if (other instanceof CompositeValue<?>) {
 			// FIXME: Does this work?
-			return this.subValues.equals(((CompositeValue<?>) other).getSubValues());
+			return Arrays.equals(this.subValues, ((CompositeValue<?>) other).getSubValues());
 		} else {
 			return false;
 		}

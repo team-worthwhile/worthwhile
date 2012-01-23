@@ -4,8 +4,11 @@
 package edu.kit.iti.formal.pse.worthwhile;
 
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider;
+import org.eclipse.xtext.validation.INamesAreUniqueValidationHelper;
+
 import de.itemis.xtext.typesystem.ITypesystem;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
+import edu.kit.iti.formal.pse.worthwhile.validation.WorthwhileNamesAreUniqueValidationHelper;
 import edu.kit.iti.formal.pse.worthwhile.validation.WorthwhileSyntaxErrorMessageProvider;
 
 /**
@@ -29,6 +32,15 @@ public class WorthwhileRuntimeModule extends edu.kit.iti.formal.pse.worthwhile.A
 	 */
 	public final Class<? extends ISyntaxErrorMessageProvider> bindISyntaxErrorMessageProvider() {
 		return WorthwhileSyntaxErrorMessageProvider.class;
+	}
+
+	/**
+	 * Provides a helper for the "names are unique" validation.
+	 * 
+	 * @return A {@link NamesAreUniqueValidationHelper}
+	 */
+	public final Class<? extends INamesAreUniqueValidationHelper> bindINamesAreUniqueValidationHelper() {
+		return WorthwhileNamesAreUniqueValidationHelper.class;
 	}
 
 }

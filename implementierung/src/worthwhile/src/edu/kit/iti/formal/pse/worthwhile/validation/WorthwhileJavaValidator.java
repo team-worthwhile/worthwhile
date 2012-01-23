@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.validation;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.NamesAreUniqueValidator;
 
 import com.google.inject.Inject;
 
@@ -185,6 +186,17 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	@Check
 	public final void checkTypesystemRules(final ASTNode node) {
 		ts.checkTypesystemConstraints(node, this);
+	}
 
+	/**
+	 * Check that function and variable name identifiers are unique.
+	 * 
+	 * @param node
+	 *                The AST node to check.
+	 */
+	@Check
+	public final void checkNamesAreUnique(final ASTNode node) {
+		NamesAreUniqueValidator val = new NamesAreUniqueValidator();
+		val.checkUniqueNamesInResourceOf(node);
 	}
 }

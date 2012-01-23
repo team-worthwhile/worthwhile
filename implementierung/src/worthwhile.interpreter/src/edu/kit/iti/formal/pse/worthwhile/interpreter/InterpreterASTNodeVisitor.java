@@ -383,10 +383,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(Block block) {
 		Map<VariableDeclaration, Value> symbolMap = new HashMap<VariableDeclaration, Value>();
 		this.symbolStack.push(symbolMap);
+		this.statementWillExecute(block);
 		EList<Statement> statements = block.getStatements();
 		for (Statement statement : statements) {
 			statement.accept(this);
 		}
+		this.statementExecuted(block);
 		this.symbolStack.pop();
 	}
 

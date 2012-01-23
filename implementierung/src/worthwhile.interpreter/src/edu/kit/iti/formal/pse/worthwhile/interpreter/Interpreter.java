@@ -31,10 +31,9 @@ public class Interpreter {
 
 	/**
 	 * @param executionEventHandlers
-	 *            the executionEventHandlers to set
+	 *                the executionEventHandlers to set
 	 */
-	public void setExecutionEventHandlers(
-			Set<AbstractExecutionEventListener> executionEventHandlers) {
+	public void setExecutionEventHandlers(Set<AbstractExecutionEventListener> executionEventHandlers) {
 		// begin-user-code
 		this.executionEventHandlers = executionEventHandlers;
 		// end-user-code
@@ -105,7 +104,7 @@ public class Interpreter {
 
 	/**
 	 * @param program
-	 *            the program to set
+	 *                the program to set
 	 */
 	public void setProgram(Program program) {
 		// begin-user-code
@@ -140,8 +139,7 @@ public class Interpreter {
 	/**
 	 * @param handler
 	 */
-	public void removeExecutionEventHandler(
-			AbstractExecutionEventListener handler) {
+	public void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.remove(handler);
 	}
 
@@ -167,7 +165,7 @@ public class Interpreter {
 	 * Get the value of a symbol by its name
 	 * 
 	 * @param key
-	 *            the name of the Symbol to look up the value for
+	 *                the name of the Symbol to look up the value for
 	 * @return the current value of the Symbol or null if no such symbol exists
 	 */
 	public Value getSymbol(String key) {

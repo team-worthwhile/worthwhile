@@ -36,4 +36,9 @@
             id="edu.kit.iti.formal.pse.worthwhile.debugger.sourcePathComputer">
       </sourcePathComputer>
    </extension>
+   <extension point="org.eclipse.debug.core.watchExpressionDelegates">
+      <watchExpressionDelegate
+         debugModel="edu.kit.iti.formal.pse.worthwhile"
+         delegateClass="edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileWatchExpressionDelegate"/>
+   </extension>   
 </plugin>

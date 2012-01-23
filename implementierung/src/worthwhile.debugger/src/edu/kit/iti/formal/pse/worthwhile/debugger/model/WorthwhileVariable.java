@@ -23,7 +23,9 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 	 * Creates a new instance of the {@link WorthwhileVariable} class.
 	 * 
 	 * @param debugTarget
+	 *                The debug target to use.
 	 * @param name
+	 *                The name of the variable.
 	 */
 	public WorthwhileVariable(final WorthwhileDebugTarget debugTarget, final String name) {
 		super(debugTarget);
@@ -31,7 +33,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 	}
 
 	@Override
-        public final void setValue(final String expression) throws DebugException {
+	public final void setValue(final String expression) throws DebugException {
 		// TODO Auto-generated method stub
 		Value value = this.getDebugTarget().evaluateExpression(expression);
 		System.out.println(value.toString());

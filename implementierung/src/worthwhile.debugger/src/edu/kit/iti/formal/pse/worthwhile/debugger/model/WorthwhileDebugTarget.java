@@ -478,7 +478,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                 if the expression contains syntax errors.
 	 */
 	private Expression parseExpressionString(final String expressionText) throws DebugException {
-		String expressionProgramText = "_axiom(" + expressionText + ")\n"; // FIXME oh my eyes!!
+		// Create a new program that contains the expression evaluation.
+		String expressionProgramText = "__eval " + expressionText;
 
 		// Obtain an injector and create an Xtext resource
 		Injector guiceInjector = new WorthwhileDebuggerStandaloneSetup(this)
@@ -504,6 +505,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 				errorStringBuilder.append("\n" + diag.getMessage());
 			}
 
+			System.out.println(errorStringBuilder.toString());
+			
 			throw new DebugException(new ExpressionEvaluationError(new IllegalArgumentException(
 			                "Expression contains errors:" + errorStringBuilder.toString())));
 		}

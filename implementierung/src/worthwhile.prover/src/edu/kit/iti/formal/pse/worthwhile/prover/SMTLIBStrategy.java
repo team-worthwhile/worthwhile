@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.math.BigInteger;
 import java.util.Stack;
 
+import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
@@ -35,11 +36,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
@@ -165,12 +166,22 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
 		String literalString = "";
-		Type arrayType = (Type) (new WorthwhileTypesystem()).type(arrayLiteral.getValues().get(0));
-		if (arrayType instanceof IntegerType) {
-			literalString = "integer_array";
-		} else if (arrayType instanceof BooleanType) {
-			literalString = "boolean_array";
-		}
+		ArrayType arrayType = (ArrayType) (new WorthwhileTypesystem()).typeof(arrayLiteral, new TypeCalculationTrace());
+		
+		literalString = (new ASTNodeReturnVisitor<String>() {
+
+			@Override
+                        public void visit(BooleanType node) {
+				this.setReturnValue("boolean_array");
+                        }
+
+			@Override
+                        public void visit(IntegerType node) {
+				this.setReturnValue("integer_array");
+                        }
+			
+		}).apply(arrayType.getBaseType());
+
 		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
 			arrayLiteral.getValues().get(i).accept(this);
 			String valueAtIndex = this.formulaCompileStack.pop();

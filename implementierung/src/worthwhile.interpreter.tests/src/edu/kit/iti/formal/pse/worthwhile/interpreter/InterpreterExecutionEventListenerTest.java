@@ -96,6 +96,18 @@ public class InterpreterExecutionEventListenerTest {
 	}
 
 	/**
+	 * Convenience method to launch a Program and listen to the execution events with an event listener.
+	 * 
+	 * @param listener
+	 *                the listener to attach to the running {@link Program}
+	 * @param program
+	 *                the {@link String} that encodes the {@link Program} to run
+	 */
+	public static void listenProgram(final AbstractExecutionEventListener listener, final String program) {
+		InterpreterExecutionEventListenerTest.listenProgram(listener, TestASTProvider.getRootASTNode(program));
+	}
+
+	/**
 	 * Test if execution events are correctly fired for a boolean variable declaration.
 	 */
 	@Test

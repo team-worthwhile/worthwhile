@@ -326,8 +326,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.expressionEvaluated(addition);
 	}
 
-	public void visit(ArrayLength arrayLength) {
-		// TODO Auto-generated method stub
+	@Override
+	public void visit(final ArrayLength arrayLength) {
+		// the casts should be safe after validation
+		final VariableDeclaration variable = ((VariableReference) arrayLength.getOperand()).getVariable();
+		final Expression size = ((ArrayType) variable.getType()).getSize();
+		size.accept(this);
+
 		this.expressionEvaluated(arrayLength);
 	}
 

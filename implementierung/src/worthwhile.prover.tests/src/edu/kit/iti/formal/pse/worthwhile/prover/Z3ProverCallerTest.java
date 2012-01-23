@@ -57,7 +57,7 @@ public final class Z3ProverCallerTest {
 	 */
 	@Test
 	public void testIntegerArrayEquals() throws ProverCallerException {
-		Expression formula = TestASTProvider.parseFormulaString("{1, 2, 3} = {1 + 3 - 2, 2 * 1, 2 + 1}");
+		Expression formula = TestASTProvider.parseFormulaString("{1, 2, 3} = {2 + 4 - 5, 2 * 1, 2 + 1}");
 		ProverResult result = this.prover.checkFormula(formula);
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
 	}

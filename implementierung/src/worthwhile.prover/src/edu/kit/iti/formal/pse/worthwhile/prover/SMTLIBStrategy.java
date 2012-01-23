@@ -35,11 +35,13 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
  * @author Leon Handreke, fabian
@@ -71,8 +73,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// what we want to know about the formula
 		// TODO: Make this more intelligent, maybe wrap the Expression in an
 		// Assert and then visit it just like all the other nodes...?
-		return "(declare-const integer_array (Array Int Int))\n" + declarationsString + "(assert "
-		                + formulaString + ")\n(check-sat)";
+		return "(declare-const integer_array (Array Int Int))\n(declare-const boolean_array (Array Int Bool))\n"
+		                + declarationsString + "(assert " + formulaString + ")\n(check-sat)";
 	}
 
 	/**
@@ -162,7 +164,13 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
-		String literalString = "integer_array";
+		String literalString = "";
+		Type arrayType = (Type) (new WorthwhileTypesystem()).type(arrayLiteral.getValues().get(0));
+		if (arrayType instanceof IntegerType) {
+			literalString = "integer_array";
+		} else if (arrayType instanceof BooleanType) {
+			literalString = "boolean_array";
+		}
 		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
 			arrayLiteral.getValues().get(i).accept(this);
 			String valueAtIndex = this.formulaCompileStack.pop();

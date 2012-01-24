@@ -41,7 +41,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	private Stack<Expression> weakestPreconditionStack;
 
 	/**
-	 * The postcondition when visitor is inside an {@link FunctionDeclaration}.
+	 * The postcondition when visitor is inside an {@link FunctionDeclaration}. This is needed because the original
+	 * postcondition may be needed again while proving a function, e.g. when a return statement occurs
 	 */
 	private Expression postcondition;
 
@@ -76,8 +77,10 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Transform the weakest precondition for a given program so that the given postcondition holds.
 	 * 
-	 * @param program the {@link Program} to transform
-	 * @param postcondition the postcondition that the weakest precondition should be calculated for
+	 * @param program
+	 *                the {@link Program} to transform
+	 * @param postcondition
+	 *                the postcondition that the weakest precondition should be calculated for
 	 * @return the calculated weakest precondition
 	 */
 	private Expression transformProgram(final Program program, final Expression postcondition) {

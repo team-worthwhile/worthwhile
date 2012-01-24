@@ -73,7 +73,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 * The node currently being executed.
 	 */
 	private ASTNode currentNode;
-	
+
 	/**
 	 * Returns the node currently being executed.
 	 * 
@@ -209,7 +209,10 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 					break;
 				}
 
-				this.getDebugTarget().resumed(resumeReason);
+				if (resumeReason != 0) {
+					this.getDebugTarget().resumed(resumeReason);
+				}
+
 				this.currentNode = null;
 			}
 		}
@@ -247,15 +250,18 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	 * Terminates the execution.
 	 */
 	public final void terminate() {
-		this.mode = DebugMode.TERMINATED;
+		synchronized (this) {
+			this.mode = DebugMode.TERMINATED;
+			notifyAll();
+		}
 	}
 
 	/**
 	 * Steps over the current statement.
 	 */
 	public void stepOver() {
-	        // TODO Auto-generated method stub
-	        
-        }
+		// TODO Auto-generated method stub
+
+	}
 
 }

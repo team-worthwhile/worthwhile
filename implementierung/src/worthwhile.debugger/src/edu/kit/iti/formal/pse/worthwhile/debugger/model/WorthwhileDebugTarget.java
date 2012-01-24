@@ -111,7 +111,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		// Execute the program.
 		this.interpreterRunner = new InterpreterRunner(interpreter);
-		this.interpreterRunner.schedule();
+		this.interpreterRunner.start();
 	}
 
 	/**
@@ -133,10 +133,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		return this.eventListener.getMode().equals(DebugMode.TERMINATED);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public final void terminate() throws DebugException {
+		this.interpreterRunner.getInterpreter().removeExecutionEventHandler(this.eventListener);
 		this.eventListener.terminate();
-		this.interpreterRunner.cancel();
+		this.interpreterRunner.stop();
 	}
 
 	@Override
@@ -391,8 +393,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			Path path = new Path(this.launch.getLaunchConfiguration().getAttribute(ATTR_PATH, ""));
 			return path.lastSegment();
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 			return "";
 		}
 	}

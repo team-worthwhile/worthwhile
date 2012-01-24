@@ -9,16 +9,20 @@
 
 <body>
 <h1>_requires</h1>
-<!--TODO-->
+To provide requirements for a function, the _requires statement is used. The prover checks if the given <a href="quantified expression.html">quantified expression</a> or <a href="boolean.html">boolean</a> <a href="expression.html">expression</a> is true to validate a program.
 <br><br>
 <b>Syntax:</b><br>
 <pre>
-_requires 
+_requires &lt;<a href="boolean.html">boolean</a> <a href="expression.html">expression</a> | <a href="quantifiedexpression.html">quantified expression</a>&gt;
 </pre><br><br>
 
 <b>Example:</b><br>
 <pre>
-
+function Integer test(Integer a, Integer b)
+_requires b > 0
+{
+	return a &#x00F7; b
+}
 </pre>
 </body>
 </html>

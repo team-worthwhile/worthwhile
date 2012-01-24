@@ -251,6 +251,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			this.mode = DebugMode.TERMINATED;
 			notifyAll();
 		}
+		
+		this.getDebugTarget().terminated();
 	}
 
 	/**

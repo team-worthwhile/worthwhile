@@ -1,7 +1,12 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.runtime;
 
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.validation.NamesAreUniqueValidationHelper;
+
 import edu.kit.iti.formal.pse.worthwhile.WorthwhileRuntimeModule;
+import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugScopeProvider;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
+import edu.kit.iti.formal.pse.worthwhile.validation.WorthwhileNamesAreUniqueValidationHelper;
 
 /**
  * Runtime module for a Worthwhile environment in the debugger.
@@ -33,5 +38,14 @@ public class WorthwhileDebuggerRuntimeModule extends WorthwhileRuntimeModule {
 	 */
 	public final WorthwhileDebugTarget bindWorthwhileDebugTarget() {
 		return this.debugTarget;
+	}
+
+	/**
+	 * Provides a scoping provider.
+	 * 
+	 * @return The class of a scoping provider.
+	 */
+	public final Class<? extends IScopeProvider> bindIScopeProvider() {
+		return WorthwhileDebugScopeProvider.class;
 	}
 }

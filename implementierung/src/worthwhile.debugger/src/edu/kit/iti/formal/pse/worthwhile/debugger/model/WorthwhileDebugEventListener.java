@@ -75,6 +75,11 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	private ASTNode currentNode;
 
 	/**
+	 * The node we are currently stepping over.
+	 */
+	private ASTNode stepOverNode;
+
+	/**
 	 * Returns the node currently being executed.
 	 * 
 	 * @return the node currently being executed.
@@ -151,6 +156,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	public final void statementWillExecute(final Statement statement) {
 		synchronized (this) {
 			this.currentNode = statement;
+			this.stepOverNode = null;
 
 			boolean doSuspend = false;
 			int suspendReason = 0;
@@ -201,6 +207,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 					break;
 				case STEP_OVER:
 					resumeReason = DebugEvent.STEP_OVER;
+					this.stepOverNode = currentNode;
 					break;
 				default:
 					break;
@@ -211,6 +218,15 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				}
 
 				this.currentNode = null;
+			}
+		}
+	}
+
+	@Override
+	public final void statementExecuted(final Statement statement) {
+		if (this.mode == DebugMode.STEP_OVER) { // TODO use equals() here?
+			if (statement.equals(this.stepOverNode)) {
+				this.mode = DebugMode.STEP;
 			}
 		}
 	}
@@ -251,16 +267,18 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			this.mode = DebugMode.TERMINATED;
 			notifyAll();
 		}
-		
+
 		this.getDebugTarget().terminated();
 	}
 
 	/**
 	 * Steps over the current statement.
 	 */
-	public void stepOver() {
-		// TODO Auto-generated method stub
-
+	public final void stepOver() {
+		synchronized (this) {
+			this.mode = DebugMode.STEP_OVER;
+			notifyAll();
+		}
 	}
 
 }

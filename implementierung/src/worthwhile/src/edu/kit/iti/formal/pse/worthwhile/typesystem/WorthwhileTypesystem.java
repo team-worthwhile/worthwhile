@@ -14,6 +14,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 
 /**
@@ -65,6 +66,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			at.setBaseType(null);
 		} else {
 			at.setBaseType((PrimitiveType) typeof(element.getValues().get(0), trace));
+
 		}
 		IntegerLiteral it = AstFactory.eINSTANCE.createIntegerLiteral();
 		it.setValue(BigInteger.valueOf(element.getValues().size()));
@@ -85,19 +87,15 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	@Override
 	protected final EObject type(final ReturnValueReference element, final TypeCalculationTrace trace) {
 
-		EObject current = element;
-		do {
-			current = current.eContainer();
-			System.out.println("current:" + current);
+		ASTNodeBottomUpVisitor<Type> visitor = new ASTNodeBottomUpVisitor<Type>() {
 
-		} while (current != null && !(current instanceof FunctionDeclaration));
-
-		if (current == null) {
-			return null;
-		} else {
-			trace.add(element, "returnValueRefernce");
-			return ((FunctionDeclaration) current).getReturnType();
-		}
+			public void visit(final FunctionDeclaration func) {
+				setReturnValue(func.getReturnType());
+			}
+		};
+		Type type = visitor.apply(element);
+		trace.add(element, "returnValueRefernce");
+		return type;
 	}
 
 	/**

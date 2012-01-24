@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.NamesAreUniqueValidator;
@@ -13,6 +14,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
@@ -61,13 +63,14 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	 */
 	@Check
 	public final void checkReturnValueReference(final ReturnValueReference returnValueReference) {
-		EObject current = returnValueReference;
 
-		do {
-			current = current.eContainer();
-		} while (current != null && !(current instanceof Postcondition));
+		ASTNodeBottomUpVisitor<Boolean> visitor = new ASTNodeBottomUpVisitor<Boolean>() {
 
-		if (current == null) {
+			public void visit(final Postcondition postcondition) {
+				setReturnValue(true);
+			}
+		};
+		if (visitor.apply(returnValueReference) == null) {
 			error("The return value of a function may only be referenced in the postcondition.",
 			                returnValueReference, null, -1);
 		}
@@ -138,43 +141,36 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	}
 
 	/**
-	 * Checks if the arrayLiteral is used in an initialization and if all entries have the same type as the variable
-	 * which get initialized.
+	 * Checks if all elements of the {@link ArrayLiteral} have the same type. The type may not be {@link ArrayType}
 	 * 
 	 * @param arrayLiteral
 	 *                The array literal to be checked.
 	 */
 	@Check
 	public final void checkArrayLiteral(final ArrayLiteral arrayLiteral) {
-		EObject current = arrayLiteral;
-		boolean inVariableDec = false;
-		boolean inAssignment = false;
-		EList<Expression> actuals = arrayLiteral.getValues();
-		TypeCalculationTrace trace = new TypeCalculationTrace();
-		// Check which container the arrayLiteral has
-		current = current.eContainer();
-		if (current instanceof VariableDeclaration) {
-			inVariableDec = true;
-		} else if (current instanceof Assignment) {
-			inAssignment = true;
-		}
-		EObject type = ts.typeof(actuals.get(0), trace);
 
-		if (ts.isInstanceOf(ts.typeof(current, trace), AstPackage.eINSTANCE.getArrayType(), trace)) {
+		ASTNodeBottomUpVisitor<Boolean> visitor = new ASTNodeBottomUpVisitor<Boolean>() {
 
-			if (inAssignment) {
-
-				type = ((ArrayType) ((Assignment) current).getVariable().getVariable().getType())
-				                .getBaseType();
-			} else if (inVariableDec) {
-				type = ((ArrayType) ((VariableDeclaration) current).getType()).getBaseType();
+			public void visit(final ArrayLiteral arrayLiteral) {
+				setReturnValue(true);
 			}
-		}
-		for (int i = 0; i < actuals.size(); i++) {
-			if (!ts.isSameType(type, type, actuals.get(i), ts.typeof(actuals.get(i), trace), trace)) {
-				error("Element doesn't match type of the array. Expected " + ts.typeString(type)
-				                + ", but found " + ts.typeString(ts.typeof(actuals.get(i), trace))
-				                + ".", actuals.get(i), null, -1);
+		};
+		// if this array literal is contained in an other one
+		if (visitor.apply((ASTNode) arrayLiteral.eContainer())) {
+			error("An array may not contain an other array.", arrayLiteral, null, -1);
+		} else {
+			EList<Expression> actuals = arrayLiteral.getValues();
+			TypeCalculationTrace trace = new TypeCalculationTrace();
+
+			Type type = ((ArrayType) ts.typeof(arrayLiteral, trace)).getBaseType();
+
+			for (int i = 0; i < actuals.size(); i++) {
+				if (!ts.isSameType(type, type, actuals.get(i), ts.typeof(actuals.get(i), trace), trace)) {
+					error("Element doesn't match type of the array. Expected "
+					                + ts.typeString(type) + ", but found "
+					                + ts.typeString(ts.typeof(actuals.get(i), trace)) + ".",
+					                actuals.get(i), null, -1);
+				}
 			}
 		}
 

@@ -115,8 +115,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			throw new IllegalArgumentException("Breakpoint may not be null");
 		}
 
-		System.out.println("Breakpoint added at line " + lineNumber);
-
 		this.breakpoints.put(lineNumber, breakpoint);
 	}
 
@@ -146,7 +144,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void executionCompleted() {
-		System.out.println("Execution completed.");
 		this.getDebugTarget().terminated();
 	}
 

@@ -5,16 +5,20 @@ import java.math.BigInteger;
 import org.eclipse.emf.ecore.EObject;
 
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 
 /**
@@ -127,6 +131,54 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			return super.isSameType(at1, at1.getBaseType(), at2, at2.getBaseType(), trace);
 		}
 		return super.isSameType(element1, type1, element2, type2, trace);
+	}
+
+	/**
+	 * Returns a brief representation of the object.
+	 * 
+	 * @param type
+	 *                The type whose representation to return.
+	 * 
+	 * @return A representation of the object.
+	 */
+	@Override
+	public final String typeString(final Object type) {
+		if (type instanceof ASTNode) {
+			ASTNodeReturnVisitor<ArrayType> visitor = new ASTNodeReturnVisitor<ArrayType>() {
+				@Override
+				protected void defaultOperation(final ASTNode node) {
+					setReturnValue(null);
+				}
+
+				public void visit(final ArrayType arrayType) {
+					setReturnValue(arrayType);
+				}
+			};
+			ArrayType arrayType = visitor.apply((ASTNode) type);
+
+			if (arrayType != null) {
+				return super.typeString(arrayType).replace("Type", "") + " (with base type "
+				                + super.typeString(arrayType.getBaseType()).replace("Type", "") + ")";
+			} else {
+				ASTNodeReturnVisitor<Type> visitor2 = new ASTNodeReturnVisitor<Type>() {
+					@Override
+					protected void defaultOperation(final ASTNode node) {
+						setReturnValue(null);
+					}
+
+					public void visit(final IntegerType integerType) {
+						setReturnValue(integerType);
+					}
+
+					public void visit(final BooleanType booleanType) {
+						setReturnValue(booleanType);
+					}
+				};
+				return super.typeString(visitor2.apply((ASTNode) type)).replace("Type", "");
+			}
+		}
+		return super.typeString(type);
+
 	}
 
 	/**

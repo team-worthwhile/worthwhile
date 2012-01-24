@@ -67,11 +67,24 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public Expression transformProgram(final Program program) {
+		// initialize the weakest precondition of the main block to true
+		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
+		trueLiteral.setValue(true);
+		return this.transformProgram(program, trueLiteral);
+	}
+
+	/**
+	 * Transform the weakest precondition for a given program so that the given postcondition holds.
+	 * 
+	 * @param program the {@link Program} to transform
+	 * @param postcondition the postcondition that the weakest precondition should be calculated for
+	 * @return the calculated weakest precondition
+	 */
+	private Expression transformProgram(final Program program, final Expression postcondition) {
 		// clear weakestPrecondition state from a previous transformation
 		this.weakestPreconditionStack.clear();
-
+		this.weakestPreconditionStack.push(postcondition);
 		program.accept(this);
-
 		return this.getWeakestPrecondition();
 	}
 
@@ -432,11 +445,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			conjunction.setRight(c);
 			conjunction = c;
 		}
-
-		// initialize the weakest precondition of the main block to true
-		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
-		trueLiteral.setValue(true);
-		this.weakestPreconditionStack.push(AstNodeCloneHelper.clone(trueLiteral));
 
 		// visit program's main block
 		program.getMainBlock().accept(this);

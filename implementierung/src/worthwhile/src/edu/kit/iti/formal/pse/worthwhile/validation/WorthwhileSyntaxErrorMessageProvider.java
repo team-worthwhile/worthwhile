@@ -12,6 +12,16 @@ import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProvider {
 
 	/**
+	 * Error code for "No newline at end of file".
+	 */
+	public static final String NO_NEWLINE_AT_EOF = "NoNewlineAtEOF";
+
+	/**
+	 * Error code for "No return type specified for function"
+	 */
+	public static final String NO_FUNCTION_RETURN_TYPE = "NoFunctionReturnType";
+
+	/**
 	 * Returns improved syntax error messages. TODO find a better way to get improved messages
 	 * 
 	 * @param context
@@ -24,7 +34,7 @@ public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProv
 		System.out.println(context.getDefaultMessage());
 		if (context.getDefaultMessage().contains("loop did not match anything at input '<EOF>'")) {
 
-			return new SyntaxErrorMessage("Newline is missing", "missingEOF");
+			return new SyntaxErrorMessage("Newline is missing", NO_NEWLINE_AT_EOF);
 
 		} else if (context.getDefaultMessage().contains("loop did not match anything")
 		                || context.getDefaultMessage().contains("missing EOF")) {

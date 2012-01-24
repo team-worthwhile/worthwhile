@@ -31,6 +31,15 @@ import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 
 	/**
+	 * Error code for "Function has no valid return statement".
+	 */
+	public static final String FUNCDEC_NO_VALID_RETURN = "FuncdecNoValidReturn";
+	/**
+	 * Error code for "Return statement may only appear in a function".
+	 */
+	public static final String RETURN_STATEMENT_ONLY_IN_FUNCTION = "ReturnStatementOnlyInFunction";
+
+	/**
 	 * The language typesystem.
 	 */
 	@Inject
@@ -48,7 +57,7 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 		validatorASTNodeVisitor.visit(functionDeclaration);
 		if (!validatorASTNodeVisitor.getValidReturnFound()) {
 			error("Function has no valid return statement.", functionDeclaration,
-			                AstPackage.eINSTANCE.getFunctionDeclaration_Name(), 0);
+			                AstPackage.eINSTANCE.getFunctionDeclaration_Name(), FUNCDEC_NO_VALID_RETURN);
 		}
 	}
 
@@ -93,7 +102,8 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 		Type type = visitor.apply(returnStatement);
 		// no function declaration found
 		if (type == null) {
-			error("The return statement has to be in a function block.", returnStatement, null, -1);
+			error("The return statement has to be in a function block.", returnStatement, null,
+			                RETURN_STATEMENT_ONLY_IN_FUNCTION);
 
 			// compare the type of the function declaration and the returnStatement
 		} else if (!ts.isSameType(returnStatement, ts.typeof(returnStatement, new TypeCalculationTrace()),

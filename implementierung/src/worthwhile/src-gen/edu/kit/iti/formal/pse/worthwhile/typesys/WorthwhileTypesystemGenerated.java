@@ -146,6 +146,7 @@
 
 						useTypeOfFeature( p.getFunctionDeclaration(), p.getFunctionDeclaration_ReturnType() );
 						ensureFeatureType( p.getFunctionDeclaration(), p.getFunctionDeclaration_ReturnType(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
+						useTypeOfFeature( p.getReturnStatement(), p.getReturnStatement_ReturnValue() );
 						ensureFeatureType( p.getReturnStatement(), p.getReturnStatement_ReturnValue(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						useTypeOfFeature( p.getFunctionCall(), p.getFunctionCall_Function() );
 

@@ -173,7 +173,7 @@ section "Functions"
 		ensureType returnType :<=: BooleanType, IntegerType, ArrayType
 		
 	}
-	typeof ReturnStatement -> abstract {
+	typeof ReturnStatement -> feature returnValue {
 		ensureType returnValue :<=: BooleanType, IntegerType, ArrayType
 	}
 	typeof FunctionCall -> feature function 

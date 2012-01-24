@@ -20,7 +20,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
@@ -81,25 +83,24 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	@Check
 	public final void checkReturnStatementOnlyFunction(final ReturnStatement returnStatement) {
 
-		EObject current = returnStatement;
+		ASTNodeBottomUpVisitor<Type> visitor = new ASTNodeBottomUpVisitor<Type>() {
 
-		do {
-			current = current.eContainer();
-		} while (current != null && !(current instanceof FunctionDeclaration));
-
-		if (current == null) {
-			// No FunctionDeclaration found
-			error("The return statement has to be in a function block.", returnStatement, null, -1);
-		} else {
-			// Check if the type of the return statement is the same as the type of the function
-			TypeCalculationTrace trace = new TypeCalculationTrace();
-			if (!ts.isSameType(returnStatement, ts.typeof(returnStatement.getReturnValue(), trace),
-			                current, ts.typeof(current, trace), trace)) {
-				error("Type mismatch. Expected " + ts.typeString(ts.typeof(current, trace))
-				                + ", but found "
-				                + ts.typeString(ts.typeof(returnStatement.getReturnValue(), trace))
-				                + ".", returnStatement.getReturnValue(), null, -1);
+			public void visit(final FunctionDeclaration func) {
+				setReturnValue(func.getReturnType());
 			}
+		};
+
+		Type type = visitor.apply(returnStatement);
+		// no function declaration found
+		if (type == null) {
+			error("The return statement has to be in a function block.", returnStatement, null, -1);
+
+			// compare the type of the function declaration and the returnStatement
+		} else if (!ts.isSameType(returnStatement, ts.typeof(returnStatement, new TypeCalculationTrace()),
+		                type, type, new TypeCalculationTrace())) {
+			error("Type mismatch. Expected " + ts.typeString(type) + ", but found "
+			                + ts.typeString(ts.typeof(returnStatement, new TypeCalculationTrace())) + ".",
+			                returnStatement, null, -1);
 		}
 	}
 
@@ -125,8 +126,10 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 				if (!((WorthwhileTypesystem) ts).isSameType(functionCall,
 				                ts.typeof(actuals.get(i), trace), functionCall.getFunction(),
 				                ts.typeof(parameters.get(i), trace), trace)) {
-					error("Expected parameter " + ts.typeString(ts.typeof(parameters.get(i), trace))
-					                + " , but found " + ts.typeString(ts.typeof(actuals.get(i), trace)) + ".",
+					error("Expected parameter "
+					                + ts.typeString(ts.typeof(parameters.get(i), trace))
+					                + " , but found "
+					                + ts.typeString(ts.typeof(actuals.get(i), trace)) + ".",
 					                actuals.get(i), null, -1);
 
 				}

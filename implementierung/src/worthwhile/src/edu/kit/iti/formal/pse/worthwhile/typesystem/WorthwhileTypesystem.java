@@ -10,8 +10,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
@@ -24,8 +22,8 @@ import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
 public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 
 	/**
-	 * Returns the type of the {@link VariableReference}. If the variable reference is an array access return the base type
-	 * of the array.
+	 * Returns the type of the {@link VariableReference}. If the variable reference is an array access return the
+	 * base type of the array.
 	 * 
 	 * @param element
 	 *                The variable reference from which you want to get the type.
@@ -49,8 +47,8 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	}
 
 	/**
-	 * Returns the type of the {@link ArrayLiteral}. Sets the base type of the array literal to the type of the first
-	 * element of the array. If the array has no elements the base type is null.
+	 * Returns the type of the {@link ArrayLiteral}. Sets the base type of the array literal to the type of the
+	 * first element of the array. If the array has no elements the base type is null.
 	 * 
 	 * @param element
 	 *                The array literal from which you want to get the type.
@@ -74,20 +72,24 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 		trace.add(element, "arrayType");
 		return at;
 	}
+
 	/**
-	 * @param element The {@link ReturnValueReference} of which you want to get the type.
+	 * @param element
+	 *                The {@link ReturnValueReference} of which you want to get the type.
 	 * 
-	 * @param trace A type calculation trace. 
+	 * @param trace
+	 *                A type calculation trace.
 	 * 
 	 * @return The type of the return value reference.
 	 */
 	@Override
 	protected final EObject type(final ReturnValueReference element, final TypeCalculationTrace trace) {
+
 		EObject current = element;
 		do {
 			current = current.eContainer();
 			System.out.println("current:" + current);
-			
+
 		} while (current != null && !(current instanceof FunctionDeclaration));
 
 		if (current == null) {

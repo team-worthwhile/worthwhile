@@ -111,7 +111,7 @@ public class Interpreter {
 	 */
 	public Value evaluateExpression(Expression expression) {
 		InterpreterASTNodeVisitor visitor = new InterpreterASTNodeVisitor();
-		visitor.visit(expression);
+		expression.accept(visitor);
 		return visitor.getReturnValue();
 	}
 

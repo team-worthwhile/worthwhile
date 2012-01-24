@@ -129,7 +129,7 @@ public class InterpreterScopingTest {
 	public void testWhileScopingWithInteger() {
 		InterpreterScopingTest.runInterpreter(InterpreterScopingTest.getCodeBeforeNewScope() + "\n"
 		                + "Integer i := 0" + "\nwhile(i < 10) {" + "\ni := i + 1" + "\n"
-		                + InterpreterScopingTest.getCodeInNewScopeWithGlobal() + "\n}" + "\n", 1, 2);
+		                + InterpreterScopingTest.getCodeInNewScopeWithGlobal() + "\n}" + "\n", 2, 1);
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class InterpreterScopingTest {
 		InterpreterScopingTest.runInterpreter(
 		                InterpreterScopingTest.getCodeBeforeNewScope() + "\nInteger i := 0" + "\nif(i < 1) {"
 		                                + "\n" + InterpreterScopingTest.getCodeInNewScopeWithGlobal() + "\n}"
-		                                + "\n", 1, 2);
+		                                + "\n", 2, 1);
 	}
 
 	@Test
@@ -146,6 +146,7 @@ public class InterpreterScopingTest {
 		                "function Integer test() {" + "\n" + InterpreterScopingTest.getCodeInNewScope()
 		                                + "\nInteger a := 3" + "\nreturn a" + "\n}" + "\n"
 		                                + InterpreterScopingTest.getCodeBeforeNewScope()
-		                                + "\nInteger a := test()" + "\n", 1, 3);
+		                                + "\nInteger a := test()" + "\n"
+		                                + InterpreterScopingTest.getGlobalVariablesChangeCode() + "\n", 3, 1);
 	}
 }

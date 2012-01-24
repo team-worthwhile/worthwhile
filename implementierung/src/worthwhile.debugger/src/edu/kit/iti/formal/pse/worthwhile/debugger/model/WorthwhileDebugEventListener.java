@@ -199,18 +199,18 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				int resumeReason = 0;
 
 				switch (this.mode) {
-				case DEBUG:
-					resumeReason = DebugEvent.RESUME;
-					break;
-				case STEP:
-					resumeReason = DebugEvent.STEP_INTO;
-					break;
-				case STEP_OVER:
-					resumeReason = DebugEvent.STEP_OVER;
-					this.stepOverNode = currentNode;
-					break;
-				default:
-					break;
+					case DEBUG:
+						resumeReason = DebugEvent.RESUME;
+						break;
+					case STEP:
+						resumeReason = DebugEvent.STEP_INTO;
+						break;
+					case STEP_OVER:
+						resumeReason = DebugEvent.STEP_OVER;
+						this.stepOverNode = currentNode;
+						break;
+					default:
+						break;
 				}
 
 				if (resumeReason != 0) {

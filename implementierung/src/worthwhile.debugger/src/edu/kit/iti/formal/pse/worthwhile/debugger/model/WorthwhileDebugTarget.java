@@ -11,6 +11,7 @@ import java.util.Set;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
@@ -320,10 +321,22 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	@Override
 	public final boolean supportsBreakpoint(final IBreakpoint breakpoint) {
 		// Support a breakpoint if its debug model equals the Worthwhile debug model
-		// and it is set in the program we are currently executing.
 		if (ID_WORTHWHILE_DEBUG_MODEL.equals(breakpoint.getModelIdentifier())) {
-			IMarker marker = breakpoint.getMarker();
-			// TODO
+
+			// Check if the breakpoint is set in the program we are currently executing.
+			String program;
+			try {
+				program = this.getLaunch().getLaunchConfiguration().getAttribute(ATTR_PATH, "");
+				if (program != null) {
+					IMarker marker = breakpoint.getMarker();
+					if (marker != null) {
+						IPath p = new Path(program);
+						return marker.getResource().getFullPath().equals(p);
+					}
+				}
+			} catch (CoreException e) {
+				return false;
+			}
 		}
 
 		return false;
@@ -497,7 +510,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		// Check whether there are errors in the expression string
 		if (resource.getErrors().isEmpty()) {
 			Program root = (Program) resource.getContents().get(0);
-			return root.getAxioms().get(0).getExpression();
+			return root.getExpressionEvaluation().getExpression();
 		} else {
 			StringBuilder errorStringBuilder = new StringBuilder();
 
@@ -506,7 +519,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			}
 
 			System.out.println(errorStringBuilder.toString());
-			
+
 			throw new DebugException(new ExpressionEvaluationError(new IllegalArgumentException(
 			                "Expression contains errors:" + errorStringBuilder.toString())));
 		}

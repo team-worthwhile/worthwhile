@@ -33,7 +33,7 @@
          </property>
          <property
                name="aboutText"
-               value="One does not simply walk into the about dialog …">
+               value="Leon Handreke&#x0A;Chris Hiatt&#x0A;Joachim Priesner&#x0A;Fabian Ruch&#x0A;Stefan Orf&#x0A;Matthias Wagner&#x0A;&#x0A;PSE am KIT im WS 2011">
          </property>
          <property
                name="windowImages"

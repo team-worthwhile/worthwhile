@@ -29,46 +29,74 @@ public class WorthwhileQuickfixProvider extends DefaultQuickfixProvider {
 	 */
 	@Fix(WorthwhileSyntaxErrorMessageProvider.NO_NEWLINE_AT_EOF)
 	public final void addNewlineAtEOF(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		// FIXME: Where does the image come from?
 		acceptor.accept(issue, "Add newline", "Add a newline character.", "addnewline.png",
 		                new IModification() {
 			                public void apply(final IModificationContext context)
 			                                throws BadLocationException {
 				                IXtextDocument document = context.getXtextDocument();
-				                document.replace(document.getLength(), 0, "\n"); // FIXME Use
-				                                                                 // platform-specific NL
-				                                                                 // character
+				                String newline = String.format("%n");
+				                document.replace(document.getLength(), 0, newline);
 			                }
 		                });
 	}
 
+	/**
+	 * Offers to add a return type to a function.
+	 * 
+	 * @param issue
+	 *                Details about the error.
+	 * @param acceptor
+	 *                The issue resolution acceptor.
+	 */
 	@Fix(WorthwhileSyntaxErrorMessageProvider.NO_FUNCTION_RETURN_TYPE)
-        public final void addFunctionReturnType(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Add return type 'int'", "Add a return type of 'int' to the function.",
-		                "upcase.png", new AddFunctionReturnTypeModification(issue, "int"));
-		acceptor.accept(issue, "Add return type 'bool'", "Add a return type of 'bool' to the function.",
-		                "upcase.png", new AddFunctionReturnTypeModification(issue, "bool"));
-		acceptor.accept(issue, "Add return type 'int[]'", "Add a return type of 'int[]' to the function.",
-		                "upcase.png", new AddFunctionReturnTypeModification(issue, "int[]"));
-		acceptor.accept(issue, "Add return type 'bool[]'", "Add a return type of 'bool[]' to the function.",
-		                "upcase.png", new AddFunctionReturnTypeModification(issue, "bool[]"));
+	public final void addFunctionReturnType(final Issue issue, final IssueResolutionAcceptor acceptor) {
+		acceptor.accept(issue, "Add return type 'Integer'", "Add a return type of 'Integer' to the function.",
+		                "add.png", new InsertStringModification(issue.getOffset(), "Integer"));
+		acceptor.accept(issue, "Add return type 'Boolean'", "Add a return type of 'Boolean' to the function.",
+		                "add.png", new InsertStringModification(issue.getOffset(), "Boolean"));
+		acceptor.accept(issue, "Add return type 'Integer[]'",
+		                "Add a return type of 'Integer[]' to the function.", "add.png",
+		                new InsertStringModification(issue.getOffset(), "Integer[]"));
+		acceptor.accept(issue, "Add return type 'Boolean[]'",
+		                "Add a return type of 'Boolean[]' to the function.", "add.png",
+		                new InsertStringModification(issue.getOffset(), "Boolean[]"));
 	}
 
-	private class AddFunctionReturnTypeModification implements IModification {
+	/**
+	 * Modification that inserts a string at a given position.
+	 * 
+	 * @author Joachim
+	 * 
+	 */
+	private class InsertStringModification implements IModification {
 
-		private final String returnType;
+		/**
+		 * The string to insert.
+		 */
+		private final String stringToInsert;
 
-		private final Issue issue;
+		/**
+		 * The position in the document at which to insert the string.
+		 */
+		private final int position;
 
-		public AddFunctionReturnTypeModification(final Issue issue, final String returnType) {
-			this.issue = issue;
-			this.returnType = returnType;
+		/**
+		 * Creates a new instance of the {@link InsertStringModification} class.
+		 * 
+		 * @param stringToInsert
+		 *                The string to insert.
+		 * @param position
+		 *                The position in the document at which to insert the string.
+		 */
+		public InsertStringModification(final int position, final String stringToInsert) {
+			this.stringToInsert = stringToInsert;
+			this.position = position;
 		}
 
 		@Override
 		public void apply(final IModificationContext context) throws BadLocationException {
 			IXtextDocument xtextDocument = context.getXtextDocument();
-			xtextDocument.replace(issue.getOffset(), 0, returnType + " ");
+			xtextDocument.replace(position, 0, stringToInsert + " ");
 		}
 
 	}

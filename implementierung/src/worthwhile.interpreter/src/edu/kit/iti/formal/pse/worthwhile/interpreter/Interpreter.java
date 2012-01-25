@@ -48,7 +48,11 @@ public class Interpreter {
 	 * @return the currentNodeVisitor
 	 */
 	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
-		return this.executingVisitor.getExecutingVisitor();
+		if (this.executingVisitor != null) {
+			return this.executingVisitor.getExecutingVisitor();
+		} else {
+			return null;
+		}
 	}
 
 	/** 

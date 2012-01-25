@@ -2,7 +2,9 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
@@ -80,7 +82,12 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(final Expression node) {
-		// we reached a not a VariableReference leaf, ignore default operation
+	public void visit(final Literal literal) {
+		// we reached an Expression leaf, ignore default operation
+	}
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+		// we reached an Expression leaf, ignore default operation
 	}
 }

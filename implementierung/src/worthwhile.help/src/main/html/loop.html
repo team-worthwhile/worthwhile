@@ -14,7 +14,7 @@ To repeatedly execute <a href="statement.html">statements</a> while a certain <a
 <b>Syntax:</b><br>
 <pre>
 while(&lt;<a href="expression.html">expression</a>&gt;)
-&lt;<a href="invariant.html">invariant</a>&gt;+
+&lt;<a href="invariant.html">invariant</a>&gt;*
 {
 &lt;block&gt;
 }
@@ -23,11 +23,13 @@ while(&lt;<a href="expression.html">expression</a>&gt;)
 <b>Example:</b><br>
 <pre>
 Integer i := 0
+
 while(i < 10)
-_invariant i <= 10
+_invariant i &#8804; 10
 {
 	i = i + 1
 }
+
 </pre>
 </body>
 </html>

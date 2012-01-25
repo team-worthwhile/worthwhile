@@ -25,16 +25,16 @@ function &lt;type&gt; &lt;<a href="identifier.html">name</a>&gt;(&lt;type <a hre
 Function declaration:<br>
 <pre>
 function Integer pow(Integer base, Integer exponent)
-_requires(exponent >= 0)
+_requires(exponent &#8805; 0)
 {
 	Integer result := base
 
-	if(exponent == 0) {
+	if(exponent = 0) {
 		return 1
 	}
 
 	while( exponent > 1) {
-		result := result * base
+		result := result &#8226; base
 		exponent := exponent - 1
 	}
 
@@ -51,7 +51,7 @@ function Boolean isEqualToSquare(Integer a, Integer b) {
 	}
 }
 
-Boolean a := isEqualToSquare(25, 5)
+Boolean var := isEqualToSquare(25, 5)
 
 </pre>
 </body>

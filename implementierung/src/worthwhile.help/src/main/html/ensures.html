@@ -9,7 +9,7 @@
 
 <body>
 <h1>_ensures</h1>
-<!--TODO-->
+<!--TODO returns?-->
 The _ensures statement tells the prover that the given <a href="expression.html">expression</a>, which must be of type <a href="boolean_type.html">Boolean</a>, or <a href="quantifiedexpression.html">quantified expression</a> is ensured after the execution of the function.<br><br>
 <b>Syntax:</b><br>
 <pre>
@@ -19,7 +19,11 @@ _ensures &lt;<a href="boolean.html">boolean</a> <a href="expression.html">expres
 <b>Example:</b><br>
 <pre>
 function Integer test(Integer a)
-_ensures(
+_ensures <!--TODO-->true
+{
+	return a &#8226; a
+}
+
 </pre>
 </body>
 </html>

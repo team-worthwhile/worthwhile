@@ -9,7 +9,6 @@
 
 <body>
 <h1>_invariant</h1>
-<!--TODO-->
 This tells the prover the invariant of a loop.<br><br>
 <b>Syntax:</b><br>
 <pre>
@@ -18,11 +17,14 @@ _invariant &lt;<a href="boolean.html">boolean</a> <a href="expression.html">expr
 
 <b>Example:</b><br>
 <pre>
+Integer x := 0
+
 while(x < 10)
-_invariant x <= 10
+_invariant x &#8804; 10
 {
-x := x + 1
+	x := x + 1
 }
+
 </pre>
 </body>
 </html>

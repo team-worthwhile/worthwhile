@@ -676,4 +676,16 @@ public class InterpreterExecutionEventListenerTest {
 			assertTrue(true);
 		}
 	}
+
+	@Test
+	public void testFunctionCall() {
+		TestExecutionListener listener = new TestExecutionListener();
+		Interpreter interpreter = new Interpreter(
+		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n_ensures _return = 9\n{\nreturn 42\n}\n"
+		                                + "{\nInteger i := 9\ni := i + 1\nwhile (true) {\ni := i + x(i)\n}\nInteger result := x(5)\n}\n"));
+		interpreter.addExecutionEventHandler(listener);
+
+		interpreter.execute();
+		assertTrue(true);
+	}
 }

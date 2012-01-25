@@ -2,10 +2,8 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -29,11 +27,6 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	private Map<VariableDeclaration, VariableDeclaration> variableMap = new LinkedHashMap<VariableDeclaration, VariableDeclaration>();
 
 	/**
-	 * Stack to hand expressions back up the calling visit method.
-	 */
-	private Stack<Expression> substituteExpressionStack = new Stack<Expression>();
-
-	/**
 	 * A mapping from the substituted to the substitute {@link VariableDeclaration}s.
 	 * 
 	 * @return the mapping from old to new variables
@@ -43,24 +36,19 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public final void visit(final BinaryExpression b) {
-		b.getLeft().accept(this);
-		b.setLeft(this.substituteExpressionStack.pop());
-		b.getRight().accept(this);
-		b.setRight(this.substituteExpressionStack.pop());
-		this.substituteExpressionStack.push(b);
+	public final void visit(final Literal literal) {
+		// do nothing for Literals
 	}
 
 	@Override
-	public final void visit(final Literal a) {
-		this.substituteExpressionStack.push(a);
+	public final void visit(final BinaryExpression b) {
+		b.getLeft().accept(this);
+		b.getRight().accept(this);
 	}
 
 	@Override
 	public final void visit(final UnaryExpression u) {
 		u.getOperand().accept(this);
-		u.setOperand(this.substituteExpressionStack.pop());
-		this.substituteExpressionStack.push(u);
 	}
 
 	@Override
@@ -73,7 +61,5 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 		}
 		// substitute the old VariableDeclaration with a fresh one
 		v.setVariable(this.variableMap.get(v.getVariable()));
-
-		this.substituteExpressionStack.push(v);
 	}
 }

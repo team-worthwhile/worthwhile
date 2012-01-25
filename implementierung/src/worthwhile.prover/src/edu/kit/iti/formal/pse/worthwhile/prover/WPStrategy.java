@@ -328,16 +328,24 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		AstFactory factory = AstFactory.init();
 
 		Expression invariant = null;
-		for (Invariant i : loop.getInvariants()) {
-			// and the new invariant with the existing if needed
-			if (invariant == null) {
-				invariant = i.getExpression();
-			} else {
-				Conjunction conj = factory.createConjunction();
-				conj.setLeft(invariant);
-				conj.setRight(i.getExpression());
-				invariant = conj;
+		final List<Invariant> invariants = loop.getInvariants();
+		if (!invariants.isEmpty()) {
+			for (Invariant i : invariants) {
+				// and the new invariant with the existing if needed
+				if (invariant == null) {
+					invariant = i.getExpression();
+				} else {
+					Conjunction conj = factory.createConjunction();
+					conj.setLeft(invariant);
+					conj.setRight(i.getExpression());
+					invariant = conj;
+				}
 			}
+		} else {
+			// loop is not annotated with any invariants, getInvariants returned an empty list
+			final BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
+			trueLiteral.setValue(true);
+			invariant = trueLiteral;
 		}
 
 		// (condition and invariant) implies wp(body, invariant)

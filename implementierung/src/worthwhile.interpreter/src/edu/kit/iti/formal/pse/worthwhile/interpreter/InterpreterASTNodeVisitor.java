@@ -312,14 +312,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * @return
+	 * @return a new {@link InterpreterASTNodeVisitor} that contains an equal {@link symbolStack}
 	 */
 	@Override
 	protected InterpreterASTNodeVisitor clone() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+		final InterpreterASTNodeVisitor clone = new InterpreterASTNodeVisitor();
+
+		// Values are immutable so that it is efficient to clone the array and not the elements
+		for (final Map<VariableDeclaration, Value> m : this.symbolStack) {
+			clone.symbolStack.push(new HashMap<VariableDeclaration, Value>(m));
+		}
+
+		return clone;
 	}
 
 	/**

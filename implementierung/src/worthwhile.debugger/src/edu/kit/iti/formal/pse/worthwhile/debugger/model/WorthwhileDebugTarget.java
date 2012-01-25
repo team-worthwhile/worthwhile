@@ -277,12 +277,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final boolean canDisconnect() {
-		return this.eventListener.getMode().equals(DebugMode.DEBUG);
+		return !this.eventListener.getMode().equals(DebugMode.RUN);
 	}
 
 	@Override
 	public final void disconnect() throws DebugException {
-		// TODO
+		this.eventListener.disconnect();
 	}
 
 	@Override
@@ -384,15 +384,17 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
-	 * Returns the path to the source file of the program that is executed.
+	 * Returns the file name of the source file of the program that is executed.
 	 * 
-	 * @return The path to the source file of the program that is executed.
+	 * @return The file name of the source file of the program that is executed.
 	 */
 	public final String getSourceName() {
 		try {
+			// Get the path from the launch configuration and return only the file name.
 			Path path = new Path(this.launch.getLaunchConfiguration().getAttribute(ATTR_PATH, ""));
 			return path.lastSegment();
 		} catch (CoreException e) {
+			e.printStackTrace();
 			return "";
 		}
 	}

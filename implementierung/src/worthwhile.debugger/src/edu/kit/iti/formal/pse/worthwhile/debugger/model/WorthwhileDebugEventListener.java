@@ -199,6 +199,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				int resumeReason = 0;
 
 				switch (this.mode) {
+					case RUN:
 					case DEBUG:
 						resumeReason = DebugEvent.RESUME;
 						break;
@@ -277,6 +278,16 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	public final void stepOver() {
 		synchronized (this) {
 			this.mode = DebugMode.STEP_OVER;
+			notifyAll();
+		}
+	}
+
+	/**
+	 * Sets the debug mode to "run", i.e. breakpoints are not handled any more.
+	 */
+	public final void disconnect() {
+		synchronized (this) {
+			this.mode = DebugMode.RUN;
 			notifyAll();
 		}
 	}

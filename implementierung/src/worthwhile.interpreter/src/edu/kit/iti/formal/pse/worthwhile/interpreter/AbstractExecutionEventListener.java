@@ -55,20 +55,20 @@ public abstract class AbstractExecutionEventListener {
 	}
 
 	/**
-	 * Signals the execution of an {@link Assertion} that was not valid.
+	 * Signals the execution of an {@link Annotation} that was not valid.
 	 * 
-	 * @param assertion
-	 *                the invalid <code>Assertion</code>
+	 * @param annotation
+	 *                the invalid <code>Annotation</code>
 	 */
 	public void annotationFailed(final Annotation annotation) {
 		throw new RuntimeException(annotation.toString() + " is invalid.");
 	}
 
 	/**
-	 * Signals the execution of an {@link Assertion} that was valid.
+	 * Signals the execution of an {@link Annotation} that was valid.
 	 * 
-	 * @param assertion
-	 *                the valid <code>Assertion</code>
+	 * @param annotation
+	 *                the valid <code>Annotation</code>
 	 */
 	public void annotationSucceeded(final Annotation annotation) {
 	}

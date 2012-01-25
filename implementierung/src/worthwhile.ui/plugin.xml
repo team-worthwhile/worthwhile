@@ -380,4 +380,23 @@
            id="edu.kit.iti.formal.pse.worthwhile">
      </debugModelPresentation>
   </extension>
+  
+  <extension point="org.eclipse.ui.navigator.navigatorContent">
+    <commonWizard
+        type="new"
+        wizardId="edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileProjectWizard">
+        <enablement>
+        	true
+        </enablement>
+    </commonWizard>
+  </extension>
+  <extension point="org.eclipse.ui.navigator.navigatorContent">
+    <commonWizard
+        type="new"
+        wizardId="edu.kit.iti.formal.pse.worthwhile.ui.wizard.NewWorthwhileFileWizard">
+        <enablement>
+            	true
+        </enablement>
+    </commonWizard>
+</extension>
 </plugin>

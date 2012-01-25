@@ -5,6 +5,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import java.math.BigInteger;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
@@ -74,7 +75,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 *
 	 */
-	private Set<AbstractExecutionEventListener> executionEventHandlers;
+	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
 	/**
 	 * @return the executionEventHandlers

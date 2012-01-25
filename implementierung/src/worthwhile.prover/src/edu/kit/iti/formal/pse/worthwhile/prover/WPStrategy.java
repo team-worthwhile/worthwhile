@@ -10,10 +10,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
@@ -29,6 +27,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
@@ -69,9 +68,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	@Override
 	public Expression transformProgram(final Program program) {
 		// initialize the weakest precondition of the main block to true
-		BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
-		trueLiteral.setValue(true);
-		return this.transformProgram(program, trueLiteral);
+		return this.transformProgram(program, AstNodeCreatorHelper.createTrueLiteral());
 	}
 
 	/**
@@ -99,9 +96,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final Assertion assertion) {
-		Conjunction conjunction = AstFactory.init().createConjunction();
-		conjunction.setRight(this.weakestPreconditionStack.pop());
-		conjunction.setLeft(AstNodeCloneHelper.clone(assertion.getExpression()));
+		Conjunction conjunction = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCloneHelper.clone(assertion.getExpression()),
+		                this.weakestPreconditionStack.pop());
 		this.weakestPreconditionStack.push(conjunction);
 	}
 
@@ -140,9 +137,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final Assumption assumption) {
-		Implication implication = AstFactory.init().createImplication();
-		implication.setLeft(AstNodeCloneHelper.clone(assumption.getExpression()));
-		implication.setRight(this.weakestPreconditionStack.pop());
+		Implication implication = AstNodeCreatorHelper.createImplication(
+		                AstNodeCloneHelper.clone(assumption.getExpression()),
+		                this.weakestPreconditionStack.pop());
 		this.weakestPreconditionStack.push(implication);
 	}
 
@@ -164,9 +161,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final Axiom axiom) {
-		Implication implication = AstFactory.init().createImplication();
-		implication.setLeft(AstNodeCloneHelper.clone(axiom.getExpression()));
-		implication.setRight(this.weakestPreconditionStack.pop());
+		Implication implication = AstNodeCreatorHelper.createImplication(
+		                AstNodeCloneHelper.clone(axiom.getExpression()), this.weakestPreconditionStack.pop());
 		this.weakestPreconditionStack.push(implication);
 	}
 
@@ -212,24 +208,24 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	@Override
 	public void visit(final Conditional conditional) {
 		// the updated weakest precondition
-		Conjunction conjunction = AstFactory.init().createConjunction();
-
-		// build first implication: condition => wp(if-block, wp)
-		Implication implication = AstFactory.init().createImplication();
-		implication.setLeft(AstNodeCloneHelper.clone(conditional.getCondition()));
+		Conjunction conjunction = AstNodeCreatorHelper.createConjunction();
 
 		Expression wp = this.weakestPreconditionStack.peek();
 
 		// will calculate new wp for if-block and replace wp on top of stack with it
 		conditional.getTrueBlock().accept(this);
-		implication.setRight(this.weakestPreconditionStack.pop());
+
+		// build first implication: condition => wp(if-block, wp)
+		Implication implication = AstNodeCreatorHelper.createImplication(
+		                AstNodeCloneHelper.clone(conditional.getCondition()),
+		                this.weakestPreconditionStack.pop());
 
 		conjunction.setLeft(implication);
 
 		// build second implication: !condition => wp(else-block, wp)
-		implication = AstFactory.init().createImplication();
-		Negation negation = AstFactory.init().createNegation();
-		negation.setOperand(AstNodeCloneHelper.clone(conditional.getCondition()));
+		implication = AstNodeCreatorHelper.createImplication();
+		Negation negation = AstNodeCreatorHelper.createNegation(AstNodeCloneHelper.clone(conditional
+		                .getCondition()));
 		implication.setLeft(negation);
 
 		if (conditional.getFalseBlock() != null) {
@@ -239,9 +235,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			conditional.getFalseBlock().accept(this);
 			implication.setRight(this.weakestPreconditionStack.pop());
 		} else {
-			BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
-			trueLiteral.setValue(true);
-			implication.setRight(trueLiteral);
+			implication.setRight(AstNodeCreatorHelper.createTrueLiteral());
 		}
 
 		conjunction.setRight(implication);
@@ -258,29 +252,21 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final FunctionDeclaration functionDeclaration) {
-		// the factory used to create ASTNodes in the following
-		AstFactory model = AstFactory.init();
-
-		BooleanLiteral trueLiteral = model.createBooleanLiteral();
-		trueLiteral.setValue(true);
-
 		List<List<? extends Annotation>> lists = new ArrayList<List<? extends Annotation>>();
 		lists.add(functionDeclaration.getPreconditions());
 		lists.add(functionDeclaration.getPostconditions());
 
 		for (List<? extends Annotation> l : lists) {
 			if (l.isEmpty()) {
-				this.weakestPreconditionStack.push(AstNodeCloneHelper.clone(trueLiteral));
+				this.weakestPreconditionStack.push(AstNodeCreatorHelper.createTrueLiteral());
 			} else {
 				Expression conjunction;
 
 				Iterator<? extends Annotation> i = l.iterator();
 				conjunction = AstNodeCloneHelper.clone(i.next().getExpression());
 				while (i.hasNext()) {
-					Conjunction c = model.createConjunction();
-					c.setLeft(conjunction);
-					c.setRight(AstNodeCloneHelper.clone(i.next().getExpression()));
-					conjunction = c;
+					conjunction = AstNodeCreatorHelper.createConjunction(conjunction,
+					                AstNodeCloneHelper.clone(i.next().getExpression()));
 				}
 
 				this.weakestPreconditionStack.push(conjunction);
@@ -295,7 +281,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		this.postcondition = null;
 
 		// build the weakest precondition for this function: preconditions => wp(body, postconditions)
-		Implication implication = model.createImplication();
+		Implication implication = AstNodeCreatorHelper.createImplication();
 
 		// pops body weakest precondition wp(body, postconditions)
 		implication.setRight(this.weakestPreconditionStack.pop());
@@ -309,9 +295,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		wp.accept(freshVariableSet);
 
 		for (final VariableDeclaration v : freshVariableSet.getVariableMap().values()) {
-			ForAllQuantifier forall = model.createForAllQuantifier();
-			forall.setParameter(v);
-			forall.setExpression(wp);
+			ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(v, wp);
 			wp = forall;
 		}
 		this.weakestPreconditionStack.push(wp);
@@ -325,8 +309,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final Loop loop) {
-		AstFactory factory = AstFactory.init();
-
 		Expression invariant = null;
 		final List<Invariant> invariants = loop.getInvariants();
 		if (!invariants.isEmpty()) {
@@ -335,23 +317,19 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 				if (invariant == null) {
 					invariant = i.getExpression();
 				} else {
-					Conjunction conj = factory.createConjunction();
-					conj.setLeft(invariant);
-					conj.setRight(i.getExpression());
+					Conjunction conj = AstNodeCreatorHelper.createConjunction(invariant,
+					                i.getExpression());
 					invariant = conj;
 				}
 			}
 		} else {
 			// loop is not annotated with any invariants, getInvariants returned an empty list
-			final BooleanLiteral trueLiteral = AstFactory.init().createBooleanLiteral();
-			trueLiteral.setValue(true);
-			invariant = trueLiteral;
+			invariant = AstNodeCreatorHelper.createTrueLiteral();
 		}
 
 		// (condition and invariant) implies wp(body, invariant)
-		Conjunction conditionAndInvariant = factory.createConjunction();
-		conditionAndInvariant.setLeft(AstNodeCloneHelper.clone(loop.getCondition()));
-		conditionAndInvariant.setRight(AstNodeCloneHelper.clone(invariant));
+		Conjunction conditionAndInvariant = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCloneHelper.clone(loop.getCondition()), AstNodeCloneHelper.clone(invariant));
 
 		// generate weakest precondition for the body given the invariant as the postcondition
 		// we have to copy the invariant because what happens inside the loop should not be reflected outside of
@@ -360,21 +338,18 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		loop.getBody().accept(this);
 		Expression bodyPrecondition = this.weakestPreconditionStack.pop();
 
-		Implication conditionAndInvariantImpliesBodyPrecondition = factory.createImplication();
-		conditionAndInvariantImpliesBodyPrecondition.setLeft(conditionAndInvariant);
-		conditionAndInvariantImpliesBodyPrecondition.setRight(AstNodeCloneHelper.clone(bodyPrecondition));
+		Implication conditionAndInvariantImpliesBodyPrecondition = AstNodeCreatorHelper.createImplication(
+		                conditionAndInvariant, AstNodeCloneHelper.clone(bodyPrecondition));
 
 		// ((not condition) and invariant) implies postcondition
-		Negation notCondition = factory.createNegation();
-		notCondition.setOperand(AstNodeCloneHelper.clone(loop.getCondition()));
+		Negation notCondition = AstNodeCreatorHelper.createNegation(AstNodeCloneHelper.clone(loop
+		                .getCondition()));
 
-		Conjunction notConditionAndInvariant = factory.createConjunction();
-		notConditionAndInvariant.setLeft(notCondition);
-		notConditionAndInvariant.setRight(AstNodeCloneHelper.clone(invariant));
+		Conjunction notConditionAndInvariant = AstNodeCreatorHelper.createConjunction(notCondition,
+		                AstNodeCloneHelper.clone(invariant));
 
-		Implication notConditionAndInvariantImpliesPostcondition = factory.createImplication();
-		notConditionAndInvariantImpliesPostcondition.setLeft(notConditionAndInvariant);
-		notConditionAndInvariantImpliesPostcondition.setRight(this.getWeakestPrecondition());
+		Implication notConditionAndInvariantImpliesPostcondition = AstNodeCreatorHelper.createImplication(
+		                notConditionAndInvariant, this.getWeakestPrecondition());
 
 		/*
 		 * the two implications have to be true for all values of all referenced variables because we don't look
@@ -386,10 +361,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		Expression forAllValuesConditionAndInvariantImpliesBodyPrecondition = conditionAndInvariantImpliesBodyPrecondition;
 		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
-			QuantifiedExpression forAllValuesOfNewDeclaration = factory.createForAllQuantifier();
-			forAllValuesOfNewDeclaration.setParameter(newDeclaration);
-			forAllValuesOfNewDeclaration
-			                .setExpression(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
+			QuantifiedExpression forAllValuesOfNewDeclaration = AstNodeCreatorHelper
+			                .createForAllQuantifier(newDeclaration,
+			                                forAllValuesConditionAndInvariantImpliesBodyPrecondition);
 			forAllValuesConditionAndInvariantImpliesBodyPrecondition = forAllValuesOfNewDeclaration;
 		}
 
@@ -399,21 +373,19 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		Expression forAllValuesNotConditionAndInvariantImpliesPostcondition = notConditionAndInvariantImpliesPostcondition;
 		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
-			QuantifiedExpression forAllValuesOfNewDeclaration = factory.createForAllQuantifier();
-			forAllValuesOfNewDeclaration.setParameter(newDeclaration);
-			forAllValuesOfNewDeclaration
-			                .setExpression(forAllValuesNotConditionAndInvariantImpliesPostcondition);
+			QuantifiedExpression forAllValuesOfNewDeclaration = AstNodeCreatorHelper
+			                .createForAllQuantifier(newDeclaration,
+			                                forAllValuesNotConditionAndInvariantImpliesPostcondition);
 			forAllValuesNotConditionAndInvariantImpliesPostcondition = forAllValuesOfNewDeclaration;
 		}
 
 		// assemble the weakest precondition from the three conditions
-		Conjunction invariantAndConditionTrueCase = factory.createConjunction();
-		invariantAndConditionTrueCase.setLeft(AstNodeCloneHelper.clone(invariant));
-		invariantAndConditionTrueCase.setRight(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
+		Conjunction invariantAndConditionTrueCase = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCloneHelper.clone(invariant),
+		                forAllValuesConditionAndInvariantImpliesBodyPrecondition);
 
-		Conjunction loopPrecondition = factory.createConjunction();
-		loopPrecondition.setLeft(invariantAndConditionTrueCase);
-		loopPrecondition.setRight(forAllValuesNotConditionAndInvariantImpliesPostcondition);
+		Conjunction loopPrecondition = AstNodeCreatorHelper.createConjunction(invariantAndConditionTrueCase,
+		                forAllValuesNotConditionAndInvariantImpliesPostcondition);
 
 		// replace the weakest precondition on the stack
 		this.weakestPreconditionStack.pop();
@@ -444,14 +416,14 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		for (FunctionDeclaration f : program.getFunctionDeclarations()) {
 			if (conjunction == null) {
-				conjunction = AstFactory.init().createConjunction();
+				conjunction = AstNodeCreatorHelper.createConjunction();
 			}
 
 			// visit function declaration, pushes its weakest precondition on top (does not replace)
 			f.accept(this);
 
 			// add function declaration's weakest precondition to program's weakest precondition
-			Conjunction c = AstFactory.init().createConjunction();
+			Conjunction c = AstNodeCreatorHelper.createConjunction();
 			c.setLeft(this.weakestPreconditionStack.pop());
 			conjunction.setRight(c);
 			conjunction = c;

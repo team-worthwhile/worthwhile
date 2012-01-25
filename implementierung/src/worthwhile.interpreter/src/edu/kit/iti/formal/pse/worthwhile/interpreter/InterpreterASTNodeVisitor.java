@@ -26,7 +26,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -64,6 +63,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
@@ -716,8 +716,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 					// evaluate the size expression and assign the size value as
 					// literal
 					arrayType.getSize().accept(this);
-					final IntegerLiteral sizeLiteral = AstFactory.init().createIntegerLiteral();
-					sizeLiteral.setValue(((IntegerValue) this.resultStack.pop()).getValue());
+					final IntegerLiteral sizeLiteral = AstNodeCreatorHelper
+					                .createIntegerLiteral(((IntegerValue) this.resultStack.pop())
+					                                .getValue());
 					arrayType.setSize(sizeLiteral);
 
 					if (arrayType.getBaseType() instanceof BooleanType) {

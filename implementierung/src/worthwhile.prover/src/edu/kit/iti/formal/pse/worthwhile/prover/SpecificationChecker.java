@@ -5,18 +5,15 @@ import java.util.Map;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 
 /**
  * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
@@ -114,46 +111,30 @@ public class SpecificationChecker {
 		// TODO apply Worthwhile specific runtime assertions
 		// TODO apply axiom list
 
-		AstFactory factory = AstFactory.init();
-
-		BooleanLiteral trueExpression = factory.createBooleanLiteral();
-		trueExpression.setValue(true);
-		Expression environmentExpression = trueExpression;
+		Expression environmentExpression = AstNodeCreatorHelper.createTrueLiteral();
 		for (VariableDeclaration environmentVariable : environment.keySet()) {
 			// create a reference to the variable
-			VariableReference variableReference = factory.createVariableReference();
-			variableReference.setVariable(environmentVariable);
+			VariableReference variableReference = AstNodeCreatorHelper.createVariableReference(environmentVariable);
 
 			Value variableValue = environment.get(environmentVariable);
 			// create the literal that epxresses the value of the symbol
 			Literal variableValueLiteral = null;
 			// TODO: array symbols
 			if (variableValue instanceof BooleanValue) {
-				BooleanLiteral l = factory.createBooleanLiteral();
-				l.setValue(((BooleanValue) variableValue).getValue());
-				variableValueLiteral = l;
+				variableValueLiteral = AstNodeCreatorHelper.createBooleanLiteral(((BooleanValue) variableValue).getValue());
 			} else if (variableValue instanceof IntegerValue) {
-				IntegerLiteral l = factory.createIntegerLiteral();
-				l.setValue(((IntegerValue) variableValue).getValue());
-				variableValueLiteral = l;
+				variableValueLiteral = AstNodeCreatorHelper.createIntegerLiteral(((IntegerValue) variableValue).getValue());
 			}
 
 			// create the ref = literal expression
-			Equal equal = factory.createEqual();
-			equal.setLeft(variableReference);
-			equal.setRight(variableValueLiteral);
+			Equal equal = AstNodeCreatorHelper.createEqual(variableReference, variableValueLiteral);
 
 			// conjunctively add the equals to the expression expressing the environment
-			Conjunction c = factory.createConjunction();
-			c.setLeft(environmentExpression);
-			c.setRight(equal);
-			environmentExpression = c;
+			environmentExpression = AstNodeCreatorHelper.createConjunction(environmentExpression, equal);
 		}
 
 		// create the environment => expression implication
-		Implication environmentImpliesFormula = factory.createImplication();
-		environmentImpliesFormula.setLeft(environmentExpression);
-		environmentImpliesFormula.setRight(formula);
+		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression, formula);
 		return getValidity(environmentImpliesFormula);
 	}
 
@@ -165,10 +146,7 @@ public class SpecificationChecker {
 	 * @return <code>formula</code>'s {@link Validity}
 	 */
 	private Validity getValidity(final Expression formula) {
-		AstFactory model = AstFactory.init();
-
-		Negation negation = model.createNegation();
-		negation.setOperand(formula);
+		Negation negation = AstNodeCreatorHelper.createNegation(formula);
 
 		// let prover check formula and initialize checkResult with the returned result
 		try {

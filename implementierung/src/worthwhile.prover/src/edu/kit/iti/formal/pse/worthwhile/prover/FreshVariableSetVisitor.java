@@ -4,7 +4,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
@@ -49,6 +51,24 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public final void visit(final UnaryExpression u) {
 		u.getOperand().accept(this);
+	}
+
+	@Override
+	public final void visit(final QuantifiedExpression quantifiedExpression) {
+		// since QuantifiedExpression#parameters are bound in the respective QuantifiedExpression#expression we
+		// do not need to clone them, therefore add them temporarily to the variableMap so that
+		// visit(VariableReference) does not create a copy we cannot remove from the variableMap anymore
+		final VariableDeclaration parameter = quantifiedExpression.getParameter();
+		this.variableMap.put(parameter, parameter);
+
+		final Expression condition = quantifiedExpression.getCondition();
+		if (condition != null) {
+			condition.accept(this);
+		}
+
+		quantifiedExpression.getExpression().accept(this);
+
+		this.variableMap.remove(parameter);
 	}
 
 	@Override

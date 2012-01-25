@@ -17,6 +17,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
  */
 public class Interpreter {
 	/**
+	 * The {@link Set} of {@link AbstractExecutionEventListener}s that are notified during execution.
 	 */
 	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
@@ -39,13 +40,14 @@ public class Interpreter {
 		// end-user-code
 	}
 
-	/** 
-	 * 
+	/**
+	 * The {@link InterpreterASTNodeVisitor} that is executing the {@link program}, if any.
 	 */
 	private InterpreterASTNodeVisitor executingVisitor;
 
 	/**
-	 * @return the currentNodeVisitor
+	 * @return the currently executing {@link InterpreterASTNodeVisitor} and <code>null</code> if
+	 *         {@link Interpreter#execute()} has not been called yet
 	 */
 	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
 		if (this.executingVisitor != null) {
@@ -55,8 +57,8 @@ public class Interpreter {
 		}
 	}
 
-	/** 
-	 * 
+	/**
+	 * The {@link Program} that is executed with {@link Interpreter#execute()}.
 	 */
 	private Program program;
 
@@ -86,8 +88,11 @@ public class Interpreter {
 		this.program = program;
 	}
 
-	/** 
+	/**
+	 * Executes the {@link program}.
 	 * 
+	 * @see Interpreter#Interpreter(Program)
+	 * @see Interpreter#setProgram(Program)
 	 */
 	public void execute() {
 		this.executingVisitor = new InterpreterASTNodeVisitor();

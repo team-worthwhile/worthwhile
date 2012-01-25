@@ -114,7 +114,14 @@ public class Interpreter {
 	 * @return
 	 */
 	public Value evaluateExpression(Expression expression) {
-		InterpreterASTNodeVisitor visitor = new InterpreterASTNodeVisitor();
+		InterpreterASTNodeVisitor visitor = this.getCurrentNodeVisitor();
+
+		if (visitor != null) {
+			visitor = visitor.clone();
+		} else {
+			visitor = new InterpreterASTNodeVisitor();
+		}
+
 		expression.accept(visitor);
 		return visitor.getReturnValue();
 	}

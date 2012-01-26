@@ -11,6 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 
@@ -189,5 +190,39 @@ public final class AstNodeCreatorHelper {
 		final VariableReference variableReference = AstNodeCreatorHelper.factory.createVariableReference();
 		variableReference.setVariable(variable);
 		return variableReference;
+	}
+
+	/**
+	 * 
+	 * @param type
+	 *                the {@link VariableDeclaration}'s {@link Type} to be
+	 * @param name
+	 *                the <code>VariableDeclaration</code>'s name to be
+	 * @param initialValue
+	 *                the <code>VariableDeclaration</code>'s initial value {@link Expression} to be
+	 * @return a <code>VariableDeclaration</code> with the given <code>type</code>, <code>name</code> and
+	 *         <code>initialValue</code>
+	 */
+	public static VariableDeclaration createVariableDeclaration(final Type type, final String name,
+	                final Expression initialValue) {
+		final VariableDeclaration variableDeclaration = AstNodeCreatorHelper.factory
+		                .createVariableDeclaration();
+		variableDeclaration.setType(type);
+		variableDeclaration.setName(name);
+		variableDeclaration.setInitialValue(initialValue);
+		return variableDeclaration;
+	}
+
+	/**
+	 * 
+	 * @param type
+	 *                the {@link VariableDeclaration}'s {@link Type} to be
+	 * @param name
+	 *                the <code>VariableDeclaration</code>'s name to be
+	 * @return an uninitialized <code>VariableDeclaration</code> with the given <code>type</code> and
+	 *         <code>name</code>
+	 */
+	public static VariableDeclaration createVariableDeclaration(final Type type, final String name) {
+		return AstNodeCreatorHelper.createVariableDeclaration(type, name, null);
 	}
 }

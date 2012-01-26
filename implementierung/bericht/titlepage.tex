@@ -1,0 +1,57 @@
+%% titlepage.tex
+%%
+
+% coordinates for the bg shape on the titlepage
+\newcommand{\diameter}{20}
+\newcommand{\xone}{-30}
+\newcommand{\xtwo}{150}
+\newcommand{\yone}{15}
+\newcommand{\ytwo}{-265}
+
+\begin{titlepage}
+% bg shape
+\begin{tikzpicture}[overlay]
+\draw[color=gray]
+ 		 (\xone mm, \yone mm)
+  -- (\xtwo mm, \yone mm)
+ arc (90:0:\diameter pt)
+  -- (\xtwo mm + \diameter pt , \ytwo mm)
+	-- (\xone mm + \diameter pt , \ytwo mm)
+ arc (270:180:\diameter pt)
+	-- (\xone mm, \yone mm);
+\end{tikzpicture}
+
+	\begin{textblock}{10}[0,0](1.7,1)
+		\includegraphics[width=.3\textwidth]{images/kit_logo_de_4c_positiv.pdf}
+	\end{textblock}
+	\changefont{phv}{m}{n}	% helvetica	
+	\begin{center}
+		\fontsize{45}{50}\selectfont
+        \vfill
+        \textsc{Worthwhile} \\
+        \textsc{Implementierung}
+        \vfill
+		\LARGE
+		PSE WS 11/12
+  \vfill
+ \newpage
+ 
+ \null
+ \vfill
+ 
+ Praxis der Softwareentwicklung -- WS 2011/2012 \\
+ 
+  \Large
+  Automatisches Prüfen der Korrektheit von Programmen \\
+  Projekt 4 -- Gruppe 2 \\
+  \medskip
+  \vspace{2cm}
+  
+    Leon Handreke $\cdot$ Chris Hiatt $\cdot$ Stefan Orf $\cdot$ Joachim Priesner $\cdot$ Fabian Ruch $\cdot$ Matthias Wagner
+  \vspace{2cm} \\
+  \today
+	\end{center}
+	
+  \vfill
+
+\end{titlepage}

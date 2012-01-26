@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 

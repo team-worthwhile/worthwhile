@@ -33,6 +33,8 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.Provider;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
@@ -41,6 +43,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile_expressions.WorthwhileExpressionsStandaloneSetup;
 import edu.kit.iti.formal.pse.worthwhile_expressions.scoping.IWorthwhileContextProvider;
 
 /**
@@ -476,7 +479,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 	
 	@Inject
-	private XtextResourceSet resourceSet;
+	private Provider<XtextResourceSet> resourceSetProvider;
 
 	/**
 	 * Parses an expression string and returns the corresponding AST node.
@@ -489,12 +492,15 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	private Expression parseExpressionString(final String expressionText) throws DebugException {
 		// Create a new program that contains the expression evaluation.
+		Injector guiceInjector = new WorthwhileExpressionsStandaloneSetup(this).createInjectorAndDoEMFRegistration();
+		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.wwexpr"));
 		InputStream in = new ByteArrayInputStream(expressionText.getBytes());
 		try {
 			resource.load(in, resourceSet.getLoadOptions());
 		} catch (IOException e) {
+			e.printStackTrace();
 			return null;
 		}
 

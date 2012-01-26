@@ -30,4 +30,5 @@ Export-Package: edu.kit.iti.formal.pse.worthwhile,
  edu.kit.iti.formal.pse.worthwhile.typesystem,
  edu.kit.iti.formal.pse.worthwhile.util,
  edu.kit.iti.formal.pse.worthwhile.validation,
+ edu.kit.iti.formal.pse.worthwhile_expressions,
  edu.kit.iti.formal.pse.worthwhile_expressions.scoping

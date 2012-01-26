@@ -148,16 +148,19 @@ public class SpecificationChecker {
 		Expression environmentExpression = AstNodeCreatorHelper.createTrueLiteral();
 		for (VariableDeclaration environmentVariable : environment.keySet()) {
 			// create a reference to the variable
-			VariableReference variableReference = AstNodeCreatorHelper.createVariableReference(environmentVariable);
+			VariableReference variableReference = AstNodeCreatorHelper
+			                .createVariableReference(environmentVariable);
 
 			Value variableValue = environment.get(environmentVariable);
 			// create the literal that epxresses the value of the symbol
 			Literal variableValueLiteral = null;
 			// TODO: array symbols
 			if (variableValue instanceof BooleanValue) {
-				variableValueLiteral = AstNodeCreatorHelper.createBooleanLiteral(((BooleanValue) variableValue).getValue());
+				variableValueLiteral = AstNodeCreatorHelper
+				                .createBooleanLiteral(((BooleanValue) variableValue).getValue());
 			} else if (variableValue instanceof IntegerValue) {
-				variableValueLiteral = AstNodeCreatorHelper.createIntegerLiteral(((IntegerValue) variableValue).getValue());
+				variableValueLiteral = AstNodeCreatorHelper
+				                .createIntegerLiteral(((IntegerValue) variableValue).getValue());
 			}
 
 			// create the ref = literal expression
@@ -168,7 +171,8 @@ public class SpecificationChecker {
 		}
 
 		// create the environment => expression implication
-		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression, formula);
+		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression,
+		                formula);
 		return getValidity(environmentImpliesFormula);
 	}
 

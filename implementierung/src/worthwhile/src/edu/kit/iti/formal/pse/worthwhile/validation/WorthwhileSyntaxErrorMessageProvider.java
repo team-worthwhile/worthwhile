@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
 
+import org.antlr.runtime.EarlyExitException;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
 
@@ -17,12 +18,12 @@ public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProv
 	public static final String NO_NEWLINE_AT_EOF = "NoNewlineAtEOF";
 
 	/**
-	 * Error code for "No return type specified for function"
+	 * Error code for "No return type specified for function".
 	 */
 	public static final String NO_FUNCTION_RETURN_TYPE = "NoFunctionReturnType";
 
 	/**
-	 * Returns improved syntax error messages. TODO find a better way to get improved messages
+	 * Returns a syntax error messages for the context.
 	 * 
 	 * @param context
 	 *                the context from which you want the error message
@@ -31,16 +32,16 @@ public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProv
 	 */
 	@Override
 	public final SyntaxErrorMessage getSyntaxErrorMessage(final IParserErrorContext context) {
-		System.out.println(context.getDefaultMessage());
-		if (context.getDefaultMessage().contains("loop did not match anything at input '<EOF>'")) {
+		if (context.getRecognitionException() instanceof EarlyExitException) {
 
-			return new SyntaxErrorMessage("Newline is missing", NO_NEWLINE_AT_EOF);
-
-		} else if (context.getDefaultMessage().contains("loop did not match anything")
-		                || context.getDefaultMessage().contains("missing EOF")) {
-
-			return new SyntaxErrorMessage("Delete this token.", "deleteToken");
+			if (context.getCurrentNode().getRootNode().getTotalEndLine() == context.getCurrentNode()
+			                .getEndLine()) {
+				return new SyntaxErrorMessage("Newline is missing", NO_NEWLINE_AT_EOF);
+			} else {
+				return new SyntaxErrorMessage("Delete this token.", "deleteToken");
+			}
 		}
+
 		return super.getSyntaxErrorMessage(context);
 
 	}

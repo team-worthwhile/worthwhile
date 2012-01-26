@@ -1,0 +1,7 @@
+grammar edu.kit.iti.formal.pse.worthwhile_expressions.WorthwhileExpressions with edu.kit.iti.formal.pse.worthwhile.Worthwhile
+
+import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast"
+
+ExpressionEvaluation returns ExpressionEvaluation:
+	expression=Expression
+;

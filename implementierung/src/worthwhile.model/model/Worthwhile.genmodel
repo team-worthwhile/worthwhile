@@ -29,8 +29,6 @@
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/mainBlock"/>
                     <genFeatures property="None" children="true" createChild="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/axioms"/>
-                    <genFeatures property="None" children="true" createChild="true"
-                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/expressionEvaluation"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Program/accept/visitor"/>
                     </genOperations>

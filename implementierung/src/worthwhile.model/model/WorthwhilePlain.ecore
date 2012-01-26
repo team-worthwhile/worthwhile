@@ -16,8 +16,6 @@
         eType="#//Block" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="axioms" ordered="false"
         upperBound="-1" eType="#//Axiom" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expressionEvaluation" eType="#//ExpressionEvaluation"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ASTNode" abstract="true">
     <eOperations name="accept">
@@ -520,7 +518,7 @@
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionEvaluation" eSuperTypes="#//Statement">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionEvaluation" eSuperTypes="#//ASTNode">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>

@@ -5,14 +5,11 @@ import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwh
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 // A program consists of a sequence of statements and/or function declarations.
-// Alternatively, it can consist of exactly one expression evaluation.
 Program returns Program:
 	{Program}
-	(
-		NL* // Newline at the beginning of the file is allowed.
-		((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
-		mainBlock=Block // FIXME: Newline at end of file?
-	) | "__eval" expressionEvaluation=ExpressionEvaluation
+	NL* // Newline at the beginning of the file is allowed.
+	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
+	mainBlock=Block // FIXME: Newline at end of file?
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 

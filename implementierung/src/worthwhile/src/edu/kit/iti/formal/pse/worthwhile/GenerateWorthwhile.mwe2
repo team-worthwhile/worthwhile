@@ -9,6 +9,10 @@ var file.extensions = "ww"
 var projectName = "worthwhile"
 var runtimeProject = "../${projectName}"
 
+var expr_grammarURI = "classpath:/edu/kit/iti/formal/pse/worthwhile/WorthwhileExpressions.xtext"
+var expr_file.extensions = "wwexpr"
+var expr_projectName = "worthwhileExpressions"
+
 Workflow {
 	bean = StandaloneSetup {
 		scanClassPath  = true
@@ -105,6 +109,50 @@ Workflow {
 
 			// quickfix API 
 			fragment = quickfix.QuickfixProviderFragment {}
+		}
+	}
+
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = expr_projectName
+		srcPath = "/src"
+		srcGenPath = "/target/generated"
+		language = {
+			uri = expr_grammarURI
+			fileExtensions = expr_file.extensions
+
+			// Java API to access grammar elements (required by several other fragments)
+			fragment = grammarAccess.GrammarAccessFragment {}
+
+			// generates Java API for the generated EPackages
+			// fragment = ecore.EcoreGeneratorFragment {}
+
+			// the serialization component
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+
+			// a custom ResourceFactory for use with EMF 
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = file.extensions
+			}
+
+			// the Antlr parser
+			fragment = parser.antlr.XtextAntlrGeneratorFragment {
+				options = {
+					classSplitting = true
+				}
+			}
+
+			// the Ecore2Xtext specific terminal converter
+			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment {}
+
+			// java-based API for validation 
+			fragment = validation.JavaValidatorFragment {
+			// composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			}
+
+			// scoping and exporting API
+			fragment = scoping.ImportURIScopingFragment {}
 		}
 	}
 }

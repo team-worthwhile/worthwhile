@@ -32,14 +32,13 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
-import com.google.inject.Injector;
+import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
-import edu.kit.iti.formal.pse.worthwhile.debugger.runtime.WorthwhileDebuggerStandaloneSetup;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
@@ -482,6 +481,9 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		return this.interpreterRunner.getInterpreter().evaluateExpression(
 		                this.parseExpressionString(expressionText));
 	}
+	
+	@Inject
+	private XtextResourceSet resourceSet;
 
 	/**
 	 * Parses an expression string and returns the corresponding AST node.
@@ -494,15 +496,9 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	private Expression parseExpressionString(final String expressionText) throws DebugException {
 		// Create a new program that contains the expression evaluation.
-		String expressionProgramText = "__eval " + expressionText;
-
-		// Obtain an injector and create an Xtext resource
-		Injector guiceInjector = new WorthwhileDebuggerStandaloneSetup(this)
-		                .createInjectorAndDoEMFRegistration();
-		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.ww"));
-		InputStream in = new ByteArrayInputStream(expressionProgramText.getBytes());
+		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.wwexpr"));
+		InputStream in = new ByteArrayInputStream(expressionText.getBytes());
 		try {
 			resource.load(in, resourceSet.getLoadOptions());
 		} catch (IOException e) {
@@ -511,8 +507,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		// Check whether there are errors in the expression string
 		if (resource.getErrors().isEmpty()) {
-			Program root = (Program) resource.getContents().get(0);
-			return root.getExpressionEvaluation().getExpression();
+			return ((ExpressionEvaluation) resource.getContents().get(0)).getExpression();
 		} else {
 			StringBuilder errorStringBuilder = new StringBuilder();
 

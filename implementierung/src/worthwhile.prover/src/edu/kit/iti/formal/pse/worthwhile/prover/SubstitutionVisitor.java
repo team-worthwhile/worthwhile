@@ -38,7 +38,7 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * 
 	 * @param substitute
-	 *                the {@link Expression} {@link ReturnValueReference}s are substituted with
+	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
 	 */
 	SubstitutionVisitor(final Expression substitute) {
 		this.substitute = substitute;

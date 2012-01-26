@@ -92,6 +92,33 @@ public class SpecificationChecker {
 	}
 
 	/**
+	 * The listener that distributes fired events to other event listeners attached to this instance.
+	 */
+	private final DistributorProverEventListener listener = new DistributorProverEventListener();
+
+	/**
+	 * Add an event listener to this instance.
+	 * 
+	 * @param listener
+	 *                the listener to add
+	 * @return true if adding the listener succeeded, else false
+	 */
+	public final boolean addProverEventListener(final AbstractProverEventListener listener) {
+		return this.listener.addProverEventListener(listener);
+	}
+
+	/**
+	 * Remove an event listener to this instance.
+	 * 
+	 * @param listener
+	 *                the listener to remove
+	 * @return true if removing the listener succeeded, else false
+	 */
+	public final boolean removeProverEventListener(final AbstractProverEventListener listener) {
+		return this.listener.removeProverEventListener(listener);
+	}
+
+	/**
 	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer}.
 	 */
 	public SpecificationChecker() {
@@ -216,7 +243,10 @@ public class SpecificationChecker {
 
 		// generate formula from program
 		Expression formula = this.transformer.transformProgram(program);
-
-		return this.getValidity(formula);
+		// get the validity from the prover
+		Validity validity = this.getValidity(formula);
+		// fire the event listener
+		this.listener.programVerified(program, validity, this.getCheckResult());
+		return validity;
 	}
 }

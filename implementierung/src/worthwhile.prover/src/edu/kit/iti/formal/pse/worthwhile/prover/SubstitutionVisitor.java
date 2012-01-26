@@ -59,6 +59,22 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 		this.found = found;
 	}
 
+	/**
+	 * @return the substitute
+	 */
+	final Expression getSubstitute() {
+		return this.substitute;
+	}
+
+	/**
+	 * 
+	 * @param substitute
+	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
+	 */
+	final void setSubstitute(final Expression substitute) {
+		this.substitute = substitute;
+	}
+
 	@Override
 	public void visit(final QuantifiedExpression quantifiedExpression) {
 		final Expression condition = quantifiedExpression.getCondition();

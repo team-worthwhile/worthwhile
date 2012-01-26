@@ -38,7 +38,6 @@ PSE am KIT im WS 2011
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -50,6 +49,8 @@ PSE am KIT im WS 2011
       <plugin id="de.itemis.xtext.typesystem.dsl"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.debugger"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.expressions"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.expressions.ui"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.help"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.interpreter"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.model"/>

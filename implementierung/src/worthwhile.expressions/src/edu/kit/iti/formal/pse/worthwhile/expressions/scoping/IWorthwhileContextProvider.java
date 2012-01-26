@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile_expressions.scoping;
+package edu.kit.iti.formal.pse.worthwhile.expressions.scoping;
 
 import java.util.Set;
 

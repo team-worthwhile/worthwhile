@@ -1,17 +1,13 @@
-module edu.kit.iti.formal.pse.worthwhile.Worthwhile
+module edu.kit.iti.formal.pse.worthwhile.expressions.GenerateWorthwhileExpressions
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/edu/kit/iti/formal/pse/worthwhile/Worthwhile.xtext"
-var file.extensions = "ww"
-var projectName = "worthwhile"
+var grammarURI = "classpath:/edu/kit/iti/formal/pse/worthwhile/expressions/WorthwhileExpressions.xtext"
+var file.extensions = "wwexpr"
+var projectName = "worthwhile.expressions"
 var runtimeProject = "../${projectName}"
-
-var expr_grammarURI = "classpath:/edu/kit/iti/formal/pse/worthwhile/WorthwhileExpressions.xtext"
-var expr_file.extensions = "wwexpr"
-var expr_projectName = "worthwhileExpressions"
 
 Workflow {
 	bean = StandaloneSetup {
@@ -66,49 +62,12 @@ Workflow {
 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
-			// composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-				composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
 			}
 
 			// scoping and exporting API
 			fragment = scoping.ImportURIScopingFragment {}
-			// fragment = exporting.SimpleNamesFragment {} // commented out by JP on 12/20/2011
-
-			// scoping and exporting API 
-
-			// fragment = scoping.ImportNamespacesScopingFragment {}
-			// fragment = exporting.QualifiedNamesFragment {}
-
-
-			// formatter API 
-			fragment = ecore2xtext.FormatterFragment {}
-
-			// labeling API 
-			fragment = labeling.LabelProviderFragment {}
-
-			// outline API 
-            fragment = outline.OutlineTreeProviderFragment {}
-            fragment = outline.QuickOutlineFragment {}
-
-			// java-based API for content assistance 
-			fragment = contentAssist.JavaBasedContentAssistFragment {}
-
-			// antlr parser generator tailored for content assist 
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment {
-				options = {
-					classSplitting = true
-				}
-			}
-
-			// provides a compare view
-            fragment = compare.CompareFragment {
-                fileExtensions = file.extensions
-            }
 
 			fragment = builder.BuilderIntegrationFragment {}
-
-			// quickfix API 
-			fragment = quickfix.QuickfixProviderFragment {}
 		}
 	}
 }

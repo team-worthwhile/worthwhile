@@ -1,4 +1,4 @@
-grammar edu.kit.iti.formal.pse.worthwhile_expressions.WorthwhileExpressions with edu.kit.iti.formal.pse.worthwhile.Worthwhile
+grammar edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions with edu.kit.iti.formal.pse.worthwhile.Worthwhile
 
 import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast"
 

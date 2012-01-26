@@ -6,6 +6,7 @@ import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLau
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.core.resources.IMarker;
@@ -32,19 +33,17 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
-import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
+import edu.kit.iti.formal.pse.worthwhile.expressions.scoping.IWorthwhileContextProvider;
+import edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator.WorthwhileExpressionsActivator;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile_expressions.WorthwhileExpressionsStandaloneSetup;
-import edu.kit.iti.formal.pse.worthwhile_expressions.scoping.IWorthwhileContextProvider;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -477,9 +476,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		return this.interpreterRunner.getInterpreter().evaluateExpression(
 		                this.parseExpressionString(expressionText));
 	}
-	
-	@Inject
-	private Provider<XtextResourceSet> resourceSetProvider;
 
 	/**
 	 * Parses an expression string and returns the corresponding AST node.
@@ -492,7 +488,13 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	private Expression parseExpressionString(final String expressionText) throws DebugException {
 		// Create a new program that contains the expression evaluation.
-		Injector guiceInjector = new WorthwhileExpressionsStandaloneSetup(this).createInjectorAndDoEMFRegistration();
+		// Injector guiceInjector = new
+		// WorthwhileExpressionsStandaloneSetup().createInjectorAndDoEMFRegistration(this);
+		// XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
+		WorthwhileExpressionsActivator activator = WorthwhileExpressionsActivator.getInstance();
+		activator.setContextProvider(this);
+		Injector guiceInjector = activator
+		                .getInjector("edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions");
 		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.wwexpr"));
@@ -510,28 +512,34 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		} else {
 			StringBuilder errorStringBuilder = new StringBuilder();
 
-			for (Diagnostic diag : resource.getErrors()) {
-				errorStringBuilder.append("\n" + diag.getMessage());
+			// Create a newline-separated list of the parse error messages
+			Iterator<Diagnostic> iter = resource.getErrors().iterator();
+			while (iter.hasNext()) {
+				errorStringBuilder.append(iter.next().getMessage());
+				if (!iter.hasNext()) {
+					break;
+				}
+				errorStringBuilder.append("\n");
 			}
 
 			System.out.println(errorStringBuilder.toString());
 
+			// TODO use ParseException
 			throw new DebugException(new ExpressionEvaluationError(new IllegalArgumentException(
-			                "Expression contains errors:" + errorStringBuilder.toString())));
+			                errorStringBuilder.toString())));
 		}
 	}
-	
 
 	@Override
-        public Set<VariableDeclaration> getVariableDeclarations() {
+	public final Set<VariableDeclaration> getVariableDeclarations() {
 		return this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
-        }
+	}
 
 	@Override
-        public Set<FunctionDeclaration> getFunctionDeclarations() {
-	        // TODO Auto-generated method stub
-	        return null;
-        }
+	public final Set<FunctionDeclaration> getFunctionDeclarations() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	private class ExpressionEvaluationError implements IStatus {
 
@@ -593,5 +601,4 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		}
 
 	}
-
 }

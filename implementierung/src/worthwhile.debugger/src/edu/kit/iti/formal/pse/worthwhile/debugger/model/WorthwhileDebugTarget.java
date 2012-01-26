@@ -39,7 +39,9 @@ import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile_expressions.scoping.IWorthwhileContextProvider;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -47,7 +49,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
  * @author Joachim
  * 
  */
-public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDebugTarget {
+public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDebugTarget, IWorthwhileContextProvider {
 
 	/**
 	 * The (only) thread a program execution consists of.
@@ -448,15 +450,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
-	 * Returns a set of all variable declarations in the current context.
-	 * 
-	 * @return a set of all variable declarations in the current context.
-	 */
-	public final Set<VariableDeclaration> getVariableDeclarations() {
-		return this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
-	}
-
-	/**
 	 * Sets the value of the given variable.
 	 * 
 	 * @param variable
@@ -521,6 +514,18 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			                "Expression contains errors:" + errorStringBuilder.toString())));
 		}
 	}
+	
+
+	@Override
+        public Set<VariableDeclaration> getVariableDeclarations() {
+		return this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
+        }
+
+	@Override
+        public Set<FunctionDeclaration> getFunctionDeclarations() {
+	        // TODO Auto-generated method stub
+	        return null;
+        }
 
 	private class ExpressionEvaluationError implements IStatus {
 

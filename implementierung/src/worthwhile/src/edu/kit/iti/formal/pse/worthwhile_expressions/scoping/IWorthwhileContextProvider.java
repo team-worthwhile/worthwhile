@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile_expressions.scoping;
 
-import java.util.List;
+import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -16,15 +16,15 @@ public interface IWorthwhileContextProvider {
 	/**
 	 * Returns the currently visible variable declarations.
 	 * 
-	 * @return a list of the currently visible variable declarations.
+	 * @return a set of the currently visible variable declarations.
 	 */
-	List<VariableDeclaration> getVariableDeclarations();
+	Set<VariableDeclaration> getVariableDeclarations();
 
 	/**
 	 * Returns the currently visible function declarations.
 	 * 
-	 * @return a list of the currently visible function declarations.
+	 * @return a set of the currently visible function declarations.
 	 */
-	List<FunctionDeclaration> getFunctionDeclarations();
+	Set<FunctionDeclaration> getFunctionDeclarations();
 
 }

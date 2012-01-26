@@ -508,6 +508,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		FunctionDeclaration functionDeclaration = functionCall.getFunction();
 		EList<Expression> actuals = functionCall.getActuals();
+		functionVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
 			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i), this.resultStack.pop());
@@ -680,6 +681,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	public void visit(ReturnValueReference returnValueReference) {
+		this.resultStack.push(executingVisitor.getReturnValue());
+		this.expressionEvaluated(returnValueReference);
 	}
 
 	public void visit(Subtraction subtraction) {

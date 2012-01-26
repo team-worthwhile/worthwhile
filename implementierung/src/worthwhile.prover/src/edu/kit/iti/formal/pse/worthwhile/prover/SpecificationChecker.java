@@ -73,7 +73,7 @@ public class SpecificationChecker {
 
 	/**
 	 * @param transformer
-	 *            the transformer to set
+	 *                the transformer to set
 	 */
 	public final void setTransformer(final FormulaGenerator transformer) {
 		this.transformer = transformer;
@@ -100,7 +100,7 @@ public class SpecificationChecker {
 
 	/**
 	 * @param transformer
-	 *            Is called to transform {@link Program}s into formulae.
+	 *                Is called to transform {@link Program}s into formulae.
 	 */
 	public SpecificationChecker(final FormulaGenerator transformer) {
 		this.transformer = transformer;
@@ -108,9 +108,9 @@ public class SpecificationChecker {
 
 	/**
 	 * @param formula
-	 *            the {@link Expression} to check
+	 *                the {@link Expression} to check
 	 * @param environment
-	 *            a list of variable values and axioms
+	 *                a list of variable values and axioms
 	 * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied
 	 */
 	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
@@ -208,7 +208,7 @@ public class SpecificationChecker {
 
 	/**
 	 * @param program
-	 *            the {@link Program} to check
+	 *                the {@link Program} to check
 	 * @return the {@link Validity} of <code>program</code>
 	 */
 	public final Validity checkProgram(final Program program) {

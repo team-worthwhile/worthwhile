@@ -681,8 +681,19 @@ public class InterpreterExecutionEventListenerTest {
 	public void testFunctionCall() {
 		TestExecutionListener listener = new TestExecutionListener();
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n_ensures _return = 9\n{\nreturn 42\n}\n"
-		                                + "{\nInteger i := 9\ni := i + 1\nwhile (true) {\ni := i + x(i)\n}\nInteger result := x(5)\n}\n"));
+		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n" +
+		                								"_ensures _return = 42\n" +
+		                								"{\n" +
+		                									"return 42\n" +
+		                								"}\n" +
+		                								"{\n" +
+			                								"Integer i := 9\n" +
+			                								"i := i + 1\n" +
+			                								"while (i < 666) {\n" +
+			                									"i := i + x(i)\n" +
+			                								"}\n" +
+			                								"Integer result := x(5)\n" +
+		                								"}\n"));
 		interpreter.addExecutionEventHandler(listener);
 
 		interpreter.execute();

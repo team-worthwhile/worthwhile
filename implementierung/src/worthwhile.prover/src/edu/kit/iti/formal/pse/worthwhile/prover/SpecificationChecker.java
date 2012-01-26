@@ -1,6 +1,13 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
@@ -24,7 +31,7 @@ public class SpecificationChecker {
 	 * 
 	 * Defaults to zero.
 	 */
-	private Integer timeout = 0;
+	private Integer timeout = 1;
 
 	/**
 	 * @return the timeout
@@ -35,13 +42,13 @@ public class SpecificationChecker {
 
 	/**
 	 * @param timeout
-	 *            the timeout to set, zero when negative
+	 *                the timeout to set, minimum 1
 	 */
 	public final void setTimeout(final Integer timeout) {
-		if (timeout < 0) {
-			this.timeout = 0;
-		} else {
+		if (timeout > 0) {
 			this.timeout = timeout;
+		} else {
+			this.timeout = 1;
 		}
 	}
 
@@ -142,20 +149,45 @@ public class SpecificationChecker {
 	 * Checks a formula's validity and returns the result.
 	 * 
 	 * @param formula
-	 *            the {@link Expression} whose {@link Validity} to determine
+	 *                the {@link Expression} whose {@link Validity} to determine
 	 * @return <code>formula</code>'s {@link Validity}
 	 */
 	private Validity getValidity(final Expression formula) {
-		Negation negation = AstNodeCreatorHelper.createNegation(formula);
+		final Negation negation = AstNodeCreatorHelper.createNegation(formula);
 
 		// let prover check formula and initialize checkResult with the returned result
-		try {
-			this.checkResult = this.prover.checkFormula(negation);
-		} catch (ProverCallerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return Validity.UNKNOWN;
+		/**
+		 * Thread that detaches to execute the prover caller.
+		 * 
+		 * @author Leon Handreke
+		 */
+		class ProverCallerTask implements Callable<ProverResult> {
+			@Override
+			public ProverResult call() throws ProverCallerException {
+				return SpecificationChecker.this.prover.checkFormula(negation);
+			}
 		}
+		// run the prover caller
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		Future<ProverResult> resultFuture = executor.submit(new ProverCallerTask());
+		try {
+			this.checkResult = resultFuture.get(this.timeout, TimeUnit.SECONDS);
+		} catch (InterruptedException e) {
+			// don't care
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// what could possibly go wrong?
+			e.printStackTrace();
+		} catch (TimeoutException e) {
+			// timeout - result unknown
+			this.checkResult = new ProverResult("timeout") {
+				@Override
+				public FormulaSatisfiability getSatisfiability() {
+					return FormulaSatisfiability.UNKOWN;
+				}
+			};
+		}
+		executor.shutdown();
 
 		// determine formula's validity based on negation's satisfiability, which is VALID only if the latter is
 		// UNSATISFIABLE and INVALID only if the latter is SATISFIABLE, UNKNOWN otherwise

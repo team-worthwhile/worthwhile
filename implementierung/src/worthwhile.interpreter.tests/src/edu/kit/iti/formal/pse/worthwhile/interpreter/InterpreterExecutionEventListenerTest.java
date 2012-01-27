@@ -26,11 +26,6 @@ public class InterpreterExecutionEventListenerTest {
 	public boolean test;
 	public int counter;
 
-	class TestExecutionListener extends AbstractExecutionEventListener {
-		public boolean check = false;
-		public int counter = 0;
-	}
-
 	/**
 	 * Test listener that captures statement execution events.
 	 */

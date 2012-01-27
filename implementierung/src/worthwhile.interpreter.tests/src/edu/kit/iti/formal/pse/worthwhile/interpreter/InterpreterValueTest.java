@@ -11,9 +11,12 @@ import java.math.BigInteger;
 
 import org.junit.Test;
 
+import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**
  * @author matthias and stefan
@@ -58,6 +61,30 @@ public class InterpreterValueTest {
 		                new BooleanValue(array1[1]) };
 		CompositeValue<BooleanValue> value1 = new CompositeValue<BooleanValue>(val_array1);
 		assertSame(value1.getSubValues(), val_array1);
+	}
+
+	@Test
+	public void testArrayAssignments() {
+		Program testProgram = TestASTProvider
+		                .getRootASTNode("Integer[] j := {1, 2, 43}\nj[5] := 9\n_assert j[2] ≠ 9\n");
+		Interpreter interpreter = new Interpreter(testProgram);
+		TestExecutionListener listener = new TestExecutionListener() {
+
+			@Override
+                        public void annotationSucceeded(Annotation annotation) {
+	                        this.check = true;
+                        }
+			
+			@Override
+			public void annotationFailed(Annotation annotation) {
+				this.check = false;
+			}
+			
+		};
+		interpreter.addExecutionEventHandler(listener);
+		
+		interpreter.execute();
+		assertEquals(true, listener.check);
 	}
 
 	@Test

@@ -614,22 +614,31 @@ public class InterpreterExecutionEventListenerTest {
 
 	@Test
 	public void testAssertionFailed() {
-		TestExecutionListener listener = new TestExecutionListener();
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a > 10)\n"));
+		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a > 10)\n_assert exists Integer n : forall Integer m : m > n\n"));
+		TestExecutionListener listener = new TestExecutionListener() {
+			public void annotationFailed(final Annotation annotation) {
+				this.check = true;
+			}
+
+			public void annotationSucceeded(Annotation annotation) {
+				this.check = false;
+			}
+		};
 		interpreter.addExecutionEventHandler(listener);
-		try {
-			interpreter.execute();
-		} catch (RuntimeException exception) {
-			assertTrue(true);
-		}
+		interpreter.execute();
+		assertTrue(listener.check);
 	}
 
 	@Test
 	public void testAssertionSucceeded() {
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a >= 10)\n"));
+		                TestASTProvider.getRootASTNode("Integer a := 10\n_assert(a >= 10)\n_assert exists Integer n : n = 1\n"));
 		TestExecutionListener listener = new TestExecutionListener() {
+			public void annotationFailed(final Annotation annotation) {
+				this.check = false;
+			}
+
 			public void annotationSucceeded(Annotation annotation) {
 				this.check = true;
 			}

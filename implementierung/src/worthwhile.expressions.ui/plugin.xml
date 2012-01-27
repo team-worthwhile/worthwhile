@@ -3,48 +3,18 @@
 
 <plugin>
 
-    <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions.Editor.opened">
-            <and>
-                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-                <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions" 
-                        forcePluginActivation="true"/>
-                </with>        
-            </and>
-        </definition>
-    </extension>
-    <extension
-        point="org.eclipse.ui.keywords">
-        <keyword
-            id="edu.kit.iti.formal.pse.worthwhile.expressions.ui.keyword_WorthwhileExpressions"
-            label="WorthwhileExpressions"/>
-    </extension>
-	<extension point="org.eclipse.ui.handlers">
-	    <handler
-            class="edu.kit.iti.formal.pse.worthwhile.expressions.ui.WorthwhileExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.editor.FindReferences">
-            <activeWhen>
-                <reference
-                    definitionId="edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions.Editor.opened">
-                </reference>
-            </activeWhen>
-        </handler>
-    </extension>   
-
 <!-- adding resource factories -->
 
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="edu.kit.iti.formal.pse.worthwhile.expressions.ui.WorthwhileExpressionsExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="edu.kit.iti.formal.pse.worthwhile.expressions.ui.MyWorthwhileExpressionsExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="wwexpr">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="edu.kit.iti.formal.pse.worthwhile.expressions.ui.WorthwhileExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            class="edu.kit.iti.formal.pse.worthwhile.expressions.ui.MyWorthwhileExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="wwexpr">
         </resourceServiceProvider>
     </extension>

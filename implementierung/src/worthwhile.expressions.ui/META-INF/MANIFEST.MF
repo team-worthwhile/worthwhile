@@ -4,7 +4,6 @@ Bundle-Name: edu.kit.iti.formal.pse.worthwhile.expressions.ui
 Bundle-Vendor: Team Worthwhile
 Bundle-Version: 0.1.0
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.expressions.ui; singleton:=true
-Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.shared,
  org.eclipse.xtext.builder,
@@ -16,5 +15,6 @@ Import-Package: edu.kit.iti.formal.pse.worthwhile.expressions,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator.WorthwhileExpressionsActivator
-Export-Package: edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator,
- edu.kit.iti.formal.pse.worthwhile.expressions.ui.internal
+Export-Package: edu.kit.iti.formal.pse.worthwhile.expressions.ui,
+ edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator
+Bundle-ActivationPolicy: lazy

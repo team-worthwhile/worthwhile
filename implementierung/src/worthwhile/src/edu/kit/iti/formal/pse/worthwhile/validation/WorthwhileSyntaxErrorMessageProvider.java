@@ -1,8 +1,11 @@
 package edu.kit.iti.formal.pse.worthwhile.validation;
 
 import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.NoViableAltException;
 import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
 import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**
  * This class provides the correct syntax error messages.
@@ -40,6 +43,10 @@ public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProv
 			} else {
 				return new SyntaxErrorMessage("Delete this token.", "deleteToken");
 			}
+		} else if (context.getRecognitionException() instanceof NoViableAltException
+		                && context.getCurrentContext() instanceof Program) {
+			return new SyntaxErrorMessage("Return type of function is missing", NO_FUNCTION_RETURN_TYPE);
+
 		}
 
 		return super.getSyntaxErrorMessage(context);

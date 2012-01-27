@@ -72,9 +72,6 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			at.setBaseType((PrimitiveType) typeof(element.getValues().get(0), trace));
 
 		}
-		IntegerLiteral it = AstFactory.eINSTANCE.createIntegerLiteral();
-		it.setValue(BigInteger.valueOf(element.getValues().size()));
-		at.setSize(it);
 		trace.add(element, "arrayType");
 		return at;
 	}

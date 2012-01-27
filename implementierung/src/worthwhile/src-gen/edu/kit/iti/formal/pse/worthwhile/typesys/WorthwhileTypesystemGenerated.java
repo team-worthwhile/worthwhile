@@ -16,7 +16,6 @@
 						// Section: BaseTypes
 
 						useCloneAsType( p.getArrayType() );
-						ensureFeatureType( p.getArrayType(), p.getArrayType_Size(), p.getIntegerType() );
 						ensureFeatureType( p.getArrayType(), p.getArrayType_BaseType(), p.getBooleanType(), p.getIntegerType() );
 						useCloneAsType( p.getIntegerType() );
 						useCloneAsType( p.getBooleanType() );
@@ -132,8 +131,6 @@
 						ensureFeatureType( "Only Integers have signs", p.getPlus(), p.getUnaryExpression_Operand(), p.getIntegerType() );
 						useTypeOfFeature( p.getMinus(), p.getUnaryExpression_Operand() );
 						ensureFeatureType( "Only Integers have signs", p.getMinus(), p.getUnaryExpression_Operand(), p.getIntegerType() );
-						useFixedType( p.getArrayLength(), p.getIntegerType() );
-						ensureFeatureType( "The Operand has to be an array", p.getArrayLength(), p.getUnaryExpression_Operand(), p.getArrayType() );
 
 						// ----------------------------------------------------------------
 						// Section: Conditional

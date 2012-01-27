@@ -3,7 +3,6 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -79,14 +78,6 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(Annotation node);
-
-	/**
-	 * Visits an AST node of type ArrayLength.
-	 * 
-	 * @param node
-	 *                The AST node to visit
-	 */
-	void visit(ArrayLength node);
 
 	/**
 	 * Visits an AST node of type ArrayLiteral.

@@ -22,7 +22,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
@@ -384,16 +383,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(final ArrayLength arrayLength) {
-		// the casts should be safe after validation
-		final VariableDeclaration variable = ((VariableReference) arrayLength.getOperand()).getVariable();
-		final Expression size = ((ArrayType) variable.getType()).getSize();
-		size.accept(this);
-
-		this.expressionEvaluated(arrayLength);
-	}
-
-	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
 		final List<Expression> values = arrayLiteral.getValues();
 		final Value[] subValues = new Value[values.size()];
@@ -712,14 +701,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			} else {
 				if (variableDeclaration.getType() instanceof ArrayType) {
 					final ArrayType arrayType = ((ArrayType) variableDeclaration.getType());
-
-					// evaluate the size expression and assign the size value as
-					// literal
-					arrayType.getSize().accept(this);
-					final IntegerLiteral sizeLiteral = AstNodeCreatorHelper
-					                .createIntegerLiteral(((IntegerValue) this.resultStack.pop())
-					                                .getValue());
-					arrayType.setSize(sizeLiteral);
 
 					if (arrayType.getBaseType() instanceof BooleanType) {
 						this.setSymbol(variableDeclaration, new CompositeValue<BooleanValue>(

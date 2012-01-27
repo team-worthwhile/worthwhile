@@ -63,14 +63,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" ordered="false"
         lowerBound="1" eType="#//Expression" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ArrayLength" eSuperTypes="#//UnaryExpression">
-    <eOperations name="accept">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="visitor.visit(this);"/>
-      </eAnnotations>
-      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
-    </eOperations>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayLiteral" eSuperTypes="#//Literal">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -98,8 +90,6 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" ordered="false"
         lowerBound="1" eType="#//PrimitiveType" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="size" ordered="false" eType="#//Expression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//ASTNode">
     <eOperations name="accept">
@@ -547,9 +537,6 @@
       </eOperations>
       <eOperations name="visit">
         <eParameters name="node" lowerBound="1" eType="#//Annotation"/>
-      </eOperations>
-      <eOperations name="visit">
-        <eParameters name="node" lowerBound="1" eType="#//ArrayLength"/>
       </eOperations>
       <eOperations name="visit">
         <eParameters name="node" lowerBound="1" eType="#//ArrayLiteral"/>

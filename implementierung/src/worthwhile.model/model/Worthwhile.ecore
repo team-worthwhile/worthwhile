@@ -82,14 +82,6 @@
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
                       containment="true"/>
                 </eClassifiers>
-                <eClassifiers xsi:type="ecore:EClass" name="ArrayLength" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression">
-                  <eOperations name="accept">
-                    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-                      <details key="body" value="visitor.visit(this);"/>
-                    </eAnnotations>
-                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
-                  </eOperations>
-                </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ArrayLiteral" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Literal">
                   <eOperations name="accept">
                     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -119,9 +111,6 @@
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="baseType"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/PrimitiveType"
-                      containment="true"/>
-                  <eStructuralFeatures xsi:type="ecore:EReference" name="size" ordered="false"
-                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
                       containment="true"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true"
@@ -584,9 +573,6 @@
                     </eOperations>
                     <eOperations name="visit">
                       <eParameters name="node" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Annotation"/>
-                    </eOperations>
-                    <eOperations name="visit">
-                      <eParameters name="node" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLength"/>
                     </eOperations>
                     <eOperations name="visit">
                       <eParameters name="node" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/ArrayLiteral"/>

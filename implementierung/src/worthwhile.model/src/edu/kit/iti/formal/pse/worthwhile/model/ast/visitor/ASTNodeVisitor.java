@@ -3,7 +3,6 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -86,11 +85,6 @@ public abstract class ASTNodeVisitor implements IASTNodeVisitor {
 
 	@Override
 	public void visit(final Annotation node) {
-		this.defaultOperation(node);
-	}
-
-	@Override
-	public void visit(final ArrayLength node) {
 		this.defaultOperation(node);
 	}
 

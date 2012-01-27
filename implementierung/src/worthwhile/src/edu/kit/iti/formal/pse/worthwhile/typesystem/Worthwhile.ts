@@ -6,7 +6,6 @@ section "BaseTypes"
 		typeof Type -> abstract
 		typeof PrimitiveType -> abstract
 		typeof ArrayType -> clone {
-			ensureType size :<=: IntegerType
 			ensureType baseType :<=: BooleanType, IntegerType
 		}
 		typeof IntegerType -> clone
@@ -153,9 +152,6 @@ section "Unary Expression"
 		}
 		typeof Minus -> feature operand {
 			ensureType operand :<=: IntegerType "Only Integers have signs"
-		} 
-		typeof ArrayLength -> IntegerType {
-			ensureType operand :<=: ArrayType "The Operand has to be an array"
 		}
 		
 section "Conditional"

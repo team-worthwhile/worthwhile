@@ -3,9 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.math.BigInteger;
 import java.util.Stack;
 
-import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLength;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -153,14 +151,6 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	@Override
 	public void visit(final Addition addition) {
 		this.pushBinaryOperation(addition, "+");
-	}
-
-	@Override
-	public void visit(final ArrayLength arrayLength) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
 	}
 
 	@Override

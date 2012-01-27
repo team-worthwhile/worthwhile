@@ -2,6 +2,8 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import java.math.BigInteger;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
@@ -33,6 +35,17 @@ public final class AstNodeCreatorHelper {
 	 * The {@link AstFactory} singleton whose create methods are used to instantiate the {@link ASTNode}s.
 	 */
 	private static AstFactory factory = AstFactory.eINSTANCE;
+
+	/**
+	 * Create an {@link Assertion} with the given {@link Expression}.
+	 * @param expression the {@link Expression} to assert
+	 * @return the created {@link Assertion}
+	 */
+	public static Assertion createAssertion(final Expression expression) {
+		final Assertion assertion = AstNodeCreatorHelper.factory.createAssertion();
+		assertion.setExpression(expression);
+		return assertion;
+	}
 
 	/**
 	 * 

@@ -9,7 +9,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
  *                The type of the return value.
  * @author Joachim
  */
-public abstract class ASTNodeReturnVisitor<R> extends ASTNodeVisitor {
+public abstract class ASTNodeReturnVisitor<R> extends HierarchialASTNodeVisitor {
 
 	/**
 	 * The return value.

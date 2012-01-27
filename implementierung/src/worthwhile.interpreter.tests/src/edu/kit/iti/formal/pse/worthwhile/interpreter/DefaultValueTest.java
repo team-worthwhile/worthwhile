@@ -13,45 +13,50 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 public class DefaultValueTest {
-	
+
 	Interpreter interpreter;
-	
+
 	static Value value;
-	
+
 	private void assertIntegerValueEqualsDefault() {
-		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
-			@Override
-			public void statementExecuted(Statement statement) {
-				Assert.assertNotNull(interpreter.getSymbol("a"));
-				Assert.assertTrue(interpreter.getSymbol("a") instanceof IntegerValue);
-				Assert.assertEquals(new BigInteger("0"), ((IntegerValue) interpreter.getSymbol("a")).getValue());
-			}
-		});
-		
+		interpreter
+				.addExecutionEventHandler(new AbstractExecutionEventListener() {
+					@Override
+					public void statementExecuted(Statement statement) {
+						Assert.assertNotNull(interpreter.getSymbol("a"));
+						Assert.assertTrue(interpreter.getSymbol("a") instanceof IntegerValue);
+						Assert.assertEquals(new BigInteger("0"),
+								((IntegerValue) interpreter.getSymbol("a"))
+										.getValue());
+					}
+				});
+
 	}
-	
+
 	private void assertBooleanValueEqualsDefault() {
-		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
-			@Override
-			public void statementExecuted(Statement statement) {
-				Assert.assertNotNull(interpreter.getSymbol("a"));
-				Assert.assertTrue(interpreter.getSymbol("a") instanceof BooleanValue);
-				Assert.assertEquals(false, ((BooleanValue) interpreter.getSymbol("a")).getValue());
-			}
-		});
+		interpreter
+				.addExecutionEventHandler(new AbstractExecutionEventListener() {
+					@Override
+					public void statementExecuted(Statement statement) {
+						Assert.assertNotNull(interpreter.getSymbol("a"));
+						Assert.assertTrue(interpreter.getSymbol("a") instanceof BooleanValue);
+						Assert.assertEquals(false, ((BooleanValue) interpreter
+								.getSymbol("a")).getValue());
+					}
+				});
 	}
-	
+
 	private void setup(String type) {
 		Program program = TestASTProvider.getRootASTNode(type + " a\n");
 		this.interpreter = new Interpreter(program);
 	}
-	
+
 	@Test
 	public void testIntegerDefaultValue() {
 		setup("Integer");
 		this.assertIntegerValueEqualsDefault();
 	}
-	
+
 	@Test
 	public void testBooleanDefaultValue() {
 		setup("Boolean");

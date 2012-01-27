@@ -5,19 +5,13 @@ Bundle-Vendor: Team Worthwhile
 Bundle-Version: 0.1.0
 Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.expressions; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
- org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
- org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
- org.eclipse.xtext.generator;resolution:=optional,
- org.eclipse.emf.codegen.ecore;resolution:=optional,
- org.eclipse.emf.mwe.utils;resolution:=optional,
+Require-Bundle: org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  edu.kit.iti.formal.pse.worthwhile;bundle-version="0.1.0",
+ de.itemis.xtext.typesystem;bundle-version="1.0.0",
+ org.eclipse.xtext,
  org.eclipse.xtext.util,
- org.antlr.runtime,
- de.itemis.xtext.typesystem;bundle-version="1.0.0"
-Import-Package: org.apache.log4j,
- org.apache.commons.logging
+ org.antlr.runtime
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: edu.kit.iti.formal.pse.worthwhile.expressions,
  edu.kit.iti.formal.pse.worthwhile.expressions.parseTreeConstruction,
@@ -26,4 +20,4 @@ Export-Package: edu.kit.iti.formal.pse.worthwhile.expressions,
  edu.kit.iti.formal.pse.worthwhile.expressions.scoping,
  edu.kit.iti.formal.pse.worthwhile.expressions.services,
  edu.kit.iti.formal.pse.worthwhile.expressions.validation
-
+Import-Package: org.apache.log4j

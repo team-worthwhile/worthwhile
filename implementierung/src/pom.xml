@@ -9,8 +9,10 @@
     </properties>
     <modules>
         <module>worthwhile</module>
+	<module>worthwhile.expressions</module>
         <module>worthwhile.model</module>
-        <module>worthwhile.ui</module>
+	<module>worthwhile.ui</module>
+        <module>worthwhile.expressions.ui</module>
         <module>worthwhile.debugger</module>
         <module>worthwhile.interpreter</module>
         <module>worthwhile.prover</module>

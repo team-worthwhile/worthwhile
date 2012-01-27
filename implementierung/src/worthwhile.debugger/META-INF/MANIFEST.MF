@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.debug.core,
  org.eclipse.xtext.ui;bundle-version="2.0.1",
  edu.kit.iti.formal.pse.worthwhile;bundle-version="0.1.0",
  edu.kit.iti.formal.pse.worthwhile.expressions;bundle-version="0.1.0",
- edu.kit.iti.formal.pse.worthwhile.expressions.ui;bundle-version="1.0.0"
+ edu.kit.iti.formal.pse.worthwhile.expressions.ui;bundle-version="0.1.0"
 Export-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
  edu.kit.iti.formal.pse.worthwhile.debugger.launching,
  edu.kit.iti.formal.pse.worthwhile.debugger.model

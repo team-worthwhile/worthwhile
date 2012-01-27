@@ -14,7 +14,6 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
-import edu.kit.iti.formal.pse.worthwhile.model.Value;
 
 /**
  * @author matthias and stefan

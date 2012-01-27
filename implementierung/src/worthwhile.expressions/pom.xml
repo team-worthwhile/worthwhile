@@ -19,7 +19,8 @@
                 <artifactId>fornax-oaw-m2-plugin</artifactId>
                 <version>3.3.0-SNAPSHOT</version>
                 <configuration>
-                    <workflowEngine>mwe2</workflowEngine> <workflowDescriptor>src/edu/kit/iti/formal/pse/worthwhile/expressions/GenerateWorthwhileExpressions.mwe2</workflowDescriptor>
+                    <workflowEngine>mwe2</workflowEngine>
+                    <workflowDescriptor>src/edu/kit/iti/formal/pse/worthwhile/expressions/GenerateWorthwhileExpressions.mwe2</workflowDescriptor>
                 </configuration>
                 <executions>
                     <execution>

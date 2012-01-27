@@ -1,7 +1,5 @@
 package edu.kit.iti.formal.pse.worthwhile.typesystem;
 
-import java.math.BigInteger;
-
 import org.eclipse.emf.ecore.EObject;
 
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
@@ -11,7 +9,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;

@@ -9,10 +9,6 @@ var file.extensions = "ww"
 var projectName = "worthwhile"
 var runtimeProject = "../${projectName}"
 
-var expr_grammarURI = "classpath:/edu/kit/iti/formal/pse/worthwhile/WorthwhileExpressions.xtext"
-var expr_file.extensions = "wwexpr"
-var expr_projectName = "worthwhileExpressions"
-
 Workflow {
 	bean = StandaloneSetup {
 		scanClassPath  = true

@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model;
 
 import java.util.Arrays;
-import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 

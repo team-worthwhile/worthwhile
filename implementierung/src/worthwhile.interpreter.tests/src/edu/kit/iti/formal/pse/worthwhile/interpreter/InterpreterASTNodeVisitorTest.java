@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
 
@@ -8,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterExecutionEventListenerTest.TestExecutionListener;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
@@ -169,5 +171,23 @@ public class InterpreterASTNodeVisitorTest {
 	@Test
 	public void testInterpreterContexNot() {
 		InterpreterASTNodeVisitorTest.assertBooleanExpressionValueEquals("!false", true);
+	}
+
+	@Test
+	public void testVisitReturnStatement() {
+		Interpreter interpreter = new Interpreter(
+		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n" +
+		                				"_ensures _return = 42\n" + 
+		                				"{\n" + 
+		                					"return 42\n" + 
+		                					"return 24\n" +
+		                				"}\n" + 
+		                				"{\n" + 
+		                				"Integer result := x(5)\n" + 
+		                				"_assert result = 42 \n" +
+		                				"}\n"));
+
+		interpreter.execute();
+		assertTrue(true);
 	}
 }

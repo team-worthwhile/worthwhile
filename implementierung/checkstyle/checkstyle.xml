@@ -6,7 +6,8 @@
 -->
 <!--
     Checkstyle-Configuration: Worthwhile
-    Description: none
+    Description: 
+Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that better matches the default code formatter setting of Eclipse.
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
@@ -68,7 +69,9 @@
     </module>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
-    <module name="MagicNumber"/>
+    <module name="MagicNumber">
+      <property name="ignoreNumbers" value="-1, 0, 1, 2, 42"/>
+    </module>
     <module name="MissingSwitchDefault"/>
     <module name="RedundantThrows">
       <property name="suppressLoadErrors" value="true"/>

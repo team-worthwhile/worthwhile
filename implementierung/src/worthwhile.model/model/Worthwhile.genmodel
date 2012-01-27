@@ -363,6 +363,18 @@
                     <genFeatures property="None" children="true" createChild="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionEvaluation/expression"/>
                   </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunction">
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunction/values"/>
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunction/chainedFunction"/>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionToExpressionMap">
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionToExpressionMap/key"/>
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionToExpressionMap/value"/>
+                  </genClasses>
                   <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
                       disposableProviderFactory="true" adapterFactory="false" literalsInterface="false"
                       contentTypeIdentifier="" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor">
@@ -525,6 +537,9 @@
                       </genOperations>
                       <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.52">
                         <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.52/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53/node"/>
                       </genOperations>
                     </genClasses>
                   </nestedGenPackages>

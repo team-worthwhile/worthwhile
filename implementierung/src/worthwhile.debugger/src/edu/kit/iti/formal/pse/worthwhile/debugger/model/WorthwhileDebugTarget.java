@@ -1,30 +1,19 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
-import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.MARKER_FAILED_ANNOTATION;
-import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.MARKER_SUCCEEDED_ANNOTATION;
 import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
@@ -38,25 +27,15 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.debug.core.model.LineBreakpoint;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
-
-import com.google.inject.Injector;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.expressions.scoping.IWorthwhileContextProvider;
-import edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator.WorthwhileExpressionsActivator;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -87,6 +66,16 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	private InterpreterRunner interpreterRunner;
 
 	/**
+	 * The expression parser.
+	 */
+	private WorthwhileExpressionParser expressionParser;
+
+	/**
+	 * The marker helper.
+	 */
+	private WorthwhileDebugMarkerHelper markerHelper;
+
+	/**
 	 * Creates a new instance of the {@link WorthwhileDebugTarget} class.
 	 * 
 	 * @param launch
@@ -104,6 +93,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		this.launch = launch;
 		this.thread = new WorthwhileThread(this);
+		this.markerHelper = new WorthwhileDebugMarkerHelper(this.getLaunchedFile());
 
 		// Create a new event listener.
 		if (launch.getLaunchMode().equals("debug")) {
@@ -123,7 +113,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		}
 
 		// Clear all problem markers
-		this.clearMarkers();
+		this.markerHelper.clearMarkers();
 
 		// Register our event listener with the interpreter.
 		interpreter.addExecutionEventHandler(this.eventListener);
@@ -395,6 +385,26 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
+	 * Called when an annotation failed.
+	 * 
+	 * @param annotation
+	 *                The annotation that failed.
+	 */
+	public final void annotationFailed(final Annotation annotation) {
+		this.markerHelper.markFailedStatement(annotation, "Annotation failed");
+	}
+
+	/**
+	 * Called when an annotation succeeded.
+	 * 
+	 * @param annotation
+	 *                The annotation that succeeded.
+	 */
+	public final void annotationSucceeded(final Annotation annotation) {
+		this.markerHelper.markSucceededStatement(annotation, "Annotation succeeded");
+	}
+
+	/**
 	 * Called when the interpreter terminates the execution.
 	 */
 	protected final void terminated() {
@@ -489,104 +499,13 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                 when there is an error in the expression
 	 */
 	public final Value evaluateExpression(final String expressionText) throws DebugException {
-		return this.interpreterRunner.getInterpreter().evaluateExpression(
-		                this.parseExpressionString(expressionText));
-	}
+		Expression expression = this.expressionParser.parseExpressionString(expressionText);
 
-	/**
-	 * Clears all markers in the launched file.
-	 */
-	private void clearMarkers() {
-		final IFile file = this.getLaunchedFile();
-
-		if (file != null) {
-			try {
-				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-					@Override
-					public void run(final IProgressMonitor monitor) throws CoreException {
-						file.deleteMarkers(MARKER_FAILED_ANNOTATION, true,
-						                IResource.DEPTH_INFINITE);
-						file.deleteMarkers(MARKER_SUCCEEDED_ANNOTATION, true,
-						                IResource.DEPTH_INFINITE);
-					}
-				};
-				runnable.run(null);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
+		if (expression != null) {
+			return this.interpreterRunner.getInterpreter().evaluateExpression(expression);
+		} else {
+			return null;
 		}
-	}
-
-	/**
-	 * Marks a statement as failed (e.g. an assertion).
-	 * 
-	 * @param statement
-	 *                The statement to mark as failed.
-	 */
-	public final void markFailedStatement(final ASTNode statement) {
-		final IFile file = this.getLaunchedFile();
-
-		if (file != null) {
-			try {
-				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-					@Override
-					public void run(final IProgressMonitor monitor) throws CoreException {
-						// Get the position of the node in the source file.
-						int line = NodeHelper.getLine(statement);
-						int offset = NodeHelper.getOffset(statement);
-						int length = NodeHelper.getLength(statement);
-
-						// Create a new marker
-						IMarker marker = file.createMarker(MARKER_FAILED_ANNOTATION);
-						marker.setAttribute(IMarker.LINE_NUMBER, line);
-						marker.setAttribute(IMarker.CHAR_START, offset);
-						marker.setAttribute(IMarker.CHAR_END, offset + length);
-						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
-						marker.setAttribute(IMarker.MESSAGE, "Assertion failed");
-					}
-				};
-				runnable.run(null);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
-
-	}
-
-	/**
-	 * Marks a statement as succeeded (e.g. an assertion).
-	 * 
-	 * @param statement
-	 *                The statement to mark as succeeded.
-	 */
-	public final void markSucceededStatement(final ASTNode statement) {
-		final IFile file = this.getLaunchedFile();
-
-		if (file != null) {
-			try {
-				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
-					@Override
-					public void run(final IProgressMonitor monitor) throws CoreException {
-						// Get the position of the node in the source file.
-						int line = NodeHelper.getLine(statement);
-						int offset = NodeHelper.getOffset(statement);
-						int length = NodeHelper.getLength(statement);
-
-						// Create a new marker
-						IMarker marker = file.createMarker(MARKER_SUCCEEDED_ANNOTATION);
-						marker.setAttribute(IMarker.LINE_NUMBER, line);
-						marker.setAttribute(IMarker.CHAR_START, offset);
-						marker.setAttribute(IMarker.CHAR_END, offset + length);
-						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
-						marker.setAttribute(IMarker.MESSAGE, "Assertion succeeded");
-					}
-				};
-				runnable.run(null);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-		}
-
 	}
 
 	/**
@@ -611,58 +530,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		return workspaceRoot.getFile(path);
 	}
 
-	/**
-	 * Parses an expression string and returns the corresponding AST node.
-	 * 
-	 * @param expressionText
-	 *                The expression string.
-	 * @return An {@link Expression} object that represents this expression
-	 * @throws DebugException
-	 *                 if the expression contains syntax errors.
-	 */
-	private Expression parseExpressionString(final String expressionText) throws DebugException {
-		// Load the expressions language plugin and obtain an injector.
-		WorthwhileExpressionsActivator activator = WorthwhileExpressionsActivator.getInstance();
-		activator.setContextProvider(this);
-		Injector guiceInjector = activator
-		                .getInjector("edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions");
-
-		// Create a new program that contains the expression string.
-		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
-		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.wwexpr"));
-		InputStream in = new ByteArrayInputStream(expressionText.getBytes());
-
-		try {
-			resource.load(in, resourceSet.getLoadOptions());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-
-		// Check whether there are errors in the expression string
-		if (resource.getErrors().isEmpty()) {
-			return ((ExpressionEvaluation) resource.getContents().get(0)).getExpression();
-		} else {
-			StringBuilder errorStringBuilder = new StringBuilder();
-
-			// Create a newline-separated list of the parse error messages
-			Iterator<Diagnostic> iter = resource.getErrors().iterator();
-			while (iter.hasNext()) {
-				errorStringBuilder.append(iter.next().getMessage());
-				if (!iter.hasNext()) {
-					break;
-				}
-				errorStringBuilder.append("\n");
-			}
-
-			System.out.println(errorStringBuilder.toString());
-
-			throw new DebugException(new ExpressionEvaluationError(new ParseException(
-			                errorStringBuilder.toString(), resource.getErrors().get(0).getColumn())));
-		}
-	}
-
 	@Override
 	public final Set<VariableDeclaration> getVariableDeclarations() {
 		return this.interpreterRunner.getInterpreter().getAllSymbols().keySet();
@@ -672,66 +539,5 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final Set<FunctionDeclaration> getFunctionDeclarations() {
 		return new HashSet<FunctionDeclaration>(this.interpreterRunner.getInterpreter().getProgram()
 		                .getFunctionDeclarations());
-	}
-
-	private class ExpressionEvaluationError implements IStatus {
-
-		private final Exception exception;
-
-		public ExpressionEvaluationError(final Exception exception) {
-			this.exception = exception;
-		}
-
-		@Override
-		public IStatus[] getChildren() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public int getCode() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public Throwable getException() {
-			return this.exception;
-		}
-
-		@Override
-		public String getMessage() {
-			return this.exception.getMessage();
-		}
-
-		@Override
-		public String getPlugin() {
-			return "";
-		}
-
-		@Override
-		public int getSeverity() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public boolean isMultiStatus() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean isOK() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public boolean matches(final int arg0) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
 	}
 }

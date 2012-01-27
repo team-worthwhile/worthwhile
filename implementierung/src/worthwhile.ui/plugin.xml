@@ -397,51 +397,51 @@
   <extension
         point="org.eclipse.ui.editors.markerAnnotationSpecification">
      <specification
-           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededAnnotation"
+           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededStatement"
            includeOnPreferencePage="true"
-           label="Succeeded Annotation"
-         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.color"
+           label="Succeeded Statement"
+         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededStatement.color"
          colorPreferenceValue="143,255,143"
          contributesToHeader="false"
-         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.highlight"
+         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededStatement.highlight"
          highlightPreferenceValue="true"
-         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.overview"
+         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededStatement.overview"
          overviewRulerPreferenceValue="true"
          presentationLayer="0"
-         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.text"
+         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededStatement.text"
          textPreferenceValue="true"
          textStylePreferenceValue="BOX"
-         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.ruler"
+         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededStatement.ruler"
          verticalRulerPreferenceValue="true">
      </specification>
      <specification
-           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedAnnotation"
+           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedStatement"
            includeOnPreferencePage="true"
-           label="Failed Annotation"
-         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.color"
+           label="Failed Statement"
+         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedStatement.color"
          colorPreferenceValue="255,143,143"
          contributesToHeader="false"
-         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.highlight"
+         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedStatement.highlight"
          highlightPreferenceValue="true"
-         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.overview"
+         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedStatement.overview"
          overviewRulerPreferenceValue="true"
          presentationLayer="0"
-         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.text"
+         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedStatement.text"
          textPreferenceValue="true"
          textStylePreferenceValue="BOX"
-         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.ruler"
+         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedStatement.ruler"
          verticalRulerPreferenceValue="true">
      </specification>
   </extension>
   <extension
         point="org.eclipse.ui.editors.annotationTypes">
      <type
-           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAnnotation"
-           name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedAnnotation">
+           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedStatement"
+           name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedStatement">
      </type>
      <type
-           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.succeededAnnotation"
-           name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededAnnotation">
+           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.succeededStatement"
+           name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededStatement">
      </type>
   </extension>
 </plugin>

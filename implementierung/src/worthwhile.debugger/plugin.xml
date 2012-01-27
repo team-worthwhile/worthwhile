@@ -17,8 +17,8 @@
       	 <persistent value="true"/>
    </extension>
    <extension
-         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAnnotation"
-         name="Failed Assertion"
+         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedStatement"
+         name="Failed Statement"
          point="org.eclipse.core.resources.markers">
          <super type="org.eclipse.core.resources.textmarker">
    		</super>
@@ -27,8 +27,8 @@
          </persistent>
    </extension>
    <extension
-         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.succeededAnnotation"
-         name="Succeeded Assertion"
+         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.succeededStatement"
+         name="Succeeded Statement"
          point="org.eclipse.core.resources.markers">
    		 <super type="org.eclipse.core.resources.textmarker">
    		</super>

@@ -235,12 +235,12 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	
 	@Override
         public final void annotationFailed(final Annotation annotation) {
-	        this.getDebugTarget().markFailedStatement(annotation);
+	        this.getDebugTarget().annotationFailed(annotation);
         }
 
 	@Override
         public final void annotationSucceeded(final Annotation annotation) {
-		this.getDebugTarget().markSucceededStatement(annotation);
+		this.getDebugTarget().annotationSucceeded(annotation);
         }
 
 	/**

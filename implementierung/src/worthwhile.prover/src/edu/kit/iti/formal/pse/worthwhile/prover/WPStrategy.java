@@ -470,11 +470,15 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
-		// TODO treat missing initial value
 		final Expression initialValue = variableDeclaration.getInitialValue();
 
 		Expression wp = this.weakestPreconditionStack.pop();
-		wp = VariableReferenceSubstitution.substitute(wp, variableDeclaration, initialValue);
+
+		if (initialValue == null) {
+			wp = AstNodeCreatorHelper.createForAllQuantifier(variableDeclaration, wp);
+		} else {
+			wp = VariableReferenceSubstitution.substitute(wp, variableDeclaration, initialValue);
+		}
 
 		this.weakestPreconditionStack.push(wp);
 	}

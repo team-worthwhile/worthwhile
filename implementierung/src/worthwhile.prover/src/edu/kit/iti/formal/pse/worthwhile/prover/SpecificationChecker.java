@@ -252,6 +252,7 @@ public class SpecificationChecker {
 		// add assertions to check that the divisors are not zero
 		DivisionByZeroAssertionInserter divisionByZeroAssertionInserter = new DivisionByZeroAssertionInserter();
 		modifiedProgram.accept(divisionByZeroAssertionInserter);
+		modifiedProgram.accept(new ImplicitInitialValueInserter());
 		// generate formula from program
 		Expression formula = this.transformer.transformProgram(modifiedProgram);
 		// get the validity from the prover

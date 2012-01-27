@@ -61,7 +61,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;

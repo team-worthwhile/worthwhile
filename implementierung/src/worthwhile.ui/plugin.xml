@@ -228,11 +228,6 @@
 	name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.lineBreakpoint"
 	super="org.eclipse.debug.core.breakpoint">
 </type>
-<type
-      markerSeverity="2"
-      markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failledAssertion"
-      name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedAssertion">
-</type>
  </extension>
 <extension
       point="org.eclipse.ui.editorActions">
@@ -399,4 +394,33 @@
         </enablement>
     </commonWizard>
 </extension>
+  <extension
+        point="org.eclipse.ui.editors.markerAnnotationSpecification">
+     <specification
+           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.markers.failedAnnotation"
+           includeOnPreferencePage="true"
+           label="Failed assertion"
+         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertioncolor"
+         colorPreferenceValue="192,255,192"
+         contributesToHeader="false"
+         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertionhighlight"
+         highlightPreferenceValue="true"
+         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertionoverview"
+         overviewRulerPreferenceValue="true"
+         presentationLayer="0"
+         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertiontext"
+         textPreferenceValue="true"
+         textStylePreferenceValue="BOX"
+         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertionruler"
+         verticalRulerPreferenceValue="true">
+     </specification>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editors.annotationTypes">
+     <type
+           markerSeverity="2"
+           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion"
+           name="edu.kit.iti.formal.pse.worthwhile.ui.markers.failedAnnotation">
+     </type>
+  </extension>
 </plugin>

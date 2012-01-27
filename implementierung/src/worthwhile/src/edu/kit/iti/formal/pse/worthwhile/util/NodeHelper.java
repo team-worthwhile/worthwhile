@@ -25,12 +25,44 @@ public final class NodeHelper {
 	 * 
 	 * @param node
 	 *                The node to locate in the source file.
-	 * @return The (TODO: 0 or 1 based?) line number of the node in the source file.
+	 * @return The 1-based line number of the node in the source file.
 	 */
 	public static int getLine(final ASTNode node) {
 		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
 		if (actualNode != null) {
 			return actualNode.getStartLine();
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * Returns the offset of a node in the entire document.
+	 * 
+	 * @param node
+	 *                The node to locate in the source file.
+	 * @return The offset of the node in the document
+	 */
+	public static int getOffset(final ASTNode node) {
+		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
+		if (actualNode != null) {
+			return actualNode.getOffset();
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * Returns the length of a node in the source file.
+	 * 
+	 * @param node
+	 *                The node whose length to get.
+	 * @return The length of the node in the source file.
+	 */
+	public static int getLength(final ASTNode node) {
+		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
+		if (actualNode != null) {
+			return actualNode.getLength();
 		} else {
 			return -1;
 		}

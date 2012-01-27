@@ -8,6 +8,7 @@ import org.eclipse.debug.core.model.IBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
@@ -18,6 +19,17 @@ import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
  * 
  */
 public class WorthwhileDebugEventListener extends WorthwhileEventListener {
+
+	@Override
+        public void annotationFailed(Annotation annotation) {
+	        this.getDebugTarget().markFailedStatement(annotation);
+        }
+
+	@Override
+        public void annotationSucceeded(Annotation annotation) {
+	        // TODO Auto-generated method stub
+	        super.annotationSucceeded(annotation);
+        }
 
 	/**
 	 * The mode a debugger can be in.

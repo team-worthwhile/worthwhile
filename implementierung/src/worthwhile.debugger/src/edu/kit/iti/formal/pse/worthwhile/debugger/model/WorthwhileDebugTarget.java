@@ -11,10 +11,17 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IMarkerDelta;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
@@ -42,10 +49,12 @@ import edu.kit.iti.formal.pse.worthwhile.expressions.scoping.IWorthwhileContextP
 import edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator.WorthwhileExpressionsActivator;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -110,6 +119,9 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		} else {
 			this.eventListener = new WorthwhileDebugEventListener(this, false);
 		}
+		
+		// Clear all problem markers
+		this.clearMarkers();
 
 		// Register our event listener with the interpreter.
 		interpreter.addExecutionEventHandler(this.eventListener);
@@ -477,6 +489,79 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final Value evaluateExpression(final String expressionText) throws DebugException {
 		return this.interpreterRunner.getInterpreter().evaluateExpression(
 		                this.parseExpressionString(expressionText));
+	}
+
+	/**
+	 * Clears all markers from the launched file.
+	 */
+	public void clearMarkers() {
+		final IFile file = this.getLaunchedFile();
+
+		if (file != null) {
+			try {
+				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+					@Override
+					public void run(final IProgressMonitor monitor) throws CoreException {
+						file.deleteMarkers(
+						                "edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion",
+						                true, IResource.DEPTH_INFINITE);
+					}
+				};
+				runnable.run(null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	/**
+	 * Marks a statement as failed (e.g. an assertion).
+	 * 
+	 * @param statement
+	 *                The statement to mark as failed.
+	 */
+	public void markFailedStatement(final ASTNode statement) {
+		final IFile file = this.getLaunchedFile();
+
+		if (file != null) {
+			try {
+				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+					@Override
+					public void run(final IProgressMonitor monitor) throws CoreException {
+						// Get the position of the node in the source file.
+						int line = NodeHelper.getLine(statement);
+						int offset = NodeHelper.getOffset(statement);
+						int length = NodeHelper.getLength(statement);
+						
+						// Create a new marker
+						IMarker marker = file
+						                .createMarker("edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion");
+						marker.setAttribute(IMarker.LINE_NUMBER, line);
+						marker.setAttribute(IMarker.CHAR_START, offset);
+						marker.setAttribute(IMarker.CHAR_END, offset + length);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+						marker.setAttribute(IMarker.MESSAGE, "Assertion failed");
+					}
+				};
+				runnable.run(null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private final IFile getLaunchedFile() {
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		Path path;
+		try {
+			path = new Path(this.launch.getLaunchConfiguration().getAttribute(ATTR_PATH, ""));
+			return workspaceRoot.getFile(path);
+		} catch (CoreException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**

@@ -20,17 +20,6 @@ import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
  */
 public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
-	@Override
-        public void annotationFailed(Annotation annotation) {
-	        this.getDebugTarget().markFailedStatement(annotation);
-        }
-
-	@Override
-        public void annotationSucceeded(Annotation annotation) {
-	        // TODO Auto-generated method stub
-	        super.annotationSucceeded(annotation);
-        }
-
 	/**
 	 * The mode a debugger can be in.
 	 */
@@ -243,6 +232,16 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			}
 		}
 	}
+	
+	@Override
+        public final void annotationFailed(final Annotation annotation) {
+	        this.getDebugTarget().markFailedStatement(annotation);
+        }
+
+	@Override
+        public final void annotationSucceeded(final Annotation annotation) {
+		this.getDebugTarget().markSucceededStatement(annotation);
+        }
 
 	/**
 	 * Suspends the execution.

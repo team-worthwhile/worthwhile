@@ -1,6 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.MARKER_FAILED_ANNOTATION;
+import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.MARKER_SUCCEEDED_ANNOTATION;
 import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
 import java.io.ByteArrayInputStream;
@@ -119,7 +121,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		} else {
 			this.eventListener = new WorthwhileDebugEventListener(this, false);
 		}
-		
+
 		// Clear all problem markers
 		this.clearMarkers();
 
@@ -492,9 +494,9 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	}
 
 	/**
-	 * Clears all markers from the launched file.
+	 * Clears all markers in the launched file.
 	 */
-	public void clearMarkers() {
+	private void clearMarkers() {
 		final IFile file = this.getLaunchedFile();
 
 		if (file != null) {
@@ -502,9 +504,10 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 					@Override
 					public void run(final IProgressMonitor monitor) throws CoreException {
-						file.deleteMarkers(
-						                "edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion",
-						                true, IResource.DEPTH_INFINITE);
+						file.deleteMarkers(MARKER_FAILED_ANNOTATION, true,
+						                IResource.DEPTH_INFINITE);
+						file.deleteMarkers(MARKER_SUCCEEDED_ANNOTATION, true,
+						                IResource.DEPTH_INFINITE);
 					}
 				};
 				runnable.run(null);
@@ -520,7 +523,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @param statement
 	 *                The statement to mark as failed.
 	 */
-	public void markFailedStatement(final ASTNode statement) {
+	public final void markFailedStatement(final ASTNode statement) {
 		final IFile file = this.getLaunchedFile();
 
 		if (file != null) {
@@ -532,14 +535,13 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 						int line = NodeHelper.getLine(statement);
 						int offset = NodeHelper.getOffset(statement);
 						int length = NodeHelper.getLength(statement);
-						
+
 						// Create a new marker
-						IMarker marker = file
-						                .createMarker("edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion");
+						IMarker marker = file.createMarker(MARKER_FAILED_ANNOTATION);
 						marker.setAttribute(IMarker.LINE_NUMBER, line);
 						marker.setAttribute(IMarker.CHAR_START, offset);
 						marker.setAttribute(IMarker.CHAR_END, offset + length);
-						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);
 						marker.setAttribute(IMarker.MESSAGE, "Assertion failed");
 					}
 				};
@@ -551,17 +553,62 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	}
 
-	private final IFile getLaunchedFile() {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot workspaceRoot = workspace.getRoot();
-		Path path;
+	/**
+	 * Marks a statement as succeeded (e.g. an assertion).
+	 * 
+	 * @param statement
+	 *                The statement to mark as succeeded.
+	 */
+	public final void markSucceededStatement(final ASTNode statement) {
+		final IFile file = this.getLaunchedFile();
+
+		if (file != null) {
+			try {
+				IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+					@Override
+					public void run(final IProgressMonitor monitor) throws CoreException {
+						// Get the position of the node in the source file.
+						int line = NodeHelper.getLine(statement);
+						int offset = NodeHelper.getOffset(statement);
+						int length = NodeHelper.getLength(statement);
+
+						// Create a new marker
+						IMarker marker = file.createMarker(MARKER_SUCCEEDED_ANNOTATION);
+						marker.setAttribute(IMarker.LINE_NUMBER, line);
+						marker.setAttribute(IMarker.CHAR_START, offset);
+						marker.setAttribute(IMarker.CHAR_END, offset + length);
+						marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
+						marker.setAttribute(IMarker.MESSAGE, "Assertion succeeded");
+					}
+				};
+				runnable.run(null);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	/**
+	 * Returns the file that is currently being launched.
+	 * 
+	 * @return the currently launched file.
+	 */
+	private IFile getLaunchedFile() {
+		// Obtain the path to the file from the launch configuration.
+		IPath path;
+
 		try {
 			path = new Path(this.launch.getLaunchConfiguration().getAttribute(ATTR_PATH, ""));
-			return workspaceRoot.getFile(path);
 		} catch (CoreException e) {
 			e.printStackTrace();
 			return null;
 		}
+
+		// Locate the path in the workspace and get the file with this path from the workspace.
+		IWorkspace workspace = ResourcesPlugin.getWorkspace();
+		IWorkspaceRoot workspaceRoot = workspace.getRoot();
+		return workspaceRoot.getFile(path);
 	}
 
 	/**

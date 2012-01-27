@@ -397,30 +397,51 @@
   <extension
         point="org.eclipse.ui.editors.markerAnnotationSpecification">
      <specification
-           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.markers.failedAnnotation"
+           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededAnnotation"
            includeOnPreferencePage="true"
-           label="Failed assertion"
-         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertioncolor"
-         colorPreferenceValue="192,255,192"
+           label="Succeeded Annotation"
+         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.color"
+         colorPreferenceValue="143,255,143"
          contributesToHeader="false"
-         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertionhighlight"
+         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.highlight"
          highlightPreferenceValue="true"
-         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertionoverview"
+         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.overview"
          overviewRulerPreferenceValue="true"
          presentationLayer="0"
-         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertiontext"
+         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.text"
          textPreferenceValue="true"
          textStylePreferenceValue="BOX"
-         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAssertionruler"
+         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.succeededAnnotation.ruler"
+         verticalRulerPreferenceValue="true">
+     </specification>
+     <specification
+           annotationType="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedAnnotation"
+           includeOnPreferencePage="true"
+           label="Failed Annotation"
+         colorPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.color"
+         colorPreferenceValue="255,143,143"
+         contributesToHeader="false"
+         highlightPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.highlight"
+         highlightPreferenceValue="true"
+         overviewRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.overview"
+         overviewRulerPreferenceValue="true"
+         presentationLayer="0"
+         textPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.text"
+         textPreferenceValue="true"
+         textStylePreferenceValue="BOX"
+         verticalRulerPreferenceKey="edu.kit.iti.formal.pse.worthwhile.ui.preferences.markers.failedAnnotation.ruler"
          verticalRulerPreferenceValue="true">
      </specification>
   </extension>
   <extension
         point="org.eclipse.ui.editors.annotationTypes">
      <type
-           markerSeverity="2"
-           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion"
-           name="edu.kit.iti.formal.pse.worthwhile.ui.markers.failedAnnotation">
+           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAnnotation"
+           name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.failedAnnotation">
+     </type>
+     <type
+           markerType="edu.kit.iti.formal.pse.worthwhile.debugger.markers.succeededAnnotation"
+           name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededAnnotation">
      </type>
   </extension>
 </plugin>

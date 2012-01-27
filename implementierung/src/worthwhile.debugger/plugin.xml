@@ -17,14 +17,24 @@
       	 <persistent value="true"/>
    </extension>
    <extension
-         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAssertion"
+         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.failedAnnotation"
          name="Failed Assertion"
          point="org.eclipse.core.resources.markers">
          <super type="org.eclipse.core.resources.textmarker">
    		</super>
-      <persistent
-            value="true">
-      </persistent>
+         <persistent
+               value="true">
+         </persistent>
+   </extension>
+   <extension
+         id="edu.kit.iti.formal.pse.worthwhile.debugger.markers.succeededAnnotation"
+         name="Succeeded Assertion"
+         point="org.eclipse.core.resources.markers">
+   		 <super type="org.eclipse.core.resources.textmarker">
+   		</super>
+         <persistent
+               value="true">
+         </persistent>
    </extension>
    <extension
          point="org.eclipse.debug.core.sourceLocators">

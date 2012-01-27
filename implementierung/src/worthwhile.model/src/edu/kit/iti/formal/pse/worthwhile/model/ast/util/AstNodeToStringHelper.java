@@ -17,6 +17,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
@@ -132,6 +133,22 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Equal equal) {
 		this.appendBinaryExpression(equal, "=");
+	}
+
+	@Override
+	public void visit(FunctionCall functionCall) {
+		this.buf.append(functionCall.getFunction().getName());
+		this.buf.append("(");
+		final List<Expression> actuals = functionCall.getActuals();
+		if (!actuals.isEmpty()) {
+			final Iterator<Expression> i = actuals.iterator();
+			i.next().accept(this);
+			while (i.hasNext()) {
+				this.buf.append(", ");
+				i.next().accept(this);
+			}
+		}
+		this.buf.append(")");
 	}
 
 	@Override

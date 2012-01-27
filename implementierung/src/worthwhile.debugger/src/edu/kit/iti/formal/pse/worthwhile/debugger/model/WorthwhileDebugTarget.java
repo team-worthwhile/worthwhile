@@ -6,6 +6,8 @@ import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLau
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -524,9 +526,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 			System.out.println(errorStringBuilder.toString());
 
-			// TODO use ParseException
-			throw new DebugException(new ExpressionEvaluationError(new IllegalArgumentException(
-			                errorStringBuilder.toString())));
+			throw new DebugException(new ExpressionEvaluationError(new ParseException(
+			                errorStringBuilder.toString(), resource.getErrors().get(0).getColumn())));
 		}
 	}
 
@@ -537,8 +538,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final Set<FunctionDeclaration> getFunctionDeclarations() {
-		// TODO Auto-generated method stub
-		return null;
+		return new HashSet<FunctionDeclaration>(this.interpreterRunner.getInterpreter().getProgram()
+		                .getFunctionDeclarations());
 	}
 
 	private class ExpressionEvaluationError implements IStatus {

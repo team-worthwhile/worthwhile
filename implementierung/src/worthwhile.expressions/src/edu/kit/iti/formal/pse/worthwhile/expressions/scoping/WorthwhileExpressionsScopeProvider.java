@@ -16,9 +16,9 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.scoping.WorthwhileScopeProvider;
 
 /**
  * A scoping provider that uses the current program state to provide variable declarations.
@@ -56,7 +56,13 @@ public class WorthwhileExpressionsScopeProvider extends AbstractDeclarativeScope
 	 * @return A scope in which to look for the referenced function.
 	 */
 	public final IScope scope_FunctionCall_function(final FunctionCall context, final EReference reference) {
-		return new WorthwhileScopeProvider().scope_FunctionCall_function(context, reference);
+		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
+
+		for (FunctionDeclaration funcdec : this.contextProvider.getFunctionDeclarations()) {
+			descriptions.add(EObjectDescription.create(funcdec.getName(), funcdec));
+		}
+
+		return new SimpleScope(IScope.NULLSCOPE, descriptions);
 	}
 
 	/**

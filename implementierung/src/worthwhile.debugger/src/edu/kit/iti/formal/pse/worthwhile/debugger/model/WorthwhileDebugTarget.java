@@ -94,6 +94,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		this.launch = launch;
 		this.thread = new WorthwhileThread(this);
 		this.markerHelper = new WorthwhileDebugMarkerHelper(this.getLaunchedFile());
+		this.expressionParser = new WorthwhileExpressionParser(this);
 
 		// Create a new event listener.
 		if (launch.getLaunchMode().equals("debug")) {
@@ -484,9 +485,22 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                The variable whose value to set.
 	 * @param value
 	 *                The value to set.
+	 * @throws DebugException 
 	 */
-	public final void setVariableValue(final VariableDeclaration variable, final Value value) {
-		this.interpreterRunner.getInterpreter().setSymbol(variable, value);
+	public final void setVariableValue(final IVariable variable, final Value value) throws DebugException {
+		// Find the declaration of this variable
+		VariableDeclaration vardec = null;
+		
+		for (VariableDeclaration v : this.interpreterRunner.getInterpreter().getAllSymbols().keySet()) {
+			if (v.getName().equals(variable.getName())) {
+				vardec = v;
+				break;
+			}
+		}
+		
+		if (vardec != null) {
+			this.interpreterRunner.getInterpreter().setSymbol(vardec, value);
+		}
 	}
 
 	/**

@@ -19,6 +19,64 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
 public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 
 	/**
+	 * The value represented by this object.
+	 */
+	private final Value value;
+
+	/**
+	 * Creates a new instance of the {@link WorthwhileValue} class.
+	 * 
+	 * @param debugTarget
+	 *                The debug target this object belongs to
+	 * @param value
+	 *                The value represented by this object.
+	 */
+	public WorthwhileValue(final WorthwhileDebugTarget debugTarget, final Value value) {
+		super(debugTarget);
+		this.value = value;
+	}
+
+	/**
+	 * Returns the value represented by this object.
+	 * 
+	 * @return the value represented by this object.
+	 */
+	public final Value getValue() {
+		return this.value;
+	}
+
+	@Override
+	public final String getReferenceTypeName() throws DebugException {
+		return (new ValueTypeVisitor()).apply(this.value);
+	}
+
+	@Override
+	public final String getValueString() throws DebugException {
+		return (new ValueToStringVisitor()).apply(this.value);
+	}
+
+	@Override
+	public final boolean isAllocated() throws DebugException {
+		return true;
+	}
+
+	@Override
+	public final IVariable[] getVariables() throws DebugException {
+		return (new GetVariablesVisitor()).apply(this.value);
+	}
+
+	@Override
+	public final boolean hasVariables() throws DebugException {
+		return (new GetVariablesVisitor()).apply(this.value).length > 0;
+	}
+
+	private final IVariable createSubVariable(int index) {
+		// return new WorthwhileVariable(this.getDebugTarget(), )
+		// TODO implement
+		return null;
+	}
+
+	/**
 	 * A visitor that returns the sub-variables for a specific value (if present).
 	 * 
 	 * @author Joachim
@@ -116,49 +174,6 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 			this.setReturnValue("Boolean");
 		}
 
-	}
-
-	/**
-	 * The value represented by this object.
-	 */
-	private final Value value;
-
-	/**
-	 * Creates a new instance of the {@link WorthwhileValue} class.
-	 * 
-	 * @param debugTarget
-	 *                The debug target this object belongs to
-	 * @param value
-	 *                The value represented by this object.
-	 */
-	public WorthwhileValue(final WorthwhileDebugTarget debugTarget, final Value value) {
-		super(debugTarget);
-		this.value = value;
-	}
-
-	@Override
-	public final String getReferenceTypeName() throws DebugException {
-		return (new ValueTypeVisitor()).apply(this.value);
-	}
-
-	@Override
-	public final String getValueString() throws DebugException {
-		return (new ValueToStringVisitor()).apply(this.value);
-	}
-
-	@Override
-	public final boolean isAllocated() throws DebugException {
-		return true;
-	}
-
-	@Override
-	public final IVariable[] getVariables() throws DebugException {
-		return (new GetVariablesVisitor()).apply(this.value);
-	}
-
-	@Override
-	public final boolean hasVariables() throws DebugException {
-		return (new GetVariablesVisitor()).apply(this.value).length > 0;
 	}
 
 }

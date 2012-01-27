@@ -6,6 +6,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 /**
  * Default listener for {@link Interpreter} events.
+ * 
+ * @see AbstractExecutionEventEvent
  */
 public abstract class AbstractExecutionEventListener {
 	/**
@@ -14,7 +16,6 @@ public abstract class AbstractExecutionEventListener {
 	 * @param statement
 	 *                the <code>Statement</code> that was executed
 	 */
-
 	public void statementExecuted(final Statement statement) {
 	}
 

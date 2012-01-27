@@ -12,8 +12,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
-/** 
- * 
+/**
+ * The facade for the interpreter module.
+ * @author Chris
+ *
  */
 public class Interpreter {
 	/**
@@ -22,6 +24,8 @@ public class Interpreter {
 	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
 	/**
+	 * Gets the execution event handlers.
+	 *
 	 * @return the executionEventHandlers
 	 */
 	public Set<AbstractExecutionEventListener> getExecutionEventHandlers() {
@@ -31,8 +35,9 @@ public class Interpreter {
 	}
 
 	/**
-	 * @param executionEventHandlers
-	 *                the executionEventHandlers to set
+	 * Sets the execution event handlers.
+	 *
+	 * @param executionEventHandlers the executionEventHandlers to set
 	 */
 	public void setExecutionEventHandlers(Set<AbstractExecutionEventListener> executionEventHandlers) {
 		// begin-user-code
@@ -46,8 +51,10 @@ public class Interpreter {
 	private InterpreterASTNodeVisitor executingVisitor;
 
 	/**
+	 * Gets the current node visitor.
+	 *
 	 * @return the currently executing {@link InterpreterASTNodeVisitor} and <code>null</code> if
-	 *         {@link Interpreter#execute()} has not been called yet
+	 * {@link Interpreter#execute()} has not been called yet
 	 */
 	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
 		if (this.executingVisitor != null) {
@@ -63,6 +70,8 @@ public class Interpreter {
 	private Program program;
 
 	/**
+	 * Gets the program.
+	 *
 	 * @return the program
 	 */
 	public Program getProgram() {
@@ -72,8 +81,9 @@ public class Interpreter {
 	}
 
 	/**
-	 * @param program
-	 *                the program to set
+	 * Sets the program.
+	 *
+	 * @param program the program to set
 	 */
 	public void setProgram(Program program) {
 		// begin-user-code
@@ -82,7 +92,9 @@ public class Interpreter {
 	}
 
 	/**
-	 * @param program
+	 * Instantiates a new interpreter.
+	 *
+	 * @param program the program
 	 */
 	public Interpreter(Program program) {
 		this.program = program;
@@ -101,22 +113,28 @@ public class Interpreter {
 	}
 
 	/**
-	 * @param handler
+	 * Adds the execution event handler.
+	 *
+	 * @param handler the handler
 	 */
 	public void addExecutionEventHandler(AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.add(handler);
 	}
 
 	/**
-	 * @param handler
+	 * Removes the execution event handler.
+	 *
+	 * @param handler the handler
 	 */
 	public void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.remove(handler);
 	}
 
 	/**
-	 * @param expression
-	 * @return
+	 * Evaluate expression.
+	 *
+	 * @param expression the expression
+	 * @return the "return"-value of the expression
 	 */
 	public Value evaluateExpression(Expression expression) {
 		InterpreterASTNodeVisitor visitor = this.getCurrentNodeVisitor();
@@ -132,18 +150,19 @@ public class Interpreter {
 	}
 
 	/**
-	 * @param key
-	 * @return
+	 * Gets a symbol.
+	 *
+	 * @param key the key
+	 * @return the symbol
 	 */
 	public Value getSymbol(VariableDeclaration key) {
 		return this.getCurrentNodeVisitor().getSymbol(key);
 	}
 
 	/**
-	 * Get the value of a symbol by its name
-	 * 
-	 * @param key
-	 *                the name of the Symbol to look up the value for
+	 * Get the value of a symbol by its name.
+	 *
+	 * @param key the name of the Symbol to look up the value for
 	 * @return the current value of the Symbol or null if no such symbol exists
 	 */
 	public Value getSymbol(String key) {
@@ -151,15 +170,19 @@ public class Interpreter {
 	}
 
 	/**
-	 * @param key
-	 * @param value
+	 * Sets a symbol.
+	 *
+	 * @param key the key
+	 * @param value the value
 	 */
 	public void setSymbol(VariableDeclaration key, Value value) {
 		this.getCurrentNodeVisitor().setSymbol(key, value);
 	}
 
 	/**
-	 * @return
+	 * Gets all symbols.
+	 *
+	 * @return all symbols as Map
 	 */
 	public Map<VariableDeclaration, Value> getAllSymbols() {
 		return this.getCurrentNodeVisitor().getAllSymbols();

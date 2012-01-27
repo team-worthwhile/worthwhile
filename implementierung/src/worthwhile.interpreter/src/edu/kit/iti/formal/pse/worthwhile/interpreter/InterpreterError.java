@@ -3,12 +3,16 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
-/** 
- * 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InterpreterError.
  */
 public class InterpreterError {
+	
 	/**
-	 * @return
+	 * Gets the description.
+	 *
+	 * @return the description
 	 */
 	public String getDescription() {
 		// begin-user-code

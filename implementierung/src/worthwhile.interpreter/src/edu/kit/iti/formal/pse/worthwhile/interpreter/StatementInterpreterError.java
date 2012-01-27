@@ -5,16 +5,18 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
-/** 
- * 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StatementInterpreterError.
  */
 public class StatementInterpreterError extends InterpreterError {
-	/** 
-	 * 
-	 */
+	
+	/** The statement. */
 	private Statement statement;
 
 	/**
+	 * Gets the statement.
+	 *
 	 * @return the statement
 	 */
 	public Statement getStatement() {
@@ -24,8 +26,9 @@ public class StatementInterpreterError extends InterpreterError {
 	}
 
 	/**
-	 * @param statement
-	 *                the statement to set
+	 * Sets the statement.
+	 *
+	 * @param statement the statement to set
 	 */
 	public void setStatement(Statement statement) {
 		// begin-user-code

@@ -621,18 +621,18 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                 if the expression contains syntax errors.
 	 */
 	private Expression parseExpressionString(final String expressionText) throws DebugException {
-		// Create a new program that contains the expression evaluation.
-		// Injector guiceInjector = new
-		// WorthwhileExpressionsStandaloneSetup().createInjectorAndDoEMFRegistration(this);
-		// XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
+		// Load the expressions language plugin and obtain an injector.
 		WorthwhileExpressionsActivator activator = WorthwhileExpressionsActivator.getInstance();
 		activator.setContextProvider(this);
 		Injector guiceInjector = activator
 		                .getInjector("edu.kit.iti.formal.pse.worthwhile.expressions.WorthwhileExpressions");
+
+		// Create a new program that contains the expression string.
 		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
 		Resource resource = resourceSet.createResource(URI.createURI("dummy:/debug.wwexpr"));
 		InputStream in = new ByteArrayInputStream(expressionText.getBytes());
+
 		try {
 			resource.load(in, resourceSet.getLoadOptions());
 		} catch (IOException e) {

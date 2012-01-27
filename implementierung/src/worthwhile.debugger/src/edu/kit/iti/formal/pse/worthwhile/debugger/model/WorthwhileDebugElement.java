@@ -60,6 +60,8 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	public final Object getAdapter(@SuppressWarnings("rawtypes") final Class adapter) {
 		if (adapter == IDebugElement.class) {
 			return this;
+		} else if (adapter == ILaunch.class) {
+			return this.getLaunch();
 		}
 		return super.getAdapter(adapter);
 	}

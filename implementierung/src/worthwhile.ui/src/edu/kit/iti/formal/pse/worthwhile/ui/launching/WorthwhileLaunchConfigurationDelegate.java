@@ -32,9 +32,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
  */
 public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
+	/**
+	 * A resource set provider for loading the program.
+	 */
 	@Inject
-	private IResourceSetProvider resourceSetProvider; // TODO: This makes the debugger plugin depend on
-	                                                  // xtext.ui, EMF and all sorts of horrible stuff
+	private IResourceSetProvider resourceSetProvider;
 
 	@Override
 	public final void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,

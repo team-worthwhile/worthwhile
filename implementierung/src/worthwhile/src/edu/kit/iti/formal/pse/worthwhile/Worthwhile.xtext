@@ -9,7 +9,7 @@ Program returns Program:
 	{Program}
 	NL* // Newline at the beginning of the file is allowed.
 	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
-	mainBlock=Block // FIXME: Newline at end of file?
+	mainBlock=Block
 ;
 
 // Override the whitespace rules: Disallow line breaks as whitespace since we want to use them to separate statements 

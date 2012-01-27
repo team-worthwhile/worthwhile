@@ -47,7 +47,6 @@ public class CompositeValue<T extends Value> extends Value {
 	@Override
         public final boolean equals(final Object other) {
 		if (other instanceof CompositeValue<?>) {
-			// FIXME: Does this work?
 			return Arrays.equals(this.subValues, ((CompositeValue<?>) other).getSubValues());
 		} else {
 			return false;

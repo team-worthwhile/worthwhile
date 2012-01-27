@@ -226,7 +226,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void statementExecuted(final Statement statement) {
-		if (this.mode == DebugMode.STEP_OVER) { // TODO use equals() here?
+		if (DebugMode.STEP_OVER.equals(this.mode)) {
 			if (statement.equals(this.stepOverNode)) {
 				this.mode = DebugMode.STEP;
 			}

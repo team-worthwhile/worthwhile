@@ -254,7 +254,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 				e.printStackTrace();
 			}
 		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
-			// TODO
+			// TODO Watchpoints
 		}
 	}
 

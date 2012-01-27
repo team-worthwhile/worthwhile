@@ -30,9 +30,8 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
 			IVariable[] result = new IVariable[value.getSubValues().length];
 
-			int i = 0;
-			for (T subvalue : value.getSubValues()) {
-				// TODO result[i++] = new WorthwhileVariable(this.getDebugTarget);
+			for (int i = 0; i < value.getSubValues().length; i++) {
+				result[i++] = createSubVariable(i);
 			}
 
 			this.setReturnValue(result);

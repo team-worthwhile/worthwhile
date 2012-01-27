@@ -58,7 +58,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 
 	@Override
 	public final boolean verifyValue(final IValue value) throws DebugException {
-		// TODO Auto-generated method stub
+		// TODO Verify value
 		return true;
 	}
 
@@ -79,7 +79,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 
 	@Override
 	public final boolean hasValueChanged() throws DebugException {
-		// TODO Auto-generated method stub
+		// TODO HasValueChanged
 		return false;
 	}
 

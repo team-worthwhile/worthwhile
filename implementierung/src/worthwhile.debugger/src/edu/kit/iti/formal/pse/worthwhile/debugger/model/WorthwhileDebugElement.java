@@ -73,14 +73,10 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	 *                the event to be fired
 	 */
 	protected final void fireEvent(final DebugEvent event) {
-		System.out.println(event.toString());
 		DebugPlugin debugPlugin = DebugPlugin.getDefault();
 		if (debugPlugin != null) {
 			debugPlugin.fireDebugEventSet(new DebugEvent[] { event });
 		}
-		// TODO: fire model changed event
-		// ModelDelta delta = new ModelDelta(DebugPlugin.getDefault().getLaunchManager(), IModelDelta.CONTENT);
-		// DebugPlugin.getDefault().
 	}
 
 	/**

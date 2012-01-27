@@ -62,12 +62,12 @@ public class WorthwhileLineBreakpointAdapter implements IToggleBreakpointsTarget
 
 	@Override
 	public void toggleWatchpoints(final IWorkbenchPart part, final ISelection selection) throws CoreException {
-		// TODO
+		// TODO toggle watchpoints
 	}
 
 	@Override
 	public final boolean canToggleWatchpoints(final IWorkbenchPart part, final ISelection selection) {
-		// we don’t support watchpoints (yet!)
+		// TODO we don’t support watchpoints (yet!)
 		return false;
 	}
 

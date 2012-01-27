@@ -71,7 +71,7 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 			ILaunchConfiguration launchConfiguration = workingCopy.doSave();
 			DebugUITools.launch(launchConfiguration, mode);
 		} catch (CoreException e) {
-			// TODO
+			// TODO Show error message
 			e.printStackTrace();
 		}
 	}

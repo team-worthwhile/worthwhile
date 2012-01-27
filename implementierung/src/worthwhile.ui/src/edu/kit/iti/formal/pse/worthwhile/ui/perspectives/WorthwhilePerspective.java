@@ -69,7 +69,6 @@ public class WorthwhilePerspective implements IPerspectiveFactory {
 		                .createFolder("bottom", IPageLayout.BOTTOM, EDITOR_AREA_HEIGHT, editorArea);
 		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);
 		bottom.addView(IPageLayout.ID_TASK_LIST);
-		// TODO: Add console
 	}
 
 }

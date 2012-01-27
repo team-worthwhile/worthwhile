@@ -111,7 +111,7 @@ PrimitiveType returns PrimitiveType:
 
 // An array type represents an array of a primitive type.
 ArrayType returns ArrayType:
-	{ArrayType} baseType=PrimitiveType '[' (size=Expression)? ']'
+	{ArrayType} baseType=PrimitiveType '[]'
 ;
 
 // A function call simply calls a function without returning a value.
@@ -177,7 +177,7 @@ Multiplication returns Expression:
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.
 UnaryOperation returns Expression:
-	 Atomic | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=Atomic) | {ArrayLength} 'length' '(' operand=Atomic ')'
+	 Atomic | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=Atomic)
 ;
 
 // An atomic value in an Expression is either

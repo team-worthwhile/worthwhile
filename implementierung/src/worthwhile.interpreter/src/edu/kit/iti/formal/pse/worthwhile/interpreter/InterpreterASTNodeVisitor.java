@@ -19,7 +19,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
@@ -627,10 +626,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		negation.getOperand().accept(this);
 		this.resultStack.push(new BooleanValue(!(this.popBooleanValue().getValue())));
 		this.expressionEvaluated(negation);
-	}
-
-	@Override
-	public void visit(ASTNode node) {
 	}
 
 	public void visit(Plus plus) {

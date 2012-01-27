@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
@@ -55,6 +56,26 @@ public final class AstNodeCreatorHelper {
 
 	/**
 	 * 
+	 * @param values
+	 *                the array element {@link Expression}s
+	 * @return an {@link ArrayLiteral} whose first elements are initialized with the given <code>values</code>
+	 */
+	public static ArrayLiteral createArrayLiteral(final List<Expression> values) {
+		final ArrayLiteral arrayLiteral = AstNodeCreatorHelper.createArrayLiteral();
+		arrayLiteral.getValues().addAll(values);
+		return arrayLiteral;
+	}
+
+	/**
+	 * 
+	 * @return an uninitialized {@link ArrayLiteral}
+	 */
+	public static ArrayLiteral createArrayLiteral() {
+		return AstNodeCreatorHelper.factory.createArrayLiteral();
+	}
+
+	/**
+	 * 
 	 * @param value
 	 *                the {@link Boolean} value to be represented by the {@link BooleanLiteral}
 	 * @return a <code>BooleanLiteral</code> that represents <code>value</code>
@@ -91,6 +112,14 @@ public final class AstNodeCreatorHelper {
 		final IntegerLiteral integerLiteral = AstNodeCreatorHelper.factory.createIntegerLiteral();
 		integerLiteral.setValue(value);
 		return integerLiteral;
+	}
+
+	/**
+	 * 
+	 * @return an <code>IntegerLiteral</code> that represents the value <code>zero</code>
+	 */
+	public static IntegerLiteral createZeroLiteral() {
+		return AstNodeCreatorHelper.createIntegerLiteral(BigInteger.ZERO);
 	}
 
 	/**

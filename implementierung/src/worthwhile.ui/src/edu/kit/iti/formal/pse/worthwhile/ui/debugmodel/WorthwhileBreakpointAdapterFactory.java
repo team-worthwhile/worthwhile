@@ -16,7 +16,7 @@ public class WorthwhileBreakpointAdapterFactory implements IAdapterFactory {
 	@Override
 	public final Object getAdapter(final Object adaptableObject, final Class adapterType) {
 		if (adaptableObject instanceof WorthwhileEditor) {
-			return new WorthwhileLineBreakpointAdapter();
+			return new WorthwhileBreakpointAdapter();
 		}
 		return null;
 	}
@@ -24,7 +24,7 @@ public class WorthwhileBreakpointAdapterFactory implements IAdapterFactory {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public final Class[] getAdapterList() {
-		return new Class[] { WorthwhileLineBreakpointAdapter.class };
+		return new Class[] { WorthwhileBreakpointAdapter.class };
 	}
 
 }

@@ -21,6 +21,11 @@ import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstant
 public class WorthwhileLineBreakpoint extends LineBreakpoint {
 
 	/**
+	 * The ID of the associated marker.
+	 */
+	public static final String MARKER_ID = "edu.kit.iti.formal.pse.worthwhile.debugger.lineBreakpoint.marker";
+
+	/**
 	 * The attribute identifier for the condition on which this breakpoint stops.
 	 */
 	public static final String CONDITION = "edu.kit.iti.formal.pse.worthwhile.debugger.model.lineBreakpoint.condition";
@@ -54,8 +59,7 @@ public class WorthwhileLineBreakpoint extends LineBreakpoint {
 			@Override
 			public void run(final IProgressMonitor monitor) throws CoreException {
 				// Create a new marker for this breakpoint
-				IMarker marker = resource
-				                .createMarker("edu.kit.iti.formal.pse.worthwhile.debugger.lineBreakpoint.marker");
+				IMarker marker = resource.createMarker(MARKER_ID);
 				setMarker(marker);
 				marker.setAttribute(IBreakpoint.ENABLED, Boolean.TRUE);
 				marker.setAttribute(IMarker.LINE_NUMBER, lineNumber);

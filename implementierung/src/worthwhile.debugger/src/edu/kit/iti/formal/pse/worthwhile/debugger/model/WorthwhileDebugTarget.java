@@ -29,6 +29,7 @@ import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
+import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileWatchpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.expressions.scoping.IWorthwhileContextProvider;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
@@ -256,8 +257,9 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
-		} else if (breakpoint instanceof org.eclipse.debug.core.model.IWatchpoint) {
-			// TODO Watchpoints
+		} else if (breakpoint instanceof WorthwhileWatchpoint) {
+			this.eventListener.addWatchpoint(((WorthwhileWatchpoint) breakpoint).getVariableName(),
+			                (WorthwhileWatchpoint) breakpoint);
 		}
 	}
 
@@ -278,12 +280,15 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void breakpointRemoved(final IBreakpoint breakpoint, final IMarkerDelta delta) {
-		if (breakpoint instanceof org.eclipse.debug.core.model.LineBreakpoint) {
+		if (breakpoint instanceof WorthwhileLineBreakpoint) {
 			try {
-				this.eventListener.removeBreakpoint(((LineBreakpoint) breakpoint).getLineNumber());
+				this.eventListener.removeBreakpoint(((WorthwhileLineBreakpoint) breakpoint)
+				                .getLineNumber());
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
+		} else if (breakpoint instanceof WorthwhileWatchpoint) {
+			this.eventListener.removeWatchpoint(((WorthwhileWatchpoint) breakpoint).getVariableName());
 		}
 	}
 

@@ -11,6 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  * The facade for the interpreter module.
@@ -54,14 +55,17 @@ public class Interpreter {
 		return program;
 	}
 
+	private SpecificationChecker specificationChecker;
 
 	/**
-	 * Instantiates a new interpreter.
+	 * Constructs a new {@link Interpreter} with the given program and specification checker.
 	 *
-	 * @param program the program
+	 * @param program the program to execute
+	 * @param specificationChecker the specification checker to use to prove some expressions
 	 */
-	public Interpreter(Program program) {
+	public Interpreter(final Program program, final SpecificationChecker specificationChecker) {
 		this.program = program;
+		this.specificationChecker = specificationChecker;
 	}
 
 	/**
@@ -71,7 +75,7 @@ public class Interpreter {
 	 * @see Interpreter#setProgram(Program)
 	 */
 	public void execute() {
-		this.executingVisitor = new InterpreterASTNodeVisitor();
+		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);
 		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		this.program.accept(executingVisitor);
 	}
@@ -106,7 +110,7 @@ public class Interpreter {
 		if (visitor != null) {
 			visitor = visitor.clone();
 		} else {
-			visitor = new InterpreterASTNodeVisitor();
+			visitor = new InterpreterASTNodeVisitor(this.specificationChecker);
 		}
 
 		expression.accept(visitor);

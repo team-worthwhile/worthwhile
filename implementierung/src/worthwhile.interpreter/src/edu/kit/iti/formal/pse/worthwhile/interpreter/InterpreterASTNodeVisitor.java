@@ -223,9 +223,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Instantiates a new interpreter ast node visitor.
+	 * Constructs a new {@link InterpreterASTNodeVisitor} with the given {@link SpecificationChecker}.
 	 */
-	protected InterpreterASTNodeVisitor() {
+	protected InterpreterASTNodeVisitor(final SpecificationChecker specificationChecker) {
+		this.specificationChecker = specificationChecker;
 	}
 
 	/**
@@ -357,7 +358,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	@Override
 	protected InterpreterASTNodeVisitor clone() {
-		final InterpreterASTNodeVisitor clone = new InterpreterASTNodeVisitor();
+		final InterpreterASTNodeVisitor clone = new InterpreterASTNodeVisitor(this.specificationChecker);
 
 		// Values are immutable so that it is efficient to clone the array and not the elements
 		for (final Map<VariableDeclaration, Value> m : this.symbolStack) {
@@ -662,7 +663,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.FunctionCall)
 	 */
 	public void visit(FunctionCall functionCall) {
-		this.executingVisitor = new InterpreterASTNodeVisitor();
+		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);
 		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		EList<Expression> actuals = functionCall.getActuals();
 		this.executingVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
@@ -959,7 +960,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void visit(QuantifiedExpression quantifiedExpression) {
 		if (this.specificationChecker == null) {
-			throw new NullPointerException("no SpecificationChecker");
+			throw new IllegalArgumentException("No SpecificationChecker supplied");
 		}
 		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {

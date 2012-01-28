@@ -231,7 +231,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final Division division) {
-		this.pushBinaryOperation(division, "/");
+		this.pushBinaryOperation(division, "div");
 	}
 
 	@Override

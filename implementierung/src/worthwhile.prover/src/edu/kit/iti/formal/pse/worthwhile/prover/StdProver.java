@@ -64,7 +64,7 @@ abstract class StdProver implements ProverCaller {
 		String outputString = "";
 		try {
 			// instantiate the prover
-			ProcessBuilder builder = new ProcessBuilder("z3", "-in", "-smt2");
+			ProcessBuilder builder = new ProcessBuilder(this.proverCommand);
 			builder.redirectErrorStream(true);
 			Process proverProcess = builder.start();
 

@@ -1,9 +1,26 @@
 \section{Änderungen am Entwurf}
 % TODO: generelle Einführung, wie toll unser Entwurf doch war
 \subsection{Grammatik}
+\subsubsection{\_return Statement}
 In der Grammtik wurde das neue Schlüsselwort \texttt{\_return} eingefügt, um auf den Rückgabewert einer Funktion in ihrer Nachbedingung zugreifen zu können.
+\subsubsection{Arraygröße}
+Da unbeschränkte Arrays für den Benutzer einfacher zu handhaben gibt es nun ausschließlich Arrays mit unbegrenzter Größe. Dies hat außerdem zur Folge, dass der \texttt{length()}-Operator entfällt und bei der Deklaration eines Arrays keine Größenangabe mehr möglich sind. Die nicht initialisierten Elemente eines Arrays werden mit dem Defaultwert des jeweiligen Basisdatentypen belegt. Im Speziellen heißt dies, dass Boolean-Arrays mit \texttt{false} und Integer-Arrays mit \texttt{0} vorinitialisiert werden.
 
 \subsection{Parser}
+Die Schnittstellenklasse \texttt{Parser} des Entwurfs wurde durch schon vorhandene XText-Klassen realisiert, da diese bereits die benötigte Funktionalität zur Verfügung stellt. Insbesondere die GUI benutzt nun diese XText-Klasse um mit dem Parser zu kommunizieren.
+
 \subsection{Interpreter}
+\subsubsection{Klasse \texttt{Value}}
+Die \texttt{Value} Klasse wurde dahingehend geändert, dass es für jeden Datentyp (Integer, Boolean, Array) eine eigene Klasse, welche den jeweiligen Wert in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Visitor-Pattern implementiert. Da diese Klassen auch von anderen Programmteilen außer dem Interpreter benutzt werden, wurden sie aus dem Interpreter ausgelagert und somit allen anderen Komponenten zugänglich gemacht.
+
+\subsubsection{Breakpoints}
+Da der Interpreter von den Breakpoints nichts wissen muss und diese Funktionalität indirekt über den ExecutionEventListener realisierbar ist, wurden die zu Breakpoints gehörigen Klassen in die GUI, welche als einzigste mit ihnen umgehen muss, verschoben. 
+
+\subsubsection{Umbenennung des AbstractDebugEventListeners}
+Die Klasse \texttt{AbstractDebugEventListener} wurde zu \texttt{AbstractExecutionEventListener} umbenannt, da diese allgemein benutzt wird Einfluss auf den Interpreter-Vorgang zu nehmen.
+
 \subsection{Beweiserschnittstelle}
+Der Entwurf der Beweiserschnittstelle wurde, bis auf einige zusätzliche Hilfsklassen, soweit umgesetzt. Dies hatte keine Änderungen der Funktionalität zur Folge.
+
 \subsection{GUI}
+In der GUI gab es ebenfalls keine nennenswerten Abweichungen zum Entwurfsheft.

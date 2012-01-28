@@ -72,7 +72,11 @@ import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
  * 
  */
 class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
-
+	/**
+	 * The specification checker.
+	 */
+	private SpecificationChecker specificationChecker;
+	
 	/**
 	 *  The execution event handlers. 
 	 */
@@ -951,7 +955,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.QuantifiedExpression)
 	 */
 	public void visit(QuantifiedExpression quantifiedExpression) {
-		Validity validity = (new SpecificationChecker()).checkFormula(quantifiedExpression,
+		if (this.specificationChecker == null) {
+			throw new NullPointerException("no SpecificationChecker");
+		}
+		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression,
 		                this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
 			throw new StatementException(new UnknownValidityInterpreterError());

@@ -133,7 +133,7 @@ public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {
 	@Override
 	public final void visit(final Loop loop) {
 		loop.getCondition().accept(this);
-		loop.accept(this);
+		loop.getBody().accept(this);
 	}
 
 	@Override

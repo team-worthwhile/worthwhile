@@ -17,6 +17,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  * @author matthias and stefan
@@ -67,7 +68,7 @@ public class InterpreterValueTest {
 	public void testArrayAssignments() {
 		Program testProgram = TestASTProvider
 		                .getRootASTNode("Integer[] j := {1, 2, 43}\nj[5] := 9\n_assert j[2] ≠ 9\n");
-		Interpreter interpreter = new Interpreter(testProgram);
+		Interpreter interpreter = new Interpreter(testProgram, new SpecificationChecker());
 		TestExecutionListener listener = new TestExecutionListener() {
 
 			@Override

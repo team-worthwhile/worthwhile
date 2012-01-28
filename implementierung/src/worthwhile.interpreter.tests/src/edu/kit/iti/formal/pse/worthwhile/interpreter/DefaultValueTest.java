@@ -11,6 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 public class DefaultValueTest {
 
@@ -48,7 +49,7 @@ public class DefaultValueTest {
 
 	private void setup(String type) {
 		Program program = TestASTProvider.getRootASTNode(type + " a\n");
-		this.interpreter = new Interpreter(program);
+		this.interpreter = new Interpreter(program, new SpecificationChecker());
 	}
 
 	@Test

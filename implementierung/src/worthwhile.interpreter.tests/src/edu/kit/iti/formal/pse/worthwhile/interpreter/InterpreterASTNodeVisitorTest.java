@@ -13,6 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  * @author matthias and stefan
@@ -61,7 +62,7 @@ public class InterpreterASTNodeVisitorTest {
 	 */
 	private static void assertIntegerExpressionValueEquals(final String expression, final Integer expected) {
 		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := "
-		                + expression + "\n"));
+		                + expression + "\n"), new SpecificationChecker());
 		assertNotNull(interpreter);
 		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 			@Override
@@ -84,7 +85,7 @@ public class InterpreterASTNodeVisitorTest {
 	 */
 	private static void assertBooleanExpressionValueEquals(final String expression, final Boolean expected) {
 		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := "
-		                + expression + "\n"));
+		                + expression + "\n"), new SpecificationChecker());
 		assertNotNull(interpreter);
 		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 			@Override
@@ -98,7 +99,7 @@ public class InterpreterASTNodeVisitorTest {
 
 	@Test
 	public void test() {
-		InterpreterASTNodeVisitor v = new InterpreterASTNodeVisitor();
+		InterpreterASTNodeVisitor v = new InterpreterASTNodeVisitor(new SpecificationChecker());
 		assertNotNull(v);
 	}
 
@@ -184,7 +185,7 @@ public class InterpreterASTNodeVisitorTest {
 		                				"{\n" + 
 		                				"Integer result := x(5)\n" + 
 		                				"_assert result = 42 \n" +
-		                				"}\n"));
+		                				"}\n"), new SpecificationChecker());
 
 		interpreter.execute();
 		assertTrue(true);

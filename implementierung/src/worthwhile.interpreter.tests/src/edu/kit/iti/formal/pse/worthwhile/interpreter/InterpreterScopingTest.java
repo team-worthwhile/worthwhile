@@ -1,15 +1,19 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.math.BigInteger;
+
 import org.junit.Test;
 
+import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
-import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 public class InterpreterScopingTest {
 	private static String getLocalVariablesDeclarationCode() {
@@ -92,7 +96,7 @@ public class InterpreterScopingTest {
 	}
 
 	private static void runInterpreter(final String programCode, final int localLevel, final int globalLevel) {
-		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode(programCode));
+		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode(programCode), new SpecificationChecker());
 
 		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 			private int level = 0;

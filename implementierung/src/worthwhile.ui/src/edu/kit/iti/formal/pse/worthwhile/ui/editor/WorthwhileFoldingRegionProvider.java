@@ -49,6 +49,14 @@ public class WorthwhileFoldingRegionProvider extends DefaultFoldingRegionProvide
 	/**
 	 * A visitor which provides folding regions for a Worthwhile document.
 	 * 
+	 * It folds the following statements:
+	 * <ul>
+	 * 	<li>Function Declarations</li>
+	 * 	<li>Conditionals (both true and false block)</li>
+	 * 	<li>Loops</li>
+	 * 	<li>The main block of a program</li>
+	 * </ul>
+	 * 
 	 * @author Joachim
 	 * 
 	 */

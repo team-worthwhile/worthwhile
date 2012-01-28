@@ -4,68 +4,90 @@
 <contexts>
 	<context id="keyword_Array" title="Arrays">
 		<topic href="src/main/html/array.html" label="Arrays"/>
+		<description>Arrays are collections of primitive data types.</description>
 	</context>
 	<context id="keyword_Assertion" title="Assertions">
 		<topic href="src/main/html/assert.html" label="Assertions"/>
+		<description></description>
 	</context>
 	<context id="keyword_Assignment" title="Assignments">
 		<topic href="src/main/html/assignment.html" label="Assignments"/>
+		<description>Assignments alter the value of a variable.</description>
 	</context>
 	<context id="keyword_Assumption" title="Assumptions">
 		<topic href="src/main/html/assume.html" label="Assumptions"/>
+		<description></description>
 	</context>
 	<context id="keyword_Axiom" title="Axioms">
 		<topic href="src/main/html/axiom.html" label="Axioms"/>
+		<description></description>
 	</context>
 	<context id="keyword_Boolean" title="Booleans">
 		<topic href="src/main/html/boolean.html" label="Booleans"/>
+		<description>The boolean primitive data type.</description>
 	</context>
 	<context id="keyword_Comment" title="Comments">
 		<topic href="src/main/html/comment.html" label="Comments"/>
+		<description>Untreated text to describe the code.</description>
 	</context>
 	<context id="keyword_Condition" title="Conditions">
 		<topic href="src/main/html/condition.html" label="Conditions"/>
+		<description>Conditions </description>
 	</context>
 	<context id="keyword_Expression" title="Expressions">
 		<topic href="src/main/html/expression.html" label="Expressions"/>
+		<description></description>
 	</context>
 	<context id="keyword_Function" title="Functions">
 		<topic href="src/main/html/function.html" label="Functions"/>
+		<description>The function declarations and usage.</description>
 	</context>
 	<context id="keyword_Identifier" title="Identifiers">
 		<topic href="src/main/html/identifier.html" label="Identifiers"/>
+		<description>The conventions for identifiers.</description>
 	</context>
 	<context id="keyword_Integer" title="Integers">
 		<topic href="src/main/html/integer.html" label="Integers"/>
+		<description>The integer primitive data type.</description>
 	</context>
 	<context id="keyword_Invariant" title="Invariants">
 		<topic href="src/main/html/invariant.html" label="Invariants"/>
+		<description></description>
 	</context>
 	<context id="keyword_Loop" title="Loops">
 		<topic href="src/main/html/loop.html" label="Loops"/>
+		<description>The while loop to repeatedly execute statements.</description>
 	</context>
 	<context id="keyword_Operator" title="Operators">
 		<topic href="src/main/html/operator.html" label="Operators"/>
+		<description>A list of all operators.</description>
 	</context>
 	<context id="keyword_Postcondition" title="Postconditions">
 		<topic href="src/main/html/ensures.html" label="Postconditions"/>
+		<description></description>
 	</context>
 	<context id="keyword_Precondition" title="Preconditions">
 		<topic href="src/main/html/requires.html" label="Preconditions"/>
+		<description></description>
 	</context>
 	<context id="keyword_Program" title="Programs">
 		<topic href="src/main/html/program.html" label="Programs"/>
+		<description>The worthwhile program.</description>
 	</context>
 	<context id="keyword_Quantified_Expression" title="Quantified Expressions">
 		<topic href="src/main/html/quantifiedexpression.html" label="Quantified_Expressions"/>
+		<description></description>
 	</context>
 	<context id="keyword_Return" title="Returns">
 		<topic href="src/main/html/return.html" label="Returns"/>
+		<description>To return a value from a function.</description>
 	</context>
 	<context id="keyword_Statement" title="Statements">
 		<topic href="src/main/html/statement.html" label="Statements"/>
+		<description>The worthwhile statements.</description>
 	</context>
 	<context id="keyword_Variable_Declaration" title="Variable Declarations">
 		<topic href="src/main/html/variabledeclaration.html" label="Variable_Declarations"/>
+		<description>The declaration of variables.</description>
 	</context>
 </contexts>

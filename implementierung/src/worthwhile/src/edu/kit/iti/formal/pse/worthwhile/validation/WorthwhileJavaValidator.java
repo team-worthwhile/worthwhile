@@ -9,13 +9,16 @@ import com.google.inject.Inject;
 import de.itemis.xtext.typesystem.ITypesystem;
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
@@ -197,6 +200,56 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 			}
 		}
 
+	}
+
+	/**
+	 * Checks if the {@link QuantifiedExpression} is used in a {@link Annotation}.
+	 * 
+	 * @param expression
+	 *                The expression to be checked.
+	 * 
+	 */
+	@Check
+	public final void checkQuantifiedExpression(final QuantifiedExpression expression) {
+		ASTNodeBottomUpVisitor<Boolean> visitor = new ASTNodeBottomUpVisitor<Boolean>() {
+
+			public void visit(final Annotation annotation) {
+				setReturnValue(true);
+			}
+		};
+		// if the quantifiedExpression is not in an Annotation
+		if (visitor.apply((ASTNode) expression.eContainer()) == null) {
+			error("QuantifiedExpression may only be used in Annotations.", expression, null, -1);
+		}
+
+	}
+
+	/**
+	 * Checks if the {@link Assignment} is used correctly. If the assignment is in a {@link FunctionDeclaration}, it
+	 * will be checked if it doesn't change any parameters of the function.
+	 * 
+	 * @param assignment
+	 *                The assignment to be checked.
+	 */
+	@Check
+	public final void checkFunctionParametersNotModified(final Assignment assignment) {
+		ASTNodeBottomUpVisitor<FunctionDeclaration> visitor = new ASTNodeBottomUpVisitor<FunctionDeclaration>() {
+
+			public void visit(final FunctionDeclaration functionDeclaration) {
+				setReturnValue(functionDeclaration);
+			}
+		};
+		FunctionDeclaration functionDeclaration = visitor.apply(assignment);
+		// if the assignment is in a function
+		if (functionDeclaration != null) {
+
+			for (int i = 0; i < functionDeclaration.getParameters().size(); i++) {
+				if (functionDeclaration.getParameters().get(i).getName()
+				                .equals(assignment.getVariable().getVariable().getName())) {
+					error("Paramters of a function may not be changed.", assignment, null, -1);
+				}
+			}
+		}
 	}
 
 	/**

@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 
@@ -52,6 +53,17 @@ public final class TransformProgramTest {
 		return p;
 	}
 
+	private void testTransformProgram(final String program, final String expected) {
+		this.testTransformProgram(program, this.getExpression(expected));
+	}
+
+	private void testTransformProgram(final String program, final Expression expected) {
+		final Program p = this.getProgram(program);
+		p.accept(new ImplicitInitialValueInserter());
+		final Expression actual = this.transformer.transformProgram(p);
+		TransformProgramTest.assertASTNodeEqual(expected, actual);
+	}
+
 	/**
 	 * The {@link FormulaGenerator} implementation to test.
 	 */
@@ -81,13 +93,43 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void assignmentRule() {
-		Program p = this.getProgram("Integer x := 1\n_assert x = 1\n");
-		Expression result = this.transformer.transformProgram(p);
-		assertASTNodeEqual(this.getExpression("1 = 1 && true"), result);
+		Expression expected;
 
-		p = this.getProgram("Integer x := 1\nx := 0\n_assert x = 1\n");
-		result = this.transformer.transformProgram(p);
-		assertASTNodeEqual(this.getExpression("0 = 1 && true"), result);
+		this.testTransformProgram("Integer x := 1\n_assert x = 1\n", "1 = 1 && true");
+
+		this.testTransformProgram("Integer x := 1\nx := 0\n_assert x = 1\n", "0 = 1 && true");
+
+		expected = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
+		                                this.getExpression("false = false && true")),
+		                this.getExpression("false = false && true"));
+		this.testTransformProgram(
+		                "function Boolean f() {\nBoolean x\n_assert x = false\nreturn x\n}\nBoolean x\n_assert x = false\n",
+		                expected);
+
+		expected = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
+		                                this.getExpression("0 = 0 && true")),
+		                this.getExpression("0 = 0 && true"));
+		this.testTransformProgram(
+		                "function Integer f() {\nInteger x\n_assert x = 0\nreturn x\n}\nInteger x\n_assert x = 0\n",
+		                expected);
+
+		expected = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
+		                                this.getExpression("{ } = { } && true")),
+		                this.getExpression("{ } = { } && true"));
+		this.testTransformProgram(
+		                "function Boolean[] f() {\nBoolean[] x\n_assert x = { }\nreturn x\n}\nBoolean[] x\n_assert x = { }\n",
+		                expected);
+
+		expected = AstNodeCreatorHelper.createConjunction(
+		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
+		                                this.getExpression("{ } = { } && true")),
+		                this.getExpression("{ } = { } && true"));
+		this.testTransformProgram(
+		                "function Integer[] f() {\nInteger[] x\n_assert x = { }\nreturn x\n}\nInteger[] x\n_assert x = { }\n",
+		                expected);
 	}
 
 	/**

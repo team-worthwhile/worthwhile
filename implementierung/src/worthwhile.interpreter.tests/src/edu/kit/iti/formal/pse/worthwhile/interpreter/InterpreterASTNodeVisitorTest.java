@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterExecutionEventListenerTest.TestExecutionListener;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;

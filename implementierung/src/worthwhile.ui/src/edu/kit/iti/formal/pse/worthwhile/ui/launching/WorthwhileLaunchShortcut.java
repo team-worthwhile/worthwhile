@@ -13,6 +13,7 @@ import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.ILaunchShortcut;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IEditorPart;
 
 /**
@@ -25,8 +26,14 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 
 	@Override
 	public final void launch(final ISelection selection, final String mode) {
-		// TODO Auto-generated method stub
-		System.out.println("launching selection");
+		if (selection instanceof IStructuredSelection) {
+			IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+			if (structuredSelection.size() == 1) {
+				if (structuredSelection.getFirstElement() instanceof IFile) {
+					launchFile((IFile) structuredSelection.getFirstElement(), mode);
+				}
+			}
+		}
 	}
 
 	@Override

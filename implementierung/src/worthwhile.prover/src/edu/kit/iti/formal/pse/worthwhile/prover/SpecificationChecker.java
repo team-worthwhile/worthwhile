@@ -174,7 +174,8 @@ public class SpecificationChecker {
 		// create the environment => expression implication
 		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression,
 		                AstNodeCloneHelper.clone(formula));
-		return getValidity(environmentImpliesFormula);
+		return this.checkProgram(AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper
+		                .createAssertion(environmentImpliesFormula)));
 	}
 
 	/**

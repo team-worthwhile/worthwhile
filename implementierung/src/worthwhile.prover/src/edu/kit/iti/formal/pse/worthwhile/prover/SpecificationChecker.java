@@ -20,6 +20,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 
 /**
@@ -245,8 +246,13 @@ public class SpecificationChecker {
 	public final Validity checkProgram(final Program program) {
 		// TODO apply Worthwhile specific runtime assertions
 
+		// we don't want to pollute the o
+		Program modifiedProgram = AstNodeCloneHelper.clone(program);
+		// add assertions to check that the divisors are not zero
+		DivisionByZeroAssertionInserter divisionByZeroAssertionInserter = new DivisionByZeroAssertionInserter();
+		modifiedProgram.accept(divisionByZeroAssertionInserter);
 		// generate formula from program
-		Expression formula = this.transformer.transformProgram(program);
+		Expression formula = this.transformer.transformProgram(modifiedProgram);
 		// get the validity from the prover
 		Validity validity = this.getValidity(formula);
 		// fire the event listener

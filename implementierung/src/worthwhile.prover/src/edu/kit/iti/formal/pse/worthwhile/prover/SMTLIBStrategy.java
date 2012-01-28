@@ -1,13 +1,16 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.math.BigInteger;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
@@ -38,9 +41,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
-import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
  * @author Leon Handreke, fabian
@@ -154,33 +156,50 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	}
 
 	@Override
-	public void visit(final ArrayLiteral arrayLiteral) {
-		String literalString = "";
-		ArrayType arrayType = (ArrayType) (new WorthwhileTypesystem()).typeof(arrayLiteral);
-
-		if (arrayType.getBaseType() != null) {
-			literalString = (new ASTNodeReturnVisitor<String>() {
-
-				@Override
-				public void visit(BooleanType node) {
-					this.setReturnValue("boolean_array");
-				}
-
-				@Override
-				public void visit(IntegerType node) {
-					this.setReturnValue("integer_array");
-				}
-
-			}).apply(arrayType.getBaseType());
+	public void visit(final ArrayFunction arrayFunction) {
+		// get the Array type as a String
+		// FIXME: get the type from the typesystem and also support booleans
+		//ArrayType arrayType = (ArrayType) (new WorthwhileTypesystem()).typeof(arrayFunction);
+		//arrayType.getBaseType().accept(this);
+		//String typeString = this.formulaCompileStack.pop();
+		String typeString = "Int";
+		// TODO: Store this in a prover-wide constant
+		String defaultValueString = "0";
+		/*if (arrayType.getBaseType() instanceof BooleanType) {
+			defaultValueString = "false";
+		} else if (arrayType.getBaseType() instanceof IntegerType) {
+			defaultValueString = "0";
+		}*/
+		// build the inner array from either the default value or the chainedFunction
+		String innerArrayString = "((as const (Array Int " + typeString + ")) " + defaultValueString + ")";
+		if (arrayFunction.getChainedFunction() != null) {
+			arrayFunction.getChainedFunction().accept(this);
+			innerArrayString = this.formulaCompileStack.pop();
 		}
 
-		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
-			arrayLiteral.getValues().get(i).accept(this);
-			String valueAtIndex = this.formulaCompileStack.pop();
-			literalString = "(store " + literalString + " " + Integer.toString(i) + " " + valueAtIndex
+		String arrayFunctionString = innerArrayString;
+		for (Entry<Expression, Expression> entry : arrayFunction.getValues()) {
+			entry.getKey().accept(this);
+			String keyString = this.formulaCompileStack.pop();
+			entry.getValue().accept(this);
+			String valueString = this.formulaCompileStack.pop();
+			arrayFunctionString = "(store " + arrayFunctionString + " " + keyString + " " + valueString
 			                + ")";
 		}
-		this.formulaCompileStack.push(literalString);
+		this.formulaCompileStack.push(arrayFunctionString);
+	}
+
+	@Override
+	public void visit(final ArrayLiteral arrayLiteral) {
+		ArrayFunction arrayFunction = AstFactory.init().createArrayFunction();
+		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
+			// create a new entry in the function mapping an IntegerLiteral to an Expression
+			BigInteger iBigInteger = new BigInteger(Integer.toString(i));
+			IntegerLiteral iIntegerLiteral = AstNodeCreatorHelper.createIntegerLiteral(iBigInteger);
+			arrayFunction.getValues().put(iIntegerLiteral, arrayLiteral.getValues().get(i));
+		}
+		// visit the newly-created function instead
+		arrayFunction.accept(this);
 	}
 
 	@Override

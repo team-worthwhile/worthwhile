@@ -487,6 +487,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @param value
 	 *                The value to set.
 	 * @throws DebugException
+	 *                 when there is an error setting the variable value.
 	 */
 	public final void setVariableValue(final IVariable variable, final Value value) throws DebugException {
 		// Find the declaration of this variable

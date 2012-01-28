@@ -70,7 +70,7 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 		return (new GetVariablesVisitor()).apply(this.value).length > 0;
 	}
 
-	private final IVariable createSubVariable(int index) {
+	private IVariable createSubVariable(final int index) {
 		// return new WorthwhileVariable(this.getDebugTarget(), )
 		// TODO implement
 		return null;

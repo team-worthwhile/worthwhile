@@ -20,6 +20,21 @@ public class WorthwhileHighlightingConfiguration extends DefaultHighlightingConf
 	 * The hightlighting ID for Boolean literals.
 	 */
 	public static final String BOOL_ID = "edu.kit.iti.formal.pse.worthwhile.ui.highlighting.bool";
+	
+	/**
+	 * The red part of the RGB value for Boolean literals.
+	 */
+	private static final int BOOL_R = 0;
+	
+	/**
+	 * The green part of the RGB value for Boolean literals.
+	 */
+	private static final int BOOL_G = 85;
+	
+	/**
+	 * The blue part of the RGB value for Boolean literals.
+	 */
+	private static final int BOOL_B = 127;
 
 	@Override
 	public final void configure(final IHighlightingConfigurationAcceptor acceptor) {
@@ -34,7 +49,7 @@ public class WorthwhileHighlightingConfiguration extends DefaultHighlightingConf
 	 */
 	public final TextStyle booleanTextStyle() {
 		TextStyle textStyle = new TextStyle();
-		textStyle.setColor(new RGB(0, 85, 127));
+		textStyle.setColor(new RGB(BOOL_R, BOOL_G, BOOL_B));
 		textStyle.setStyle(SWT.BOLD);
 		return textStyle;
 	}

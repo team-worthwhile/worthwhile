@@ -6,11 +6,13 @@ package edu.kit.iti.formal.pse.worthwhile.ui;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 
 import edu.kit.iti.formal.pse.worthwhile.ui.autoedit.WorthwhileAutoEditStrategyProvider;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
+import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileFoldingRegionProvider;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileHighlightingConfiguration;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileTokenToAttributeIdMapper;
 
@@ -53,7 +55,7 @@ public class WorthwhileUiModule extends edu.kit.iti.formal.pse.worthwhile.ui.Abs
 	 * 
 	 * @return A highlighting configuration.
 	 */
-        public final Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+	public final Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return WorthwhileHighlightingConfiguration.class;
 	}
 
@@ -64,6 +66,15 @@ public class WorthwhileUiModule extends edu.kit.iti.formal.pse.worthwhile.ui.Abs
 	 */
 	public final Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return WorthwhileTokenToAttributeIdMapper.class;
+	}
+
+	/**
+	 * Provides a folding region provider.
+	 * 
+	 * @return A folding region provider.
+	 */
+	public final Class<? extends IFoldingRegionProvider> bindIFoldingRegionprovider() {
+		return WorthwhileFoldingRegionProvider.class;
 	}
 
 }

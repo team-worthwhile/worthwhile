@@ -27,15 +27,24 @@ public abstract class ASTNodeReturnVisitor<R> extends HierarchialASTNodeVisitor 
 	}
 
 	/**
-	 * Applies this visitor to the specified value and returns the return value.
+	 * Gets the return value.
 	 * 
-	 * @param value
-	 *                The value to visit.
+	 * @return The return value.
+	 */
+	protected final R getReturnValue() {
+		return this.returnValue;
+	}
+
+	/**
+	 * Applies this visitor to the specified node and returns the return value.
+	 * 
+	 * @param node
+	 *                The node to visit.
 	 * @return The return value as computed by this visitor.
 	 */
 	public final R apply(final ASTNode node) {
 		node.accept(this);
 		return this.returnValue;
 	}
-	
+
 }

@@ -11,7 +11,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IWorkbenchPart;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
-import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileLineBreakpoint;
+import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
 
 public class WorthwhileLineBreakpointAdapter implements IToggleBreakpointsTarget {

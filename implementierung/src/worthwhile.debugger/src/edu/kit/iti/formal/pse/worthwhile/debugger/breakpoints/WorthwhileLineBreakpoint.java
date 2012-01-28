@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.debugger.model;
+package edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;

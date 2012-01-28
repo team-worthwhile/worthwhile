@@ -8,7 +8,7 @@ import org.eclipse.jface.text.source.IVerticalRulerInfo;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
 
-import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileLineBreakpoint;
+import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
 
 /**
  * A ruler action to open the properties page of a breakpoint.

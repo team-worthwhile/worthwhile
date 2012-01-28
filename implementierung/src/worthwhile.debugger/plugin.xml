@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.debug.core.breakpoints">
       <breakpoint
-            class="edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileLineBreakpoint"
+            class="edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint"
             id="edu.kit.iti.formal.pse.worthwhile.debugger.lineBreakpoint"
             markerType="edu.kit.iti.formal.pse.worthwhile.debugger.lineBreakpoint.marker">
       </breakpoint>

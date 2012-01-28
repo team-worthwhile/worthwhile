@@ -12,6 +12,7 @@ Require-Bundle: org.eclipse.debug.core,
  edu.kit.iti.formal.pse.worthwhile.expressions;bundle-version="0.1.0",
  edu.kit.iti.formal.pse.worthwhile.expressions.ui;bundle-version="0.1.0"
 Export-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
+ edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints,
  edu.kit.iti.formal.pse.worthwhile.debugger.launching,
  edu.kit.iti.formal.pse.worthwhile.debugger.model
 Import-Package: edu.kit.iti.formal.pse.worthwhile.debugger

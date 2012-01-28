@@ -28,6 +28,7 @@ import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.expressions.scoping.IWorthwhileContextProvider;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;

@@ -20,6 +20,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
 public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 
 	/**
+	 * The variable this value belongs to.
+	 */
+	private final IVariable variable;
+
+	/**
 	 * The value represented by this object.
 	 */
 	private final Value value;
@@ -29,12 +34,24 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 	 * 
 	 * @param debugTarget
 	 *                The debug target this object belongs to
+	 * @param variable
+	 *                The variable this value belongs to.
 	 * @param value
 	 *                The value represented by this object.
 	 */
-	public WorthwhileValue(final WorthwhileDebugTarget debugTarget, final Value value) {
+	public WorthwhileValue(final WorthwhileDebugTarget debugTarget, final IVariable variable, final Value value) {
 		super(debugTarget);
+		this.variable = variable;
 		this.value = value;
+	}
+
+	/**
+	 * Returns the variable this value belongs to.
+	 * 
+	 * @return the variable this value belongs to.
+	 */
+	public final IVariable getVariable() {
+		return this.variable;
 	}
 
 	/**
@@ -71,10 +88,28 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 		return (new GetVariablesVisitor()).apply(this.value).length > 0;
 	}
 
-	private IVariable createSubVariable(final int index) {
-		// return new WorthwhileVariable(this.getDebugTarget(), )
-		// TODO implement
-		return null;
+	/**
+	 * Creates a new array entry.
+	 * 
+	 * @param index
+	 *                The index of the array entry.
+	 * @param value
+	 *                The value of the array entry.
+	 * @return A new array entry with the specified index and value.
+	 */
+	private IVariable createArrayEntry(final int index, final WorthwhileValue value) {
+		return new WorthwhileArrayEntry(this.getDebugTarget(), this.variable, index, value);
+	}
+
+	/**
+	 * Creates a new subvalue of this value.
+	 * 
+	 * @param value
+	 *                The value represented by the subvalue
+	 * @return A new subvalue that represents the specified value.
+	 */
+	private WorthwhileValue createSubValue(final Value value) {
+		return new WorthwhileValue(getDebugTarget(), this.getVariable(), value);
 	}
 
 	/**
@@ -89,8 +124,9 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
 			IVariable[] result = new IVariable[value.getSubValues().length];
 
+			// Create an array entry for each of the sub values.
 			for (int i = 0; i < value.getSubValues().length; i++) {
-				result[i++] = createSubVariable(i);
+				result[i] = createArrayEntry(i, createSubValue(value.getSubValues()[i]));
 			}
 
 			this.setReturnValue(result);

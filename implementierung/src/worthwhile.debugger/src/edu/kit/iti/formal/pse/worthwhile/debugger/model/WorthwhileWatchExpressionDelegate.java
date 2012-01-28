@@ -63,7 +63,7 @@ public class WorthwhileWatchExpressionDelegate implements IWatchExpressionDelega
 
 		@Override
 		public IValue getValue() {
-			return new WorthwhileValue(this.getDebugTarget(), this.value);
+			return new WorthwhileValue(this.getDebugTarget(), null, this.value);
 		}
 
 		@Override

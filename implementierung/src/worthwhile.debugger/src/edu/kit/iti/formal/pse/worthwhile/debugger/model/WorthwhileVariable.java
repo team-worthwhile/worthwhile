@@ -36,7 +36,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 	@Override
 	public final void setValue(final String expression) throws DebugException {
 		Value value = this.getDebugTarget().evaluateExpression(expression);
-		this.setValue(new WorthwhileValue(this.getDebugTarget(), value));
+		this.setValue(new WorthwhileValue(this.getDebugTarget(), this, value));
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 	@Override
 	public final boolean verifyValue(final String expression) throws DebugException {
 		Value value = this.getDebugTarget().evaluateExpression(expression);
-		return this.verifyValue(new WorthwhileValue(this.getDebugTarget(), value));
+		return this.verifyValue(new WorthwhileValue(this.getDebugTarget(), this, value));
 	}
 
 	@Override

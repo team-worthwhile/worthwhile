@@ -476,7 +476,8 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @return The value of the variable.
 	 */
 	public final IValue getVariableValue(final String name) {
-		return new WorthwhileValue(this, this.interpreterRunner.getInterpreter().getSymbol(name));
+		return new WorthwhileValue(this, new WorthwhileVariable(this, name), this.interpreterRunner
+		                .getInterpreter().getSymbol(name));
 	}
 
 	/**

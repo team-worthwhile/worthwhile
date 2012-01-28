@@ -76,9 +76,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * The specification checker.
 	 */
 	private SpecificationChecker specificationChecker;
-	
+
 	/**
-	 *  The execution event handlers. 
+	 * The execution event handlers.
 	 */
 	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
@@ -131,7 +131,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * The result stack.
 	 */
 	private Stack<Value> resultStack = new Stack<Value>();
-	
+
 	/**
 	 * Indicates whether the function handled by this visitor has returned
 	 */
@@ -664,40 +664,43 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(FunctionCall functionCall) {
 		this.executingVisitor = new InterpreterASTNodeVisitor();
 		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
-		FunctionDeclaration functionDeclaration = functionCall.getFunction();
 		EList<Expression> actuals = functionCall.getActuals();
 		this.executingVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
-			this.executingVisitor.setSymbol(functionDeclaration.getParameters().get(i), this.resultStack.pop());
+			this.executingVisitor.setSymbol(functionCall.getFunction().getParameters().get(i),
+			                this.resultStack.pop());
 		}
+		functionCall.getFunction().accept(this);
+
+		this.resultStack.push(this.executingVisitor.getReturnValue());
+
+		// get execution control back from the function visitor that just returned
+		this.executingVisitor = null;
+
+		this.expressionEvaluated(functionCall);
+
+	}
+
+	/**
+	 * handles preconditions, body and postconditions of a function.
+	 * 
+	 * @param functionDeclaration
+	 *                the FunctionDeclaration to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.FunctionDeclaration)
+	 */
+	public void visit(FunctionDeclaration functionDeclaration) {
 		for (Precondition precondition : functionDeclaration.getPreconditions()) {
 			precondition.accept(this);
 		}
 
 		functionDeclaration.getBody().accept(this.executingVisitor);
-		for (Postcondition postcondition : functionCall.getFunction().getPostconditions()) {
+
+		for (Postcondition postcondition : functionDeclaration.getPostconditions()) {
 			postcondition.accept(this);
 		}
-		
-// TODO		this.resultStack.push(this.executingVisitor.getReturnValue()); 
-		
-		// get execution control back from the function visitor that just returned
-		this.executingVisitor = null;
-		
-		this.expressionEvaluated(functionCall);
-		
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
-	 * .worthwhile.model.ast.FunctionDeclaration)
-	 */
-	public void visit(FunctionDeclaration functionDeclaration) {
-		// does this even have to do anything?
 	}
 
 	/**
@@ -958,8 +961,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		if (this.specificationChecker == null) {
 			throw new NullPointerException("no SpecificationChecker");
 		}
-		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression,
-		                this.getAllSymbols());
+		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
 			throw new StatementException(new UnknownValidityInterpreterError());
 		} else {

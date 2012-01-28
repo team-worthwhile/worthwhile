@@ -176,6 +176,7 @@ public final class AstNodeCreatorHelper {
 	                final Expression condition, final Expression expression) {
 		final ForAllQuantifier forAllQuantifier = AstNodeCreatorHelper.factory.createForAllQuantifier();
 		forAllQuantifier.setParameter(parameter);
+		forAllQuantifier.setCondition(condition);
 		forAllQuantifier.setExpression(expression);
 		return forAllQuantifier;
 	}

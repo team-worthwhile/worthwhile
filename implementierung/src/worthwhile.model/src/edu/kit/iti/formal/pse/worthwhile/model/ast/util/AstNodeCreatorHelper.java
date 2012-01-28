@@ -2,7 +2,6 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import java.math.BigInteger;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;

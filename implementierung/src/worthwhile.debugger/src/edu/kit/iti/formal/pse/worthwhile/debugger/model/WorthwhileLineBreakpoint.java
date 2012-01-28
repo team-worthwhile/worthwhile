@@ -5,6 +5,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.LineBreakpoint;
 
@@ -18,6 +19,11 @@ import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstant
  * 
  */
 public class WorthwhileLineBreakpoint extends LineBreakpoint {
+
+	/**
+	 * The attribute identifier for the condition on which this breakpoint stops.
+	 */
+	public static final String CONDITION = "edu.kit.iti.formal.pse.worthwhile.debugger.model.lineBreakpoint.condition";
 
 	/**
 	 * Default constructor is required for the breakpoint manager to re-create persisted breakpoints. After
@@ -59,6 +65,34 @@ public class WorthwhileLineBreakpoint extends LineBreakpoint {
 			}
 		};
 		run(getMarkerRule(resource), runnable);
+	}
+
+	/**
+	 * Sets the condition of this breakpoint.
+	 * 
+	 * @param condition
+	 *                The condition of this breakpoint
+	 * @throws DebugException
+	 *                 if the condition cannot be retrieved.
+	 */
+	public final void setCondition(final String condition) throws DebugException {
+		IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+			@Override
+			public void run(final IProgressMonitor monitor) throws CoreException {
+				IMarker marker = getMarker();
+				marker.setAttribute(WorthwhileLineBreakpoint.CONDITION, condition);
+			}
+		};
+		run(getMarkerRule(), runnable);
+	}
+
+	/**
+	 * Returns the condition of this breakpoint.
+	 * 
+	 * @return the condition of this breakpoint.
+	 */
+	public final String getCondition() {
+		return this.getMarker().getAttribute(CONDITION, "");
 	}
 
 	@Override

@@ -247,10 +247,11 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final void breakpointAdded(final IBreakpoint breakpoint) {
-		if (breakpoint instanceof LineBreakpoint) {
+		if (breakpoint instanceof WorthwhileLineBreakpoint) {
 			try {
-				this.eventListener.addBreakpoint(((LineBreakpoint) breakpoint).getLineNumber(),
-				                breakpoint);
+				this.eventListener.addBreakpoint(
+				                ((WorthwhileLineBreakpoint) breakpoint).getLineNumber(),
+				                (WorthwhileLineBreakpoint) breakpoint);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -485,19 +486,19 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                The variable whose value to set.
 	 * @param value
 	 *                The value to set.
-	 * @throws DebugException 
+	 * @throws DebugException
 	 */
 	public final void setVariableValue(final IVariable variable, final Value value) throws DebugException {
 		// Find the declaration of this variable
 		VariableDeclaration vardec = null;
-		
+
 		for (VariableDeclaration v : this.interpreterRunner.getInterpreter().getAllSymbols().keySet()) {
 			if (v.getName().equals(variable.getName())) {
 				vardec = v;
 				break;
 			}
 		}
-		
+
 		if (vardec != null) {
 			this.interpreterRunner.getInterpreter().setSymbol(vardec, value);
 		}

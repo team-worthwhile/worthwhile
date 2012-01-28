@@ -39,17 +39,17 @@ public class WorthwhileOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	 */
 	protected final void _createChildren(final DocumentRootNode parentNode, final Program program) {
 		createEStructuralFeatureNode(parentNode, program, AstPackage.eINSTANCE.getProgram_Axioms(),
-		                imageHelper.getImage(imageHelper.getDefaultImage()), "Axioms",
-		                program.getAxioms() == null || program.getAxioms().size() == 0);
+		                imageHelper.getImage("list.gif"), "Axioms", program.getAxioms() == null
+		                                || program.getAxioms().size() == 0);
 
 		createEStructuralFeatureNode(parentNode, program,
 		                AstPackage.eINSTANCE.getProgram_FunctionDeclarations(),
-		                imageHelper.getImage(imageHelper.getDefaultImage()), "Function declarations",
+		                imageHelper.getImage("list.gif"), "Function declarations",
 		                program.getFunctionDeclarations() == null
 		                                || program.getFunctionDeclarations().size() == 0);
 
 		createEStructuralFeatureNode(parentNode, program, AstPackage.eINSTANCE.getProgram_MainBlock(),
-		                imageHelper.getImage(imageHelper.getDefaultImage()), "Main block", true);
+		                imageHelper.getImage("generic_element.gif"), "Main block", true);
 	}
 
 	/**
@@ -63,16 +63,16 @@ public class WorthwhileOutlineTreeProvider extends DefaultOutlineTreeProvider {
 	protected final void _createChildren(final IOutlineNode parentNode, final FunctionDeclaration funcdec) {
 		createEStructuralFeatureNode(parentNode, funcdec,
 		                AstPackage.eINSTANCE.getFunctionDeclaration_Preconditions(),
-		                imageHelper.getImage(imageHelper.getDefaultImage()), "Preconditions",
+		                imageHelper.getImage("list.gif"), "Preconditions",
 		                funcdec.getPreconditions() == null || funcdec.getPreconditions().size() == 0);
 
 		createEStructuralFeatureNode(parentNode, funcdec,
 		                AstPackage.eINSTANCE.getFunctionDeclaration_Postconditions(),
-		                imageHelper.getImage(imageHelper.getDefaultImage()), "Postconditions",
+		                imageHelper.getImage("list.gif"), "Postconditions",
 		                funcdec.getPostconditions() == null || funcdec.getPostconditions().size() == 0);
 
 		createEStructuralFeatureNode(parentNode, funcdec, AstPackage.eINSTANCE.getFunctionDeclaration_Body(),
-		                imageHelper.getImage(imageHelper.getDefaultImage()), "Body", true);
+		                imageHelper.getImage("generic_element.gif"), "Body", true);
 	}
 
 	/**

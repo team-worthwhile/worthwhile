@@ -29,7 +29,7 @@ public class WorthwhileQuickfixProvider extends DefaultQuickfixProvider {
 	 */
 	@Fix(WorthwhileSyntaxErrorMessageProvider.NO_NEWLINE_AT_EOF)
 	public final void addNewlineAtEOF(final Issue issue, final IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Add newline", "Add a newline character.", "addnewline.png",
+		acceptor.accept(issue, "Add newline", "Add a newline character.", "correction_change.png",
 		                new IModification() {
 			                public void apply(final IModificationContext context)
 			                                throws BadLocationException {
@@ -51,14 +51,14 @@ public class WorthwhileQuickfixProvider extends DefaultQuickfixProvider {
 	@Fix(WorthwhileSyntaxErrorMessageProvider.NO_FUNCTION_RETURN_TYPE)
 	public final void addFunctionReturnType(final Issue issue, final IssueResolutionAcceptor acceptor) {
 		acceptor.accept(issue, "Add return type 'Integer'", "Add a return type of 'Integer' to the function.",
-		                "add.png", new InsertStringModification(issue.getOffset(), "Integer"));
+		                "add_correction.png", new InsertStringModification(issue.getOffset(), "Integer"));
 		acceptor.accept(issue, "Add return type 'Boolean'", "Add a return type of 'Boolean' to the function.",
-		                "add.png", new InsertStringModification(issue.getOffset(), "Boolean"));
+		                "add_correction.png", new InsertStringModification(issue.getOffset(), "Boolean"));
 		acceptor.accept(issue, "Add return type 'Integer[]'",
-		                "Add a return type of 'Integer[]' to the function.", "add.png",
+		                "Add a return type of 'Integer[]' to the function.", "add_correction.png",
 		                new InsertStringModification(issue.getOffset(), "Integer[]"));
 		acceptor.accept(issue, "Add return type 'Boolean[]'",
-		                "Add a return type of 'Boolean[]' to the function.", "add.png",
+		                "Add a return type of 'Boolean[]' to the function.", "add_correction.png",
 		                new InsertStringModification(issue.getOffset(), "Boolean[]"));
 	}
 

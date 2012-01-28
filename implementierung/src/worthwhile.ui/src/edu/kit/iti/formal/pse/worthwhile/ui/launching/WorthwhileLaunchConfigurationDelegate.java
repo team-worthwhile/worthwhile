@@ -23,6 +23,7 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  * This delegate is responsible for launching a Worthwhile program from a given launch configuration.
@@ -62,7 +63,7 @@ public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 		// Create and run the interpreter.
 		Program program = (Program) resource.getContents().get(0);
-		final Interpreter interpreter = new Interpreter(program);
+		final Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
 
 		IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
 		launch.addDebugTarget(target);

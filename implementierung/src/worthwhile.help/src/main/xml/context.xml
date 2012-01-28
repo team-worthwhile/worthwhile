@@ -8,19 +8,19 @@
 	</context>
 	<context id="keyword_Assertion" title="Assertions">
 		<topic href="src/main/html/assert.html" label="Assertions"/>
-		<description></description>
+		<description>With assertions a formula can be defined, which then is proven.</description>
 	</context>
 	<context id="keyword_Assignment" title="Assignments">
 		<topic href="src/main/html/assignment.html" label="Assignments"/>
-		<description>Assignments alter the value of a variable.</description>
+		<description>With assignments the value of a variable can be altered.</description>
 	</context>
 	<context id="keyword_Assumption" title="Assumptions">
 		<topic href="src/main/html/assume.html" label="Assumptions"/>
-		<description></description>
+		<description>With an assumption a formula can be provided which is taken for granted by the prover.</description>
 	</context>
 	<context id="keyword_Axiom" title="Axioms">
 		<topic href="src/main/html/axiom.html" label="Axioms"/>
-		<description></description>
+		<description>To tell the prover additional information about the program, axioms are used.</description>
 	</context>
 	<context id="keyword_Boolean" title="Booleans">
 		<topic href="src/main/html/boolean.html" label="Booleans"/>
@@ -28,19 +28,19 @@
 	</context>
 	<context id="keyword_Comment" title="Comments">
 		<topic href="src/main/html/comment.html" label="Comments"/>
-		<description>Untreated text to describe the code.</description>
+		<description>Text to describe the code, which is unnoticed by the program.</description>
 	</context>
 	<context id="keyword_Condition" title="Conditions">
 		<topic href="src/main/html/condition.html" label="Conditions"/>
-		<description>Conditions </description>
+		<description>With conditions the program flow can be splitted up.</description>
 	</context>
 	<context id="keyword_Expression" title="Expressions">
 		<topic href="src/main/html/expression.html" label="Expressions"/>
-		<description></description>
+		<description>An Expression is a combination of literals, variables, array elements, operators, and functions.</description>
 	</context>
 	<context id="keyword_Function" title="Functions">
 		<topic href="src/main/html/function.html" label="Functions"/>
-		<description>The function declarations and usage.</description>
+		<description>To swap out and periodic and independent code, functions can be declared.</description>
 	</context>
 	<context id="keyword_Identifier" title="Identifiers">
 		<topic href="src/main/html/identifier.html" label="Identifiers"/>
@@ -52,11 +52,11 @@
 	</context>
 	<context id="keyword_Invariant" title="Invariants">
 		<topic href="src/main/html/invariant.html" label="Invariants"/>
-		<description></description>
+		<description>To tell the prover the invariant of a loop the _invariant statement is used.</description>
 	</context>
 	<context id="keyword_Loop" title="Loops">
 		<topic href="src/main/html/loop.html" label="Loops"/>
-		<description>The while loop to repeatedly execute statements.</description>
+		<description>Loops are used to repeatedly execute statements.</description>
 	</context>
 	<context id="keyword_Operator" title="Operators">
 		<topic href="src/main/html/operator.html" label="Operators"/>
@@ -64,11 +64,11 @@
 	</context>
 	<context id="keyword_Postcondition" title="Postconditions">
 		<topic href="src/main/html/ensures.html" label="Postconditions"/>
-		<description></description>
+		<description>The _ensures statement provides a postcondition for the function which is checked by the prover.</description>
 	</context>
 	<context id="keyword_Precondition" title="Preconditions">
 		<topic href="src/main/html/requires.html" label="Preconditions"/>
-		<description></description>
+		<description>The _requires statement provides a precondition for the function which is checked by the prover.</description>
 	</context>
 	<context id="keyword_Program" title="Programs">
 		<topic href="src/main/html/program.html" label="Programs"/>
@@ -76,11 +76,11 @@
 	</context>
 	<context id="keyword_Quantified_Expression" title="Quantified Expressions">
 		<topic href="src/main/html/quantifiedexpression.html" label="Quantified_Expressions"/>
-		<description></description>
+		<description>Quantified expressions are expressions which allow the use of quantors.</description>
 	</context>
 	<context id="keyword_Return" title="Returns">
 		<topic href="src/main/html/return.html" label="Returns"/>
-		<description>To return a value from a function.</description>
+		<description>To return from a function with a specified value, the return statement is used.</description>
 	</context>
 	<context id="keyword_Statement" title="Statements">
 		<topic href="src/main/html/statement.html" label="Statements"/>
@@ -88,6 +88,6 @@
 	</context>
 	<context id="keyword_Variable_Declaration" title="Variable Declarations">
 		<topic href="src/main/html/variabledeclaration.html" label="Variable_Declarations"/>
-		<description>The declaration of variables.</description>
+		<description>Variable declarations are used to introduce variables to the system.</description>
 	</context>
 </contexts>

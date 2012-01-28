@@ -166,35 +166,16 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 			// Check if there is a breakpoint in this statement's line
 			int lineNumber = NodeHelper.getLine(statement);
-			if (!this.mode.equals(DebugMode.RUN) && this.lineBreakpoints.containsKey(lineNumber)) {
-				WorthwhileLineBreakpoint breakpoint = this.lineBreakpoints.get(lineNumber);
-				// check breakpoint condition
-				String condition = breakpoint.getCondition();
-
-				if ("".equals(condition)) {
-					// Notify the debug target that a breakpoint has been hit
-					this.getDebugTarget().breakpointHit(breakpoint);
-
+			if (!this.mode.equals(DebugMode.RUN)) {
+				if (this.checkLineBreakpoint(lineNumber)) {
 					doSuspend = true;
 					suspendReason = DebugEvent.BREAKPOINT;
-				}
 
-				try {
-					Value result = this.getDebugTarget().evaluateExpression(condition);
-
-					if (result.equals(new BooleanValue(true))) {
-						// Notify the debug target that a breakpoint has been hit
-						this.getDebugTarget().breakpointHit(breakpoint);
-
-						doSuspend = true;
-						suspendReason = DebugEvent.BREAKPOINT;
-					}
-				} catch (DebugException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					// Notify the debug target that a breakpoint has been hit
+					this.getDebugTarget().breakpointHit(this.lineBreakpoints.get(lineNumber));
 				}
 			} else {
-				// Check if we want to suspend anyway
+				// Check if we want to suspend anyway, because of stepping mode or client request
 				if (this.mode.equals(DebugMode.STEP)) {
 					doSuspend = true;
 					suspendReason = DebugEvent.STEP_END;
@@ -293,6 +274,43 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			this.mode = DebugMode.RUN;
 			notifyAll();
 		}
+	}
+
+	/**
+	 * Checks if there is a breakpoint on the specified line (and if yes, whether the breakpoint's condition is
+	 * met).
+	 * 
+	 * @param lineNumber
+	 *                The line number to check for a breakpoint.
+	 * @return Whether there is a breakpoint on the specified line and if yes, whether the breakpoint's condition is
+	 *         met.
+	 */
+	private boolean checkLineBreakpoint(final int lineNumber) {
+		WorthwhileLineBreakpoint breakpoint = this.lineBreakpoints.get(lineNumber);
+
+		if (breakpoint == null) {
+			return false;
+		}
+
+		// check breakpoint condition
+		String condition = breakpoint.getCondition();
+
+		if (!("".equals(condition))) {
+			// Evaluate condition expression and check if the result is true.
+			try {
+				Value result = this.getDebugTarget().evaluateExpression(condition);
+
+				if (!result.equals(new BooleanValue(true))) {
+					return false;
+				}
+			} catch (DebugException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+		return true;
+
 	}
 
 	/**

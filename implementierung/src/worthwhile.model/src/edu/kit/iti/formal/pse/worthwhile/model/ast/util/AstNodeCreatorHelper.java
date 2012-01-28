@@ -109,7 +109,7 @@ public final class AstNodeCreatorHelper {
 	 * @return a <code>Conjunction</code> that has the given <code>left</code> and <code>right</code> operands
 	 */
 	public static Conjunction createConjunction(final Expression left, final Expression right) {
-		final Conjunction conjunction = AstNodeCreatorHelper.factory.createConjunction();
+		final Conjunction conjunction = AstNodeCreatorHelper.createConjunction();
 		conjunction.setLeft(left);
 		conjunction.setRight(right);
 		return conjunction;
@@ -120,7 +120,7 @@ public final class AstNodeCreatorHelper {
 	 * @return a {@link Conjunction} that does not have any operands set yet
 	 */
 	public static Conjunction createConjunction() {
-		return AstNodeCreatorHelper.createConjunction(null, null);
+		return AstNodeCreatorHelper.factory.createConjunction();
 	}
 
 	/**
@@ -147,7 +147,7 @@ public final class AstNodeCreatorHelper {
 	 * @return an <code>Implication</code> that has the given <code>left</code> and <code>right</code> operands
 	 */
 	public static Implication createImplication(final Expression left, final Expression right) {
-		final Implication implication = AstNodeCreatorHelper.factory.createImplication();
+		final Implication implication = AstNodeCreatorHelper.createImplication();
 		implication.setLeft(left);
 		implication.setRight(right);
 		return implication;
@@ -158,7 +158,7 @@ public final class AstNodeCreatorHelper {
 	 * @return an {@link Implication} that does not have any operands set yet
 	 */
 	public static Implication createImplication() {
-		return AstNodeCreatorHelper.createImplication(null, null);
+		return AstNodeCreatorHelper.factory.createImplication();
 	}
 
 	/**
@@ -174,10 +174,9 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static ForAllQuantifier createForAllQuantifier(final VariableDeclaration parameter,
 	                final Expression condition, final Expression expression) {
-		final ForAllQuantifier forAllQuantifier = AstNodeCreatorHelper.factory.createForAllQuantifier();
-		forAllQuantifier.setParameter(parameter);
+		final ForAllQuantifier forAllQuantifier = AstNodeCreatorHelper.createForAllQuantifier(parameter,
+		                expression);
 		forAllQuantifier.setCondition(condition);
-		forAllQuantifier.setExpression(expression);
 		return forAllQuantifier;
 	}
 
@@ -192,7 +191,10 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static ForAllQuantifier createForAllQuantifier(final VariableDeclaration parameter,
 	                final Expression expression) {
-		return AstNodeCreatorHelper.createForAllQuantifier(parameter, null, expression);
+		final ForAllQuantifier forAllQuantifier = AstNodeCreatorHelper.factory.createForAllQuantifier();
+		forAllQuantifier.setParameter(parameter);
+		forAllQuantifier.setExpression(expression);
+		return forAllQuantifier;
 	}
 
 	/**
@@ -220,10 +222,8 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static VariableDeclaration createVariableDeclaration(final Type type, final String name,
 	                final Expression initialValue) {
-		final VariableDeclaration variableDeclaration = AstNodeCreatorHelper.factory
-		                .createVariableDeclaration();
-		variableDeclaration.setType(type);
-		variableDeclaration.setName(name);
+		final VariableDeclaration variableDeclaration = AstNodeCreatorHelper.createVariableDeclaration(type,
+		                name);
 		variableDeclaration.setInitialValue(initialValue);
 		return variableDeclaration;
 	}
@@ -238,6 +238,10 @@ public final class AstNodeCreatorHelper {
 	 *         <code>name</code>
 	 */
 	public static VariableDeclaration createVariableDeclaration(final Type type, final String name) {
-		return AstNodeCreatorHelper.createVariableDeclaration(type, name, null);
+		final VariableDeclaration variableDeclaration = AstNodeCreatorHelper.factory
+		                .createVariableDeclaration();
+		variableDeclaration.setType(type);
+		variableDeclaration.setName(name);
+		return variableDeclaration;
 	}
 }

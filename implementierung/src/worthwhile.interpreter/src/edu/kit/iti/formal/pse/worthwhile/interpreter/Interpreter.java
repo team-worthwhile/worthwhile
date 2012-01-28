@@ -24,28 +24,6 @@ public class Interpreter {
 	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
 	/**
-	 * Gets the execution event handlers.
-	 *
-	 * @return the executionEventHandlers
-	 */
-	public Set<AbstractExecutionEventListener> getExecutionEventHandlers() {
-		// begin-user-code
-		return this.executionEventHandlers;
-		// end-user-code
-	}
-
-	/**
-	 * Sets the execution event handlers.
-	 *
-	 * @param executionEventHandlers the executionEventHandlers to set
-	 */
-	public void setExecutionEventHandlers(Set<AbstractExecutionEventListener> executionEventHandlers) {
-		// begin-user-code
-		this.executionEventHandlers = executionEventHandlers;
-		// end-user-code
-	}
-
-	/**
 	 * The {@link InterpreterASTNodeVisitor} that is executing the {@link program}, if any.
 	 */
 	private InterpreterASTNodeVisitor executingVisitor;
@@ -70,26 +48,12 @@ public class Interpreter {
 	private Program program;
 
 	/**
-	 * Gets the program.
-	 *
-	 * @return the program
+	 * @return the {@link Program} ran by this {@link Interpreter} instance.
 	 */
 	public Program getProgram() {
-		// begin-user-code
-		return this.program;
-		// end-user-code
+		return program;
 	}
 
-	/**
-	 * Sets the program.
-	 *
-	 * @param program the program to set
-	 */
-	public void setProgram(Program program) {
-		// begin-user-code
-		this.program = program;
-		// end-user-code
-	}
 
 	/**
 	 * Instantiates a new interpreter.

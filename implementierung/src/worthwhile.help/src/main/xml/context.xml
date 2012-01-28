@@ -3,69 +3,69 @@
 
 <contexts>
 	<context id="keyword_Array" title="Arrays">
-		<topic href="src/main/html/integer.html" label="Arrays"/>
+		<topic href="src/main/html/array.html" label="Arrays"/>
 	</context>
 	<context id="keyword_Assertion" title="Assertions">
-		<topic href="src/main/html/integer.html" label="Assertions"/>
+		<topic href="src/main/html/assert.html" label="Assertions"/>
 	</context>
 	<context id="keyword_Assignment" title="Assignments">
-		<topic href="src/main/html/integer.html" label="Assignments"/>
+		<topic href="src/main/html/assignment.html" label="Assignments"/>
 	</context>
 	<context id="keyword_Assumption" title="Assumptions">
-		<topic href="src/main/html/integer.html" label="Assumptions"/>
+		<topic href="src/main/html/assume.html" label="Assumptions"/>
 	</context>
 	<context id="keyword_Axiom" title="Axioms">
-		<topic href="src/main/html/integer.html" label="Axioms"/>
+		<topic href="src/main/html/axiom.html" label="Axioms"/>
 	</context>
 	<context id="keyword_Boolean" title="Booleans">
-		<topic href="src/main/html/integer.html" label="Booleans"/>
+		<topic href="src/main/html/boolean.html" label="Booleans"/>
 	</context>
 	<context id="keyword_Comment" title="Comments">
-		<topic href="src/main/html/integer.html" label="Comments"/>
+		<topic href="src/main/html/comment.html" label="Comments"/>
 	</context>
 	<context id="keyword_Condition" title="Conditions">
-		<topic href="src/main/html/integer.html" label="Conditions"/>
+		<topic href="src/main/html/condition.html" label="Conditions"/>
 	</context>
 	<context id="keyword_Expression" title="Expressions">
-		<topic href="src/main/html/integer.html" label="Expressions"/>
+		<topic href="src/main/html/expression.html" label="Expressions"/>
 	</context>
 	<context id="keyword_Function" title="Functions">
-		<topic href="src/main/html/integer.html" label="Functions"/>
+		<topic href="src/main/html/function.html" label="Functions"/>
 	</context>
 	<context id="keyword_Identifier" title="Identifiers">
-		<topic href="src/main/html/integer.html" label="Identifiers"/>
+		<topic href="src/main/html/identifier.html" label="Identifiers"/>
 	</context>
 	<context id="keyword_Integer" title="Integers">
 		<topic href="src/main/html/integer.html" label="Integers"/>
 	</context>
 	<context id="keyword_Invariant" title="Invariants">
-		<topic href="src/main/html/integer.html" label="Invariants"/>
+		<topic href="src/main/html/invariant.html" label="Invariants"/>
 	</context>
 	<context id="keyword_Loop" title="Loops">
-		<topic href="src/main/html/integer.html" label="Loops"/>
+		<topic href="src/main/html/loop.html" label="Loops"/>
 	</context>
 	<context id="keyword_Operator" title="Operators">
-		<topic href="src/main/html/integer.html" label="Operators"/>
+		<topic href="src/main/html/operator.html" label="Operators"/>
 	</context>
 	<context id="keyword_Postcondition" title="Postconditions">
-		<topic href="src/main/html/integer.html" label="Postconditions"/>
+		<topic href="src/main/html/ensures.html" label="Postconditions"/>
 	</context>
 	<context id="keyword_Precondition" title="Preconditions">
-		<topic href="src/main/html/integer.html" label="Preconditions"/>
+		<topic href="src/main/html/requires.html" label="Preconditions"/>
 	</context>
 	<context id="keyword_Program" title="Programs">
-		<topic href="src/main/html/integer.html" label="Programs"/>
+		<topic href="src/main/html/program.html" label="Programs"/>
 	</context>
 	<context id="keyword_Quantified_Expression" title="Quantified Expressions">
-		<topic href="src/main/html/integer.html" label="Quantified_Expressions"/>
+		<topic href="src/main/html/quantifiedexpression.html" label="Quantified_Expressions"/>
 	</context>
 	<context id="keyword_Return" title="Returns">
-		<topic href="src/main/html/integer.html" label="Returns"/>
+		<topic href="src/main/html/return.html" label="Returns"/>
 	</context>
 	<context id="keyword_Statement" title="Statements">
-		<topic href="src/main/html/integer.html" label="Statements"/>
+		<topic href="src/main/html/statement.html" label="Statements"/>
 	</context>
 	<context id="keyword_Variable_Declaration" title="Variable Declarations">
-		<topic href="src/main/html/integer.html" label="Variable_Declarations"/>
+		<topic href="src/main/html/variabledeclaration.html" label="Variable_Declarations"/>
 	</context>
 </contexts>

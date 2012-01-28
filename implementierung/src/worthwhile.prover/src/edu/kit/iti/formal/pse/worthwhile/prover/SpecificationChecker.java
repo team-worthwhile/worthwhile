@@ -253,6 +253,7 @@ public class SpecificationChecker {
 		DivisionByZeroAssertionInserter divisionByZeroAssertionInserter = new DivisionByZeroAssertionInserter();
 		modifiedProgram.accept(divisionByZeroAssertionInserter);
 		modifiedProgram.accept(new ImplicitInitialValueInserter());
+		modifiedProgram.accept(new FunctionCallSubstitution());
 		// generate formula from program
 		Expression formula = this.transformer.transformProgram(modifiedProgram);
 		// get the validity from the prover

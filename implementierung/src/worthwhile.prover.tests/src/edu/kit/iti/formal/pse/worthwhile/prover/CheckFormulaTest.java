@@ -360,4 +360,13 @@ public final class CheckFormulaTest {
 		Expression expr = getExpression("forall Integer x exists Integer y : y = x + 1");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
+
+	/**
+	 * Test if two literally equal arrays compare equal.
+	 */
+	@Test
+	public void testArrayLiteralEquals() {
+		Expression expression = this.getExpression("{1, 2, 3} = {1, 2, 3}");
+		assertEnvIndependentEquals(expression, Validity.VALID);
+	}
 }

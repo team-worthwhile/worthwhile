@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
@@ -25,10 +28,16 @@ public class TestASTProvider {
 
 	public static Program getRootASTNode(String parseText) {
 		Resource resource = loadProgram(parseText);
+
 		Program root = null;
 
 		if (resource.getErrors().isEmpty()) {
 			root = (Program) resource.getContents().get(0);
+			
+			BasicDiagnostic diagnostic = new BasicDiagnostic();
+			if (!Diagnostician.INSTANCE.validate(root, diagnostic)) {
+				throw new IllegalArgumentException("Program contains validation errors:" + diagnostic.getMessage());
+			}
 		} else {
 			StringBuilder errorStringBuilder = new StringBuilder();
 
@@ -36,7 +45,7 @@ public class TestASTProvider {
 				errorStringBuilder.append("\n Line " + diag.getLine() + ": " + diag.getMessage());
 			}
 
-			throw new IllegalArgumentException("Program contains errors:" + errorStringBuilder.toString());
+			throw new IllegalArgumentException("Program contains syntax errors:" + errorStringBuilder.toString());
 		}
 		return root;
 	}
@@ -50,7 +59,16 @@ public class TestASTProvider {
 	 */
 	public static int getErrorCount(String parseText) {
 		Resource resource = loadProgram(parseText);
-		return resource.getErrors().size();
+		if (resource.getErrors().size() == 0) {
+			BasicDiagnostic diagnostic = new BasicDiagnostic();
+			if (!Diagnostician.INSTANCE.validate(resource.getContents().get(0), diagnostic)) {
+				return 0;
+			} else {
+				return 1;
+			}
+		} else {
+			return resource.getErrors().size();
+		}
 	}
 
 	public static Expression parseFormulaString(String formulaString) {

@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.ui
 Import-Package: edu.kit.iti.formal.pse.worthwhile.expressions,
  org.apache.log4j
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Activator: edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator.WorthwhileExpressionsActivator
 Export-Package: edu.kit.iti.formal.pse.worthwhile.expressions.ui,
  edu.kit.iti.formal.pse.worthwhile.expressions.ui.activator

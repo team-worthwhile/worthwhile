@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.xtext.generator;resolution:=optional,
  org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.antlr.runtime
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile.expressions,
  edu.kit.iti.formal.pse.worthwhile.expressions.parseTreeConstruction,
  edu.kit.iti.formal.pse.worthwhile.expressions.parser.antlr,

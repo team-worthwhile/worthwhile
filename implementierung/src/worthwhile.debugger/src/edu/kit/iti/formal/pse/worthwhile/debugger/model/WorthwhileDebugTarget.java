@@ -491,18 +491,39 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	public final void setVariableValue(final IVariable variable, final Value value) throws DebugException {
 		// Find the declaration of this variable
-		VariableDeclaration vardec = null;
-
-		for (VariableDeclaration v : this.interpreterRunner.getInterpreter().getAllSymbols().keySet()) {
-			if (v.getName().equals(variable.getName())) {
-				vardec = v;
-				break;
-			}
-		}
+		VariableDeclaration vardec = this.getVariableDeclaration(variable.getName());
 
 		if (vardec != null) {
 			this.interpreterRunner.getInterpreter().setSymbol(vardec, value);
 		}
+	}
+
+	/**
+	 * Returns whether the variable declaration with the given name has changed since the last suspend operation.
+	 * 
+	 * @param name
+	 *                The name of the variable to check for changes.
+	 * @return Whether the variable declaration with the given name has changed since the last suspend operation.
+	 */
+	public final boolean hasVariableValueChanged(final String name) {
+		return this.getEventListener().getChangedVariables().contains(this.getVariableDeclaration(name));
+	}
+
+	/**
+	 * Returns the variable declaration belonging to the specified name.
+	 * 
+	 * @param name
+	 *                The name of the variable.
+	 * @return The declaration of the variable.
+	 */
+	private VariableDeclaration getVariableDeclaration(final String name) {
+		for (VariableDeclaration v : this.interpreterRunner.getInterpreter().getAllSymbols().keySet()) {
+			if (v.getName().equals(name)) {
+				return v;
+			}
+		}
+
+		return null;
 	}
 
 	/**

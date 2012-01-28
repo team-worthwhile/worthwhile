@@ -1,6 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.eclipse.debug.core.DebugEvent;
@@ -11,7 +13,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
@@ -83,12 +88,31 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	private ASTNode stepOverNode;
 
 	/**
+	 * The variables that were introduced or changed since the last suspend.
+	 */
+	private Collection<VariableDeclaration> changedVariables;
+
+	/**
+	 * The variables that are a candidate to be changed during the current statement.
+	 */
+	private Map<VariableDeclaration, Value> changedVariableCandidates;
+
+	/**
 	 * Returns the node currently being executed.
 	 * 
 	 * @return the node currently being executed.
 	 */
 	public final ASTNode getCurrentNode() {
 		return this.currentNode;
+	}
+
+	/**
+	 * Returns the variables changed since the last suspend.
+	 * 
+	 * @return A list of the variables changed since the last suspend
+	 */
+	public final Collection<VariableDeclaration> getChangedVariables() {
+		return this.changedVariables;
 	}
 
 	/**
@@ -102,6 +126,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	public WorthwhileDebugEventListener(final WorthwhileDebugTarget debugTarget, final boolean debug) {
 		super(debugTarget);
 		this.lineBreakpoints = new HashMap<Integer, WorthwhileLineBreakpoint>();
+		this.changedVariables = new HashSet<VariableDeclaration>();
+		this.changedVariableCandidates = new HashMap<VariableDeclaration, Value>();
 
 		if (debug) {
 			this.mode = DebugMode.DEBUG;
@@ -147,7 +173,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void executionFailed(final Statement statement, final InterpreterError error) {
-
+		// TODO handle executionFailed
 	}
 
 	@Override
@@ -188,17 +214,39 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 			if (doSuspend) {
 				// Suspend the execution and wait for resume.
 				suspendExecution(suspendReason);
-
-				// If we arrive here we have gor the resume event.
-				resumeExecution();
-
-				this.currentNode = null;
 			}
+		}
+
+		// If the statement executed is an assignment or a variable declaration, we have a candidate for a
+		// changed variable. Put the old value in the list of candidates for changed variables.
+		VariableValueInfo changedVariable = (new VariableValueVisitor().apply(statement));
+		if (changedVariable != null) {
+			this.changedVariableCandidates.put(changedVariable.getVariable(), changedVariable.getValue());
 		}
 	}
 
 	@Override
 	public final void statementExecuted(final Statement statement) {
+		// Check if a variable was changed during this statement.
+		if (this.changedVariableCandidates.size() > 0) {
+			VariableValueInfo changedVariable = (new VariableValueVisitor().apply(statement));
+
+			if (changedVariable != null) {
+				// A variable was changed in this statement, get its old value from the list of
+				// candidates and compare.
+				Value oldValue = changedVariableCandidates.get(changedVariable.getVariable());
+				if (!changedVariable.getValue().equals(oldValue)) {
+					// Variable was indeed changed!
+					this.changedVariables.add(changedVariable.getVariable());
+
+					// TODO: Check here for watchpoints of this variable
+				}
+			}
+
+		}
+
+		// Check if this is the statement we have stepped over. If yes, return to normal step mode.
+		// FIXME: Statement is visited twice when stepping over?!
 		if (DebugMode.STEP_OVER.equals(this.mode)) {
 			if (statement.equals(this.stepOverNode)) {
 				this.mode = DebugMode.STEP;
@@ -334,6 +382,12 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				e.printStackTrace();
 			}
 		}
+
+		// If we arrive here we have gor the resume event.
+		resumeExecution();
+
+		this.currentNode = null;
+		this.changedVariables = new HashSet<VariableDeclaration>();
 	}
 
 	/**
@@ -361,6 +415,91 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		if (resumeReason != 0) {
 			this.getDebugTarget().resumed(resumeReason);
 		}
+	}
+
+	/**
+	 * Stores information about a variable and its value.
+	 * 
+	 * @author Joachim
+	 * 
+	 */
+	private class VariableValueInfo {
+
+		/**
+		 * The variable declaration.
+		 */
+		private final VariableDeclaration variable;
+
+		/**
+		 * The value of the variable.
+		 */
+		private final Value value;
+
+		/**
+		 * Creates a new instance of the {@link VariableValueInfo} class.
+		 * 
+		 * @param variable
+		 *                The variable declaration.
+		 * @param value
+		 *                The value of the variable.
+		 */
+		public VariableValueInfo(final VariableDeclaration variable, final Value value) {
+			this.variable = variable;
+			this.value = value;
+		}
+
+		/**
+		 * Returns the variable.
+		 * 
+		 * @return The variable.
+		 */
+		public VariableDeclaration getVariable() {
+			return this.variable;
+		}
+
+		/**
+		 * Returns the value of the variable.
+		 * 
+		 * @return The value of the variable.
+		 */
+		public Value getValue() {
+			return this.value;
+		}
+
+	}
+
+	/**
+	 * A visitor that extracts information about variable assignment and declaration and their old value from a
+	 * statement.
+	 * 
+	 * @author Joachim
+	 * 
+	 */
+	private class VariableValueVisitor extends ASTNodeReturnVisitor<VariableValueInfo> {
+
+		@Override
+		public void defaultOperation(final ASTNode node) {
+		}
+
+		@Override
+		public void visit(final Assignment node) {
+			VariableDeclaration variable = node.getVariable().getVariable();
+			// FIXME: Ugly code
+			Value value = ((WorthwhileValue) getDebugTarget().getVariableValue(variable.getName()))
+			                .getValue();
+			this.setReturnValue(new VariableValueInfo(variable, value));
+		}
+
+		@Override
+		public void visit(final VariableDeclaration node) {
+			WorthwhileValue value = ((WorthwhileValue) getDebugTarget().getVariableValue(node.getName()));
+			if (value == null) {
+				this.setReturnValue(new VariableValueInfo(node, null));
+			} else {
+				this.setReturnValue(new VariableValueInfo(node, value.getValue()));
+			}
+		}
+
 	}
 
 }

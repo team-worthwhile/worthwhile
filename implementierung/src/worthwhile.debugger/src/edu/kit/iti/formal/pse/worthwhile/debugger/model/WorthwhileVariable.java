@@ -81,8 +81,7 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 
 	@Override
 	public final boolean hasValueChanged() throws DebugException {
-		// TODO HasValueChanged
-		return false;
+		return this.getDebugTarget().hasVariableValueChanged(this.getName());
 	}
 
 }

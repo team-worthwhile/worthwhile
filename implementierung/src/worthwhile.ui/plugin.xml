@@ -444,4 +444,22 @@
            name="edu.kit.iti.formal.pse.worthwhile.ui.annotations.succeededStatement">
      </type>
   </extension>
+  <extension point="org.eclipse.ui.popupMenus">
+     <viewerContribution id="edu.kit.iti.formal.pse.worthwhile.ui.actions.RulerPopupActions"
+                targetID="#TextRulerContext">
+      <action
+           id="edu.kit.iti.formal.pse.worthwhile.ui.actions.breakpointPropertiesAction" label="Breakpoint Properties …"
+           class="edu.kit.iti.formal.pse.worthwhile.ui.actions.WorthwhileRulerBreakpointPropertiesActionDelegate"
+           menubarPath="debug">
+     </action>
+     <action
+ 	class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+ 	helpContextId="manage_breakpoint_action_context"
+ 	icon="icons/breakpoint.gif"
+ 	id="edu.kit.iti.formal.pse.worthwhile.ui.actions.BreakpointRulerActionDelegate"
+ 	label="Toggle Breakpoint"
+ 	menubarPath="debug">
+ 	</action>
+</viewerContribution>   
+</extension>
 </plugin>

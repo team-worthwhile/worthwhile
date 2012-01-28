@@ -127,6 +127,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * The result stack.
 	 */
 	private Stack<Value> resultStack = new Stack<Value>();
+	
+	/**
+	 * Indicates whether the function handled by this visitor has returned
+	 */
+	private boolean functionReturned = false;
 
 	/**
 	 * A stack of symbol maps.
@@ -496,6 +501,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		EList<Statement> statements = block.getStatements();
 		for (Statement statement : statements) {
 			statement.accept(this);
+			if (this.functionReturned) {
+				this.statementExecuted(block);
+				return;
+			}
 		}
 		this.statementExecuted(block);
 		this.symbolStack.pop();
@@ -649,32 +658,31 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.FunctionCall)
 	 */
 	public void visit(FunctionCall functionCall) {
-		InterpreterASTNodeVisitor functionVisitor = new InterpreterASTNodeVisitor();
-		functionVisitor.setExecutionEventHandlers(this.executionEventHandlers);
+		this.executingVisitor = new InterpreterASTNodeVisitor();
+		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		FunctionDeclaration functionDeclaration = functionCall.getFunction();
 		EList<Expression> actuals = functionCall.getActuals();
-		functionVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
+		this.executingVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
-			functionVisitor.setSymbol(functionDeclaration.getParameters().get(i), this.resultStack.pop());
+			this.executingVisitor.setSymbol(functionDeclaration.getParameters().get(i), this.resultStack.pop());
 		}
 		for (Precondition precondition : functionDeclaration.getPreconditions()) {
 			precondition.accept(this);
 		}
 
-		// pass the execution control over to the newly created function visitor
-		this.executingVisitor = functionVisitor;
-
-		functionDeclaration.getBody().accept(functionVisitor);
-		for (Postcondition postcondition : functionDeclaration.getPostconditions()) {
+		functionDeclaration.getBody().accept(this.executingVisitor);
+		for (Postcondition postcondition : functionCall.getFunction().getPostconditions()) {
 			postcondition.accept(this);
 		}
-
+		
+// TODO		this.resultStack.push(this.executingVisitor.getReturnValue()); 
+		
 		// get execution control back from the function visitor that just returned
 		this.executingVisitor = null;
-
-		this.resultStack.push(functionVisitor.getReturnValue());
+		
 		this.expressionEvaluated(functionCall);
+		
 	}
 
 	/*

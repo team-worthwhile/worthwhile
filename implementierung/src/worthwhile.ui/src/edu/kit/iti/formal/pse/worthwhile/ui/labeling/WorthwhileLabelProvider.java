@@ -8,6 +8,9 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
+
 /**
  * Provides labels for a EObjects.
  * 
@@ -24,6 +27,17 @@ public class WorthwhileLabelProvider extends DefaultEObjectLabelProvider {
 	@Inject
 	public WorthwhileLabelProvider(final AdapterFactoryLabelProvider delegate) {
 		super(delegate);
+	}
+
+	/**
+	 * Returns the lael for an annotation.
+	 * 
+	 * @param node
+	 *                The annotation to get the label for
+	 * @return The label for the annotation.
+	 */
+	final String text(final Annotation node) {
+		return NodeHelper.getText(node);
 	}
 
 	/*

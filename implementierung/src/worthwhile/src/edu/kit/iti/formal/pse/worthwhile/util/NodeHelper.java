@@ -35,7 +35,7 @@ public final class NodeHelper {
 			return -1;
 		}
 	}
-	
+
 	/**
 	 * Returns the offset of a node in the entire document.
 	 * 
@@ -51,7 +51,7 @@ public final class NodeHelper {
 			return -1;
 		}
 	}
-	
+
 	/**
 	 * Returns the length of a node in the source file.
 	 * 
@@ -65,6 +65,22 @@ public final class NodeHelper {
 			return actualNode.getLength();
 		} else {
 			return -1;
+		}
+	}
+	
+	/**
+	 * Returns the text of an AST node.
+	 * 
+	 * @param node
+	 *                The AST node to get the text of.
+	 * @return The text contained in the AST node.
+	 */
+	public static String getText(final ASTNode node) {
+		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
+		if (actualNode != null) {
+			return actualNode.getText();
+		} else {
+			return "";
 		}
 	}
 

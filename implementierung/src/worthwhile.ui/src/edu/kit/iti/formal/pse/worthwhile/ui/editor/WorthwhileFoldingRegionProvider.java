@@ -34,13 +34,15 @@ public class WorthwhileFoldingRegionProvider extends DefaultFoldingRegionProvide
 		ASTNode root = (ASTNode) xtextResource.getParseResult().getRootASTElement();
 		Collection<ASTNode> nodesToFold = (new WorthwhileFoldingVisitor()).apply(root);
 		Collection<FoldedPosition> foldedPositions = new ArrayList<FoldedPosition>();
-		
+
 		for (ASTNode node : nodesToFold) {
 			int offset = NodeHelper.getOffset(node);
 			int length = NodeHelper.getLength(node);
-			foldedPositions.add(new DefaultFoldedPosition(offset, length, 0, 0));
+			if (length > 0) {
+				foldedPositions.add(new DefaultFoldedPosition(offset, length, 0, 0));
+			}
 		}
-		
+
 		return foldedPositions;
 	}
 

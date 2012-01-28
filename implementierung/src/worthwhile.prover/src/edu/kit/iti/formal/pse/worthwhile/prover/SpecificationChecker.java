@@ -173,7 +173,7 @@ public class SpecificationChecker {
 
 		// create the environment => expression implication
 		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression,
-		                formula);
+		                AstNodeCloneHelper.clone(formula));
 		return getValidity(environmentImpliesFormula);
 	}
 

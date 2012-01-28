@@ -37,7 +37,9 @@ public final class AstNodeCreatorHelper {
 
 	/**
 	 * Create an {@link Assertion} with the given {@link Expression}.
-	 * @param expression the {@link Expression} to assert
+	 * 
+	 * @param expression
+	 *                the {@link Expression} to assert
 	 * @return the created {@link Assertion}
 	 */
 	public static Assertion createAssertion(final Expression expression) {

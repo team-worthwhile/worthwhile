@@ -1,9 +1,12 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
@@ -12,6 +15,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
@@ -195,6 +200,60 @@ public final class AstNodeCreatorHelper {
 		forAllQuantifier.setParameter(parameter);
 		forAllQuantifier.setExpression(expression);
 		return forAllQuantifier;
+	}
+
+	/**
+	 * 
+	 * @param block
+	 *                the {@link Program} main {@link Block}
+	 * @return a <code>Program</code> that consists of the given <code>block</code>
+	 */
+	public static Program createProgram(final Block block) {
+		final Program program = AstNodeCreatorHelper.factory.createProgram();
+		program.setMainBlock(block);
+		return program;
+	}
+
+	/**
+	 * 
+	 * @param statements
+	 *                the {@link Program} statements
+	 * @return a <code>Program</code> whose main {@link Block} consists of the given <code>statements</code>
+	 */
+	public static Program createProgram(final List<Statement> statements) {
+		return AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper.createBlock(statements));
+	}
+
+	/**
+	 * 
+	 * @param statement
+	 *                the only {@link Program} statement
+	 * @return a <code>Program</code> whose main {@link Block} consists of the given <code>statement</code>
+	 */
+	public static Program createProgram(final Statement statement) {
+		return AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper.createBlock(statement));
+	}
+
+	/**
+	 * 
+	 * @param statements
+	 *                the {@link Block} statements
+	 * @return a <code>Block</code> that consists of the given <code>statements</code>
+	 */
+	public static Block createBlock(final List<Statement> statements) {
+		final Block block = AstNodeCreatorHelper.factory.createBlock();
+		block.getStatements().addAll(statements);
+		return block;
+	}
+
+	/**
+	 * 
+	 * @param statement
+	 *                the only {@link Block} statement
+	 * @return a <code>Block</code> that consists of the given <code>statement</code>
+	 */
+	public static Block createBlock(final Statement statement) {
+		return AstNodeCreatorHelper.createBlock(Arrays.asList(statement));
 	}
 
 	/**

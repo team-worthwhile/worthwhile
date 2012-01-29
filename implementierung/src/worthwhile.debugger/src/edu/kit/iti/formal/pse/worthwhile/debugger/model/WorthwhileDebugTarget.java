@@ -27,13 +27,17 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.ui.internal.Workbench;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileWatchpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
 import edu.kit.iti.formal.pse.worthwhile.expressions.scoping.IWorthwhileContextProvider;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
+import edu.kit.iti.formal.pse.worthwhile.interpreter.InterpreterError;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
@@ -410,6 +414,25 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	public final void annotationSucceeded(final Annotation annotation) {
 		this.markerHelper.markSucceededStatement(annotation, "Annotation succeeded");
+	}
+	
+	/**
+	 * Called when the execution failed due to a runtime exception.
+	 * 
+	 * @param node
+	 *                The node on which the execution failed.
+	 * @param error
+	 *                The error that caused the execution to fail.
+	 */
+	public final void executionFailed(final ASTNode node, final InterpreterError error) {
+		this.markerHelper.markFailedStatement(node, error.getDescription());
+
+		Workbench.getInstance().getDisplay().asyncExec(new Runnable() {
+			public void run() {
+				MessageDialog.openError(Workbench.getInstance().getActiveWorkbenchWindow().getShell(),
+				                "Execution error", error.getDescription());
+			}
+		});
 	}
 
 	/**

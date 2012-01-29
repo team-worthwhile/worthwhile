@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
@@ -206,13 +207,22 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	}
 
 	@Override
-	public final void executionFailed(final Statement statement, final InterpreterError error) {
-		// TODO handle executionFailed
-	}
-
-	@Override
 	public final void executionCompleted() {
 		this.getDebugTarget().terminated();
+	}
+	
+	@Override
+	public final void executionFailed(final Statement statement, final InterpreterError error) {
+		this.getDebugTarget().executionFailed(statement, error);
+		this.suspendExecution(DebugEvent.SUSPEND);
+		this.terminate();
+	}
+	
+	@Override
+	public final void expressionFailed(final Expression expression, final InterpreterError error) {
+		this.getDebugTarget().executionFailed(expression, error);
+		this.suspendExecution(DebugEvent.SUSPEND);
+		this.terminate();
 	}
 
 	@Override

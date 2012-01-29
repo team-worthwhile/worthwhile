@@ -12,6 +12,9 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Injector;
 
@@ -33,9 +36,20 @@ public class TestASTProvider {
 		if (resource.getErrors().isEmpty()) {
 			root = (Program) resource.getContents().get(0);
 			
-			BasicDiagnostic diagnostic = new BasicDiagnostic();
-			if (!Diagnostician.INSTANCE.validate(root, diagnostic)) {
-				throw new IllegalArgumentException("Program contains validation errors:" + diagnostic.getMessage());
+			Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
+			IResourceValidator validator = guiceInjector.getInstance(IResourceValidator.class);
+			List<Issue> validationErrors = validator.validate(resource, CheckMode.ALL, null);
+			
+			if (validationErrors.size() > 0) {
+				root = null;
+				
+				StringBuilder errorStringBuilder = new StringBuilder();
+
+				for (Issue issue : validationErrors) {
+					errorStringBuilder.append("\n Line " + issue.getLineNumber() + ": " + issue.getMessage());
+				}
+
+				throw new IllegalArgumentException("Program contains validation errors:" + errorStringBuilder.toString());
 			}
 		} else {
 			StringBuilder errorStringBuilder = new StringBuilder();
@@ -59,12 +73,11 @@ public class TestASTProvider {
 	public static int getErrorCount(String parseText) {
 		Resource resource = loadProgram(parseText);
 		if (resource.getErrors().size() == 0) {
-			BasicDiagnostic diagnostic = new BasicDiagnostic();
-			if (Diagnostician.INSTANCE.validate(resource.getContents().get(0), diagnostic)) {
-				return 0;
-			} else {
-				return 1;
-			}
+			Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
+			IResourceValidator validator = guiceInjector.getInstance(IResourceValidator.class);
+			List<Issue> validationErrors = validator.validate(resource, CheckMode.ALL, null);
+			
+			return validationErrors.size();
 		} else {
 			return resource.getErrors().size();
 		}

@@ -58,7 +58,7 @@ public class SpecificationChecker {
 	 * 
 	 * Defaults to {@link Z3Prover} instance.
 	 */
-	private ProverCaller prover = new Z3Prover();
+	private ProverCaller prover;
 
 	/**
 	 * @return the {@link ProverCaller} that is called for checking the satisfiability of formulae

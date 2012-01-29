@@ -1,5 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.util.ListIterator;
+import java.util.Map;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
@@ -123,17 +126,29 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Annotation annotation) {
 		annotation.getExpression().accept(this);
+
+		if (this.found) {
+			this.found = false;
+			annotation.setExpression(this.getSubstitute());
+		}
 	}
 
 	@Override
 	public void visit(final ArrayLiteral arrayLiteral) {
-		for (final Expression v : arrayLiteral.getValues()) {
-			v.accept(this);
+		final ListIterator<Expression> i = arrayLiteral.getValues().listIterator();
+		while (i.hasNext()) {
+			i.next().accept(this);
+
+			if (this.found) {
+				this.found = false;
+				i.set(this.getSubstitute());
+			}
 		}
 	}
 
 	@Override
 	public void visit(final ArrayFunction arrayFunction) {
+		// FIXME: substitute child reference when found is still set after accept returned
 		for (final Expression i : arrayFunction.getValues().keySet()) {
 			i.accept(this);
 		}
@@ -148,6 +163,11 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Assignment assignment) {
 		assignment.getValue().accept(this);
+
+		if (this.found) {
+			this.found = false;
+			assignment.setValue(this.getSubstitute());
+		}
 	}
 
 	@Override
@@ -160,11 +180,22 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Conditional conditional) {
 		conditional.getCondition().accept(this);
+
+		if (this.found) {
+			this.found = false;
+			conditional.setCondition(this.getSubstitute());
+		}
 	}
 
 	@Override
 	public void visit(final Loop loop) {
 		loop.getCondition().accept(this);
+
+		if (this.found) {
+			this.found = false;
+			loop.setCondition(this.getSubstitute());
+		}
+
 		for (final Invariant i : loop.getInvariants()) {
 			i.accept(this);
 		}
@@ -174,11 +205,21 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final ReturnStatement returnStatement) {
 		returnStatement.getReturnValue().accept(this);
+
+		if (this.found) {
+			this.found = false;
+			returnStatement.setReturnValue(this.getSubstitute());
+		}
 	}
 
 	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
 		variableDeclaration.getInitialValue().accept(this);
+
+		if (this.found) {
+			this.found = false;
+			variableDeclaration.setInitialValue(this.getSubstitute());
+		}
 	}
 
 	@Override
@@ -217,8 +258,14 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final FunctionCall functionCall) {
-		for (final Expression a : functionCall.getActuals()) {
-			a.accept(this);
+		final ListIterator<Expression> i = functionCall.getActuals().listIterator();
+		while (i.hasNext()) {
+			i.next().accept(this);
+
+			if (this.found) {
+				this.found = false;
+				i.set(this.getSubstitute());
+			}
 		}
 	};
 
@@ -241,6 +288,11 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 		final Expression index = variableReference.getIndex();
 		if (index != null) {
 			index.accept(this);
+
+			if (this.found) {
+				found = false;
+				variableReference.setIndex(this.getSubstitute());
+			}
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
@@ -46,6 +47,13 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	public final void visit(final BinaryExpression b) {
 		b.getLeft().accept(this);
 		b.getRight().accept(this);
+	}
+
+	@Override
+	public final void visit(final FunctionCall functionCall) {
+		for (final Expression e : functionCall.getActuals()) {
+			e.accept(this);
+		}
 	}
 
 	@Override

@@ -205,15 +205,16 @@ public class SpecificationChecker {
 		Future<ProverResult> resultFuture = executor.submit(new ProverCallerTask());
 		try {
 			this.checkResult = resultFuture.get(this.timeout, TimeUnit.SECONDS);
-		} catch (InterruptedException e) {
-			// don't care
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// what could possibly go wrong?
-			e.printStackTrace();
 		} catch (TimeoutException e) {
 			// timeout - result unknown
 			this.checkResult = new ProverResult("timeout") {
+				@Override
+				public FormulaSatisfiability getSatisfiability() {
+					return FormulaSatisfiability.UNKOWN;
+				}
+			};
+		} catch (Exception e) {
+			this.checkResult = new ProverResult(e.getMessage()) {
 				@Override
 				public FormulaSatisfiability getSatisfiability() {
 					return FormulaSatisfiability.UNKOWN;
@@ -225,15 +226,17 @@ public class SpecificationChecker {
 		// determine formula's validity based on negation's satisfiability, which is VALID only if the latter is
 		// UNSATISFIABLE and INVALID only if the latter is SATISFIABLE, UNKNOWN otherwise
 		Validity validity = Validity.UNKNOWN;
-		switch (this.checkResult.getSatisfiability()) {
-		case SATISFIABLE:
-			validity = Validity.INVALID;
-			break;
-		case UNSATISFIABLE:
-			validity = Validity.VALID;
-			break;
-		default:
-			validity = Validity.UNKNOWN;
+		if (this.checkResult != null) {
+			switch (this.checkResult.getSatisfiability()) {
+				case SATISFIABLE:
+					validity = Validity.INVALID;
+					break;
+				case UNSATISFIABLE:
+					validity = Validity.VALID;
+					break;
+				default:
+					validity = Validity.UNKNOWN;
+			}
 		}
 
 		return validity;
@@ -252,7 +255,7 @@ public class SpecificationChecker {
 		// add assertions to check that the divisors are not zero
 		modifiedProgram.accept(new DivisionByZeroAssertionInserter());
 		modifiedProgram.accept(new ImplicitInitialValueInserter());
-		//modifiedProgram.accept(new FunctionCallSubstitution());
+		// modifiedProgram.accept(new FunctionCallSubstitution());
 		// generate formula from program
 		Expression formula = this.transformer.transformProgram(modifiedProgram);
 		// get the validity from the prover

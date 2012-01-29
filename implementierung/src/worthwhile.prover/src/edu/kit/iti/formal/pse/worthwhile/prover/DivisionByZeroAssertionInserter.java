@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -111,6 +112,13 @@ public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {
 		this.foundDivisorsStack.peek().add(division.getRight());
 		division.getLeft().accept(this);
 		division.getRight().accept(this);
+	}
+
+	@Override
+	public final void visit(final Modulus modulus) {
+		this.foundDivisorsStack.peek().add(modulus.getRight());
+		modulus.getLeft().accept(this);
+		modulus.getRight().accept(this);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class Z3Prover extends StdProver {
 	/**
 	 * Construct a new prover caller with the default Z3 command line.
 	 * 
-	 * The default Z3 command line is <code>z3 -in -smt2</code>.
+	 * The default Z3 command line is <code>z3 -in -smt2 -nw</code>.
 	 */
 	public Z3Prover() {
 		/* we will assume that z3 is in the PATH */

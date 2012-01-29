@@ -27,7 +27,21 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
 public class TestASTProvider {
+	/**
+	 * Indicates whether {@link TestASTProvider#getRootASTNode(String, boolean) should fail with an exception when
+	 * validation errors occur while parsing.
+	 */
+	private static boolean fail = true;
 
+	/**
+	 * Creates a {@link Program} from a Worthwhile {@link String}.
+	 * 
+	 * Does fail when validation errors occur while parsing the <code>parseText</code>.
+	 * 
+	 * @param parseText
+	 *                a <code>String</code> that encodes a <code>Program</code>
+	 * @return a <code>Program</code> that represents the <code>parseText</code>
+	 */
 	public static Program getRootASTNode(String parseText) {
 		Resource resource = loadProgram(parseText);
 
@@ -40,7 +54,7 @@ public class TestASTProvider {
 			IResourceValidator validator = guiceInjector.getInstance(IResourceValidator.class);
 			List<Issue> validationErrors = validator.validate(resource, CheckMode.ALL, null);
 			
-			if (validationErrors.size() > 0) {
+			if (validationErrors.size() > 0 && TestASTProvider.fail) {
 				root = null;
 				
 				StringBuilder errorStringBuilder = new StringBuilder();
@@ -83,8 +97,21 @@ public class TestASTProvider {
 		}
 	}
 
+	/**
+	 * Creates an {@link Expression} from a Worthwhile {@link String}.
+	 * 
+	 * Does not fail when validation errors occur while parsing the <code>formulaString</code>.
+	 * 
+	 * @param formulaString
+	 *                a <code>String</code> that encodes an <code>Expression</code>
+	 * @return an <code>Expression</code> that represents the <code>formulaString</code>
+	 */
 	public static Expression parseFormulaString(String formulaString) {
+		TestASTProvider.fail = false;
+
 		ASTNode n = TestASTProvider.getRootASTNode("{\n_assert (" + formulaString + ")\n" + "}\n");
+
+		TestASTProvider.fail = true;
 
 		if (n == null) {
 			return null;

@@ -23,7 +23,8 @@ public class WorthwhileRootPreferencePage extends LanguageRootPreferencePage {
 		addField(new IntegerFieldEditor(WorthwhilePreferenceConstants.PROVER_TIMEOUT,
 		                "Prover &timeout (in seconds)", getFieldEditorParent()));
 		addField(new BooleanFieldEditor(WorthwhilePreferenceConstants.ENABLE_AUTOEDIT,
-		                "Enable automatic keyword replacing in editor", getFieldEditorParent()));
+		                "Enable automatic keyword replacing in editor (change requires restart)",
+		                getFieldEditorParent()));
 	}
 
 	@Override

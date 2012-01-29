@@ -495,4 +495,9 @@
            type="edu.kit.iti.formal.pse.worthwhile.debugger.launch">
      </launchDelegate>
   </extension>
+  <extension 
+ 		point="org.eclipse.core.runtime.preferences">
+  		<initializer 
+  			class="edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceInitializer" /> 
+  	</extension>
 </plugin>

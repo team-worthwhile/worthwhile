@@ -9,10 +9,14 @@
 
 <body>
 <h1>Array</h1>
-Arrays are a indexed collection of elements of a given base type, which can be either <a href="integer.html">Integer</a> or <a href="boolean.html">Boolean</a>. Note that because of this limitation there exists no such things like arrays of arrays.<br>
-<a href="variabledeclaration.html">Declaration</a> of an array works just like primitive variable declaration. All elements to which no value is <a href="assignment.html">assigned</a> on declaration, get the default value of the arrays base type. For an Integer array the default value is '0' and for an Boolean array it is 'false'. Note that arrays in worthwhile are unlimited in size and thus all elements to which are no values are assigned, have the default value.<br>
-An array element can be referenced with the specified name of the array and an positive Integer index.<br>
-There exists an array literal which can be used to assign values to an array. The values of an array literal can be of type Integer or Boolean but must be uniform.<br><br>
+<p>Arrays are a indexed collection of elements of a given base type, which can be either <a href="integer.html">Integer</a> or <a href="boolean.html">Boolean</a>. Note that because of this limitation there exists no such things like arrays of arrays.<br>
+<a href="variabledeclaration.html">Declaration</a> of an array works just like primitive variable declaration. All elements to which no value is <a href="assignment.html">assigned</a> on declaration, get the default value of the arrays base type. For an Integer array the default value is '0' and for an Boolean array it is 'false'. Note that arrays in worthwhile are unlimited in size and thus all elements to which are no values are assigned, have the default value.</p>
+
+<p>An array element can be referenced with the specified name of the array and an non-negative Integer index.</p>
+
+<p>There exists an array literal which can be used to assign values to an array. The values of an array literal can be of type Integer or Boolean but must be uniform. The indices in an array literal are continuous and start at 0.</p>
+
+<br />
 
 <b>Syntax: (Array declaration)</b><br>
 <pre>
@@ -25,7 +29,7 @@ Boolean[] &lt;<a href="identifier.html">name</a>&gt;
 </pre><br>
 <b>Syntax: (Array literal)</b><br>
 <pre>
-{&lt;value&gt;*}
+{(&lt;value&gt; (, &lt;value&gt;)*)?}
 </pre><br>
 <b>Example:</b><br>
 <pre>

@@ -29,14 +29,22 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * Substitutes a child reference with some {@link Expression} in the parent {@link ASTNode} when indicated so by the
  * child.
  * 
- * Implements all {@link Statement} visit methods, {@link HierarchialASTNodeVisitor#visit(ArrayLiteral}, {@link
- * HierarchialASTNodeVisitor#visit(ArrayFunction}, {@link HierarchialASTNodeVisitor#visit(FunctionCall}, {@link
- * HierarchialASTNodeVisitor#visit(QuantifiedExpression}, {@link HierarchialASTNodeVisitor#visit(BinaryExpression)} and
- * {@link HierarchialASTNodeVisitor#visit(UnaryExpression)} to traverse {@link Expression}s and substitute the
- * respective child references when the visited children called {@link SubstitutionVisitor#setFound(Boolean)}.
- * {@link HierarchialASTNodeVisitor#visit(Expression)} is implemented with an empty body so that the default visit
- * operation is ignored and subclasses just have to override the visit methods in which they want to actually call
- * {@link SubstitutionVisitor#setFound(Boolean)}.
+ * Implements all {@link Statement} visit methods as well as
+ * 
+ * <ul>
+ * <li>{@link HierarchialASTNodeVisitor#visit(ArrayFunction)}</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(ArrayLiteral)}</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(BinaryExpression)}</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(FunctionCall)}</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(QuantifiedExpression)}</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(UnaryExpression)}</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(VariableReference)} (for array index expressions)</li>
+ * </ul>
+ * 
+ * to traverse {@link Expression}s and substitute the respective child references when the visited children called
+ * {@link SubstitutionVisitor#setFound(Boolean)}. {@link HierarchialASTNodeVisitor#visit(Literal)} is implemented with
+ * an empty body so that the default visit operation is ignored and subclasses just have to override the visit methods
+ * in which they want to actually call {@link SubstitutionVisitor#setFound(Boolean)}.
  * 
  * @author fabian
  * 

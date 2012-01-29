@@ -113,7 +113,13 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
 			                .getBreakpoints(ID_WORTHWHILE_DEBUG_MODEL);
 			for (IBreakpoint breakpoint : breakpoints) {
-				breakpointAdded(breakpoint);
+				try {
+					if (breakpoint.isEnabled()) {
+						breakpointAdded(breakpoint);
+					}
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
 		} else {
 			this.eventListener = new WorthwhileDebugEventListener(this, false);
@@ -415,7 +421,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final void annotationSucceeded(final Annotation annotation) {
 		this.markerHelper.markSucceededStatement(annotation, "Annotation succeeded");
 	}
-	
+
 	/**
 	 * Called when the execution failed due to a runtime exception.
 	 * 

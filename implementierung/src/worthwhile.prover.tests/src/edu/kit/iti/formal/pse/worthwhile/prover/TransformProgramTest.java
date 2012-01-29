@@ -104,7 +104,7 @@ public final class TransformProgramTest {
 		                                this.getExpression("false = false && true")),
 		                this.getExpression("false = false && true"));
 		this.testTransformProgram(
-		                "function Boolean f() {\nBoolean x\n_assert x = false\nreturn x\n}\nBoolean x\n_assert x = false\n",
+		                "function Boolean f() {\nBoolean fx\n_assert fx = false\nreturn fx\n}\nBoolean x\n_assert x = false\n",
 		                expected);
 
 		expected = AstNodeCreatorHelper.createConjunction(
@@ -112,7 +112,7 @@ public final class TransformProgramTest {
 		                                this.getExpression("0 = 0 && true")),
 		                this.getExpression("0 = 0 && true"));
 		this.testTransformProgram(
-		                "function Integer f() {\nInteger x\n_assert x = 0\nreturn x\n}\nInteger x\n_assert x = 0\n",
+		                "function Integer f() {\nInteger fx\n_assert fx = 0\nreturn fx\n}\nInteger x\n_assert x = 0\n",
 		                expected);
 
 		expected = AstNodeCreatorHelper.createConjunction(
@@ -120,7 +120,7 @@ public final class TransformProgramTest {
 		                                this.getExpression("{ } = { } && true")),
 		                this.getExpression("{ } = { } && true"));
 		this.testTransformProgram(
-		                "function Boolean[] f() {\nBoolean[] x\n_assert x = { }\nreturn x\n}\nBoolean[] x\n_assert x = { }\n",
+		                "function Boolean[] f() {\nBoolean[] fx\n_assert fx = { }\nreturn fx\n}\nBoolean[] x\n_assert x = { }\n",
 		                expected);
 
 		expected = AstNodeCreatorHelper.createConjunction(
@@ -128,7 +128,7 @@ public final class TransformProgramTest {
 		                                this.getExpression("{ } = { } && true")),
 		                this.getExpression("{ } = { } && true"));
 		this.testTransformProgram(
-		                "function Integer[] f() {\nInteger[] x\n_assert x = { }\nreturn x\n}\nInteger[] x\n_assert x = { }\n",
+		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
 		                expected);
 	}
 

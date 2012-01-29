@@ -1,6 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
@@ -27,7 +29,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * Substitutes a child reference with some {@link Expression} in the parent {@link ASTNode} when indicated so by the
  * child.
  * 
- * Implements all {@link Statement} visit methods, {@link HierarchialASTNodeVisitor#visit(FunctionCall}, {@link
+ * Implements all {@link Statement} visit methods, {@link HierarchialASTNodeVisitor#visit(ArrayLiteral}, {@link
+ * HierarchialASTNodeVisitor#visit(ArrayFunction}, {@link HierarchialASTNodeVisitor#visit(FunctionCall}, {@link
  * HierarchialASTNodeVisitor#visit(QuantifiedExpression}, {@link HierarchialASTNodeVisitor#visit(BinaryExpression)} and
  * {@link HierarchialASTNodeVisitor#visit(UnaryExpression)} to traverse {@link Expression}s and substitute the
  * respective child references when the visited children called {@link SubstitutionVisitor#setFound(Boolean)}.
@@ -112,6 +115,26 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Annotation annotation) {
 		annotation.getExpression().accept(this);
+	}
+
+	@Override
+	public void visit(final ArrayLiteral arrayLiteral) {
+		for (final Expression v : arrayLiteral.getValues()) {
+			v.accept(this);
+		}
+	}
+
+	@Override
+	public void visit(final ArrayFunction arrayFunction) {
+		for (final Expression i : arrayFunction.getValues().keySet()) {
+			i.accept(this);
+		}
+
+		for (final Expression v : arrayFunction.getValues().values()) {
+			v.accept(this);
+		}
+
+		arrayFunction.getChainedFunction().accept(this);
 	}
 
 	@Override
@@ -207,6 +230,9 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final VariableReference variableReference) {
-		// we reached an Expression leaf, ignore default operation
+		final Expression index = variableReference.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
 	}
 }

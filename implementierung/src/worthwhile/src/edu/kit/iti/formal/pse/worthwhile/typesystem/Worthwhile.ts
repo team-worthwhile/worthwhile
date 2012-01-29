@@ -133,13 +133,13 @@ section "Binary Expression with boolean operands"
 section "Binary Expression with boolean operands or integer operands"
 
 		  typeof Equal -> BooleanType {
-			ensureType left :<=: BooleanType, IntegerType
-		 	ensureType right :<=: BooleanType, IntegerType
+			ensureType left :<=: BooleanType, IntegerType, ArrayType
+		 	ensureType right :<=: BooleanType, IntegerType, ArrayType
 		 	ensureCompatibility left :<=>: right "Both operands have to be be of the same type"
 		 }
 		 typeof Unequal -> BooleanType {
-		 	ensureType left :<=: BooleanType, IntegerType
-		 	ensureType right :<=: BooleanType, IntegerType
+		 	ensureType left :<=: BooleanType, IntegerType, ArrayType
+		 	ensureType right :<=: BooleanType, IntegerType, ArrayType
 		 	ensureCompatibility left :<=>: right "Both operands have to be be of the same type"
 		 }
 section "Unary Expression"

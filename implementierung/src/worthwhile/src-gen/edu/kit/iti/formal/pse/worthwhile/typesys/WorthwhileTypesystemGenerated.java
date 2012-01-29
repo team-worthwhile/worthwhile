@@ -114,12 +114,12 @@
 						// Section: Binary Expression with boolean operands or integer operands
 
 						useFixedType( p.getEqual(), p.getBooleanType() );
-						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType() );
-						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType() );
+						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
+						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( "Both operands have to be be of the same type", p.getEqual(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getUnequal(), p.getBooleanType() );
-						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType() );
-						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType() );
+						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
+						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( "Both operands have to be be of the same type", p.getUnequal(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 
 						// ----------------------------------------------------------------

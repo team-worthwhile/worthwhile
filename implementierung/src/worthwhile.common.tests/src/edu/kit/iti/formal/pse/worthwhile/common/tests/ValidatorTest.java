@@ -7,8 +7,7 @@ public class ValidatorTest {
 	
 	@Test
 	public void testEmptyArrayLiteral() {
-		String testProgram = "Integer[] k := {}\n";
-
+		String testProgram = "Integer[]  k := {}\n";
 		Assert.assertEquals(0, TestASTProvider.getErrorCount(testProgram));
 	}
 

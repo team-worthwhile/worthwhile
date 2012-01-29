@@ -60,7 +60,6 @@ public class TestASTProvider {
 		Resource resource = loadProgram(parseText);
 		if (resource.getErrors().size() == 0) {
 			BasicDiagnostic diagnostic = new BasicDiagnostic();
-			System.out.println(Diagnostician.INSTANCE.validate(resource.getContents().get(0), diagnostic));
 			if (Diagnostician.INSTANCE.validate(resource.getContents().get(0), diagnostic)) {
 				return 0;
 			} else {

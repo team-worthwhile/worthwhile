@@ -51,6 +51,24 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 	 *                The mode (run, debug) in which to launch the program.
 	 */
 	private void launchFile(final IFile file, final String mode) {
+		// Create a new launchable configuration and launch it.
+		ILaunchConfiguration launchConfiguration = getLaunchConfiguration(file);
+		if (launchConfiguration != null) {
+			DebugUITools.launch(launchConfiguration, mode);
+		}
+	}
+
+	/**
+	 * Gets a launch configuration for a file.
+	 * 
+	 * If a configuration with the name of the file (slashes replaced by underscores) already exists, it is taken.
+	 * Otherwise a new one with default values is created.
+	 * 
+	 * @param file
+	 *                The file for which to get the launch configuration.
+	 * @return A launch configuration for the file, or {@code null} if an error occured.
+	 */
+	private ILaunchConfiguration getLaunchConfiguration(final IFile file) {
 		// Get the launch configuration type from the launch manager
 		ILaunchManager launchManager = DebugPlugin.getDefault().getLaunchManager();
 		ILaunchConfigurationType launchConfigurationType = launchManager
@@ -58,14 +76,13 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 		final String launchConfigurationName = file.getFullPath().toString().replace("/", "_");
 
 		try {
-			// Delete any pre-existing configuration with the name of the file
+			// Search for pre-existing configurations.
 			ILaunchConfiguration[] configurations = launchManager
 			                .getLaunchConfigurations(launchConfigurationType);
 			for (int i = 0; i < configurations.length; i++) {
 				ILaunchConfiguration configuration = configurations[i];
 				if (configuration.getName().equals(launchConfigurationName)) {
-					configuration.delete();
-					break;
+					return configuration;
 				}
 			}
 
@@ -73,13 +90,12 @@ public class WorthwhileLaunchShortcut implements ILaunchShortcut {
 			ILaunchConfigurationWorkingCopy workingCopy = launchConfigurationType.newInstance(null,
 			                launchConfigurationName);
 			workingCopy.setAttribute(ATTR_PATH, file.getFullPath().toString());
+			return workingCopy.doSave();
 
-			// Create a new launchable configuration and launch it.
-			ILaunchConfiguration launchConfiguration = workingCopy.doSave();
-			DebugUITools.launch(launchConfiguration, mode);
 		} catch (CoreException e) {
 			// TODO Show error message
 			e.printStackTrace();
+			return null;
 		}
 	}
 

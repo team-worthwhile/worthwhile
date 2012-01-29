@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
@@ -26,7 +27,6 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
-import org.eclipse.debug.core.model.LineBreakpoint;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileWatchpoint;
@@ -428,8 +428,13 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final String getSourceName() {
 		try {
 			// Get the path from the launch configuration and return only the file name.
-			Path path = new Path(this.launch.getLaunchConfiguration().getAttribute(ATTR_PATH, ""));
-			return path.lastSegment();
+			ILaunchConfiguration configuration = this.launch.getLaunchConfiguration();
+			if (configuration != null) {
+				Path path = new Path(configuration.getAttribute(ATTR_PATH, ""));
+				return path.lastSegment();
+			} else {
+				return "";
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 			return "";

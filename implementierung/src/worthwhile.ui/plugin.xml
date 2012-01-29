@@ -347,6 +347,9 @@
          <actionSet
                id="org.eclipse.debug.ui.launchActionSet">
          </actionSet>
+         <actionSet
+               id="org.eclipse.debug.ui.breakpointActionSet">
+         </actionSet>
       </perspectiveExtension>
    </extension>
    <extension point="org.eclipse.ui.activities">

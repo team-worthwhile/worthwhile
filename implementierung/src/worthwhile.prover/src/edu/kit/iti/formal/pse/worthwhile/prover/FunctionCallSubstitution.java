@@ -103,9 +103,6 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor {
 					}
 				}
 
-				ReturnValueReferenceSubstitution.substitute(postcondition,
-				                AstNodeCreatorHelper.createVariableReference(variable));
-
 				if (precondition != null) {
 					i.add(AstNodeCreatorHelper.createAssertion(precondition));
 				}
@@ -113,6 +110,9 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor {
 				i.add(variable);
 
 				if (postcondition != null) {
+					ReturnValueReferenceSubstitution.substitute(postcondition,
+					                AstNodeCreatorHelper.createVariableReference(variable));
+
 					i.add(AstNodeCreatorHelper.createAssumption(postcondition));
 				}
 			}

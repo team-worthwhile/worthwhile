@@ -40,6 +40,26 @@ public class DivisionByZeroAssertionInserterTest {
 	private static final String DIVISIONBYZEROCONDITIONAL = "Integer a := 0\nif(10 / a = 2) {\n    a := 0\n    Integer b := 42 / 1\n}\n_assert(true)\n";
 
 	/**
+	 * Test if modulus by a zero literal causes the proof to fail.
+	 */
+	private static final String MODULUSBYZEROLITERAL = "Integer a := 1 % 0\n_assert(true)\n";
+
+	/**
+	 * Test if modulus by a variable set to zero causes the proof to fail.
+	 */
+	private static final String MODULUSBYZEROVARIABLE = "Integer a := 0\nInteger b := 42 % a\n_assert(true)\n";
+
+	/**
+	 * Test if modulus by a variable that was previously set to zero causes the proof to succeed like it should.
+	 */
+	private static final String MODULUSBYMULTIPLEZEROVARIABLES = "Integer a := 2\nInteger b := 42 % a\na := 0\nb := 42 % 1\n_assert(true)\n";
+
+	/**
+	 * Test if modulus by zero inside the condition of a conditional causes the proof to fail.
+	 */
+	private static final String MODULUSBYZEROCONDITIONAL = "Integer a := 0\nif(10 % a = 2) {\na := 0\nInteger b := 42 % 1\n}\n_assert(true)\n";
+
+	/**
 	 * The {@link SpecificationChecker} whose {@link Program} validity checking is tested.
 	 */
 	private SpecificationChecker checker;
@@ -67,7 +87,11 @@ public class DivisionByZeroAssertionInserterTest {
 		                { TestASTProvider.getRootASTNode(DIVISIONBYZEROLITERAL), Validity.INVALID },
 		                { TestASTProvider.getRootASTNode(DIVISIONBYZEROVARIABLE), Validity.INVALID },
 		                { TestASTProvider.getRootASTNode(DIVISIONBYMULTIPLEZEROVARIABLES), Validity.VALID },
-		                { TestASTProvider.getRootASTNode(DIVISIONBYZEROCONDITIONAL), Validity.INVALID } });
+		                { TestASTProvider.getRootASTNode(DIVISIONBYZEROCONDITIONAL), Validity.INVALID },
+		                { TestASTProvider.getRootASTNode(MODULUSBYZEROLITERAL), Validity.INVALID },
+		                { TestASTProvider.getRootASTNode(MODULUSBYZEROVARIABLE), Validity.INVALID },
+		                { TestASTProvider.getRootASTNode(MODULUSBYMULTIPLEZEROVARIABLES), Validity.VALID },
+		                { TestASTProvider.getRootASTNode(MODULUSBYZEROCONDITIONAL), Validity.INVALID } });
 	}
 
 	/**

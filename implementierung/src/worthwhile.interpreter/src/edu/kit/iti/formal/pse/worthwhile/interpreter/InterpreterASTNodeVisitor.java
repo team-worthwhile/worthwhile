@@ -378,8 +378,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (this.resultStack.peek() instanceof BooleanValue) {
 				return (BooleanValue) this.resultStack.pop();
 			} else {
-				// TODO executionFailed
-				return null;
+				throw new RuntimeException("result type error on resultStack: boolean expected");
 			}
 		}
 	}
@@ -394,8 +393,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (this.resultStack.peek() instanceof IntegerValue) {
 				return (IntegerValue) this.resultStack.pop();
 			} else {
-				// TODO executionFailed
-				return null;
+				throw new RuntimeException("result type error on resultStack: integer expected");
 			}
 		}
 	}

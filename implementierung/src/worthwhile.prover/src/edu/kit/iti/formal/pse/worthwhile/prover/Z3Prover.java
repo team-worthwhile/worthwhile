@@ -14,7 +14,7 @@ public class Z3Prover extends StdProver {
 	 */
 	public Z3Prover() {
 		/* we will assume that z3 is in the PATH */
-		this(Arrays.asList("z3", "-in", "-smt2"));
+		this(Arrays.asList("z3", "-in", "-smt2", "-nw"));
 	}
 
 	/**

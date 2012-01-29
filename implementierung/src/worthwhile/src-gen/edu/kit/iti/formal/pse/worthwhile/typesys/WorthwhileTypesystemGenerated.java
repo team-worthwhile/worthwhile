@@ -61,23 +61,23 @@
 						// ----------------------------------------------------------------
 						// Section: Binary Expression with integer operands
 
-						computeCommonType( p.getAddition(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right());
+						useFixedType( p.getAddition(), p.getIntegerType() );
 						ensureFeatureType( p.getAddition(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getAddition(), p.getBinaryExpression_Right(), p.getIntegerType() );
 						ensureUnorderedCompatibility( "Both summands have to be an Integer or an expression which returns an integer", p.getAddition(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
-						computeCommonType( p.getSubtraction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right());
+						useFixedType( p.getSubtraction(), p.getIntegerType() );
 						ensureFeatureType( p.getSubtraction(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getSubtraction(), p.getBinaryExpression_Right(), p.getIntegerType() );
 						ensureUnorderedCompatibility( "Both minuend and subtrahend have to be an Integer or an expression which returns an integer", p.getSubtraction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
-						computeCommonType( p.getMultiplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right());
+						useFixedType( p.getMultiplication(), p.getIntegerType() );
 						ensureFeatureType( p.getMultiplication(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getMultiplication(), p.getBinaryExpression_Right(), p.getIntegerType() );
 						ensureUnorderedCompatibility( "Both factors have to be an Integer or an expression which returns an integer", p.getMultiplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
-						computeCommonType( p.getModulus(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right());
+						useFixedType( p.getModulus(), p.getIntegerType() );
 						ensureFeatureType( p.getModulus(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getModulus(), p.getBinaryExpression_Right(), p.getIntegerType() );
 						ensureUnorderedCompatibility( "Both operands have to be be an Integer or an expression which returns an integer", p.getModulus(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
-						computeCommonType( p.getDivision(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right());
+						useFixedType( p.getDivision(), p.getIntegerType() );
 						ensureFeatureType( p.getDivision(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getDivision(), p.getBinaryExpression_Right(), p.getIntegerType() );
 						ensureUnorderedCompatibility( "Both dividend and divisor have to be an Integer or an expression which returns an integer", p.getDivision(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );

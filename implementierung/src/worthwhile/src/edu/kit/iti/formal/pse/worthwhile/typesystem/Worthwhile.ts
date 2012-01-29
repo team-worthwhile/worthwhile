@@ -69,27 +69,27 @@ section "Binary Expression with integer operands"
 
 		//-BinaryExprssion with integer operands
 			//--and have return type IntegerType
-		typeof Addition -> common left right {
+		typeof Addition -> IntegerType {
 			ensureType left :<=: IntegerType 
 		 	ensureType right :<=: IntegerType 
 		 	ensureCompatibility left :<=>: right "Both summands have to be an Integer or an expression which returns an integer"
 		 }
-		 typeof Subtraction -> common left right {
+		 typeof Subtraction -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
 		 	ensureCompatibility left :<=>: right "Both minuend and subtrahend have to be an Integer or an expression which returns an integer"
 		 }
-		 typeof Multiplication -> common left right {
+		 typeof Multiplication -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
 		 	ensureCompatibility left :<=>: right "Both factors have to be an Integer or an expression which returns an integer"
 		 }
-		 typeof Modulus -> common left right {
+		 typeof Modulus -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
 		 	ensureCompatibility left :<=>: right "Both operands have to be be an Integer or an expression which returns an integer"
 		 }
-		 typeof Division -> common left right {
+		 typeof Division -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
 		 	ensureCompatibility left :<=>: right "Both dividend and divisor have to be an Integer or an expression which returns an integer"

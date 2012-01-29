@@ -30,7 +30,7 @@ public final class DebugHelper {
 	 * @throws CoreException
 	 *                 This is the purpose of the method.
 	 */
-	public static void showError(final String message, final Throwable e) throws CoreException {
+	public static void throwError(final String message, final Throwable e) throws CoreException {
 		throw new CoreException(new Status(IStatus.ERROR, "edu.kit.iti.formal.pse.worthwhile.debugger", 0,
 		                message, e));
 	}

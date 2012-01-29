@@ -31,7 +31,7 @@ import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
  * @author Joachim
  * 
  */
-public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
+public abstract class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDelegate {
 
 	/**
 	 * A resource set provider for loading the program.
@@ -39,16 +39,23 @@ public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDe
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
 
-	@Override
-	public final void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
-	                final IProgressMonitor monitor) throws CoreException {
-
+	/**
+	 * Gets a program from the specified launch configuration.
+	 * 
+	 * @param configuration
+	 *                The launch configuration.
+	 * @return The root AST node of the program launched by this configuration, or {@code null} if the file contains
+	 *         errors.
+	 * @throws CoreException
+	 *                 if getting the program from the file fails
+	 */
+	protected final Program getProgram(final ILaunchConfiguration configuration) throws CoreException {
 		// Get the file to execute from the launch configuration.
 		String path = configuration.getAttribute(ATTR_PATH, "");
 		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
 
 		if (file == null) {
-			DebugHelper.showError("The specified source file cannot be found.", null);
+			DebugHelper.throwError("The specified source file cannot be found.", null);
 		}
 
 		// Load the model from the file
@@ -57,16 +64,11 @@ public class WorthwhileLaunchConfigurationDelegate extends LaunchConfigurationDe
 		Resource resource = resourceSet.getResource(URI.createURI(path), true);
 
 		// Check if there are no parser errors
+		// TODO: Validate?!
 		if (!resource.getErrors().isEmpty()) {
-			DebugHelper.showError("There are errors in the source file.", null);
+			DebugHelper.throwError("There are errors in the source file.", null);
 		}
 
-		// Create and run the interpreter.
-		Program program = (Program) resource.getContents().get(0);
-		final Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
-
-		IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
-		launch.addDebugTarget(target);
+		return (Program) resource.getContents().get(0);
 	}
-
 }

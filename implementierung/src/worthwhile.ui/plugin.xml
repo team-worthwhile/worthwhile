@@ -360,12 +360,8 @@
   <extension
          point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType
-            delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate"
             id="edu.kit.iti.formal.pse.worthwhile.debugger.launch"
-            modes="run,debug"
-            name="Worthwhile Program"
-            sourceLocatorId="edu.kit.iti.formal.pse.worthwhile.debugger.sourceLookupDirector"
-            sourcePathComputerId="edu.kit.iti.formal.pse.worthwhile.debugger.sourcePathComputer">
+            name="Worthwhile Program">
       </launchConfigurationType>
    </extension>
   <extension
@@ -464,4 +460,25 @@
  	</action>
 </viewerContribution>   
 </extension>
+  <extension
+        point="org.eclipse.debug.core.launchDelegates">
+     <launchDelegate
+           delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileExecuteLaunchConfigurationDelegate"
+           delegateDescription="This delegate supports the execution and debugging of a Worthwhile program with the Worthwhile interpreter"
+           id="edu.kit.iti.formal.pse.worthwhile.ui.launching.delegates.execute"
+           modes="run,debug"
+           name="Execute Worthwhile program"
+           sourceLocatorId="edu.kit.iti.formal.pse.worthwhile.debugger.sourceLookupDirector"
+           sourcePathComputerId="edu.kit.iti.formal.pse.worthwhile.debugger.sourcePathComputer"
+           type="edu.kit.iti.formal.pse.worthwhile.debugger.launch">
+     </launchDelegate>
+     <launchDelegate
+           delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileProveLaunchConfigurationDelegate"
+           delegateDescription="This delegate checks a Worthwhile program against its specification with the Specification Checker."
+           id="edu.kit.iti.formal.pse.worthwhile.ui.launching.delegates.prove"
+           modes="prove"
+           name="Prove Worthwhile program"
+           type="edu.kit.iti.formal.pse.worthwhile.debugger.launch">
+     </launchDelegate>
+  </extension>
 </plugin>

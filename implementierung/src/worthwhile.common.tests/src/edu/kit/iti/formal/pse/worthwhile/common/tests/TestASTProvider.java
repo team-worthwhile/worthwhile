@@ -16,12 +16,12 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import com.google.inject.Injector;
 
 import edu.kit.iti.formal.pse.worthwhile.WorthwhileStandaloneSetup;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 public class TestASTProvider {
 
@@ -71,7 +71,7 @@ public class TestASTProvider {
 	}
 
 	public static Expression parseFormulaString(String formulaString) {
-		ASTNode n = TestASTProvider.getRootASTNode("{\nBoolean x := (" + formulaString + ")\n" + "}\n");
+		ASTNode n = TestASTProvider.getRootASTNode("{\n_assert (" + formulaString + ")\n" + "}\n");
 
 		if (n == null) {
 			return null;
@@ -80,7 +80,7 @@ public class TestASTProvider {
 		List<Statement> statements = ((Block) ((Program) n).getMainBlock().getStatements().get(0))
 		                .getStatements();
 
-		return ((VariableDeclaration) (statements.get(0))).getInitialValue();
+		return ((Annotation) (statements.get(0))).getExpression();
 	}
 
 	/**

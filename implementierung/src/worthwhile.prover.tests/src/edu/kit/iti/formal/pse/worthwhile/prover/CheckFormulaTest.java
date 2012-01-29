@@ -219,10 +219,10 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void equalSameBoundVariable() {
-		Expression expr = getExpression("forall Integer x : x = x");
+		Expression expr = getExpression("forall Integer n : n = n");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 
-		expr = getExpression("exists Integer x : x = x");
+		expr = getExpression("exists Integer n : n = n");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -231,10 +231,10 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void unequalSameBoundVariable() {
-		Expression expr = getExpression("forall Integer x : x != x");
+		Expression expr = getExpression("forall Integer n : n != n");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 
-		expr = getExpression("exists Integer x : x != x");
+		expr = getExpression("exists Integer n : n != n");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 	}
 
@@ -243,10 +243,10 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void equalDiffBoundVariable() {
-		Expression expr = getExpression("forall Integer x exists Integer y : x = y");
+		Expression expr = getExpression("forall Integer n exists Integer m : n = m");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 
-		expr = getExpression("exists Integer x forall Integer y : x = y");
+		expr = getExpression("exists Integer n forall Integer m : n = m");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 	}
 
@@ -255,10 +255,10 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void unequalDiffBoundVariable() {
-		Expression expr = getExpression("forall Integer x exists Integer y : x != y");
+		Expression expr = getExpression("forall Integer n exists Integer m : n != m");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 
-		expr = getExpression("exists Integer x forall Integer y : x != y");
+		expr = getExpression("exists Integer n forall Integer m : n != m");
 		assertEnvIndependentEquals(expr, Validity.INVALID);
 	}
 
@@ -267,7 +267,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void equalTransitiveFreeVariables() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x = y && y = z) || x = z");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : forall Boolean o : !(n = m && m = o) || n = o");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -276,7 +276,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void implicationNotOrEquivalence() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : (!x || y) = (!x || y)");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : (!n || m) = (!n || m)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -285,7 +285,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void notAndNotOrDeMorganEquivalence() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x || y) = (!x && !y)");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : !(n || m) = (!n && !m)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -294,7 +294,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void notOrNotAndDeMorganEquivalence() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : !(x && y) = !x || !y");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : !(n && m) = !n || !m");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -303,7 +303,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void andOrDistributivity() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x && (y || z)) = (x && y || x && z)");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : forall Boolean o : (n && (m || o)) = (n && m || n && o)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -312,7 +312,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void orAndDistributivity() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x || (y && z)) = ((x || y) && (x || z))");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : forall Boolean o : (n || (m && o)) = ((n || m) && (n || o))");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -321,7 +321,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void orAssociativity() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x || (y || z)) = ((x || y) || z)");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : forall Boolean o : (n || (m || o)) = ((n || m) || o)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -330,7 +330,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void andAssociativity() {
-		Expression expr = getExpression("forall Boolean x : forall Boolean y : forall Boolean z : (x && (y && z)) = ((x && y) && z)");
+		Expression expr = getExpression("forall Boolean n : forall Boolean m : forall Boolean o : (n && (m && o)) = ((n && m) && o)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -339,7 +339,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void vectorSpaceNeutralNeutralDistributivity() {
-		Expression expr = getExpression("forall Integer x : x + x = 2 * x");
+		Expression expr = getExpression("forall Integer n : n + n = 2 * n");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -348,7 +348,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void groupInverseAdditionEqualityTransformation() {
-		Expression expr = getExpression("forall Integer x : (x = x - 1) = (x + 1 = x)");
+		Expression expr = getExpression("forall Integer n : (n = n - 1) = (n + 1 = n)");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 
@@ -357,7 +357,7 @@ public final class CheckFormulaTest {
 	 */
 	@Test
 	public void forallIntegersExistsSuccessor() {
-		Expression expr = getExpression("forall Integer x exists Integer y : y = x + 1");
+		Expression expr = getExpression("forall Integer n exists Integer m : m = n + 1");
 		assertEnvIndependentEquals(expr, Validity.VALID);
 	}
 

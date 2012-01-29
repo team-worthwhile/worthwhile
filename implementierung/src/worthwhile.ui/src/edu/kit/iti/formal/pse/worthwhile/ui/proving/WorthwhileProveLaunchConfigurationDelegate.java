@@ -18,6 +18,7 @@ import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
 
@@ -45,7 +46,11 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 		String fileName = new Path(filePath).lastSegment();
 
 		if (program != null) {
-			SpecificationChecker specChecker = new SpecificationChecker();
+			// Create and run the prover, specification checker, and interpreter.
+			Z3Prover prover = new Z3Prover(
+			                preferenceStore.getString(WorthwhilePreferenceConstants.PROVER_PATH));
+
+			SpecificationChecker specChecker = new SpecificationChecker(prover);
 			specChecker.setTimeout(preferenceStore.getInt(WorthwhilePreferenceConstants.PROVER_TIMEOUT));
 			final WorthwhileProveJob proveJob = new WorthwhileProveJob("Prove " + fileName, specChecker,
 			                program);

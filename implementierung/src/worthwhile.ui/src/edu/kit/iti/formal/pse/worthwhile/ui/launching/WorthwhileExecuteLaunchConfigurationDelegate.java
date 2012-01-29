@@ -13,6 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
 
 /**
@@ -36,10 +37,14 @@ public class WorthwhileExecuteLaunchConfigurationDelegate extends WorthwhileLaun
 		Program program = this.getProgram(configuration);
 
 		if (program != null) {
-			// Create and run the interpreter.
-			SpecificationChecker specChecker = new SpecificationChecker();
+			// Create and run the prover, specification checker, and interpreter.
+			Z3Prover prover = new Z3Prover(
+			                preferenceStore.getString(WorthwhilePreferenceConstants.PROVER_PATH));
+
+			SpecificationChecker specChecker = new SpecificationChecker(prover);
 			specChecker.setTimeout(preferenceStore.getInt(WorthwhilePreferenceConstants.PROVER_TIMEOUT));
-			final Interpreter interpreter = new Interpreter(program, specChecker);
+
+			Interpreter interpreter = new Interpreter(program, specChecker);
 
 			IDebugTarget target = new WorthwhileDebugTarget(launch, interpreter);
 			launch.addDebugTarget(target);

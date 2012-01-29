@@ -130,7 +130,7 @@ section "Binary Expression with boolean operands"
 		 	ensureType right :<=: BooleanType
 		 	ensureCompatibility left :<=>: right "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean"
 		 }
-section "Binary Expression with boolean operands or integer operands"
+section "Binary Expression with boolean, integer or array operands"
 
 		  typeof Equal -> BooleanType {
 			ensureType left :<=: BooleanType, IntegerType, ArrayType

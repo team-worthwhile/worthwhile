@@ -111,7 +111,7 @@
 						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getConjunction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 
 						// ----------------------------------------------------------------
-						// Section: Binary Expression with boolean operands or integer operands
+						// Section: Binary Expression with boolean, integer or array operands
 
 						useFixedType( p.getEqual(), p.getBooleanType() );
 						ensureFeatureType( p.getEqual(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );

@@ -242,6 +242,19 @@
             style="push">
       </action>
    </editorContribution>
+   <editorContribution
+         id="edu.kit.iti.formal.pse.worthwhile.ui.toolbarActions"
+         targetID="edu.kit.iti.formal.pse.worthwhile.Worthwhile">
+      <action
+            class="edu.kit.iti.formal.pse.worthwhile.ui.actions.ProveActionDelegate"
+            icon="icons/run_prove.gif"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.actions.prove"
+            label="Prove"
+            style="push"
+            toolbarPath="org.eclipse.debug.ui.launchActionSet/debug"
+            tooltip="Invoke the prover on this program">
+      </action>
+   </editorContribution>
 </extension>
 <extension
       id="edu.kit.iti.formal.pse.worthwhile.ui.contenttype"

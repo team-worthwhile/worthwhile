@@ -61,6 +61,21 @@ public class SpecificationChecker {
 	private ProverCaller prover = new Z3Prover();
 
 	/**
+	 * @return the {@link ProverCaller} that is called for checking the satisfiability of formulae
+	 */
+	public final ProverCaller getProver() {
+		return this.prover;
+	}
+
+	/**
+	 * @param prover
+	 *                the {@link ProverCaller} that is called for checking the satisfiability of formulae
+	 */
+	public final void setProver(final ProverCaller prover) {
+		this.prover = prover;
+	}
+
+	/**
 	 * The {@link FormulaGenerator} that is called for generating a formula from a {@link Program}.
 	 */
 	private FormulaGenerator transformer;
@@ -120,18 +135,34 @@ public class SpecificationChecker {
 	}
 
 	/**
-	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer}.
+	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer} and {@link Z3Prover} with the default
+	 * command line as {@link SpecificationChecker#prover}.
 	 */
 	public SpecificationChecker() {
 		this.transformer = new WPStrategy();
+		this.prover = new Z3Prover();
 	}
 
 	/**
+	 * Uses {@link Z3Prover} with the default command line as {@link SpecificationChecker#prover}.
+	 * 
 	 * @param transformer
 	 *                Is called to transform {@link Program}s into formulae.
 	 */
 	public SpecificationChecker(final FormulaGenerator transformer) {
 		this.transformer = transformer;
+		this.prover = new Z3Prover();
+	}
+
+	/**
+	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer}.
+	 * 
+	 * @param prover
+	 *                the {@link ProverCaller} that is called for checking the satisfiability of formulae
+	 */
+	public SpecificationChecker(final ProverCaller prover) {
+		this.transformer = new WPStrategy();
+		this.prover = prover;
 	}
 
 	/**

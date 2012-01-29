@@ -25,8 +25,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -187,6 +189,18 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final LessOrEqual lessOrEqual) {
 		this.appendBinaryExpression(lessOrEqual, "<=");
+	}
+	
+	@Override
+	public void visit(final Loop loop) {
+		this.buf.append("while ");
+		loop.getCondition().accept(this);
+		for (final Invariant i : loop.getInvariants()) {
+			this.buf.append("\n_invariant ");
+			i.getExpression().accept(this);
+		}
+		this.buf.append(" ");
+		loop.getBody().accept(this);
 	}
 
 	@Override

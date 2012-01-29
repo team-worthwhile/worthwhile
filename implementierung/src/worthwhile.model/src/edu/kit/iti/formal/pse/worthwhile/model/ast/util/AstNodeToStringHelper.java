@@ -132,7 +132,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 			stmt.accept(this);
 			this.buf.append("\n");
 		}
-		this.buf.append("}");
+		this.buf.append("}\n");
 	}
 
 	@Override

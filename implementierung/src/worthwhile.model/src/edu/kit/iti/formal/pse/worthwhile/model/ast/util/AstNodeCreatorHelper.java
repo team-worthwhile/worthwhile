@@ -6,6 +6,7 @@ import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -52,6 +53,19 @@ public final class AstNodeCreatorHelper {
 		final Assertion assertion = AstNodeCreatorHelper.factory.createAssertion();
 		assertion.setExpression(expression);
 		return assertion;
+	}
+
+	/**
+	 * Creates an {@link Assumption} with the given {@link Expression}.
+	 * 
+	 * @param expression
+	 *                the <code>Expression</code> to assume
+	 * @return the created <code>Assumption</code>
+	 */
+	public static Assumption createAssumption(final Expression expression) {
+		final Assumption assumption = AstNodeCreatorHelper.factory.createAssumption();
+		assumption.setExpression(expression);
+		return assumption;
 	}
 
 	/**

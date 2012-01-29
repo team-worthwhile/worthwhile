@@ -1,11 +1,24 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
@@ -14,7 +27,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * Substitutes a child reference with some {@link Expression} in the parent {@link ASTNode} when indicated so by the
  * child.
  * 
- * Implements {@link HierarchialASTNodeVisitor#visit(FunctionCall}, {@link
+ * Implements all {@link Statement} visit methods, {@link HierarchialASTNodeVisitor#visit(FunctionCall}, {@link
  * HierarchialASTNodeVisitor#visit(QuantifiedExpression}, {@link HierarchialASTNodeVisitor#visit(BinaryExpression)} and
  * {@link HierarchialASTNodeVisitor#visit(UnaryExpression)} to traverse {@link Expression}s and substitute the
  * respective child references when the visited children called {@link SubstitutionVisitor#setFound(Boolean)}.
@@ -74,6 +87,67 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	 */
 	final void setSubstitute(final Expression substitute) {
 		this.substitute = substitute;
+	}
+
+	@Override
+	public void visit(final Program program) {
+		for (final FunctionDeclaration f : program.getFunctionDeclarations()) {
+			f.accept(this);
+		}
+
+		program.getMainBlock().accept(this);
+	}
+
+	@Override
+	public void visit(final FunctionDeclaration functionDeclaration) {
+		for (final Precondition p : functionDeclaration.getPreconditions()) {
+			p.accept(this);
+		}
+		for (final Postcondition p : functionDeclaration.getPostconditions()) {
+			p.accept(this);
+		}
+		functionDeclaration.getBody().accept(this);
+	}
+
+	@Override
+	public void visit(final Annotation annotation) {
+		annotation.getExpression().accept(this);
+	}
+
+	@Override
+	public void visit(final Assignment assignment) {
+		assignment.getValue().accept(this);
+	}
+
+	@Override
+	public void visit(final Block block) {
+		for (final Statement s : block.getStatements()) {
+			s.accept(this);
+		}
+	}
+
+	@Override
+	public void visit(final Conditional conditional) {
+		conditional.getCondition().accept(this);
+	}
+
+	@Override
+	public void visit(final Loop loop) {
+		loop.getCondition().accept(this);
+		for (final Invariant i : loop.getInvariants()) {
+			i.accept(this);
+		}
+		loop.getBody().accept(this);
+	}
+
+	@Override
+	public void visit(final ReturnStatement returnStatement) {
+		returnStatement.getReturnValue().accept(this);
+	}
+
+	@Override
+	public void visit(final VariableDeclaration variableDeclaration) {
+		variableDeclaration.getInitialValue().accept(this);
 	}
 
 	@Override

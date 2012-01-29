@@ -36,7 +36,7 @@ class VariableReferenceSubstitution extends SubstitutionVisitor {
 		expression.accept(substitutor);
 		if (substitutor.getFound()) {
 			substitutor.setFound(false);
-			return AstNodeCloneHelper.clone(substitute);
+			return substitutor.getSubstitute();
 		}
 		return expression;
 	}

@@ -60,10 +60,10 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * @return the substitute
+	 * @return a clone of the {@link SubstitutionVisitor#substitute}
 	 */
 	final Expression getSubstitute() {
-		return this.substitute;
+		return AstNodeCloneHelper.clone(this.substitute);
 	}
 
 	/**
@@ -82,14 +82,14 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 			condition.accept(this);
 
 			if (found) {
-				quantifiedExpression.setCondition(AstNodeCloneHelper.clone(substitute));
+				quantifiedExpression.setCondition(this.getSubstitute());
 				found = false;
 			}
 		}
 
 		quantifiedExpression.getExpression().accept(this);
 		if (found) {
-			quantifiedExpression.setExpression(AstNodeCloneHelper.clone(substitute));
+			quantifiedExpression.setExpression(this.getSubstitute());
 			found = false;
 		}
 	}
@@ -98,13 +98,13 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	public void visit(final BinaryExpression binaryExpression) {
 		binaryExpression.getLeft().accept(this);
 		if (found) {
-			binaryExpression.setLeft(AstNodeCloneHelper.clone(substitute));
+			binaryExpression.setLeft(this.getSubstitute());
 			found = false;
 		}
 
 		binaryExpression.getRight().accept(this);
 		if (found) {
-			binaryExpression.setRight(AstNodeCloneHelper.clone(substitute));
+			binaryExpression.setRight(this.getSubstitute());
 			found = false;
 		}
 	}
@@ -113,7 +113,7 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	public void visit(final UnaryExpression unaryExpression) {
 		unaryExpression.getOperand().accept(this);
 		if (found) {
-			unaryExpression.setOperand(AstNodeCloneHelper.clone(substitute));
+			unaryExpression.setOperand(this.getSubstitute());
 			found = false;
 		}
 	}

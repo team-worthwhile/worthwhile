@@ -249,7 +249,8 @@
             class="edu.kit.iti.formal.pse.worthwhile.ui.actions.ProveActionDelegate"
             icon="icons/run_prove.gif"
             id="edu.kit.iti.formal.pse.worthwhile.ui.actions.prove"
-            label="Prove"
+            label="Prove it!"
+            mode="FORCE_TEXT"
             style="push"
             toolbarPath="org.eclipse.debug.ui.launchActionSet/debug"
             tooltip="Invoke the prover on this program">
@@ -486,7 +487,7 @@
            type="edu.kit.iti.formal.pse.worthwhile.debugger.launch">
      </launchDelegate>
      <launchDelegate
-           delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileProveLaunchConfigurationDelegate"
+           delegate="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.proving.WorthwhileProveLaunchConfigurationDelegate"
            delegateDescription="This delegate checks a Worthwhile program against its specification with the Specification Checker."
            id="edu.kit.iti.formal.pse.worthwhile.ui.launching.delegates.prove"
            modes="prove"

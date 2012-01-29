@@ -219,7 +219,7 @@ public class WorthwhileExpressionParser extends WorthwhileDebugElement {
 
 		@Override
 		public boolean matches(final int severityMask) {
-			return (severityMask | IStatus.ERROR) > 0;
+			return (severityMask & IStatus.ERROR) > 0;
 		}
 
 	}

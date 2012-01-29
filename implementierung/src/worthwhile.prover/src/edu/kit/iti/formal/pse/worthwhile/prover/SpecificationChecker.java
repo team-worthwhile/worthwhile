@@ -104,7 +104,7 @@ public class SpecificationChecker {
 	 *                the listener to add
 	 * @return true if adding the listener succeeded, else false
 	 */
-	public final boolean addProverEventListener(final AbstractProverEventListener listener) {
+	public final boolean addProverEventListener(final IProverEventListener listener) {
 		return this.listener.addProverEventListener(listener);
 	}
 
@@ -115,7 +115,7 @@ public class SpecificationChecker {
 	 *                the listener to remove
 	 * @return true if removing the listener succeeded, else false
 	 */
-	public final boolean removeProverEventListener(final AbstractProverEventListener listener) {
+	public final boolean removeProverEventListener(final IProverEventListener listener) {
 		return this.listener.removeProverEventListener(listener);
 	}
 

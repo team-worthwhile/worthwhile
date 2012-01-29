@@ -3,7 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 /**
  * Represents a result of a proof attempt by a prover for a formula.
  */
-abstract class ProverResult {
+public abstract class ProverResult {
 	/**
 	 * The output of the prover.
 	 */

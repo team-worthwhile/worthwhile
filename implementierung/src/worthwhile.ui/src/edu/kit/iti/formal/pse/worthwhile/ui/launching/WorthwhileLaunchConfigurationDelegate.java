@@ -5,11 +5,8 @@ import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLau
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,10 +17,7 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
-import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
-import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
-import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  * This delegate is responsible for launching a Worthwhile program from a given launch configuration.

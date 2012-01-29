@@ -265,7 +265,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(ReturnStatement returnStatement) {
 		this.buf.append("return ");
-		returnStatement.accept(this);
+		returnStatement.getReturnValue().accept(this);
 	}
 
 	@Override

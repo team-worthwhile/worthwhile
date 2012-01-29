@@ -29,8 +29,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -274,13 +277,40 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 		this.buf.append(") ");
 
+		for (final Precondition p : functionDeclaration.getPreconditions()) {
+			this.buf.append("\n");
+			p.accept(this);
+		}
+
+		for (final Postcondition p : functionDeclaration.getPostconditions()) {
+			this.buf.append("\n");
+			p.accept(this);
+		}
+
 		functionDeclaration.getBody().accept(this);
+	}
+
+	@Override
+	public void visit(final Postcondition postcondition) {
+		this.buf.append("_ensures ");
+		postcondition.getExpression().accept(this);
+	}
+
+	@Override
+	public void visit(final Precondition precondition) {
+		this.buf.append("_requires ");
+		precondition.getExpression().accept(this);
 	}
 
 	@Override
 	public void visit(ReturnStatement returnStatement) {
 		this.buf.append("return ");
 		returnStatement.getReturnValue().accept(this);
+	}
+
+	@Override
+	public void visit(ReturnValueReference node) {
+		this.buf.append("_return");
 	}
 
 	@Override

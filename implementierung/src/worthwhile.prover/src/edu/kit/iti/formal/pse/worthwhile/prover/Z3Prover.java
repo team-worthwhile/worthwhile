@@ -14,18 +14,18 @@ public class Z3Prover extends StdProver {
 	 */
 	public Z3Prover() {
 		/* we will assume that z3 is in the PATH */
-		this(Arrays.asList("z3", "-in", "-smt2", "-nw"));
+		this("z3");
 	}
 
 	/**
-	 * Construct a new {@link Z3Prover} with the given command line.
+	 * Construct a new {@link Z3Prover} with the given Z3 binary path.
 	 * 
-	 * @param command
-	 *                the command line that is executed to run the Z3 prover binary
+	 * @param binary
+	 *                the path that is executed to run the Z3 prover with the default parameters
+	 *                <code>-in -smt2 -nw</code>
 	 */
-	public Z3Prover(final String command) {
-		/* we will use SMTLib as the input format */
-		super(command, new SMTLIBStrategy());
+	public Z3Prover(final String binary) {
+		this(Arrays.asList(binary, "-in", "-smt2", "-nw"));
 	}
 
 	/**

@@ -5,8 +5,19 @@
 \frametitle{Beweiserschnittstelle}
 \framesubtitle{Zeitplan}
 \begin{itemize}
+    \item<+-> Z3-Anbindung und ProverResult-Erstellung
 	\item<+-> ``Einfache'' Formelgenerierungen schon sehr früh möglich
+    \begin{itemize}
+        \item<+-> Zuweisung (auch Deklaration)
+        \item<+-> Bedingte Anweisung
+        \item<+-> Zusicherung und Annahme
+    \end{itemize}
 	\item<+-> Nach und nach Implementierung von komplizierteren Weakest-Precondition Features
+    \begin{itemize}
+        \item<+-> Schleife
+        \item<+-> Funktionsdeklaration
+        \item<+-> Funktionsaufruf
+    \end{itemize}
 	\item<+-> Stetige Erweiterung des SMTLIB-Compilers, um momentane Anforderungen zu erfüllen
 	\item<+-> Gute Abdeckung durch JUnit-Tests
 \end{itemize}

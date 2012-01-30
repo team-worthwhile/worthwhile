@@ -120,6 +120,29 @@ public class CheckProgramTest {
 			+ "    var := increment(var)\n"
 			+ "}\n"
 			+ "_assert var = 10\n";
+	
+	/**
+	 * 
+	 */
+	private static final String TEST_DEBUGGERDEMO = "function Integer[] buildArray(Integer length) {\n"
+			+ "Integer[] result\n"
+			+ "Integer i := 1\n"
+			+ "while (i <= length) {\n"
+			+ "    result[i - 1] := i\n"
+			+ "i := i + 1\n"
+			+ "}\n"
+			+ "return result\n"
+			+ "}\n"
+			+ "Integer len := 100\n"
+			+ "Integer[] array := buildArray(len)\n"
+			+ "Integer sum := 0\n"
+			+ "Integer j := 0\n"
+			+ "while (j < len)\n"
+			+ "_invariant sum = (j * (j + 1)) / 2\n"
+			+ "{\n"
+			+ "    sum := sum + array[j]\n"
+			+ "    j := j + 1\n"
+			+ "}\n";
 
 	/**
 	 * Test assignment of an Integer to an array at an index.
@@ -156,7 +179,8 @@ public class CheckProgramTest {
 		                { TestASTProvider.getRootASTNode(TEST_MAX), Validity.VALID },
 		                { TestASTProvider.getRootASTNode(TEST_CLONE), Validity.VALID },
 		                { TestASTProvider.getRootASTNode(TEST_ARRAYINDEXASSIGNMENT), Validity.VALID },
-		                { TestASTProvider.getRootASTNode(TEST_INCREMENTFUNCTION), Validity.VALID } });
+		                { TestASTProvider.getRootASTNode(TEST_INCREMENTFUNCTION), Validity.VALID },
+		                { TestASTProvider.getRootASTNode(TEST_DEBUGGERDEMO), Validity.VALID } });
 	}
 
 	/**

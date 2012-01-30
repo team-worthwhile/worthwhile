@@ -1,0 +1,51 @@
+//Axiome
+_axiom ∀ Integer a ∀ Integer b: (a + b) * (a + b) = a*a + 2*a*b + b*b
+
+//Funktionen
+function Boolean funktion(Integer param1, Integer param2)
+_requires param1 < param2
+_ensures _return = true
+{
+	return true
+}
+
+//Variablen Deklarationen
+Integer intVar := 10
+Boolean boolVar
+
+//Verzweigungen
+if(boolVar) {
+	boolVar := false
+} else {
+	boolVar := true
+}
+
+if(¬boolVar) {
+	intVar := 0
+}
+
+//Schleifen
+while(intVar < 15)
+_invariant intVar ≤ 15
+{
+	intVar := intVar + 1
+}
+
+Integer intVar2
+Boolean boolVar2 := true
+Boolean boolVar3
+
+//Zuweisungen, Arithmetische Operationen
+intVar2 := intVar * intVar
+boolVar3 := boolVar ∧ boolVar2
+
+//Arrays
+Integer[] intArray
+Boolean[] boolArray := {true, false, true, false}
+
+intArray[0] := 12
+intArray := {1, 2, 3, 4}
+
+//Weitere Annotationen
+_assume boolArray[1] = true 
+_assert intVar ≥ 0

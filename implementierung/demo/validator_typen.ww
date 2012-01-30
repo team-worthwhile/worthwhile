@@ -1,0 +1,18 @@
+//Quantifizierte Expression darf nur in Annotationen verwendet werden
+Boolean boolVar := ∀ Integer intVar : intVar > 0
+
+//Typ des zugewiesenen Werts und Typ der Variable müssen übereinstimmen
+Integer a := true
+a := false
+Integer[] b := {true, false, false, true}
+
+//Elemente müssen dem Typ des ArrayLiterals entsprechen 
+b := {0, 1, 2, true, 4, 5}
+
+Integer int
+Boolean bool
+//Typüberprüfung bei Arithmetik
+int := 0 + true
+int := 1 * false
+bool := 2 + 1
+bool := false ∨ 0

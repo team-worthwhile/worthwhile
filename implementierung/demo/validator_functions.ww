@@ -1,0 +1,43 @@
+function funktion(Integer parameter1, Integer parameter2)
+{	
+	//Parameter dürfen nicht verändert werden
+	parameter1 := 3
+	
+	Integer index := 0
+	/* 
+	 * Ein return in einer while Schleife gilt nicht
+	 * als valides return Statement
+	 */
+	while(index < 10) {
+		index := index + 1
+		return true
+	}
+	
+	/*
+	 * Falls sonst kein return Statement vorhanden,
+	 * muss im if und! else Block ein valides return Statement
+	 * vorhanden sein
+	 */
+	if(parameter1 < parameter2) {
+		return false
+	} else {
+		
+	}
+}
+
+//Typ des Returnwert muss mit Returntyp übereinstimmen
+function Integer funktion2() {
+	return true
+}
+
+//_return nur in Postcondition
+function Integer funktion3(Integer a, Integer b)
+_requires a > _return 
+_ensures _return = 0
+{
+	return 0
+}
+
+Integer intVar1 := funktion3(3)
+Integer intVar2 := funktion3(true, 0)
+Boolean boolVar := funktion3(1, 2)

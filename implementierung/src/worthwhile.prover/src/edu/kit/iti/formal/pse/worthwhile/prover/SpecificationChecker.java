@@ -2,7 +2,6 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.Map;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -259,14 +258,14 @@ public class SpecificationChecker {
 		Validity validity = Validity.UNKNOWN;
 		if (this.checkResult != null) {
 			switch (this.checkResult.getSatisfiability()) {
-				case SATISFIABLE:
-					validity = Validity.INVALID;
-					break;
-				case UNSATISFIABLE:
-					validity = Validity.VALID;
-					break;
-				default:
-					validity = Validity.UNKNOWN;
+			case SATISFIABLE:
+				validity = Validity.INVALID;
+				break;
+			case UNSATISFIABLE:
+				validity = Validity.VALID;
+				break;
+			default:
+				validity = Validity.UNKNOWN;
 			}
 		}
 

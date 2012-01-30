@@ -1,0 +1,25 @@
+function Integer[] buildArray(Integer length) {
+	
+	Integer[] result
+	Integer i := 1
+	
+	while (i ≤ length) {
+		result[i - 1] := i
+	}
+	
+	return result
+	
+}
+
+Integer len := 100
+
+Integer[] array := buildArray(len)
+Integer sum := 0
+Integer j := 0
+
+while (j < len)
+	_invariant sum = (j + (j - 1)) / 2
+{
+	sum := sum + array[j]	
+}
+

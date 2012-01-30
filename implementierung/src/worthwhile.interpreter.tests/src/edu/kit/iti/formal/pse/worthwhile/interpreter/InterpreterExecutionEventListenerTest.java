@@ -211,7 +211,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementExecutedPostCondition() {
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nInteger result := test()\n"), new SpecificationChecker());
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nBoolean result := test()\n"), new SpecificationChecker());
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementExecuted(Statement statement) {
@@ -419,7 +419,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecutePreCondition() {
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("function Boolean test()\n_requires true\n{\nreturn false\n}\nInteger result := test()\n"), new SpecificationChecker());
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_requires true\n{\nreturn false\n}\nBoolean result := test()\n"), new SpecificationChecker());
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {
@@ -437,7 +437,7 @@ public class InterpreterExecutionEventListenerTest {
 	@Test
 	public void testStatementWillExecutePostCondition() {
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nInteger result := test()\n"), new SpecificationChecker());
+		                TestASTProvider.getRootASTNode("function Boolean test()\n_ensures true\n{\nreturn false\n}\nBoolean result := test()\n"), new SpecificationChecker());
 		TestExecutionListener listener = new TestExecutionListener() {
 			@Override
 			public void statementWillExecute(Statement statement) {

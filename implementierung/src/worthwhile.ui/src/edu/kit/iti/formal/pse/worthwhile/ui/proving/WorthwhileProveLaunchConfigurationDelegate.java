@@ -12,12 +12,14 @@ import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.swt.SWT;
 import org.eclipse.ui.internal.Workbench;
 
 import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
 import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
@@ -72,24 +74,49 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 		public void done(final IJobChangeEvent event) {
 			final IStatus status = event.getResult();
 
+			// Type of the dialog to show
+			int type;
+			// Title of the dialog
+			String title = "";
+			// Dialog message
+			String message = "";
+
 			if (status.isOK()) {
-				Workbench.getInstance().getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						MessageDialog.openInformation(Workbench.getInstance()
-						                .getActiveWorkbenchWindow().getShell(),
-						                "Prove success", status.getMessage());
-					}
-				});
+				type = MessageDialog.INFORMATION;
+				title = "Prove success";
+				message = "The program conforms to the specification.";
 			} else {
-				// Something went horribly wrong
-				Workbench.getInstance().getDisplay().asyncExec(new Runnable() {
-					public void run() {
-						MessageDialog.openError(Workbench.getInstance()
-						                .getActiveWorkbenchWindow().getShell(), "Prove error",
-						                status.getMessage());
+				type = MessageDialog.ERROR;
+				if (status instanceof ProveResultStatus) {
+					if (Validity.INVALID.equals(((ProveResultStatus) status).getValidity())) {
+						message = "It cannot be proven that the program conforms to the specification.";
+					} else {
+						message = "The validity of the program could not be determined.";
 					}
-				});
+
+					title = "Prove unsuccessful";
+					message += "\n\nAdditional prover output: " + status.getMessage();
+				} else {
+					// Something went horribly wrong
+					title = "Prove error";
+					message += "There was an unexpected error invoking the prover:\n\n"
+					                + status.getMessage();
+				}
 			}
+
+			// Copy variable contents into new final variables, since the variables used in the inner
+			// Runnable class need to be final.
+			final int dialogType = type;
+			final String dialogTitle = title;
+			final String dialogMessage = message;
+
+			Workbench.getInstance().getDisplay().asyncExec(new Runnable() {
+				public void run() {
+					MessageDialog.open(dialogType, Workbench.getInstance()
+					                .getActiveWorkbenchWindow().getShell(), dialogTitle,
+					                dialogMessage, SWT.NONE);
+				}
+			});
 		}
 	}
 }

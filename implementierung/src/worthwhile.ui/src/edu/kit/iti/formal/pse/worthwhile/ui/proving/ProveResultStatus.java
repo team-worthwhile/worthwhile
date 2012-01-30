@@ -36,6 +36,15 @@ public class ProveResultStatus implements IStatus {
 		this.validity = validity;
 	}
 
+	/**
+	 * Returns the validity represented by this status.
+	 * 
+	 * @return the {@link Validity} represented by this status.
+	 */
+	public final Validity getValidity() {
+		return this.validity;
+	}
+
 	@Override
 	public final IStatus[] getChildren() {
 		return new IStatus[0];

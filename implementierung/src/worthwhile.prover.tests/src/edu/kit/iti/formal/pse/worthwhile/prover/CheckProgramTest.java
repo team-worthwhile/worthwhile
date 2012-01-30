@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
  * Tests {@link SpecificationChecker#checkProgram(Program)}.
  * 
  * @author fabian
+ * @author Leon Handreke
  * 
  */
 @RunWith(Parameterized.class)
@@ -121,6 +122,12 @@ public class CheckProgramTest {
 			+ "_assert var = 10\n";
 
 	/**
+	 * Test assignment of an Integer to an array at an index.
+	 */
+	private static final String TEST_ARRAYINDEXASSIGNMENT = "Integer[] a := {1, 2, 3}\n"
+			+ "a[0] := 42\n"
+			+ "_assert a[0] = 42 && a[1] = 2 && a[2] = 3\n";
+	/**
 	 * The {@link SpecificationChecker} to be tested.
 	 */
 	private SpecificationChecker checker;
@@ -138,7 +145,7 @@ public class CheckProgramTest {
 	/**
 	 * Returns an array of pairs of {@link Program}s and expected {@link Validity} results.
 	 * 
-	 * @return
+	 * @return the parameters to test with
 	 */
 	@Parameters
 	public static Collection<Object[]> testData() {
@@ -148,6 +155,7 @@ public class CheckProgramTest {
 		                { TestASTProvider.getRootASTNode(TEST_EVEN), Validity.VALID },
 		                { TestASTProvider.getRootASTNode(TEST_MAX), Validity.VALID },
 		                { TestASTProvider.getRootASTNode(TEST_CLONE), Validity.VALID },
+		                { TestASTProvider.getRootASTNode(TEST_ARRAYINDEXASSIGNMENT), Validity.VALID },
 		                { TestASTProvider.getRootASTNode(TEST_INCREMENTFUNCTION), Validity.VALID } });
 	}
 

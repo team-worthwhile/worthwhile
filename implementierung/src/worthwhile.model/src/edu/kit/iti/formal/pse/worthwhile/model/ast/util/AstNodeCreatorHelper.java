@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -78,6 +79,105 @@ public final class AstNodeCreatorHelper {
 		final ArrayLiteral arrayLiteral = AstNodeCreatorHelper.createArrayLiteral();
 		arrayLiteral.getValues().addAll(values);
 		return arrayLiteral;
+	}
+
+	/**
+	 * Indexes not covered by the given <code>values</code> are initialized with <code>false</code>.
+	 * 
+	 * @param values
+	 *                the value {@link Expression}s the new {@link ArrayFunction} is to be initialized with
+	 * @return a new <code>ArrayFunction</code> initialized with the given <code>values</code>
+	 */
+	public static ArrayFunction createFalseArrayFunction(final List<Expression> values) {
+		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createFalseArrayFunction();
+		return AstNodeCreatorHelper.createArrayFunction(values, arrayFunction);
+	}
+
+	/**
+	 * Indexes not covered by the given <code>values</code> are initialized with <code>0</code>.
+	 * 
+	 * @param values
+	 *                the value {@link Expression}s the new {@link ArrayFunction} is to be initialized with
+	 * @return a new <code>ArrayFunction</code> initialized with the given <code>values</code>
+	 */
+	public static ArrayFunction createZeroArrayFunction(final List<Expression> values) {
+		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createZeroArrayFunction();
+		return AstNodeCreatorHelper.createArrayFunction(values, arrayFunction);
+	}
+
+	/**
+	 * 
+	 * @param values
+	 *                the {@link Expression}s to be assigned to <code>chainedFunction</code>
+	 * @param chainedFunction
+	 *                the to be modified {@link ArrayFunction}
+	 * @return a new {@link ArrayFunction} that represents the assignment of <code>values</code> to
+	 *         <code>chainedFunction</code>
+	 */
+	public static ArrayFunction createArrayFunction(final List<Expression> values,
+	                final ArrayFunction chainedFunction) {
+		ArrayFunction arrayFunction = chainedFunction;
+
+		int index = -1;
+		for (final Expression v : values) {
+			index++;
+			final Expression indexLiteral = AstNodeCreatorHelper.createIntegerLiteral(BigInteger
+			                .valueOf(index));
+			arrayFunction = AstNodeCreatorHelper.createArrayFunction(indexLiteral, v, arrayFunction);
+		}
+
+		return arrayFunction;
+	}
+
+	/**
+	 * 
+	 * @param index
+	 *                the explicit index {@link Expression} for the case distinction
+	 * @param value
+	 *                the value <code>Expression</code> that is returned for the given <code>index</code>
+	 * @param chainedFunction
+	 *                the {@link ArrayFunction} that is evaluated for all <code>Expression</code>s different from
+	 *                the given <code>index</code>
+	 * @return a new <code>ArrayFunction</code> returning <code>value</code> for <code>index</code> and evaluating
+	 *         <code>chainedFunction</code> else
+	 */
+	public static ArrayFunction createArrayFunction(final Expression index, final Expression value,
+	                final ArrayFunction chainedFunction) {
+		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();
+		arrayFunction.setIndex(index);
+		arrayFunction.setValue(value);
+		arrayFunction.setChainedFunction(chainedFunction);
+		return arrayFunction;
+	}
+
+	/**
+	 * 
+	 * @return a new implicitly all <code>false</code> <code>ArrayFunction</code>
+	 */
+	public static ArrayFunction createFalseArrayFunction() {
+		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();
+		arrayFunction.setIndex(null);
+		arrayFunction.setValue(AstNodeCreatorHelper.createFalseLiteral());
+		return arrayFunction;
+	}
+
+	/**
+	 * 
+	 * @return a new implicitly all <code>0</code> <code>ArrayFunction</code>
+	 */
+	public static ArrayFunction createZeroArrayFunction() {
+		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();
+		arrayFunction.setIndex(null);
+		arrayFunction.setValue(AstNodeCreatorHelper.createZeroLiteral());
+		return arrayFunction;
+	}
+
+	/**
+	 * 
+	 * @return a new uninitialized <code>ArrayFunction</code>
+	 */
+	public static ArrayFunction createArrayFunction() {
+		return AstNodeCreatorHelper.factory.createArrayFunction();
 	}
 
 	/**

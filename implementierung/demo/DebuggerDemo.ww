@@ -1,3 +1,7 @@
+/*
+ * Builds an array with specified length that contains the
+ * values from 1 to length.
+ */
 function Integer[] buildArray(Integer length) {
 	
 	Integer[] result
@@ -12,15 +16,25 @@ function Integer[] buildArray(Integer length) {
 	
 }
 
-Integer len := 100
+function Integer sumArray(Integer[] arrayToSum, Integer arrayLength)
+	_requires arrayLength ≥ 0
+	_ensures _return = (arrayLength * (arrayLength + 1)) / 2
+{ 
+	Integer sum := 0
+	Integer j := 0
 
-Integer[] array := buildArray(len)
-Integer sum := 0
-Integer j := 0
-
-while (j < len)
-	_invariant sum = (j * (j + 1)) / 2
-{
-	sum := sum + array[j]	
-	j := j + 1
+	while (j < arrayLength)
+		_invariant sum = (j * (j + 1)) / 2
+	{
+		sum := sum + arrayToSum[j]	
+		j := j + 1
+	}
+	
+	return sum
 }
+
+Integer len := 100
+Integer[] array := buildArray(len)
+Integer mySum := sumArray(array, len)
+
+_assert mySum = (len * (len + 1)) / 2

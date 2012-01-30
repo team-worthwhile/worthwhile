@@ -10,7 +10,7 @@ public class Z3Prover extends StdProver {
 	/**
 	 * Construct a new prover caller with the default Z3 command line.
 	 * 
-	 * The default Z3 command line is <code>z3 -in -smt2 -nw</code>.
+	 * The default Z3 command line is <code>z3 -in -smt2 -nw -m</code>.
 	 */
 	public Z3Prover() {
 		/* we will assume that z3 is in the PATH */
@@ -22,7 +22,7 @@ public class Z3Prover extends StdProver {
 	 * 
 	 * @param binary
 	 *                the path that is executed to run the Z3 prover with the default parameters
-	 *                <code>-in -smt2 -nw</code>
+	 *                <code>-in -smt2 -nw -m</code>
 	 */
 	public Z3Prover(final String binary) {
 		this(Arrays.asList(binary, "-in", "-smt2", "-nw", "-m"));

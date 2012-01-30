@@ -1,17 +1,17 @@
 \section{Änderungen am Entwurf}
 % TODO: generelle Einführung, wie toll unser Entwurf doch war
 \subsection{Grammatik}
-\subsubsection{\_return-Statement}
-In der Grammtik wurde das neue Schlüsselwort \texttt{\_return} eingefügt, um auf den Rückgabewert einer Funktion in ihrer Nachbedingung zugreifen zu können.
+\subsubsection{\_return-Verweis}
+In der Grammatik wurde das neue Schlüsselwort \texttt{\_return} eingefügt, um auf den Rückgabewert einer Funktion in ihrer Nachbedingung verweisen zu können.
 \subsubsection{Arraygröße}
-Da unbeschränkte Arrays für den Benutzer einfacher zu handhaben sin, gibt es nun ausschließlich Arrays mit unbegrenzter Größe. Dies hat außerdem zur Folge, dass der \texttt{length()}-Operator entfällt und bei der Deklaration eines Arrays keine Größenangabe mehr möglich ist. Die nicht initialisierten Elemente eines Arrays werden mit dem Defaultwert des jeweiligen Basisdatentypen belegt. Im Speziellen heißt dies, dass Boolean-Arrays mit \texttt{false} und Integer-Arrays mit \texttt{0} vorinitialisiert werden.
+Da unbeschränkte Arrays für den Benutzer einfacher zu handhaben sind, gibt es nun ausschließlich Arrays mit unbegrenzter Größe. Dies hat außerdem zur Folge, dass der \texttt{length}-Operator entfällt und bei der Deklaration eines Arrays keine Größenangabe mehr möglich ist. Die nicht initialisierten Elemente eines Arrays werden mit dem Defaultwert des jeweiligen Basisdatentyps belegt. Im Speziellen heißt dies, dass Boolean-Arrays mit \texttt{false} und Integer-Arrays mit \texttt{0} vorinitialisiert werden.
 
 \subsection{Parser\label{aenderung_parser}}
 Die Schnittstellenklasse \texttt{Parser} des Entwurfs wurde durch die von ANTLR generierte Parserklasse realisiert, da diese bereits die benötigte Funktionalität zur Verfügung stellt. Insbesondere die GUI benutzt nun diese ANTLR-Klasse, um mit dem Parser zu kommunizieren.
 
 \subsection{Interpreter}
 \subsubsection{Klasse Value}
-Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp (Integer, Boolean, Array) eine eigene Klasse existiert, welche den jeweiligen Wert in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Composite-Pattern implementiert. Außerdem wurde wie im AST auch das Visitor-Pattern implementiert, um Fallunterscheidungen im Code zu vermeiden. Da diese Klassen auch von anderen Programmteilen außer dem Interpreter benutzt werden, wurden sie aus dem Interpreter ausgelagert und somit allen anderen Komponenten zugänglich gemacht.
+Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp (Integer, Boolean, Array) eine eigene Klasse existiert, welche den jeweiligen Wert in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Composite-Pattern implementiert. Außerdem wurde, wie im AST auch, das Visitor-Pattern implementiert, um Fallunterscheidungen im Code zu vermeiden. Da diese Klassen auch von dem Prover für den Kontext einer Formelauswertung benutzt werden, wurden sie aus dem Interpreter in das Model ausgelagert.
 
 \subsubsection{Breakpoints\label{aenderung_interpreter_breakpoints}}
 Da Breakpoints eine vom Interpreter unabhängige Funktion des Debuggers darstellen, die indirekt über den ExecutionEventListener realisierbar ist, wurde die entsprechende Funktionalität nicht im Interpreter, sondern im Debugger der GUI realisiert.

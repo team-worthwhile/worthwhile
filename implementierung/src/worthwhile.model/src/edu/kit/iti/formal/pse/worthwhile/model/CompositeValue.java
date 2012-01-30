@@ -39,7 +39,7 @@ public class CompositeValue<T extends Value> extends Value {
 	public CompositeValue(final Map<Integer, T> subValues) {
 		this.subValues = subValues;
 	}
-	
+
 	/**
 	 * Creates a new instance of the {@link CompositeValue} class.
 	 * 
@@ -47,10 +47,36 @@ public class CompositeValue<T extends Value> extends Value {
 	 *                The sub-values of this value.
 	 */
 	public CompositeValue(final T[] subValues) {
-		this.subValues = new HashMap<Integer,T>();
+		this.subValues = new HashMap<Integer, T>();
 		for (int i = 0; i < subValues.length; i++) {
 			this.subValues.put(i, subValues[i]);
 		}
+	}
+
+	/**
+	 * Returns a new instance of the {@link CompositeValue} class with the value at index i replaced by (or newly
+	 * set to) the specified value.
+	 * 
+	 * @param index
+	 *                The index at which to set the new value.
+	 * @param newValue
+	 *                The new value to set.
+	 * @return a new instance of the {@link CompositeValue} class with the value at index i replaced by (or newly
+	 *         set to) the specified value.
+	 */
+	public CompositeValue<T> replaceValue(int index, T newValue) {
+		// Copy the current values to a new composite value
+		Map<Integer, T> newValues = new HashMap<Integer, T>();
+		
+		for (Integer idx : this.subValues.keySet()) {
+			newValues.put(idx, this.getSubValues().get(idx));
+		}
+		
+		// Put the new value at the specified index.
+		newValues.put(index, newValue);
+		
+		// Return a new composite value.
+		return new CompositeValue<T>(newValues);
 	}
 
 	@Override
@@ -59,22 +85,22 @@ public class CompositeValue<T extends Value> extends Value {
 	}
 
 	@Override
-        public final boolean equals(final Object other) {
+	public final boolean equals(final Object other) {
 		if (other instanceof CompositeValue<?>) {
 			return this.subValues.equals(((CompositeValue<?>) other).getSubValues());
 		} else {
 			return false;
 		}
 	}
-	
+
 	@Override
-        public final int hashCode() {
+	public final int hashCode() {
 		int result = 0;
-		
+
 		for (Integer index : this.subValues.keySet()) {
 			result += this.subValues.get(index).hashCode();
 		}
-		
+
 		return result;
 	}
 

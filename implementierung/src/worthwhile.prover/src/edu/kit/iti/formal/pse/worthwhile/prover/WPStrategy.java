@@ -210,7 +210,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		// the updated weakest precondition
 		Conjunction conjunction = AstNodeCreatorHelper.createConjunction();
 
-		Expression wp = this.weakestPreconditionStack.peek();
+		Expression wp = AstNodeCloneHelper.clone(this.weakestPreconditionStack.peek());
 
 		// will calculate new wp for if-block and replace wp on top of stack with it
 		conditional.getTrueBlock().accept(this);

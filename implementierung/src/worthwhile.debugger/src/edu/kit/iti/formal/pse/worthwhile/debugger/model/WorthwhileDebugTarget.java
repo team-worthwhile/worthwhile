@@ -114,7 +114,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 			                .getBreakpoints(ID_WORTHWHILE_DEBUG_MODEL);
 			for (IBreakpoint breakpoint : breakpoints) {
 				try {
-					if (breakpoint.isEnabled()) {
+					if (this.supportsBreakpoint(breakpoint) && breakpoint.isEnabled()) {
 						breakpointAdded(breakpoint);
 					}
 				} catch (CoreException e) {

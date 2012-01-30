@@ -456,10 +456,10 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		this.weakestPreconditionStack.pop();
 
-		Expression postcondition = AstNodeCloneHelper.clone(this.postcondition);
-		postcondition = ReturnValueReferenceSubstitution.substitute(postcondition, returnValue);
+		Expression substitutedPostcondition = AstNodeCloneHelper.clone(this.postcondition);
+		substitutedPostcondition = ReturnValueReferenceSubstitution.substitute(substitutedPostcondition, returnValue);
 
-		this.weakestPreconditionStack.push(postcondition);
+		this.weakestPreconditionStack.push(substitutedPostcondition);
 	}
 
 	/**

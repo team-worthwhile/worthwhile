@@ -582,7 +582,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (this.popBooleanValue().getValue()) {
 				conditional.getTrueBlock().accept(this);
 			} else {
-				conditional.getFalseBlock().accept(this);
+				if (conditional.getFalseBlock() != null) {
+					conditional.getFalseBlock().accept(this);
+				}
 			}
 		} catch (StatementException e) {
 			this.executionFailed(conditional, e.getError());

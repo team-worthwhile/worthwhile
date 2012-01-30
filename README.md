@@ -24,4 +24,4 @@ Now, find `edu.kit.iti.formal.pse.worthwhile/src/edu.kit.iti.formal.pse.worthwhi
 
 You might also need to add `com.google.inject` as a dependency to the product. Find `edu.kit.iti.formal.pse.worthwhile.product/META-INF/MANIFEST.MF`, open it, select the *Dependencies* tab and add `com.google.inject` as a dependency.
 
-You should now be ready to go! Find `edu.kit.iti.formal.pse.worthwhile.product/worthwhile.product.launch`. Right-click it, select *Debug As → worthwhile.product*. Boom! You're in for endless hours of fun with Worthwhile!
+Nobody knows why, but to get everything to work you have to open `edu.kit.iti.formal.pse.worthwhile.product/worthwhile.product`, select the *Dependencies* tab and press the *Add Required Plug-ins* button. Now, switch back to the *Overview* tab and in the *Testing* section first select *Synchronize* and then *Launch an Eclipse application*. Boom! You're in for endless hours of fun with Worthwhile!

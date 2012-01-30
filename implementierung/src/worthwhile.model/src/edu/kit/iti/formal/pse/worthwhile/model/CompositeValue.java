@@ -79,6 +79,11 @@ public class CompositeValue<T extends Value> extends Value {
 		// Return a new composite value.
 		return new CompositeValue<T>(newValues);
 	}
+	
+	@SuppressWarnings("unchecked")
+        public CompositeValue<T> replaceUntypedValue(BigInteger index, Value newValue) {
+		return this.replaceValue(index, (T) newValue);
+	}
 
 	@Override
 	public final void accept(final IValueVisitor visitor) {

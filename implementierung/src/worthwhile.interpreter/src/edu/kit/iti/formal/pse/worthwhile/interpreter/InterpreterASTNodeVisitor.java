@@ -321,7 +321,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			listener.expressionEvaluated(expression);
 		}
 	}
-	
+
 	/**
 	 * Signals the failure of a {@link Expression}.
 	 * 
@@ -411,6 +411,22 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * Pops a composite value from the result stack. Fails the execution if there is no composite value on the
+	 * stack.
+	 * 
+	 * @return the {@link CompositeValue} that is on top of the stack.
+	 */
+	private CompositeValue<?> popCompositeValue() {
+		synchronized (this.resultStack) {
+			if (this.resultStack.peek() instanceof IntegerValue) {
+				return (CompositeValue<?>) this.resultStack.pop();
+			} else {
+				throw new RuntimeException("result type error on resultStack: composite expected");
+			}
+		}
+	}
+
+	/**
 	 * adds the {@link IntegerValue}s of the {@link expression}s addition.left and addition.right and pushes the
 	 * result on the resultStack.
 	 * 
@@ -492,7 +508,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(assignment);
 		try {
 			assignment.getValue().accept(this);
-			this.setSymbol(assignment.getVariable().getVariable(), resultStack.pop());
+			VariableReference reference = assignment.getVariable();
+			if (reference.getIndex() == null) {
+				this.setSymbol(reference.getVariable(), this.resultStack.pop());
+			} else {
+				reference.getIndex().accept(this);
+				IntegerValue index = this.popIntegerValue();
+				CompositeValue<? extends Value> oldValue = (CompositeValue<?>) this.getSymbol(reference
+				                .getVariable());
+				CompositeValue<? extends Value> newValue = oldValue.replaceUntypedValue(
+				                index.getValue(), this.resultStack.pop());
+				this.setSymbol(reference.getVariable(), newValue);
+			}
 		} catch (StatementException e) {
 			this.executionFailed(assignment, e.getError());
 			return;

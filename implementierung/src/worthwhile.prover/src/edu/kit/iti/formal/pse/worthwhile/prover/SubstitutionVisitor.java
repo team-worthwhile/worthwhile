@@ -185,6 +185,13 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 			this.found = false;
 			conditional.setCondition(this.getSubstitute());
 		}
+
+		conditional.getTrueBlock().accept(this);
+
+		final Block falseBlock = conditional.getFalseBlock();
+		if (falseBlock != null) {
+			falseBlock.accept(this);
+		}
 	}
 
 	@Override

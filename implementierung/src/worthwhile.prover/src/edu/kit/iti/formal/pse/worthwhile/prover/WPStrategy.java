@@ -235,7 +235,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			conditional.getFalseBlock().accept(this);
 			implication.setRight(this.weakestPreconditionStack.pop());
 		} else {
-			implication.setRight(AstNodeCreatorHelper.createTrueLiteral());
+			implication.setRight(wp);
 		}
 
 		conjunction.setRight(implication);

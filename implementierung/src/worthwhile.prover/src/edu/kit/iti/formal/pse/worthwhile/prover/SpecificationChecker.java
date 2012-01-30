@@ -285,6 +285,7 @@ public class SpecificationChecker {
 		// add assertions to check that the divisors are not zero
 		modifiedProgram.accept(new DivisionByZeroAssertionInserter());
 		modifiedProgram.accept(new ImplicitInitialValueInserter());
+		modifiedProgram.accept(new ArrayFunctionInserter());
 		modifiedProgram.accept(new FunctionCallSubstitution());
 		// generate formula from program
 		Expression formula = this.transformer.transformProgram(modifiedProgram);

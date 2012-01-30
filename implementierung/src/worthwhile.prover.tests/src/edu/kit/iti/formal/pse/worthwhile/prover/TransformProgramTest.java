@@ -50,6 +50,7 @@ public final class TransformProgramTest {
 	private void testTransformProgram(final String program, final Expression expected) {
 		final Program p = this.getProgram(program);
 		p.accept(new ImplicitInitialValueInserter());
+		p.accept(new ArrayFunctionInserter());
 		final Expression actual = this.transformer.transformProgram(p);
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}

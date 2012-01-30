@@ -1104,12 +1104,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 					if (arrayType.getBaseType() instanceof BooleanType) {
 						this.setSymbol(variableDeclaration, new CompositeValue<BooleanValue>(
-						                new BooleanValue[this.popIntegerValue().getValue()
-						                                .intValue()]));
+						                new BooleanValue[0]));
 					} else {
 						this.setSymbol(variableDeclaration, new CompositeValue<IntegerValue>(
-						                new IntegerValue[this.popIntegerValue().getValue()
-						                                .intValue()]));
+						                new IntegerValue[0]));
 					}
 				} else if (variableDeclaration.getType() instanceof BooleanType) {
 					this.setSymbol(variableDeclaration, new BooleanValue(Boolean.FALSE));

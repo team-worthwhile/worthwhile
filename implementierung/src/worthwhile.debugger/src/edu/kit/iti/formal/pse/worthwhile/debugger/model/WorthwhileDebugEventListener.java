@@ -210,14 +210,14 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 	public final void executionCompleted() {
 		this.getDebugTarget().terminated();
 	}
-	
+
 	@Override
 	public final void executionFailed(final Statement statement, final InterpreterError error) {
 		this.getDebugTarget().executionFailed(statement, error);
 		this.suspendExecution(DebugEvent.SUSPEND);
 		this.terminate();
 	}
-	
+
 	@Override
 	public final void expressionFailed(final Expression expression, final InterpreterError error) {
 		this.getDebugTarget().executionFailed(expression, error);
@@ -242,15 +242,15 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 				// Notify the debug target that a breakpoint has been hit
 				this.getDebugTarget().breakpointHit(this.lineBreakpoints.get(lineNumber));
-			}
-		} else {
-			// Check if we want to suspend anyway, because of stepping mode or client request
-			if (this.mode.equals(DebugMode.STEP)) {
-				doSuspend = true;
-				suspendReason = DebugEvent.STEP_END;
-			} else if (this.mode.equals(DebugMode.SUSPEND)) {
-				doSuspend = true;
-				suspendReason = DebugEvent.CLIENT_REQUEST;
+			} else {
+				// Check if we want to suspend anyway, because of stepping mode or client request
+				if (this.mode.equals(DebugMode.STEP)) {
+					doSuspend = true;
+					suspendReason = DebugEvent.STEP_END;
+				} else if (this.mode.equals(DebugMode.SUSPEND)) {
+					doSuspend = true;
+					suspendReason = DebugEvent.CLIENT_REQUEST;
+				}
 			}
 		}
 

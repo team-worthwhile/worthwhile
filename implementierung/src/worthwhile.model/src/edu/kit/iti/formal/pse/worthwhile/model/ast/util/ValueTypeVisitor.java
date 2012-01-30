@@ -15,24 +15,24 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
 public class ValueTypeVisitor extends ValueReturnVisitor<String> {
 
 	@Override
-        public final <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
+	public final <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
 		StringBuilder sb = new StringBuilder();
-		if (value.getSubValues().length > 0) {
-			sb.append(this.apply(value.getSubValues()[0]));
+		if (value.getSubValues().size() > 0) {
+			sb.append(this.apply(value.getSubValues().entrySet().iterator().next().getValue()));
 		} else {
-			sb.append("?"); // FIXME
+			sb.append("-");
 		}
 		sb.append("[]");
 		this.setReturnValue(sb.toString());
 	}
 
 	@Override
-        public final void visitIntegerValue(final IntegerValue value) {
+	public final void visitIntegerValue(final IntegerValue value) {
 		this.setReturnValue("Integer");
 	}
 
 	@Override
-        public final void visitBooleanValue(final BooleanValue value) {
+	public final void visitBooleanValue(final BooleanValue value) {
 		this.setReturnValue("Boolean");
 	}
 

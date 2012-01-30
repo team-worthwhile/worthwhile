@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
@@ -18,14 +19,14 @@ public class CompositeValue<T extends Value> extends Value {
 	/**
 	 * The sub-values of this composite value.
 	 */
-	private final T[] subValues;
+	private final Map<Integer, T> subValues;
 
 	/**
 	 * Returns the sub-values of this composite value.
 	 * 
 	 * @return The sub-values of this composite value.
 	 */
-	public final T[] getSubValues() {
+	public final Map<Integer, T> getSubValues() {
 		return this.subValues;
 	}
 
@@ -35,8 +36,21 @@ public class CompositeValue<T extends Value> extends Value {
 	 * @param subValues
 	 *                The sub-values of this value.
 	 */
-	public CompositeValue(final T[] subValues) {
+	public CompositeValue(final Map<Integer, T> subValues) {
 		this.subValues = subValues;
+	}
+	
+	/**
+	 * Creates a new instance of the {@link CompositeValue} class.
+	 * 
+	 * @param subValues
+	 *                The sub-values of this value.
+	 */
+	public CompositeValue(final T[] subValues) {
+		this.subValues = new HashMap<Integer,T>();
+		for (int i = 0; i < subValues.length; i++) {
+			this.subValues.put(i, subValues[i]);
+		}
 	}
 
 	@Override
@@ -47,7 +61,7 @@ public class CompositeValue<T extends Value> extends Value {
 	@Override
         public final boolean equals(final Object other) {
 		if (other instanceof CompositeValue<?>) {
-			return Arrays.equals(this.subValues, ((CompositeValue<?>) other).getSubValues());
+			return this.subValues.equals(((CompositeValue<?>) other).getSubValues());
 		} else {
 			return false;
 		}
@@ -57,8 +71,8 @@ public class CompositeValue<T extends Value> extends Value {
         public final int hashCode() {
 		int result = 0;
 		
-		for (T subValue : this.subValues) {
-			result += subValue.hashCode();
+		for (Integer index : this.subValues.keySet()) {
+			result += this.subValues.get(index).hashCode();
 		}
 		
 		return result;

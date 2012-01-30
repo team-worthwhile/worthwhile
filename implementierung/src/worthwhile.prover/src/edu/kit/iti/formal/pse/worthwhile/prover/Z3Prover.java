@@ -25,7 +25,7 @@ public class Z3Prover extends StdProver {
 	 *                <code>-in -smt2 -nw</code>
 	 */
 	public Z3Prover(final String binary) {
-		this(Arrays.asList(binary, "-in", "-smt2", "-nw"));
+		this(Arrays.asList(binary, "-in", "-smt2", "-nw", "-m"));
 	}
 
 	/**

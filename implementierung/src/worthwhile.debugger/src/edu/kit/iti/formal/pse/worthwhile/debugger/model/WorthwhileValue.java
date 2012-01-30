@@ -122,11 +122,12 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 
 		@Override
 		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
-			IVariable[] result = new IVariable[value.getSubValues().length];
+			IVariable[] result = new IVariable[value.getSubValues().size()];
 
 			// Create an array entry for each of the sub values.
-			for (int i = 0; i < value.getSubValues().length; i++) {
-				result[i] = createArrayEntry(i, createSubValue(value.getSubValues()[i]));
+			int i = 0;
+			for (int index : value.getSubValues().keySet()) {
+				result[i++] = createArrayEntry(i, createSubValue(value.getSubValues().get(index)));
 			}
 
 			this.setReturnValue(result);
@@ -156,15 +157,18 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 		public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
 			StringBuilder sb = new StringBuilder();
 			sb.append("{");
-
-			for (int i = 0; i < value.getSubValues().length; i++) {
-				sb.append(this.apply(value.getSubValues()[i]));
-
-				if (i < value.getSubValues().length - 1) {
+			
+			int i = 0;
+			for (int index : value.getSubValues().keySet()) {
+				sb.append(this.apply(value.getSubValues().get(index)));
+				
+				if (i < value.getSubValues().size() - 1) {
 					sb.append(", ");
 				}
+				
+				i++;
 			}
-
+			
 			sb.append("}");
 			this.setReturnValue(sb.toString());
 		}

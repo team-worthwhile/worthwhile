@@ -74,7 +74,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		// what we want to know about the formula
 		// TODO: Make this more intelligent, maybe wrap the Expression in an
 		// Assert and then visit it just like all the other nodes...?
-		return declarationsString + "(assert " + formulaString + ")\n(check-sat)\n";
+		return declarationsString + "(assert " + formulaString + ")\n(check-sat)\n(get-model)\n";
 	}
 
 	/**

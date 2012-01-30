@@ -509,9 +509,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		try {
 			assignment.getValue().accept(this);
 			VariableReference reference = assignment.getVariable();
+			
+			//Decide if we have to handle arrays
 			if (reference.getIndex() == null) {
 				this.setSymbol(reference.getVariable(), this.resultStack.pop());
 			} else {
+				//create a new array with the new value and replace the old one
 				reference.getIndex().accept(this);
 				IntegerValue index = this.popIntegerValue();
 				CompositeValue<? extends Value> oldValue = (CompositeValue<?>) this.getSymbol(reference
@@ -707,6 +710,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		EList<Expression> actuals = functionCall.getActuals();
 		this.executingVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
+		
+		//calculate the actual parameters
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
 			this.executingVisitor.setSymbol(functionCall.getFunction().getParameters().get(i),
@@ -1099,10 +1104,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(VariableDeclaration variableDeclaration) {
 		this.statementWillExecute(variableDeclaration);
 		try {
+			//just set the variable if the declaration includes a definition...
 			if (variableDeclaration.getInitialValue() != null) {
 				variableDeclaration.getInitialValue().accept(this);
 				this.setSymbol(variableDeclaration, this.resultStack.pop());
 			} else {
+				//...or choose the respective default values
 				if (variableDeclaration.getType() instanceof ArrayType) {
 					final ArrayType arrayType = ((ArrayType) variableDeclaration.getType());
 
@@ -1142,9 +1149,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			// Evaluate the index expression
 			variableReference.getIndex().accept(this);
 			BigInteger index = this.popIntegerValue().getValue();
-			
+
 			// Get the appropriate value from the array, or throw an error if the index is out of bounds.
-			CompositeValue<?> completeArray = (CompositeValue<?>) this.getSymbol(variableReference.getVariable());
+			CompositeValue<?> completeArray = (CompositeValue<?>) this.getSymbol(variableReference
+			                .getVariable());
 			Map<BigInteger, ?> arrayValues = completeArray.getSubValues();
 			if (arrayValues.containsKey(index)) {
 				this.resultStack.push((Value) arrayValues.get(index));

@@ -16,6 +16,9 @@ Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp 
 \subsubsection{Breakpoints\label{aenderung_interpreter_breakpoints}}
 Da Breakpoints eine vom Interpreter unabhängige Funktion des Debuggers darstellen, die indirekt über den ExecutionEventListener realisierbar ist, wurde die entsprechende Funktionalität nicht im Interpreter, sondern im Debugger der GUI realisiert.
 
+\subsubsection{Sprachdefinition für die Ausdrucksauswertung}
+Da sich das Scoping für die Ausdrucksauswertung vom Scoping für die Sprache unterscheidet -- bei alleinstehenden Ausdrücken ist der aktuelle Ausführungskontext des Interpreters der Scope --, musste eine neue Sprachdefinition zur internen Verwendung angelegt werden. Diese ist eine Teilmenge der While-Sprache und lässt als Programminhalt genau einen Ausdruck zu. Sie stellt außerdem einen eigenen Scoping-Provider zur Verfügung, der den Ausführungskontext als Scope übergibt.
+
 \subsubsection{Umbenennung des AbstractDebugEventListeners}
 Die Klasse \texttt{AbstractDebugEventListener} wurde zu \\ \texttt{AbstractExecutionEventListener} umbenannt, da diese allgemein benutzt wird, um Einfluss auf den Interpreter-Vorgang zu nehmen.
 

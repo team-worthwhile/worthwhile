@@ -1,0 +1,20 @@
+function Integer max(Integer a, Integer b)
+_ensures (_return ≥ a) ∧ (_return ≥ b)
+_ensures (_return = a) ∧ (_return = b)
+_ensures((forall Integer i, i = a ∨ i = b: _return ≥ i) ∧ (exists Integer j, j = a ∨ j = b : _return = j))
+{
+	Integer result
+		if (a > b) {
+			result := a
+		}
+	if (b ≥ a) {
+		result := b
+	}
+	return result
+}
+
+Integer k := -1
+Integer l := 42
+Integer q := max(k, l)
+_assert(q = 42)
+

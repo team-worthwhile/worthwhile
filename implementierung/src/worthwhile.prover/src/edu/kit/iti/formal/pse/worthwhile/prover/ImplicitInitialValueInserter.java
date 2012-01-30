@@ -54,7 +54,12 @@ public final class ImplicitInitialValueInserter extends HierarchialASTNodeVisito
 
 	@Override
 	public void visit(final Conditional conditional) {
-		// explicitly ignore default operation for Loops
+		conditional.getTrueBlock().accept(this);
+
+		final Block falseBlock = conditional.getFalseBlock();
+		if (falseBlock != null) {
+			falseBlock.accept(this);
+		}
 	}
 
 	@Override
@@ -64,7 +69,7 @@ public final class ImplicitInitialValueInserter extends HierarchialASTNodeVisito
 
 	@Override
 	public void visit(final Loop loop) {
-		// explicitly ignore default operation for Loops
+		loop.getBody().accept(this);
 	}
 
 	@Override

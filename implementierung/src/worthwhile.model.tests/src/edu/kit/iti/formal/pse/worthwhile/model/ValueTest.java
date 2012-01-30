@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
@@ -45,7 +44,7 @@ public class ValueTest {
 		BigInteger[] array1 = new BigInteger[] { BigInteger.valueOf(0), BigInteger.valueOf(42) };
 		IntegerValue[] val_array1 = new IntegerValue[] { new IntegerValue(array1[0]),
 		                new IntegerValue(array1[1]) };
-		Map<Integer, IntegerValue> valmap_array1 = convertToValueMap(val_array1);
+		Map<BigInteger, IntegerValue> valmap_array1 = convertToValueMap(val_array1);
 		CompositeValue<IntegerValue> value1 = new CompositeValue<IntegerValue>(val_array1);
 		assertEquals(value1.getSubValues(), valmap_array1);
 	}
@@ -55,7 +54,7 @@ public class ValueTest {
 		Boolean[] array1 = new Boolean[] { false, true };
 		BooleanValue[] val_array1 = new BooleanValue[] { new BooleanValue(array1[0]),
 		                new BooleanValue(array1[1]) };
-		Map<Integer, BooleanValue> valmap_array1 = convertToValueMap(val_array1);
+		Map<BigInteger, BooleanValue> valmap_array1 = convertToValueMap(val_array1);
 		CompositeValue<BooleanValue> value1 = new CompositeValue<BooleanValue>(val_array1);
 		assertEquals(value1.getSubValues(), valmap_array1);
 	}
@@ -155,10 +154,10 @@ public class ValueTest {
 		assertTrue(value7.equals(value8));
 	}
 	
-	private <T> Map<Integer, T> convertToValueMap(T[] array) {
-		Map<Integer, T> result = new HashMap<Integer, T>();
+	private <T> Map<BigInteger, T> convertToValueMap(T[] array) {
+		Map<BigInteger, T> result = new HashMap<BigInteger, T>();
 		for (int i = 0; i < array.length; i++) {
-			result.put(i, array[i]);
+			result.put(BigInteger.valueOf(i), array[i]);
 		}
 		return result;
 	}

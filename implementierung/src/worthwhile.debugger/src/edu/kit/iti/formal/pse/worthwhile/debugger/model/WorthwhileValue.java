@@ -1,5 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
+import java.math.BigInteger;
+
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
@@ -126,7 +128,7 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 
 			// Create an array entry for each of the sub values.
 			int i = 0;
-			for (int index : value.getSubValues().keySet()) {
+			for (BigInteger index : value.getSubValues().keySet()) {
 				result[i++] = createArrayEntry(i, createSubValue(value.getSubValues().get(index)));
 			}
 
@@ -159,7 +161,7 @@ public class WorthwhileValue extends WorthwhileDebugElement implements IValue {
 			sb.append("{");
 			
 			int i = 0;
-			for (int index : value.getSubValues().keySet()) {
+			for (BigInteger index : value.getSubValues().keySet()) {
 				sb.append(this.apply(value.getSubValues().get(index)));
 				
 				if (i < value.getSubValues().size() - 1) {

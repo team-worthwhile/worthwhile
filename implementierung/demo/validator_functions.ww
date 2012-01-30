@@ -41,3 +41,5 @@ _ensures _return = 0
 Integer intVar1 := funktion3(3)
 Integer intVar2 := funktion3(true, 0)
 Boolean boolVar := funktion3(1, 2)
+
+return 0

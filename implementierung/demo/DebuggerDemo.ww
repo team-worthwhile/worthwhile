@@ -5,6 +5,7 @@ function Integer[] buildArray(Integer length) {
 	
 	while (i ≤ length) {
 		result[i - 1] := i
+		i := i + 1
 	}
 	
 	return result
@@ -18,8 +19,8 @@ Integer sum := 0
 Integer j := 0
 
 while (j < len)
-	_invariant sum = (j + (j - 1)) / 2
+	_invariant sum = (j * (j + 1)) / 2
 {
 	sum := sum + array[j]	
+	j := j + 1
 }
-

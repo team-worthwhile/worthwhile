@@ -193,7 +193,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		ArrayFunction arrayFunction = AstFactory.init().createArrayFunction();
 		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
 			// create a new entry in the function mapping an IntegerLiteral to an Expression
-			BigInteger iBigInteger = new BigInteger(Integer.toString(i));
+			BigInteger iBigInteger = BigInteger.valueOf(i);
 			IntegerLiteral iIntegerLiteral = AstNodeCreatorHelper.createIntegerLiteral(iBigInteger);
 			arrayFunction.getValues().put(iIntegerLiteral, arrayLiteral.getValues().get(i));
 		}
@@ -298,7 +298,7 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	@Override
 	public void visit(final IntegerLiteral integerLiteral) {
 		String literalString = integerLiteral.getValue().abs().toString();
-		if (integerLiteral.getValue().compareTo(new BigInteger("0")) < 0) {
+		if (integerLiteral.getValue().compareTo(BigInteger.ZERO) < 0) {
 			literalString = "(- " + literalString + ")";
 		}
 		this.formulaCompileStack.push(literalString);

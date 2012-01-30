@@ -8,6 +8,8 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -43,8 +45,9 @@ public class ValueTest {
 		BigInteger[] array1 = new BigInteger[] { BigInteger.valueOf(0), BigInteger.valueOf(42) };
 		IntegerValue[] val_array1 = new IntegerValue[] { new IntegerValue(array1[0]),
 		                new IntegerValue(array1[1]) };
+		Map<Integer, IntegerValue> valmap_array1 = convertToValueMap(val_array1);
 		CompositeValue<IntegerValue> value1 = new CompositeValue<IntegerValue>(val_array1);
-		assertSame(value1.getSubValues(), val_array1);
+		assertEquals(value1.getSubValues(), valmap_array1);
 	}
 
 	@Test
@@ -52,8 +55,9 @@ public class ValueTest {
 		Boolean[] array1 = new Boolean[] { false, true };
 		BooleanValue[] val_array1 = new BooleanValue[] { new BooleanValue(array1[0]),
 		                new BooleanValue(array1[1]) };
+		Map<Integer, BooleanValue> valmap_array1 = convertToValueMap(val_array1);
 		CompositeValue<BooleanValue> value1 = new CompositeValue<BooleanValue>(val_array1);
-		assertSame(value1.getSubValues(), val_array1);
+		assertEquals(value1.getSubValues(), valmap_array1);
 	}
 
 	@Test
@@ -88,18 +92,25 @@ public class ValueTest {
 		                new IntegerValue(array1[1]), new IntegerValue(array1[2]), new IntegerValue(array1[3]) };
 		IntegerValue[] val_array2 = new IntegerValue[] { new IntegerValue(array2[0]),
 		                new IntegerValue(array2[1]), new IntegerValue(array2[2]), new IntegerValue(array2[3]) };
-
+		
 		CompositeValue<IntegerValue> value5 = new CompositeValue<IntegerValue>(val_array1);
 		CompositeValue<IntegerValue> value6 = new CompositeValue<IntegerValue>(val_array2);
 		assertNotSame(value5, value6);
 		assertEquals(value5, value6);
 		assertTrue(value5.equals(value6));
+		
 		val_array1[2] = new IntegerValue(new BigInteger("4"));
 		val_array2[2] = new IntegerValue(new BigInteger("5"));
+		value5 = new CompositeValue<IntegerValue>(val_array1);
+		value6 = new CompositeValue<IntegerValue>(val_array2);
+		
 		assertNotSame(value5, value6);
 		assertFalse(value5.equals(value6));
 		val_array1[2] = new IntegerValue(new BigInteger("4"));
 		val_array2[2] = new IntegerValue(new BigInteger("4"));
+		value5 = new CompositeValue<IntegerValue>(val_array1);
+		value6 = new CompositeValue<IntegerValue>(val_array2);
+		
 		assertNotSame(value5, value6);
 		assertEquals(value5, value6);
 		assertTrue(value5.equals(value6));
@@ -125,14 +136,30 @@ public class ValueTest {
 		assertNotSame(value7, value8);
 		assertEquals(value7, value8);
 		assertTrue(value7.equals(value8));
+		
 		val_array3[2] = new BooleanValue(true);
 		val_array4[2] = new BooleanValue(false);
+		value7 = new CompositeValue<BooleanValue>(val_array3);
+		value8 = new CompositeValue<BooleanValue>(val_array4);
+		
 		assertNotSame(value7, value8);
 		assertFalse(value7.equals(value8));
+		
 		val_array3[2] = new BooleanValue(true);
 		val_array4[2] = new BooleanValue(true);
+		value7 = new CompositeValue<BooleanValue>(val_array3);
+		value8 = new CompositeValue<BooleanValue>(val_array4);
+		
 		assertNotSame(value7, value8);
 		assertEquals(value7, value8);
 		assertTrue(value7.equals(value8));
+	}
+	
+	private <T> Map<Integer, T> convertToValueMap(T[] array) {
+		Map<Integer, T> result = new HashMap<Integer, T>();
+		for (int i = 0; i < array.length; i++) {
+			result.put(i, array[i]);
+		}
+		return result;
 	}
 }

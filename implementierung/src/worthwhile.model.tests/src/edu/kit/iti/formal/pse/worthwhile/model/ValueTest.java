@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * @author matthias and stefan
  */
-public class InterpreterValueTest {
+public class ValueTest {
 
 	@Test
 	public void test() {

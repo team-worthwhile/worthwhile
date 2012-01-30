@@ -214,7 +214,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 * @return whether the debug target can step to the next return statement.
 	 */
 	public final boolean canStepReturn() {
-		return this.isSuspended();
+		return false;
 	}
 
 	/**
@@ -254,7 +254,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                 when the desired operation cannot be performed.
 	 */
 	public void stepReturn() throws DebugException {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

@@ -5,9 +5,9 @@
 \frametitle{Debugger}
 \framesubtitle{Änderungen gegenüber dem Entwurf}
 \begin{itemize}
-	\item<+-> Breakpoints jetzt im Debugger
-	\item<+-> Neue Sprachdefinition (Teilmenge der While-Sprache) für die Ausdrucksauswertung
-	\item<+-> Ansonsten 1:1-Umsetzung des Entwurfes
+	\item Breakpoints jetzt im Debugger
+	\item Neue Sprachdefinition (Teilmenge der While-Sprache) für die Ausdrucksauswertung
+	\item Ansonsten 1:1-Umsetzung des Entwurfes
 \end{itemize}
 \end{frame}
 
@@ -15,7 +15,8 @@
 \frametitle{Debugger}
 \framesubtitle{Umsetzung des Entwurfes}
 \begin{itemize}
-	\item<+-> Observer-Pattern: \texttt{WorthwhileDebugEventListener} registriert sich beim Interpreter und fängt Ereignisse ab.
+	\item Observer-Pattern: \texttt{WorthwhileDebugEventListener} registriert sich beim Interpreter und fängt Ereignisse ab.
+	\item DebugEventListener blockiert den Interpreter-Thread beim Suspend.
 \end{itemize}
 \end{frame}
 

@@ -1,0 +1,20 @@
+\section{GUI}
+\subsection{Änderungen gegenüber dem Entwurf}
+
+\begin{frame}
+\frametitle{GUI}
+\framesubtitle{Umsetzung des Entwurfes}
+\begin{itemize}
+	\item Keine Änderungen gegenüber dem Entwurf.
+	\item Durch Eclipse vorgegebene Entwurfsmuster:
+	\begin{itemize}
+		\item Plugin (sämtliche Sprachkomponenten sind Plugins, Erweiterungen erfolgen deklarativ über die Datei \texttt{plugin.xml})
+		\item Delegate (Erweiterungen der Funktionalität werden durch Delegates umgesetzt), Beispiele:
+		\begin{itemize}
+			\item \texttt{WorthwhileLaunchConfigurationDelegate}
+			\item \texttt{WorthwhileRulerBreakpointPropertiesActionDelegate}			
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+

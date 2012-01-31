@@ -2,7 +2,6 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 
 /**
  * Substitute {@link ReturnValueReference}s in an {@link Expression} with another {@link Expression}.

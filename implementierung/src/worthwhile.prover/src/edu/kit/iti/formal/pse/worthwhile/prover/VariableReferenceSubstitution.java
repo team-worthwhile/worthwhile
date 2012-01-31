@@ -3,7 +3,6 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 
 /**
  * Substitute {@link VariableReference}s in an {@link Expression} with another {@link Expression}.

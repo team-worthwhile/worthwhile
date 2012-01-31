@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.ListIterator;
-import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;

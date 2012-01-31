@@ -85,7 +85,7 @@ public final class TransformProgramTest {
 	}
 
 	/**
-	 * Tests the transformation of {@link Assignment}s.
+	 * Tests the transformation of {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment}s.
 	 */
 	@Test
 	public void assignmentRule() {
@@ -129,7 +129,7 @@ public final class TransformProgramTest {
 	}
 
 	/**
-	 * Tests the transformation of {@link Conditional}s.
+	 * Tests the transformation of {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional}s.
 	 */
 	@Test
 	public void conditionalRule() {
@@ -153,7 +153,7 @@ public final class TransformProgramTest {
 	}
 
 	/**
-	 * Test the transformation of {@link Assumption}s.
+	 * Test the transformation of {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption}s.
 	 */
 	@Test
 	public void assumptionRule() {
@@ -169,7 +169,7 @@ public final class TransformProgramTest {
 	}
 
 	/**
-	 * Test the transformation of {@link Axiom}s.
+	 * Test the transformation of {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom}s.
 	 */
 	@Test
 	public void axiomRule() {
@@ -184,7 +184,7 @@ public final class TransformProgramTest {
 	}
 
 	/**
-	 * Tests the transformation of {@link Loop}s.
+	 * Tests the transformation of {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop}s.
 	 */
 	@Test
 	public void loopRule() {
@@ -211,7 +211,7 @@ public final class TransformProgramTest {
 	}
 
 	/**
-	 * Test the transformation of {@link FunctionDeclaration}s.
+	 * Test the transformation of {@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration}s.
 	 */
 	@Test
 	public void functionDeclarationRule() {

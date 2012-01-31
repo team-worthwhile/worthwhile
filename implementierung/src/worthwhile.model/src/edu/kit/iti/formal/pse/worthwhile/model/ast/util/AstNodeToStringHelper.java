@@ -79,6 +79,14 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		return AstNodeToStringHelper.singleton.buf.toString();
 	}
 
+	/**
+	 * Appends <code>`(' binaryExpression.left operatorString binaryExpression.right `)'</code> to the buffer.
+	 * 
+	 * @param binaryExpression
+	 *                the {@link BinaryExpression} that is to be represented as {@link String}
+	 * @param operatorString
+	 *                the <code>String</code> representation for the <code>binaryExpression</code>'s operator
+	 */
 	private void appendBinaryExpression(final BinaryExpression binaryExpression, final String operatorString) {
 		this.buf.append("(");
 		binaryExpression.getLeft().accept(this);
@@ -156,7 +164,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(FunctionCall functionCall) {
+	public void visit(final FunctionCall functionCall) {
 		this.buf.append(functionCall.getFunction().getName());
 		this.buf.append("(");
 		final List<Expression> actuals = functionCall.getActuals();
@@ -273,7 +281,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(FunctionDeclaration functionDeclaration) {
+	public void visit(final FunctionDeclaration functionDeclaration) {
 		this.buf.append("function ");
 		this.buf.append(functionDeclaration.getName());
 		this.buf.append("(");
@@ -317,33 +325,33 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(ReturnStatement returnStatement) {
+	public void visit(final ReturnStatement returnStatement) {
 		this.buf.append("return ");
 		returnStatement.getReturnValue().accept(this);
 	}
 
 	@Override
-	public void visit(ReturnValueReference node) {
+	public void visit(final ReturnValueReference node) {
 		this.buf.append("_return");
 	}
 
 	@Override
-	public void visit(Unequal unequal) {
+	public void visit(final Unequal unequal) {
 		this.appendBinaryExpression(unequal, "!=");
 	}
 
 	@Override
-	public void visit(GreaterOrEqual greaterOrEqual) {
+	public void visit(final GreaterOrEqual greaterOrEqual) {
 		this.appendBinaryExpression(greaterOrEqual, ">=");
 	}
 
 	@Override
-	public void visit(Greater greater) {
+	public void visit(final Greater greater) {
 		this.appendBinaryExpression(greater, ">");
 	}
 
 	@Override
-	public void visit(Disjunction disjunction) {
+	public void visit(final Disjunction disjunction) {
 		this.appendBinaryExpression(disjunction, "||");
 	}
 }

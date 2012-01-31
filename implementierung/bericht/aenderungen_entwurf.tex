@@ -11,7 +11,7 @@ Die Schnittstellenklasse \texttt{Parser} des Entwurfs wurde durch die von ANTLR 
 
 \subsection{Interpreter}
 \subsubsection{Klasse Value}
-Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp (Integer, Boolean, Array) eine eigene Klasse existiert, welche den jeweiligen Wert in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Composite-Pattern implementiert. Außerdem wurde, wie im AST auch, das Visitor-Pattern implementiert, um Fallunterscheidungen im Code zu vermeiden. Da diese Klassen auch von dem Prover für den Kontext einer Formelauswertung benutzt werden, wurden sie aus dem Interpreter in das Model ausgelagert.
+Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp (Integer, Boolean, Array) eine eigene Klasse existiert, welche den jeweiligen Wert in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Composite-Pattern implementiert. Außerdem wurde, wie im AST auch, das Visitor-Pattern implementiert, um Fallunterscheidungen im Code zu vermeiden. Da diese Klassen auch von der Beweiserschnittstelle für den Kontext einer Formelauswertung benutzt werden, wurden sie aus dem Interpreter in das Model ausgelagert.
 
 \subsubsection{Breakpoints\label{aenderung_interpreter_breakpoints}}
 Da Breakpoints eine vom Interpreter unabhängige Funktion des Debuggers darstellen, die indirekt über den ExecutionEventListener realisierbar ist, wurde die entsprechende Funktionalität nicht im Interpreter, sondern im Debugger der GUI realisiert.

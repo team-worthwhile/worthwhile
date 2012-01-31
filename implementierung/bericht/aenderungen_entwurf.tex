@@ -1,29 +1,29 @@
 \section{Änderungen am Entwurf}
 \subsection{Grammatik}
-\subsubsection{\_return-Verweis}
-In der Grammatik wurde das neue Schlüsselwort \texttt{\_return} eingefügt, um auf den Rückgabewert einer Funktion in ihrer Nachbedingung verweisen zu können.
+\subsubsection{Verweis auf den Rückgabewert einer Funktion}
+In die Grammatik wurde das neue Schlüsselwort \texttt{\_return} eingefügt, um auf den Rückgabewert einer Funktion in ihrer Nachbedingung verweisen zu können.
 
-\subsubsection{Arraygröße}
-Da unbeschränkte Arrays für den Benutzer einfacher zu handhaben sind, gibt es nun ausschließlich Arrays mit unbegrenzter Größe. Dies hat außerdem zur Folge, dass der \texttt{length}-Operator entfällt und bei der Deklaration eines Arrays keine Größenangabe mehr möglich ist. Die nicht initialisierten Elemente eines Arrays werden mit dem Defaultwert des jeweiligen Basisdatentyps belegt. Im Speziellen heißt dies, dass Boolean-Arrays mit \texttt{false} und Integer-Arrays mit \texttt{0} vorinitialisiert werden.
+\subsubsection{Größe von Arrays}
+Da unbeschränkte Arrays sowohl für den Benutzer als auch den Entwickler einfacher zu handhaben sind (im Hinblick auf mögliche Sonderfälle beim Arrayzugriff), gibt es nun ausschließlich Arrays mit unbegrenzter Größe in Worthwhile. Dies hat außerdem zur Folge, dass der \texttt{length}-Operator entfällt und bei der Deklaration eines Arrays keine Größenangabe mehr möglich ist. Die nicht initialisierten Elemente eines Arrays werden mit dem Defaultwert des jeweiligen Basisdatentyps belegt. Im Speziellen heißt dies, dass \texttt{Boolean}-Arrays mit \texttt{false} und \texttt{Integer}-Arrays mit \texttt{0} vorinitialisiert werden.
 
-\subsection{Parser\label{aenderung_parser}}
-Die Schnittstellenklasse \texttt{Parser} des Entwurfs wurde durch die von ANTLR generierte Parserklasse realisiert, da diese bereits die benötigte Funktionalität zur Verfügung stellt. Insbesondere die GUI benutzt nun diese ANTLR-Klasse, um mit dem Parser zu kommunizieren.
+\subsection{Schnittstelle zur Parser-Funktionalität\label{aenderung_parser}}
+Die Schnittstellenklasse \texttt{Parser} aus dem Entwurfs wurde durch die von ANTLR generierte Parser-Klasse realisiert, da diese bereits die benötigte Funktionalität zur Verfügung stellt. Insbesondere die GUI benutzt nun direkt diese ANTLR-Klasse, um auf die Parser-Funktionalität zuzugreifen.
 
 \subsection{Interpreter}
-\subsubsection{Klasse Value}
-Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp (Integer, Boolean, Array) eine eigene Klasse existiert, welche den jeweiligen Wert in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Composite-Pattern implementiert. Außerdem wurde, wie im AST auch, das Visitor-Pattern implementiert, um Fallunterscheidungen im Code zu vermeiden. Da diese Klassen auch von der Beweiserschnittstelle für den Kontext einer Formelauswertung benutzt werden, wurden sie aus dem Interpreter in das Model ausgelagert.
+\subsubsection{Abbildung von Variablenbelegungen}
+Die \texttt{Value}-Klasse wurde dahingehend geändert, dass für jeden Datentyp (\texttt{Integer}, \texttt{Boolean}, Array) eine eigene Klasse existiert, welche die Werte des jeweiligen Datentyps in sich speichert. Einem objektorientierteren Ansatz entsprechend wurde hier das Composite-Pattern implementiert. Außerdem wurde, wie im Abstract-Syntax-Tree auch, das Visitor-Pattern implementiert, um Fallunterscheidungen im Quellcode zu vermeiden. Da diese Klassen auch von der Beweiserschnittstelle für den Kontext von Formelauswertungen benutzt werden, wurden sie aus der Interpreter-Komponente in das Model ausgelagert.
 
 \subsubsection{Breakpoints\label{aenderung_interpreter_breakpoints}}
-Da Breakpoints eine vom Interpreter unabhängige Funktion des Debuggers darstellen, die indirekt über den ExecutionEventListener realisierbar ist, wurde die entsprechende Funktionalität nicht im Interpreter, sondern im Debugger der GUI realisiert.
+Da Breakpoints eine vom Interpreter unabhängige Funktion des Debuggers darstellen, die indirekt über den \texttt{ExecutionEventListener} realisierbar ist, wurde die entsprechende Funktionalität nicht im Interpreter, sondern im Debugger der GUI realisiert.
 
-\subsubsection{Sprachdefinition für die Ausdrucksauswertung}
-Da sich das Scoping für die Ausdrucksauswertung vom Scoping für die Sprache unterscheidet -- bei alleinstehenden Ausdrücken ist der aktuelle Ausführungskontext des Interpreters der Scope --, musste eine neue Sprachdefinition zur internen Verwendung angelegt werden. Diese ist eine Teilmenge der While-Sprache und lässt als Programminhalt genau einen Ausdruck zu. Sie stellt außerdem einen eigenen Scoping-Provider zur Verfügung, der den Ausführungskontext als Scope übergibt.
+\subsubsection{Weitere Sprachdefinition für die Ausdrucksauswertung}
+Da sich das Scoping für die Ausdrucksauswertung vom Scoping für die Sprache unterscheidet -- bei alleinstehenden Ausdrücken ist der aktuelle Ausführungskontext des Interpreters der Scope --, musste eine neue Sprachdefinition zur ausschließlich programminternen Verwendung angelegt werden. Diese ist eine Teilmenge der While-Sprache und lässt als Programminhalt genau einen Ausdruck zu. Sie stellt außerdem einen eigenen Scoping-Provider zur Verfügung, der den Ausführungskontext als Scope übergibt.
 
 \subsubsection{Umbenennung des AbstractDebugEventListeners}
-Die Klasse \texttt{AbstractDebugEventListener} wurde zu \\ \texttt{AbstractExecutionEventListener} umbenannt, da diese allgemein benutzt wird, um auf Ereignisse während des Interpreter-Vorgangs zu reagieren.
+Die Klasse \texttt{Abstract"-Debug"-Event"-Listener} wurde zu \texttt{Abstract"-Execution"-Event"-Listener} umbenannt, da diese allgemein benutzt wird, um auf Ereignisse während des Interpreter-Vorgangs zu reagieren.
 
 \subsection{Beweiserschnittstelle}
-Der Entwurf der Beweiserschnittstelle wurde, bis auf einige zusätzliche Hilfsklassen, soweit umgesetzt. Dies hatte keine Änderungen der Funktionalität zur Folge.
+Der Entwurf der Beweiserschnittstelle wurde, bis auf einige zusätzliche Hilfsklassen (z.~B. für die Ersetzung von Variablenreferenzen, das Setzen von den impliziten Standardwerten für deklarierte Variablen, das Einfügen von Zusicherungen, welche bei Erfüllung Nulldivision in Ausdrücken ausschließen), soweit umgesetzt. Dies hatte keine Änderungen der Funktionalität zur Folge.
 
 \subsection{GUI}
 In der GUI gab es ebenfalls keine nennenswerten Abweichungen zum Entwurfsheft.

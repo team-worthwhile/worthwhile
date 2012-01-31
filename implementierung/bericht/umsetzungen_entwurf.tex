@@ -4,22 +4,22 @@
 Um rekursive Funktionsaufrufe zu verhindern, wurde das Scoping dergestalt umgesetzt, dass die Referenzierung einer Funktion (insbesondere die Verwendung innerhalb einer anderen Funktion) erst nach ihrer Deklaration möglich ist.
 
 \subsection{Arrays}
-Das gegenüber dem Entwurf veränderte Verhalten von Arrays wurde im Interpreter implementiert. Die im Entwurf konzepierten Datenstrukturen zur Darstellung von Formeln stellten sich jedoch bei der Implementation von Arrays in der Beweiserschnittstelle als unzureichend heraus. Aufgrund vom Zeitmangel konnten die Datenstrukturen nicht mehr angepasst werden und die Funktionalität deshalb nicht implementiert werden.
+Das gegenüber dem Entwurf veränderte Verhalten von Arrays wurde im Interpreter implementiert. Die im Entwurf konzepierten Datenstrukturen zur Darstellung von Formeln stellten sich jedoch bei der Implementation von Arrayzuweisungen und -zugriffen in der Beweiserschnittstelle als unzureichend heraus. Aufgrund von Zeitmangel konnten die Datenstrukturen nicht mehr angepasst werden und die Funktionalität deshalb nicht implementiert werden.
 
 \subsection{Arithmetik}
 \subsubsection{Division/Modulo mit Divisor gleich Null \label{umsetzung_division_null}}
-Tritt beim Ausführen eines Programms eine Division durch Null auf, so wird der entsprechende Ausdruck rot markiert und die Ausführung abgebrochen. Entsprechend muss für einen erfolgreichen Beweisversuch durch den Beweiser gezeigt werden, dass keine Division durch Null auftreten kann. Dieses Verhalten folgt dem "`principle of least surprise"' für Benutzer der Software.
+Tritt beim Ausführen eines Programms eine Division durch Null auf, so wird der entsprechende Ausdruck rot markiert und die Ausführung abgebrochen. Entsprechend muss für einen erfolgreichen Beweisversuch durch den Beweiser gezeigt werden, dass keine Division durch Null auftreten kann. Dieses Verhalten folgt dem "`principle of least surprise"' für die Benutzer von Worthwhile.
 
 \subsection{Entwurfsmuster}
 \subsubsection{Delegation-Pattern}
-Das Delegate-Pattern findet hauptsächlich in der GUI Anwendung. Die Eclipse-Platform "`delegiert"' mit Hilfe dieses Entwurfsmusters Aufgaben an Worthwhile-eigenen Code. Ein Beispiel defür ist \texttt{WorthwhileLaunchConfigurationDelegate}.
+Das Delegate-Pattern findet hauptsächlich in der GUI Anwendung. Die Eclipse-Plattform "`delegiert"' mit Hilfe dieses Entwurfsmusters Aufgaben an Worthwhile-eigenen Code. Ein Beispiel dafür ist \texttt{WorthwhileLaunchConfigurationDelegate}.
 
 \subsubsection{Facade-Pattern}
 Um den Umgang mit der Beweiserschnittstelle zu erleichtern, interne Implementationsdetails zu verstecken und ausschließlich ausgewählte Methoden zur Verfügung zu stellen, wurde unter anderem hier das Facade-Pattern angewendet.
 
 \subsubsection{Observer-Pattern}
-Das Oberserver-Pattern wird für die Kommunikation des Interpreters mit dem Debugger eingesetzt. Dabei informiert der Interpreter den Debugger über bestimmte Ereignisse, wie zum Beispiel die Erfolgreiche Ausführung eines Statements oder das Auftreten eines Fehlers beim Interpretieren.
+Das Oberserver-Pattern wird für die Kommunikation des Interpreters mit dem Debugger eingesetzt. Dabei informiert der Interpreter den Debugger über bestimmte Ereignisse, wie zum Beispiel die erfolgreiche Ausführung eines Statements oder das Auftreten eines Fehlers beim Interpretieren.
 
 \subsubsection{Visitor-Pattern}
-Das Visitor-Pattern ist ein zentrales Entwurfsmuster und wird an vielen Stellen in Worthwhile verwendet, um den AST zu traversieren. Zusätzlich zu den schon im Entwurf geplanten Visitor-Klassen haben sich einige Visitor-Implementierungen mit spezieller Funktionalität ergeben, wie zum Beispiel der \texttt{ASTNodeBottomUpVisitor}, welcher den AST ausgehend von einem Startknoten rückwärts besucht, oder der \\ \texttt{ASTNodeReturnVisitor}, der einen generischen Rückgabewert besitzt.
+Das Visitor-Pattern ist ein zentrales Entwurfsmuster und wird an vielen Stellen in Worthwhile verwendet, um den Abstract-Syntax-Tree~(AST) zu traversieren. Zusätzlich zu den schon im Entwurf geplanten Visitor-Klassen haben sich einige Visitor-Implementierungen mit spezieller Funktionalität ergeben, wie zum Beispiel der \texttt{AST"-Node"-Bottom"-Up"-Visitor}, welcher den AST ausgehend von einem Startknoten rückwärts besucht, oder der \texttt{AST"-Node"-Return"-Visitor}, der einen generischen Rückgabewert besitzt.
 

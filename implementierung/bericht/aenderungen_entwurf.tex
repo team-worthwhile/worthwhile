@@ -1,8 +1,8 @@
 \section{Änderungen am Entwurf}
-% TODO: generelle Einführung, wie toll unser Entwurf doch war
 \subsection{Grammatik}
 \subsubsection{\_return-Verweis}
 In der Grammatik wurde das neue Schlüsselwort \texttt{\_return} eingefügt, um auf den Rückgabewert einer Funktion in ihrer Nachbedingung verweisen zu können.
+
 \subsubsection{Arraygröße}
 Da unbeschränkte Arrays für den Benutzer einfacher zu handhaben sind, gibt es nun ausschließlich Arrays mit unbegrenzter Größe. Dies hat außerdem zur Folge, dass der \texttt{length}-Operator entfällt und bei der Deklaration eines Arrays keine Größenangabe mehr möglich ist. Die nicht initialisierten Elemente eines Arrays werden mit dem Defaultwert des jeweiligen Basisdatentyps belegt. Im Speziellen heißt dies, dass Boolean-Arrays mit \texttt{false} und Integer-Arrays mit \texttt{0} vorinitialisiert werden.
 

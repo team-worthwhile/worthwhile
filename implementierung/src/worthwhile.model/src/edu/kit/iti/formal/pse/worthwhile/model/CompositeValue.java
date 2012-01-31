@@ -65,23 +65,34 @@ public class CompositeValue<T extends Value> extends Value {
 	 * @return a new instance of the {@link CompositeValue} class with the value at index i replaced by (or newly
 	 *         set to) the specified value.
 	 */
-	public CompositeValue<T> replaceValue(BigInteger index, T newValue) {
+	public final CompositeValue<T> replaceValue(final BigInteger index, final T newValue) {
 		// Copy the current values to a new composite value
 		Map<BigInteger, T> newValues = new HashMap<BigInteger, T>();
-		
+
 		for (BigInteger idx : this.subValues.keySet()) {
 			newValues.put(idx, this.getSubValues().get(idx));
 		}
-		
+
 		// Put the new value at the specified index.
 		newValues.put(index, newValue);
-		
+
 		// Return a new composite value.
 		return new CompositeValue<T>(newValues);
 	}
-	
+
+	/**
+	 * Returns a new instance of the {@link CompositeValue} class with the value at index i replaced by (or newly
+	 * set to) the specified value.
+	 * 
+	 * @param index
+	 *                The index at which to set the new value.
+	 * @param newValue
+	 *                The new value to set.
+	 * @return a new instance of the {@link CompositeValue} class with the value at index i replaced by (or newly
+	 *         set to) the specified value.
+	 */
 	@SuppressWarnings("unchecked")
-        public CompositeValue<T> replaceUntypedValue(BigInteger index, Value newValue) {
+	public final CompositeValue<T> replaceUntypedValue(final BigInteger index, final Value newValue) {
 		return this.replaceValue(index, (T) newValue);
 	}
 

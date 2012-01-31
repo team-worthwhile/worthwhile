@@ -1,3 +1,4 @@
+// @nocheckstyle:linelength: import line cannot be broken
 package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
@@ -10,6 +11,8 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
+
+// @checkstyle:linelength
 
 /**
  * A helper class for launching from the Worthwhile UI.

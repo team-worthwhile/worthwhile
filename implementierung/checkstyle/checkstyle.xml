@@ -118,4 +118,9 @@ Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that 
     <property name="onCommentFormat" value="@checkstyle:methodname"/>
     <property name="checkFormat" value="MethodName"/>
   </module>
+  <module name="SuppressionCommentFilter">
+    <property name="offCommentFormat" value="@nocheckstyle:linelength"/>
+    <property name="onCommentFormat" value="@checkstyle:linelength"/>
+    <property name="checkFormat" value="LineLengthCheck"/>
+  </module>
 </module>

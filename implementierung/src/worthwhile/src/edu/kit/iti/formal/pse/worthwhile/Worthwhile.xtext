@@ -23,9 +23,9 @@ terminal SL_COMMENT :
 	'//' !('\n'|'\r')*
 ;
 
-// A number can be any integer.
+// A number can be any non-negative integer.
 terminal NUMBER returns ecore::EBigInteger:
- 	'-'? ('0'..'9')+
+ 	('0'..'9')+
 ;
 
 // We are using the terminal NUMBER instead of INT, so we have to redefine INT because it matches the same pattern as NUMBER.

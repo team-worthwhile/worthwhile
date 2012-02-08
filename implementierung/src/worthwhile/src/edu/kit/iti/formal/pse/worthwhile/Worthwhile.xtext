@@ -205,8 +205,3 @@ VariableReference returns VariableReference:
 ReturnValueReference returns ReturnValueReference:
 	{ReturnValueReference} "_return"
 ;
-
-// An expression evaluation is a special helper rule to allow a program consisting only of one expression
-ExpressionEvaluation returns ExpressionEvaluation:
-	expression=Expression
-;

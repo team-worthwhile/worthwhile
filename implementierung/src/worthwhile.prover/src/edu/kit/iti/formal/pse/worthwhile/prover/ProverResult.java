@@ -22,7 +22,7 @@ public abstract class ProverResult {
 	/**
 	 * @return the raw output of the prover
 	 */
-	public String getOutput() {
+	public final String getOutput() {
 		return this.output;
 	}
 

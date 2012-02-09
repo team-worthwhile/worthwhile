@@ -198,13 +198,13 @@ public final class TransformProgramTest {
 				+ "_assert t = n\n");
 		Expression result = this.transformer.transformProgram(p);
 
-		String expectedResultString = "(((0 <= 42) " +
+		String expectedResultString = "(((0 <= 42) "
 				// condition true implies weakest block precondition
-				"&& forall Integer n : forall Integer t : (((t < n) && (t <= n)) => " +
-				"((t + 1) <= n))) " +
+				+ "&& forall Integer n : forall Integer t : (((t < n) && (t <= n)) => "
+				+ "((t + 1) <= n))) "
 				// condition not true implies postcondition
-				"&& forall Integer n : forall Integer t : ((!(t < n) && (t <= n)) => " +
-				"((t = n) && true)))";
+				+ "&& forall Integer n : forall Integer t : ((!(t < n) && (t <= n)) => "
+				+ "((t = n) && true)))";
 		String resultString = AstNodeToStringHelper.toString(result);
 
 		Assert.assertEquals(expectedResultString, resultString);

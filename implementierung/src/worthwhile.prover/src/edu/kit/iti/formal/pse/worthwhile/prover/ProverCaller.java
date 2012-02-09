@@ -1,12 +1,12 @@
-/**
- * 
- */
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 
 /**
- * 
+ * Classes implementing the {@link ProverCaller} interface provide {@link ProverCaller#checkFormula(Expression)}
+ * implementations that generate an {@link ProverResult} for an {@link Expression}. The given <code>Expression</code>s
+ * are first-order logic formulae and primarily the implementations try to determine these formulas' satisfiability.
+ * Therefore usually an external prover binary or library is called, which is the reason for the interface's name.
  */
 public interface ProverCaller {
 	/**

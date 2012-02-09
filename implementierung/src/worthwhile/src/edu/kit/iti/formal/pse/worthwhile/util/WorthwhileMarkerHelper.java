@@ -1,9 +1,8 @@
-package edu.kit.iti.formal.pse.worthwhile.debugger.model;
+package edu.kit.iti.formal.pse.worthwhile.util;
 
-import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.MARKER_FAILED_STATEMENT;
-import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.MARKER_SUCCEEDED_STATEMENT;
+import static edu.kit.iti.formal.pse.worthwhile.util.WorthwhileConstants.MARKER_FAILED_STATEMENT;
+import static edu.kit.iti.formal.pse.worthwhile.util.WorthwhileConstants.MARKER_SUCCEEDED_STATEMENT;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRunnable;
@@ -11,45 +10,44 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
-import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
- * Helper class for setting markers in a debugged file.
+ * Helper class for setting markers in a Worthwhile file.
  * 
  * @author Joachim
  * 
  */
-public class WorthwhileDebugMarkerHelper {
+public class WorthwhileMarkerHelper {
 
 	/**
-	 * The file to set the markers in.
+	 * The resource to set the markers in.
 	 */
-	private final IFile file;
+	private final IResource resource;
 
 	/**
-	 * Creates a new instance of the {@link WorthwhileDebugMarkerHelper} class.
+	 * Creates a new instance of the {@link WorthwhileMarkerHelper} class.
 	 * 
-	 * @param file
-	 *                The file to set the markers in.
+	 * @param resource
+	 *                The resource to set the markers in.
 	 */
-	public WorthwhileDebugMarkerHelper(final IFile file) {
-		if (file == null) {
-			throw new IllegalArgumentException("File may not be null");
+	public WorthwhileMarkerHelper(final IResource resource) {
+		if (resource == null) {
+			throw new IllegalArgumentException("Resource may not be null");
 		}
 
-		this.file = file;
+		this.resource = resource;
 	}
 
 	/**
-	 * Clears all debug markers in the file.
+	 * Clears all Worthwhile markers in the resource.
 	 */
 	public final void clearMarkers() {
 		try {
 			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
 				@Override
 				public void run(final IProgressMonitor monitor) throws CoreException {
-					file.deleteMarkers(MARKER_FAILED_STATEMENT, true, IResource.DEPTH_INFINITE);
-					file.deleteMarkers(MARKER_SUCCEEDED_STATEMENT, true, IResource.DEPTH_INFINITE);
+					resource.deleteMarkers(MARKER_FAILED_STATEMENT, true, IResource.DEPTH_INFINITE);
+					resource.deleteMarkers(MARKER_SUCCEEDED_STATEMENT, true, IResource.DEPTH_INFINITE);
 				}
 			};
 			runnable.run(null);
@@ -111,10 +109,10 @@ public class WorthwhileDebugMarkerHelper {
 	}
 
 	/**
-	 * Creates a marker in the specified file.
+	 * Creates a marker in the specified resource.
 	 * 
 	 * @param statement
-	 *                The statement to mark in the file.
+	 *                The statement to mark in the resource.
 	 * @param markerType
 	 *                The type of the marker
 	 * @return The created marker.
@@ -128,7 +126,7 @@ public class WorthwhileDebugMarkerHelper {
 		int length = NodeHelper.getLength(statement);
 
 		// Create a new marker
-		IMarker marker = this.file.createMarker(markerType);
+		IMarker marker = this.resource.createMarker(markerType);
 		marker.setAttribute(IMarker.LINE_NUMBER, line);
 		marker.setAttribute(IMarker.CHAR_START, offset);
 		marker.setAttribute(IMarker.CHAR_END, offset + length);

@@ -42,6 +42,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -79,7 +80,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	/**
 	 * The marker helper.
 	 */
-	private WorthwhileDebugMarkerHelper markerHelper;
+	private WorthwhileMarkerHelper markerHelper;
 
 	/**
 	 * Creates a new instance of the {@link WorthwhileDebugTarget} class.
@@ -99,7 +100,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 		this.launch = launch;
 		this.thread = new WorthwhileThread(this);
-		this.markerHelper = new WorthwhileDebugMarkerHelper(this.getLaunchedFile());
+		this.markerHelper = new WorthwhileMarkerHelper(this.getLaunchedFile());
 		this.expressionParser = new WorthwhileExpressionParser(this);
 
 		// Create a new event listener.

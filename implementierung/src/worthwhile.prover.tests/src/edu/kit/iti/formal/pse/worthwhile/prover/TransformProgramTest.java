@@ -79,8 +79,8 @@ public final class TransformProgramTest {
 	 */
 	private static void assertASTNodeEqual(final ASTNode expected, final ASTNode was) {
 		if (!AstNodeEqualsHelper.equals(expected, was)) {
-			Assert.fail("expected: " + AstNodeToStringHelper.toString(expected) + " was: "
-			                + AstNodeToStringHelper.toString(was));
+			Assert.fail("\nexpected: " + AstNodeToStringHelper.toString(expected) + "\nwas: "
+			                + AstNodeToStringHelper.toString(was) + "\n");
 		}
 	}
 

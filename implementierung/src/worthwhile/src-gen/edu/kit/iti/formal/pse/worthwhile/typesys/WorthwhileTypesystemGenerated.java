@@ -109,6 +109,14 @@
 						ensureFeatureType( p.getConjunction(), p.getBinaryExpression_Left(), p.getBooleanType() );
 						ensureFeatureType( p.getConjunction(), p.getBinaryExpression_Right(), p.getBooleanType() );
 						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getConjunction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						useFixedType( p.getEquivalence(), p.getBooleanType() );
+						ensureFeatureType( p.getEquivalence(), p.getBinaryExpression_Left(), p.getBooleanType() );
+						ensureFeatureType( p.getEquivalence(), p.getBinaryExpression_Right(), p.getBooleanType() );
+						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getEquivalence(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						useFixedType( p.getImplication(), p.getBooleanType() );
+						ensureFeatureType( p.getImplication(), p.getBinaryExpression_Left(), p.getBooleanType() );
+						ensureFeatureType( p.getImplication(), p.getBinaryExpression_Right(), p.getBooleanType() );
+						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getImplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 
 						// ----------------------------------------------------------------
 						// Section: Binary Expression with boolean, integer or array operands

@@ -142,15 +142,25 @@ Assignment returns Assignment:
 // An Expression is based on operator precedence. Each "level" of Expressions means one level of operator precedence,
 // where the last operation specified has the highest priority. In the same level, operators are evaluated from left to right.
 Expression returns Expression:
-	QuantifiedExpression | BooleanOr
+	QuantifiedExpression | LogicalImplication
 ;
 
-// The boolean or has the lowest priority.
+// logical equivalence (lowest priority)
+LogicalEquivalence returns Expression:
+	LogicalImplication ({Equivalence.left=current} ('⇔' | '<=>') right=LogicalImplication)*
+;
+
+// logical implication (second lowest priority)
+LogicalImplication returns Expression:
+	BooleanOr ({Implication.left=current} ('⇒' | '=>') right=BooleanOr)*
+;
+
+// The boolean or has third lowest priority.
 BooleanOr returns Expression:
 	BooleanAnd ({Disjunction.left=current} ('∨' | '||') right=BooleanAnd)*
 ;
 
-// The boolean and has second lowest priority.
+// The boolean and has fourth lowest priority.
 BooleanAnd returns Expression:
 	EqualsComparison ({Conjunction.left=current} ('∧' | '&&') right=EqualsComparison)*
 ;

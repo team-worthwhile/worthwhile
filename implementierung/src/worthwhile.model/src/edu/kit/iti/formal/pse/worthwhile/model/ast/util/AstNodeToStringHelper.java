@@ -29,6 +29,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -209,6 +210,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		}
 		this.buf.append(" ");
 		loop.getBody().accept(this);
+	}
+
+	@Override
+	public void visit(final Minus minus) {
+		this.buf.append("-");
+		minus.getOperand().accept(this);
 	}
 
 	@Override

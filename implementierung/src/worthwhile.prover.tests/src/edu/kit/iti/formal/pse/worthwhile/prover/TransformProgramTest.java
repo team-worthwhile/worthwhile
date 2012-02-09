@@ -95,34 +95,22 @@ public final class TransformProgramTest {
 
 		this.testTransformProgram("Integer x := 1\nx := 0\n_assert x = 1\n", "0 = 1 && true");
 
-		expected = AstNodeCreatorHelper.createConjunction(
-		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
-		                                this.getExpression("false = false && true")),
-		                this.getExpression("false = false && true"));
+		expected = this.getExpression("(true => (false = false && true)) && (false = false && true)");
 		this.testTransformProgram(
 		                "function Boolean f() {\nBoolean fx\n_assert fx = false\nreturn fx\n}\nBoolean x\n_assert x = false\n",
 		                expected);
 
-		expected = AstNodeCreatorHelper.createConjunction(
-		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
-		                                this.getExpression("0 = 0 && true")),
-		                this.getExpression("0 = 0 && true"));
+		expected = this.getExpression("(true => (0 = 0 && true)) && (0 = 0 && true)");
 		this.testTransformProgram(
 		                "function Integer f() {\nInteger fx\n_assert fx = 0\nreturn fx\n}\nInteger x\n_assert x = 0\n",
 		                expected);
 
-		expected = AstNodeCreatorHelper.createConjunction(
-		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
-		                                this.getExpression("{ } = { } && true")),
-		                this.getExpression("{ } = { } && true"));
+		expected = this.getExpression("(true => ({ } = { } && true)) && ({ } = { } && true)");
 		this.testTransformProgram(
 		                "function Boolean[] f() {\nBoolean[] fx\n_assert fx = { }\nreturn fx\n}\nBoolean[] x\n_assert x = { }\n",
 		                expected);
 
-		expected = AstNodeCreatorHelper.createConjunction(
-		                AstNodeCreatorHelper.createImplication(AstNodeCreatorHelper.createTrueLiteral(),
-		                                this.getExpression("{ } = { } && true")),
-		                this.getExpression("{ } = { } && true"));
+		expected = this.getExpression("(true => ({ } = { } && true)) && ({ } = { } && true)");
 		this.testTransformProgram(
 		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
 		                expected);
@@ -136,18 +124,8 @@ public final class TransformProgramTest {
 		Program p = this.getProgram("Integer x := 1\nif x = 1 {\nx := 0\n}\n_assert x = 0\n");
 		Expression result = this.transformer.transformProgram(p);
 
-		// getExpression cannot be used to build expected because `=>' is no valid Worthwhile operator
-		Conjunction expected = AstFactory.init().createConjunction();
-
-		Implication implication = AstFactory.init().createImplication();
-		implication.setLeft(this.getExpression("1 = 1"));
-		implication.setRight(this.getExpression("0 = 0 && true"));
-		expected.setLeft(implication);
-
-		implication = AstFactory.init().createImplication();
-		implication.setLeft(this.getExpression("!(1 = 1)"));
-		implication.setRight(this.getExpression("1 = 0 && true"));
-		expected.setRight(implication);
+		Expression expected = this.getExpression("(1 = 1 => (0 = 0 && true))"
+		                + "&& (!(1 = 1) => (1 = 0 && true))");
 
 		assertASTNodeEqual(expected, result);
 	}
@@ -160,10 +138,7 @@ public final class TransformProgramTest {
 		Program p = this.getProgram("Integer x := 1\n_assume x = 0\n_assert x = 10\n");
 		Expression result = this.transformer.transformProgram(p);
 
-		// getExpression cannot be used to build expected because `=>' is no valid Worthwhile operator
-		Implication expected = AstFactory.init().createImplication();
-		expected.setLeft(this.getExpression("1 = 0"));
-		expected.setRight(this.getExpression("1 = 10 && true"));
+		Expression expected = this.getExpression("(1 = 0) => (1 = 10 && true)");
 
 		assertASTNodeEqual(expected, result);
 	}
@@ -176,9 +151,8 @@ public final class TransformProgramTest {
 		Program p = this.getProgram("_axiom forall Integer a forall Integer b : a * b = b * a\nInteger x := 2 * 3\n_assert x = 3 * 2\n");
 		Expression result = this.transformer.transformProgram(p);
 
-		Implication expected = AstFactory.init().createImplication();
-		expected.setLeft(this.getExpression("forall Integer a forall Integer b : a * b = b * a"));
-		expected.setRight(this.getExpression("2 * 3 = 3 * 2 && true"));
+		Expression expected = this.getExpression("(forall Integer a forall Integer b : a * b = b * a)"
+		                + "=> (2 * 3 = 3 * 2 && true)");
 
 		assertASTNodeEqual(expected, result);
 	}
@@ -220,56 +194,9 @@ public final class TransformProgramTest {
 		                + "{\nif (a > b) {\nreturn a\n}\nreturn b\n}\n");
 		Expression result = this.transformer.transformProgram(p);
 
-		// some implications are specified as conjunctions because they cannot be parsed
-		Expression expected = this.getExpression("(forall Integer b : forall Integer a : true && "
-		                + "(((a > b) && ((a = a || a = b) && (a >= a && a >= b))) "
-		                + "&& (!(a > b) && ((b = a || b = b) && (b >= a && b >= b))))) && true");
-
-		Assert.assertTrue(expected instanceof Conjunction);
-		BinaryExpression binary = (BinaryExpression) expected;
-		Assert.assertTrue(binary.getLeft() instanceof QuantifiedExpression);
-		QuantifiedExpression quantifier = (QuantifiedExpression) binary.getLeft();
-		Assert.assertTrue(quantifier.getExpression() instanceof QuantifiedExpression);
-		quantifier = (QuantifiedExpression) quantifier.getExpression();
-		Assert.assertTrue(quantifier.getExpression() instanceof Conjunction);
-
-		// the first implication: precondition => wp(body, postcondition)
-		binary = (BinaryExpression) quantifier.getExpression();
-		Implication implication = model.createImplication();
-		Expression left = binary.getLeft();
-		binary.setLeft(null);
-		implication.setLeft(left);
-		Expression right = binary.getRight();
-		binary.setRight(null);
-		implication.setRight(right);
-		quantifier.setExpression(implication);
-
-		Assert.assertTrue(implication.getRight() instanceof Conjunction);
-		Conjunction conjunction = (Conjunction) implication.getRight();
-
-		// the second implication: a > b => (a = a || a = b) && (a >= a && a >= b)
-		Assert.assertTrue(conjunction.getLeft() instanceof Conjunction);
-		binary = (BinaryExpression) conjunction.getLeft();
-		implication = model.createImplication();
-		left = binary.getLeft();
-		binary.setLeft(null);
-		implication.setLeft(left);
-		right = binary.getRight();
-		binary.setRight(null);
-		implication.setRight(right);
-		conjunction.setLeft(implication);
-
-		// the third implication: !(a > b) => (b = a || b = b) && (b >= a && b >= b)
-		Assert.assertTrue(conjunction.getRight() instanceof Conjunction);
-		binary = (BinaryExpression) conjunction.getRight();
-		implication = model.createImplication();
-		left = binary.getLeft();
-		binary.setLeft(null);
-		implication.setLeft(left);
-		right = binary.getRight();
-		binary.setRight(null);
-		implication.setRight(right);
-		conjunction.setRight(implication);
+		Expression expected = this.getExpression("(forall Integer b : forall Integer a : true => "
+		                + "(((a > b) => ((a = a || a = b) && (a >= a && a >= b))) "
+		                + "&& (!(a > b) => ((b = a || b = b) && (b >= a && b >= b))))) && true");
 
 		TransformProgramTest.assertASTNodeEqual(expected, result);
 	}
@@ -286,23 +213,10 @@ public final class TransformProgramTest {
 		testProgram.accept(new FunctionCallSubstitution());
 		final Expression actual = this.transformer.transformProgram(testProgram);
 
-		QuantifiedExpression q;
-		BinaryExpression o;
-
-		// we cannot parse implications so replace the conjunction by an implication later
-		q = (QuantifiedExpression) this.getExpression("forall Integer t :"
-		                + "(t = 0 || t = 1) && (t = 0 && -1 = 1 || t = 1 && -1 = 0)");
-		o = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
-
-		o = (BinaryExpression) this.getExpression("(2 = 0 || 2 = 1) && (forall Integer _f0 :"
-		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) && true))");
-
-		final Expression expected = AstNodeCreatorHelper.createConjunction(q, o);
-
-		q = (QuantifiedExpression) o.getRight();
-		o = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
+		final Expression expected = this.getExpression("(forall Integer t :"
+		                + "(t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
+		                + "&& ((2 = 0 || 2 = 1) && (forall Integer _f0 :"
+		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) => true)))");
 
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
@@ -319,29 +233,11 @@ public final class TransformProgramTest {
 		testProgram.accept(new FunctionCallSubstitution());
 		final Expression actual = this.transformer.transformProgram(testProgram);
 
-		QuantifiedExpression q;
-		BinaryExpression o, o1, o2;
-
-		// we cannot parse implications so replace the conjunction by an implication later
-		q = (QuantifiedExpression) this.getExpression("forall Integer t :"
-		                + "(t = 0 || t = 1) && (t = 0 && -1 = 1 || t = 1 && -1 = 0)");
-		o = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
-
-		o = (BinaryExpression) this.getExpression("(2 = 0 || 2 = 1) && (forall Integer _f0 :"
+		final Expression expected = this.getExpression("(forall Integer t :"
+		                + "(t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
+		                + "&& ((2 = 0 || 2 = 1) && (forall Integer _f0 :"
 		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0))"
-		                + "&& ((_f0 = -1 && true) && (!(_f0 = -1) && true))))");
-
-		final Expression expected = AstNodeCreatorHelper.createConjunction(q, o);
-
-		q = (QuantifiedExpression) o.getRight();
-		o = (BinaryExpression) q.getExpression();
-		o1 = (BinaryExpression) o.getRight();
-		o2 = (BinaryExpression) o1.getLeft();
-		o1.setLeft(AstNodeCreatorHelper.createImplication(o2.getLeft(), o2.getRight()));
-		o2 = (BinaryExpression) o1.getRight();
-		o1.setRight(AstNodeCreatorHelper.createImplication(o2.getLeft(), o2.getRight()));
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
+		                + "=> ((_f0 = -1 => true) && (!(_f0 = -1) => true)))))");
 
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
@@ -358,44 +254,15 @@ public final class TransformProgramTest {
 		testProgram.accept(new FunctionCallSubstitution());
 		final Expression actual = this.transformer.transformProgram(testProgram);
 
-		QuantifiedExpression q;
-		BinaryExpression o, o1, o2;
-
-		// we cannot parse implications so replace the conjunction by an implication later
-		q = (QuantifiedExpression) this.getExpression("forall Integer t : (t = 0 || t = 1) &&"
-		                + "(t = 0 && -1 = 1 || t = 1 && -1 = 0)");
-		o = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
-
-		o = (BinaryExpression) this.getExpression("(2 = 0 || 2 = 1)" + "&& (forall Integer _f0 :"
-		                + "((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) &&"
+		final Expression expected = this.getExpression("(forall Integer t : (t = 0 || t = 1) =>"
+		                + "(t = 0 && -1 = 1 || t = 1 && -1 = 0))"
+		                + "&& ((2 = 0 || 2 = 1)" + "&& (forall Integer _f0 :"
+		                + "((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
 		                + "(((2 = 0 || 2 = 1) && (forall Integer _f1 :"
-		                + "(((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) &&"
+		                + "(((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) =>"
 		                + "((_f1 = -1) && (forall Integer _f1 : (forall Integer _f0 :"
-		                + "(_f0 = -1 && _f1 = -1) && _f1 = -1)) && (forall Integer _f1 :"
-		                + "(forall Integer _f0 :" + "(!(_f0 = -1) && _f1 = -1) && true))))))))");
-
-		final Expression expected = AstNodeCreatorHelper.createConjunction(q, o);
-
-		q = (QuantifiedExpression) o.getRight();
-		o = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
-
-		q = (QuantifiedExpression) ((BinaryExpression) ((BinaryExpression) q.getExpression()).getRight())
-		                .getRight();
-		o = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o.getLeft(), o.getRight()));
-
-		o = (BinaryExpression) ((BinaryExpression) q.getExpression()).getRight();
-		o1 = (BinaryExpression) o.getLeft();
-
-		q = (QuantifiedExpression) ((QuantifiedExpression) o1.getRight()).getExpression();
-		o2 = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o2.getLeft(), o2.getRight()));
-
-		q = (QuantifiedExpression) ((QuantifiedExpression) o.getRight()).getExpression();
-		o2 = (BinaryExpression) q.getExpression();
-		q.setExpression(AstNodeCreatorHelper.createImplication(o2.getLeft(), o2.getRight()));
+		                + "(_f0 = -1 && _f1 = -1) => _f1 = -1)) && (forall Integer _f1 :"
+		                + "(forall Integer _f0 :" + "(!(_f0 = -1) && _f1 = -1) => true)))))))))");
 
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}

@@ -177,7 +177,7 @@ Multiplication returns Expression:
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.
 UnaryOperation returns Expression:
-	 Atomic | (({Plus} '-' | {Minus} '+' | {Negation} ('¬'|'!') ) operand=Atomic)
+	 Atomic | (({Plus} '+' | {Minus} '-' | {Negation} ('¬'|'!') ) operand=Atomic)
 ;
 
 // An atomic value in an Expression is either

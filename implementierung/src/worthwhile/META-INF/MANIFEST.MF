@@ -16,7 +16,9 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.xtext.util,
  org.antlr.runtime,
  de.itemis.xtext.typesystem;bundle-version="1.0.0",
- de.itemis.xtext.typesystem.dsl;bundle-version="1.0.0"
+ de.itemis.xtext.typesystem.dsl;bundle-version="1.0.0",
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.core.resources;bundle-version="3.7.100"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

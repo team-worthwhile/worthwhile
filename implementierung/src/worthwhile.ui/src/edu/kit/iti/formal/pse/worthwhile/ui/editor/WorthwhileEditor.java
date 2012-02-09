@@ -12,6 +12,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 
 /**
  * The source code editor used for Worthwhile documents.
@@ -57,6 +58,12 @@ public class WorthwhileEditor extends XtextEditor {
 
 		return null;
 	}
+
+	@Override
+        protected void editorSaved() {
+	        super.editorSaved();
+	        new WorthwhileMarkerHelper(this.getResource()).clearMarkers();
+        }
 
 	/**
 	 * Gets the AST object at the given position in the document.

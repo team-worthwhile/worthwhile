@@ -413,7 +413,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="invariants" ordered="false"
         upperBound="-1" eType="#//Invariant" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//Sign"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//Sign">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Sign" abstract="true" eSuperTypes="#//UnaryExpression">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

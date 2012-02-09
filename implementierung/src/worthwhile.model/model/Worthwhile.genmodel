@@ -297,7 +297,11 @@
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Loop/accept/visitor"/>
                     </genOperations>
                   </genClasses>
-                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Minus"/>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Minus">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Minus/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Minus/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
                   <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Sign">
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Sign/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Sign/accept/visitor"/>

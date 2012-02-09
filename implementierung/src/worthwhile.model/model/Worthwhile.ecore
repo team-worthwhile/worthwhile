@@ -459,7 +459,14 @@
                       ordered="false" upperBound="-1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Invariant"
                       containment="true"/>
                 </eClassifiers>
-                <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Sign"/>
+                <eClassifiers xsi:type="ecore:EClass" name="Minus" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Sign">
+                  <eOperations name="accept">
+                    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                      <details key="body" value="visitor.visit(this);"/>
+                    </eAnnotations>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
+                  </eOperations>
+                </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Sign" abstract="true"
                     eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/UnaryExpression">
                   <eOperations name="accept">

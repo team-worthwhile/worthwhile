@@ -223,7 +223,7 @@ public final class TransformProgramTest {
 		// some implications are specified as conjunctions because they cannot be parsed
 		Expression expected = this.getExpression("(forall Integer b : forall Integer a : true && "
 		                + "(((a > b) && ((a = a || a = b) && (a >= a && a >= b))) "
-		                + "&& (!(a > b) && true))) && true");
+		                + "&& (!(a > b) && ((b = a || b = b) && (b >= a && b >= b))))) && true");
 
 		Assert.assertTrue(expected instanceof Conjunction);
 		BinaryExpression binary = (BinaryExpression) expected;

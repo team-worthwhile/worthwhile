@@ -1,0 +1,90 @@
+// This procedure implements Bubble Sort.  One of the postconditions says that,
+// in the final state of the procedure, the array is sorted.  The other
+// postconditions say that the final array is a permutation of the initial
+// array.  To write that part of the specification, the procedure returns that
+// permutation mapping.  That is, out-parameter 'perm' injectively maps the
+// numbers [0..N) to [0..N), as stated by the second and third postconditions.
+// The final postcondition says that 'perm' describes how the elements in
+// 'a' moved:  what is now at index 'i' used to be at index 'perm[i]'.
+// Note, the specification says nothing about the elements of 'a' outside the
+// range [0..N).  Moreover, Boogie does not prove that the program will terminate.
+
+// This function sorts a given array of size N using the BubbleSort algorithm.
+// The function returns an array of size 2*N. The first N elements of the array (elements 0..N-1)
+// contain the sorted input array. The following N elements contain a description
+// of the array’s permutation. That means, array element N+i contains the new index of a[i] in the
+// sorted array. Using this trick, one can prove that not only the array is sorted,
+// but also that the sorted array is a permutation of the input array.
+function Integer[] BubbleSort(Integer N, Integer[] a)
+  // Ensures that the resulting array is sorted
+  _ensures ∀ Integer i1 ∀ Integer j1, 0 ≤ i1 ∧ i1 ≤ j1 ∧ j1 < N : _return[i1] ≤ _return[j1]
+  // The second part of the resulting array is a permutation: distinct numbers between 0 and N-1
+  _ensures ∀ Integer i2, 0 ≤ i2 ∧ i2 < N : 0 ≤ _return[N + i2] ∧ _return[N + i2] < N
+  _ensures ∀ Integer i3 ∀ Integer j3, 0 ≤ i3 ∧ i3 < j3 ∧ j3 < N : _return[N + i3] != _return[N + j3]
+  // The resulting array is that permutation of the input array
+  _ensures ∀ Integer i4, 0 ≤ i4 ∧ i4 < N: _return[i4] = a[_return[N + i4]]
+{
+  Integer n := N
+  Integer p
+  Integer tmp
+  Integer[] result := a
+  Integer[] perm
+  
+  Integer i5 := N - 1
+  while i5 ≥ 0 {
+      perm[i5] := i5
+      i5 := i5 - 1
+  }
+
+  _assert (∀ Integer i6, 0 ≤ i6 ∧ i6 < N : perm[i6] = i6)
+
+  while n > 0
+    _invariant 0 ≤ n ∧ n ≤ N
+    // array is sorted from n onwards
+    _invariant (∀ Integer i7 ∀ Integer k7, n ≤ i7 ∧ i7 < N ∧ 0 ≤ k7 ∧ k7 < i7 : result[k7] ≤ result[i7])
+    // perm is a permutation
+    _invariant (∀ Integer i8, 0 ≤ i8 ∧ i8 < N : 0 ≤ perm[i8] ∧ perm[i8] < N)
+    _invariant (∀ Integer i9 ∀ Integer j9, 0 ≤ i9 ∧ i9 < j9 ∧ j9 < N : perm[i9] != perm[j9])
+    // the current array is that permutation of the input array
+    _invariant (∀ Integer i10, 0 ≤ i10 ∧ i10 < N : result[i10] = a[perm[i10]])
+  {
+    n := n - 1
+
+    p := 0
+    while (p < n)
+      _invariant p ≤ n
+      // array is sorted from n+1 onwards
+      _invariant (∀ Integer i11 ∀ Integer k11, n+1 ≤ i11 ∧ i11 < N ∧ 0 ≤ k11 ∧ k11 < i11 : result[k11] ≤ result[i11])
+      // perm is a permutation
+      _invariant (∀ Integer i12, 0 ≤ i12 ∧ i12 < N : 0 ≤ perm[i12] ∧ perm[i12] < N)
+      _invariant (∀ Integer i13 ∀ Integer j13, 0 ≤ i13 ∧ i13 < j13 ∧ j13 < N : perm[i13] != perm[j13])
+      // the current array is that permutation of the input array
+      _invariant (∀ Integer i14, 0 ≤ i14 ∧ i14 < N : result[i14] = a[perm[i14]])
+      // a[p] is at least as large as any of the first p elements
+      _invariant (∀ Integer k15, 0 ≤ k15 ∧ k15 < p : result[k15] ≤ result[p])
+    {
+      if (result[p+1] < result[p]) {
+        tmp := result[p]
+        result[p] := result[p+1]
+        result[p+1] := tmp
+        
+        tmp := perm[p]
+        perm[p] := perm[p+1]
+        perm[p+1] := tmp
+      }
+
+      p := p + 1
+    }
+  }
+  
+  // Incorporate the permutation into the result array
+  Integer i16 := 0
+  while (i16 < N) {
+  	result[N + i16] := perm[i16]
+  } 
+  
+  return result
+}
+
+Integer[] test := BubbleSort(6, {6, 4, 2, 3, 5, 1})
+test := test // for setting breakpoints and looking at the result

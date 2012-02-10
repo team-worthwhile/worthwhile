@@ -107,6 +107,16 @@ public final class TransformProgramTest {
 		this.testTransformProgram(
 		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
 		                expected);
+
+		expected = this.getExpression("2 = 2 && (2 = 2 && ({ 2 } = { 2 } && true))");
+		this.testTransformProgram("Integer i := 0\n"
+		                + "Integer j := 0\n"
+		                + "Integer[] a\n"
+		                + "a[i] := 1\n"
+		                + "a[j] := 2\n"
+		                + "_assert a[i] = 2\n"
+		                + "_assert a[j] = 2\n"
+		                + "_assert a = { 2 }\n", expected);
 	}
 
 	/**

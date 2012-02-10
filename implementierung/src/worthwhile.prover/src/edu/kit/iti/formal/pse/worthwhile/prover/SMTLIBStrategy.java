@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.math.BigInteger;
-import java.util.Map.Entry;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
@@ -174,14 +173,11 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		}
 
 		String arrayFunctionString = innerArrayString;
-		for (Entry<Expression, Expression> entry : arrayFunction.getValues()) {
-			entry.getKey().accept(this);
-			String keyString = this.formulaCompileStack.pop();
-			entry.getValue().accept(this);
-			String valueString = this.formulaCompileStack.pop();
-			arrayFunctionString = "(store " + arrayFunctionString + " " + keyString + " " + valueString
-			                + ")";
-		}
+		arrayFunction.getIndex().accept(this);
+		String keyString = this.formulaCompileStack.pop();
+		arrayFunction.getValue().accept(this);
+		String valueString = this.formulaCompileStack.pop();
+		arrayFunctionString = "(store " + arrayFunctionString + " " + keyString + " " + valueString + ")";
 		this.formulaCompileStack.push(arrayFunctionString);
 	}
 

@@ -92,8 +92,14 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			}
 		};
 		Type type = visitor.apply(element);
-		trace.add(element, "returnValueRefernce");
-		return type;
+		trace.add(element, "returnValueReference");
+		
+		// Check if there is an array access on the return value reference. If yes, return the array's base type.
+		if (type instanceof ArrayType && element.getIndex() != null) {
+			return ((ArrayType) type).getBaseType();
+		} else {
+			return type;
+		}
 	}
 
 	/**

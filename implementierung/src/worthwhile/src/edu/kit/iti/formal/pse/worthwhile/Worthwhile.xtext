@@ -213,5 +213,5 @@ VariableReference returns VariableReference:
 
 // A special variable reference is needed to point to the return value of a function.
 ReturnValueReference returns ReturnValueReference:
-	{ReturnValueReference} "_return"
+	{ReturnValueReference} "_return" ('[' index=Expression ']')?
 ;

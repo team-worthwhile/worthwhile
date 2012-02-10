@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * Some tests for the Worthwhile grammar.
+ *
+ */
 public class GrammarTest {
 
 	/**
@@ -17,6 +21,18 @@ public class GrammarTest {
 		                + "_assert (i - 1) = 0\n_assert (i - - 1) = 0\n_assert (i - i) = 0\n_assert (i - - i) = 0\n"
 		                + "_assert (i - y()) = 0\n_assert (i - - y()) = 0\n";
 		
+		assertEquals(0, TestASTProvider.getErrorCount(testAST));
+	}
+	
+	/**
+	 * Tests that the return value reference in a function’s postcondition accepts an array index
+	 * if the function returns an array.
+	 */
+	@Test
+	public void testReturnValueReferenceIndex() {
+		String testAST = "function Integer[] x()\n _ensures _return[0] = 1\n{\nreturn {1}\n}\n";
+		
+		TestASTProvider.getRootASTNode(testAST);
 		assertEquals(0, TestASTProvider.getErrorCount(testAST));
 	}
 

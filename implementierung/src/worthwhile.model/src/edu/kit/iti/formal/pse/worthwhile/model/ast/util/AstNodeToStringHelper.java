@@ -15,6 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
@@ -40,6 +41,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
@@ -106,6 +108,11 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Addition addition) {
 		this.appendBinaryExpression(addition, "+");
+	}
+	
+	@Override
+	public void visit(final Subtraction subtraction) {
+		this.appendBinaryExpression(subtraction, "-");
 	}
 
 	@Override
@@ -224,6 +231,18 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		this.buf.append(" ");
 		loop.getBody().accept(this);
 	}
+	
+	@Override
+	public void visit(final Conditional conditional) {
+		this.buf.append("if ");
+		conditional.getCondition().accept(this);
+		conditional.getTrueBlock().accept(this);
+		
+		if (conditional.getFalseBlock() != null) {
+			this.buf.append("else ");
+			conditional.getFalseBlock().accept(this);
+		}
+	}
 
 	@Override
 	public void visit(final Minus minus) {
@@ -261,6 +280,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final VariableReference variableReference) {
 		this.buf.append(variableReference.getVariable().getName());
+		
+		if (variableReference.getIndex() != null) {
+			this.buf.append("[");
+			variableReference.getIndex().accept(this);
+			this.buf.append("]");
+		}
 	}
 
 	@Override
@@ -353,6 +378,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final ReturnValueReference node) {
 		this.buf.append("_return");
+		
+		if (node.getIndex() != null) {
+			this.buf.append("[");
+			node.getIndex().accept(this);
+			this.buf.append("]");
+		}
 	}
 
 	@Override

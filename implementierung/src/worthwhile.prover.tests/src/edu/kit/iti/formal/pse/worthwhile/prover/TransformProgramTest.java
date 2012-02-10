@@ -6,13 +6,8 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 
@@ -64,7 +59,6 @@ public final class TransformProgramTest {
 	 * The {@link FormulaGenerator} implementation to test.
 	 */
 	private FormulaGenerator transformer = new WPStrategy();
-	private AstFactory model = AstFactory.init();
 
 	/**
 	 * Asserts equality of an expected and actual {@link ASTNode} result.

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -178,6 +179,30 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static ArrayFunction createArrayFunction() {
 		return AstNodeCreatorHelper.factory.createArrayFunction();
+	}
+
+	/**
+	 * 
+	 * @param index
+	 *                the {@link Expression} for which <code>arrayFunction</code> is evaluated
+	 * @param arrayFunction
+	 *                the <code>Expression</code> to be evaluated at <code>index</code>
+	 * @return a new {@link ArrayFunctionAccess} that evaluates <code>arrayFunction</code> at <code>index</code>
+	 */
+	public static ArrayFunctionAccess createArrayFunctionAccess(final Expression index,
+	                final Expression arrayFunction) {
+		final ArrayFunctionAccess arrayFunctionAccess = AstNodeCreatorHelper.createArrayFunctionAccess();
+		arrayFunctionAccess.setIndex(index);
+		arrayFunctionAccess.setFunction(arrayFunction);
+		return arrayFunctionAccess;
+	}
+
+	/**
+	 * @return a new uninitialized {@link ArrayFunctionAccess}
+	 * @return
+	 */
+	public static ArrayFunctionAccess createArrayFunctionAccess() {
+		return AstNodeCreatorHelper.factory.createArrayFunctionAccess();
 	}
 
 	/**

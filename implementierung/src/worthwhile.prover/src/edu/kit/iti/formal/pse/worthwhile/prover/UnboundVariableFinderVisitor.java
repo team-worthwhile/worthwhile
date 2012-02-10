@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
@@ -51,6 +52,12 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 		if (chainedFunction != null) {
 			chainedFunction.accept(this);
 		}
+	}
+
+	@Override
+	public final void visit(final ArrayFunctionAccess arrayFunctionAccess) {
+		arrayFunctionAccess.getFunction().accept(this);
+		arrayFunctionAccess.getIndex().accept(this);
 	}
 
 	@Override

@@ -583,6 +583,17 @@
                   <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
                 </eClassifiers>
+                <eClassifiers xsi:type="ecore:EClass" name="ArrayFunctionAccess" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Expression">
+                  <eOperations name="accept">
+                    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+                      <details key="body" value="visitor.visit(this);"/>
+                    </eAnnotations>
+                    <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
+                  </eOperations>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="function"
+                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
+                </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ExpressionToExpressionMap"
                     instanceClassName="java.util.Map$Entry">
                   <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>

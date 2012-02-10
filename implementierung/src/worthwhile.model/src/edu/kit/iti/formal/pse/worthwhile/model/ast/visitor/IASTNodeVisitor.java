@@ -4,6 +4,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -503,5 +504,13 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(ArrayFunction node);
+
+	/**
+	 * Visits an AST node of type ArrayFunctionAccess.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(ArrayFunctionAccess node);
 
 }

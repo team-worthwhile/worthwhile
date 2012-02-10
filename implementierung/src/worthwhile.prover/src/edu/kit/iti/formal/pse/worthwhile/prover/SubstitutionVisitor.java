@@ -4,6 +4,7 @@ import java.util.ListIterator;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
@@ -184,6 +185,17 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();
 		if (chainedFunction != null) {
 			chainedFunction.accept(this);
+		}
+	}
+
+	@Override
+	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
+		arrayFunctionAccess.getFunction().accept(this);
+
+		arrayFunctionAccess.getIndex().accept(this);
+		if (this.found) {
+			this.found = false;
+			arrayFunctionAccess.setIndex(this.getSubstitute());
 		}
 	}
 

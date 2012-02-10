@@ -6,6 +6,7 @@ import java.util.List;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -13,6 +14,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
@@ -121,6 +123,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
+	public void visit(final ArrayType arrayType) {
+		arrayType.getBaseType().accept(this);
+		this.buf.append("[]");
+	}
+
+	@Override
 	public void visit(final Assertion assertion) {
 		this.buf.append("_assert ");
 		assertion.getExpression().accept(this);
@@ -152,6 +160,11 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final BooleanLiteral booleanLiteral) {
 		this.buf.append(booleanLiteral.getValue());
+	}
+
+	@Override
+	public void visit(final BooleanType booleanType) {
+		this.buf.append("Boolean");
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class InterpreterValueTest {
 		Program testProgram = TestASTProvider
 		                .getRootASTNode("Integer[] j := {1, 2, 43}\nj[5] := 9\n_assert j[2] ≠ 9\n");
 		Interpreter interpreter = new Interpreter(testProgram, new SpecificationChecker());
-		TestExecutionListener listener = new TestExecutionListener() {
+		WorthwhileTestExecutionListener listener = new WorthwhileTestExecutionListener() {
 
 			@Override
                         public void annotationSucceeded(Annotation annotation) {

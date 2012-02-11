@@ -87,10 +87,25 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	}
 
 	/**
+	 * 
+	 * @param cloned
+	 *                indicates whether a clone of the {@link SubstitutionVisitor#substitute} or the
+	 *                <code>substitute</code> itself should be returned
+	 * @return the <code>substitute</code>
+	 */
+	final T getSubstitute(boolean cloned) {
+		if (cloned) {
+			return AstNodeCloneHelper.clone(this.substitute);
+		} else {
+			return this.substitute;
+		}
+	}
+
+	/**
 	 * @return a clone of the {@link SubstitutionVisitor#substitute}
 	 */
 	final T getSubstitute() {
-		return AstNodeCloneHelper.clone(this.substitute);
+		return this.getSubstitute(true);
 	}
 
 	/**

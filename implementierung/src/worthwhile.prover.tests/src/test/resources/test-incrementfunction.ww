@@ -1,0 +1,13 @@
+// EXPECTED:VALID
+function Integer increment(Integer i)
+_ensures _return = i + 1
+{
+    return i + 1
+}
+Integer var := 0
+while var < 10
+_invariant var <= 10
+{
+    var := increment(var)
+}
+_assert var = 10

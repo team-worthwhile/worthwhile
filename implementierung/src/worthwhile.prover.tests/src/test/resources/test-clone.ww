@@ -1,0 +1,13 @@
+// EXPECTED:VALID
+function Integer clone(Integer n)
+_requires n >= 0
+_ensures _return = n
+{
+    Integer t := 0
+    while t < n
+    _invariant t <= n
+    {
+        t := t + 1
+    }
+    return t
+}

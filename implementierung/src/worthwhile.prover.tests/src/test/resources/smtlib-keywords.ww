@@ -1,0 +1,15 @@
+// Program to test the handling of SMTLIB keywords like "let" and "par"
+// EXPECTED:VALID
+function Integer let (Integer par)
+	_ensures _return = par
+{
+	return par
+}
+
+Integer assume := let(42)
+Integer assert := let(43)
+Integer as := let(44)
+
+_assert assume = 42
+_assert assert = 43
+_assert as = 44

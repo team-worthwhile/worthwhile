@@ -1,0 +1,14 @@
+// EXPECTED:VALID
+function Integer division(Integer a, Integer b)
+_ensures _return = a / b
+{
+    Integer c := b
+    Integer d := 0
+    if b >= 0 {
+        while c <= a {
+            c := c + b
+            d := d + 1
+        }
+    }
+    return d
+}

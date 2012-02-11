@@ -1,0 +1,17 @@
+// EXPECTED:VALID
+function Integer faculty(Integer fac)
+{
+    if fac < 0 {
+        return -1
+    }
+    if fac = 0 {
+        return 1
+    }
+    Integer res := 1
+    Integer factor := fac
+    while factor > 0 {
+        res := res * fac
+        factor := factor - 1
+    }
+    return res
+}

@@ -11,7 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
  * @author fabian
  * 
  */
-class VariableReferenceSubstitution extends SubstitutionVisitor {
+class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	/**
 	 * Substitutes occurrences of a {@link VariableDeclaration} in an {@link Expression} with another
 	 * <code>Expression</code>.

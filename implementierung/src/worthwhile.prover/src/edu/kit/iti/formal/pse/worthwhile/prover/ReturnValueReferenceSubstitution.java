@@ -10,7 +10,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
  * @author fabian
  * 
  */
-class ReturnValueReferenceSubstitution extends SubstitutionVisitor {
+class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	/**
 	 * Substitutes {@link ReturnValueReference}s with the given {@link Expression}.
 	 * 

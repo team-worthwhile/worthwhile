@@ -22,7 +22,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
  * @author fabian
  * 
  */
-public final class FunctionCallSubstitution extends SubstitutionVisitor {
+public final class FunctionCallSubstitution extends SubstitutionVisitor<Expression> {
 	/**
 	 * Default constructor.
 	 */

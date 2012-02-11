@@ -51,11 +51,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * @author fabian
  * 
  */
-class SubstitutionVisitor extends HierarchialASTNodeVisitor {
+class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisitor {
 	/**
 	 * The {@link Expression} children are substituted with when {@link SubstitutionVisitor#found} was set.
 	 */
-	private Expression substitute;
+	private T substitute;
 
 	/**
 	 * Indicates whether a matching child has been found and has to be substituted in the parent {@link ASTNode}.
@@ -67,7 +67,7 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	 * @param substitute
 	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
 	 */
-	SubstitutionVisitor(final Expression substitute) {
+	SubstitutionVisitor(final T substitute) {
 		this.substitute = substitute;
 	}
 
@@ -89,7 +89,7 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * @return a clone of the {@link SubstitutionVisitor#substitute}
 	 */
-	final Expression getSubstitute() {
+	final T getSubstitute() {
 		return AstNodeCloneHelper.clone(this.substitute);
 	}
 
@@ -98,7 +98,7 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	 * @param substitute
 	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
 	 */
-	final void setSubstitute(final Expression substitute) {
+	final void setSubstitute(final T substitute) {
 		this.substitute = substitute;
 	}
 

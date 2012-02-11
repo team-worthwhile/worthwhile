@@ -127,7 +127,7 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 				}
 			}
 		}
-		
+
 		return previous;
 	}
 
@@ -141,11 +141,11 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 		// Direct ancestors cannot be called as a function.
 		if (!NodeHelper.isAncestor(node, this.node)) {
 			this.functionDeclarations.add(node);
-		}
-
-		// However, the parameters of the function are always visible.
-		for (VariableDeclaration param : node.getParameters()) {
-			this.variableDeclarations.add(param);
+		} else {
+			// However, the parameters of the function are always visible in the function, but not outside
+			for (VariableDeclaration param : node.getParameters()) {
+				this.variableDeclarations.add(param);
+			}
 		}
 	}
 

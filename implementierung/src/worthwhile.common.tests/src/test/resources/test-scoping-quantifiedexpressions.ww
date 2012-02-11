@@ -1,0 +1,3 @@
+Integer i := 9
+
+_assert forall Integer j, j < i exists Integer k, j < k && k < i : j + i + k = 42

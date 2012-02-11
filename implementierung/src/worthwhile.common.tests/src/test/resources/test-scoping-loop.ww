@@ -1,0 +1,10 @@
+i := 9
+
+while (true) 
+	_invariant i = 42
+{
+	Integer i := 10
+	i := i + 1
+}
+
+i := 11

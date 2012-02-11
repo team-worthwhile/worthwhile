@@ -1,0 +1,5 @@
+function Integer test (Integer n) {
+	return n
+}
+
+Integer m := n

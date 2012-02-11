@@ -1,0 +1,15 @@
+_axiom x() + y() + z() = 42
+
+function Integer x() {
+	return x() + y() + z()
+}
+
+function Integer y() {
+	return x() + y() + z()
+}
+
+function Integer z() {
+	return x() + y() + z()
+}
+
+Integer i := x() + y() + z()

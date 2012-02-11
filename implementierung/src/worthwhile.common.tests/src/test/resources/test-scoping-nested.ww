@@ -1,0 +1,15 @@
+Integer i := 9
+
+while (true) {
+	i := i + 1
+	
+	if (i > 10) {
+		i := i / 10
+	} else {
+		i := i * 10
+	}
+	
+	i := i - 1
+}
+
+i := 42

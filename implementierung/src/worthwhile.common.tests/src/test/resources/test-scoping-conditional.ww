@@ -1,0 +1,11 @@
+j1 := 12
+j2 := 11
+if (true) {
+	Integer j1 := 10
+	j2 := 45
+} else {
+	Integer j2 := 11
+	j1 := 45
+}
+j1 := 12
+j2 := 11

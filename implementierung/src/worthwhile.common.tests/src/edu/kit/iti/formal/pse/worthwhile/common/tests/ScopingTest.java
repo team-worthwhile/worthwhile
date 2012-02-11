@@ -1,5 +1,10 @@
 package edu.kit.iti.formal.pse.worthwhile.common.tests;
 
+import java.io.IOException;
+import java.util.Collection;
+
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,64 +14,110 @@ import org.junit.Test;
 public class ScopingTest {
 
 	/**
-	 * Test program for scoping test.
-	 */
-	// @formatter:off
-	private static final String TEST_PROGRAM_SCOPING =
-			"_axiom forall Integer a forall Integer b : a * b = b * a\n"
-	                + "function Integer z() {\n"
-				+ "Integer bla := x() + y() + z()\n"
-				+ "return 0\n"
-	                + "}\n"
-					
-	                + "function Integer x() {\n"
-	                	+ "Integer c := 42\n"
-	                	+ "_assert forall Integer a : b = 0 ∧ (forall Integer b : a * b = b * a - c)\n"
-	                	+ "Integer b := 9 + a + x() + b + z() + c + y()\n"
-	                	+ "b := 4\n" + "c := z\n"
-	                	+ "b := u\n"
-	                	+ "while (false) {\n"
-	                		+ "Integer h := 9\n"
-	                		+ "h := 7\n" + "}\n"
-	                		+ "h := 8\n"
-	                		+ "return 0\n"
-	                	+ "}\n"
-	                		
-	                + "function Integer y() {\n"
-	                	+ "Integer bla := x() + y() + z()\n"
-	                	+ "return 0\n"
-	                + "}\n"
-	                	
-	                + "Integer trololo := x() + y() + z()\n" 
-	                + "while (false) {\n"
-	                	+ "Integer h := 9\n"
-	                	+ "h := 7\n"
-	                + "}\n"
-	                + "trololo := 8\n" + "h := 8\n";
-	// @formatter:on
-
-	/**
-	 * Number of errors in {@code TEST_PROGRAM_SCOPING}.
-	 */
-	private static final int TEST_PROGRAM_SCOPING_ERROR_COUNT = 13;
-
-	/**
-	 * Tests the scoping provider as a whole.
+	 * Tests that function calls are resolved correctly and no function can be called until after its definition.
+	 * 
+	 * @throws IOException
+	 *                 if the test program fails to load
 	 */
 	@Test
-	public final void testScoping() {
-		Assert.assertEquals(TEST_PROGRAM_SCOPING_ERROR_COUNT,
-		                TestASTProvider.getErrorCount(TEST_PROGRAM_SCOPING));
+	public final void testFunctionCallScoping() throws IOException {
+		String testProgram = TestUtils.loadTestProgram(ScopingTest.class, "test-scoping-functioncalls.ww");
+
+		Collection<Diagnostic> errors = TestASTProvider.getParseErrors(testProgram);
+
+		Assert.assertEquals(9, errors.size());
+
+		for (Diagnostic diagnostic : errors) {
+			Assert.assertTrue(diagnostic instanceof XtextLinkingDiagnostic);
+			Assert.assertTrue(diagnostic.getMessage().contains(
+			                "Couldn't resolve reference to FunctionDeclaration"));
+		}
+	}
+
+	/**
+	 * Tests that variables defined in conditionals are only visible inside the conditional.
+	 * 
+	 * @throws IOException
+	 *                 if the test program fails to load
+	 */
+	@Test
+	public final void testConditionalScoping() throws IOException {
+		String testProgram = TestUtils.loadTestProgram(ScopingTest.class, "test-scoping-conditional.ww");
+
+		Collection<Diagnostic> errors = TestASTProvider.getParseErrors(testProgram);
+
+		Assert.assertEquals(6, errors.size());
+
+		for (Diagnostic diagnostic : errors) {
+			Assert.assertTrue(diagnostic instanceof XtextLinkingDiagnostic);
+			Assert.assertTrue(diagnostic.getMessage().contains(
+			                "Couldn't resolve reference to VariableDeclaration"));
+		}
+	}
+
+	/**
+	 * Tests that variables defined in loops are only visible inside the loop body.
+	 * 
+	 * @throws IOException
+	 *                 if the test program fails to load
+	 */
+	@Test
+	public final void testLoopScoping() throws IOException {
+		String testProgram = TestUtils.loadTestProgram(ScopingTest.class, "test-scoping-loop.ww");
+
+		Collection<Diagnostic> errors = TestASTProvider.getParseErrors(testProgram);
+
+		Assert.assertEquals(3, errors.size());
+
+		for (Diagnostic diagnostic : errors) {
+			Assert.assertTrue(diagnostic instanceof XtextLinkingDiagnostic);
+			Assert.assertTrue(diagnostic.getMessage().contains(
+			                "Couldn't resolve reference to VariableDeclaration"));
+		}
 	}
 
 	/**
 	 * Checks that a function's parameters are visible in the function itself, but not outside.
+	 * 
+	 * @throws IOException
+	 *                 if the test program fails to load
 	 */
 	@Test
-	public final void testFunctionParameterVisibility() {
-		String testProgram = "function Integer test (Integer n) {\n" + "return n\n" + "}\n"
-		                + "Integer m := n\n";
+	public final void testFunctionParameterVisibility() throws IOException {
+		String testProgram = TestUtils.loadTestProgram(ScopingTest.class, "test-scoping-parameters.ww");
 
-		Assert.assertEquals(1, TestASTProvider.getErrorCount(testProgram));
+		Collection<Diagnostic> errors = TestASTProvider.getParseErrors(testProgram);
+
+		Assert.assertEquals(1, errors.size());
+
+		for (Diagnostic diagnostic : errors) {
+			Assert.assertTrue(diagnostic instanceof XtextLinkingDiagnostic);
+			Assert.assertTrue(diagnostic.getMessage().contains(
+			                "Couldn't resolve reference to VariableDeclaration"));
+		}
+	}
+
+	/**
+	 * Tests that variables are visible in nested constructs (loops and conditions).
+	 * 
+	 * @throws IOException
+	 *                 if the test program fails to load
+	 */
+	@Test
+	public final void testNestedScoping() throws IOException {
+		Assert.assertEquals(0, TestASTProvider.getErrorCount(TestUtils.loadTestProgram(ScopingTest.class,
+		                "test-scoping-nested.ww")));
+	}
+	
+	/**
+	 * Tests that variables are visible in quantified expressions.
+	 * 
+	 * @throws IOException
+	 *                 if the test program fails to load
+	 */
+	@Test
+	public final void testQuantifiedExpressionScoping() throws IOException {
+		Assert.assertEquals(0, TestASTProvider.getErrorCount(TestUtils.loadTestProgram(ScopingTest.class,
+		                "test-scoping-quantifiedexpressions.ww")));
 	}
 }

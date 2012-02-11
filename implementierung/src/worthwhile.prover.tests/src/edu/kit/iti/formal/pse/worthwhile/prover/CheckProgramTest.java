@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
+import java.text.ParseException;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
@@ -73,7 +73,7 @@ public class CheckProgramTest {
 				result.add(new Object[] { program, validity });
 			} else {
 				throw new ParseException("Could not determine expected validity from test program "
-				                + fileName);
+				                + fileName, 0);
 			}
 		}
 

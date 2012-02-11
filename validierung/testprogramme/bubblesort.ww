@@ -1,13 +1,4 @@
-// This procedure implements Bubble Sort.  One of the postconditions says that,
-// in the final state of the procedure, the array is sorted.  The other
-// postconditions say that the final array is a permutation of the initial
-// array.  To write that part of the specification, the procedure returns that
-// permutation mapping.  That is, out-parameter 'perm' injectively maps the
-// numbers [0..N) to [0..N), as stated by the second and third postconditions.
-// The final postcondition says that 'perm' describes how the elements in
-// 'a' moved:  what is now at index 'i' used to be at index 'perm[i]'.
-// Note, the specification says nothing about the elements of 'a' outside the
-// range [0..N).  Moreover, Boogie does not prove that the program will terminate.
+// see also http://rise4fun.com/Boogie/Bubble
 
 // This function sorts a given array of size N using the BubbleSort algorithm.
 // The function returns an array of size 2*N. The first N elements of the array (elements 0..N-1)

@@ -3,7 +3,6 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class InterpreterError.
  */
@@ -16,8 +15,7 @@ public class InterpreterError {
 	 */
 	public String getDescription() {
 		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
+		return "not further specified " + this.getClass().getName();
 		// end-user-code
 	}
 }

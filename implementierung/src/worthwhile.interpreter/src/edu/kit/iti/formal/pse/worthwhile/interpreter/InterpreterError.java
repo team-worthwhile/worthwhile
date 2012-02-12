@@ -10,7 +10,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 public class InterpreterError {
 	
 	/**
-	 * Gets the description.
+	 * Gets the description of the error.
 	 *
 	 * @return the description
 	 */

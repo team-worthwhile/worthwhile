@@ -1,0 +1,2 @@
+// Try to prove Fermat’s last theorem
+_assert ∀ Integer i ∀ Integer j ∀ Integer k, i > 0 ∧ j > 0 ∧ k > 0 : i * i * i + j * j * j ≠ k * k * k

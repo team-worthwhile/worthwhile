@@ -90,6 +90,16 @@
                     </excludes>
                 </configuration>
             </plugin>
+	    <plugin>
+              <groupId>org.eclipse.tycho</groupId>
+              <artifactId>tycho-surefire-plugin</artifactId>
+              <version>0.13.0</version>
+              <configuration>
+                <excludes>
+                  <exclude>**/Test*.java</exclude>
+                </excludes>        
+              </configuration>
+           </plugin> 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-eclipse-plugin</artifactId>

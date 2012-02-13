@@ -1,16 +1,13 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.math.BigInteger;
-import java.util.Map.Entry;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
@@ -41,7 +38,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
@@ -177,28 +173,12 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		}
 
 		String arrayFunctionString = innerArrayString;
-		for (Entry<Expression, Expression> entry : arrayFunction.getValues()) {
-			entry.getKey().accept(this);
-			String keyString = this.formulaCompileStack.pop();
-			entry.getValue().accept(this);
-			String valueString = this.formulaCompileStack.pop();
-			arrayFunctionString = "(store " + arrayFunctionString + " " + keyString + " " + valueString
-			                + ")";
-		}
+		arrayFunction.getIndex().accept(this);
+		String keyString = this.formulaCompileStack.pop();
+		arrayFunction.getValue().accept(this);
+		String valueString = this.formulaCompileStack.pop();
+		arrayFunctionString = "(store " + arrayFunctionString + " " + keyString + " " + valueString + ")";
 		this.formulaCompileStack.push(arrayFunctionString);
-	}
-
-	@Override
-	public void visit(final ArrayLiteral arrayLiteral) {
-		ArrayFunction arrayFunction = AstFactory.init().createArrayFunction();
-		for (int i = 0; i < arrayLiteral.getValues().size(); i++) {
-			// create a new entry in the function mapping an IntegerLiteral to an Expression
-			BigInteger iBigInteger = BigInteger.valueOf(i);
-			IntegerLiteral iIntegerLiteral = AstNodeCreatorHelper.createIntegerLiteral(iBigInteger);
-			arrayFunction.getValues().put(iIntegerLiteral, arrayLiteral.getValues().get(i));
-		}
-		// visit the newly-created function instead
-		arrayFunction.accept(this);
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class IntegerValue extends Value {
 		if (value == null) {
 			throw new IllegalArgumentException("IntegerValue cannot hold null as a value");
 		}
-		
+
 		this.value = value;
 	}
 

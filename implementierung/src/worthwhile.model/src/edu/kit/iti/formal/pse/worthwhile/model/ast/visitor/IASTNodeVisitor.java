@@ -487,7 +487,7 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(VariableReference node);
-	
+
 	/**
 	 * Visits an AST node of type ReturnVariableReference.
 	 * 
@@ -495,7 +495,7 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(ReturnValueReference node);
-	
+
 	/**
 	 * Visits an AST node of type ArrayFunction.
 	 * 

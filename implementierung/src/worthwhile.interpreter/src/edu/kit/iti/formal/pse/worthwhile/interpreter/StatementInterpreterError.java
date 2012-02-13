@@ -5,7 +5,6 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StatementInterpreterError.
  */
@@ -33,6 +32,18 @@ public class StatementInterpreterError extends InterpreterError {
 	public void setStatement(Statement statement) {
 		// begin-user-code
 		this.statement = statement;
+		// end-user-code
+	}
+	
+	/**
+	 * Gets the description of the error.
+	 *
+	 * @return the description
+	 */
+	@Override
+	public String getDescription() {
+		// begin-user-code
+		return this.getClass().getName() + " at statement: " + statement.toString();
 		// end-user-code
 	}
 }

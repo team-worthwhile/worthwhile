@@ -148,15 +148,25 @@ class SubstitutionVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final ArrayFunction arrayFunction) {
 		// FIXME: substitute child reference when found is still set after accept returned
-		for (final Expression i : arrayFunction.getValues().keySet()) {
-			i.accept(this);
+		final Expression index = arrayFunction.getIndex();
+		if (index != null) {
+			index.accept(this);
+			if (this.found) {
+				this.found = false;
+				arrayFunction.setIndex(this.getSubstitute());
+			}
 		}
 
-		for (final Expression v : arrayFunction.getValues().values()) {
-			v.accept(this);
+		arrayFunction.getValue().accept(this);
+		if (this.found) {
+			this.found = false;
+			arrayFunction.setValue(this.getSubstitute());
 		}
 
-		arrayFunction.getChainedFunction().accept(this);
+		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();
+		if (chainedFunction != null) {
+			chainedFunction.accept(this);
+		}
 	}
 
 	@Override

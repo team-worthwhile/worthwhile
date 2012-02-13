@@ -38,7 +38,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
  * @author Leon Handreke, fabian
@@ -152,33 +154,41 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final ArrayFunction arrayFunction) {
-		// get the Array type as a String
-		// FIXME: get the type from the typesystem and also support booleans
-		//ArrayType arrayType = (ArrayType) (new WorthwhileTypesystem()).typeof(arrayFunction);
-		//arrayType.getBaseType().accept(this);
-		//String typeString = this.formulaCompileStack.pop();
-		String typeString = "Int";
-		// TODO: Store this in a prover-wide constant
-		String defaultValueString = "0";
-		/*if (arrayType.getBaseType() instanceof BooleanType) {
-			defaultValueString = "false";
-		} else if (arrayType.getBaseType() instanceof IntegerType) {
-			defaultValueString = "0";
-		}*/
-		// build the inner array from either the default value or the chainedFunction
-		String innerArrayString = "((as const (Array Int " + typeString + ")) " + defaultValueString + ")";
-		if (arrayFunction.getChainedFunction() != null) {
+		String arrayString;
+
+		if (arrayFunction.getIndex() == null && arrayFunction.getChainedFunction() == null) {
+			final Expression value = arrayFunction.getValue();
+
+			final String typeString = new ASTNodeReturnVisitor<String>() {
+				@Override
+				public void visit(final BooleanType booleanType) {
+					this.setReturnValue("Bool");
+				}
+
+				@Override
+				public void visit(final IntegerType integerType) {
+					this.setReturnValue("Int");
+				}
+			}.apply((new WorthwhileTypesystem()).typeof(value));
+
+			value.accept(this);
+			final String valueString = this.formulaCompileStack.pop();
+
+			arrayString = "((as const (Array Int " + typeString + ")) " + valueString + ")";
+		} else {
 			arrayFunction.getChainedFunction().accept(this);
-			innerArrayString = this.formulaCompileStack.pop();
+			final String chainedArrayString = this.formulaCompileStack.pop();
+
+			arrayFunction.getIndex().accept(this);
+			final String keyString = this.formulaCompileStack.pop();
+
+			arrayFunction.getValue().accept(this);
+			final String valueString = this.formulaCompileStack.pop();
+
+			arrayString = "(store " + chainedArrayString + " " + keyString + " " + valueString + ")";
 		}
 
-		String arrayFunctionString = innerArrayString;
-		arrayFunction.getIndex().accept(this);
-		String keyString = this.formulaCompileStack.pop();
-		arrayFunction.getValue().accept(this);
-		String valueString = this.formulaCompileStack.pop();
-		arrayFunctionString = "(store " + arrayFunctionString + " " + keyString + " " + valueString + ")";
-		this.formulaCompileStack.push(arrayFunctionString);
+		this.formulaCompileStack.push(arrayString);
 	}
 
 	@Override

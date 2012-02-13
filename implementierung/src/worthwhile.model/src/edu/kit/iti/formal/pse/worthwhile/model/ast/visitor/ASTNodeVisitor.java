@@ -123,7 +123,7 @@ public abstract class ASTNodeVisitor implements IASTNodeVisitor {
 	public void visit(final Axiom node) {
 		this.defaultOperation(node);
 	}
-	
+
 	@Override
 	public void visit(final ArrayFunction node) {
 		this.defaultOperation(node);
@@ -348,7 +348,7 @@ public abstract class ASTNodeVisitor implements IASTNodeVisitor {
 	public void visit(final VariableReference node) {
 		this.defaultOperation(node);
 	}
-	
+
 	@Override
 	public void visit(final ReturnValueReference node) {
 		this.defaultOperation(node);

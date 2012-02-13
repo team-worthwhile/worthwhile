@@ -48,6 +48,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * an empty body so that the default visit operation is ignored and subclasses just have to override the visit methods
  * in which they want to actually call {@link SubstitutionVisitor#setFound(Boolean)}.
  * 
+ * @param <T>
+ *                the substitute's, which a child reference is replaced with, <code>Expression</code> type
+ * 
  * @author fabian
  * 
  */
@@ -93,7 +96,7 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	 *                <code>substitute</code> itself should be returned
 	 * @return the <code>substitute</code>
 	 */
-	final T getSubstitute(boolean cloned) {
+	final T getSubstitute(final boolean cloned) {
 		if (cloned) {
 			return AstNodeCloneHelper.clone(this.substitute);
 		} else {

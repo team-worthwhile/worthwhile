@@ -1,18 +1,25 @@
 package edu.kit.iti.formal.pse.worthwhile.typesystem;
 
+import java.util.Iterator;
+
 import org.eclipse.emf.ecore.EObject;
 
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
@@ -62,9 +69,70 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	@Override
 	protected final EObject type(final ArrayLiteral element, final TypeCalculationTrace trace) {
 
-		ArrayType at = AstFactory.eINSTANCE.createArrayType();
+		final ArrayType at = AstFactory.eINSTANCE.createArrayType();
 		if (element.getValues().size() == 0) {
-			at.setBaseType(null);
+			// used to determine the base types of variables (also parameters) the ArrayLiteral is assigned
+			// to or compared to (in Equal Expressions)
+			final WorthwhileTypesystem ts = WorthwhileTypesystem.this;
+
+			// derives the empty ArrayLiterals base type from the context (up in the AST an Assignment,
+			// VariableDeclaration, FunctionCall or Equal) it is used in
+			final ASTNodeBottomUpVisitor<Type> visitor = new ASTNodeBottomUpVisitor<Type>() {
+				@Override
+				public void visit(final Assignment assignment) {
+					// base type is the assigned variable's one
+					at.setBaseType(((ArrayType) ts.typeof(assignment.getVariable())).getBaseType());
+				}
+
+				@Override
+				public void visit(final VariableDeclaration variableDeclaration) {
+					// base type is the initialized variable's one
+					at.setBaseType(((ArrayType) ts.typeof(variableDeclaration)).getBaseType());
+				}
+
+				@Override
+				public void visit(final Equal equal) {
+					// base type is the compared to ArrayLiteral's, ArrayType variable's one or
+					// BooleanType by convention when both operands are empty ArrayLiterals
+					final ASTNodeReturnVisitor<PrimitiveType> visitor = new ASTNodeReturnVisitor<PrimitiveType>() {
+						public void visit(final ArrayLiteral arrayLiteral) {
+							if (arrayLiteral.getValues().size() == 0) {
+								this.setReturnValue(AstFactory.eINSTANCE
+								                .createBooleanType());
+							} else {
+								super.visit(arrayLiteral);
+							}
+						};
+
+						public void visit(final Expression expression) {
+							this.setReturnValue(((ArrayType) ts.typeof(expression))
+							                .getBaseType());
+						};
+					};
+
+					if (equal.getLeft() == element) {
+						at.setBaseType(visitor.apply(equal.getRight()));
+					} else if (equal.getRight() == element) {
+						at.setBaseType(visitor.apply(equal.getLeft()));
+					}
+				}
+
+				@Override
+				public void visit(final FunctionCall functionCall) {
+					// base type is the assigned parameter's one
+					final Iterator<VariableDeclaration> p = functionCall.getFunction()
+					                .getParameters().iterator();
+					final Iterator<Expression> a = functionCall.getActuals().iterator();
+					while (a.hasNext()) {
+						if (a.next() == element) {
+							at.setBaseType(((ArrayType) ts.typeof(p.next())).getBaseType());
+						} else {
+							p.next();
+						}
+					}
+				}
+			};
+			element.accept(visitor);
 		} else {
 			at.setBaseType((PrimitiveType) typeof(element.getValues().get(0), trace));
 

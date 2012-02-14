@@ -285,14 +285,12 @@ public class SpecificationChecker {
 	public final Validity checkProgram(final Program program) {
 		// TODO apply Worthwhile specific runtime assertions
 
-		// we don't want to pollute the o
-		Program modifiedProgram = AstNodeCloneHelper.clone(program);
 		// add assertions to check that the divisors are not zero
-		modifiedProgram.accept(new DivisionByZeroAssertionInserter());
-		modifiedProgram.accept(new ImplicitInitialValueInserter());
-		modifiedProgram.accept(new FunctionCallSubstitution());
+		program.accept(new DivisionByZeroAssertionInserter());
+		program.accept(new ImplicitInitialValueInserter());
+		program.accept(new FunctionCallSubstitution());
 		// generate formula from program
-		List<Proof> provableFormulas = this.transformer.transformProgram(modifiedProgram);
+		List<Proof> provableFormulas = this.transformer.transformProgram(program);
 		Validity programValidity = Validity.VALID;
 		for (Proof provable : provableFormulas) {
 			// get the validity from the prover

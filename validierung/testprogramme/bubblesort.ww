@@ -72,6 +72,7 @@ function Integer[] BubbleSort(Integer N, Integer[] a)
   Integer i16 := 0
   while (i16 < N) {
   	result[N + i16] := perm[i16]
+  	i16 := i16 + 1
   } 
   
   return result

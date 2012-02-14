@@ -51,16 +51,16 @@ class ReplaceKeywordAutoEditStrategy implements IAutoEditStrategy {
 			return;
 		}
 
-		try {			
+		try {
 			// Calculate the starting position of the keyword under the assumption that the character just
 			// typed was the last character of the keyword.
 			int beginOfKeyword = command.offset - (keyword.length() - 1);
-			
+
 			// Abort if we are currently in a single-line comment
 			String documentUntilNow = document.get(0, beginOfKeyword);
 			int lastLineBreak = documentUntilNow.lastIndexOf("\n");
 			String currentLine = documentUntilNow.substring(lastLineBreak + 1);
-			
+
 			if (currentLine.indexOf("//") != -1) {
 				return;
 			}
@@ -71,9 +71,10 @@ class ReplaceKeywordAutoEditStrategy implements IAutoEditStrategy {
 				return;
 			}
 
-			// Check if the typed word is at the beginning of the document or there is whitespace before the
-			// typed word.
-			if (!(beginOfKeyword <= 0 || document.get(beginOfKeyword - 1, 1).matches("[ \t\n]"))) {
+			// If the typed character is a letter, check that there are no letters before the keyword (to
+			// prevent e.g. replacing the "or" in "forall")
+			if (command.text.matches("[a-z]") && beginOfKeyword > 0
+			                && document.get(beginOfKeyword - 1, 1).matches("[a-z]")) {
 				return;
 			}
 

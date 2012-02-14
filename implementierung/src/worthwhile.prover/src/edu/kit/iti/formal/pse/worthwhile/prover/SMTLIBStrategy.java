@@ -183,10 +183,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final ArrayType arrayType) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		arrayType.getBaseType().accept(this);
+		this.formulaCompileStack.push("(Array Int " + this.formulaCompileStack.pop() + ")");
 	}
 
 	@Override

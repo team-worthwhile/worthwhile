@@ -32,10 +32,15 @@ public class WorthwhileAutoEditStrategyProvider extends DefaultAutoEditStrategyP
 			                IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("<=", "≤"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy(">=", "≥"), IDocument.DEFAULT_CONTENT_TYPE);
+			acceptor.accept(new ReplaceKeywordAutoEditStrategy("=>", "⇒"), IDocument.DEFAULT_CONTENT_TYPE);
+			acceptor.accept(new ReplaceKeywordAutoEditStrategy("<=>", "⇔"), IDocument.DEFAULT_CONTENT_TYPE);
+			// Replace "≤>" too in case the "<=" was replaced by "≤" before. 
+			acceptor.accept(new ReplaceKeywordAutoEditStrategy("≤>", "⇔"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("&&", "∧"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("||", "∨"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("!", "¬"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("!=", "≠"), IDocument.DEFAULT_CONTENT_TYPE);
+			acceptor.accept(new ReplaceKeywordAutoEditStrategy("*", "⋅"), IDocument.DEFAULT_CONTENT_TYPE);
 			// Replace "¬=" too in case the "!" was replaced by "¬" before.
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("¬=", "≠"), IDocument.DEFAULT_CONTENT_TYPE);
 		}

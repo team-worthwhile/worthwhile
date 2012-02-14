@@ -20,6 +20,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
@@ -346,6 +347,21 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 		this.buf.append(" : ");
 		forAllQuantifier.getExpression().accept(this);
+	}
+	
+	@Override
+	public void visit(final ExistsQuantifier existsQuantifier) {
+		this.buf.append("exists ");
+		existsQuantifier.getParameter().accept(this);
+
+		Expression condition = existsQuantifier.getCondition();
+		if (condition != null) {
+			this.buf.append(", ");
+			condition.accept(this);
+		}
+
+		this.buf.append(" : ");
+		existsQuantifier.getExpression().accept(this);
 	}
 
 	@Override

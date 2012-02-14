@@ -5,6 +5,7 @@ import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -113,6 +114,28 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Subtraction subtraction) {
 		this.appendBinaryExpression(subtraction, "-");
+	}
+
+	@Override
+	public void visit(final ArrayFunction arrayFunction) {
+		this.buf.append("{ ");
+
+		ArrayFunction next = arrayFunction;
+		do {
+			if (next.getIndex() != null) {
+				next.getIndex().accept(this);
+			} else {
+				this.buf.append("any");
+			}
+
+			this.buf.append(" => ");
+
+			next.getValue().accept(this);
+
+			next = next.getChainedFunction();
+		} while (next != null);
+
+		this.buf.append(" }");
 	}
 
 	@Override

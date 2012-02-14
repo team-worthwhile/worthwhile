@@ -269,7 +269,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		}
 		// just to be sure that there is anything to prove, add true as a required postcondition
 		postconditionList.add(new Proof(AstNodeCreatorHelper.createTrueLiteral(),
-		                ProofImplication.POSTCONDITION_VALID, functionDeclaration));
+		                ProofImplication.POSTCONDITION_VALID, null));
 
 		// calculate wp(loop block, postcondition) for each of the postconditions in the list
 		for (Proof postcondition : postconditionList) {

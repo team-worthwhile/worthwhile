@@ -3,7 +3,9 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
@@ -34,6 +36,21 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public final Set<VariableDeclaration> getUnboundVariables() {
 		return this.unboundVariables;
+	}
+
+	@Override
+	public final void visit(final ArrayFunction arrayFunction) {
+		final Expression index = arrayFunction.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
+
+		arrayFunction.getValue().accept(this);
+
+		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();
+		if (chainedFunction != null) {
+			chainedFunction.accept(this);
+		}
 	}
 
 	@Override

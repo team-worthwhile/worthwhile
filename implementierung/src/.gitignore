@@ -3,4 +3,5 @@
 .classpath
 .checkstyle
 */target
+!worthwhile.model/target
 */bin

@@ -1,2 +1,5 @@
-target
+target/*
+!target/generated
+target/generated/*
+!target/generated/java
 .settings

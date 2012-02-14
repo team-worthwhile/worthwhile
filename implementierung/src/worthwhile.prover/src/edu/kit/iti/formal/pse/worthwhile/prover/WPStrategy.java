@@ -434,6 +434,10 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		// visit program's main block
 		program.getMainBlock().accept(this);
 
+		// merge function precondition list with main program precondition list
+		preconditionList.addAll(this.weakestPreconditionStack.pop());
+		this.weakestPreconditionStack.push(preconditionList);
+
 		// assume axioms for the function bodies' and main block's weakest preconditions
 		for (Axiom a : program.getAxioms()) {
 			a.accept(this);

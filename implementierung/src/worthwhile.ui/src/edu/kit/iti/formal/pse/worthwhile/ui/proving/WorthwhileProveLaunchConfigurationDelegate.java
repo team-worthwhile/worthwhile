@@ -1,11 +1,9 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.proving;
 
-import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
-
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.debug.core.ILaunch;
@@ -23,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
 import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
+import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 
 /**
  * Starts the prover with the specified program.
@@ -42,10 +41,8 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 	public final void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
 	                final IProgressMonitor monitor) throws CoreException {
 
-		Program program = this.getProgram(configuration);
-
-		String filePath = configuration.getAttribute(ATTR_PATH, "");
-		String fileName = new Path(filePath).lastSegment();
+		IFile file = this.getFile(configuration);
+		Program program = this.getProgram(file);
 
 		if (program != null) {
 			// Create and run the prover, specification checker, and interpreter.
@@ -54,8 +51,8 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 
 			SpecificationChecker specChecker = new SpecificationChecker(prover);
 			specChecker.setTimeout(preferenceStore.getInt(WorthwhilePreferenceConstants.PROVER_TIMEOUT));
-			final WorthwhileProveJob proveJob = new WorthwhileProveJob("Prove " + fileName, specChecker,
-			                program);
+			final WorthwhileProveJob proveJob = new WorthwhileProveJob("Prove " + file.getName(),
+			                specChecker, program, new WorthwhileMarkerHelper(file));
 			proveJob.addJobChangeListener(new ProveJobFinishedListener());
 			proveJob.schedule();
 		}

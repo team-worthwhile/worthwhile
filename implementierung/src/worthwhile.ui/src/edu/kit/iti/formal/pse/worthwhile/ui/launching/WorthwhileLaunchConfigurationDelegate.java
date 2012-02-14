@@ -46,28 +46,20 @@ public abstract class WorthwhileLaunchConfigurationDelegate extends LaunchConfig
 	private IResourceValidator validator;
 
 	/**
-	 * Gets a program from the specified launch configuration.
+	 * Gets a program from the specified file.
 	 * 
-	 * @param configuration
-	 *                The launch configuration.
+	 * @param file
+	 *                The source file.
 	 * @return The root AST node of the program launched by this configuration, or {@code null} if the file contains
 	 *         errors.
 	 * @throws CoreException
 	 *                 if getting the program from the file fails
 	 */
-	protected final Program getProgram(final ILaunchConfiguration configuration) throws CoreException {
-		// Get the file to execute from the launch configuration.
-		String path = configuration.getAttribute(ATTR_PATH, "");
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
-
-		if (file == null) {
-			DebugHelper.throwError("The specified source file cannot be found.", null);
-		}
-
+	protected final Program getProgram(final IFile file) throws CoreException {
 		// Load the model from the file
 		XtextResourceSet resourceSet = (XtextResourceSet) resourceSetProvider.get(file.getProject());
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true);
-		Resource resource = resourceSet.getResource(URI.createURI(path), true);
+		Resource resource = resourceSet.getResource(URI.createURI(file.getFullPath().toString()), true);
 
 		// Check if there are no parser or validator errors
 		if (!resource.getErrors().isEmpty()) {
@@ -92,5 +84,25 @@ public abstract class WorthwhileLaunchConfigurationDelegate extends LaunchConfig
 		}
 
 		return (Program) resource.getContents().get(0);
+	}
+
+	/**
+	 * Gets the file being launched from the launch configuration.
+	 * 
+	 * @param configuration
+	 *                The launch configuration.
+	 * @return The file being launched
+	 * @throws CoreException
+	 *                 if getting the file from the configuration fails.
+	 */
+	protected final IFile getFile(final ILaunchConfiguration configuration) throws CoreException {
+		String path = configuration.getAttribute(ATTR_PATH, "");
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
+
+		if (file == null) {
+			DebugHelper.throwError("The specified source file cannot be found.", null);
+		}
+
+		return file;
 	}
 }

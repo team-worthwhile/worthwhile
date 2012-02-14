@@ -51,10 +51,19 @@ class ReplaceKeywordAutoEditStrategy implements IAutoEditStrategy {
 			return;
 		}
 
-		try {
+		try {			
 			// Calculate the starting position of the keyword under the assumption that the character just
 			// typed was the last character of the keyword.
 			int beginOfKeyword = command.offset - (keyword.length() - 1);
+			
+			// Abort if we are currently in a single-line comment
+			String documentUntilNow = document.get(0, beginOfKeyword);
+			int lastLineBreak = documentUntilNow.lastIndexOf("\n");
+			String currentLine = documentUntilNow.substring(lastLineBreak + 1);
+			
+			if (currentLine.indexOf("//") != -1) {
+				return;
+			}
 
 			// Check if the text before the cursor matches the rest of the keyword.
 			if (!(command.offset >= keyword.length() - 1 && document.get(beginOfKeyword,

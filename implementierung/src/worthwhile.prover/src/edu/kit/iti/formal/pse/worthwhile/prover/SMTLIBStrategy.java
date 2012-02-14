@@ -38,7 +38,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
@@ -159,17 +158,8 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 		if (arrayFunction.getIndex() == null && arrayFunction.getChainedFunction() == null) {
 			final Expression value = arrayFunction.getValue();
 
-			final String typeString = new ASTNodeReturnVisitor<String>() {
-				@Override
-				public void visit(final BooleanType booleanType) {
-					this.setReturnValue("Bool");
-				}
-
-				@Override
-				public void visit(final IntegerType integerType) {
-					this.setReturnValue("Int");
-				}
-			}.apply((new WorthwhileTypesystem()).typeof(value));
+			(new WorthwhileTypesystem()).typeof(value).accept(this);
+			final String typeString = this.formulaCompileStack.pop();
 
 			value.accept(this);
 			final String valueString = this.formulaCompileStack.pop();

@@ -11,16 +11,13 @@ Worthwhile is built on the Eclipse Platform. Java SE 6, Eclipse 3.7.1 and Maven 
 
 Worthwhile uses the [Eclipse Xtext framework](http://www.eclipse.org/Xtext/) and the [Xtext Typesystem framework](http://code.google.com/a/eclipselabs.org/p/xtext-typesystem/). Therefore, to build a project, an Eclipse environment with these plugins installed is required. [Itemis](http://www.itemis.de/) provides prebuilt Eclipse binaries with these plugins already installed on [their website](http://www.itemis.de/). The Xtext Typesystem plugins (Version 2.0-beta, available in the ["Downloads" area of their Google Code page](http://code.google.com/a/eclipselabs.org/p/xtext-typesystem/downloads/list)) should be placed in the `plugins/` directory of your Eclipse installation.
 
-First, Eclipse projects need to be generated to be able to build the model.
+The easiest way to run *Worthwhile* from source is launching it from within an existing Eclipse instance. Because for some reason, *maven-eclipse-plugin* requires all build artifacts to be in place when generating `.project` files for Eclipse, all projects have to be built and the build artifacts installed to the local Maven repository before generating the project files. If you have figured out a better way to do this, please let us know.
 
 	cd implementierung/src
+	mvn install -Dmaven.test.skip=true
 	mvn eclipse:eclipse
 
 After this step has completed, open Eclipse, select *File → Import... → Existing Projects into Workspace* and choose the `implementierung/src` directory. Import all the projects and wait for Eclipse to stabilize in flight.
-
-Find `edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.genmodel`, open it, right-click the *Worthwhile* entry in the tree and select *Generate Model Code*.
-
-Now, find `edu.kit.iti.formal.pse.worthwhile/src/edu.kit.iti.formal.pse.worthwhile/GenerateWorthwhile.mwe2`. Right-click it, select *Debug As → MWE2 Workflow*.
 
 You might also need to add `com.google.inject` as a dependency to the product. Find `edu.kit.iti.formal.pse.worthwhile.product/META-INF/MANIFEST.MF`, open it, select the *Dependencies* tab and add `com.google.inject` as a dependency.
 

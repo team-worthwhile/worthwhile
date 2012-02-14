@@ -321,7 +321,15 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final VariableReference variableReference) {
-		this.formulaCompileStack.push(variableReference.getVariable().getName());
+		String varrefString = variableReference.getVariable().getName();
+
+		final Expression index = variableReference.getIndex();
+		if (index != null) {
+			index.accept(this);
+			varrefString = "(select " + varrefString + " " + this.formulaCompileStack.pop() + ")";
+		}
+
+		this.formulaCompileStack.push(varrefString);
 	}
 
 	@Override

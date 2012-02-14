@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ReturnValueReferenceSubstitution.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">ReturnValueReferenceSubstitution.java</span></div><h1>ReturnValueReferenceSubstitution.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+
+/**
+ * Substitute {@link ReturnValueReference}s in an {@link Expression} with another {@link Expression}.
+ * 
+ * @see ReturnValueReferenceSubstitution#substitute(VariableDeclaration, Expression)
+ * @author fabian
+ * 
+ */
+class ReturnValueReferenceSubstitution extends SubstitutionVisitor&lt;Expression&gt; {
+	/**
+	 * Substitutes {@link ReturnValueReference}s with the given {@link Expression}.
+	 * 
+	 * A clone of the &lt;code&gt;substitute&lt;/code&gt; is used for substitution.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; to search for &lt;code&gt;ReturnValueReferences&lt;/code&gt;
+	 * @param substitute
+	 *                the &lt;code&gt;Expression&lt;/code&gt; &lt;code&gt;ReturnValueReferences&lt;/code&gt; are substituted with
+	 * @return the substituted &lt;code&gt;expression&lt;/code&gt;, which differs from the passed &lt;code&gt;expression&lt;/code&gt; when
+	 *         the &lt;code&gt;expression&lt;/code&gt; itself was an &lt;code&gt;ReturnValueReference&lt;/code&gt;
+	 */
+	public static Expression substitute(final Expression expression, final Expression substitute) {
+<span class="fc" id="L27">		final ReturnValueReferenceSubstitution substitutor = new ReturnValueReferenceSubstitution(substitute);</span>
+<span class="fc" id="L28">		expression.accept(substitutor);</span>
+<span class="pc bpc" id="L29" title="1 of 2 branches missed.">		if (substitutor.getFound()) {</span>
+<span class="nc" id="L30">			substitutor.setFound(false);</span>
+<span class="nc" id="L31">			return substitutor.getSubstitute();</span>
+		}
+<span class="fc" id="L33">		return expression;</span>
+	}
+
+	/**
+	 * 
+	 * @param substitute
+	 *                the {@link Expression} {@link ReturnValueReference}s are substituted with
+	 */
+	ReturnValueReferenceSubstitution(final Expression substitute) {
+<span class="fc" id="L42">		super(substitute);</span>
+<span class="fc" id="L43">	}</span>
+
+	@Override
+	public void visit(final ReturnValueReference returnValueReference) {
+<span class="fc" id="L47">		this.setFound(true);</span>
+<span class="fc" id="L48">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

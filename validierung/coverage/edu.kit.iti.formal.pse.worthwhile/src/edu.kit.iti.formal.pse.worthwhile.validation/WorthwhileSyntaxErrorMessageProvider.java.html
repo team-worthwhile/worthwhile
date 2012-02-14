@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WorthwhileSyntaxErrorMessageProvider.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.validation</a> &gt; <span class="el_source">WorthwhileSyntaxErrorMessageProvider.java</span></div><h1>WorthwhileSyntaxErrorMessageProvider.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.validation;
+
+import org.antlr.runtime.EarlyExitException;
+import org.antlr.runtime.NoViableAltException;
+import org.eclipse.xtext.nodemodel.SyntaxErrorMessage;
+import org.eclipse.xtext.parser.antlr.SyntaxErrorMessageProvider;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+
+/**
+ * This class provides the correct syntax error messages.
+ * 
+ * @author matthias
+ * 
+ */
+<span class="fc" id="L16">public class WorthwhileSyntaxErrorMessageProvider extends SyntaxErrorMessageProvider {</span>
+
+	/**
+	 * Error code for &quot;No newline at end of file&quot;.
+	 */
+	public static final String NO_NEWLINE_AT_EOF = &quot;NoNewlineAtEOF&quot;;
+
+	/**
+	 * Error code for &quot;No return type specified for function&quot;.
+	 */
+	public static final String NO_FUNCTION_RETURN_TYPE = &quot;NoFunctionReturnType&quot;;
+
+	/**
+	 * Returns a syntax error messages for the context.
+	 * 
+	 * @param context
+	 *                the context from which you want the error message
+	 * 
+	 * @return the syntax error message
+	 */
+	@Override
+	public final SyntaxErrorMessage getSyntaxErrorMessage(final IParserErrorContext context) {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		if (context.getRecognitionException() instanceof EarlyExitException) {</span>
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">			if (context.getCurrentNode().getRootNode().getTotalEndLine() == context.getCurrentNode()</span>
+<span class="nc" id="L41">			                .getEndLine()) {</span>
+<span class="nc" id="L42">				return new SyntaxErrorMessage(&quot;Newline is missing&quot;, NO_NEWLINE_AT_EOF);</span>
+			} else {
+<span class="nc" id="L44">				return new SyntaxErrorMessage(&quot;Delete this token.&quot;, &quot;deleteToken&quot;);</span>
+			}
+<span class="nc bnc" id="L46" title="All 2 branches missed.">		} else if (context.getRecognitionException() instanceof NoViableAltException</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">		                &amp;&amp; context.getCurrentContext() instanceof Program) {</span>
+<span class="nc" id="L48">			return new SyntaxErrorMessage(&quot;Return type of function is missing&quot;, NO_FUNCTION_RETURN_TYPE);</span>
+
+		}
+
+<span class="nc" id="L52">		return super.getSyntaxErrorMessage(context);</span>
+
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

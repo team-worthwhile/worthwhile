@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WorthwhileFormatter.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.formatting</a> &gt; <span class="el_source">WorthwhileFormatter.java</span></div><h1>WorthwhileFormatter.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.formatting;
+
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
+import org.eclipse.xtext.formatting.impl.FormattingConfig;
+import org.eclipse.xtext.util.Pair;
+
+import edu.kit.iti.formal.pse.worthwhile.services.WorthwhileGrammarAccess;
+
+/**
+ * This class contains custom formatting description.
+ * 
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting on how and when to use it
+ * 
+ * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
+ */
+<span class="fc" id="L17">public class WorthwhileFormatter extends AbstractDeclarativeFormatter {</span>
+
+	@Override
+	protected final void configureFormatting(final FormattingConfig c) {
+<span class="nc" id="L21">		WorthwhileGrammarAccess f = (WorthwhileGrammarAccess) getGrammarAccess();</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">		for (Pair&lt;Keyword, Keyword&gt; pair : f.findKeywordPairs(&quot;{&quot;, &quot;}&quot;)) {</span>
+<span class="nc" id="L23">			c.setIndentation(pair.getFirst(), pair.getSecond());</span>
+<span class="nc" id="L24">			c.setLinewrap(1).after(pair.getFirst());</span>
+<span class="nc" id="L25">			c.setLinewrap(1).before(pair.getSecond());</span>
+<span class="nc" id="L26">			c.setLinewrap(1).after(pair.getSecond());</span>
+<span class="nc" id="L27">			c.setNoSpace().before(pair.getFirst());</span>
+<span class="nc" id="L28">			c.setNoSpace().between(pair.getFirst(), pair.getSecond());</span>
+		}
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		for (Pair&lt;Keyword, Keyword&gt; pair : f.findKeywordPairs(&quot;(&quot;, &quot;)&quot;)) {</span>
+<span class="nc" id="L31">			c.setNoSpace().before(pair.getFirst());</span>
+<span class="nc" id="L32">			c.setNoSpace().between(pair.getFirst(), pair.getSecond());</span>
+		}
+<span class="nc bnc" id="L34" title="All 2 branches missed.">		for (Keyword comma : f.findKeywords(&quot;,&quot;)) {</span>
+<span class="nc" id="L35">			c.setNoLinewrap().before(comma);</span>
+<span class="nc" id="L36">			c.setNoSpace().before(comma);</span>
+<span class="nc" id="L37">			c.setLinewrap().after(comma);</span>
+		}
+<span class="nc" id="L39">		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());</span>
+<span class="nc" id="L40">		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());</span>
+<span class="nc" id="L41">		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());</span>
+
+		// Forbid line wrap and space in array literals
+<span class="nc" id="L44">		c.setNoLinewrap().between(f.getArrayLiteralAccess().getLeftCurlyBracketKeyword_1(),</span>
+<span class="nc" id="L45">		                f.getArrayLiteralAccess().getRightCurlyBracketKeyword_3());</span>
+<span class="nc" id="L46">		c.setNoSpace().after(f.getArrayLiteralAccess().getLeftCurlyBracketKeyword_1());</span>
+<span class="nc" id="L47">		c.setNoSpace().before(f.getArrayLiteralAccess().getRightCurlyBracketKeyword_3());</span>
+<span class="nc" id="L48">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

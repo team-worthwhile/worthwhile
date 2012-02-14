@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ValidatorASTNodeVisitor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.validation</a> &gt; <span class="el_source">ValidatorASTNodeVisitor.java</span></div><h1>ValidatorASTNodeVisitor.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.validation;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeVisitor;
+
+/**
+ * The visitor for validation.
+ * 
+ * 
+ */
+<span class="fc" id="L25">public class ValidatorASTNodeVisitor extends ASTNodeVisitor {</span>
+	/**
+	 * Indicates if a valid {@link ReturnStatement} was found.
+	 */
+<span class="fc" id="L29">	private boolean validReturnFound = false;</span>
+
+	@Override
+	public final void visit(final ReturnStatement returnStatement) {
+<span class="fc" id="L33">		setValidReturnFound(true);</span>
+<span class="fc" id="L34">	}</span>
+
+	@Override
+	public final void visit(final Assertion node) {
+<span class="fc" id="L38">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Assumption node) {
+<span class="nc" id="L43">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Axiom node) {
+<span class="nc" id="L48">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Invariant node) {
+<span class="nc" id="L53">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Postcondition node) {
+<span class="nc" id="L58">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Precondition node) {
+<span class="nc" id="L63">		return;</span>
+	}
+
+	@Override
+	public final void visit(final FunctionDeclaration functionDeclaration) {
+<span class="fc" id="L68">		functionDeclaration.getBody().accept(this);</span>
+<span class="fc" id="L69">	}</span>
+
+	@Override
+	public final void visit(final Block block) {
+<span class="fc bfc" id="L73" title="All 2 branches covered.">		for (Statement statement : block.getStatements()) {</span>
+<span class="fc" id="L74">			statement.accept(this);</span>
+		}
+<span class="fc" id="L76">	}</span>
+
+	@Override
+	public final void visit(final Conditional conditional) {
+<span class="fc" id="L80">		ValidatorASTNodeVisitor trueVisitor = new ValidatorASTNodeVisitor();</span>
+<span class="fc" id="L81">		ValidatorASTNodeVisitor falseVisitor = new ValidatorASTNodeVisitor();</span>
+
+<span class="pc bpc" id="L83" title="2 of 4 branches missed.">		if (conditional.getTrueBlock() != null &amp;&amp; conditional.getFalseBlock() != null) {</span>
+<span class="nc" id="L84">			conditional.getTrueBlock().accept(trueVisitor);</span>
+<span class="nc" id="L85">			conditional.getFalseBlock().accept(falseVisitor);</span>
+<span class="nc bnc" id="L86" title="All 4 branches missed.">			if (trueVisitor.getValidReturnFound() &amp;&amp; falseVisitor.getValidReturnFound()) {</span>
+<span class="nc" id="L87">				setValidReturnFound(true);</span>
+			}
+		}
+<span class="fc" id="L90">	}</span>
+
+	@Override
+	public final void visit(final Assignment assignment) {
+<span class="nc" id="L94">		return;</span>
+	}
+
+	@Override
+	public final void visit(final VariableDeclaration variableDeclaration) {
+<span class="fc" id="L99">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Loop loop) {
+<span class="fc" id="L104">		return;</span>
+	}
+
+	@Override
+	public final void visit(final Annotation annotation) {
+<span class="nc" id="L109">		return;</span>
+	}
+
+	/**
+	 * Returns true if a valid {@link ReturnStatement} was found.
+	 * 
+	 * @return true if a valid {@link ReturnStatement} was found, otherwise false.
+	 */
+	public final boolean getValidReturnFound() {
+<span class="fc" id="L118">		return validReturnFound;</span>
+	}
+
+	/**
+	 * Sets the value for validReturnFound.
+	 * 
+	 * @param validReturnFound
+	 *                the value to be set
+	 */
+	private void setValidReturnFound(final boolean validReturnFound) {
+<span class="fc" id="L128">		this.validReturnFound = validReturnFound;</span>
+<span class="fc" id="L129">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

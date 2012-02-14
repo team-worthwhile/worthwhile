@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ProverResult.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">ProverResult.java</span></div><h1>ProverResult.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+/**
+ * Represents a result of a proof attempt by a prover for a formula.
+ */
+public abstract class ProverResult {
+	/**
+	 * The output of the prover.
+	 */
+	private final String output;
+
+	/**
+	 * Construct a new instance using the given output to deduce the satisfiability.
+	 * 
+	 * @param output
+	 *            the output to construct the result with
+	 */
+<span class="fc" id="L18">	protected ProverResult(final String output) {</span>
+<span class="fc" id="L19">		this.output = output;</span>
+<span class="fc" id="L20">	}</span>
+
+	/**
+	 * @return the raw output of the prover
+	 */
+	public final String getOutput() {
+<span class="fc" id="L26">		return this.output;</span>
+	}
+
+	/**
+	 * @return the satisfiability of the formula
+	 */
+	public abstract FormulaSatisfiability getSatisfiability();
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>SpecificationChecker.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">SpecificationChecker.java</span></div><h1>SpecificationChecker.java</h1><pre class="source lang-java linenums"><span class="pc" id="L1">package edu.kit.iti.formal.pse.worthwhile.prover;</span>
+
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+
+/**
+ * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
+ */
+public class SpecificationChecker {
+	/**
+	 * Time delta in seconds after which a prover call times out.
+	 * 
+	 * Defaults to zero.
+	 */
+<span class="pc" id="L34">	private Integer timeout = 1;</span>
+
+	/**
+	 * @return the timeout
+	 */
+	public final Integer getTimeout() {
+<span class="nc" id="L40">		return this.timeout;</span>
+	}
+
+	/**
+	 * @param timeout
+	 *                the timeout to set, minimum 1
+	 */
+	public final void setTimeout(final Integer timeout) {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (timeout &gt; 0) {</span>
+<span class="nc" id="L49">			this.timeout = timeout;</span>
+		} else {
+<span class="nc" id="L51">			this.timeout = 1;</span>
+		}
+<span class="nc" id="L53">	}</span>
+
+	/**
+	 * The {@link ProverCaller} that is called for checking the satisfiability of formulae.
+	 * 
+	 * Defaults to {@link Z3Prover} instance.
+	 */
+	private ProverCaller prover;
+
+	/**
+	 * @return the {@link ProverCaller} that is called for checking the satisfiability of formulae
+	 */
+	public final ProverCaller getProver() {
+<span class="nc" id="L66">		return this.prover;</span>
+	}
+
+	/**
+	 * @param prover
+	 *                the {@link ProverCaller} that is called for checking the satisfiability of formulae
+	 */
+	public final void setProver(final ProverCaller prover) {
+<span class="nc" id="L74">		this.prover = prover;</span>
+<span class="nc" id="L75">	}</span>
+
+	/**
+	 * The {@link FormulaGenerator} that is called for generating a formula from a {@link Program}.
+	 */
+	private FormulaGenerator transformer;
+
+	/**
+	 * @return the transformer
+	 */
+	public final FormulaGenerator getTransformer() {
+<span class="nc" id="L86">		return this.transformer;</span>
+	}
+
+	/**
+	 * @param transformer
+	 *                the transformer to set
+	 */
+	public final void setTransformer(final FormulaGenerator transformer) {
+<span class="nc" id="L94">		this.transformer = transformer;</span>
+<span class="nc" id="L95">	}</span>
+
+	/**
+	 * The result of the last call to {@link prover}.
+	 */
+	private ProverResult checkResult;
+
+	/**
+	 * @return the checkResult
+	 */
+	public final ProverResult getCheckResult() {
+<span class="fc" id="L106">		return this.checkResult;</span>
+	}
+
+	/**
+	 * The listener that distributes fired events to other event listeners attached to this instance.
+	 */
+<span class="pc" id="L112">	private final DistributorProverEventListener listener = new DistributorProverEventListener();</span>
+
+	/**
+	 * Add an event listener to this instance.
+	 * 
+	 * @param listener
+	 *                the listener to add
+	 * @return true if adding the listener succeeded, else false
+	 */
+	public final boolean addProverEventListener(final IProverEventListener listener) {
+<span class="fc" id="L122">		return this.listener.addProverEventListener(listener);</span>
+	}
+
+	/**
+	 * Remove an event listener to this instance.
+	 * 
+	 * @param listener
+	 *                the listener to remove
+	 * @return true if removing the listener succeeded, else false
+	 */
+	public final boolean removeProverEventListener(final IProverEventListener listener) {
+<span class="fc" id="L133">		return this.listener.removeProverEventListener(listener);</span>
+	}
+
+	/**
+	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer} and {@link Z3Prover} with the default
+	 * command line as {@link SpecificationChecker#prover}.
+	 */
+<span class="fc" id="L140">	public SpecificationChecker() {</span>
+<span class="fc" id="L141">		this.transformer = new WPStrategy();</span>
+<span class="fc" id="L142">		this.prover = new Z3Prover();</span>
+<span class="fc" id="L143">	}</span>
+
+	/**
+	 * Uses {@link Z3Prover} with the default command line as {@link SpecificationChecker#prover}.
+	 * 
+	 * @param transformer
+	 *                Is called to transform {@link Program}s into formulae.
+	 */
+<span class="nc" id="L151">	public SpecificationChecker(final FormulaGenerator transformer) {</span>
+<span class="nc" id="L152">		this.transformer = transformer;</span>
+<span class="nc" id="L153">		this.prover = new Z3Prover();</span>
+<span class="nc" id="L154">	}</span>
+
+	/**
+	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer}.
+	 * 
+	 * @param prover
+	 *                the {@link ProverCaller} that is called for checking the satisfiability of formulae
+	 */
+<span class="nc" id="L162">	public SpecificationChecker(final ProverCaller prover) {</span>
+<span class="nc" id="L163">		this.transformer = new WPStrategy();</span>
+<span class="nc" id="L164">		this.prover = prover;</span>
+<span class="nc" id="L165">	}</span>
+
+	/**
+	 * @param formula
+	 *                the {@link Expression} to check
+	 * @param environment
+	 *                a list of variable values and axioms
+	 * @return the {@link Validity} of &lt;code&gt;formula&lt;/code&gt; when &lt;code&gt;environment&lt;/code&gt; is applied
+	 */
+	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
+	public final Validity checkFormula(final Expression formula, final Map&lt;VariableDeclaration, Value&gt; environment) {
+		// TODO apply Worthwhile specific runtime assertions
+		// TODO apply axiom list
+
+<span class="fc" id="L179">		Expression environmentExpression = AstNodeCreatorHelper.createTrueLiteral();</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">		for (VariableDeclaration environmentVariable : environment.keySet()) {</span>
+			// create a reference to the variable
+<span class="fc" id="L182">			VariableReference variableReference = AstNodeCreatorHelper</span>
+<span class="fc" id="L183">			                .createVariableReference(environmentVariable);</span>
+
+<span class="fc" id="L185">			Value variableValue = environment.get(environmentVariable);</span>
+			// create the literal that epxresses the value of the symbol
+<span class="fc" id="L187">			Literal variableValueLiteral = null;</span>
+			// TODO: array symbols
+<span class="fc bfc" id="L189" title="All 2 branches covered.">			if (variableValue instanceof BooleanValue) {</span>
+<span class="fc" id="L190">				variableValueLiteral = AstNodeCreatorHelper</span>
+<span class="fc" id="L191">				                .createBooleanLiteral(((BooleanValue) variableValue).getValue());</span>
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">			} else if (variableValue instanceof IntegerValue) {</span>
+<span class="fc" id="L193">				variableValueLiteral = AstNodeCreatorHelper</span>
+<span class="fc" id="L194">				                .createIntegerLiteral(((IntegerValue) variableValue).getValue());</span>
+			}
+
+			// create the ref = literal expression
+<span class="fc" id="L198">			Equal equal = AstNodeCreatorHelper.createEqual(variableReference, variableValueLiteral);</span>
+
+			// conjunctively add the equals to the expression expressing the environment
+<span class="fc" id="L201">			environmentExpression = AstNodeCreatorHelper.createConjunction(environmentExpression, equal);</span>
+		}
+
+		// create the environment =&gt; expression implication
+<span class="fc" id="L205">		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression,</span>
+<span class="fc" id="L206">		                AstNodeCloneHelper.clone(formula));</span>
+<span class="fc" id="L207">		return this.checkProgram(AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper</span>
+<span class="fc" id="L208">		                .createAssertion(environmentImpliesFormula)));</span>
+	}
+
+	/**
+	 * Checks a formula's validity and returns the result.
+	 * 
+	 * @param formula
+	 *                the {@link Expression} whose {@link Validity} to determine
+	 * @return &lt;code&gt;formula&lt;/code&gt;'s {@link Validity}
+	 */
+	private Validity getValidity(final Expression formula) {
+<span class="fc" id="L219">		final Negation negation = AstNodeCreatorHelper.createNegation(formula);</span>
+
+		// let prover check formula and initialize checkResult with the returned result
+		/**
+		 * Thread that detaches to execute the prover caller.
+		 * 
+		 * @author Leon Handreke
+		 */
+<span class="fc" id="L227">		class ProverCallerTask implements Callable&lt;ProverResult&gt; {</span>
+			@Override
+			public ProverResult call() throws ProverCallerException {
+<span class="fc" id="L230">				return SpecificationChecker.this.prover.checkFormula(negation);</span>
+			}
+		}
+		// run the prover caller
+<span class="fc" id="L234">		ExecutorService executor = Executors.newSingleThreadExecutor();</span>
+<span class="fc" id="L235">		Future&lt;ProverResult&gt; resultFuture = executor.submit(new ProverCallerTask());</span>
+		try {
+<span class="fc" id="L237">			this.checkResult = resultFuture.get(this.timeout, TimeUnit.SECONDS);</span>
+<span class="nc" id="L238">		} catch (TimeoutException e) {</span>
+			// timeout - result unknown
+<span class="nc" id="L240">			this.checkResult = new ProverResult(&quot;timeout&quot;) {</span>
+				@Override
+				public FormulaSatisfiability getSatisfiability() {
+<span class="nc" id="L243">					return FormulaSatisfiability.UNKOWN;</span>
+				}
+			};
+<span class="fc" id="L246">		} catch (Exception e) {</span>
+<span class="fc" id="L247">			this.checkResult = new ProverResult(e.getMessage()) {</span>
+				@Override
+				public FormulaSatisfiability getSatisfiability() {
+<span class="fc" id="L250">					return FormulaSatisfiability.UNKOWN;</span>
+				}
+			};
+		}
+<span class="fc" id="L254">		executor.shutdown();</span>
+
+		// determine formula's validity based on negation's satisfiability, which is VALID only if the latter is
+		// UNSATISFIABLE and INVALID only if the latter is SATISFIABLE, UNKNOWN otherwise
+<span class="fc" id="L258">		Validity validity = Validity.UNKNOWN;</span>
+<span class="pc bpc" id="L259" title="1 of 2 branches missed.">		if (this.checkResult != null) {</span>
+<span class="fc bfc" id="L260" title="All 3 branches covered.">			switch (this.checkResult.getSatisfiability()) {</span>
+			case SATISFIABLE:
+<span class="fc" id="L262">				validity = Validity.INVALID;</span>
+<span class="fc" id="L263">				break;</span>
+			case UNSATISFIABLE:
+<span class="fc" id="L265">				validity = Validity.VALID;</span>
+<span class="fc" id="L266">				break;</span>
+			default:
+<span class="fc" id="L268">				validity = Validity.UNKNOWN;</span>
+			}
+		}
+
+<span class="fc" id="L272">		return validity;</span>
+	}
+
+	/**
+	 * @param program
+	 *                the {@link Program} to check
+	 * @return the {@link Validity} of &lt;code&gt;program&lt;/code&gt;
+	 */
+	public final Validity checkProgram(final Program program) {
+		// TODO apply Worthwhile specific runtime assertions
+
+		// we don't want to pollute the o
+<span class="fc" id="L284">		Program modifiedProgram = AstNodeCloneHelper.clone(program);</span>
+		// add assertions to check that the divisors are not zero
+<span class="fc" id="L286">		modifiedProgram.accept(new DivisionByZeroAssertionInserter());</span>
+<span class="fc" id="L287">		modifiedProgram.accept(new ImplicitInitialValueInserter());</span>
+<span class="fc" id="L288">		modifiedProgram.accept(new FunctionCallSubstitution());</span>
+		// generate formula from program
+<span class="fc" id="L290">		Expression formula = this.transformer.transformProgram(modifiedProgram);</span>
+		// get the validity from the prover
+<span class="fc" id="L292">		Validity validity = this.getValidity(formula);</span>
+		// fire the event listener
+<span class="fc" id="L294">		this.listener.programVerified(program, validity, this.getCheckResult());</span>
+<span class="fc" id="L295">		return validity;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

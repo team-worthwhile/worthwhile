@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WorthwhileMarkerHelper.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.util</a> &gt; <span class="el_source">WorthwhileMarkerHelper.java</span></div><h1>WorthwhileMarkerHelper.java</h1><pre class="source lang-java linenums"><span class="nc" id="L1">package edu.kit.iti.formal.pse.worthwhile.util;</span>
+
+import static edu.kit.iti.formal.pse.worthwhile.util.WorthwhileConstants.MARKER_FAILED_STATEMENT;
+import static edu.kit.iti.formal.pse.worthwhile.util.WorthwhileConstants.MARKER_SUCCEEDED_STATEMENT;
+
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+
+/**
+ * Helper class for setting markers in a Worthwhile file.
+ * 
+ * @author Joachim
+ * 
+ */
+public class WorthwhileMarkerHelper {
+
+	/**
+	 * The resource to set the markers in.
+	 */
+	private final IResource resource;
+
+	/**
+	 * Creates a new instance of the {@link WorthwhileMarkerHelper} class.
+	 * 
+	 * @param resource
+	 *                The resource to set the markers in.
+	 */
+<span class="nc" id="L33">	public WorthwhileMarkerHelper(final IResource resource) {</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">		if (resource == null) {</span>
+<span class="nc" id="L35">			throw new IllegalArgumentException(&quot;Resource may not be null&quot;);</span>
+		}
+
+<span class="nc" id="L38">		this.resource = resource;</span>
+<span class="nc" id="L39">	}</span>
+
+	/**
+	 * Clears all Worthwhile markers in the resource.
+	 */
+	public final void clearMarkers() {
+		try {
+<span class="nc" id="L46">			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {</span>
+				@Override
+				public void run(final IProgressMonitor monitor) throws CoreException {
+<span class="nc" id="L49">					resource.deleteMarkers(MARKER_FAILED_STATEMENT, true, IResource.DEPTH_INFINITE);</span>
+<span class="nc" id="L50">					resource.deleteMarkers(MARKER_SUCCEEDED_STATEMENT, true, IResource.DEPTH_INFINITE);</span>
+<span class="nc" id="L51">				}</span>
+			};
+<span class="nc" id="L53">			runnable.run(null);</span>
+<span class="nc" id="L54">		} catch (CoreException e) {</span>
+<span class="nc" id="L55">			e.printStackTrace();</span>
+		}
+<span class="nc" id="L57">	}</span>
+
+	/**
+	 * Marks a statement as failed (e.g. an assertion).
+	 * 
+	 * @param statement
+	 *                The statement to mark as failed.
+	 * @param message
+	 *                The message to mark the statement with.
+	 */
+	public final void markFailedStatement(final ASTNode statement, final String message) {
+		try {
+<span class="nc" id="L69">			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {</span>
+				@Override
+				public void run(final IProgressMonitor monitor) throws CoreException {
+					// Create a new marker
+<span class="nc" id="L73">					IMarker marker = createMarker(statement, MARKER_FAILED_STATEMENT);</span>
+<span class="nc" id="L74">					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_WARNING);</span>
+<span class="nc" id="L75">					marker.setAttribute(IMarker.MESSAGE, message);</span>
+<span class="nc" id="L76">				}</span>
+			};
+<span class="nc" id="L78">			runnable.run(null);</span>
+<span class="nc" id="L79">		} catch (CoreException e) {</span>
+<span class="nc" id="L80">			e.printStackTrace();</span>
+		}
+
+<span class="nc" id="L83">	}</span>
+
+	/**
+	 * Marks a statement as succeeded (e.g. an assertion).
+	 * 
+	 * @param statement
+	 *                The statement to mark as succeeded.
+	 * @param message
+	 *                The message to mark the statement with.
+	 */
+	public final void markSucceededStatement(final ASTNode statement, final String message) {
+		try {
+<span class="nc" id="L95">			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {</span>
+				@Override
+				public void run(final IProgressMonitor monitor) throws CoreException {
+					// Create a new marker
+<span class="nc" id="L99">					IMarker marker = createMarker(statement, MARKER_SUCCEEDED_STATEMENT);</span>
+<span class="nc" id="L100">					marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);</span>
+<span class="nc" id="L101">					marker.setAttribute(IMarker.MESSAGE, message);</span>
+<span class="nc" id="L102">				}</span>
+			};
+<span class="nc" id="L104">			runnable.run(null);</span>
+<span class="nc" id="L105">		} catch (CoreException e) {</span>
+<span class="nc" id="L106">			e.printStackTrace();</span>
+		}
+
+<span class="nc" id="L109">	}</span>
+
+	/**
+	 * Creates a marker in the specified resource.
+	 * 
+	 * @param statement
+	 *                The statement to mark in the resource.
+	 * @param markerType
+	 *                The type of the marker
+	 * @return The created marker.
+	 * @throws CoreException
+	 *                 if the marker cannot be created.
+	 */
+	private IMarker createMarker(final ASTNode statement, final String markerType) throws CoreException {
+		// Get the position of the node in the source file.
+<span class="nc" id="L124">		int line = NodeHelper.getLine(statement);</span>
+<span class="nc" id="L125">		int offset = NodeHelper.getOffset(statement);</span>
+<span class="nc" id="L126">		int length = NodeHelper.getLength(statement);</span>
+
+		// Create a new marker
+<span class="nc" id="L129">		IMarker marker = this.resource.createMarker(markerType);</span>
+<span class="nc" id="L130">		marker.setAttribute(IMarker.LINE_NUMBER, line);</span>
+<span class="nc" id="L131">		marker.setAttribute(IMarker.CHAR_START, offset);</span>
+<span class="nc" id="L132">		marker.setAttribute(IMarker.CHAR_END, offset + length);</span>
+
+<span class="nc" id="L134">		return marker;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>DivisionByZeroAssertionInserter.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">DivisionByZeroAssertionInserter.java</span></div><h1>DivisionByZeroAssertionInserter.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.math.BigInteger;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Stack;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * Visitor to insert Assertion statements above every {@link Division} to ensure the divisor is not zero.
+ * 
+ * @author Leon Handreke
+ */
+<span class="fc" id="L34">public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {</span>
+	/**
+	 * Divisors found inside an expression that have to be checked.
+	 */
+<span class="fc" id="L38">	private final Stack&lt;Set&lt;Expression&gt;&gt; foundDivisorsStack = new Stack&lt;Set&lt;Expression&gt;&gt;();</span>
+
+	@Override
+	public final void visit(final Annotation annotation) {
+		// we don't do fancy stuff in Annotations - they are directly passed to Z3
+		// TODO: If we can do this for quantified expressions, we could actually do this
+<span class="fc" id="L44">	}</span>
+
+	@Override
+	public final void visit(final Assignment assignment) {
+<span class="fc" id="L48">		assignment.getValue().accept(this);</span>
+<span class="fc" id="L49">	}</span>
+
+	@Override
+	public final void visit(final BinaryExpression binaryExpression) {
+<span class="fc" id="L53">		binaryExpression.getLeft().accept(this);</span>
+<span class="fc" id="L54">		binaryExpression.getRight().accept(this);</span>
+<span class="fc" id="L55">	}</span>
+
+	@Override
+	public final void visit(final Block block) {
+		/*
+		 * initialize a new stack the statement containing this block might contain a division itself that we
+		 * want to check for *before* the statement
+		 */
+<span class="fc" id="L63">		this.foundDivisorsStack.push(new HashSet&lt;Expression&gt;());</span>
+
+<span class="fc bfc" id="L65" title="All 2 branches covered.">		for (int i = 0; i &lt; block.getStatements().size(); i++) {</span>
+<span class="fc" id="L66">			Expression divisorCheck = null;</span>
+<span class="fc" id="L67">			Statement s = block.getStatements().get(i);</span>
+			// find all divisors in the statement
+<span class="fc" id="L69">			s.accept(this);</span>
+			// go through all of the found divisors
+<span class="fc bfc" id="L71" title="All 2 branches covered.">			for (Expression divisor : this.foundDivisorsStack.peek()) {</span>
+				// create (not (divisor equals zero))
+<span class="fc" id="L73">				IntegerLiteral zero = AstNodeCreatorHelper.createIntegerLiteral(new BigInteger(&quot;0&quot;));</span>
+<span class="fc" id="L74">				Expression equalsZero = AstNodeCreatorHelper.createEqual(zero,</span>
+<span class="fc" id="L75">				                AstNodeCloneHelper.clone(divisor));</span>
+<span class="fc" id="L76">				Expression notEqualsZero = AstNodeCreatorHelper.createNegation(equalsZero);</span>
+				// add it to the expression to be asserted conjuntively
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">				if (divisorCheck == null) {</span>
+<span class="fc" id="L79">					divisorCheck = notEqualsZero;</span>
+				} else {
+<span class="nc" id="L81">					divisorCheck = AstNodeCreatorHelper.createConjunction(divisorCheck,</span>
+<span class="nc" id="L82">					                notEqualsZero);</span>
+				}
+			}
+
+			// if divisors were found, add the check expression as an assertion
+<span class="fc bfc" id="L87" title="All 2 branches covered.">			if (divisorCheck != null) {</span>
+<span class="fc" id="L88">				block.getStatements().add(i, AstNodeCreatorHelper.createAssertion(divisorCheck));</span>
+				/*
+				 * advance the loop past the statement just read that is now at i + 1 because the
+				 * assertion was inserted at index i
+				 */
+<span class="fc" id="L93">				i++;</span>
+			}
+			// clear the stack for the next statement
+<span class="fc" id="L96">			this.foundDivisorsStack.peek().clear();</span>
+		}
+<span class="fc" id="L98">		this.foundDivisorsStack.pop();</span>
+<span class="fc" id="L99">	}</span>
+
+	@Override
+	public final void visit(final Conditional conditional) {
+<span class="fc" id="L103">		conditional.getCondition().accept(this);</span>
+<span class="fc" id="L104">		conditional.getTrueBlock().accept(this);</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">		if (conditional.getFalseBlock() != null) {</span>
+<span class="nc" id="L106">			conditional.getFalseBlock().accept(this);</span>
+		}
+<span class="fc" id="L108">	}</span>
+
+	@Override
+	public final void visit(final Division division) {
+<span class="fc" id="L112">		this.foundDivisorsStack.peek().add(division.getRight());</span>
+<span class="fc" id="L113">		division.getLeft().accept(this);</span>
+<span class="fc" id="L114">		division.getRight().accept(this);</span>
+<span class="fc" id="L115">	}</span>
+
+	@Override
+	public final void visit(final Modulus modulus) {
+<span class="fc" id="L119">		this.foundDivisorsStack.peek().add(modulus.getRight());</span>
+<span class="fc" id="L120">		modulus.getLeft().accept(this);</span>
+<span class="fc" id="L121">		modulus.getRight().accept(this);</span>
+<span class="fc" id="L122">	}</span>
+
+	@Override
+	public final void visit(final Expression expression) {
+		// this only happens for quantified expressions that we don't want to visit
+		// TODO: maybe visit them too?
+		// we'd have to do some heuristics to stop checking bound variables
+<span class="fc" id="L129">	}</span>
+
+	@Override
+	public final void visit(final FunctionDeclaration functionDeclaration) {
+<span class="fc" id="L133">		functionDeclaration.getBody().accept(this);</span>
+<span class="fc" id="L134">	}</span>
+
+	@Override
+	public final void visit(final Literal literal) {
+		// no Division can hide in a literal
+<span class="fc" id="L139">	}</span>
+
+	@Override
+	public final void visit(final Loop loop) {
+<span class="fc" id="L143">		loop.getCondition().accept(this);</span>
+<span class="fc" id="L144">		loop.getBody().accept(this);</span>
+<span class="fc" id="L145">	}</span>
+
+	@Override
+	public final void visit(final Program program) {
+<span class="fc" id="L149">		program.getMainBlock().accept(this);</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">		for (FunctionDeclaration d : program.getFunctionDeclarations()) {</span>
+<span class="fc" id="L151">			d.accept(this);</span>
+		}
+<span class="fc" id="L153">	}</span>
+
+	@Override
+	public final void visit(final ReturnStatement returnStatement) {
+<span class="fc" id="L157">		returnStatement.getReturnValue().accept(this);</span>
+<span class="fc" id="L158">	}</span>
+
+	@Override
+	public final void visit(final UnaryExpression unaryExpression) {
+<span class="fc" id="L162">		unaryExpression.getOperand().accept(this);</span>
+<span class="fc" id="L163">	}</span>
+
+	@Override
+	public final void visit(final VariableDeclaration variableDeclaration) {
+<span class="fc bfc" id="L167" title="All 2 branches covered.">		if (variableDeclaration.getInitialValue() != null) {</span>
+<span class="fc" id="L168">			variableDeclaration.getInitialValue().accept(this);</span>
+		}
+<span class="fc" id="L170">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

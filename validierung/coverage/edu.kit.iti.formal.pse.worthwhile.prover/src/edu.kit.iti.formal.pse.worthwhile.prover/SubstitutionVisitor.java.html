@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>SubstitutionVisitor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">SubstitutionVisitor.java</span></div><h1>SubstitutionVisitor.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.util.ListIterator;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * Substitutes a child reference with some {@link Expression} in the parent {@link ASTNode} when indicated so by the
+ * child.
+ * 
+ * Implements all {@link Statement} visit methods as well as
+ * 
+ * &lt;ul&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(ArrayFunction)}&lt;/li&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(ArrayLiteral)}&lt;/li&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(BinaryExpression)}&lt;/li&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(FunctionCall)}&lt;/li&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(QuantifiedExpression)}&lt;/li&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(UnaryExpression)}&lt;/li&gt;
+ * &lt;li&gt;{@link HierarchialASTNodeVisitor#visit(VariableReference)} (for array index expressions)&lt;/li&gt;
+ * &lt;/ul&gt;
+ * 
+ * to traverse {@link Expression}s and substitute the respective child references when the visited children called
+ * {@link SubstitutionVisitor#setFound(Boolean)}. {@link HierarchialASTNodeVisitor#visit(Literal)} is implemented with
+ * an empty body so that the default visit operation is ignored and subclasses just have to override the visit methods
+ * in which they want to actually call {@link SubstitutionVisitor#setFound(Boolean)}.
+ * 
+ * @param T
+ *                the substitute's, which a child reference is replaced with, &lt;code&gt;Expression&lt;/code&gt; type
+ * 
+ * @author fabian
+ * 
+ */
+class SubstitutionVisitor&lt;T extends Expression&gt; extends HierarchialASTNodeVisitor {
+	/**
+	 * The {@link Expression} children are substituted with when {@link SubstitutionVisitor#found} was set.
+	 */
+	private T substitute;
+
+	/**
+	 * Indicates whether a matching child has been found and has to be substituted in the parent {@link ASTNode}.
+	 */
+<span class="fc" id="L67">	private Boolean found = false;</span>
+
+	/**
+	 * 
+	 * @param substitute
+	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
+	 */
+<span class="fc" id="L74">	SubstitutionVisitor(final T substitute) {</span>
+<span class="fc" id="L75">		this.substitute = substitute;</span>
+<span class="fc" id="L76">	}</span>
+
+	/**
+	 * @return the found
+	 */
+	final Boolean getFound() {
+<span class="fc" id="L82">		return this.found;</span>
+	}
+
+	/**
+	 * @param found
+	 *                the found to set
+	 */
+	final void setFound(final Boolean found) {
+<span class="fc" id="L90">		this.found = found;</span>
+<span class="fc" id="L91">	}</span>
+
+	/**
+	 * 
+	 * @param cloned
+	 *                indicates whether a clone of the {@link SubstitutionVisitor#substitute} or the
+	 *                &lt;code&gt;substitute&lt;/code&gt; itself should be returned
+	 * @return the &lt;code&gt;substitute&lt;/code&gt;
+	 */
+	final T getSubstitute(final boolean cloned) {
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">		if (cloned) {</span>
+<span class="fc" id="L102">			return AstNodeCloneHelper.clone(this.substitute);</span>
+		} else {
+<span class="nc" id="L104">			return this.substitute;</span>
+		}
+	}
+
+	/**
+	 * @return a clone of the {@link SubstitutionVisitor#substitute}
+	 */
+	final T getSubstitute() {
+<span class="fc" id="L112">		return this.getSubstitute(true);</span>
+	}
+
+	/**
+	 * 
+	 * @param substitute
+	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
+	 */
+	final void setSubstitute(final T substitute) {
+<span class="fc" id="L121">		this.substitute = substitute;</span>
+<span class="fc" id="L122">	}</span>
+
+	@Override
+	public void visit(final Program program) {
+<span class="fc bfc" id="L126" title="All 2 branches covered.">		for (final FunctionDeclaration f : program.getFunctionDeclarations()) {</span>
+<span class="fc" id="L127">			f.accept(this);</span>
+		}
+
+<span class="fc" id="L130">		program.getMainBlock().accept(this);</span>
+<span class="fc" id="L131">	}</span>
+
+	@Override
+	public void visit(final FunctionDeclaration functionDeclaration) {
+<span class="fc bfc" id="L135" title="All 2 branches covered.">		for (final Precondition p : functionDeclaration.getPreconditions()) {</span>
+<span class="fc" id="L136">			p.accept(this);</span>
+		}
+<span class="fc bfc" id="L138" title="All 2 branches covered.">		for (final Postcondition p : functionDeclaration.getPostconditions()) {</span>
+<span class="fc" id="L139">			p.accept(this);</span>
+		}
+<span class="fc" id="L141">		functionDeclaration.getBody().accept(this);</span>
+<span class="fc" id="L142">	}</span>
+
+	@Override
+	public void visit(final Annotation annotation) {
+<span class="fc" id="L146">		annotation.getExpression().accept(this);</span>
+
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">		if (this.found) {</span>
+<span class="nc" id="L149">			this.found = false;</span>
+<span class="nc" id="L150">			annotation.setExpression(this.getSubstitute());</span>
+		}
+<span class="fc" id="L152">	}</span>
+
+	@Override
+	public void visit(final ArrayLiteral arrayLiteral) {
+<span class="fc" id="L156">		final ListIterator&lt;Expression&gt; i = arrayLiteral.getValues().listIterator();</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">		while (i.hasNext()) {</span>
+<span class="fc" id="L158">			i.next().accept(this);</span>
+
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">			if (this.found) {</span>
+<span class="nc" id="L161">				this.found = false;</span>
+<span class="nc" id="L162">				i.set(this.getSubstitute());</span>
+			}
+		}
+<span class="fc" id="L165">	}</span>
+
+	@Override
+	public void visit(final ArrayFunction arrayFunction) {
+		// FIXME: substitute child reference when found is still set after accept returned
+<span class="nc" id="L170">		final Expression index = arrayFunction.getIndex();</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">		if (index != null) {</span>
+<span class="nc" id="L172">			index.accept(this);</span>
+<span class="nc bnc" id="L173" title="All 2 branches missed.">			if (this.found) {</span>
+<span class="nc" id="L174">				this.found = false;</span>
+<span class="nc" id="L175">				arrayFunction.setIndex(this.getSubstitute());</span>
+			}
+		}
+
+<span class="nc" id="L179">		arrayFunction.getValue().accept(this);</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		if (this.found) {</span>
+<span class="nc" id="L181">			this.found = false;</span>
+<span class="nc" id="L182">			arrayFunction.setValue(this.getSubstitute());</span>
+		}
+
+<span class="nc" id="L185">		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">		if (chainedFunction != null) {</span>
+<span class="nc" id="L187">			chainedFunction.accept(this);</span>
+		}
+<span class="nc" id="L189">	}</span>
+
+	@Override
+	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
+<span class="nc" id="L193">		arrayFunctionAccess.getFunction().accept(this);</span>
+
+<span class="nc" id="L195">		arrayFunctionAccess.getIndex().accept(this);</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">		if (this.found) {</span>
+<span class="nc" id="L197">			this.found = false;</span>
+<span class="nc" id="L198">			arrayFunctionAccess.setIndex(this.getSubstitute());</span>
+		}
+<span class="nc" id="L200">	}</span>
+
+	@Override
+	public void visit(final Assignment assignment) {
+<span class="fc" id="L204">		assignment.getValue().accept(this);</span>
+
+<span class="fc bfc" id="L206" title="All 2 branches covered.">		if (this.found) {</span>
+<span class="fc" id="L207">			this.found = false;</span>
+<span class="fc" id="L208">			assignment.setValue(this.getSubstitute());</span>
+		}
+<span class="fc" id="L210">	}</span>
+
+	@Override
+	public void visit(final Block block) {
+<span class="nc bnc" id="L214" title="All 2 branches missed.">		for (final Statement s : block.getStatements()) {</span>
+<span class="nc" id="L215">			s.accept(this);</span>
+		}
+<span class="nc" id="L217">	}</span>
+
+	@Override
+	public void visit(final Conditional conditional) {
+<span class="fc" id="L221">		conditional.getCondition().accept(this);</span>
+
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">		if (this.found) {</span>
+<span class="nc" id="L224">			this.found = false;</span>
+<span class="nc" id="L225">			conditional.setCondition(this.getSubstitute());</span>
+		}
+
+<span class="fc" id="L228">		conditional.getTrueBlock().accept(this);</span>
+
+<span class="fc" id="L230">		final Block falseBlock = conditional.getFalseBlock();</span>
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">		if (falseBlock != null) {</span>
+<span class="nc" id="L232">			falseBlock.accept(this);</span>
+		}
+<span class="fc" id="L234">	}</span>
+
+	@Override
+	public void visit(final Loop loop) {
+<span class="fc" id="L238">		loop.getCondition().accept(this);</span>
+
+<span class="pc bpc" id="L240" title="1 of 2 branches missed.">		if (this.found) {</span>
+<span class="nc" id="L241">			this.found = false;</span>
+<span class="nc" id="L242">			loop.setCondition(this.getSubstitute());</span>
+		}
+
+<span class="fc bfc" id="L245" title="All 2 branches covered.">		for (final Invariant i : loop.getInvariants()) {</span>
+<span class="fc" id="L246">			i.accept(this);</span>
+		}
+<span class="fc" id="L248">		loop.getBody().accept(this);</span>
+<span class="fc" id="L249">	}</span>
+
+	@Override
+	public void visit(final ReturnStatement returnStatement) {
+<span class="fc" id="L253">		returnStatement.getReturnValue().accept(this);</span>
+
+<span class="pc bpc" id="L255" title="1 of 2 branches missed.">		if (this.found) {</span>
+<span class="nc" id="L256">			this.found = false;</span>
+<span class="nc" id="L257">			returnStatement.setReturnValue(this.getSubstitute());</span>
+		}
+<span class="fc" id="L259">	}</span>
+
+	@Override
+	public void visit(final VariableDeclaration variableDeclaration) {
+<span class="fc" id="L263">		variableDeclaration.getInitialValue().accept(this);</span>
+
+<span class="fc bfc" id="L265" title="All 2 branches covered.">		if (this.found) {</span>
+<span class="fc" id="L266">			this.found = false;</span>
+<span class="fc" id="L267">			variableDeclaration.setInitialValue(this.getSubstitute());</span>
+		}
+<span class="fc" id="L269">	}</span>
+
+	@Override
+	public void visit(final QuantifiedExpression quantifiedExpression) {
+<span class="fc" id="L273">		final Expression condition = quantifiedExpression.getCondition();</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">		if (condition != null) {</span>
+<span class="fc" id="L275">			condition.accept(this);</span>
+
+<span class="pc bpc" id="L277" title="1 of 2 branches missed.">			if (found) {</span>
+<span class="nc" id="L278">				quantifiedExpression.setCondition(this.getSubstitute());</span>
+<span class="nc" id="L279">				found = false;</span>
+			}
+		}
+
+<span class="fc" id="L283">		quantifiedExpression.getExpression().accept(this);</span>
+<span class="pc bpc" id="L284" title="1 of 2 branches missed.">		if (found) {</span>
+<span class="nc" id="L285">			quantifiedExpression.setExpression(this.getSubstitute());</span>
+<span class="nc" id="L286">			found = false;</span>
+		}
+<span class="fc" id="L288">	}</span>
+
+	@Override
+	public void visit(final BinaryExpression binaryExpression) {
+<span class="fc" id="L292">		binaryExpression.getLeft().accept(this);</span>
+<span class="fc bfc" id="L293" title="All 2 branches covered.">		if (found) {</span>
+<span class="fc" id="L294">			binaryExpression.setLeft(this.getSubstitute());</span>
+<span class="fc" id="L295">			found = false;</span>
+		}
+
+<span class="fc" id="L298">		binaryExpression.getRight().accept(this);</span>
+<span class="fc bfc" id="L299" title="All 2 branches covered.">		if (found) {</span>
+<span class="fc" id="L300">			binaryExpression.setRight(this.getSubstitute());</span>
+<span class="fc" id="L301">			found = false;</span>
+		}
+<span class="fc" id="L303">	}</span>
+
+	@Override
+	public void visit(final FunctionCall functionCall) {
+<span class="nc" id="L307">		final ListIterator&lt;Expression&gt; i = functionCall.getActuals().listIterator();</span>
+<span class="nc bnc" id="L308" title="All 2 branches missed.">		while (i.hasNext()) {</span>
+<span class="nc" id="L309">			i.next().accept(this);</span>
+
+<span class="nc bnc" id="L311" title="All 2 branches missed.">			if (this.found) {</span>
+<span class="nc" id="L312">				this.found = false;</span>
+<span class="nc" id="L313">				i.set(this.getSubstitute());</span>
+			}
+		}
+<span class="nc" id="L316">	};</span>
+
+	@Override
+	public void visit(final UnaryExpression unaryExpression) {
+<span class="fc" id="L320">		unaryExpression.getOperand().accept(this);</span>
+<span class="pc bpc" id="L321" title="1 of 2 branches missed.">		if (found) {</span>
+<span class="nc" id="L322">			unaryExpression.setOperand(this.getSubstitute());</span>
+<span class="nc" id="L323">			found = false;</span>
+		}
+<span class="fc" id="L325">	}</span>
+
+	@Override
+	public void visit(final Literal literal) {
+		// we reached an Expression leaf, ignore default operation
+<span class="fc" id="L330">	}</span>
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+<span class="fc" id="L334">		final Expression index = variableReference.getIndex();</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">		if (index != null) {</span>
+<span class="fc" id="L336">			index.accept(this);</span>
+
+<span class="pc bpc" id="L338" title="1 of 2 branches missed.">			if (this.found) {</span>
+<span class="nc" id="L339">				found = false;</span>
+<span class="nc" id="L340">				variableReference.setIndex(this.getSubstitute());</span>
+			}
+		}
+<span class="fc" id="L343">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

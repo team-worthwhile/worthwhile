@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WorthwhileJavaValidator.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.validation</a> &gt; <span class="el_source">WorthwhileJavaValidator.java</span></div><h1>WorthwhileJavaValidator.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package edu.kit.iti.formal.pse.worthwhile.validation;</span>
+
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.NamesAreUniqueValidator;
+
+import com.google.inject.Inject;
+
+import de.itemis.xtext.typesystem.ITypesystem;
+import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
+
+/**
+ * Performs semantic validation on a Worthwhile program.
+ * 
+ */
+<span class="fc" id="L34">public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {</span>
+
+	/**
+	 * Error code for &quot;Function has no valid return statement&quot;.
+	 */
+	public static final String FUNCDEC_NO_VALID_RETURN = &quot;FuncdecNoValidReturn&quot;;
+	/**
+	 * Error code for &quot;Return statement may only appear in a function&quot;.
+	 */
+	public static final String RETURN_STATEMENT_ONLY_IN_FUNCTION = &quot;ReturnStatementOnlyInFunction&quot;;
+
+	/**
+	 * The language typesystem.
+	 */
+	@Inject
+	private ITypesystem ts;
+
+	/**
+	 * Checks if a function declaration contains a return statement on all code paths.
+	 * 
+	 * @param functionDeclaration
+	 *                The function declaration to check.
+	 */
+	@Check
+	public final void checkFunctionDeclarationValidReturnStatment(final FunctionDeclaration functionDeclaration) {
+<span class="fc" id="L59">		ValidatorASTNodeVisitor validatorASTNodeVisitor = new ValidatorASTNodeVisitor();</span>
+<span class="fc" id="L60">		validatorASTNodeVisitor.visit(functionDeclaration);</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">		if (!validatorASTNodeVisitor.getValidReturnFound()) {</span>
+<span class="nc" id="L62">			error(&quot;Function has no valid return statement.&quot;, functionDeclaration,</span>
+<span class="nc" id="L63">			                AstPackage.eINSTANCE.getFunctionDeclaration_Name(), FUNCDEC_NO_VALID_RETURN);</span>
+		}
+<span class="fc" id="L65">	}</span>
+
+	/**
+	 * Checks that a return value reference is only used in the postcondition of a function.
+	 * 
+	 * @param returnValueReference
+	 *                The return value reference to check.
+	 */
+	@Check
+	public final void checkReturnValueReference(final ReturnValueReference returnValueReference) {
+
+<span class="fc" id="L76">		ASTNodeBottomUpVisitor&lt;Boolean&gt; visitor = new ASTNodeBottomUpVisitor&lt;Boolean&gt;() {</span>
+
+			public void visit(final Postcondition postcondition) {
+<span class="fc" id="L79">				setReturnValue(true);</span>
+<span class="fc" id="L80">			}</span>
+		};
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">		if (visitor.apply(returnValueReference) == null) {</span>
+<span class="nc" id="L83">			error(&quot;The return value of a function may only be referenced in the postcondition.&quot;,</span>
+<span class="nc" id="L84">			                returnValueReference, null, -1);</span>
+		}
+<span class="fc" id="L86">	}</span>
+
+	/**
+	 * Checks if a return statement is only contained by a function block. If so the type of the return statement
+	 * and its function will also be checked.
+	 * 
+	 * @param returnStatement
+	 *                The return statement to check.
+	 */
+	@Check
+	public final void checkReturnStatementOnlyFunction(final ReturnStatement returnStatement) {
+
+<span class="fc" id="L98">		ASTNodeBottomUpVisitor&lt;Type&gt; visitor = new ASTNodeBottomUpVisitor&lt;Type&gt;() {</span>
+
+			public void visit(final FunctionDeclaration func) {
+<span class="fc" id="L101">				setReturnValue(func.getReturnType());</span>
+<span class="fc" id="L102">			}</span>
+		};
+
+<span class="fc" id="L105">		Type type = visitor.apply(returnStatement);</span>
+		// no function declaration found
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">		if (type == null) {</span>
+<span class="nc" id="L108">			error(&quot;The return statement has to be in a function block.&quot;, returnStatement, null,</span>
+<span class="nc" id="L109">			                RETURN_STATEMENT_ONLY_IN_FUNCTION);</span>
+
+			// compare the type of the function declaration and the returnStatement
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">		} else if (!ts.isSameType(returnStatement, ts.typeof(returnStatement, new TypeCalculationTrace()),</span>
+<span class="fc" id="L113">		                type, type, new TypeCalculationTrace())) {</span>
+<span class="nc" id="L114">			error(&quot;Type mismatch. Expected &quot; + ts.typeString(type) + &quot;, but found &quot;</span>
+<span class="nc" id="L115">			                + ts.typeString(ts.typeof(returnStatement, new TypeCalculationTrace())) + &quot;.&quot;,</span>
+<span class="nc" id="L116">			                returnStatement, null, -1);</span>
+		}
+<span class="fc" id="L118">	}</span>
+
+	/**
+	 * Checks if the function call parameters match with the ones of the called function.
+	 * 
+	 * @param functionCall
+	 *                The function call to be checked.
+	 */
+	@Check
+	public final void checkFunctionCallParameter(final FunctionCall functionCall) {
+
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">		if (functionCall.getActuals().size() != functionCall.getFunction().getParameters().size()) {</span>
+<span class="nc" id="L130">			error(&quot;The amount of parameters is incorrect. Expecting &quot;</span>
+<span class="nc" id="L131">			                + functionCall.getFunction().getParameters().size() + &quot; parameters, but found &quot;</span>
+<span class="nc" id="L132">			                + functionCall.getActuals().size() + &quot;.&quot;, functionCall, null, -1);</span>
+		} else {
+<span class="fc" id="L134">			TypeCalculationTrace trace = new TypeCalculationTrace();</span>
+<span class="fc" id="L135">			EList&lt;Expression&gt; actuals = functionCall.getActuals();</span>
+<span class="fc" id="L136">			EList&lt;VariableDeclaration&gt; parameters = functionCall.getFunction().getParameters();</span>
+
+<span class="fc bfc" id="L138" title="All 2 branches covered.">			for (int i = 0; i &lt; actuals.size(); i++) {</span>
+<span class="pc bpc" id="L139" title="1 of 2 branches missed.">				if (!((WorthwhileTypesystem) ts).isSameType(functionCall,</span>
+<span class="fc" id="L140">				                ts.typeof(actuals.get(i), trace), functionCall.getFunction(),</span>
+<span class="fc" id="L141">				                ts.typeof(parameters.get(i), trace), trace)) {</span>
+<span class="nc" id="L142">					error(&quot;Expected parameter &quot;</span>
+<span class="nc" id="L143">					                + ts.typeString(ts.typeof(parameters.get(i), trace))</span>
+<span class="nc" id="L144">					                + &quot; , but found &quot;</span>
+<span class="nc" id="L145">					                + ts.typeString(ts.typeof(actuals.get(i), trace)) + &quot;.&quot;,</span>
+<span class="nc" id="L146">					                actuals.get(i), null, -1);</span>
+
+				}
+			}
+		}
+<span class="fc" id="L151">	}</span>
+
+	/**
+	 * Checks if all elements of the {@link ArrayLiteral} have the same type. The type may not be {@link ArrayType}
+	 * 
+	 * @param arrayLiteral
+	 *                The array literal to be checked.
+	 */
+	@Check
+	public final void checkArrayLiteral(final ArrayLiteral arrayLiteral) {
+<span class="fc" id="L161">		ASTNodeBottomUpVisitor&lt;Boolean&gt; visitor = new ASTNodeBottomUpVisitor&lt;Boolean&gt;() {</span>
+
+			public void visit(final ArrayLiteral arrayLiteral) {
+<span class="nc" id="L164">				setReturnValue(true);</span>
+<span class="nc" id="L165">			}</span>
+		};
+		// if this array literal is contained in an other one
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">		if (visitor.apply((ASTNode) arrayLiteral.eContainer()) != null) {</span>
+<span class="nc" id="L169">			error(&quot;An array may not contain an other array.&quot;, arrayLiteral, null, -1);</span>
+		} else {
+<span class="fc" id="L171">			EList&lt;Expression&gt; actuals = arrayLiteral.getValues();</span>
+<span class="fc" id="L172">			TypeCalculationTrace trace = new TypeCalculationTrace();</span>
+<span class="fc" id="L173">			ASTNodeReturnVisitor&lt;ArrayType&gt; rv = new ASTNodeReturnVisitor&lt;ArrayType&gt;() {</span>
+				@Override
+				protected void defaultOperation(final ASTNode node) {
+<span class="fc" id="L176">					setReturnValue(null);</span>
+<span class="fc" id="L177">				}</span>
+
+				public void visit(final ArrayType arrayType) {
+<span class="nc" id="L180">					setReturnValue(arrayType);</span>
+<span class="nc" id="L181">				}</span>
+			};
+<span class="fc bfc" id="L183" title="All 2 branches covered.">			if (actuals.size() != 0) {</span>
+<span class="fc" id="L184">				ArrayType arrayType = rv.apply((ASTNode) (ts.typeof(actuals.get(0), trace)));</span>
+				// the first element may not be of type arrayType
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">				if (arrayType != null) {</span>
+<span class="nc" id="L187">					error(&quot;An array may not contain an other array.&quot;, actuals.get(0), null, -1);</span>
+					// check the rest of the array elements if they have the same type as the first
+				} else {
+<span class="fc" id="L190">					Type type = ((ArrayType) ts.typeof(arrayLiteral, trace)).getBaseType();</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">					for (int i = 0; i &lt; actuals.size(); i++) {</span>
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">						if (!ts.isSameType(type, type, actuals.get(i),</span>
+<span class="fc" id="L193">						                ts.typeof(actuals.get(i), trace), trace)) {</span>
+<span class="nc" id="L194">							error(&quot;Element doesn't match type of the array. Expected parameter of type &quot;</span>
+<span class="nc" id="L195">							                + ts.typeString(ts.typeof(actuals.get(0), trace))</span>
+<span class="nc" id="L196">							                + &quot;, but found &quot;</span>
+<span class="nc" id="L197">							                + ts.typeString(ts.typeof(actuals.get(i), trace)) + &quot;.&quot;,</span>
+<span class="nc" id="L198">							                actuals.get(i), null, -1);</span>
+						}
+					}
+				}
+			}
+		}
+
+<span class="fc" id="L205">	}</span>
+
+	/**
+	 * Checks if the {@link QuantifiedExpression} is used in a {@link Annotation}.
+	 * 
+	 * @param expression
+	 *                The expression to be checked.
+	 * 
+	 */
+	@Check
+	public final void checkQuantifiedExpression(final QuantifiedExpression expression) {
+<span class="fc" id="L216">		ASTNodeBottomUpVisitor&lt;Boolean&gt; visitor = new ASTNodeBottomUpVisitor&lt;Boolean&gt;() {</span>
+
+			public void visit(final Annotation annotation) {
+<span class="fc" id="L219">				setReturnValue(true);</span>
+<span class="fc" id="L220">			}</span>
+		};
+		// if the quantifiedExpression is not in an Annotation
+<span class="pc bpc" id="L223" title="1 of 2 branches missed.">		if (visitor.apply((ASTNode) expression.eContainer()) == null) {</span>
+<span class="nc" id="L224">			error(&quot;QuantifiedExpression may only be used in Annotations.&quot;, expression, null, -1);</span>
+		}
+
+<span class="fc" id="L227">	}</span>
+
+	/**
+	 * Checks if the {@link Assignment} is used correctly. If the assignment is in a {@link FunctionDeclaration}, it
+	 * will be checked if it doesn't change any parameters of the function.
+	 * 
+	 * @param assignment
+	 *                The assignment to be checked.
+	 */
+	@Check
+	public final void checkFunctionParametersNotModified(final Assignment assignment) {
+<span class="fc" id="L238">		ASTNodeBottomUpVisitor&lt;FunctionDeclaration&gt; visitor = new ASTNodeBottomUpVisitor&lt;FunctionDeclaration&gt;() {</span>
+
+			public void visit(final FunctionDeclaration functionDeclaration) {
+<span class="fc" id="L241">				setReturnValue(functionDeclaration);</span>
+<span class="fc" id="L242">			}</span>
+		};
+<span class="fc" id="L244">		FunctionDeclaration functionDeclaration = visitor.apply(assignment);</span>
+		// if the assignment is in a function
+<span class="fc bfc" id="L246" title="All 2 branches covered.">		if (functionDeclaration != null) {</span>
+
+<span class="fc bfc" id="L248" title="All 2 branches covered.">			for (int i = 0; i &lt; functionDeclaration.getParameters().size(); i++) {</span>
+<span class="fc" id="L249">				if (functionDeclaration.getParameters().get(i).getName()</span>
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">				                .equals(assignment.getVariable().getVariable().getName())) {</span>
+<span class="nc" id="L251">					error(&quot;Paramters of a function may not be changed.&quot;, assignment, null, -1);</span>
+				}
+			}
+		}
+<span class="fc" id="L255">	}</span>
+
+	/**
+	 * Checks if the given AST node conforms to the typesystem rules.
+	 * 
+	 * @param node
+	 *                The AST node to check.
+	 */
+	@Check
+	public final void checkTypesystemRules(final ASTNode node) {
+<span class="fc" id="L265">		ts.checkTypesystemConstraints(node, this);</span>
+<span class="fc" id="L266">	}</span>
+
+	/**
+	 * Check that function and variable name identifiers are unique.
+	 * 
+	 * @param node
+	 *                The AST node to check.
+	 */
+	@Check
+	public final void checkNamesAreUnique(final ASTNode node) {
+<span class="nc" id="L276">		NamesAreUniqueValidator val = new NamesAreUniqueValidator();</span>
+<span class="nc" id="L277">		val.checkUniqueNamesInResourceOf(node);</span>
+<span class="nc" id="L278">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

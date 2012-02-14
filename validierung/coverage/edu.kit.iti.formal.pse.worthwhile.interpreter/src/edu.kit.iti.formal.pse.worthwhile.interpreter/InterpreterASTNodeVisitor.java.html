@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>InterpreterASTNodeVisitor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.interpreter</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.interpreter</a> &gt; <span class="el_source">InterpreterASTNodeVisitor.java</span></div><h1>InterpreterASTNodeVisitor.java</h1><pre class="source lang-java linenums">/**
+ *
+ */
+package edu.kit.iti.formal.pse.worthwhile.interpreter;
+
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Stack;
+
+import org.eclipse.emf.common.util.EList;
+
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+
+/**
+ * The AST-visitor implementing the functionality of the interpreter module.
+ * 
+ * @author Chris
+ * 
+ */
+class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
+	/**
+	 * The specification checker.
+	 */
+	private SpecificationChecker specificationChecker;
+
+	/**
+	 * The execution event handlers.
+	 */
+<span class="fc" id="L83">	private Set&lt;AbstractExecutionEventListener&gt; executionEventHandlers = new HashSet&lt;AbstractExecutionEventListener&gt;();</span>
+
+	/**
+	 * Gets the execution event handlers.
+	 * 
+	 * @return the executionEventHandlers
+	 */
+	public Set&lt;AbstractExecutionEventListener&gt; getExecutionEventHandlers() {
+		// begin-user-code
+<span class="nc" id="L92">		return this.executionEventHandlers;</span>
+		// end-user-code
+	}
+
+	/**
+	 * Sets the execution event handlers.
+	 * 
+	 * @param executionEventHandlers
+	 *                the executionEventHandlers to set
+	 */
+	public void setExecutionEventHandlers(Set&lt;AbstractExecutionEventListener&gt; executionEventHandlers) {
+		// begin-user-code
+<span class="fc" id="L104">		this.executionEventHandlers = executionEventHandlers;</span>
+		// end-user-code
+<span class="fc" id="L106">	}</span>
+
+	/**
+	 * The {@link InterpreterASTNodeVisitor} that was created to execute a function.
+	 * 
+	 * &lt;code&gt;executingVisitor&lt;/code&gt; is not &lt;code&gt;null&lt;/code&gt; if and only if this
+	 * &lt;code&gt;InterpreterASTNodeVisitor&lt;/code&gt; has instantiated another &lt;code&gt;InterpreterASTNodeVisitor&lt;/code&gt; and
+	 * waits for that to finish the execution of a {@link FunctionDeclaration}.
+	 */
+<span class="fc" id="L115">	private InterpreterASTNodeVisitor executingVisitor = null;</span>
+
+	/**
+	 * Determine the currently executing {@link InterpreterASTNodeVisitor}.
+	 * 
+	 * @return the currently executing &lt;code&gt;InterpreterASTNodeVisitor&lt;/code&gt;
+	 */
+	InterpreterASTNodeVisitor getExecutingVisitor() {
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">		if (this.executingVisitor != null) {</span>
+<span class="nc" id="L124">			return this.executingVisitor.getExecutingVisitor();</span>
+		} else {
+<span class="fc" id="L126">			return this;</span>
+		}
+	}
+
+	/**
+	 * The result stack.
+	 */
+<span class="fc" id="L133">	private Stack&lt;Value&gt; resultStack = new Stack&lt;Value&gt;();</span>
+
+	/**
+	 * Indicates whether the function handled by this visitor has returned
+	 */
+<span class="fc" id="L138">	private boolean functionReturned = false;</span>
+
+	/**
+	 * A stack of symbol maps.
+	 */
+<span class="fc" id="L143">	private Stack&lt;Map&lt;VariableDeclaration, Value&gt;&gt; symbolStack = new Stack&lt;Map&lt;VariableDeclaration, Value&gt;&gt;();</span>
+
+	/**
+	 * Gets the symbol.
+	 * 
+	 * @param key
+	 *                the key
+	 * @return the symbol
+	 */
+	protected Value getSymbol(VariableDeclaration key) {
+<span class="pc bpc" id="L153" title="1 of 2 branches missed.">		for (int i = this.symbolStack.size() - 1; i &gt;= 0; i--) { // I won't take</span>
+			                                                 // the
+			                                                 // 'nice'
+			                                                 // variant
+			                                                 // here
+			                                                 // because
+			// I want to start at the top of the stack
+<span class="fc" id="L160">			Value temp = this.symbolStack.get(i).get(key);</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">			if (temp != null) {</span>
+<span class="fc" id="L162">				return temp;</span>
+			}
+		}
+<span class="nc" id="L165">		return null;</span>
+	}
+
+	/**
+	 * Get the value of a symbol by its name.
+	 * 
+	 * @param key
+	 *                the name of the Symbol to look up the value for
+	 * @return the current value of the Symbol or null if no such symbol exists
+	 */
+	protected Value getSymbol(String key) {
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">		for (VariableDeclaration declaration : this.getAllSymbols().keySet()) {</span>
+<span class="pc bpc" id="L177" title="1 of 2 branches missed.">			if (declaration.getName().equals(key)) {</span>
+<span class="fc" id="L178">				return this.getSymbol(declaration);</span>
+			}
+		}
+		// no such symbol
+<span class="nc" id="L182">		return null;</span>
+	}
+
+	/**
+	 * Sets the symbol.
+	 * 
+	 * @param key
+	 *                the key
+	 * @param value
+	 *                the value
+	 */
+	protected void setSymbol(VariableDeclaration key, Value value) {
+<span class="fc bfc" id="L194" title="All 2 branches covered.">		for (int i = this.symbolStack.size() - 1; i &gt;= 0; i--) { // I won't take</span>
+			                                                 // the
+			                                                 // 'nice'
+			                                                 // variant
+			                                                 // here
+			                                                 // because
+			// I want to start at the top of the stack
+<span class="fc" id="L201">			Map&lt;VariableDeclaration, Value&gt; temp = this.symbolStack.get(i);</span>
+<span class="fc bfc" id="L202" title="All 2 branches covered.">			if (temp.get(key) != null) {</span>
+<span class="fc" id="L203">				temp.put(key, value);</span>
+<span class="fc" id="L204">				return;</span>
+			}
+		}
+<span class="fc" id="L207">		this.symbolStack.peek().put(key, value);</span>
+<span class="fc" id="L208">	}</span>
+
+	/**
+	 * Gets all symbols.
+	 * 
+	 * @return all symbols
+	 */
+	protected Map&lt;VariableDeclaration, Value&gt; getAllSymbols() {
+<span class="fc" id="L216">		Map&lt;VariableDeclaration, Value&gt; result = new LinkedHashMap&lt;VariableDeclaration, Value&gt;();</span>
+<span class="fc" id="L217">		ListIterator&lt;Map&lt;VariableDeclaration, Value&gt;&gt; i = this.symbolStack</span>
+<span class="fc" id="L218">		                .listIterator(this.symbolStack.size());</span>
+<span class="fc bfc" id="L219" title="All 2 branches covered.">		while (i.hasPrevious()) {</span>
+<span class="fc" id="L220">			result.putAll(i.previous());</span>
+		}
+<span class="fc" id="L222">		return result;</span>
+	}
+
+	/**
+	 * Constructs a new {@link InterpreterASTNodeVisitor} with the given {@link SpecificationChecker}.
+	 */
+<span class="fc" id="L228">	protected InterpreterASTNodeVisitor(final SpecificationChecker specificationChecker) {</span>
+<span class="fc" id="L229">		this.specificationChecker = specificationChecker;</span>
+<span class="fc" id="L230">	}</span>
+
+	/**
+	 * Signals that a {@link Statement} has been executed by the {@link Interpreter}.
+	 * 
+	 * @param statement
+	 *                the &lt;code&gt;Statement&lt;/code&gt; that was executed
+	 */
+	private void statementExecuted(Statement statement) {
+<span class="fc bfc" id="L239" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L240">			listener.statementExecuted(statement);</span>
+		}
+<span class="fc" id="L242">	}</span>
+
+	/**
+	 * Signals that a {@link Statement} will be executed.
+	 * 
+	 * @param statement
+	 *                the &lt;code&gt;Statement&lt;/code&gt; that will be executed
+	 */
+	private void statementWillExecute(Statement statement) {
+<span class="fc bfc" id="L251" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L252">			listener.statementWillExecute(statement);</span>
+		}
+<span class="fc" id="L254">	}</span>
+
+	/**
+	 * Signals that the execution of a {@link Statement} failed.
+	 * 
+	 * @param statement
+	 *                the &lt;code&gt;Statement&lt;/code&gt; that failed to execute
+	 * @param error
+	 *                an {@link InterpreterError} object that describes the error
+	 */
+	private void executionFailed(Statement statement, InterpreterError error) {
+<span class="nc bnc" id="L265" title="All 2 branches missed.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="nc" id="L266">			listener.executionFailed(statement, error);</span>
+		}
+<span class="nc" id="L268">	}</span>
+
+	/**
+	 * Signals the start of the execution of a {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
+	 */
+	private void executionStarted() {
+<span class="fc bfc" id="L274" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L275">			listener.executionStarted();</span>
+		}
+<span class="fc" id="L277">	}</span>
+
+	/**
+	 * Signals the successful completion of execution of a
+	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
+	 */
+	private void executionCompleted() {
+<span class="fc bfc" id="L284" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L285">			listener.executionCompleted();</span>
+		}
+<span class="fc" id="L287">	}</span>
+
+	/**
+	 * Signals the execution of an {@link Annotation} that was not valid.
+	 * 
+	 * @param annotation
+	 *                the invalid &lt;code&gt;Annotation&lt;/code&gt;
+	 */
+	private void annotationFailed(Annotation annotation) {
+<span class="fc bfc" id="L296" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L297">			listener.annotationFailed(annotation);</span>
+		}
+<span class="fc" id="L299">	}</span>
+
+	/**
+	 * Signals the execution of an {@link Annotation} that was valid.
+	 * 
+	 * @param annotation
+	 *                the valid &lt;code&gt;Annotation&lt;/code&gt;
+	 */
+	private void annotationSucceeded(Annotation annotation) {
+<span class="fc bfc" id="L308" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L309">			listener.annotationSucceeded(annotation);</span>
+		}
+<span class="fc" id="L311">	}</span>
+
+	/**
+	 * Signals the evaluation of a {@link Expression}.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; that was evaluated
+	 */
+	private void expressionEvaluated(Expression expression) {
+<span class="fc bfc" id="L320" title="All 2 branches covered.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="fc" id="L321">			listener.expressionEvaluated(expression);</span>
+		}
+<span class="fc" id="L323">	}</span>
+
+	/**
+	 * Signals the failure of a {@link Expression}.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; that failed
+	 */
+	private void expressionFailed(Expression expression, InterpreterError error) {
+<span class="pc bnc" id="L332" title="All 2 branches missed.">		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {</span>
+<span class="nc" id="L333">			listener.expressionFailed(expression, error);</span>
+		}
+<span class="nc" id="L335">	}</span>
+
+	/**
+	 * Returns the value generated by the last return statement ran in this context.
+	 * 
+	 * @return the return value or null if none is available
+	 */
+	protected Value getReturnValue() {
+<span class="fc" id="L343">		return this.resultStack.peek();</span>
+	}
+
+	/**
+	 * Adds a debug event handler to this context.
+	 * 
+	 * @param handler
+	 *                the handler
+	 */
+	protected void addExecutionEventHandler(AbstractExecutionEventListener handler) {
+<span class="nc" id="L353">		this.executionEventHandlers.add(handler);</span>
+<span class="nc" id="L354">	}</span>
+
+	/**
+	 * Removes a debug event handler from this context.
+	 * 
+	 * @param handler
+	 *                the handler
+	 */
+	protected void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
+<span class="nc" id="L363">		this.executionEventHandlers.remove(handler);</span>
+<span class="nc" id="L364">	}</span>
+
+	/**
+	 * Clones this visitor.
+	 * 
+	 * @return a new {@link InterpreterASTNodeVisitor} that contains an equal {@link symbolStack}
+	 */
+	@Override
+	protected InterpreterASTNodeVisitor clone() {
+<span class="fc" id="L373">		final InterpreterASTNodeVisitor clone = new InterpreterASTNodeVisitor(this.specificationChecker);</span>
+
+		// Values are immutable so that it is efficient to clone the array and not the elements
+<span class="fc bfc" id="L376" title="All 2 branches covered.">		for (final Map&lt;VariableDeclaration, Value&gt; m : this.symbolStack) {</span>
+<span class="fc" id="L377">			clone.symbolStack.push(new HashMap&lt;VariableDeclaration, Value&gt;(m));</span>
+		}
+
+<span class="fc" id="L380">		return clone;</span>
+	}
+
+	/**
+	 * Pops a boolean value from the result stack. Fails the execution if there is no boolean value on the stack.
+	 * 
+	 * @return the {@link BooleanValue} that is on top of the stack.
+	 */
+	private BooleanValue popBooleanValue() {
+<span class="pc" id="L389">		synchronized (this.resultStack) {</span>
+<span class="pc bpc" id="L390" title="1 of 2 branches missed.">			if (this.resultStack.peek() instanceof BooleanValue) {</span>
+<span class="fc" id="L391">				return (BooleanValue) this.resultStack.pop();</span>
+			} else {
+<span class="nc" id="L393">				throw new RuntimeException(&quot;result type error on resultStack: boolean expected&quot;);</span>
+			}
+		}
+	}
+
+	/**
+	 * Pops an integer value from the result stack. Fails the execution if there is no integer value on the stack.
+	 * 
+	 * @return the {@link IntegerValue} that is on top of the stack.
+	 */
+	private IntegerValue popIntegerValue() {
+<span class="pc" id="L404">		synchronized (this.resultStack) {</span>
+<span class="pc bpc" id="L405" title="1 of 2 branches missed.">			if (this.resultStack.peek() instanceof IntegerValue) {</span>
+<span class="fc" id="L406">				return (IntegerValue) this.resultStack.pop();</span>
+			} else {
+<span class="nc" id="L408">				throw new RuntimeException(&quot;result type error on resultStack: integer expected&quot;);</span>
+			}
+		}
+	}
+
+	/**
+	 * Pops a composite value from the result stack. Fails the execution if there is no composite value on the
+	 * stack.
+	 * 
+	 * @return the {@link CompositeValue} that is on top of the stack.
+	 */
+	private CompositeValue&lt;?&gt; popCompositeValue() {
+<span class="nc" id="L420">		synchronized (this.resultStack) {</span>
+<span class="nc bnc" id="L421" title="All 2 branches missed.">			if (this.resultStack.peek() instanceof IntegerValue) {</span>
+<span class="nc" id="L422">				return (CompositeValue&lt;?&gt;) this.resultStack.pop();</span>
+			} else {
+<span class="nc" id="L424">				throw new RuntimeException(&quot;result type error on resultStack: composite expected&quot;);</span>
+			}
+		}
+	}
+
+	/**
+	 * adds the {@link IntegerValue}s of the {@link expression}s addition.left and addition.right and pushes the
+	 * result on the resultStack.
+	 * 
+	 * @param addition
+	 *                the Addition to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Addition)
+	 */
+	public void visit(Addition addition) {
+<span class="fc" id="L440">		addition.getLeft().accept(this);</span>
+<span class="fc" id="L441">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L442">		addition.getRight().accept(this);</span>
+<span class="fc" id="L443">		IntegerValue right = this.popIntegerValue();</span>
+<span class="fc" id="L444">		this.resultStack.push(new IntegerValue(left.getValue().add(right.getValue())));</span>
+<span class="fc" id="L445">		this.expressionEvaluated(addition);</span>
+<span class="fc" id="L446">	}</span>
+
+	/**
+	 * Evaluates an annotation.
+	 * 
+	 * @param annotation
+	 *                the Annotation to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Annotation)
+	 */
+	public void visit(Annotation annotation) {
+<span class="fc" id="L458">		statementWillExecute(annotation);</span>
+		try {
+<span class="fc" id="L460">			annotation.getExpression().accept(this);</span>
+<span class="fc bfc" id="L461" title="All 2 branches covered.">			if (this.popBooleanValue().getValue()) {</span>
+<span class="fc" id="L462">				annotationSucceeded(annotation);</span>
+			} else {
+<span class="fc" id="L464">				annotationFailed(annotation);</span>
+			}
+<span class="nc" id="L466">		} catch (StatementException e) {</span>
+<span class="nc" id="L467">			this.executionFailed(annotation, e.getError());</span>
+<span class="nc" id="L468">			return;</span>
+		}
+<span class="fc" id="L470">		this.statementExecuted(annotation);</span>
+<span class="fc" id="L471">	}</span>
+
+	/**
+	 * Pushes an array-literal onto the resultStack.
+	 * 
+	 * @param arrayLiteral
+	 *                the ArrayLiteral to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.ArrayLiteral)
+	 */
+	@Override
+	public void visit(final ArrayLiteral arrayLiteral) {
+<span class="fc" id="L484">		final List&lt;Expression&gt; values = arrayLiteral.getValues();</span>
+<span class="fc" id="L485">		final Value[] subValues = new Value[values.size()];</span>
+
+<span class="fc" id="L487">		int i = 0;</span>
+<span class="fc bfc" id="L488" title="All 2 branches covered.">		for (Expression e : values) {</span>
+<span class="fc" id="L489">			e.accept(this);</span>
+<span class="fc" id="L490">			subValues[i++] = this.resultStack.pop();</span>
+		}
+
+<span class="fc" id="L493">		this.resultStack.push(new CompositeValue&lt;Value&gt;(subValues));</span>
+
+<span class="fc" id="L495">		this.expressionEvaluated(arrayLiteral);</span>
+<span class="fc" id="L496">	}</span>
+
+	/**
+	 * assigns a new {@link Value} to a variable in the current symbol map.
+	 * 
+	 * @param assignment
+	 *                the Assignment to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Assignment)
+	 */
+	public void visit(Assignment assignment) {
+<span class="fc" id="L508">		this.statementWillExecute(assignment);</span>
+		try {
+<span class="fc" id="L510">			assignment.getValue().accept(this);</span>
+<span class="fc" id="L511">			VariableReference reference = assignment.getVariable();</span>
+			
+			//Decide if we have to handle arrays
+<span class="fc bfc" id="L514" title="All 2 branches covered.">			if (reference.getIndex() == null) {</span>
+<span class="fc" id="L515">				this.setSymbol(reference.getVariable(), this.resultStack.pop());</span>
+			} else {
+				//create a new array with the new value and replace the old one
+<span class="fc" id="L518">				reference.getIndex().accept(this);</span>
+<span class="fc" id="L519">				IntegerValue index = this.popIntegerValue();</span>
+<span class="fc" id="L520">				CompositeValue&lt;? extends Value&gt; oldValue = (CompositeValue&lt;?&gt;) this.getSymbol(reference</span>
+<span class="fc" id="L521">				                .getVariable());</span>
+<span class="fc" id="L522">				CompositeValue&lt;? extends Value&gt; newValue = oldValue.replaceUntypedValue(</span>
+<span class="fc" id="L523">				                index.getValue(), this.resultStack.pop());</span>
+<span class="fc" id="L524">				this.setSymbol(reference.getVariable(), newValue);</span>
+			}
+<span class="nc" id="L526">		} catch (StatementException e) {</span>
+<span class="nc" id="L527">			this.executionFailed(assignment, e.getError());</span>
+<span class="nc" id="L528">			return;</span>
+		}
+<span class="fc" id="L530">		this.statementExecuted(assignment);</span>
+<span class="fc" id="L531">	}</span>
+
+	/**
+	 * executes the statements of the block.
+	 * 
+	 * @param block
+	 *                the Block to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Block)
+	 */
+	public void visit(Block block) {
+<span class="fc" id="L543">		Map&lt;VariableDeclaration, Value&gt; symbolMap = new HashMap&lt;VariableDeclaration, Value&gt;();</span>
+<span class="fc" id="L544">		this.symbolStack.push(symbolMap);</span>
+<span class="fc" id="L545">		this.statementWillExecute(block);</span>
+<span class="fc" id="L546">		EList&lt;Statement&gt; statements = block.getStatements();</span>
+<span class="fc bfc" id="L547" title="All 2 branches covered.">		for (Statement statement : statements) {</span>
+<span class="fc" id="L548">			statement.accept(this);</span>
+<span class="pc bpc" id="L549" title="1 of 2 branches missed.">			if (this.functionReturned) {</span>
+<span class="nc" id="L550">				this.statementExecuted(block);</span>
+<span class="nc" id="L551">				return;</span>
+			}
+		}
+<span class="fc" id="L554">		this.statementExecuted(block);</span>
+<span class="fc" id="L555">		this.symbolStack.pop();</span>
+<span class="fc" id="L556">	}</span>
+
+	/**
+	 * Pushes the {@link BooleanValue} of the booleanLiteral onto the resultStack.
+	 * 
+	 * @param booleanLiteral
+	 *                the BooleanLiteral to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.BooleanLiteral)
+	 */
+	public void visit(BooleanLiteral booleanLiteral) {
+<span class="fc" id="L568">		this.resultStack.push(new BooleanValue(booleanLiteral.getValue()));</span>
+<span class="fc" id="L569">		this.expressionEvaluated(booleanLiteral);</span>
+<span class="fc" id="L570">	}</span>
+
+	/**
+	 * Visits one of two {@link Block}s depending on a condition.
+	 * 
+	 * @param conditional
+	 *                the Conditional to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Conditional)
+	 */
+	public void visit(Conditional conditional) {
+<span class="fc" id="L582">		this.statementWillExecute(conditional);</span>
+		try {
+<span class="fc" id="L584">			conditional.getCondition().accept(this);</span>
+<span class="pc bpc" id="L585" title="1 of 2 branches missed.">			if (this.popBooleanValue().getValue()) {</span>
+<span class="fc" id="L586">				conditional.getTrueBlock().accept(this);</span>
+			} else {
+<span class="nc bnc" id="L588" title="All 2 branches missed.">				if (conditional.getFalseBlock() != null) {</span>
+<span class="nc" id="L589">					conditional.getFalseBlock().accept(this);</span>
+				}
+			}
+<span class="nc" id="L592">		} catch (StatementException e) {</span>
+<span class="nc" id="L593">			this.executionFailed(conditional, e.getError());</span>
+<span class="nc" id="L594">			return;</span>
+		}
+<span class="fc" id="L596">		this.statementExecuted(conditional);</span>
+<span class="fc" id="L597">	}</span>
+
+	/**
+	 * checks if the {@link Value}s of the {@link expression}s conjunction.left and conjunction.right are both true
+	 * and pushes the result on the resultStack.
+	 * 
+	 * @param conjunction
+	 *                the Conjunction to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Conjunction)
+	 */
+	public void visit(Conjunction conjunction) {
+<span class="fc" id="L610">		conjunction.getLeft().accept(this);</span>
+<span class="fc" id="L611">		BooleanValue left = this.popBooleanValue();</span>
+<span class="fc" id="L612">		conjunction.getRight().accept(this);</span>
+<span class="fc" id="L613">		BooleanValue right = this.popBooleanValue();</span>
+<span class="pc bpc" id="L614" title="2 of 4 branches missed.">		this.resultStack.push(new BooleanValue(left.getValue() &amp;&amp; right.getValue()));</span>
+<span class="fc" id="L615">		this.expressionEvaluated(conjunction);</span>
+<span class="fc" id="L616">	}</span>
+
+	/**
+	 * checks if at least one the {@link Value}s of the {@link expression}s disjunction.left and disjunction.right
+	 * are both true and pushes the result on the resultStack.
+	 * 
+	 * @param disjunction
+	 *                the Disjunction to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Disjunction)
+	 */
+	public void visit(Disjunction disjunction) {
+<span class="fc" id="L629">		disjunction.getLeft().accept(this);</span>
+<span class="fc" id="L630">		BooleanValue left = this.popBooleanValue();</span>
+<span class="fc" id="L631">		disjunction.getRight().accept(this);</span>
+<span class="fc" id="L632">		BooleanValue right = this.popBooleanValue();</span>
+<span class="pc bpc" id="L633" title="3 of 4 branches missed.">		this.resultStack.push(new BooleanValue(left.getValue() || right.getValue()));</span>
+<span class="fc" id="L634">		this.expressionEvaluated(disjunction);</span>
+<span class="fc" id="L635">	}</span>
+
+	/**
+	 * divides the {@link IntegerValue} of the {@link expression} division.left by the {@link IntegerValue} of the
+	 * {@link expression} division.right and pushes the result on the resultStack.
+	 * 
+	 * @param division
+	 *                the Division to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Division)
+	 */
+	public void visit(Division division) {
+<span class="fc" id="L648">		division.getLeft().accept(this);</span>
+<span class="fc" id="L649">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L650">		division.getRight().accept(this);</span>
+<span class="fc" id="L651">		IntegerValue right = this.popIntegerValue();</span>
+<span class="pc bpc" id="L652" title="1 of 2 branches missed.">		if (right.getValue().equals(BigInteger.ZERO)) {</span>
+<span class="nc" id="L653">			expressionFailed(division, new DivisionByZeroInterpreterError());</span>
+<span class="nc" id="L654">			return;</span>
+		} else {
+<span class="fc" id="L656">			this.resultStack.push(new IntegerValue(left.getValue().divide(right.getValue())));</span>
+<span class="fc" id="L657">			this.expressionEvaluated(division);</span>
+		}
+<span class="fc" id="L659">	}</span>
+
+	/**
+	 * checks if the {@link Value}s of the {@link expression}s equal.left and equal.right are equal and pushes the
+	 * result on the resultStack.
+	 * 
+	 * @param equal
+	 *                the Equal to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Equal)
+	 */
+	public void visit(Equal equal) {
+<span class="fc" id="L672">		equal.getLeft().accept(this);</span>
+<span class="fc" id="L673">		Value left = this.resultStack.pop();</span>
+<span class="fc" id="L674">		equal.getRight().accept(this);</span>
+<span class="fc" id="L675">		Value right = this.resultStack.pop();</span>
+<span class="fc" id="L676">		this.resultStack.push(new BooleanValue(left.equals(right)));</span>
+<span class="fc" id="L677">		this.expressionEvaluated(equal);</span>
+<span class="fc" id="L678">	}</span>
+
+	/**
+	 * compares the {@link BooleanValue}s of the {@link expression}s equivalence.left and equivalence.right and
+	 * pushes the result on the resultStack.
+	 * 
+	 * @param equivalence
+	 *                the Equivalence to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Equivalence)
+	 */
+	public void visit(Equivalence equivalence) {
+<span class="nc" id="L691">		equivalence.getLeft().accept(this);</span>
+<span class="nc" id="L692">		BooleanValue left = this.popBooleanValue();</span>
+<span class="nc" id="L693">		equivalence.getRight().accept(this);</span>
+<span class="nc" id="L694">		BooleanValue right = this.popBooleanValue();</span>
+<span class="nc bnc" id="L695" title="All 2 branches missed.">		this.resultStack.push(new BooleanValue(left.getValue() == right.getValue()));</span>
+<span class="nc" id="L696">		this.expressionEvaluated(equivalence);</span>
+<span class="nc" id="L697">	}</span>
+
+	/**
+	 * executes a function with a new InterpreterASTNodeVisitor
+	 * 
+	 * @param functionCall
+	 *                the called function
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.FunctionCall)
+	 */
+	public void visit(FunctionCall functionCall) {
+<span class="fc" id="L709">		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);</span>
+<span class="fc" id="L710">		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);</span>
+<span class="fc" id="L711">		EList&lt;Expression&gt; actuals = functionCall.getActuals();</span>
+<span class="fc" id="L712">		this.executingVisitor.symbolStack.push(new HashMap&lt;VariableDeclaration, Value&gt;());</span>
+		
+		//calculate the actual parameters
+<span class="fc bfc" id="L715" title="All 2 branches covered.">		for (int i = 0; i &lt; actuals.size(); i++) {</span>
+<span class="fc" id="L716">			actuals.get(i).accept(this);</span>
+<span class="fc" id="L717">			this.executingVisitor.setSymbol(functionCall.getFunction().getParameters().get(i),</span>
+<span class="fc" id="L718">			                this.resultStack.pop());</span>
+		}
+<span class="fc" id="L720">		functionCall.getFunction().accept(this);</span>
+
+<span class="fc" id="L722">		Value returnValue = this.executingVisitor.getReturnValue();</span>
+<span class="fc" id="L723">		this.executingVisitor.resultStack.push(returnValue);</span>
+<span class="fc" id="L724">		this.resultStack.push(returnValue);</span>
+
+		// get execution control back from the function visitor that just returned
+<span class="fc" id="L727">		this.executingVisitor = null;</span>
+
+<span class="fc" id="L729">		this.expressionEvaluated(functionCall);</span>
+
+<span class="fc" id="L731">	}</span>
+
+	/**
+	 * handles preconditions, body and postconditions of a function.
+	 * 
+	 * @param functionDeclaration
+	 *                the FunctionDeclaration to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.FunctionDeclaration)
+	 */
+	public void visit(FunctionDeclaration functionDeclaration) {
+<span class="fc bfc" id="L743" title="All 2 branches covered.">		for (Precondition precondition : functionDeclaration.getPreconditions()) {</span>
+<span class="fc" id="L744">			precondition.accept(this.executingVisitor);</span>
+		}
+
+<span class="fc" id="L747">		functionDeclaration.getBody().accept(this.executingVisitor);</span>
+
+<span class="fc bfc" id="L749" title="All 2 branches covered.">		for (Postcondition postcondition : functionDeclaration.getPostconditions()) {</span>
+<span class="fc" id="L750">			postcondition.accept(this.executingVisitor);</span>
+		}
+<span class="fc" id="L752">	}</span>
+
+	/**
+	 * checks if the {@link IntegerValue} of the {@link expression} greater.left is greater as the
+	 * {@link IntegerValue} of the {@link expression} greater.right and pushes the result on the resultStack.
+	 * 
+	 * @param greater
+	 *                the Greater to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Greater)
+	 */
+	public void visit(Greater greater) {
+<span class="fc" id="L765">		greater.getLeft().accept(this);</span>
+<span class="fc" id="L766">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L767">		greater.getRight().accept(this);</span>
+<span class="fc" id="L768">		IntegerValue right = this.popIntegerValue();</span>
+<span class="fc bfc" id="L769" title="All 2 branches covered.">		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) == 1)));</span>
+<span class="fc" id="L770">		this.expressionEvaluated(greater);</span>
+<span class="fc" id="L771">	}</span>
+
+	/**
+	 * checks if the {@link IntegerValue} of the {@link expression} greaterOrEqual.left is greater or equal as the
+	 * {@link IntegerValue} of the {@link expression} greaterOrEqual.right and pushes the result on the resultStack.
+	 * 
+	 * @param greaterOrEqual
+	 *                the GreaterOrEqual to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.GreaterOrEqual)
+	 */
+	public void visit(GreaterOrEqual greaterOrEqual) {
+<span class="fc" id="L784">		greaterOrEqual.getLeft().accept(this);</span>
+<span class="fc" id="L785">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L786">		greaterOrEqual.getRight().accept(this);</span>
+<span class="fc" id="L787">		IntegerValue right = this.popIntegerValue();</span>
+<span class="fc bfc" id="L788" title="All 2 branches covered.">		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) != -1)));</span>
+<span class="fc" id="L789">		this.expressionEvaluated(greaterOrEqual);</span>
+<span class="fc" id="L790">	}</span>
+
+	/**
+	 * checks if the {@link BooleanValue} of the {@link expression} implication.left implies the
+	 * {@link IntegerValue} of the {@link expression} implication.right and pushes the result on the resultStack.
+	 * 
+	 * @param implication
+	 *                the Implication to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Implication)
+	 */
+	public void visit(Implication implication) {
+<span class="nc" id="L803">		implication.getLeft().accept(this);</span>
+<span class="nc" id="L804">		BooleanValue left = this.popBooleanValue();</span>
+<span class="nc" id="L805">		implication.getRight().accept(this);</span>
+<span class="nc" id="L806">		BooleanValue right = this.popBooleanValue();</span>
+<span class="nc bnc" id="L807" title="All 4 branches missed.">		this.resultStack.push(new BooleanValue(!(left.getValue() &amp;&amp; !right.getValue())));</span>
+<span class="nc" id="L808">		this.expressionEvaluated(implication);</span>
+<span class="nc" id="L809">	}</span>
+
+	/**
+	 * Pushes the {@link IntegerValue} of the integerLiteral onto the resultStack.
+	 * 
+	 * @param integerLiteral
+	 *                the IntegerLiteral to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.IntegerLiteral)
+	 */
+	public void visit(IntegerLiteral integerLiteral) {
+<span class="fc" id="L821">		this.resultStack.push(new IntegerValue(integerLiteral.getValue()));</span>
+<span class="fc" id="L822">		this.expressionEvaluated(integerLiteral);</span>
+<span class="fc" id="L823">	}</span>
+
+	/**
+	 * checks if the {@link IntegerValue} of the {@link expression} less.left is less than the {@link IntegerValue}
+	 * of the {@link expression} less.right and pushes the result on the resultStack.
+	 * 
+	 * @param less
+	 *                the Less to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Less)
+	 */
+	public void visit(Less less) {
+<span class="fc" id="L836">		less.getLeft().accept(this);</span>
+<span class="fc" id="L837">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L838">		less.getRight().accept(this);</span>
+<span class="fc" id="L839">		IntegerValue right = this.popIntegerValue();</span>
+<span class="fc bfc" id="L840" title="All 2 branches covered.">		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) == -1)));</span>
+<span class="fc" id="L841">		this.expressionEvaluated(less);</span>
+<span class="fc" id="L842">	}</span>
+
+	/**
+	 * checks if the {@link IntegerValue} of the {@link expression} lessOrEqual.left is less or equal than the
+	 * {@link IntegerValue} of the {@link expression} lessOrEqual.right and pushes the result on the resultStack.
+	 * 
+	 * @param lessOrEqual
+	 *                the LessOrEqual to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.LessOrEqual)
+	 */
+	public void visit(LessOrEqual lessOrEqual) {
+<span class="fc" id="L855">		lessOrEqual.getLeft().accept(this);</span>
+<span class="fc" id="L856">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L857">		lessOrEqual.getRight().accept(this);</span>
+<span class="fc" id="L858">		IntegerValue right = this.popIntegerValue();</span>
+<span class="pc bpc" id="L859" title="1 of 2 branches missed.">		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) != 1)));</span>
+<span class="fc" id="L860">		this.expressionEvaluated(lessOrEqual);</span>
+<span class="fc" id="L861">	}</span>
+
+	/**
+	 * Visit a {@link Block} as long as a condition is true.
+	 * 
+	 * @param loop
+	 *                the Loop to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Loop)
+	 */
+	public void visit(Loop loop) {
+<span class="fc" id="L873">		this.statementWillExecute(loop);</span>
+		try {
+<span class="pc bpc" id="L875" title="1 of 2 branches missed.">			for (Invariant invariant : loop.getInvariants()) {</span>
+<span class="nc" id="L876">				invariant.accept(this);</span>
+			}
+<span class="fc" id="L878">			loop.getCondition().accept(this);</span>
+<span class="fc bfc" id="L879" title="All 2 branches covered.">			while (this.popBooleanValue().getValue()) {</span>
+<span class="fc" id="L880">				loop.getBody().accept(this);</span>
+<span class="pc bpc" id="L881" title="1 of 2 branches missed.">				for (Invariant invariant : loop.getInvariants()) {</span>
+<span class="nc" id="L882">					invariant.accept(this);</span>
+				}
+<span class="fc" id="L884">				loop.getCondition().accept(this);</span>
+			}
+<span class="nc" id="L886">		} catch (StatementException e) {</span>
+<span class="nc" id="L887">			this.executionFailed(loop, e.getError());</span>
+<span class="nc" id="L888">			return;</span>
+		}
+<span class="fc" id="L890">		this.statementExecuted(loop);</span>
+<span class="fc" id="L891">	}</span>
+
+	/**
+	 * negates the {@link IntegerValue} of the {@link expression} minus.operand and pushes the result on the
+	 * resultStack.
+	 * 
+	 * @param minus
+	 *                the Minus to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Minus)
+	 */
+	public void visit(Minus minus) {
+<span class="nc" id="L904">		this.resultStack.push(new IntegerValue(this.popIntegerValue().getValue().negate()));</span>
+<span class="nc" id="L905">		this.expressionEvaluated(minus);</span>
+<span class="nc" id="L906">	}</span>
+
+	/**
+	 * calculates the modulus of the {@link IntegerValue}s of the {@link expression}s modulus.left and modulus.right
+	 * and pushes the result on the resultStack.
+	 * 
+	 * @param modulus
+	 *                the Modulus to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Modulus)
+	 */
+	public void visit(Modulus modulus) {
+<span class="fc" id="L919">		modulus.getLeft().accept(this);</span>
+<span class="fc" id="L920">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L921">		modulus.getRight().accept(this);</span>
+<span class="fc" id="L922">		IntegerValue right = this.popIntegerValue();</span>
+<span class="pc bpc" id="L923" title="1 of 2 branches missed.">		if (right.getValue().equals(BigInteger.ZERO)) {</span>
+<span class="nc" id="L924">			expressionFailed(modulus, new DivisionByZeroInterpreterError());</span>
+<span class="nc" id="L925">			return;</span>
+		} else {
+<span class="fc" id="L927">			this.resultStack.push(new IntegerValue(left.getValue().mod(right.getValue())));</span>
+<span class="fc" id="L928">			this.expressionEvaluated(modulus);</span>
+		}
+<span class="fc" id="L930">	}</span>
+
+	/**
+	 * multiplies the {@link IntegerValue}s of the {@link expression}s multiplication.left and multiplication.right
+	 * and pushes the result on the resultStack.
+	 * 
+	 * @param multiplication
+	 *                the Multiplication to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Multiplication)
+	 */
+	public void visit(Multiplication multiplication) {
+<span class="fc" id="L943">		multiplication.getLeft().accept(this);</span>
+<span class="fc" id="L944">		IntegerValue left = this.popIntegerValue();</span>
+<span class="fc" id="L945">		multiplication.getRight().accept(this);</span>
+<span class="fc" id="L946">		IntegerValue right = this.popIntegerValue();</span>
+<span class="fc" id="L947">		this.resultStack.push(new IntegerValue(left.getValue().multiply(right.getValue())));</span>
+<span class="fc" id="L948">		this.expressionEvaluated(multiplication);</span>
+<span class="fc" id="L949">	}</span>
+
+	/**
+	 * negates the {@link BooleanValue} of the {@link expression} negation.oparand and pushes the result on the
+	 * resultStack.
+	 * 
+	 * @param negation
+	 *                the Negation to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Negation)
+	 */
+	public void visit(Negation negation) {
+<span class="fc" id="L962">		negation.getOperand().accept(this);</span>
+<span class="pc bpc" id="L963" title="1 of 2 branches missed.">		this.resultStack.push(new BooleanValue(!(this.popBooleanValue().getValue())));</span>
+<span class="fc" id="L964">		this.expressionEvaluated(negation);</span>
+<span class="fc" id="L965">	}</span>
+
+	/**
+	 * does nothing with the {@link IntegerValue} of the {@link expression} plus.operand and pushes the result on
+	 * the resultStack.
+	 * 
+	 * @param plus
+	 *                the Plus to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Plus)
+	 */
+	public void visit(Plus plus) {
+<span class="nc" id="L978">		plus.accept(this);</span>
+<span class="nc" id="L979">		this.expressionEvaluated(plus);</span>
+<span class="nc" id="L980">	}</span>
+
+	/**
+	 * Executes a program.
+	 * 
+	 * @param program
+	 *                the Program to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Program)
+	 */
+	public void visit(Program program) {
+<span class="fc" id="L992">		this.executionStarted();</span>
+<span class="fc bfc" id="L993" title="All 2 branches covered.">		for (Axiom axiom : program.getAxioms()) {</span>
+<span class="fc" id="L994">			axiom.accept(this);</span>
+		}
+<span class="fc" id="L996">		program.getMainBlock().accept(this);</span>
+<span class="fc" id="L997">		this.executionCompleted();</span>
+<span class="fc" id="L998">	}</span>
+
+	/**
+	 * Evaluates a quantified expression and pushes the result onto the resultStack.
+	 * 
+	 * @param quantifiedExpression
+	 *                the QuantifiedExpression to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.QuantifiedExpression)
+	 */
+	public void visit(QuantifiedExpression quantifiedExpression) {
+<span class="pc bpc" id="L1010" title="1 of 2 branches missed.">		if (this.specificationChecker == null) {</span>
+<span class="nc" id="L1011">			throw new IllegalArgumentException(&quot;No SpecificationChecker supplied&quot;);</span>
+		}
+<span class="fc" id="L1013">		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());</span>
+<span class="pc bpc" id="L1014" title="1 of 2 branches missed.">		if (validity.equals(Validity.UNKNOWN)) {</span>
+<span class="nc" id="L1015">			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError());</span>
+<span class="nc" id="L1016">			return;</span>
+		} else {
+<span class="fc" id="L1018">			this.resultStack.push(new BooleanValue(validity.equals(Validity.VALID)));</span>
+<span class="fc" id="L1019">			this.expressionEvaluated(quantifiedExpression);</span>
+		}
+<span class="fc" id="L1021">	}</span>
+
+	/**
+	 * Pushes the return-value onto the resultStack and terminate the execution of this function.
+	 * 
+	 * @param returnStatement
+	 *                the ReturnStatement to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.ReturnStatement)
+	 */
+	public void visit(ReturnStatement returnStatement) {
+<span class="fc" id="L1033">		this.statementWillExecute(returnStatement);</span>
+		try {
+<span class="fc" id="L1035">			returnStatement.getReturnValue().accept(this);</span>
+<span class="nc" id="L1036">		} catch (StatementException e) {</span>
+<span class="nc" id="L1037">			this.executionFailed(returnStatement, e.getError());</span>
+<span class="nc" id="L1038">			return;</span>
+		}
+<span class="fc" id="L1040">		this.statementExecuted(returnStatement);</span>
+<span class="fc" id="L1041">	}</span>
+
+/**
+	 * Pushes the return {@link Value] of a function onto the resultStack.
+	 * 
+	 * @param returnValueReference the ReturnValueReference to visit
+	 * 
+	 * @see
+	 * edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 * .worthwhile.model.ast.ReturnValueReference)
+	 */
+	public void visit(ReturnValueReference returnValueReference) {
+<span class="fc" id="L1053">		this.resultStack.push(this.getReturnValue());</span>
+<span class="fc" id="L1054">		this.expressionEvaluated(returnValueReference);</span>
+<span class="fc" id="L1055">	}</span>
+
+	/**
+	 * subtracts the {@link IntegerValue} of the {@link expression} subtraction.right from the {@link IntegerValue}
+	 * of the {@link expression} subtraction.left and pushes the result on the resultStack.
+	 * 
+	 * @param subtraction
+	 *                the subtraction to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Subtraction)
+	 */
+	public void visit(Subtraction subtraction) {
+<span class="nc" id="L1068">		subtraction.getLeft().accept(this);</span>
+<span class="nc" id="L1069">		IntegerValue left = this.popIntegerValue();</span>
+<span class="nc" id="L1070">		subtraction.getRight().accept(this);</span>
+<span class="nc" id="L1071">		IntegerValue right = this.popIntegerValue();</span>
+<span class="nc" id="L1072">		this.resultStack.push(new IntegerValue(left.getValue().subtract(right.getValue())));</span>
+<span class="nc" id="L1073">		this.expressionEvaluated(subtraction);</span>
+<span class="nc" id="L1074">	}</span>
+
+	/**
+	 * checks if the {@link Value}s of the {@link expression}s equal.left and equal.right are unequal and pushes the
+	 * result on the resultStack.
+	 * 
+	 * @param equal
+	 *                the Equal to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Unequal)
+	 */
+	public void visit(Unequal unequal) {
+<span class="fc" id="L1087">		unequal.getLeft().accept(this);</span>
+<span class="fc" id="L1088">		Value left = this.resultStack.pop();</span>
+<span class="fc" id="L1089">		unequal.getRight().accept(this);</span>
+<span class="fc" id="L1090">		Value right = this.resultStack.pop();</span>
+<span class="pc bpc" id="L1091" title="1 of 2 branches missed.">		this.resultStack.push(new BooleanValue(!(left.equals(right))));</span>
+<span class="fc" id="L1092">		this.expressionEvaluated(unequal);</span>
+<span class="fc" id="L1093">	}</span>
+
+	/**
+	 * Adds a variable to the actual symbol map.
+	 * 
+	 * @param variableDeclaration
+	 *                the variableDeclaration to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.VariableDeclaration)
+	 */
+	public void visit(VariableDeclaration variableDeclaration) {
+<span class="fc" id="L1105">		this.statementWillExecute(variableDeclaration);</span>
+		try {
+			//just set the variable if the declaration includes a definition...
+<span class="pc bpc" id="L1108" title="1 of 2 branches missed.">			if (variableDeclaration.getInitialValue() != null) {</span>
+<span class="fc" id="L1109">				variableDeclaration.getInitialValue().accept(this);</span>
+<span class="fc" id="L1110">				this.setSymbol(variableDeclaration, this.resultStack.pop());</span>
+			} else {
+				//...or choose the respective default values
+<span class="nc bnc" id="L1113" title="All 2 branches missed.">				if (variableDeclaration.getType() instanceof ArrayType) {</span>
+<span class="nc" id="L1114">					final ArrayType arrayType = ((ArrayType) variableDeclaration.getType());</span>
+
+<span class="nc bnc" id="L1116" title="All 2 branches missed.">					if (arrayType.getBaseType() instanceof BooleanType) {</span>
+<span class="nc" id="L1117">						this.setSymbol(variableDeclaration, new CompositeValue&lt;BooleanValue&gt;(</span>
+<span class="nc" id="L1118">						                new BooleanValue[0]));</span>
+					} else {
+<span class="nc" id="L1120">						this.setSymbol(variableDeclaration, new CompositeValue&lt;IntegerValue&gt;(</span>
+<span class="nc" id="L1121">						                new IntegerValue[0]));</span>
+					}
+<span class="nc bnc" id="L1123" title="All 2 branches missed.">				} else if (variableDeclaration.getType() instanceof BooleanType) {</span>
+<span class="nc" id="L1124">					this.setSymbol(variableDeclaration, new BooleanValue(Boolean.FALSE));</span>
+				} else {
+<span class="nc" id="L1126">					this.setSymbol(variableDeclaration, new IntegerValue(BigInteger.ZERO));</span>
+				}
+			}
+<span class="nc" id="L1129">		} catch (StatementException e) {</span>
+<span class="nc" id="L1130">			this.executionFailed(variableDeclaration, e.getError());</span>
+<span class="nc" id="L1131">			return;</span>
+		}
+<span class="fc" id="L1133">		this.statementExecuted(variableDeclaration);</span>
+<span class="fc" id="L1134">	}</span>
+
+	/**
+	 * Pushes the {@link Value} of the referenced variable onto the resultStack
+	 * 
+	 * @param variableReference
+	 *                the VariableReference to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.VariableReference)
+	 */
+	public void visit(VariableReference variableReference) {
+<span class="fc bfc" id="L1146" title="All 2 branches covered.">		if (variableReference.getIndex() == null) {</span>
+<span class="fc" id="L1147">			this.resultStack.push(this.getSymbol(variableReference.getVariable()));</span>
+		} else {
+			// Evaluate the index expression
+<span class="fc" id="L1150">			variableReference.getIndex().accept(this);</span>
+<span class="fc" id="L1151">			BigInteger index = this.popIntegerValue().getValue();</span>
+
+			// Get the appropriate value from the array, or throw an error if the index is out of bounds.
+<span class="fc" id="L1154">			CompositeValue&lt;?&gt; completeArray = (CompositeValue&lt;?&gt;) this.getSymbol(variableReference</span>
+<span class="fc" id="L1155">			                .getVariable());</span>
+<span class="fc" id="L1156">			Map&lt;BigInteger, ?&gt; arrayValues = completeArray.getSubValues();</span>
+<span class="pc bpc" id="L1157" title="1 of 2 branches missed.">			if (arrayValues.containsKey(index)) {</span>
+<span class="fc" id="L1158">				this.resultStack.push((Value) arrayValues.get(index));</span>
+			} else {
+<span class="nc" id="L1160">				expressionFailed(variableReference, new IllegalArrayAccessInterpreterError());</span>
+			}
+		}
+<span class="fc" id="L1163">		this.expressionEvaluated(variableReference);</span>
+<span class="fc" id="L1164">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

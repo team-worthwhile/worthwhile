@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>Interpreter.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.interpreter</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.interpreter</a> &gt; <span class="el_source">Interpreter.java</span></div><h1>Interpreter.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package edu.kit.iti.formal.pse.worthwhile.interpreter;
+
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+
+/**
+ * The facade for the interpreter module.
+ * @author Chris
+ *
+ */
+public class Interpreter {
+	/**
+	 * The {@link Set} of {@link AbstractExecutionEventListener}s that are notified during execution.
+	 */
+<span class="fc" id="L25">	private Set&lt;AbstractExecutionEventListener&gt; executionEventHandlers = new HashSet&lt;AbstractExecutionEventListener&gt;();</span>
+
+	/**
+	 * The {@link InterpreterASTNodeVisitor} that is executing the {@link program}, if any.
+	 */
+	private InterpreterASTNodeVisitor executingVisitor;
+
+	/**
+	 * Gets the current node visitor.
+	 *
+	 * @return the currently executing {@link InterpreterASTNodeVisitor} and &lt;code&gt;null&lt;/code&gt; if
+	 * {@link Interpreter#execute()} has not been called yet
+	 */
+	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">		if (this.executingVisitor != null) {</span>
+<span class="fc" id="L40">			return this.executingVisitor.getExecutingVisitor();</span>
+		} else {
+<span class="nc" id="L42">			return null;</span>
+		}
+	}
+
+	/**
+	 * The {@link Program} that is executed with {@link Interpreter#execute()}.
+	 */
+	private Program program;
+
+	/**
+	 * @return the {@link Program} ran by this {@link Interpreter} instance.
+	 */
+	public Program getProgram() {
+<span class="nc" id="L55">		return program;</span>
+	}
+
+	private SpecificationChecker specificationChecker;
+
+	/**
+	 * Constructs a new {@link Interpreter} with the given program and specification checker.
+	 *
+	 * @param program the program to execute
+	 * @param specificationChecker the specification checker to use to prove some expressions
+	 */
+<span class="fc" id="L66">	public Interpreter(final Program program, final SpecificationChecker specificationChecker) {</span>
+<span class="fc" id="L67">		this.program = program;</span>
+<span class="fc" id="L68">		this.specificationChecker = specificationChecker;</span>
+<span class="fc" id="L69">	}</span>
+
+	/**
+	 * Executes the {@link program}.
+	 * 
+	 * @see Interpreter#Interpreter(Program)
+	 * @see Interpreter#setProgram(Program)
+	 */
+	public void execute() {
+<span class="fc" id="L78">		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);</span>
+<span class="fc" id="L79">		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);</span>
+<span class="fc" id="L80">		this.program.accept(executingVisitor);</span>
+<span class="fc" id="L81">	}</span>
+
+	/**
+	 * Adds the execution event handler.
+	 *
+	 * @param handler the handler
+	 */
+	public void addExecutionEventHandler(AbstractExecutionEventListener handler) {
+<span class="fc" id="L89">		this.executionEventHandlers.add(handler);</span>
+<span class="fc" id="L90">	}</span>
+
+	/**
+	 * Removes the execution event handler.
+	 *
+	 * @param handler the handler
+	 */
+	public void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
+<span class="nc" id="L98">		this.executionEventHandlers.remove(handler);</span>
+<span class="nc" id="L99">	}</span>
+
+	/**
+	 * Evaluate expression.
+	 *
+	 * @param expression the expression
+	 * @return the &quot;return&quot;-value of the expression
+	 */
+	public Value evaluateExpression(Expression expression) {
+<span class="fc" id="L108">		InterpreterASTNodeVisitor visitor = this.getCurrentNodeVisitor();</span>
+
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">		if (visitor != null) {</span>
+<span class="fc" id="L111">			visitor = visitor.clone();</span>
+		} else {
+<span class="nc" id="L113">			visitor = new InterpreterASTNodeVisitor(this.specificationChecker);</span>
+		}
+
+<span class="fc" id="L116">		expression.accept(visitor);</span>
+<span class="fc" id="L117">		return visitor.getReturnValue();</span>
+	}
+
+	/**
+	 * Gets a symbol.
+	 *
+	 * @param key the key
+	 * @return the symbol
+	 */
+	public Value getSymbol(VariableDeclaration key) {
+<span class="nc" id="L127">		return this.getCurrentNodeVisitor().getSymbol(key);</span>
+	}
+
+	/**
+	 * Get the value of a symbol by its name.
+	 *
+	 * @param key the name of the Symbol to look up the value for
+	 * @return the current value of the Symbol or null if no such symbol exists
+	 */
+	public Value getSymbol(String key) {
+<span class="fc" id="L137">		return this.getCurrentNodeVisitor().getSymbol(key);</span>
+	}
+
+	/**
+	 * Sets a symbol.
+	 *
+	 * @param key the key
+	 * @param value the value
+	 */
+	public void setSymbol(VariableDeclaration key, Value value) {
+<span class="nc" id="L147">		this.getCurrentNodeVisitor().setSymbol(key, value);</span>
+<span class="nc" id="L148">	}</span>
+
+	/**
+	 * Gets all symbols.
+	 *
+	 * @return all symbols as Map
+	 */
+	public Map&lt;VariableDeclaration, Value&gt; getAllSymbols() {
+<span class="nc" id="L156">		return this.getCurrentNodeVisitor().getAllSymbols();</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

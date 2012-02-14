@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>IntegerValue.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.model</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.model</a> &gt; <span class="el_source">IntegerValue.java</span></div><h1>IntegerValue.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.model;
+
+import java.math.BigInteger;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
+
+/**
+ * Represents an Integer value.
+ * 
+ * @author Joachim
+ * 
+ */
+public class IntegerValue extends Value {
+
+	/**
+	 * The value represented by this object.
+	 */
+	private final BigInteger value;
+
+	/**
+	 * Returns the value represented by this object.
+	 * 
+	 * @return the value represented by this object.
+	 */
+	public final BigInteger getValue() {
+<span class="fc" id="L26">		return value;</span>
+	}
+
+	/**
+	 * Creates a new instance of the {@link IntegerValue} class.
+	 * 
+	 * @param value
+	 *                The value represented by this object.
+	 */
+<span class="fc" id="L35">	public IntegerValue(final BigInteger value) {</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">		if (value == null) {</span>
+<span class="nc" id="L37">			throw new IllegalArgumentException(&quot;IntegerValue cannot hold null as a value&quot;);</span>
+		}
+
+<span class="fc" id="L40">		this.value = value;</span>
+<span class="fc" id="L41">	}</span>
+
+	@Override
+	public final void accept(final IValueVisitor visitor) {
+<span class="nc" id="L45">		visitor.visitIntegerValue(this);</span>
+<span class="nc" id="L46">	}</span>
+
+	@Override
+	public final boolean equals(final Object other) {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		if (other instanceof IntegerValue) {</span>
+<span class="fc" id="L51">			return this.value.equals(((IntegerValue) other).getValue());</span>
+		} else {
+<span class="fc" id="L53">			return false;</span>
+		}
+	}
+
+	@Override
+	public final int hashCode() {
+<span class="nc" id="L59">		return this.value.hashCode();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

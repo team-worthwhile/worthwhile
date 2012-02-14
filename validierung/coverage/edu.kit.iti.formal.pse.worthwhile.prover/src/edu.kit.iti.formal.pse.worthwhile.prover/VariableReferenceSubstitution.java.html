@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>VariableReferenceSubstitution.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">VariableReferenceSubstitution.java</span></div><h1>VariableReferenceSubstitution.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+
+/**
+ * Substitute {@link VariableReference}s in an {@link Expression} with another {@link Expression}.
+ * 
+ * @see VariableReferenceSubstitution#substitute(VariableDeclaration, Expression)
+ * @author fabian
+ * 
+ */
+class VariableReferenceSubstitution extends SubstitutionVisitor&lt;Expression&gt; {
+	/**
+	 * Substitutes occurrences of a {@link VariableDeclaration} in an {@link Expression} with another
+	 * &lt;code&gt;Expression&lt;/code&gt;.
+	 * 
+	 * A clone of the &lt;code&gt;substitute&lt;/code&gt; is used for substitution.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; to search for occurrences of &lt;code&gt;variable&lt;/code&gt;
+	 * @param variable
+	 *                the &lt;code&gt;VariableDeclaration&lt;/code&gt; the substituted {@link VariableReference}s have to be
+	 *                occurrences of
+	 * @param substitute
+	 *                the &lt;code&gt;Expression&lt;/code&gt; occurrences of &lt;code&gt;variable&lt;/code&gt; are substituted with
+	 * @return the substituted &lt;code&gt;expression&lt;/code&gt;, which differs from the passed &lt;code&gt;expression&lt;/code&gt; when
+	 *         the &lt;code&gt;expression&lt;/code&gt; itself was an occurrence of &lt;code&gt;variable&lt;/code&gt;
+	 */
+	public static Expression substitute(final Expression expression, final VariableDeclaration variable,
+	                final Expression substitute) {
+<span class="fc" id="L33">		final VariableReferenceSubstitution substitutor = new VariableReferenceSubstitution(variable,</span>
+<span class="fc" id="L34">		                substitute);</span>
+<span class="fc" id="L35">		expression.accept(substitutor);</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">		if (substitutor.getFound()) {</span>
+<span class="nc" id="L37">			substitutor.setFound(false);</span>
+<span class="nc" id="L38">			return substitutor.getSubstitute();</span>
+		}
+<span class="fc" id="L40">		return expression;</span>
+	}
+
+	/**
+	 * The {@link VariableDeclaration} the substituted {@link VariableReference}s have to be occurrences of.
+	 */
+	private VariableDeclaration variable;
+
+	/**
+	 * 
+	 * @param variable
+	 *                the {@link VariableDeclaration} the substituted {@link VariableReference}s have to be
+	 *                occurrences of
+	 * @param substitute
+	 *                the {@link Expression} occurrences of {@link VariableReferenceSubstitution#variable} are
+	 *                substituted with
+	 */
+	VariableReferenceSubstitution(final VariableDeclaration variable, final Expression substitute) {
+<span class="fc" id="L58">		super(substitute);</span>
+<span class="fc" id="L59">		this.variable = variable;</span>
+<span class="fc" id="L60">	}</span>
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+<span class="fc bfc" id="L64" title="All 2 branches covered.">		if (variableReference.getVariable() == this.variable) {</span>
+<span class="fc" id="L65">			this.setFound(true);</span>
+		}
+<span class="fc" id="L67">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

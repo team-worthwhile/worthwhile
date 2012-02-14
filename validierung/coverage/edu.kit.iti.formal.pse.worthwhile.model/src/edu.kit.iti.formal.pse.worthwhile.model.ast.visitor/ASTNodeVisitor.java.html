@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ASTNodeVisitor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.model</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.model.ast.visitor</a> &gt; <span class="el_source">ASTNodeVisitor.java</span></div><h1>ASTNodeVisitor.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+
+/**
+ * A default implementation of the {@link IASTNodeVisitor} interface.
+ * 
+ * Implementors can specify a default operation that is executed when no other operation is defined.
+ * 
+ * @author Joachim
+ * 
+ * @nocheckstyle:designforextension
+ * 
+ */
+<span class="fc" id="L70">public abstract class ASTNodeVisitor implements IASTNodeVisitor {</span>
+
+	/**
+	 * The default operation to be executed when no operation is defined for a type of AST node.
+	 * 
+	 * @param node
+	 *                The node for which the operation was called.
+	 */
+	protected void defaultOperation(final ASTNode node) {
+<span class="fc" id="L79">		throw new UnsupportedOperationException(&quot;Visitor cannot handle this type of AST node: &quot;</span>
+<span class="fc" id="L80">		                + node.eClass().toString());</span>
+	}
+
+	@Override
+	public void visit(final Addition node) {
+<span class="nc" id="L85">		this.defaultOperation(node);</span>
+<span class="nc" id="L86">	}</span>
+
+	@Override
+	public void visit(final Annotation node) {
+<span class="nc" id="L90">		this.defaultOperation(node);</span>
+<span class="nc" id="L91">	}</span>
+
+	@Override
+	public void visit(final ArrayLiteral node) {
+<span class="nc" id="L95">		this.defaultOperation(node);</span>
+<span class="nc" id="L96">	}</span>
+
+	@Override
+	public void visit(final ArrayType node) {
+<span class="nc" id="L100">		this.defaultOperation(node);</span>
+<span class="nc" id="L101">	}</span>
+
+	@Override
+	public void visit(final Assertion node) {
+<span class="nc" id="L105">		this.defaultOperation(node);</span>
+<span class="nc" id="L106">	}</span>
+
+	@Override
+	public void visit(final Assignment node) {
+<span class="nc" id="L110">		this.defaultOperation(node);</span>
+<span class="nc" id="L111">	}</span>
+
+	@Override
+	public void visit(final Assumption node) {
+<span class="nc" id="L115">		this.defaultOperation(node);</span>
+<span class="nc" id="L116">	}</span>
+
+	@Override
+	public void visit(final ASTNode node) {
+<span class="fc" id="L120">		this.defaultOperation(node);</span>
+<span class="fc" id="L121">	}</span>
+
+	@Override
+	public void visit(final Axiom node) {
+<span class="nc" id="L125">		this.defaultOperation(node);</span>
+<span class="nc" id="L126">	}</span>
+
+	@Override
+	public void visit(final ArrayFunction node) {
+<span class="nc" id="L130">		this.defaultOperation(node);</span>
+<span class="nc" id="L131">	}</span>
+
+	@Override
+	public void visit(final ArrayFunctionAccess node) {
+<span class="nc" id="L135">		this.defaultOperation(node);</span>
+<span class="nc" id="L136">	}</span>
+
+	@Override
+	public void visit(final BinaryExpression node) {
+<span class="nc" id="L140">		this.defaultOperation(node);</span>
+<span class="nc" id="L141">	}</span>
+
+	@Override
+	public void visit(final Block node) {
+<span class="nc" id="L145">		this.defaultOperation(node);</span>
+<span class="nc" id="L146">	}</span>
+
+	@Override
+	public void visit(final BooleanLiteral node) {
+<span class="nc" id="L150">		this.defaultOperation(node);</span>
+<span class="nc" id="L151">	}</span>
+
+	@Override
+	public void visit(final BooleanType node) {
+<span class="nc" id="L155">		this.defaultOperation(node);</span>
+<span class="nc" id="L156">	}</span>
+
+	@Override
+	public void visit(final Conditional node) {
+<span class="nc" id="L160">		this.defaultOperation(node);</span>
+<span class="nc" id="L161">	}</span>
+
+	@Override
+	public void visit(final Conjunction node) {
+<span class="nc" id="L165">		this.defaultOperation(node);</span>
+<span class="nc" id="L166">	}</span>
+
+	@Override
+	public void visit(final Disjunction node) {
+<span class="nc" id="L170">		this.defaultOperation(node);</span>
+<span class="nc" id="L171">	}</span>
+
+	@Override
+	public void visit(final Division node) {
+<span class="nc" id="L175">		this.defaultOperation(node);</span>
+<span class="nc" id="L176">	}</span>
+
+	@Override
+	public void visit(final Equal node) {
+<span class="nc" id="L180">		this.defaultOperation(node);</span>
+<span class="nc" id="L181">	}</span>
+
+	@Override
+	public void visit(final Equivalence node) {
+<span class="nc" id="L185">		this.defaultOperation(node);</span>
+<span class="nc" id="L186">	}</span>
+
+	@Override
+	public void visit(final ExistsQuantifier node) {
+<span class="nc" id="L190">		this.defaultOperation(node);</span>
+<span class="nc" id="L191">	}</span>
+
+	@Override
+	public void visit(final Expression node) {
+<span class="nc" id="L195">		this.defaultOperation(node);</span>
+<span class="nc" id="L196">	}</span>
+
+	@Override
+	public void visit(final ForAllQuantifier node) {
+<span class="nc" id="L200">		this.defaultOperation(node);</span>
+<span class="nc" id="L201">	}</span>
+
+	@Override
+	public void visit(final FunctionCall node) {
+<span class="nc" id="L205">		this.defaultOperation(node);</span>
+<span class="nc" id="L206">	}</span>
+
+	@Override
+	public void visit(final FunctionDeclaration node) {
+<span class="nc" id="L210">		this.defaultOperation(node);</span>
+<span class="nc" id="L211">	}</span>
+
+	@Override
+	public void visit(final Greater node) {
+<span class="nc" id="L215">		this.defaultOperation(node);</span>
+<span class="nc" id="L216">	}</span>
+
+	@Override
+	public void visit(final GreaterOrEqual node) {
+<span class="nc" id="L220">		this.defaultOperation(node);</span>
+<span class="nc" id="L221">	}</span>
+
+	@Override
+	public void visit(final Implication node) {
+<span class="nc" id="L225">		this.defaultOperation(node);</span>
+<span class="nc" id="L226">	}</span>
+
+	@Override
+	public void visit(final IntegerLiteral node) {
+<span class="nc" id="L230">		this.defaultOperation(node);</span>
+<span class="nc" id="L231">	}</span>
+
+	@Override
+	public void visit(final IntegerType node) {
+<span class="nc" id="L235">		this.defaultOperation(node);</span>
+<span class="nc" id="L236">	}</span>
+
+	@Override
+	public void visit(final Invariant node) {
+<span class="nc" id="L240">		this.defaultOperation(node);</span>
+<span class="nc" id="L241">	}</span>
+
+	@Override
+	public void visit(final Less node) {
+<span class="nc" id="L245">		this.defaultOperation(node);</span>
+<span class="nc" id="L246">	}</span>
+
+	@Override
+	public void visit(final LessOrEqual node) {
+<span class="nc" id="L250">		this.defaultOperation(node);</span>
+<span class="nc" id="L251">	}</span>
+
+	@Override
+	public void visit(final Literal node) {
+<span class="nc" id="L255">		this.defaultOperation(node);</span>
+<span class="nc" id="L256">	}</span>
+
+	@Override
+	public void visit(final Loop node) {
+<span class="nc" id="L260">		this.defaultOperation(node);</span>
+<span class="nc" id="L261">	}</span>
+
+	@Override
+	public void visit(final Minus node) {
+<span class="nc" id="L265">		this.defaultOperation(node);</span>
+<span class="nc" id="L266">	}</span>
+
+	@Override
+	public void visit(final Modulus node) {
+<span class="nc" id="L270">		this.defaultOperation(node);</span>
+<span class="nc" id="L271">	}</span>
+
+	@Override
+	public void visit(final Multiplication node) {
+<span class="nc" id="L275">		this.defaultOperation(node);</span>
+<span class="nc" id="L276">	}</span>
+
+	@Override
+	public void visit(final Negation node) {
+<span class="nc" id="L280">		this.defaultOperation(node);</span>
+<span class="nc" id="L281">	}</span>
+
+	@Override
+	public void visit(final Plus node) {
+<span class="nc" id="L285">		this.defaultOperation(node);</span>
+<span class="nc" id="L286">	}</span>
+
+	@Override
+	public void visit(final Postcondition node) {
+<span class="nc" id="L290">		this.defaultOperation(node);</span>
+<span class="nc" id="L291">	}</span>
+
+	@Override
+	public void visit(final Precondition node) {
+<span class="nc" id="L295">		this.defaultOperation(node);</span>
+<span class="nc" id="L296">	}</span>
+
+	@Override
+	public void visit(final PrimitiveType node) {
+<span class="nc" id="L300">		this.defaultOperation(node);</span>
+<span class="nc" id="L301">	}</span>
+
+	@Override
+	public void visit(final Program node) {
+<span class="nc" id="L305">		this.defaultOperation(node);</span>
+<span class="nc" id="L306">	}</span>
+
+	@Override
+	public void visit(final QuantifiedExpression node) {
+<span class="nc" id="L310">		this.defaultOperation(node);</span>
+<span class="nc" id="L311">	}</span>
+
+	@Override
+	public void visit(final ReturnStatement node) {
+<span class="nc" id="L315">		this.defaultOperation(node);</span>
+<span class="nc" id="L316">	}</span>
+
+	@Override
+	public void visit(final Sign node) {
+<span class="nc" id="L320">		this.defaultOperation(node);</span>
+<span class="nc" id="L321">	}</span>
+
+	@Override
+	public void visit(final Statement node) {
+<span class="nc" id="L325">		this.defaultOperation(node);</span>
+<span class="nc" id="L326">	}</span>
+
+	@Override
+	public void visit(final Subtraction node) {
+<span class="nc" id="L330">		this.defaultOperation(node);</span>
+<span class="nc" id="L331">	}</span>
+
+	@Override
+	public void visit(final Type node) {
+<span class="nc" id="L335">		this.defaultOperation(node);</span>
+<span class="nc" id="L336">	}</span>
+
+	@Override
+	public void visit(final UnaryExpression node) {
+<span class="nc" id="L340">		this.defaultOperation(node);</span>
+<span class="nc" id="L341">	}</span>
+
+	@Override
+	public void visit(final Unequal node) {
+<span class="nc" id="L345">		this.defaultOperation(node);</span>
+<span class="nc" id="L346">	}</span>
+
+	@Override
+	public void visit(final VariableDeclaration node) {
+<span class="nc" id="L350">		this.defaultOperation(node);</span>
+<span class="nc" id="L351">	}</span>
+
+	@Override
+	public void visit(final VariableReference node) {
+<span class="nc" id="L355">		this.defaultOperation(node);</span>
+<span class="nc" id="L356">	}</span>
+
+	@Override
+	public void visit(final ReturnValueReference node) {
+<span class="nc" id="L360">		this.defaultOperation(node);</span>
+<span class="nc" id="L361">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

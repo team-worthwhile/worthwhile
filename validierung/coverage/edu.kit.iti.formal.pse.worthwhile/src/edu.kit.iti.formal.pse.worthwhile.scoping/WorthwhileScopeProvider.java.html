@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WorthwhileScopeProvider.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.scoping</a> &gt; <span class="el_source">WorthwhileScopeProvider.java</span></div><h1>WorthwhileScopeProvider.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.scoping;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+
+/**
+ * This class contains the custom scoping description.
+ * 
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on how and when to use it
+ * 
+ * @author Joachim
+ * 
+ * @nocheckstyle:methodname (convention requires the method names to contain underscores)
+ * 
+ */
+<span class="fc" id="L28">public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {</span>
+
+	/**
+	 * Provides the scope for a function call's function reference.
+	 * 
+	 * @param context
+	 *                The function call to provide the scope for.
+	 * @param reference
+	 *                The corresponding EReference in the Ecore model.
+	 * @return A scope in which to look for the referenced function.
+	 */
+	public final IScope scope_FunctionCall_function(final FunctionCall context, final EReference reference) {
+<span class="fc" id="L40">		ScopeFinder scopeFinder = new ScopeFinder(context);</span>
+<span class="fc" id="L41">		List&lt;IEObjectDescription&gt; descriptions = new ArrayList&lt;IEObjectDescription&gt;();</span>
+
+<span class="fc bfc" id="L43" title="All 2 branches covered.">		for (FunctionDeclaration funcdec : scopeFinder.getFunctionDeclarations()) {</span>
+<span class="fc" id="L44">			descriptions.add(EObjectDescription.create(funcdec.getName(), funcdec));</span>
+		}
+
+<span class="fc" id="L47">		return new SimpleScope(IScope.NULLSCOPE, descriptions);</span>
+	}
+
+	/**
+	 * Provides the scope for a variable reference.
+	 * 
+	 * @param context
+	 *                The variable reference to provide the scope for.
+	 * @param reference
+	 *                The corresponding EReference in the Ecore model.
+	 * @return A scope in which to look for the referenced variable.
+	 */
+	public final IScope scope_VariableReference_variable(final VariableReference context, final EReference reference) {
+<span class="fc" id="L60">		ScopeFinder scopeFinder = new ScopeFinder(context);</span>
+<span class="fc" id="L61">		List&lt;IEObjectDescription&gt; descriptions = new ArrayList&lt;IEObjectDescription&gt;();</span>
+
+<span class="fc bfc" id="L63" title="All 2 branches covered.">		for (VariableDeclaration vardec : scopeFinder.getVariableDeclarations()) {</span>
+<span class="fc" id="L64">			descriptions.add(EObjectDescription.create(vardec.getName(), vardec));</span>
+		}
+
+<span class="fc" id="L67">		return new SimpleScope(IScope.NULLSCOPE, descriptions);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

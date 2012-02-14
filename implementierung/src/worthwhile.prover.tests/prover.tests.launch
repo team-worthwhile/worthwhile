@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
+<listAttribute key="com.mountainminds.eclemma.core.SCOPE_IDS">
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.model/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.prover/src\/main\/java"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile/src\/main\/java"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.prover/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile/src"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/edu.kit.iti.formal.pse.worthwhile.prover.tests"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=edu.kit.iti.formal.pse.worthwhile.prover.tests"/>
+<booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
+<stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
+<stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value=""/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="edu.kit.iti.formal.pse.worthwhile.prover.tests"/>
+</launchConfiguration>

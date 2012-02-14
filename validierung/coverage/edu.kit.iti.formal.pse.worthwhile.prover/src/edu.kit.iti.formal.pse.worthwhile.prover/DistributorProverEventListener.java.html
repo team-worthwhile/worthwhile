@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>DistributorProverEventListener.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">DistributorProverEventListener.java</span></div><h1>DistributorProverEventListener.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+
+/**
+ * Distributes events to multiple event listeners.
+ * 
+ * @author Leon Handreke
+ * 
+ */
+<span class="fc" id="L14">public class DistributorProverEventListener extends AbstractProverEventListener {</span>
+
+	/**
+	 * Set of {@link AbstractProverEventListener}s that all events should be distributed to.
+	 */
+<span class="fc" id="L19">	private Set&lt;IProverEventListener&gt; listeners = new HashSet&lt;IProverEventListener&gt;();</span>
+
+	/**
+	 * Add a listener to the set of listeners that all events shall be distributed to.
+	 * 
+	 * @param proverEventListener
+	 *                the event listener that shall be added
+	 * @return true if the listener was successfully added, else false
+	 */
+	public final boolean addProverEventListener(final IProverEventListener proverEventListener) {
+<span class="fc" id="L29">		return this.listeners.add(proverEventListener);</span>
+	}
+
+	/**
+	 * Remove a listener to the set of listeners that all events shall be distributed to.
+	 * 
+	 * @param proverEventListener
+	 *                the event listener that shall be removed
+	 * @return true if the listener was successfully removed, else false
+	 */
+	public final boolean removeProverEventListener(final IProverEventListener proverEventListener) {
+<span class="fc" id="L40">		return this.listeners.remove(proverEventListener);</span>
+	}
+
+	@Override
+	public final void programVerified(final Program program, final Validity validity, final ProverResult proverResult) {
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		for (IProverEventListener l : this.listeners) {</span>
+<span class="fc" id="L46">			l.programVerified(program, validity, proverResult);</span>
+		}
+<span class="fc" id="L48">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

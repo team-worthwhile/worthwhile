@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AstNodeCreatorHelper.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.model</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.model.ast.util</a> &gt; <span class="el_source">AstNodeCreatorHelper.java</span></div><h1>AstNodeCreatorHelper.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
+
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+
+/**
+ * Provides convenience methods for the creation of several {@link ASTNode}s.
+ * 
+ * @author fabian
+ * 
+ */
+<span class="fc" id="L34">public final class AstNodeCreatorHelper {</span>
+	/**
+	 * Private default constructor.
+	 */
+	private AstNodeCreatorHelper() {
+<span class="nc" id="L39">		super();</span>
+<span class="nc" id="L40">	}</span>
+
+	/**
+	 * The {@link AstFactory} singleton whose create methods are used to instantiate the {@link ASTNode}s.
+	 */
+<span class="fc" id="L45">	private static AstFactory factory = AstFactory.eINSTANCE;</span>
+
+	/**
+	 * Create an {@link Assertion} with the given {@link Expression}.
+	 * 
+	 * @param expression
+	 *                the {@link Expression} to assert
+	 * @return the created {@link Assertion}
+	 */
+	public static Assertion createAssertion(final Expression expression) {
+<span class="fc" id="L55">		final Assertion assertion = AstNodeCreatorHelper.factory.createAssertion();</span>
+<span class="fc" id="L56">		assertion.setExpression(expression);</span>
+<span class="fc" id="L57">		return assertion;</span>
+	}
+
+	/**
+	 * Creates an {@link Assumption} with the given {@link Expression}.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; to assume
+	 * @return the created &lt;code&gt;Assumption&lt;/code&gt;
+	 */
+	public static Assumption createAssumption(final Expression expression) {
+<span class="fc" id="L68">		final Assumption assumption = AstNodeCreatorHelper.factory.createAssumption();</span>
+<span class="fc" id="L69">		assumption.setExpression(expression);</span>
+<span class="fc" id="L70">		return assumption;</span>
+	}
+
+	/**
+	 * 
+	 * @param values
+	 *                the array element {@link Expression}s
+	 * @return an {@link ArrayLiteral} whose first elements are initialized with the given &lt;code&gt;values&lt;/code&gt;
+	 */
+	public static ArrayLiteral createArrayLiteral(final List&lt;Expression&gt; values) {
+<span class="nc" id="L80">		final ArrayLiteral arrayLiteral = AstNodeCreatorHelper.createArrayLiteral();</span>
+<span class="nc" id="L81">		arrayLiteral.getValues().addAll(values);</span>
+<span class="nc" id="L82">		return arrayLiteral;</span>
+	}
+
+	/**
+	 * Indexes not covered by the given &lt;code&gt;values&lt;/code&gt; are initialized with &lt;code&gt;false&lt;/code&gt;.
+	 * 
+	 * @param values
+	 *                the value {@link Expression}s the new {@link ArrayFunction} is to be initialized with
+	 * @return a new &lt;code&gt;ArrayFunction&lt;/code&gt; initialized with the given &lt;code&gt;values&lt;/code&gt;
+	 */
+	public static ArrayFunction createFalseArrayFunction(final List&lt;Expression&gt; values) {
+<span class="nc" id="L93">		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createFalseArrayFunction();</span>
+<span class="nc" id="L94">		return AstNodeCreatorHelper.createArrayFunction(values, arrayFunction);</span>
+	}
+
+	/**
+	 * Indexes not covered by the given &lt;code&gt;values&lt;/code&gt; are initialized with &lt;code&gt;0&lt;/code&gt;.
+	 * 
+	 * @param values
+	 *                the value {@link Expression}s the new {@link ArrayFunction} is to be initialized with
+	 * @return a new &lt;code&gt;ArrayFunction&lt;/code&gt; initialized with the given &lt;code&gt;values&lt;/code&gt;
+	 */
+	public static ArrayFunction createZeroArrayFunction(final List&lt;Expression&gt; values) {
+<span class="nc" id="L105">		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createZeroArrayFunction();</span>
+<span class="nc" id="L106">		return AstNodeCreatorHelper.createArrayFunction(values, arrayFunction);</span>
+	}
+
+	/**
+	 * 
+	 * @param values
+	 *                the {@link Expression}s to be assigned to &lt;code&gt;chainedFunction&lt;/code&gt;
+	 * @param chainedFunction
+	 *                the to be modified {@link ArrayFunction}
+	 * @return a new {@link ArrayFunction} that represents the assignment of &lt;code&gt;values&lt;/code&gt; to
+	 *         &lt;code&gt;chainedFunction&lt;/code&gt;
+	 */
+	public static ArrayFunction createArrayFunction(final List&lt;Expression&gt; values,
+	                final ArrayFunction chainedFunction) {
+<span class="nc" id="L120">		ArrayFunction arrayFunction = chainedFunction;</span>
+
+<span class="nc" id="L122">		int index = -1;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">		for (final Expression v : values) {</span>
+<span class="nc" id="L124">			index++;</span>
+<span class="nc" id="L125">			final Expression indexLiteral = AstNodeCreatorHelper.createIntegerLiteral(BigInteger</span>
+<span class="nc" id="L126">			                .valueOf(index));</span>
+<span class="nc" id="L127">			arrayFunction = AstNodeCreatorHelper.createArrayFunction(indexLiteral, v, arrayFunction);</span>
+		}
+
+<span class="nc" id="L130">		return arrayFunction;</span>
+	}
+
+	/**
+	 * 
+	 * @param index
+	 *                the explicit index {@link Expression} for the case distinction
+	 * @param value
+	 *                the value &lt;code&gt;Expression&lt;/code&gt; that is returned for the given &lt;code&gt;index&lt;/code&gt;
+	 * @param chainedFunction
+	 *                the {@link ArrayFunction} that is evaluated for all &lt;code&gt;Expression&lt;/code&gt;s different from
+	 *                the given &lt;code&gt;index&lt;/code&gt;
+	 * @return a new &lt;code&gt;ArrayFunction&lt;/code&gt; returning &lt;code&gt;value&lt;/code&gt; for &lt;code&gt;index&lt;/code&gt; and evaluating
+	 *         &lt;code&gt;chainedFunction&lt;/code&gt; else
+	 */
+	public static ArrayFunction createArrayFunction(final Expression index, final Expression value,
+	                final ArrayFunction chainedFunction) {
+<span class="nc" id="L147">		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();</span>
+<span class="nc" id="L148">		arrayFunction.setIndex(index);</span>
+<span class="nc" id="L149">		arrayFunction.setValue(value);</span>
+<span class="nc" id="L150">		arrayFunction.setChainedFunction(chainedFunction);</span>
+<span class="nc" id="L151">		return arrayFunction;</span>
+	}
+
+	/**
+	 * 
+	 * @return a new implicitly all &lt;code&gt;false&lt;/code&gt; &lt;code&gt;ArrayFunction&lt;/code&gt;
+	 */
+	public static ArrayFunction createFalseArrayFunction() {
+<span class="nc" id="L159">		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();</span>
+<span class="nc" id="L160">		arrayFunction.setIndex(null);</span>
+<span class="nc" id="L161">		arrayFunction.setValue(AstNodeCreatorHelper.createFalseLiteral());</span>
+<span class="nc" id="L162">		return arrayFunction;</span>
+	}
+
+	/**
+	 * 
+	 * @return a new implicitly all &lt;code&gt;0&lt;/code&gt; &lt;code&gt;ArrayFunction&lt;/code&gt;
+	 */
+	public static ArrayFunction createZeroArrayFunction() {
+<span class="nc" id="L170">		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();</span>
+<span class="nc" id="L171">		arrayFunction.setIndex(null);</span>
+<span class="nc" id="L172">		arrayFunction.setValue(AstNodeCreatorHelper.createZeroLiteral());</span>
+<span class="nc" id="L173">		return arrayFunction;</span>
+	}
+
+	/**
+	 * 
+	 * @return a new uninitialized &lt;code&gt;ArrayFunction&lt;/code&gt;
+	 */
+	public static ArrayFunction createArrayFunction() {
+<span class="nc" id="L181">		return AstNodeCreatorHelper.factory.createArrayFunction();</span>
+	}
+
+	/**
+	 * 
+	 * @param index
+	 *                the {@link Expression} for which &lt;code&gt;arrayFunction&lt;/code&gt; is evaluated
+	 * @param arrayFunction
+	 *                the &lt;code&gt;Expression&lt;/code&gt; to be evaluated at &lt;code&gt;index&lt;/code&gt;
+	 * @return a new {@link ArrayFunctionAccess} that evaluates &lt;code&gt;arrayFunction&lt;/code&gt; at &lt;code&gt;index&lt;/code&gt;
+	 */
+	public static ArrayFunctionAccess createArrayFunctionAccess(final Expression index,
+	                final Expression arrayFunction) {
+<span class="nc" id="L194">		final ArrayFunctionAccess arrayFunctionAccess = AstNodeCreatorHelper.createArrayFunctionAccess();</span>
+<span class="nc" id="L195">		arrayFunctionAccess.setIndex(index);</span>
+<span class="nc" id="L196">		arrayFunctionAccess.setFunction(arrayFunction);</span>
+<span class="nc" id="L197">		return arrayFunctionAccess;</span>
+	}
+
+	/**
+	 * @return a new uninitialized {@link ArrayFunctionAccess}
+	 * @return
+	 */
+	public static ArrayFunctionAccess createArrayFunctionAccess() {
+<span class="nc" id="L205">		return AstNodeCreatorHelper.factory.createArrayFunctionAccess();</span>
+	}
+
+	/**
+	 * 
+	 * @return an uninitialized {@link ArrayLiteral}
+	 */
+	public static ArrayLiteral createArrayLiteral() {
+<span class="fc" id="L213">		return AstNodeCreatorHelper.factory.createArrayLiteral();</span>
+	}
+
+	/**
+	 * 
+	 * @param value
+	 *                the {@link Boolean} value to be represented by the {@link BooleanLiteral}
+	 * @return a &lt;code&gt;BooleanLiteral&lt;/code&gt; that represents &lt;code&gt;value&lt;/code&gt;
+	 */
+	public static BooleanLiteral createBooleanLiteral(final Boolean value) {
+<span class="fc" id="L223">		final BooleanLiteral booleanLiteral = AstNodeCreatorHelper.factory.createBooleanLiteral();</span>
+<span class="fc" id="L224">		booleanLiteral.setValue(value);</span>
+<span class="fc" id="L225">		return booleanLiteral;</span>
+	}
+
+	/**
+	 * 
+	 * @return a {@link BooleanLiteral} that represents the value &lt;code&gt;true&lt;/code&gt;
+	 */
+	public static BooleanLiteral createTrueLiteral() {
+<span class="fc" id="L233">		return AstNodeCreatorHelper.createBooleanLiteral(true);</span>
+	}
+
+	/**
+	 * 
+	 * @return a {@link BooleanLiteral} that represents the value &lt;code&gt;false&lt;/code&gt;
+	 */
+	public static BooleanLiteral createFalseLiteral() {
+<span class="fc" id="L241">		return AstNodeCreatorHelper.createBooleanLiteral(false);</span>
+	}
+
+	/**
+	 * 
+	 * @param value
+	 *                the {@link BigInteger} value to be represented by the {@link IntegerLiteral}
+	 * @return an &lt;code&gt;IntegerLiteral&lt;/code&gt; that represents &lt;code&gt;value&lt;/code&gt;
+	 */
+	public static IntegerLiteral createIntegerLiteral(final BigInteger value) {
+<span class="fc" id="L251">		final IntegerLiteral integerLiteral = AstNodeCreatorHelper.factory.createIntegerLiteral();</span>
+<span class="fc" id="L252">		integerLiteral.setValue(value);</span>
+<span class="fc" id="L253">		return integerLiteral;</span>
+	}
+
+	/**
+	 * 
+	 * @return an &lt;code&gt;IntegerLiteral&lt;/code&gt; that represents the value &lt;code&gt;zero&lt;/code&gt;
+	 */
+	public static IntegerLiteral createZeroLiteral() {
+<span class="fc" id="L261">		return AstNodeCreatorHelper.createIntegerLiteral(BigInteger.ZERO);</span>
+	}
+
+	/**
+	 * 
+	 * @param operand
+	 *                the {@link Negation} operand
+	 * @return a &lt;code&gt;Negation&lt;/code&gt; that has the given operand
+	 */
+	public static Negation createNegation(final Expression operand) {
+<span class="fc" id="L271">		final Negation negation = AstNodeCreatorHelper.factory.createNegation();</span>
+<span class="fc" id="L272">		negation.setOperand(operand);</span>
+<span class="fc" id="L273">		return negation;</span>
+	}
+
+	/**
+	 * 
+	 * @param left
+	 *                the left {@link Conjunction} operand
+	 * @param right
+	 *                the right &lt;code&gt;Conjunction&lt;/code&gt; operand
+	 * @return a &lt;code&gt;Conjunction&lt;/code&gt; that has the given &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; operands
+	 */
+	public static Conjunction createConjunction(final Expression left, final Expression right) {
+<span class="fc" id="L285">		final Conjunction conjunction = AstNodeCreatorHelper.createConjunction();</span>
+<span class="fc" id="L286">		conjunction.setLeft(left);</span>
+<span class="fc" id="L287">		conjunction.setRight(right);</span>
+<span class="fc" id="L288">		return conjunction;</span>
+	}
+
+	/**
+	 * 
+	 * @return a {@link Conjunction} that does not have any operands set yet
+	 */
+	public static Conjunction createConjunction() {
+<span class="fc" id="L296">		return AstNodeCreatorHelper.factory.createConjunction();</span>
+	}
+
+	/**
+	 * 
+	 * @param left
+	 *                the left {@link Equal} operand
+	 * @param right
+	 *                the right &lt;code&gt;Equal&lt;/code&gt; operand
+	 * @return an &lt;code&gt;Equal&lt;/code&gt; that has the given &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; operands
+	 */
+	public static Equal createEqual(final Expression left, final Expression right) {
+<span class="fc" id="L308">		final Equal equal = AstNodeCreatorHelper.factory.createEqual();</span>
+<span class="fc" id="L309">		equal.setLeft(left);</span>
+<span class="fc" id="L310">		equal.setRight(right);</span>
+<span class="fc" id="L311">		return equal;</span>
+	}
+
+	/**
+	 * 
+	 * @param left
+	 *                the left {@link Implication} operand
+	 * @param right
+	 *                the right &lt;code&gt;Implication&lt;/code&gt; operand
+	 * @return an &lt;code&gt;Implication&lt;/code&gt; that has the given &lt;code&gt;left&lt;/code&gt; and &lt;code&gt;right&lt;/code&gt; operands
+	 */
+	public static Implication createImplication(final Expression left, final Expression right) {
+<span class="fc" id="L323">		final Implication implication = AstNodeCreatorHelper.createImplication();</span>
+<span class="fc" id="L324">		implication.setLeft(left);</span>
+<span class="fc" id="L325">		implication.setRight(right);</span>
+<span class="fc" id="L326">		return implication;</span>
+	}
+
+	/**
+	 * 
+	 * @return an {@link Implication} that does not have any operands set yet
+	 */
+	public static Implication createImplication() {
+<span class="fc" id="L334">		return AstNodeCreatorHelper.factory.createImplication();</span>
+	}
+
+	/**
+	 * 
+	 * @param parameter
+	 *                the bound {@link VariableDeclaration}
+	 * @param condition
+	 *                the &lt;code&gt;parameters&lt;/code&gt; attribute
+	 * @param expression
+	 *                the quantified {@link Expression}
+	 * @return a {@link ForAllQuantifier} that bounds the given constrained &lt;code&gt;parameter&lt;/code&gt; in the given
+	 *         &lt;code&gt;expression&lt;/code&gt;
+	 */
+	public static ForAllQuantifier createForAllQuantifier(final VariableDeclaration parameter,
+	                final Expression condition, final Expression expression) {
+<span class="nc" id="L350">		final ForAllQuantifier forAllQuantifier = AstNodeCreatorHelper.createForAllQuantifier(parameter,</span>
+<span class="nc" id="L351">		                expression);</span>
+<span class="nc" id="L352">		forAllQuantifier.setCondition(condition);</span>
+<span class="nc" id="L353">		return forAllQuantifier;</span>
+	}
+
+	/**
+	 * 
+	 * @param parameter
+	 *                the bound {@link VariableDeclaration}
+	 * @param expression
+	 *                the quantified {@link Expression}
+	 * @return a {@link ForAllQuantifier} that bounds the given &lt;code&gt;parameter&lt;/code&gt; in the given
+	 *         &lt;code&gt;expression&lt;/code&gt;
+	 */
+	public static ForAllQuantifier createForAllQuantifier(final VariableDeclaration parameter,
+	                final Expression expression) {
+<span class="fc" id="L367">		final ForAllQuantifier forAllQuantifier = AstNodeCreatorHelper.factory.createForAllQuantifier();</span>
+<span class="fc" id="L368">		forAllQuantifier.setParameter(parameter);</span>
+<span class="fc" id="L369">		forAllQuantifier.setExpression(expression);</span>
+<span class="fc" id="L370">		return forAllQuantifier;</span>
+	}
+
+	/**
+	 * 
+	 * @param block
+	 *                the {@link Program} main {@link Block}
+	 * @return a &lt;code&gt;Program&lt;/code&gt; that consists of the given &lt;code&gt;block&lt;/code&gt;
+	 */
+	public static Program createProgram(final Block block) {
+<span class="fc" id="L380">		final Program program = AstNodeCreatorHelper.factory.createProgram();</span>
+<span class="fc" id="L381">		program.setMainBlock(block);</span>
+<span class="fc" id="L382">		return program;</span>
+	}
+
+	/**
+	 * 
+	 * @param statements
+	 *                the {@link Program} statements
+	 * @return a &lt;code&gt;Program&lt;/code&gt; whose main {@link Block} consists of the given &lt;code&gt;statements&lt;/code&gt;
+	 */
+	public static Program createProgram(final List&lt;Statement&gt; statements) {
+<span class="nc" id="L392">		return AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper.createBlock(statements));</span>
+	}
+
+	/**
+	 * 
+	 * @param statement
+	 *                the only {@link Program} statement
+	 * @return a &lt;code&gt;Program&lt;/code&gt; whose main {@link Block} consists of the given &lt;code&gt;statement&lt;/code&gt;
+	 */
+	public static Program createProgram(final Statement statement) {
+<span class="fc" id="L402">		return AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper.createBlock(statement));</span>
+	}
+
+	/**
+	 * 
+	 * @param statements
+	 *                the {@link Block} statements
+	 * @return a &lt;code&gt;Block&lt;/code&gt; that consists of the given &lt;code&gt;statements&lt;/code&gt;
+	 */
+	public static Block createBlock(final List&lt;Statement&gt; statements) {
+<span class="fc" id="L412">		final Block block = AstNodeCreatorHelper.factory.createBlock();</span>
+<span class="fc" id="L413">		block.getStatements().addAll(statements);</span>
+<span class="fc" id="L414">		return block;</span>
+	}
+
+	/**
+	 * 
+	 * @param statement
+	 *                the only {@link Block} statement
+	 * @return a &lt;code&gt;Block&lt;/code&gt; that consists of the given &lt;code&gt;statement&lt;/code&gt;
+	 */
+	public static Block createBlock(final Statement statement) {
+<span class="fc" id="L424">		return AstNodeCreatorHelper.createBlock(Arrays.asList(statement));</span>
+	}
+
+	/**
+	 * 
+	 * @param variable
+	 *                the {@link VariableDeclaration} that is referenced
+	 * @return a {@link VariableReference} that references the given &lt;code&gt;variable&lt;/code&gt;
+	 */
+	public static VariableReference createVariableReference(final VariableDeclaration variable) {
+<span class="fc" id="L434">		final VariableReference variableReference = AstNodeCreatorHelper.factory.createVariableReference();</span>
+<span class="fc" id="L435">		variableReference.setVariable(variable);</span>
+<span class="fc" id="L436">		return variableReference;</span>
+	}
+
+	/**
+	 * 
+	 * @param type
+	 *                the {@link VariableDeclaration}'s {@link Type} to be
+	 * @param name
+	 *                the &lt;code&gt;VariableDeclaration&lt;/code&gt;'s name to be
+	 * @param initialValue
+	 *                the &lt;code&gt;VariableDeclaration&lt;/code&gt;'s initial value {@link Expression} to be
+	 * @return a &lt;code&gt;VariableDeclaration&lt;/code&gt; with the given &lt;code&gt;type&lt;/code&gt;, &lt;code&gt;name&lt;/code&gt; and
+	 *         &lt;code&gt;initialValue&lt;/code&gt;
+	 */
+	public static VariableDeclaration createVariableDeclaration(final Type type, final String name,
+	                final Expression initialValue) {
+<span class="nc" id="L452">		final VariableDeclaration variableDeclaration = AstNodeCreatorHelper.createVariableDeclaration(type,</span>
+<span class="nc" id="L453">		                name);</span>
+<span class="nc" id="L454">		variableDeclaration.setInitialValue(initialValue);</span>
+<span class="nc" id="L455">		return variableDeclaration;</span>
+	}
+
+	/**
+	 * 
+	 * @param type
+	 *                the {@link VariableDeclaration}'s {@link Type} to be
+	 * @param name
+	 *                the &lt;code&gt;VariableDeclaration&lt;/code&gt;'s name to be
+	 * @return an uninitialized &lt;code&gt;VariableDeclaration&lt;/code&gt; with the given &lt;code&gt;type&lt;/code&gt; and
+	 *         &lt;code&gt;name&lt;/code&gt;
+	 */
+	public static VariableDeclaration createVariableDeclaration(final Type type, final String name) {
+<span class="fc" id="L468">		final VariableDeclaration variableDeclaration = AstNodeCreatorHelper.factory</span>
+<span class="fc" id="L469">		                .createVariableDeclaration();</span>
+<span class="fc" id="L470">		variableDeclaration.setType(type);</span>
+<span class="fc" id="L471">		variableDeclaration.setName(name);</span>
+<span class="fc" id="L472">		return variableDeclaration;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

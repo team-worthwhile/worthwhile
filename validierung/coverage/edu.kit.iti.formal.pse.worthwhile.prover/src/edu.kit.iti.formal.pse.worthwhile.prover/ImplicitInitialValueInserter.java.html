@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>ImplicitInitialValueInserter.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">ImplicitInitialValueInserter.java</span></div><h1>ImplicitInitialValueInserter.java</h1><pre class="source lang-java linenums"><span class="fc" id="L1">package edu.kit.iti.formal.pse.worthwhile.prover;</span>
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * Completes {@link VariableDeclaration}s that are missing an explicit initial value with the implicit default initial
+ * value defined for the Worthwhile language.
+ * 
+ * @author fabian
+ * 
+ */
+<span class="fc" id="L28">public final class ImplicitInitialValueInserter extends HierarchialASTNodeVisitor {</span>
+	@Override
+	public void visit(final Program program) {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">		for (final FunctionDeclaration f : program.getFunctionDeclarations()) {</span>
+<span class="fc" id="L32">			f.accept(this);</span>
+		}
+
+<span class="fc" id="L35">		program.getMainBlock().accept(this);</span>
+<span class="fc" id="L36">	}</span>
+
+	@Override
+	public void visit(final Annotation annotation) {
+		// explicitly ignore default operation for Annotations
+<span class="fc" id="L41">	}</span>
+
+	@Override
+	public void visit(final Assignment assignment) {
+		// explicitly ignore default operation for Annotations
+<span class="fc" id="L46">	}</span>
+
+	@Override
+	public void visit(final Block block) {
+<span class="fc bfc" id="L50" title="All 2 branches covered.">		for (final Statement s : block.getStatements()) {</span>
+<span class="fc" id="L51">			s.accept(this);</span>
+		}
+<span class="fc" id="L53">	}</span>
+
+	@Override
+	public void visit(final Conditional conditional) {
+<span class="fc" id="L57">		conditional.getTrueBlock().accept(this);</span>
+
+<span class="fc" id="L59">		final Block falseBlock = conditional.getFalseBlock();</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">		if (falseBlock != null) {</span>
+<span class="nc" id="L61">			falseBlock.accept(this);</span>
+		}
+<span class="fc" id="L63">	}</span>
+
+	@Override
+	public void visit(final FunctionDeclaration functionDeclaration) {
+<span class="fc" id="L67">		functionDeclaration.getBody().accept(this);</span>
+<span class="fc" id="L68">	}</span>
+
+	@Override
+	public void visit(final Loop loop) {
+<span class="fc" id="L72">		loop.getBody().accept(this);</span>
+<span class="fc" id="L73">	}</span>
+
+	@Override
+	public void visit(final ReturnStatement returnStatement) {
+		// explicitly ignore default operation for ReturnStatements
+<span class="fc" id="L78">	}</span>
+
+	@Override
+	public void visit(final VariableDeclaration variableDeclaration) {
+		// the visit methods return an Expression representing the implicit default initial value
+<span class="fc bfc" id="L83" title="All 2 branches covered.">		if (variableDeclaration.getInitialValue() == null) {</span>
+<span class="fc" id="L84">			variableDeclaration.setInitialValue(new ASTNodeReturnVisitor&lt;Expression&gt;() {</span>
+				@Override
+				public void visit(final BooleanType booleanType) {
+<span class="fc" id="L87">					this.setReturnValue(AstNodeCreatorHelper.createFalseLiteral());</span>
+<span class="fc" id="L88">				};</span>
+
+				@Override
+				public void visit(final IntegerType integerType) {
+<span class="fc" id="L92">					this.setReturnValue(AstNodeCreatorHelper.createZeroLiteral());</span>
+<span class="fc" id="L93">				};</span>
+
+				@Override
+				public void visit(final ArrayType arrayType) {
+<span class="fc" id="L97">					this.setReturnValue(AstNodeCreatorHelper.createArrayLiteral());</span>
+<span class="fc" id="L98">				};</span>
+<span class="fc" id="L99">			}.apply(variableDeclaration.getType()));</span>
+		}
+<span class="fc" id="L101">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

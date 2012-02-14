@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AstNodeToStringHelper.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.model</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.model.ast.util</a> &gt; <span class="el_source">AstNodeToStringHelper.java</span></div><h1>AstNodeToStringHelper.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
+
+import java.util.Iterator;
+import java.util.List;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * Implements toString methods for {@link ASTNode}s.
+ * 
+ * @author fabian
+ * 
+ */
+<span class="fc" id="L56">public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {</span>
+	/**
+	 * A single instance of {@link ASTNodeToStringHelper}.
+	 */
+<span class="fc" id="L60">	private static AstNodeToStringHelper singleton = new AstNodeToStringHelper();</span>
+
+	/**
+	 * The state of the {@link String} result returned by {@link toString}.
+	 */
+	private StringBuffer buf;
+
+	/**
+	 * Private default constructor.
+	 */
+	private AstNodeToStringHelper() {
+<span class="fc" id="L71">		super();</span>
+<span class="fc" id="L72">	}</span>
+
+	/**
+	 * Returns a {@link String} representing an {@link ASTNode}.
+	 * 
+	 * @param node
+	 *                the ASTNode that is represented by the returned String
+	 * @return a String representing &lt;code&gt;node&lt;/code&gt;
+	 */
+	public static String toString(final ASTNode node) {
+<span class="fc" id="L82">		AstNodeToStringHelper.singleton.buf = new StringBuffer();</span>
+<span class="fc" id="L83">		node.accept(AstNodeToStringHelper.singleton);</span>
+<span class="fc" id="L84">		return AstNodeToStringHelper.singleton.buf.toString();</span>
+	}
+
+	/**
+	 * Appends &lt;code&gt;`(' binaryExpression.left operatorString binaryExpression.right `)'&lt;/code&gt; to the buffer.
+	 * 
+	 * @param binaryExpression
+	 *                the {@link BinaryExpression} that is to be represented as {@link String}
+	 * @param operatorString
+	 *                the &lt;code&gt;String&lt;/code&gt; representation for the &lt;code&gt;binaryExpression&lt;/code&gt;'s operator
+	 */
+	private void appendBinaryExpression(final BinaryExpression binaryExpression, final String operatorString) {
+<span class="fc" id="L96">		this.buf.append(&quot;(&quot;);</span>
+<span class="fc" id="L97">		binaryExpression.getLeft().accept(this);</span>
+<span class="fc" id="L98">		this.buf.append(&quot; &quot; + operatorString + &quot; &quot;);</span>
+<span class="fc" id="L99">		binaryExpression.getRight().accept(this);</span>
+<span class="fc" id="L100">		this.buf.append(&quot;)&quot;);</span>
+<span class="fc" id="L101">	}</span>
+
+	@Override
+	public void visit(final ASTNode aSTNode) {
+<span class="nc" id="L105">		this.buf.append(aSTNode.toString());</span>
+<span class="nc" id="L106">	}</span>
+
+	@Override
+	public void visit(final Addition addition) {
+<span class="fc" id="L110">		this.appendBinaryExpression(addition, &quot;+&quot;);</span>
+<span class="fc" id="L111">	}</span>
+
+	@Override
+	public void visit(final Subtraction subtraction) {
+<span class="nc" id="L115">		this.appendBinaryExpression(subtraction, &quot;-&quot;);</span>
+<span class="nc" id="L116">	}</span>
+
+	@Override
+	public void visit(final ArrayLiteral arrayLiteral) {
+<span class="nc" id="L120">		this.buf.append(&quot;{ &quot;);</span>
+<span class="nc" id="L121">		final Iterator&lt;Expression&gt; i = arrayLiteral.getValues().iterator();</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		if (i.hasNext()) {</span>
+<span class="nc" id="L123">			i.next().accept(this);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">			while (i.hasNext()) {</span>
+<span class="nc" id="L125">				this.buf.append(&quot;, &quot;);</span>
+<span class="nc" id="L126">				i.next().accept(this);</span>
+			}
+		}
+<span class="nc" id="L129">		this.buf.append(&quot; }&quot;);</span>
+<span class="nc" id="L130">	}</span>
+
+	@Override
+	public void visit(final ArrayType arrayType) {
+<span class="nc" id="L134">		arrayType.getBaseType().accept(this);</span>
+<span class="nc" id="L135">		this.buf.append(&quot;[]&quot;);</span>
+<span class="nc" id="L136">	}</span>
+
+	@Override
+	public void visit(final Assertion assertion) {
+<span class="nc" id="L140">		this.buf.append(&quot;_assert &quot;);</span>
+<span class="nc" id="L141">		assertion.getExpression().accept(this);</span>
+<span class="nc" id="L142">	}</span>
+
+	@Override
+	public void visit(final Assignment assignment) {
+<span class="nc" id="L146">		assignment.getVariable().accept(this);</span>
+<span class="nc" id="L147">		this.buf.append(&quot; := &quot;);</span>
+<span class="nc" id="L148">		assignment.getValue().accept(this);</span>
+<span class="nc" id="L149">	}</span>
+
+	@Override
+	public void visit(final Assumption assumption) {
+<span class="nc" id="L153">		this.buf.append(&quot;_assume &quot;);</span>
+<span class="nc" id="L154">		assumption.getExpression().accept(this);</span>
+<span class="nc" id="L155">	}</span>
+
+	@Override
+	public void visit(final Block block) {
+<span class="nc" id="L159">		this.buf.append(&quot;{\n&quot;);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">		for (Statement stmt : block.getStatements()) {</span>
+<span class="nc" id="L161">			stmt.accept(this);</span>
+<span class="nc" id="L162">			this.buf.append(&quot;\n&quot;);</span>
+		}
+<span class="nc" id="L164">		this.buf.append(&quot;}\n&quot;);</span>
+<span class="nc" id="L165">	}</span>
+
+	@Override
+	public void visit(final BooleanLiteral booleanLiteral) {
+<span class="fc" id="L169">		this.buf.append(booleanLiteral.getValue());</span>
+<span class="fc" id="L170">	}</span>
+
+	@Override
+	public void visit(final BooleanType booleanType) {
+<span class="nc" id="L174">		this.buf.append(&quot;Boolean&quot;);</span>
+<span class="nc" id="L175">	}</span>
+
+	@Override
+	public void visit(final Conjunction conjunction) {
+<span class="fc" id="L179">		this.appendBinaryExpression(conjunction, &quot;&amp;&amp;&quot;);</span>
+<span class="fc" id="L180">	}</span>
+
+	@Override
+	public void visit(final Equal equal) {
+<span class="fc" id="L184">		this.appendBinaryExpression(equal, &quot;=&quot;);</span>
+<span class="fc" id="L185">	}</span>
+
+	@Override
+	public void visit(final FunctionCall functionCall) {
+<span class="nc" id="L189">		this.buf.append(functionCall.getFunction().getName());</span>
+<span class="nc" id="L190">		this.buf.append(&quot;(&quot;);</span>
+<span class="nc" id="L191">		final List&lt;Expression&gt; actuals = functionCall.getActuals();</span>
+<span class="nc bnc" id="L192" title="All 2 branches missed.">		if (!actuals.isEmpty()) {</span>
+<span class="nc" id="L193">			final Iterator&lt;Expression&gt; i = actuals.iterator();</span>
+<span class="nc" id="L194">			i.next().accept(this);</span>
+<span class="nc bnc" id="L195" title="All 2 branches missed.">			while (i.hasNext()) {</span>
+<span class="nc" id="L196">				this.buf.append(&quot;, &quot;);</span>
+<span class="nc" id="L197">				i.next().accept(this);</span>
+			}
+		}
+<span class="nc" id="L200">		this.buf.append(&quot;)&quot;);</span>
+<span class="nc" id="L201">	}</span>
+
+	@Override
+	public void visit(final IntegerLiteral integerLiteral) {
+<span class="fc" id="L205">		this.buf.append(integerLiteral.getValue());</span>
+<span class="fc" id="L206">	}</span>
+
+	@Override
+	public void visit(final IntegerType integerType) {
+<span class="fc" id="L210">		this.buf.append(&quot;Integer&quot;);</span>
+<span class="fc" id="L211">	}</span>
+
+	@Override
+	public void visit(final Less less) {
+<span class="fc" id="L215">		this.appendBinaryExpression(less, &quot;&lt;&quot;);</span>
+<span class="fc" id="L216">	}</span>
+
+	@Override
+	public void visit(final LessOrEqual lessOrEqual) {
+<span class="fc" id="L220">		this.appendBinaryExpression(lessOrEqual, &quot;&lt;=&quot;);</span>
+<span class="fc" id="L221">	}</span>
+
+	@Override
+	public void visit(final Loop loop) {
+<span class="nc" id="L225">		this.buf.append(&quot;while &quot;);</span>
+<span class="nc" id="L226">		loop.getCondition().accept(this);</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">		for (final Invariant i : loop.getInvariants()) {</span>
+<span class="nc" id="L228">			this.buf.append(&quot;\n_invariant &quot;);</span>
+<span class="nc" id="L229">			i.getExpression().accept(this);</span>
+		}
+<span class="nc" id="L231">		this.buf.append(&quot; &quot;);</span>
+<span class="nc" id="L232">		loop.getBody().accept(this);</span>
+<span class="nc" id="L233">	}</span>
+
+	@Override
+	public void visit(final Conditional conditional) {
+<span class="nc" id="L237">		this.buf.append(&quot;if &quot;);</span>
+<span class="nc" id="L238">		conditional.getCondition().accept(this);</span>
+<span class="nc" id="L239">		conditional.getTrueBlock().accept(this);</span>
+
+<span class="nc bnc" id="L241" title="All 2 branches missed.">		if (conditional.getFalseBlock() != null) {</span>
+<span class="nc" id="L242">			this.buf.append(&quot;else &quot;);</span>
+<span class="nc" id="L243">			conditional.getFalseBlock().accept(this);</span>
+		}
+<span class="nc" id="L245">	}</span>
+
+	@Override
+	public void visit(final Minus minus) {
+<span class="nc" id="L249">		this.buf.append(&quot;-&quot;);</span>
+<span class="nc" id="L250">		minus.getOperand().accept(this);</span>
+<span class="nc" id="L251">	}</span>
+
+	@Override
+	public void visit(final Program program) {
+<span class="nc bnc" id="L255" title="All 2 branches missed.">		for (final Axiom a : program.getAxioms()) {</span>
+<span class="nc" id="L256">			a.accept(this);</span>
+<span class="nc" id="L257">			this.buf.append(&quot;\n&quot;);</span>
+		}
+
+<span class="nc bnc" id="L260" title="All 2 branches missed.">		for (final FunctionDeclaration f : program.getFunctionDeclarations()) {</span>
+<span class="nc" id="L261">			f.accept(this);</span>
+		}
+
+<span class="nc" id="L264">		program.getMainBlock().accept(this);</span>
+<span class="nc" id="L265">	}</span>
+
+	@Override
+	public void visit(final VariableDeclaration variableDeclaration) {
+<span class="fc" id="L269">		variableDeclaration.getType().accept(this);</span>
+<span class="fc" id="L270">		this.buf.append(&quot; &quot;);</span>
+<span class="fc" id="L271">		this.buf.append(variableDeclaration.getName());</span>
+
+<span class="fc" id="L273">		Expression initialValue = variableDeclaration.getInitialValue();</span>
+<span class="pc bpc" id="L274" title="1 of 2 branches missed.">		if (initialValue != null) {</span>
+<span class="nc" id="L275">			this.buf.append(&quot; := &quot;);</span>
+<span class="nc" id="L276">			initialValue.accept(this);</span>
+		}
+<span class="fc" id="L278">	}</span>
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+<span class="fc" id="L282">		this.buf.append(variableReference.getVariable().getName());</span>
+
+<span class="pc bpc" id="L284" title="1 of 2 branches missed.">		if (variableReference.getIndex() != null) {</span>
+<span class="nc" id="L285">			this.buf.append(&quot;[&quot;);</span>
+<span class="nc" id="L286">			variableReference.getIndex().accept(this);</span>
+<span class="nc" id="L287">			this.buf.append(&quot;]&quot;);</span>
+		}
+<span class="fc" id="L289">	}</span>
+
+	@Override
+	public void visit(final Implication implication) {
+<span class="fc" id="L293">		this.appendBinaryExpression(implication, &quot;=&gt;&quot;);</span>
+<span class="fc" id="L294">	}</span>
+
+	@Override
+	public void visit(final Negation negation) {
+<span class="fc" id="L298">		this.buf.append(&quot;!&quot;);</span>
+<span class="fc" id="L299">		negation.getOperand().accept(this);</span>
+<span class="fc" id="L300">	}</span>
+
+	@Override
+	public void visit(final Multiplication multiplication) {
+<span class="nc" id="L304">		this.appendBinaryExpression(multiplication, &quot;*&quot;);</span>
+<span class="nc" id="L305">	}</span>
+
+	@Override
+	public void visit(final Axiom axiom) {
+<span class="nc" id="L309">		this.buf.append(&quot;_axiom &quot;);</span>
+<span class="nc" id="L310">		axiom.getExpression().accept(this);</span>
+<span class="nc" id="L311">	}</span>
+
+	@Override
+	public void visit(final ForAllQuantifier forAllQuantifier) {
+<span class="fc" id="L315">		this.buf.append(&quot;forall &quot;);</span>
+<span class="fc" id="L316">		forAllQuantifier.getParameter().accept(this);</span>
+
+<span class="fc" id="L318">		Expression condition = forAllQuantifier.getCondition();</span>
+<span class="pc bpc" id="L319" title="1 of 2 branches missed.">		if (condition != null) {</span>
+<span class="nc" id="L320">			this.buf.append(&quot;, &quot;);</span>
+<span class="nc" id="L321">			condition.accept(this);</span>
+		}
+
+<span class="fc" id="L324">		this.buf.append(&quot; : &quot;);</span>
+<span class="fc" id="L325">		forAllQuantifier.getExpression().accept(this);</span>
+<span class="fc" id="L326">	}</span>
+
+	@Override
+	public void visit(final FunctionDeclaration functionDeclaration) {
+<span class="nc" id="L330">		this.buf.append(&quot;function &quot;);</span>
+<span class="nc" id="L331">		this.buf.append(functionDeclaration.getName());</span>
+<span class="nc" id="L332">		this.buf.append(&quot;(&quot;);</span>
+
+<span class="nc" id="L334">		List&lt;VariableDeclaration&gt; params = functionDeclaration.getParameters();</span>
+<span class="nc bnc" id="L335" title="All 2 branches missed.">		if (!params.isEmpty()) {</span>
+<span class="nc" id="L336">			Iterator&lt;VariableDeclaration&gt; i = functionDeclaration.getParameters().iterator();</span>
+			// params is not empty, i has next
+<span class="nc" id="L338">			i.next().accept(this);</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">			while (i.hasNext()) {</span>
+<span class="nc" id="L340">				this.buf.append(&quot;, &quot;);</span>
+<span class="nc" id="L341">				i.next().accept(this);</span>
+			}
+		}
+
+<span class="nc" id="L345">		this.buf.append(&quot;) &quot;);</span>
+
+<span class="nc bnc" id="L347" title="All 2 branches missed.">		for (final Precondition p : functionDeclaration.getPreconditions()) {</span>
+<span class="nc" id="L348">			this.buf.append(&quot;\n&quot;);</span>
+<span class="nc" id="L349">			p.accept(this);</span>
+		}
+
+<span class="nc bnc" id="L352" title="All 2 branches missed.">		for (final Postcondition p : functionDeclaration.getPostconditions()) {</span>
+<span class="nc" id="L353">			this.buf.append(&quot;\n&quot;);</span>
+<span class="nc" id="L354">			p.accept(this);</span>
+		}
+
+<span class="nc" id="L357">		functionDeclaration.getBody().accept(this);</span>
+<span class="nc" id="L358">	}</span>
+
+	@Override
+	public void visit(final Postcondition postcondition) {
+<span class="nc" id="L362">		this.buf.append(&quot;_ensures &quot;);</span>
+<span class="nc" id="L363">		postcondition.getExpression().accept(this);</span>
+<span class="nc" id="L364">	}</span>
+
+	@Override
+	public void visit(final Precondition precondition) {
+<span class="nc" id="L368">		this.buf.append(&quot;_requires &quot;);</span>
+<span class="nc" id="L369">		precondition.getExpression().accept(this);</span>
+<span class="nc" id="L370">	}</span>
+
+	@Override
+	public void visit(final ReturnStatement returnStatement) {
+<span class="nc" id="L374">		this.buf.append(&quot;return &quot;);</span>
+<span class="nc" id="L375">		returnStatement.getReturnValue().accept(this);</span>
+<span class="nc" id="L376">	}</span>
+
+	@Override
+	public void visit(final ReturnValueReference node) {
+<span class="nc" id="L380">		this.buf.append(&quot;_return&quot;);</span>
+
+<span class="nc bnc" id="L382" title="All 2 branches missed.">		if (node.getIndex() != null) {</span>
+<span class="nc" id="L383">			this.buf.append(&quot;[&quot;);</span>
+<span class="nc" id="L384">			node.getIndex().accept(this);</span>
+<span class="nc" id="L385">			this.buf.append(&quot;]&quot;);</span>
+		}
+<span class="nc" id="L387">	}</span>
+
+	@Override
+	public void visit(final Unequal unequal) {
+<span class="nc" id="L391">		this.appendBinaryExpression(unequal, &quot;!=&quot;);</span>
+<span class="nc" id="L392">	}</span>
+
+	@Override
+	public void visit(final GreaterOrEqual greaterOrEqual) {
+<span class="nc" id="L396">		this.appendBinaryExpression(greaterOrEqual, &quot;&gt;=&quot;);</span>
+<span class="nc" id="L397">	}</span>
+
+	@Override
+	public void visit(final Greater greater) {
+<span class="nc" id="L401">		this.appendBinaryExpression(greater, &quot;&gt;&quot;);</span>
+<span class="nc" id="L402">	}</span>
+
+	@Override
+	public void visit(final Disjunction disjunction) {
+<span class="nc" id="L406">		this.appendBinaryExpression(disjunction, &quot;||&quot;);</span>
+<span class="nc" id="L407">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

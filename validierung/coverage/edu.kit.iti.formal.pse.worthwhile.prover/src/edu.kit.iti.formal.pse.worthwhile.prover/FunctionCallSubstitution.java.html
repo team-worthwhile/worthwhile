@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>FunctionCallSubstitution.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">FunctionCallSubstitution.java</span></div><h1>FunctionCallSubstitution.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
+import java.util.Set;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+
+/**
+ * @author fabian
+ * 
+ */
+public final class FunctionCallSubstitution extends SubstitutionVisitor&lt;Expression&gt; {
+	/**
+	 * Default constructor.
+	 */
+	FunctionCallSubstitution() {
+<span class="fc" id="L30">		super(null);</span>
+<span class="fc" id="L31">	}</span>
+
+	/**
+	 * The set of {@link VariableDeclaration}s that the visited {@link FunctionCall}s were replaced with.
+	 * 
+	 * Each &lt;code&gt;VariableDeclaration&lt;/code&gt; is mapped to the &lt;code&gt;FunctionCall&lt;/code&gt; it replaces.
+	 */
+<span class="fc" id="L38">	private Map&lt;VariableDeclaration, FunctionCall&gt; parameters = new LinkedHashMap&lt;VariableDeclaration, FunctionCall&gt;();</span>
+
+	@Override
+	public void visit(final FunctionCall functionCall) {
+<span class="fc" id="L42">		final FunctionDeclaration function = functionCall.getFunction();</span>
+		// the set size is used as counter for the replacement variable names
+<span class="fc" id="L44">		final String name = new String(&quot;_&quot; + function.getName() + this.parameters.size());</span>
+<span class="fc" id="L45">		final VariableDeclaration variable = AstNodeCreatorHelper.createVariableDeclaration(</span>
+<span class="fc" id="L46">		                AstNodeCloneHelper.clone(function.getReturnType()), name);</span>
+
+<span class="fc" id="L48">		this.parameters.put(variable, functionCall);</span>
+
+<span class="fc" id="L50">		super.setFound(true);</span>
+<span class="fc" id="L51">		super.setSubstitute(AstNodeCreatorHelper.createVariableReference(variable));</span>
+<span class="fc" id="L52">	}</span>
+
+	@Override
+	public void visit(final Block block) {
+<span class="fc" id="L56">		final List&lt;Statement&gt; statements = block.getStatements();</span>
+<span class="fc" id="L57">		final ListIterator&lt;Statement&gt; i = statements.listIterator();</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">		while (i.hasNext()) {</span>
+<span class="fc" id="L59">			statements.get(i.nextIndex()).accept(this);</span>
+
+			// add the VariableDeclarations directly before the Statement whose Expressions references them
+<span class="fc" id="L62">			final Set&lt;VariableDeclaration&gt; returnVariables = this.parameters.keySet();</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">			for (final VariableDeclaration variable : returnVariables) {</span>
+<span class="fc" id="L64">				Expression precondition = null;</span>
+<span class="fc" id="L65">				Expression postcondition = null;</span>
+
+<span class="fc" id="L67">				final FunctionCall call = this.parameters.get(variable);</span>
+<span class="fc" id="L68">				final FunctionDeclaration function = call.getFunction();</span>
+
+<span class="fc" id="L70">				final List&lt;Precondition&gt; preconditions = function.getPreconditions();</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">				if (!preconditions.isEmpty()) {</span>
+<span class="fc" id="L72">					final Iterator&lt;Precondition&gt; p = preconditions.iterator();</span>
+<span class="fc" id="L73">					precondition = AstNodeCloneHelper.clone(p.next().getExpression());</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">					while (p.hasNext()) {</span>
+<span class="nc" id="L75">						precondition = AstNodeCreatorHelper.createConjunction(precondition,</span>
+<span class="nc" id="L76">						                AstNodeCloneHelper.clone(p.next().getExpression()));</span>
+					}
+				}
+
+<span class="fc" id="L80">				final List&lt;Postcondition&gt; postconditions = function.getPostconditions();</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">				if (!postconditions.isEmpty()) {</span>
+<span class="fc" id="L82">					final Iterator&lt;Postcondition&gt; p = postconditions.iterator();</span>
+<span class="fc" id="L83">					postcondition = AstNodeCloneHelper.clone(p.next().getExpression());</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">					while (p.hasNext()) {</span>
+<span class="nc" id="L85">						postcondition = AstNodeCreatorHelper.createConjunction(postcondition,</span>
+<span class="nc" id="L86">						                AstNodeCloneHelper.clone(p.next().getExpression()));</span>
+					}
+				}
+
+				// insert the actual Expressions into the FunctionCall parameters
+<span class="fc" id="L91">				final Iterator&lt;VariableDeclaration&gt; parameters = function.getParameters().iterator();</span>
+<span class="fc" id="L92">				final Iterator&lt;Expression&gt; actuals = call.getActuals().iterator();</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">				while (parameters.hasNext()) {</span>
+<span class="fc" id="L94">					final VariableDeclaration parameter = parameters.next();</span>
+<span class="fc" id="L95">					final Expression actual = actuals.next();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">					if (precondition != null) {</span>
+<span class="fc" id="L97">						VariableReferenceSubstitution.substitute(precondition, parameter,</span>
+<span class="fc" id="L98">						                actual);</span>
+					}
+<span class="fc bfc" id="L100" title="All 2 branches covered.">					if (postcondition != null) {</span>
+<span class="fc" id="L101">						VariableReferenceSubstitution.substitute(postcondition, parameter,</span>
+<span class="fc" id="L102">						                actual);</span>
+					}
+				}
+
+<span class="fc bfc" id="L106" title="All 2 branches covered.">				if (precondition != null) {</span>
+<span class="fc" id="L107">					i.add(AstNodeCreatorHelper.createAssertion(precondition));</span>
+				}
+
+<span class="fc" id="L110">				i.add(variable);</span>
+
+<span class="fc bfc" id="L112" title="All 2 branches covered.">				if (postcondition != null) {</span>
+<span class="fc" id="L113">					ReturnValueReferenceSubstitution.substitute(postcondition,</span>
+<span class="fc" id="L114">					                AstNodeCreatorHelper.createVariableReference(variable));</span>
+
+<span class="fc" id="L116">					i.add(AstNodeCreatorHelper.createAssumption(postcondition));</span>
+				}
+			}
+
+			// clear the return variables set before moving on to the next statement
+<span class="fc" id="L121">			this.parameters.clear();</span>
+
+<span class="fc" id="L123">			i.next();</span>
+		}
+<span class="fc" id="L125">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

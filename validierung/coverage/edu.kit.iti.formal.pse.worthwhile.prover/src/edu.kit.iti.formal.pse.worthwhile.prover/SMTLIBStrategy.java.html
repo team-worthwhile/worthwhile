@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>SMTLIBStrategy.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">SMTLIBStrategy.java</span></div><h1>SMTLIBStrategy.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.math.BigInteger;
+import java.util.Stack;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
+
+/**
+ * @author Leon Handreke, fabian
+ */
+<span class="fc" id="L48">class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {</span>
+
+	/**
+	 * Stack to pass compiled formula elements up to caller.
+	 */
+<span class="fc" id="L53">	private final Stack&lt;String&gt; formulaCompileStack = new Stack&lt;String&gt;();</span>
+
+	@Override
+	public String compileFormula(final Expression formula) {
+		// this should push a String object to the compilation stack
+<span class="fc" id="L58">		formula.accept(this);</span>
+<span class="fc" id="L59">		String formulaString = this.formulaCompileStack.pop();</span>
+
+		// declare unbound variables ahead of all assertions
+<span class="fc" id="L62">		UnboundVariableFinderVisitor unboundVariableFinder = new UnboundVariableFinderVisitor();</span>
+<span class="fc" id="L63">		formula.accept(unboundVariableFinder);</span>
+<span class="fc" id="L64">		String declarationsString = &quot;&quot;;</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">		for (VariableDeclaration declaration : unboundVariableFinder.getUnboundVariables()) {</span>
+<span class="fc" id="L66">			declaration.getType().accept(this);</span>
+<span class="fc" id="L67">			declarationsString += &quot;(declare-const &quot; + declaration.getName() + &quot; &quot;</span>
+<span class="fc" id="L68">			                + this.formulaCompileStack.pop() + &quot;)\n&quot;;</span>
+		}
+
+		// wrap the formulaString in a command for the prover that tells the prover
+		// what we want to know about the formula
+		// TODO: Make this more intelligent, maybe wrap the Expression in an
+		// Assert and then visit it just like all the other nodes...?
+<span class="fc" id="L75">		return declarationsString + &quot;(assert &quot; + formulaString + &quot;)\n(check-sat)\n(get-model)\n&quot;;</span>
+	}
+
+	/**
+	 * Push a compiled {@link BinaryExpression} to the stack.
+	 * 
+	 * @param binaryExpression
+	 *                the {@link BinaryExpression} to compile
+	 * @param compiledOperationSymbol
+	 *                the symbol to use in the SMTLIB compiled expression
+	 */
+	private void pushBinaryOperation(final BinaryExpression binaryExpression, final String compiledOperationSymbol) {
+<span class="fc" id="L87">		binaryExpression.getLeft().accept(this);</span>
+<span class="fc" id="L88">		binaryExpression.getRight().accept(this);</span>
+<span class="fc" id="L89">		String right = this.formulaCompileStack.pop();</span>
+<span class="fc" id="L90">		String left = this.formulaCompileStack.pop();</span>
+<span class="fc" id="L91">		this.formulaCompileStack.push(&quot;(&quot; + compiledOperationSymbol + &quot; &quot; + left + &quot; &quot; + right + &quot;)&quot;);</span>
+<span class="fc" id="L92">	}</span>
+
+	/**
+	 * Push a compiled {@link UnaryExpression} to the stack.
+	 * 
+	 * @param unaryExpression
+	 *                the {@link UnaryExpression} to compile
+	 * @param compiledOperationSymbol
+	 *                the symbol to use in the SMTLIB compiled expression
+	 */
+	private void pushUnaryOperation(final UnaryExpression unaryExpression, final String compiledOperationSymbol) {
+<span class="fc" id="L103">		unaryExpression.getOperand().accept(this);</span>
+<span class="fc" id="L104">		String operand = this.formulaCompileStack.pop();</span>
+<span class="fc" id="L105">		this.formulaCompileStack.push(&quot;(&quot; + compiledOperationSymbol + &quot; &quot; + operand + &quot;)&quot;);</span>
+<span class="fc" id="L106">	}</span>
+
+	/**
+	 * Pushes &lt;code&gt;(type identifier)&lt;/code&gt; on top of {@link formulaCompileStack}.
+	 * 
+	 * @param variableDeclaration
+	 *                the {@link VariableDeclaration} that defines &lt;code&gt;type&lt;/code&gt; and &lt;code&gt;identifier&lt;/code&gt; in
+	 *                &lt;code&gt;(type identifier)&lt;/code&gt;
+	 */
+	private void pushParameter(final VariableDeclaration variableDeclaration) {
+<span class="fc" id="L116">		variableDeclaration.getType().accept(this);</span>
+<span class="fc" id="L117">		this.formulaCompileStack.push(&quot;(&quot; + variableDeclaration.getName() + &quot; &quot;</span>
+<span class="fc" id="L118">		                + this.formulaCompileStack.pop() + &quot;)&quot;);</span>
+<span class="fc" id="L119">	}</span>
+
+	/**
+	 * Pushes &lt;code&gt;(quantifier (param) (expr))&lt;/code&gt; on top of {@link formulaCompileStack}.
+	 * 
+	 * @param quantifiedExpression
+	 *                the {@link QuantifiedExpression} that defines &lt;code&gt;param&lt;/code&gt; and &lt;code&gt;expr&lt;/code&gt; in
+	 *                &lt;code&gt;(quantifier (param) (expr))&lt;/code&gt;
+	 * @param quantifierString
+	 *                the {@link String} that defines &lt;code&gt;quantifier&lt;/code&gt; in
+	 *                &lt;code&gt;(quantifier (param) (expr))&lt;/code&gt;
+	 */
+	private void pushQuantifier(final QuantifiedExpression quantifiedExpression, final String quantifierString) {
+<span class="fc" id="L132">		quantifiedExpression.getExpression().accept(this);</span>
+
+		String expression;
+<span class="fc" id="L135">		Expression condition = quantifiedExpression.getCondition();</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">		if (condition != null) {</span>
+<span class="fc" id="L137">			quantifiedExpression.getCondition().accept(this);</span>
+			// condition is a constraint on the type domain elements and compiled into an implication
+<span class="fc" id="L139">			expression = &quot;(=&gt; &quot; + this.formulaCompileStack.pop() + &quot; &quot; + this.formulaCompileStack.pop()</span>
+<span class="fc" id="L140">			                + &quot;)&quot;;</span>
+		} else {
+<span class="fc" id="L142">			expression = this.formulaCompileStack.pop();</span>
+		}
+
+<span class="fc" id="L145">		this.pushParameter(quantifiedExpression.getParameter());</span>
+<span class="fc" id="L146">		this.formulaCompileStack.push(&quot;(&quot; + quantifierString + &quot; (&quot; + this.formulaCompileStack.pop() + &quot;) &quot;</span>
+<span class="fc" id="L147">		                + expression + &quot;)&quot;);</span>
+<span class="fc" id="L148">	}</span>
+
+	@Override
+	public void visit(final Addition addition) {
+<span class="fc" id="L152">		this.pushBinaryOperation(addition, &quot;+&quot;);</span>
+<span class="fc" id="L153">	}</span>
+
+	@Override
+	public void visit(final ArrayFunction arrayFunction) {
+		String arrayString;
+
+<span class="nc bnc" id="L159" title="All 4 branches missed.">		if (arrayFunction.getIndex() == null &amp;&amp; arrayFunction.getChainedFunction() == null) {</span>
+<span class="nc" id="L160">			final Expression value = arrayFunction.getValue();</span>
+
+<span class="nc" id="L162">			(new WorthwhileTypesystem()).typeof(value).accept(this);</span>
+<span class="nc" id="L163">			final String typeString = this.formulaCompileStack.pop();</span>
+
+<span class="nc" id="L165">			value.accept(this);</span>
+<span class="nc" id="L166">			final String valueString = this.formulaCompileStack.pop();</span>
+
+<span class="nc" id="L168">			arrayString = &quot;((as const (Array Int &quot; + typeString + &quot;)) &quot; + valueString + &quot;)&quot;;</span>
+		} else {
+<span class="nc" id="L170">			arrayFunction.getChainedFunction().accept(this);</span>
+<span class="nc" id="L171">			final String chainedArrayString = this.formulaCompileStack.pop();</span>
+
+<span class="nc" id="L173">			arrayFunction.getIndex().accept(this);</span>
+<span class="nc" id="L174">			final String keyString = this.formulaCompileStack.pop();</span>
+
+<span class="nc" id="L176">			arrayFunction.getValue().accept(this);</span>
+<span class="nc" id="L177">			final String valueString = this.formulaCompileStack.pop();</span>
+
+<span class="nc" id="L179">			arrayString = &quot;(store &quot; + chainedArrayString + &quot; &quot; + keyString + &quot; &quot; + valueString + &quot;)&quot;;</span>
+		}
+
+<span class="nc" id="L182">		this.formulaCompileStack.push(arrayString);</span>
+<span class="nc" id="L183">	}</span>
+
+	@Override
+	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
+<span class="nc" id="L187">		arrayFunctionAccess.getIndex().accept(this);</span>
+<span class="nc" id="L188">		final String indexString = this.formulaCompileStack.pop();</span>
+<span class="nc" id="L189">		arrayFunctionAccess.getFunction().accept(this);</span>
+<span class="nc" id="L190">		final String functionString = this.formulaCompileStack.pop();</span>
+<span class="nc" id="L191">		this.formulaCompileStack.push(&quot;(select &quot; + functionString + &quot; &quot; + indexString + &quot;)&quot;);</span>
+<span class="nc" id="L192">	}</span>
+
+	@Override
+	public void visit(final ArrayType arrayType) {
+<span class="fc" id="L196">		arrayType.getBaseType().accept(this);</span>
+<span class="fc" id="L197">		this.formulaCompileStack.push(&quot;(Array Int &quot; + this.formulaCompileStack.pop() + &quot;)&quot;);</span>
+<span class="fc" id="L198">	}</span>
+
+	@Override
+	public void visit(final Assertion assertion) {
+<span class="nc" id="L202">		assertion.getExpression().accept(this);</span>
+<span class="nc" id="L203">		String expr = this.formulaCompileStack.pop();</span>
+<span class="nc" id="L204">		this.formulaCompileStack.push(&quot;assert(&quot; + expr + &quot;)&quot;);</span>
+<span class="nc" id="L205">	}</span>
+
+	@Override
+	public void visit(final Assumption assumption) {
+<span class="nc" id="L209">		assumption.getExpression().accept(this);</span>
+<span class="nc" id="L210">		String expr = this.formulaCompileStack.pop();</span>
+<span class="nc" id="L211">		this.formulaCompileStack.push(&quot;assume(&quot; + expr + &quot;)&quot;);</span>
+<span class="nc" id="L212">	}</span>
+
+	@Override
+	public void visit(final BooleanLiteral booleanLiteral) {
+<span class="fc bfc" id="L216" title="All 2 branches covered.">		if (booleanLiteral.isValue()) {</span>
+<span class="fc" id="L217">			this.formulaCompileStack.push(&quot;true&quot;);</span>
+		} else {
+<span class="fc" id="L219">			this.formulaCompileStack.push(&quot;false&quot;);</span>
+		}
+<span class="fc" id="L221">	}</span>
+
+	@Override
+	public void visit(final BooleanType booleanType) {
+<span class="fc" id="L225">		this.formulaCompileStack.push(&quot;Bool&quot;);</span>
+<span class="fc" id="L226">	}</span>
+
+	@Override
+	public void visit(final Conjunction conjunction) {
+<span class="fc" id="L230">		this.pushBinaryOperation(conjunction, &quot;and&quot;);</span>
+<span class="fc" id="L231">	}</span>
+
+	@Override
+	public void visit(final Disjunction disjunction) {
+<span class="fc" id="L235">		this.pushBinaryOperation(disjunction, &quot;or&quot;);</span>
+<span class="fc" id="L236">	}</span>
+
+	@Override
+	public void visit(final Division division) {
+<span class="fc" id="L240">		this.pushBinaryOperation(division, &quot;div&quot;);</span>
+<span class="fc" id="L241">	}</span>
+
+	@Override
+	public void visit(final Equal equal) {
+<span class="fc" id="L245">		this.pushBinaryOperation(equal, &quot;=&quot;);</span>
+<span class="fc" id="L246">	}</span>
+
+	@Override
+	public void visit(final Equivalence equivalence) {
+<span class="nc" id="L250">		this.pushBinaryOperation(equivalence, &quot;iff&quot;);</span>
+<span class="nc" id="L251">	}</span>
+
+	@Override
+	public void visit(final ExistsQuantifier existsQuantifier) {
+<span class="fc" id="L255">		this.pushQuantifier(existsQuantifier, &quot;exists&quot;);</span>
+<span class="fc" id="L256">	}</span>
+
+	@Override
+	public void visit(final ForAllQuantifier forAllQuantifier) {
+<span class="fc" id="L260">		this.pushQuantifier(forAllQuantifier, &quot;forall&quot;);</span>
+<span class="fc" id="L261">	}</span>
+
+	@Override
+	public void visit(final FunctionCall functionCall) {
+		// begin-user-code
+		// TODO Auto-generated method stub
+
+		// end-user-code
+<span class="nc" id="L269">	}</span>
+
+	@Override
+	public void visit(final Greater greater) {
+<span class="fc" id="L273">		this.pushBinaryOperation(greater, &quot;&gt;&quot;);</span>
+<span class="fc" id="L274">	}</span>
+
+	@Override
+	public void visit(final GreaterOrEqual greaterOrEqual) {
+<span class="fc" id="L278">		this.pushBinaryOperation(greaterOrEqual, &quot;&gt;=&quot;);</span>
+<span class="fc" id="L279">	}</span>
+
+	@Override
+	public void visit(final Implication implication) {
+<span class="fc" id="L283">		this.pushBinaryOperation(implication, &quot;=&gt;&quot;);</span>
+<span class="fc" id="L284">	}</span>
+
+	@Override
+	public void visit(final IntegerLiteral integerLiteral) {
+<span class="fc" id="L288">		String literalString = integerLiteral.getValue().abs().toString();</span>
+<span class="pc bpc" id="L289" title="1 of 2 branches missed.">		if (integerLiteral.getValue().compareTo(BigInteger.ZERO) &lt; 0) {</span>
+<span class="nc" id="L290">			literalString = &quot;(- &quot; + literalString + &quot;)&quot;;</span>
+		}
+<span class="fc" id="L292">		this.formulaCompileStack.push(literalString);</span>
+<span class="fc" id="L293">	}</span>
+
+	@Override
+	public void visit(final IntegerType integerType) {
+<span class="fc" id="L297">		this.formulaCompileStack.push(&quot;Int&quot;);</span>
+<span class="fc" id="L298">	}</span>
+
+	@Override
+	public void visit(final Less less) {
+<span class="fc" id="L302">		this.pushBinaryOperation(less, &quot;&lt;&quot;);</span>
+<span class="fc" id="L303">	}</span>
+
+	@Override
+	public void visit(final LessOrEqual lessOrEqual) {
+<span class="fc" id="L307">		this.pushBinaryOperation(lessOrEqual, &quot;&lt;=&quot;);</span>
+<span class="fc" id="L308">	}</span>
+
+	@Override
+	public void visit(final Minus minus) {
+<span class="fc" id="L312">		this.pushUnaryOperation(minus, &quot;-&quot;);</span>
+<span class="fc" id="L313">	}</span>
+
+	@Override
+	public void visit(final Modulus modulus) {
+<span class="fc" id="L317">		this.pushBinaryOperation(modulus, &quot;mod&quot;);</span>
+<span class="fc" id="L318">	}</span>
+
+	@Override
+	public void visit(final Multiplication multiplication) {
+<span class="fc" id="L322">		this.pushBinaryOperation(multiplication, &quot;*&quot;);</span>
+<span class="fc" id="L323">	}</span>
+
+	@Override
+	public void visit(final Negation negation) {
+<span class="fc" id="L327">		this.pushUnaryOperation(negation, &quot;not&quot;);</span>
+<span class="fc" id="L328">	}</span>
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+<span class="fc" id="L332">		String varrefString = variableReference.getVariable().getName();</span>
+
+<span class="fc" id="L334">		final Expression index = variableReference.getIndex();</span>
+<span class="fc bfc" id="L335" title="All 2 branches covered.">		if (index != null) {</span>
+<span class="fc" id="L336">			index.accept(this);</span>
+<span class="fc" id="L337">			varrefString = &quot;(select &quot; + varrefString + &quot; &quot; + this.formulaCompileStack.pop() + &quot;)&quot;;</span>
+		}
+
+<span class="fc" id="L340">		this.formulaCompileStack.push(varrefString);</span>
+<span class="fc" id="L341">	}</span>
+
+	@Override
+	public void visit(final Plus plus) {
+<span class="nc" id="L345">		this.pushUnaryOperation(plus, &quot;+&quot;);</span>
+<span class="nc" id="L346">	}</span>
+
+	@Override
+	public void visit(final Subtraction subtraction) {
+<span class="fc" id="L350">		this.pushBinaryOperation(subtraction, &quot;-&quot;);</span>
+<span class="fc" id="L351">	}</span>
+
+	@Override
+	public void visit(final Unequal unequal) {
+<span class="fc" id="L355">		this.pushBinaryOperation(unequal, &quot;=&quot;);</span>
+
+		// there is no function `!=' in SMTLIB
+<span class="fc" id="L358">		this.formulaCompileStack.push(&quot;(not &quot; + this.formulaCompileStack.pop() + &quot;)&quot;);</span>
+<span class="fc" id="L359">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WorthwhileTypesystem.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.typesystem</a> &gt; <span class="el_source">WorthwhileTypesystem.java</span></div><h1>WorthwhileTypesystem.java</h1><pre class="source lang-java linenums"><span class="pc" id="L1">package edu.kit.iti.formal.pse.worthwhile.typesystem;</span>
+
+import java.util.Iterator;
+
+import org.eclipse.emf.ecore.EObject;
+
+import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
+import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
+
+/**
+ * The type system for validation.
+ */
+<span class="fc" id="L31">public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {</span>
+
+	/**
+	 * Returns the type of the {@link VariableReference}. If the variable reference is an array access return the
+	 * base type of the array.
+	 * 
+	 * @param element
+	 *                The variable reference from which you want to get the type.
+	 * @param trace
+	 *                A type calculation trace.
+	 * 
+	 * @return the type of the variable reference.
+	 */
+	@Override
+	protected final EObject type(final VariableReference element, final TypeCalculationTrace trace) {
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		if (element.getIndex() != null</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">		                &amp;&amp; isInstanceOf(element.getVariable().getType(), p.getArrayType(), trace)) {</span>
+<span class="fc" id="L49">			trace.add(element, &quot;variableReference_arrayAccess&quot;);</span>
+
+<span class="fc" id="L51">			return ((ArrayType) element.getVariable().getType()).getBaseType();</span>
+		} else {
+<span class="fc" id="L53">			trace.add(element, &quot;variableReference&quot;);</span>
+<span class="fc" id="L54">			return typeof(element.getVariable().getType(), trace);</span>
+		}
+	}
+
+	/**
+	 * Returns the type of the {@link ArrayLiteral}. Sets the base type of the array literal to the type of the
+	 * first element of the array. If the array has no elements the base type is null.
+	 * 
+	 * @param element
+	 *                The array literal from which you want to get the type.
+	 * @param trace
+	 *                A type calculation trace.
+	 * 
+	 * @return The type of the array literal.
+	 */
+	@Override
+	protected final EObject type(final ArrayLiteral element, final TypeCalculationTrace trace) {
+
+<span class="fc" id="L72">		final ArrayType at = AstFactory.eINSTANCE.createArrayType();</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">		if (element.getValues().size() == 0) {</span>
+			// used to determine the base types of variables (also parameters) the ArrayLiteral is assigned
+			// to or compared to (in Equal Expressions)
+<span class="fc" id="L76">			final WorthwhileTypesystem ts = WorthwhileTypesystem.this;</span>
+
+			// derives the empty ArrayLiterals base type from the context (up in the AST an Assignment,
+			// VariableDeclaration, FunctionCall or Equal) it is used in
+<span class="fc" id="L80">			final ASTNodeBottomUpVisitor&lt;Type&gt; visitor = new ASTNodeBottomUpVisitor&lt;Type&gt;() {</span>
+				@Override
+				public void visit(final Assignment assignment) {
+					// base type is the assigned variable's one
+<span class="fc" id="L84">					at.setBaseType(((ArrayType) ts.typeof(assignment.getVariable())).getBaseType());</span>
+<span class="fc" id="L85">				}</span>
+
+				@Override
+				public void visit(final VariableDeclaration variableDeclaration) {
+					// base type is the initialized variable's one
+<span class="fc" id="L90">					at.setBaseType(((ArrayType) ts.typeof(variableDeclaration)).getBaseType());</span>
+<span class="fc" id="L91">				}</span>
+
+				@Override
+				public void visit(final Equal equal) {
+					// base type is the compared to ArrayLiteral's, ArrayType variable's one or
+					// BooleanType by convention when both operands are empty ArrayLiterals
+<span class="fc" id="L97">					final ASTNodeReturnVisitor&lt;PrimitiveType&gt; visitor = new ASTNodeReturnVisitor&lt;PrimitiveType&gt;() {</span>
+						public void visit(final ArrayLiteral arrayLiteral) {
+<span class="fc bfc" id="L99" title="All 2 branches covered.">							if (arrayLiteral.getValues().size() == 0) {</span>
+<span class="fc" id="L100">								this.setReturnValue(AstFactory.eINSTANCE</span>
+<span class="fc" id="L101">								                .createBooleanType());</span>
+							} else {
+<span class="fc" id="L103">								super.visit(arrayLiteral);</span>
+							}
+<span class="fc" id="L105">						};</span>
+
+						public void visit(final Expression expression) {
+<span class="fc" id="L108">							this.setReturnValue(((ArrayType) ts.typeof(expression))</span>
+<span class="fc" id="L109">							                .getBaseType());</span>
+<span class="fc" id="L110">						};</span>
+					};
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">					if (equal.getLeft() == element) {</span>
+<span class="fc" id="L114">						at.setBaseType(visitor.apply(equal.getRight()));</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">					} else if (equal.getRight() == element) {</span>
+<span class="fc" id="L116">						at.setBaseType(visitor.apply(equal.getLeft()));</span>
+					}
+<span class="fc" id="L118">				}</span>
+
+				@Override
+				public void visit(final FunctionCall functionCall) {
+					// base type is the assigned parameter's one
+<span class="fc" id="L123">					final Iterator&lt;VariableDeclaration&gt; p = functionCall.getFunction()</span>
+<span class="fc" id="L124">					                .getParameters().iterator();</span>
+<span class="fc" id="L125">					final Iterator&lt;Expression&gt; a = functionCall.getActuals().iterator();</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">					while (a.hasNext()) {</span>
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">						if (a.next() == element) {</span>
+<span class="fc" id="L128">							at.setBaseType(((ArrayType) ts.typeof(p.next())).getBaseType());</span>
+						} else {
+<span class="nc" id="L130">							p.next();</span>
+						}
+					}
+<span class="fc" id="L133">				}</span>
+			};
+<span class="fc" id="L135">			element.accept(visitor);</span>
+		} else {
+<span class="fc" id="L137">			at.setBaseType((PrimitiveType) typeof(element.getValues().get(0), trace));</span>
+
+		}
+<span class="fc" id="L140">		trace.add(element, &quot;arrayType&quot;);</span>
+<span class="fc" id="L141">		return at;</span>
+	}
+
+	/**
+	 * @param element
+	 *                The {@link ReturnValueReference} of which you want to get the type.
+	 * 
+	 * @param trace
+	 *                A type calculation trace.
+	 * 
+	 * @return The type of the return value reference.
+	 */
+	@Override
+	protected final EObject type(final ReturnValueReference element, final TypeCalculationTrace trace) {
+
+<span class="fc" id="L156">		ASTNodeBottomUpVisitor&lt;Type&gt; visitor = new ASTNodeBottomUpVisitor&lt;Type&gt;() {</span>
+
+			public void visit(final FunctionDeclaration func) {
+<span class="fc" id="L159">				setReturnValue(func.getReturnType());</span>
+<span class="fc" id="L160">			}</span>
+		};
+<span class="fc" id="L162">		Type type = visitor.apply(element);</span>
+<span class="fc" id="L163">		trace.add(element, &quot;returnValueReference&quot;);</span>
+		
+		// Check if there is an array access on the return value reference. If yes, return the array's base type.
+<span class="pc bpc" id="L166" title="1 of 4 branches missed.">		if (type instanceof ArrayType &amp;&amp; element.getIndex() != null) {</span>
+<span class="fc" id="L167">			return ((ArrayType) type).getBaseType();</span>
+		} else {
+<span class="fc" id="L169">			return type;</span>
+		}
+	}
+
+	/**
+	 * Checks whether the two elements have the same type.
+	 * 
+	 * If both elements have the type {@link ArrayType} there base types will be compared and the result will be
+	 * returned.
+	 * 
+	 * @param element1
+	 *                The first element which shell be compared.
+	 * @param type1
+	 *                The type of the first element.
+	 * @param element2
+	 *                The second element which shell be compared.
+	 * @param type2
+	 *                The type of the second element.
+	 * @param trace
+	 *                A type calculation trace
+	 * 
+	 * @return True if both have the same type, otherwise false.
+	 */
+	@Override
+	public final boolean isSameType(final EObject element1, final EObject type1, final EObject element2,
+	                final EObject type2, final TypeCalculationTrace trace) {
+
+<span class="pc bpc" id="L196" title="1 of 4 branches missed.">		if (isInstanceOf(type1, p.getArrayType(), trace) &amp;&amp; isInstanceOf(type2, p.getArrayType(), trace)) {</span>
+<span class="fc" id="L197">			ArrayType at1 = (ArrayType) type1;</span>
+<span class="fc" id="L198">			ArrayType at2 = (ArrayType) type2;</span>
+<span class="fc" id="L199">			return super.isSameType(at1, at1.getBaseType(), at2, at2.getBaseType(), trace);</span>
+		}
+<span class="fc" id="L201">		return super.isSameType(element1, type1, element2, type2, trace);</span>
+	}
+
+	/**
+	 * Returns a brief representation of the object.
+	 * 
+	 * @param type
+	 *                The type whose representation to return.
+	 * 
+	 * @return A representation of the object.
+	 */
+	@Override
+	public final String typeString(final Object type) {
+<span class="nc bnc" id="L214" title="All 2 branches missed.">		if (type instanceof ASTNode) {</span>
+<span class="nc" id="L215">			ASTNodeReturnVisitor&lt;ArrayType&gt; visitor = new ASTNodeReturnVisitor&lt;ArrayType&gt;() {</span>
+				@Override
+				protected void defaultOperation(final ASTNode node) {
+<span class="nc" id="L218">					setReturnValue(null);</span>
+<span class="nc" id="L219">				}</span>
+
+				public void visit(final ArrayType arrayType) {
+<span class="nc" id="L222">					setReturnValue(arrayType);</span>
+<span class="nc" id="L223">				}</span>
+			};
+<span class="nc" id="L225">			ArrayType arrayType = visitor.apply((ASTNode) type);</span>
+
+<span class="nc bnc" id="L227" title="All 2 branches missed.">			if (arrayType != null) {</span>
+<span class="nc" id="L228">				return super.typeString(arrayType).replace(&quot;Type&quot;, &quot;&quot;) + &quot; (with base type &quot;</span>
+<span class="nc" id="L229">				                + super.typeString(arrayType.getBaseType()).replace(&quot;Type&quot;, &quot;&quot;) + &quot;)&quot;;</span>
+			} else {
+<span class="nc" id="L231">				ASTNodeReturnVisitor&lt;Type&gt; visitor2 = new ASTNodeReturnVisitor&lt;Type&gt;() {</span>
+					@Override
+					protected void defaultOperation(final ASTNode node) {
+<span class="nc" id="L234">						setReturnValue(null);</span>
+<span class="nc" id="L235">					}</span>
+
+					public void visit(final IntegerType integerType) {
+<span class="nc" id="L238">						setReturnValue(integerType);</span>
+<span class="nc" id="L239">					}</span>
+
+					public void visit(final BooleanType booleanType) {
+<span class="nc" id="L242">						setReturnValue(booleanType);</span>
+<span class="nc" id="L243">					}</span>
+				};
+<span class="nc" id="L245">				return super.typeString(visitor2.apply((ASTNode) type)).replace(&quot;Type&quot;, &quot;&quot;);</span>
+			}
+		}
+<span class="nc" id="L248">		return super.typeString(type);</span>
+
+	}
+
+	/**
+	 * Returns the type of the specified EObject.
+	 * 
+	 * @param element
+	 *                The element whose type to return.
+	 * @return The type of the specified EObject
+	 */
+	public final Type typeof(final EObject element) {
+<span class="fc" id="L260">		return (Type) typeof(element, new TypeCalculationTrace());</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

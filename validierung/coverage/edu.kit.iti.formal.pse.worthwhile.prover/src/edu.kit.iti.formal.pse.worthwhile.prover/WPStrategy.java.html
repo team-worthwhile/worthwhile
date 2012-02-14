@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>WPStrategy.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">WPStrategy.java</span></div><h1>WPStrategy.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * Applies the Weakest Precondition calculus to a {@link Program}.
+ */
+class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
+	/**
+	 * The stack of weakest preconditions that implies the correctness of the remainder {@link Block}.
+	 */
+	private Stack&lt;Expression&gt; weakestPreconditionStack;
+
+	/**
+	 * The postcondition when visitor is inside an {@link FunctionDeclaration}. This is needed because the original
+	 * postcondition may be needed again while proving a function, e.g. when a return statement occurs
+	 */
+	private Expression postcondition;
+
+	/**
+	 * Construct a new weakest precondition strategy object.
+	 */
+<span class="fc" id="L51">	public WPStrategy() {</span>
+<span class="fc" id="L52">		this.weakestPreconditionStack = new Stack&lt;Expression&gt;();</span>
+<span class="fc" id="L53">	}</span>
+
+	/**
+	 * @return the weakestPrecondition
+	 */
+	public Expression getWeakestPrecondition() {
+<span class="fc" id="L59">		return this.weakestPreconditionStack.peek();</span>
+	}
+
+	/**
+	 * @param program
+	 *                the {@link Program} to calculate the weakest precondition for
+	 * @return the weakest precondition that implies the correctness of &lt;code&gt;program&lt;/code&gt;
+	 * @see FormulaGenerator#transformProgram(Program program)
+	 */
+	@Override
+	public Expression transformProgram(final Program program) {
+		// initialize the weakest precondition of the main block to true
+<span class="fc" id="L71">		return this.transformProgram(program, AstNodeCreatorHelper.createTrueLiteral());</span>
+	}
+
+	/**
+	 * Transform the weakest precondition for a given program so that the given postcondition holds.
+	 * 
+	 * @param program
+	 *                the {@link Program} to transform
+	 * @param postcondition
+	 *                the postcondition that the weakest precondition should be calculated for
+	 * @return the calculated weakest precondition
+	 */
+	private Expression transformProgram(final Program program, final Expression postcondition) {
+		// clear weakestPrecondition state from a previous transformation
+<span class="fc" id="L85">		this.weakestPreconditionStack.clear();</span>
+<span class="fc" id="L86">		this.weakestPreconditionStack.push(postcondition);</span>
+<span class="fc" id="L87">		program.accept(this);</span>
+<span class="fc" id="L88">		return this.getWeakestPrecondition();</span>
+	}
+
+	/**
+	 * Visit a {@link Assertion}.
+	 * 
+	 * @param assertion
+	 *                the {@link Assertion} to visit
+	 */
+	@Override
+	public void visit(final Assertion assertion) {
+<span class="fc" id="L99">		Conjunction conjunction = AstNodeCreatorHelper.createConjunction(</span>
+<span class="fc" id="L100">		                AstNodeCloneHelper.clone(assertion.getExpression()),</span>
+<span class="fc" id="L101">		                this.weakestPreconditionStack.pop());</span>
+<span class="fc" id="L102">		this.weakestPreconditionStack.push(conjunction);</span>
+<span class="fc" id="L103">	}</span>
+
+	/**
+	 * Visit a {@link Assignment} to generate the weakest precondition.
+	 * 
+	 * @param assignment
+	 *                the {@link Assignment} to visit
+	 */
+	@Override
+	public void visit(final Assignment assignment) {
+<span class="fc" id="L113">		final Expression value = assignment.getValue();</span>
+<span class="fc" id="L114">		final VariableDeclaration variableDeclaration = assignment.getVariable().getVariable();</span>
+
+<span class="fc" id="L116">		Expression wp = this.weakestPreconditionStack.pop();</span>
+<span class="fc" id="L117">		wp = VariableReferenceSubstitution.substitute(wp, variableDeclaration, value);</span>
+
+<span class="fc" id="L119">		this.weakestPreconditionStack.push(wp);</span>
+<span class="fc" id="L120">	}</span>
+
+	/**
+	 * Visit an {@link Assumption}.
+	 * 
+	 * &lt;code&gt;&lt;pre&gt;
+	 * _assume assumption
+	 * &lt;/pre&gt;&lt;/code&gt;
+	 * 
+	 * to
+	 * 
+	 * &lt;code&gt;&lt;pre&gt;
+	 * assumption =&gt; wp
+	 * &lt;/pre&gt;&lt;/code&gt;
+	 * 
+	 * @param assumption
+	 *                the &lt;code&gt;Assumption&lt;/code&gt; to visit
+	 */
+	@Override
+	public void visit(final Assumption assumption) {
+<span class="fc" id="L140">		Implication implication = AstNodeCreatorHelper.createImplication(</span>
+<span class="fc" id="L141">		                AstNodeCloneHelper.clone(assumption.getExpression()),</span>
+<span class="fc" id="L142">		                this.weakestPreconditionStack.pop());</span>
+<span class="fc" id="L143">		this.weakestPreconditionStack.push(implication);</span>
+<span class="fc" id="L144">	}</span>
+
+	/**
+	 * Visit an {@link Axiom}.
+	 * 
+	 * &lt;code&gt;&lt;pre&gt;
+	 * _axiom axiom
+	 * &lt;/pre&gt;&lt;/code&gt;
+	 * 
+	 * to
+	 * 
+	 * &lt;code&gt;&lt;pre&gt;
+	 * axiom =&gt; wp
+	 * &lt;/pre&gt;&lt;/code&gt;
+	 * 
+	 * @param axiom
+	 *                the &lt;code&gt;Axiom&lt;/code&gt; to visit
+	 */
+	@Override
+	public void visit(final Axiom axiom) {
+<span class="fc" id="L164">		Implication implication = AstNodeCreatorHelper.createImplication(</span>
+<span class="fc" id="L165">		                AstNodeCloneHelper.clone(axiom.getExpression()), this.weakestPreconditionStack.pop());</span>
+<span class="fc" id="L166">		this.weakestPreconditionStack.push(implication);</span>
+<span class="fc" id="L167">	}</span>
+
+	/**
+	 * Visit a {@link Block} to generate the weakest precondition.
+	 * 
+	 * @param block
+	 *                the {@link Block} to visit
+	 */
+	@Override
+	public void visit(final Block block) {
+		// visit all block statements in the order they were parsed reversed
+<span class="fc" id="L178">		List&lt;Statement&gt; stmts = new ArrayList&lt;Statement&gt;(block.getStatements());</span>
+<span class="fc" id="L179">		Collections.reverse(stmts);</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">		for (Statement stmt : stmts) {</span>
+<span class="fc" id="L181">			stmt.accept(this);</span>
+		}
+<span class="fc" id="L183">	}</span>
+
+	/**
+	 * Visit a {@link Conditional} to generate the weakest precondition.
+	 * 
+	 * Transforms
+	 * 
+	 * &lt;pre&gt;
+	 * if condition
+	 *     if-block
+	 * else
+	 *     else-block
+	 * &lt;/pre&gt;
+	 * 
+	 * to
+	 * 
+	 * &lt;pre&gt;
+	 * condition =&gt; wp(if-block, wp) &amp;&amp; !condition =&gt; wp(else-block, wp)
+	 * &lt;/pre&gt;
+	 * 
+	 * If a &lt;code&gt;else-block&lt;/code&gt; is missing &lt;code&gt;wp(else-block, wp)&lt;/code&gt; is &lt;code&gt;true&lt;/code&gt;.
+	 * 
+	 * @param conditional
+	 *                the {@link Conditional} to visit
+	 */
+	@Override
+	public void visit(final Conditional conditional) {
+		// the updated weakest precondition
+<span class="fc" id="L211">		Conjunction conjunction = AstNodeCreatorHelper.createConjunction();</span>
+
+<span class="fc" id="L213">		Expression wp = AstNodeCloneHelper.clone(this.weakestPreconditionStack.peek());</span>
+
+		// will calculate new wp for if-block and replace wp on top of stack with it
+<span class="fc" id="L216">		conditional.getTrueBlock().accept(this);</span>
+
+		// build first implication: condition =&gt; wp(if-block, wp)
+<span class="fc" id="L219">		Implication implication = AstNodeCreatorHelper.createImplication(</span>
+<span class="fc" id="L220">		                AstNodeCloneHelper.clone(conditional.getCondition()),</span>
+<span class="fc" id="L221">		                this.weakestPreconditionStack.pop());</span>
+
+<span class="fc" id="L223">		conjunction.setLeft(implication);</span>
+
+		// build second implication: !condition =&gt; wp(else-block, wp)
+<span class="fc" id="L226">		implication = AstNodeCreatorHelper.createImplication();</span>
+<span class="fc" id="L227">		Negation negation = AstNodeCreatorHelper.createNegation(AstNodeCloneHelper.clone(conditional</span>
+<span class="fc" id="L228">		                .getCondition()));</span>
+<span class="fc" id="L229">		implication.setLeft(negation);</span>
+
+<span class="pc bpc" id="L231" title="1 of 2 branches missed.">		if (conditional.getFalseBlock() != null) {</span>
+<span class="nc" id="L232">			this.weakestPreconditionStack.push(wp);</span>
+
+			// will calculate new wp for else-block and replace wp on top of stack with it
+<span class="nc" id="L235">			conditional.getFalseBlock().accept(this);</span>
+<span class="nc" id="L236">			implication.setRight(this.weakestPreconditionStack.pop());</span>
+		} else {
+<span class="fc" id="L238">			implication.setRight(wp);</span>
+		}
+
+<span class="fc" id="L241">		conjunction.setRight(implication);</span>
+
+		// put updated weakest precondition on top of stack
+<span class="fc" id="L244">		this.weakestPreconditionStack.push(conjunction);</span>
+<span class="fc" id="L245">	}</span>
+
+	/**
+	 * Visit a {@link FunctionDeclaration}.
+	 * 
+	 * @param functionDeclaration
+	 *                the {@link FunctionDeclaration} to visit
+	 */
+	@Override
+	public void visit(final FunctionDeclaration functionDeclaration) {
+<span class="fc" id="L255">		List&lt;List&lt;? extends Annotation&gt;&gt; lists = new ArrayList&lt;List&lt;? extends Annotation&gt;&gt;();</span>
+<span class="fc" id="L256">		lists.add(functionDeclaration.getPreconditions());</span>
+<span class="fc" id="L257">		lists.add(functionDeclaration.getPostconditions());</span>
+
+<span class="fc bfc" id="L259" title="All 2 branches covered.">		for (List&lt;? extends Annotation&gt; l : lists) {</span>
+<span class="fc bfc" id="L260" title="All 2 branches covered.">			if (l.isEmpty()) {</span>
+<span class="fc" id="L261">				this.weakestPreconditionStack.push(AstNodeCreatorHelper.createTrueLiteral());</span>
+			} else {
+				Expression conjunction;
+
+<span class="fc" id="L265">				Iterator&lt;? extends Annotation&gt; i = l.iterator();</span>
+<span class="fc" id="L266">				conjunction = AstNodeCloneHelper.clone(i.next().getExpression());</span>
+<span class="fc bfc" id="L267" title="All 2 branches covered.">				while (i.hasNext()) {</span>
+<span class="fc" id="L268">					conjunction = AstNodeCreatorHelper.createConjunction(conjunction,</span>
+<span class="fc" id="L269">					                AstNodeCloneHelper.clone(i.next().getExpression()));</span>
+				}
+
+<span class="fc" id="L272">				this.weakestPreconditionStack.push(conjunction);</span>
+			}
+		}
+
+<span class="fc" id="L276">		this.postcondition = this.weakestPreconditionStack.peek();</span>
+
+		// postconditions conjunction is on top of weakestPreconditionStack
+<span class="fc" id="L279">		functionDeclaration.getBody().accept(this);</span>
+
+<span class="fc" id="L281">		this.postcondition = null;</span>
+
+		// build the weakest precondition for this function: preconditions =&gt; wp(body, postconditions)
+<span class="fc" id="L284">		Implication implication = AstNodeCreatorHelper.createImplication();</span>
+
+		// pops body weakest precondition wp(body, postconditions)
+<span class="fc" id="L287">		implication.setRight(this.weakestPreconditionStack.pop());</span>
+
+		// pops preconditions conjunction
+<span class="fc" id="L290">		implication.setLeft(this.weakestPreconditionStack.pop());</span>
+
+<span class="fc" id="L292">		Expression wp = implication;</span>
+
+<span class="fc" id="L294">		final FreshVariableSetVisitor freshVariableSet = new FreshVariableSetVisitor();</span>
+<span class="fc" id="L295">		wp.accept(freshVariableSet);</span>
+
+<span class="fc bfc" id="L297" title="All 2 branches covered.">		for (final VariableDeclaration v : freshVariableSet.getVariableMap().values()) {</span>
+<span class="fc" id="L298">			ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(v, wp);</span>
+<span class="fc" id="L299">			wp = forall;</span>
+		}
+<span class="fc" id="L301">		this.weakestPreconditionStack.push(wp);</span>
+<span class="fc" id="L302">	}</span>
+
+	/**
+	 * Visit a {@link Loop} to generate the weakest precondition.
+	 * 
+	 * @param loop
+	 *                the {@link Loop} to visit
+	 */
+	@Override
+	public void visit(final Loop loop) {
+<span class="fc" id="L312">		Expression invariant = null;</span>
+<span class="fc" id="L313">		final List&lt;Invariant&gt; invariants = loop.getInvariants();</span>
+<span class="fc bfc" id="L314" title="All 2 branches covered.">		if (!invariants.isEmpty()) {</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">			for (Invariant i : invariants) {</span>
+				// and the new invariant with the existing if needed
+<span class="pc bpc" id="L317" title="1 of 2 branches missed.">				if (invariant == null) {</span>
+<span class="fc" id="L318">					invariant = i.getExpression();</span>
+				} else {
+<span class="nc" id="L320">					Conjunction conj = AstNodeCreatorHelper.createConjunction(invariant,</span>
+<span class="nc" id="L321">					                i.getExpression());</span>
+<span class="nc" id="L322">					invariant = conj;</span>
+				}
+			}
+		} else {
+			// loop is not annotated with any invariants, getInvariants returned an empty list
+<span class="fc" id="L327">			invariant = AstNodeCreatorHelper.createTrueLiteral();</span>
+		}
+
+		// (condition and invariant) implies wp(body, invariant)
+<span class="fc" id="L331">		Conjunction conditionAndInvariant = AstNodeCreatorHelper.createConjunction(</span>
+<span class="fc" id="L332">		                AstNodeCloneHelper.clone(loop.getCondition()), AstNodeCloneHelper.clone(invariant));</span>
+
+		// generate weakest precondition for the body given the invariant as the postcondition
+		// we have to copy the invariant because what happens inside the loop should not be reflected outside of
+		// it
+<span class="fc" id="L337">		this.weakestPreconditionStack.push(AstNodeCloneHelper.clone(invariant));</span>
+<span class="fc" id="L338">		loop.getBody().accept(this);</span>
+<span class="fc" id="L339">		Expression bodyPrecondition = this.weakestPreconditionStack.pop();</span>
+
+<span class="fc" id="L341">		Implication conditionAndInvariantImpliesBodyPrecondition = AstNodeCreatorHelper.createImplication(</span>
+<span class="fc" id="L342">		                conditionAndInvariant, AstNodeCloneHelper.clone(bodyPrecondition));</span>
+
+		// ((not condition) and invariant) implies postcondition
+<span class="fc" id="L345">		Negation notCondition = AstNodeCreatorHelper.createNegation(AstNodeCloneHelper.clone(loop</span>
+<span class="fc" id="L346">		                .getCondition()));</span>
+
+<span class="fc" id="L348">		Conjunction notConditionAndInvariant = AstNodeCreatorHelper.createConjunction(notCondition,</span>
+<span class="fc" id="L349">		                AstNodeCloneHelper.clone(invariant));</span>
+
+<span class="fc" id="L351">		Implication notConditionAndInvariantImpliesPostcondition = AstNodeCreatorHelper.createImplication(</span>
+<span class="fc" id="L352">		                notConditionAndInvariant, this.getWeakestPrecondition());</span>
+
+		/*
+		 * the two implications have to be true for all values of all referenced variables because we don't look
+		 * inside the loop body. Therefore, we have to choose a fresh set of VariableDeclarations and modify the
+		 * expression so that it has to hold for all possible values of these new variables
+		 */
+<span class="fc" id="L359">		FreshVariableSetVisitor refreshVisitor = new FreshVariableSetVisitor();</span>
+<span class="fc" id="L360">		conditionAndInvariantImpliesBodyPrecondition.accept(refreshVisitor);</span>
+
+<span class="fc" id="L362">		Expression forAllValuesConditionAndInvariantImpliesBodyPrecondition = conditionAndInvariantImpliesBodyPrecondition;</span>
+<span class="fc bfc" id="L363" title="All 2 branches covered.">		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {</span>
+<span class="fc" id="L364">			QuantifiedExpression forAllValuesOfNewDeclaration = AstNodeCreatorHelper</span>
+<span class="fc" id="L365">			                .createForAllQuantifier(newDeclaration,</span>
+<span class="fc" id="L366">			                                forAllValuesConditionAndInvariantImpliesBodyPrecondition);</span>
+<span class="fc" id="L367">			forAllValuesConditionAndInvariantImpliesBodyPrecondition = forAllValuesOfNewDeclaration;</span>
+		}
+
+		// TODO: figure out a way to remove this copy-paste from above
+<span class="fc" id="L371">		refreshVisitor = new FreshVariableSetVisitor();</span>
+<span class="fc" id="L372">		notConditionAndInvariantImpliesPostcondition.accept(refreshVisitor);</span>
+
+<span class="fc" id="L374">		Expression forAllValuesNotConditionAndInvariantImpliesPostcondition = notConditionAndInvariantImpliesPostcondition;</span>
+<span class="fc bfc" id="L375" title="All 2 branches covered.">		for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {</span>
+<span class="fc" id="L376">			QuantifiedExpression forAllValuesOfNewDeclaration = AstNodeCreatorHelper</span>
+<span class="fc" id="L377">			                .createForAllQuantifier(newDeclaration,</span>
+<span class="fc" id="L378">			                                forAllValuesNotConditionAndInvariantImpliesPostcondition);</span>
+<span class="fc" id="L379">			forAllValuesNotConditionAndInvariantImpliesPostcondition = forAllValuesOfNewDeclaration;</span>
+		}
+
+		// assemble the weakest precondition from the three conditions
+<span class="fc" id="L383">		Conjunction invariantAndConditionTrueCase = AstNodeCreatorHelper.createConjunction(</span>
+<span class="fc" id="L384">		                AstNodeCloneHelper.clone(invariant),</span>
+<span class="fc" id="L385">		                forAllValuesConditionAndInvariantImpliesBodyPrecondition);</span>
+
+<span class="fc" id="L387">		Conjunction loopPrecondition = AstNodeCreatorHelper.createConjunction(invariantAndConditionTrueCase,</span>
+<span class="fc" id="L388">		                forAllValuesNotConditionAndInvariantImpliesPostcondition);</span>
+
+		// replace the weakest precondition on the stack
+<span class="fc" id="L391">		this.weakestPreconditionStack.pop();</span>
+<span class="fc" id="L392">		this.weakestPreconditionStack.push(loopPrecondition);</span>
+<span class="fc" id="L393">	}</span>
+
+	/**
+	 * Visit a {@link Program} to generate the weakest precondition.
+	 * 
+	 * @param program
+	 *                the {@link Program} to visit
+	 */
+	@Override
+	public void visit(final Program program) {
+		// if there are FunctionDeclarations specified this will hold a conjunction of the function bodies' and
+		// main block's weakest preconditions, otherwise the program's weakest precondition will consist of the
+		// main block's one, which is always defined, only
+<span class="fc" id="L406">		Conjunction conjunction = null;</span>
+
+		/*
+		 * pass us as visitor from statement to statement in function body or main block:
+		 * 
+		 * 1. get the weakest precondition, 2. apply the appropriate calculus rule, 3. set the weakest
+		 * precondition, 4. forward us to the next statement
+		 * 
+		 * finally the weakest precondition implies the correctness of the function body or main block
+		 */
+
+<span class="fc bfc" id="L417" title="All 2 branches covered.">		for (FunctionDeclaration f : program.getFunctionDeclarations()) {</span>
+<span class="pc bpc" id="L418" title="1 of 2 branches missed.">			if (conjunction == null) {</span>
+<span class="fc" id="L419">				conjunction = AstNodeCreatorHelper.createConjunction();</span>
+			}
+
+			// visit function declaration, pushes its weakest precondition on top (does not replace)
+<span class="fc" id="L423">			f.accept(this);</span>
+
+			// add function declaration's weakest precondition to program's weakest precondition
+<span class="fc" id="L426">			Conjunction c = AstNodeCreatorHelper.createConjunction();</span>
+<span class="fc" id="L427">			c.setLeft(this.weakestPreconditionStack.pop());</span>
+<span class="fc" id="L428">			conjunction.setRight(c);</span>
+<span class="fc" id="L429">			conjunction = c;</span>
+		}
+
+		// visit program's main block
+<span class="fc" id="L433">		program.getMainBlock().accept(this);</span>
+
+		// add main block's weakest precondition to program's weakest precondition
+<span class="fc bfc" id="L436" title="All 2 branches covered.">		if (conjunction != null) {</span>
+<span class="fc" id="L437">			conjunction.setRight(this.weakestPreconditionStack.pop());</span>
+<span class="fc" id="L438">			this.weakestPreconditionStack.push(conjunction);</span>
+		}
+
+		// assume axioms for the function bodies' and main block's weakest preconditions
+<span class="fc bfc" id="L442" title="All 2 branches covered.">		for (Axiom a : program.getAxioms()) {</span>
+<span class="fc" id="L443">			a.accept(this);</span>
+		}
+<span class="fc" id="L445">	}</span>
+
+	/**
+	 * Visit a {@link ReturnStatement}.
+	 * 
+	 * @param returnStatement
+	 *                the {@link ReturnStatement} to visit
+	 */
+	@Override
+	public void visit(final ReturnStatement returnStatement) {
+<span class="fc" id="L455">		final Expression returnValue = returnStatement.getReturnValue();</span>
+
+<span class="fc" id="L457">		this.weakestPreconditionStack.pop();</span>
+
+<span class="fc" id="L459">		Expression substitutedPostcondition = AstNodeCloneHelper.clone(this.postcondition);</span>
+<span class="fc" id="L460">		substitutedPostcondition = ReturnValueReferenceSubstitution.substitute(substitutedPostcondition, returnValue);</span>
+
+<span class="fc" id="L462">		this.weakestPreconditionStack.push(substitutedPostcondition);</span>
+<span class="fc" id="L463">	}</span>
+
+	/**
+	 * Visit a {@link VariableDeclaration} to generate the weakest precondition.
+	 * 
+	 * @param variableDeclaration
+	 *                the {@link VariableDeclaration} to visit
+	 */
+	@Override
+	public void visit(final VariableDeclaration variableDeclaration) {
+<span class="fc" id="L473">		final Expression initialValue = variableDeclaration.getInitialValue();</span>
+
+<span class="fc" id="L475">		Expression wp = this.weakestPreconditionStack.pop();</span>
+
+<span class="fc bfc" id="L477" title="All 2 branches covered.">		if (initialValue == null) {</span>
+<span class="fc" id="L478">			wp = AstNodeCreatorHelper.createForAllQuantifier(variableDeclaration, wp);</span>
+		} else {
+<span class="fc" id="L480">			wp = VariableReferenceSubstitution.substitute(wp, variableDeclaration, initialValue);</span>
+		}
+
+<span class="fc" id="L483">		this.weakestPreconditionStack.push(wp);</span>
+<span class="fc" id="L484">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>FreshVariableSetVisitor.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.prover</a> &gt; <span class="el_source">FreshVariableSetVisitor.java</span></div><h1>FreshVariableSetVisitor.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.prover;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * A visitor to replace all {@link VariableDeclaration} with new instances with the same name and type.
+ * 
+ * @author Leon Handreke
+ */
+<span class="fc" id="L22">public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {</span>
+
+	/**
+	 * Map old variables to the new, fresh variables.
+	 * 
+	 * Use a LinkedHashMap here because the ordering of the keys is stable, which is needed to make the results
+	 * deterministic
+	 */
+<span class="fc" id="L30">	private Map&lt;VariableDeclaration, VariableDeclaration&gt; variableMap = new LinkedHashMap&lt;VariableDeclaration, VariableDeclaration&gt;();</span>
+
+	/**
+	 * A mapping from the substituted to the substitute {@link VariableDeclaration}s.
+	 * 
+	 * @return the mapping from old to new variables
+	 */
+	public final Map&lt;VariableDeclaration, VariableDeclaration&gt; getVariableMap() {
+<span class="fc" id="L38">		return this.variableMap;</span>
+	}
+
+	@Override
+	public final void visit(final Literal literal) {
+		// do nothing for Literals
+<span class="fc" id="L44">	}</span>
+
+	@Override
+	public final void visit(final BinaryExpression b) {
+<span class="fc" id="L48">		b.getLeft().accept(this);</span>
+<span class="fc" id="L49">		b.getRight().accept(this);</span>
+<span class="fc" id="L50">	}</span>
+
+	@Override
+	public final void visit(final FunctionCall functionCall) {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">		for (final Expression e : functionCall.getActuals()) {</span>
+<span class="nc" id="L55">			e.accept(this);</span>
+		}
+<span class="nc" id="L57">	}</span>
+
+	@Override
+	public final void visit(final UnaryExpression u) {
+<span class="fc" id="L61">		u.getOperand().accept(this);</span>
+<span class="fc" id="L62">	}</span>
+
+	@Override
+	public final void visit(final QuantifiedExpression quantifiedExpression) {
+		// since QuantifiedExpression#parameters are bound in the respective QuantifiedExpression#expression we
+		// do not need to clone them, therefore add them temporarily to the variableMap so that
+		// visit(VariableReference) does not create a copy we cannot remove from the variableMap anymore
+<span class="fc" id="L69">		final VariableDeclaration parameter = quantifiedExpression.getParameter();</span>
+<span class="fc" id="L70">		this.variableMap.put(parameter, parameter);</span>
+
+<span class="fc" id="L72">		final Expression condition = quantifiedExpression.getCondition();</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">		if (condition != null) {</span>
+<span class="nc" id="L74">			condition.accept(this);</span>
+		}
+
+<span class="fc" id="L77">		quantifiedExpression.getExpression().accept(this);</span>
+
+<span class="fc" id="L79">		this.variableMap.remove(parameter);</span>
+<span class="fc" id="L80">	}</span>
+
+	@Override
+	public final void visit(final VariableReference v) {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">		if (!this.variableMap.containsKey(v.getVariable())) {</span>
+			// if the VariableDeclaration was first seen, create a new one with the same name
+<span class="fc" id="L86">			VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());</span>
+<span class="fc" id="L87">			newVariable.setInitialValue(null);</span>
+<span class="fc" id="L88">			this.variableMap.put(v.getVariable(), newVariable);</span>
+		}
+		// substitute the old VariableDeclaration with a fresh one
+<span class="fc" id="L91">		v.setVariable(this.variableMap.get(v.getVariable()));</span>
+<span class="fc" id="L92">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

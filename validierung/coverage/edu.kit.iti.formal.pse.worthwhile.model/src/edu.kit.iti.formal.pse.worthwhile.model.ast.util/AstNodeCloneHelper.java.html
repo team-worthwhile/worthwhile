@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AstNodeCloneHelper.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.model</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.model.ast.util</a> &gt; <span class="el_source">AstNodeCloneHelper.java</span></div><h1>AstNodeCloneHelper.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
+
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+
+/**
+ * Cloner for an ASTNode.
+ * 
+ * @author Leon Handreke, fabian
+ */
+public final class AstNodeCloneHelper extends HierarchialASTNodeVisitor {
+	/**
+	 * Private default constructor.
+	 */
+	private AstNodeCloneHelper() {
+<span class="nc" id="L19">		super();</span>
+<span class="nc" id="L20">	}</span>
+
+	/**
+	 * @param n
+	 *                the {@link ASTNode} to clone.
+	 * @param &lt;T&gt;
+	 *                The type of the {@link ASTNode} to clone.
+	 * @return a clone of the given {@link ASTNode}
+	 */
+	public static &lt;T extends ASTNode&gt; T clone(final T n) {
+<span class="fc" id="L30">		return EcoreUtil.copy(n);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

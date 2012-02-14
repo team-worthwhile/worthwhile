@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>NodeHelper.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.util</a> &gt; <span class="el_source">NodeHelper.java</span></div><h1>NodeHelper.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.util;
+
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+
+/**
+ * A collection of utility functions to deal with Worthwhile ASTs.
+ * 
+ * @author Joachim
+ * 
+ */
+public final class NodeHelper {
+
+	/**
+	 * Private constructor to prevent instantiation.
+	 */
+<span class="nc" id="L19">	private NodeHelper() {</span>
+
+<span class="nc" id="L21">	}</span>
+
+	/**
+	 * Returns the 1-based line number of a node in the source file.
+	 * 
+	 * @param node
+	 *                The node to locate in the source file.
+	 * @return The 1-based line number of the node in the source file.
+	 */
+	public static int getLine(final ASTNode node) {
+<span class="nc" id="L31">		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">		if (actualNode != null) {</span>
+<span class="nc" id="L33">			return actualNode.getStartLine();</span>
+		} else {
+<span class="nc" id="L35">			return -1;</span>
+		}
+	}
+
+	/**
+	 * Returns the offset of a node in the entire document.
+	 * 
+	 * @param node
+	 *                The node to locate in the source file.
+	 * @return The offset of the node in the document
+	 */
+	public static int getOffset(final ASTNode node) {
+<span class="nc" id="L47">		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">		if (actualNode != null) {</span>
+<span class="nc" id="L49">			return actualNode.getOffset();</span>
+		} else {
+<span class="nc" id="L51">			return -1;</span>
+		}
+	}
+
+	/**
+	 * Returns the length of a node in the source file.
+	 * 
+	 * @param node
+	 *                The node whose length to get.
+	 * @return The length of the node in the source file.
+	 */
+	public static int getLength(final ASTNode node) {
+<span class="nc" id="L63">		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (actualNode != null) {</span>
+<span class="nc" id="L65">			return actualNode.getLength();</span>
+		} else {
+<span class="nc" id="L67">			return -1;</span>
+		}
+	}
+	
+	/**
+	 * Returns the text of an AST node.
+	 * 
+	 * @param node
+	 *                The AST node to get the text of.
+	 * @return The text contained in the AST node.
+	 */
+	public static String getText(final ASTNode node) {
+<span class="nc" id="L79">		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">		if (actualNode != null) {</span>
+<span class="nc" id="L81">			return actualNode.getText();</span>
+		} else {
+<span class="nc" id="L83">			return &quot;&quot;;</span>
+		}
+	}
+
+	/**
+	 * Returns whether the node {@code node} is a direct ancestor in the AST of the node {@code child}.
+	 * 
+	 * @param node
+	 *                The node for which to check whether it is an ancestor of {@code child}
+	 * @param child
+	 *                The child node for which to check for ancestors.
+	 * @return Whether the node {@code node} is a direct ancestor in the AST of the node {@code child}.
+	 */
+	public static boolean isAncestor(final ASTNode node, final ASTNode child) {
+<span class="fc" id="L97">		ASTNode current = child;</span>
+
+<span class="fc bfc" id="L99" title="All 4 branches covered.">		while (current != null &amp;&amp; !(node.equals(current))) {</span>
+<span class="fc" id="L100">			current = (ASTNode) current.eContainer();</span>
+		}
+
+<span class="fc" id="L103">		return node.equals(current);</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

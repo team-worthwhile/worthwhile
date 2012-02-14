@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../.resources/report.gif" type="image/gif"/><title>AbstractExecutionEventListener.java</title><link rel="stylesheet" href="../../../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=8;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="right"><a href="../../../.sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">All tests (14.02.2012 15:23:22)</a> &gt; <a href="../../index.html" class="el_group">edu.kit.iti.formal.pse.worthwhile.interpreter</a> &gt; <a href="../index.html" class="el_bundle">src</a> &gt; <a href="index.html" class="el_package">edu.kit.iti.formal.pse.worthwhile.interpreter</a> &gt; <span class="el_source">AbstractExecutionEventListener.java</span></div><h1>AbstractExecutionEventListener.java</h1><pre class="source lang-java linenums">package edu.kit.iti.formal.pse.worthwhile.interpreter;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+
+/**
+ * Default listener for {@link Interpreter} events.
+ * 
+ * @see AbstractExecutionEventEvent
+ */
+<span class="fc" id="L12">public abstract class AbstractExecutionEventListener {</span>
+	/**
+	 * Signals that a {@link Statement} has been executed by the {@link Interpreter}.
+	 * 
+	 * @param statement
+	 *                the &lt;code&gt;Statement&lt;/code&gt; that was executed
+	 */
+	public void statementExecuted(final Statement statement) {
+<span class="fc" id="L20">	}</span>
+
+	/**
+	 * Signals that a {@link Statement} will be executed.
+	 * 
+	 * @param statement
+	 *                the &lt;code&gt;Statement&lt;/code&gt; that will be executed
+	 */
+	public void statementWillExecute(final Statement statement) {
+<span class="fc" id="L29">	}</span>
+
+	/**
+	 * Signals that the execution of a {@link Statement} failed.
+	 * 
+	 * @param statement
+	 *                the &lt;code&gt;Statement&lt;/code&gt; that failed to execute
+	 * @param error
+	 *                an {@link InterpreterError} object that describes the error
+	 */
+	public void executionFailed(final Statement statement, final InterpreterError error) {
+<span class="nc" id="L40">		throw new RuntimeException(&quot;Failed to execute &quot; + statement.toString() + &quot;; Got error &quot;</span>
+<span class="nc" id="L41">		                + error.toString());</span>
+	}
+
+	/**
+	 * Signals the start of the execution of a {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
+	 */
+	public void executionStarted() {
+<span class="fc" id="L48">	}</span>
+
+	/**
+	 * Signals the successful completion of execution of a
+	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
+	 */
+	public void executionCompleted() {
+<span class="fc" id="L55">	}</span>
+
+	/**
+	 * Signals the execution of an {@link Annotation} that was not valid.
+	 * 
+	 * @param annotation
+	 *                the invalid &lt;code&gt;Annotation&lt;/code&gt;
+	 */
+	public void annotationFailed(final Annotation annotation) {
+<span class="nc" id="L64">		throw new RuntimeException(annotation.toString() + &quot; is invalid.&quot;);</span>
+	}
+
+	/**
+	 * Signals the execution of an {@link Annotation} that was valid.
+	 * 
+	 * @param annotation
+	 *                the valid &lt;code&gt;Annotation&lt;/code&gt;
+	 */
+	public void annotationSucceeded(final Annotation annotation) {
+<span class="fc" id="L74">	}</span>
+
+	/**
+	 * Signals the evaluation of a {@link Expression}.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; that was evaluated
+	 */
+	public void expressionEvaluated(final Expression expression) {
+<span class="fc" id="L83">	}</span>
+
+	/**
+	 * Signals that the execution of a {@link Expression} failed.
+	 * 
+	 * @param expression
+	 *                the &lt;code&gt;Expression&lt;/code&gt; that failed to execute
+	 * @param error
+	 *                an {@link InterpreterError} object that describes the error
+	 */
+	public void expressionFailed(final Expression expression, final InterpreterError error) {
+<span class="fc" id="L94">		throw new RuntimeException(&quot;Failed to execute &quot; + expression.toString() + &quot;; Got error &quot;</span>
+<span class="fc" id="L95">		                + error.toString());</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.5.5.201112152213</span>All tests (14.02.2012 15:23:22)</div></body></html>

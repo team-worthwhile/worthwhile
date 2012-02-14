@@ -182,7 +182,7 @@ Addition returns Expression:
 
 // Next in priority are multiplication, division, and modulo.
 Multiplication returns Expression:
-	UnaryOperation (({Multiplication.left=current} ('*' | '·') | {Division.left=current} ('/' | '÷') | {Modulus.left=current} '%') right=UnaryOperation)*
+	UnaryOperation (({Multiplication.left=current} ('*' | '⋅' | '∙') | {Division.left=current} ('/' | '÷') | {Modulus.left=current} '%') right=UnaryOperation)*
 ;
 
 // The unary operations (unary plus, unary minus, Boolean not) have second highest priority.

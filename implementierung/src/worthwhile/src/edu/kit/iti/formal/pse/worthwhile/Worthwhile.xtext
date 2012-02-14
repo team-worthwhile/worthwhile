@@ -142,7 +142,7 @@ Assignment returns Assignment:
 // An Expression is based on operator precedence. Each "level" of Expressions means one level of operator precedence,
 // where the last operation specified has the highest priority. In the same level, operators are evaluated from left to right.
 Expression returns Expression:
-	QuantifiedExpression | LogicalImplication
+	QuantifiedExpression | LogicalEquivalence
 ;
 
 // logical equivalence (lowest priority)

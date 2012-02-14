@@ -3,6 +3,10 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**
@@ -41,9 +45,40 @@ public class DistributorProverEventListener extends AbstractProverEventListener 
 	}
 
 	@Override
-	public final void programVerified(final Program program, final Validity validity, final ProverResult proverResult) {
+	public final void programVerified(final Program program, final Validity validity,
+	                final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.programVerified(program, validity, proverResult);
+		}
+	}
+
+	@Override
+	public void assertionVerified(Assertion assertion, Validity validity, ProverResult proverResult) {
+		for (IProverEventListener l : this.listeners) {
+			l.assertionVerified(assertion, validity, proverResult);
+		}
+
+	}
+
+	@Override
+	public void invariantValidAtEntryVerified(Invariant invariant, Validity validity, ProverResult proverResult) {
+		for (IProverEventListener l : this.listeners) {
+			l.invariantValidAtEntryVerified(invariant, validity, proverResult);
+		}
+	}
+
+	@Override
+	public void invariantAndConditionImplyLoopPreconditionVerified(Loop loop, Validity validity,
+	                ProverResult proverResult) {
+		for (IProverEventListener l : this.listeners) {
+			l.invariantAndConditionImplyLoopPreconditionVerified(loop, validity, proverResult);
+		}
+	}
+
+	@Override
+	public void postconditionValidVerified(Postcondition postcondition, Validity validity, ProverResult proverResult) {
+		for (IProverEventListener l : this.listeners) {
+			l.postconditionValidVerified(postcondition, validity, proverResult);
 		}
 	}
 }

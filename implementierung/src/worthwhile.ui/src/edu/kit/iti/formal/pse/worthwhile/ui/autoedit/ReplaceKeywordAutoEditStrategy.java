@@ -42,43 +42,40 @@ class ReplaceKeywordAutoEditStrategy implements IAutoEditStrategy {
 	@Override
 	public void customizeDocumentCommand(final IDocument document, final DocumentCommand command) {
 
-		// If the last character of the keyword is typed and the text before
-		// the cursor matches the rest of the keyword,
-		// replace the keyword with the replacement.
+		// If the last character of the keyword is typed and the text before the cursor matches the rest of the
+		// keyword, replace the keyword with the replacement.
 
-		// Check if the last character of the keyword matches the currently
-		// typed character.
+		// Check if the last character of the keyword matches the currently typed character.
 		// Do not use "chatAt" because a char cannot equal a string.
-		if (command.text.equals(keyword.substring(keyword.length() - 1))) {
-			try {
-				// Calculate the starting position of the keyword under the
-				// assumption that the character just typed was the last
-				// character of the keyword.
-				int beginOfKeyword = command.offset - (keyword.length() - 1);
+		if (!command.text.equals(keyword.substring(keyword.length() - 1))) {
+			return;
+		}
 
-				// Check if the text before the cursor matches the rest of
-				// the keyword.
-				if (command.offset >= keyword.length() - 1
-				                && document.get(beginOfKeyword, keyword.length() - 1).equals(
-				                                keyword.substring(0, keyword.length() - 1))) {
+		try {
+			// Calculate the starting position of the keyword under the assumption that the character just
+			// typed was the last character of the keyword.
+			int beginOfKeyword = command.offset - (keyword.length() - 1);
 
-					// Check if the typed word is at the beginning of the
-					// document or there is whitespace before the typed
-					// word.
-					if (beginOfKeyword <= 0
-					                || document.get(beginOfKeyword - 1, 1).matches("[ \t\n]")) {
-
-						// Replace the typed keyword with its replacement.
-						document.replace(command.offset - (keyword.length() - 1),
-						                (keyword.length() - 1), "");
-						command.offset -= (keyword.length() - 1);
-						command.shiftsCaret = true;
-						command.text = replacement;
-					}
-				}
-			} catch (BadLocationException e) {
-				e.printStackTrace();
+			// Check if the text before the cursor matches the rest of the keyword.
+			if (!(command.offset >= keyword.length() - 1 && document.get(beginOfKeyword,
+			                keyword.length() - 1).equals(keyword.substring(0, keyword.length() - 1)))) {
+				return;
 			}
+
+			// Check if the typed word is at the beginning of the document or there is whitespace before the
+			// typed word.
+			if (!(beginOfKeyword <= 0 || document.get(beginOfKeyword - 1, 1).matches("[ \t\n]"))) {
+				return;
+			}
+
+			// Replace the typed keyword with its replacement.
+			document.replace(command.offset - (keyword.length() - 1), (keyword.length() - 1), "");
+			command.offset -= (keyword.length() - 1);
+			command.shiftsCaret = true;
+			command.text = replacement;
+
+		} catch (BadLocationException e) {
+			e.printStackTrace();
 		}
 	}
 

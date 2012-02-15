@@ -247,15 +247,30 @@ public final class TransformProgramTest {
 		testProgram.accept(new FunctionCallSubstitution());
 		final Expression actual = this.transformer.transformProgram(testProgram);
 
-		final Expression expected = this.getExpression("(forall Integer t : (t = 0 || t = 1) =>"
-		                + "(t = 0 && -1 = 1 || t = 1 && -1 = 0))"
-		                + "&& ((2 = 0 || 2 = 1)" + "&& (forall Integer _f0 :"
-		                + "((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
-		                + "(((2 = 0 || 2 = 1) && (forall Integer _f1 :"
-		                + "(((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) =>"
-		                + "((_f1 = -1) && (forall Integer _f1 : (forall Integer _f0 :"
-		                + "(_f0 = -1 && _f1 = -1) => _f1 = -1)) && (forall Integer _f1 :"
-		                + "(forall Integer _f0 :" + "(!(_f0 = -1) && _f1 = -1) => true)))))))))");
+		final Expression expected = this.getExpression(
+		                  "(forall Integer t : (t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
+		                + "&&"
+		                + "((2 = 0 || 2 = 1) &&"
+		                + " (forall Integer _f0 : ((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
+		                + "  ((2 = 0 || 2 = 1) &&"
+		                + "   (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) =>"
+		                + "    (_f1 = -1)"
+		                + "    &&"
+		                + "    (forall Integer _f1 : (forall Integer _f0 :"
+		                + "     (_f0 = -1 && _f1 = -1"
+		                + "      => (_f1 = -1)"
+		                + "     )"
+		                + "    ))"
+		                + "    &&"
+		                + "    (forall Integer _f1 : (forall Integer _f0 :"
+		                + "     (!(_f0 = -1) && _f1 = -1"
+		                + "      => true"
+		                + "     )"
+		                + "    ))"
+		                + "   )"
+		                + "  )"
+		                + " )"
+		                + ")");
 
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}

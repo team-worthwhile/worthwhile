@@ -37,11 +37,17 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	 */
 	private Map<VariableDeclaration, FunctionCall> parameters = new LinkedHashMap<VariableDeclaration, FunctionCall>();
 
+	/**
+	 * Primitive to uniquely identify the newly created {@link VariableDeclaration}s that hold the function return
+	 * values (uniquely among themselves).
+	 */
+	private int index = 0;
+
 	@Override
 	public void visit(final FunctionCall functionCall) {
 		final FunctionDeclaration function = functionCall.getFunction();
-		// the set size is used as counter for the replacement variable names
-		final String name = new String("_" + function.getName() + this.parameters.size());
+		// FIXME these are legal identifiers in Worthwhile, avoid conflicts
+		final String name = new String("_" + function.getName() + index++);
 		final VariableDeclaration variable = AstNodeCreatorHelper.createVariableDeclaration(
 		                AstNodeCloneHelper.clone(function.getReturnType()), name);
 

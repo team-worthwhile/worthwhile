@@ -403,7 +403,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		// if there are FunctionDeclarations specified this will hold a conjunction of the function bodies' and
 		// main block's weakest preconditions, otherwise the program's weakest precondition will consist of the
 		// main block's one, which is always defined, only
-		Conjunction conjunction = null;
+		Expression conjunction = null;
 
 		/*
 		 * pass us as visitor from statement to statement in function body or main block:
@@ -415,18 +415,17 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		 */
 
 		for (FunctionDeclaration f : program.getFunctionDeclarations()) {
-			if (conjunction == null) {
-				conjunction = AstNodeCreatorHelper.createConjunction();
-			}
 
 			// visit function declaration, pushes its weakest precondition on top (does not replace)
 			f.accept(this);
 
 			// add function declaration's weakest precondition to program's weakest precondition
-			Conjunction c = AstNodeCreatorHelper.createConjunction();
-			c.setLeft(this.weakestPreconditionStack.pop());
-			conjunction.setRight(c);
-			conjunction = c;
+			if (conjunction == null) {
+				conjunction = this.weakestPreconditionStack.pop();
+			} else {
+				conjunction = AstNodeCreatorHelper.createConjunction(conjunction,
+				                this.weakestPreconditionStack.pop());
+			}
 		}
 
 		// visit program's main block
@@ -434,7 +433,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		// add main block's weakest precondition to program's weakest precondition
 		if (conjunction != null) {
-			conjunction.setRight(this.weakestPreconditionStack.pop());
+			conjunction = AstNodeCreatorHelper.createConjunction(conjunction,
+			                this.weakestPreconditionStack.pop());
 			this.weakestPreconditionStack.push(conjunction);
 		}
 

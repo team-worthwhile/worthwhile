@@ -193,9 +193,23 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	public void visit(final Conditional conditional) {
 		List<Proof> preconditionList = new ArrayList<Proof>();
 		List<Proof> postconditionList = this.weakestPreconditionStack.pop();
+		List<Proof> trueBlockPostconditionList = new ArrayList<Proof>();
+		List<Proof> falseBlockPostconditionList = new ArrayList<Proof>();
+
+		// clone the postcondition list because it's bound to be mangled up by substitutions when calculating
+		// the preconditions for each of the two blocks.
+		for (Proof postcondition : postconditionList) {
+			Proof trueProof = postcondition.clone();
+			trueProof.setExpression(AstNodeCloneHelper.clone(postcondition.getExpression()));
+			trueBlockPostconditionList.add(trueProof);
+
+			Proof falseProof = postcondition.clone();
+			falseProof.setExpression(AstNodeCloneHelper.clone(postcondition.getExpression()));
+			falseBlockPostconditionList.add(falseProof);
+		}
 
 		// calculate weakest precondition so that the true block implies the postcondition
-		this.weakestPreconditionStack.push(postconditionList);
+		this.weakestPreconditionStack.push(trueBlockPostconditionList);
 		conditional.getTrueBlock().accept(this);
 		List<Proof> trueBlockPreconditionList = this.weakestPreconditionStack.pop();
 
@@ -211,7 +225,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 
 		// check if the false block even exists
 		if (conditional.getFalseBlock() != null) {
-			this.weakestPreconditionStack.push(postconditionList);
+			this.weakestPreconditionStack.push(falseBlockPostconditionList);
 			// calculate weakest precondition so that false block implies postcondition
 			conditional.getFalseBlock().accept(this);
 			List<Proof> falseBlockPreconditionList = this.weakestPreconditionStack.pop();
@@ -227,7 +241,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 				preconditionList.add(conditionalPrecondition);
 			}
 		} else {
-			for (Proof falseBlockPostcondition : postconditionList) {
+			for (Proof falseBlockPostcondition : falseBlockPostconditionList) {
 				// no else block exists, so not the condition should imply the postcondition directly
 				Negation notCondition = AstNodeCreatorHelper.createNegation(AstNodeCloneHelper
 				                .clone(conditional.getCondition()));

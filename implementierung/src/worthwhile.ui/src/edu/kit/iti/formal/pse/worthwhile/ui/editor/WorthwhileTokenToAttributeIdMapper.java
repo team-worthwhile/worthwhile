@@ -30,7 +30,6 @@ public class WorthwhileTokenToAttributeIdMapper extends DefaultAntlrTokenToAttri
 			return WorthwhileHighlightingConfiguration.PUNCTUATION_ID;
 		}
 
-		System.out.println(tokenName + " - " + tokenType);
 		return super.calculateId(tokenName, tokenType);
 	}
 

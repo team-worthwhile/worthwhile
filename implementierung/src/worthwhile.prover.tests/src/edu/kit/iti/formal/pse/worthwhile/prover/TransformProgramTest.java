@@ -252,26 +252,55 @@ public final class TransformProgramTest {
 		                + "&&"
 		                + "((2 = 0 || 2 = 1) &&"
 		                + " (forall Integer _f0 : ((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
-		                + "  ((2 = 0 || 2 = 1) &&"
-		                + "   (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) =>"
-		                + "    (_f1 = -1)"
-		                + "    &&"
-		                + "    (forall Integer _f1 : (forall Integer _f0 :"
-		                + "     (_f0 = -1 && _f1 = -1"
-		                + "      => (_f1 = -1)"
-		                + "     )"
-		                + "    ))"
-		                + "    &&"
-		                + "    (forall Integer _f1 : (forall Integer _f0 :"
-		                + "     (!(_f0 = -1) && _f1 = -1"
-		                + "      => true"
-		                + "     )"
-		                + "    ))"
+		                + "  ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "  &&"
+		                + "  (forall Integer _f0 :"
+		                + "   (_f0 = -1 && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "    => ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "   )"
+		                + "  )"
+		                + "  &&"
+		                + "  (forall Integer _f0 :"
+		                + "   (!(_f0 = -1) && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "    => true"
 		                + "   )"
 		                + "  )"
 		                + " )"
 		                + ")");
 
+		TransformProgramTest.assertASTNodeEqual(expected, actual);
+	}
+
+	/**
+	 * Tests the transformation of {@link FunctionCall}s in function contract {@link Precondition}s/
+	 * {@link Postcondition}s.
+	 */
+	@Test
+	public void contractFunctionCallRule() {
+		final Program testProgram = this.getProgram(
+		                  "function Integer fiver()\n"
+		                + "_ensures _return = 5\n"
+		                + "{\n"
+		                + "return 5\n"
+		                + "}\n"
+		                + "function Integer five()\n"
+		                + "_ensures _return = fiver()\n"
+		                + "{\n"
+		                + "return fiver()\n"
+		                + "}\n");
+		testProgram.accept(new FunctionCallSubstitution());
+		final Expression actual = this.transformer.transformProgram(testProgram);
+		
+		final Expression expected = this.getExpression(
+		                  "(true => 5 = 5)"
+		                + "&&"
+		                + "(true =>"
+		                + " (forall Integer _fiver1 : _fiver1 = 5 =>"
+		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)"
+		                + " )"
+		                + ")"
+		                + "&& true");
+		
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
 }

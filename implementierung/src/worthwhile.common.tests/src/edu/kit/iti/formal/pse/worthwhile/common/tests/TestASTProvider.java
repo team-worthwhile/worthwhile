@@ -146,7 +146,8 @@ public class TestASTProvider {
 	 *                The program code.
 	 * @return An Xtext resource that represents the program text.
 	 */
-	private static Resource loadProgram(final String parseText) {
+
+	protected static Resource loadProgram(final String parseText) {
 		// http://wiki.eclipse.org/Xtext/FAQ#How_do_I_load_my_model_in_a_standalone_Java_application.C2.A0.3F
 		Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
 		XtextResourceSet resourceSet = guiceInjector.getInstance(XtextResourceSet.class);

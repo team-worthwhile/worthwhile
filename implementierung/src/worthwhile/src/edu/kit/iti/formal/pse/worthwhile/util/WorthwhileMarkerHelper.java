@@ -47,7 +47,8 @@ public class WorthwhileMarkerHelper {
 				@Override
 				public void run(final IProgressMonitor monitor) throws CoreException {
 					resource.deleteMarkers(MARKER_FAILED_STATEMENT, true, IResource.DEPTH_INFINITE);
-					resource.deleteMarkers(MARKER_SUCCEEDED_STATEMENT, true, IResource.DEPTH_INFINITE);
+					resource.deleteMarkers(MARKER_SUCCEEDED_STATEMENT, true,
+					                IResource.DEPTH_INFINITE);
 				}
 			};
 			runnable.run(null);
@@ -120,10 +121,11 @@ public class WorthwhileMarkerHelper {
 	 *                 if the marker cannot be created.
 	 */
 	private IMarker createMarker(final ASTNode statement, final String markerType) throws CoreException {
-		// Get the position of the node in the source file.
+		// Get the position and length of the node in the source file.
+		// Do not include trailing whitespace to prevent the marker from running into the next line.
 		int line = NodeHelper.getLine(statement);
 		int offset = NodeHelper.getOffset(statement);
-		int length = NodeHelper.getLength(statement);
+		int length = trimRight(NodeHelper.getText(statement)).length();
 
 		// Create a new marker
 		IMarker marker = this.resource.createMarker(markerType);
@@ -132,6 +134,19 @@ public class WorthwhileMarkerHelper {
 		marker.setAttribute(IMarker.CHAR_END, offset + length);
 
 		return marker;
+	}
+
+	/**
+	 * Removes trailing whitespace from a string.
+	 * 
+	 * http://forums.devshed.com/java-help-9/how-to-remove-leading-white-spaces-from-a-string-579116.html
+	 * 
+	 * @param s
+	 *                The string
+	 * @return The right-trimmed string.
+	 */
+	private static String trimRight(final String s) {
+		return s.replaceAll("\\s+$", "");
 	}
 
 }

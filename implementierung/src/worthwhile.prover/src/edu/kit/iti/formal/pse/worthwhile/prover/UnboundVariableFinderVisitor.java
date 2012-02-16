@@ -78,7 +78,9 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public final void visit(final QuantifiedExpression quantifiedExpression) {
-		// a quantifiedExpression binds a variable
+		// since QuantifiedExpression#parameters are bound in the respective QuantifiedExpression#expression we
+		// do not need to clone them, therefore add them temporarily to the variableMap so that
+		// visit(VariableReference) does not create a copy we cannot remove from the variableMap anymore
 		this.boundVariables.add(quantifiedExpression.getParameter());
 		if (quantifiedExpression.getCondition() != null) {
 			quantifiedExpression.getCondition().accept(this);

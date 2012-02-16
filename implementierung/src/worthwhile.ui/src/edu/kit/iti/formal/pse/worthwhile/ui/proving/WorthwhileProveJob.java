@@ -8,10 +8,12 @@ import org.eclipse.core.runtime.jobs.Job;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.IProverEventListener;
 import edu.kit.iti.formal.pse.worthwhile.prover.ProverResult;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
@@ -84,8 +86,28 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 		return new ProveResultStatus(this.proveResult, this.validity);
 	}
 
+	/**
+	 * Convenience method to generate a user-facing message describing a proof attempt.
+	 * 
+	 * @param validity
+	 *                the validity of the formula that was proven
+	 * @param formula
+	 *                the formula that was proven
+	 * @param proverResult
+	 *                the {@link ProverResult} returned by the prover
+	 * @return a human-readable tooltip message
+	 */
+	private static String getTooltipMessage(final Validity validity, final Expression formula,
+	                final ProverResult proverResult) {
+		String formulaString = AstNodeToStringHelper.toString(formula);
+		String tooltipString = formulaString
+		                + "\n\nProof attempt for the calculated formula resulted in Validity "
+		                + validity.toString() + "\n\n" + "Prover output was:\n" + proverResult.getOutput();
+		return tooltipString;
+	}
+
 	@Override
-	public final void programVerified(final Program program, final Validity validity,
+	public final void programVerified(final Program program, final Validity validity, final Expression formula,
 	                final ProverResult proverResult) {
 		this.proveResult = proverResult;
 		this.validity = validity;
@@ -93,26 +115,26 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 
 	@Override
 	public final void assertionVerified(final Assertion assertion, final Validity validity,
-	                final ProverResult proverResult) {
-		this.markStatement(assertion, validity, proverResult.getOutput());
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(assertion, validity, getTooltipMessage(validity, formula, proverResult));
 	}
 
 	@Override
 	public final void invariantValidAtEntryVerified(final Invariant invariant, final Validity validity,
-	                final ProverResult proverResult) {
-		this.markStatement(invariant, validity, proverResult.getOutput());
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(invariant, validity, getTooltipMessage(validity, formula, proverResult));
 	}
 
 	@Override
 	public final void invariantAndConditionImplyLoopPreconditionVerified(final Loop loop, final Validity validity,
-	                final ProverResult proverResult) {
-		this.markStatement(loop, validity, proverResult.getOutput());
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(loop, validity, getTooltipMessage(validity, formula, proverResult));
 	}
 
 	@Override
 	public final void postconditionValidVerified(final Postcondition postcondition, final Validity validity,
-	                final ProverResult proverResult) {
-		this.markStatement(postcondition, validity, proverResult.getOutput());
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(postcondition, validity, getTooltipMessage(validity, formula, proverResult));
 	}
 
 	/**

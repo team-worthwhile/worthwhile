@@ -312,25 +312,31 @@ public class SpecificationChecker {
 				switch (provable.getImplication()) {
 				case ASSERTION_VALID:
 					this.listener.assertionVerified((Assertion) provable.getRelatedAstNodes()
-					                .get(0), validity, this.getCheckResult());
+					                .get(0), validity, provable.getExpression(), this
+					                .getCheckResult());
 					break;
 				case INVARIANT_VALID_AT_ENTRY:
 					this.listener.invariantValidAtEntryVerified((Invariant) provable
-					                .getRelatedAstNodes().get(0), validity, this.getCheckResult());
+					                .getRelatedAstNodes().get(0), validity, provable
+					                .getExpression(), this.getCheckResult());
 					break;
 				case INVARIANT_AND_CONDITION_IMPLIES_LOOP_BODY_PRECONDITION:
 					this.listener.invariantAndConditionImplyLoopPreconditionVerified(
 					                (Loop) provable.getRelatedAstNodes().get(0), validity,
-					                this.getCheckResult());
+					                provable.getExpression(), this.getCheckResult());
 					break;
 				case POSTCONDITION_VALID:
 					this.listener.postconditionValidVerified((Postcondition) provable
-					                .getRelatedAstNodes().get(0), validity, this.getCheckResult());
+					                .getRelatedAstNodes().get(0), validity, provable
+					                .getExpression(), this.getCheckResult());
+					break;
+				default:
+					throw new RuntimeException("Unhandled proof implication type");
 				}
 			}
 		}
 		// fire the event listener for the whole verification
-		this.listener.programVerified(program, programValidity, this.getCheckResult());
+		this.listener.programVerified(program, programValidity, null, this.getCheckResult());
 		return programValidity;
 	}
 }

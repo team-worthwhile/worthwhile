@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import org.eclipse.swt.internal.theme.Theme;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -25,7 +26,8 @@ public interface IProverEventListener {
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */
-	void programVerified(final Program program, final Validity validity, final ProverResult proverResult);
+	void programVerified(final Program program, final Validity validity, final Expression formula,
+	                final ProverResult proverResult);
 
 	/**
 	 * Signals that that an assertion has been verified to be valid for one branch of execution.
@@ -37,7 +39,8 @@ public interface IProverEventListener {
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */
-	void assertionVerified(final Assertion assertion, final Validity validity, final ProverResult proverResult);
+	void assertionVerified(final Assertion assertion, final Validity validity, final Expression formula,
+	                final ProverResult proverResult);
 
 	/**
 	 * Signals that an {@link Invariant} for a loop has been verified to be valid at entry into the loop.
@@ -50,7 +53,7 @@ public interface IProverEventListener {
 	 *                the result returned by the prover
 	 */
 	void invariantValidAtEntryVerified(final Invariant invariant, final Validity validity,
-	                final ProverResult proverResult);
+	                final Expression formula, final ProverResult proverResult);
 
 	/**
 	 * Signals that the {@link Invariant} and {@link Theme} condition of a loop implying the block postcondition has
@@ -64,7 +67,7 @@ public interface IProverEventListener {
 	 *                the result returned by the prover
 	 */
 	void invariantAndConditionImplyLoopPreconditionVerified(final Loop loop, final Validity validity,
-	                final ProverResult proverResult);
+	                final Expression formula, final ProverResult proverResult);
 
 	/**
 	 * Signals that the Validity of a function {@link Postcondition} has been verified.
@@ -77,5 +80,5 @@ public interface IProverEventListener {
 	 *                the result returned by the prover
 	 */
 	void postconditionValidVerified(final Postcondition postcondition, final Validity validity,
-	                final ProverResult proverResult);
+	                final Expression formula, final ProverResult proverResult);
 }

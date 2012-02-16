@@ -1020,6 +1020,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
 			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError(currentStatement));
+			this.resultStack.push(new BooleanValue(false));
 			return;
 		} else {
 			this.resultStack.push(new BooleanValue(validity.equals(Validity.VALID)));

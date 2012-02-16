@@ -901,6 +901,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.Minus)
 	 */
 	public void visit(Minus minus) {
+		minus.getOperand().accept(this);
 		this.resultStack.push(new IntegerValue(this.popIntegerValue().getValue().negate()));
 		this.expressionEvaluated(minus);
 	}
@@ -975,7 +976,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.Plus)
 	 */
 	public void visit(Plus plus) {
-		plus.accept(this);
+		plus.getOperand().accept(this);
 		this.expressionEvaluated(plus);
 	}
 

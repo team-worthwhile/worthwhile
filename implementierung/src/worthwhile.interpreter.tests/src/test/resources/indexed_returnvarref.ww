@@ -1,0 +1,8 @@
+function Integer[] test2(Integer N, Integer[] a)
+  _ensures _return[0] ≥ 0
+{
+  return a
+}
+
+Integer[] test := test2(6, {6, 4, 2, 3, 5, 1})
+_assert test = {6, 4, 2, 3, 5, 1}

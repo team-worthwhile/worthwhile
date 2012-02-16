@@ -3,15 +3,18 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.math.BigInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
@@ -200,6 +203,14 @@ public class InterpreterASTNodeVisitorTest {
 		                                + "}\n" + "{\n" + "Integer result := x(5)\n" + "_assert result = 42 \n"
 		                                + "}\n"), new SpecificationChecker());
 
+		interpreter.execute();
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testIndexedReturnVariableReference() throws IOException {
+		Program program = TestASTProvider.getRootASTNode(TestUtils.loadTestProgram(this.getClass(), "indexed_returnvarref.ww"));
+		Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
 		interpreter.execute();
 		assertTrue(true);
 	}

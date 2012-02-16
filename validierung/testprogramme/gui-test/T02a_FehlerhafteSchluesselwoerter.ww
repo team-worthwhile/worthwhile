@@ -1,0 +1,32 @@
+/*
+ * Some nonsense program.
+ */
+moixa_ eslaf => eurt
+
+// This is a function called func.
+noitcnuf regeinI func(naelooB adams)
+	seriuqer_ adams = eslaf || adams = eurt
+	serusne_ nruter_ >= 0
+	serusne_ (adams => (nruter_ = 42)) && (!adams => (nruter_ = 0))
+{
+	fi (adams) {
+		nruter 42
+	} esle {
+		nruter 0
+	}
+}
+
+naelooB b := false
+regeinI i := 0
+
+regeinI[] funcresults := {func(b), func(!b)}
+
+tressa_ stsixe regeinI j, 0 ≤ j ∧ j ≤ 1 : funcresults[j] ≥ 0
+emussa_ llarof regeinI k, 0 ≤ k ∧ k ≤ 1 : funcresults[k] ≥ 0
+
+elihw (i ≤ 1) {
+	i := i + funcresults[i]
+	i := i + 1
+}
+
+tressa_ i = 42

@@ -1,0 +1,57 @@
+Integer i01 := /2
+
+Integer i02 := 2/
+
+Integer i03 := ⋅2
+
+Integer i04 := 2⋅
+
+Integer i06 := 2+
+
+Integer i08 := 2-
+
+Integer i09 := %2
+
+Integer i10 := 2%
+
+Boolean b01 := ≥2
+
+Boolean b02 := 2≥
+
+Boolean b03 := ≤2
+
+Boolean b04 := 2≤
+
+Boolean b05 := >2
+
+Boolean b06 := 2>
+
+Boolean b07 := <2
+
+Boolean b08 := 2<
+
+Boolean b09 := =2
+
+Boolean b10 := 2=
+
+Boolean b11 := ≠2
+
+Boolean b12 := 2≠
+
+Boolean b13 := ∧true
+
+Boolean b14 := true∧
+
+Boolean b15 := ∨true
+
+Boolean b16 := true∨
+
+Boolean b17 := ⇒true
+
+Boolean b18 := true⇒
+
+Boolean b19 := ⇔true
+
+Boolean b20 := true⇔
+
+Boolean b21 := true¬false

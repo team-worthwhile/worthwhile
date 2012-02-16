@@ -301,10 +301,13 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			precondition.setExpression(AstNodeCreatorHelper.createImplication(
 			                AstNodeCloneHelper.clone(ensures), precondition.getExpression()));
 
-			// wrap all the preconditions in foralls because they have to be true for all parameters
-			final FreshVariableSetVisitor freshVariableSet = new FreshVariableSetVisitor();
-			precondition.getExpression().accept(freshVariableSet);
-			for (final VariableDeclaration v : freshVariableSet.getVariableMap().values()) {
+			// wrap all the preconditions in foralls because they have to be true for all parameters - only
+			// the function parameters should be unbound by now, everything else should have been wp'd
+			// already
+			final UnboundVariableFinderVisitor unboundVariableFinder = new UnboundVariableFinderVisitor();
+			precondition.getExpression().accept(unboundVariableFinder);
+
+			for (final VariableDeclaration v : unboundVariableFinder.getUnboundVariables()) {
 				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(v,
 				                precondition.getExpression());
 				precondition.setExpression(forall);

@@ -158,15 +158,15 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 			                                .equals(Validity.VALID))) {
 
 				switch (validity) {
-					case VALID:
-						this.markerHelper.markSucceededStatement(statement, message);
-						break;
-					case INVALID:
-					case UNKNOWN:
-						this.markerHelper.markFailedStatement(statement, message);
-						break;
-					default:
-						break;
+				case VALID:
+					this.markerHelper.markSucceededStatement(statement, message);
+					break;
+				case INVALID:
+				case UNKNOWN:
+					this.markerHelper.markFailedStatement(statement, message);
+					break;
+				default:
+					break;
 				}
 
 			}

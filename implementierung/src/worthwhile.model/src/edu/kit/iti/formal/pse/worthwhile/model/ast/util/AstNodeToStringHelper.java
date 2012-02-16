@@ -200,7 +200,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Conjunction conjunction) {
-		this.appendBinaryExpression(conjunction, "&&");
+		this.appendBinaryExpression(conjunction, "∧");
 	}
 
 	@Override
@@ -241,7 +241,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final LessOrEqual lessOrEqual) {
-		this.appendBinaryExpression(lessOrEqual, "<=");
+		this.appendBinaryExpression(lessOrEqual, "≤");
 	}
 
 	@Override
@@ -314,18 +314,18 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Implication implication) {
-		this.appendBinaryExpression(implication, "=>");
+		this.appendBinaryExpression(implication, "⇒");
 	}
 
 	@Override
 	public void visit(final Negation negation) {
-		this.buf.append("!");
+		this.buf.append("¬");
 		negation.getOperand().accept(this);
 	}
 
 	@Override
 	public void visit(final Multiplication multiplication) {
-		this.appendBinaryExpression(multiplication, "*");
+		this.appendBinaryExpression(multiplication, "∙");
 	}
 
 	@Override
@@ -336,7 +336,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final ForAllQuantifier forAllQuantifier) {
-		this.buf.append("forall ");
+		this.buf.append("∀ ");
 		forAllQuantifier.getParameter().accept(this);
 
 		Expression condition = forAllQuantifier.getCondition();
@@ -351,7 +351,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	
 	@Override
 	public void visit(final ExistsQuantifier existsQuantifier) {
-		this.buf.append("exists ");
+		this.buf.append("∃ ");
 		existsQuantifier.getParameter().accept(this);
 
 		Expression condition = existsQuantifier.getCondition();
@@ -427,12 +427,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Unequal unequal) {
-		this.appendBinaryExpression(unequal, "!=");
+		this.appendBinaryExpression(unequal, "≠");
 	}
 
 	@Override
 	public void visit(final GreaterOrEqual greaterOrEqual) {
-		this.appendBinaryExpression(greaterOrEqual, ">=");
+		this.appendBinaryExpression(greaterOrEqual, "≥");
 	}
 
 	@Override
@@ -442,6 +442,6 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final Disjunction disjunction) {
-		this.appendBinaryExpression(disjunction, "||");
+		this.appendBinaryExpression(disjunction, "∨");
 	}
 }

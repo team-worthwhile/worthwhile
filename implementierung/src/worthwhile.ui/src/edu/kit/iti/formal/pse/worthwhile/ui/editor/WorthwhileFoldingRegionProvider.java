@@ -51,10 +51,10 @@ public class WorthwhileFoldingRegionProvider extends DefaultFoldingRegionProvide
 	 * 
 	 * It folds the following statements:
 	 * <ul>
-	 * 	<li>Function Declarations</li>
-	 * 	<li>Conditionals (both true and false block)</li>
-	 * 	<li>Loops</li>
-	 * 	<li>The main block of a program</li>
+	 * <li>Function Declarations</li>
+	 * <li>Conditionals (both true and false block)</li>
+	 * <li>Loops</li>
+	 * <li>The main block of a program</li>
 	 * </ul>
 	 * 
 	 * @author Joachim
@@ -75,8 +75,10 @@ public class WorthwhileFoldingRegionProvider extends DefaultFoldingRegionProvide
 
 		@Override
 		public void visit(final Block node) {
-			for (Statement statement : node.getStatements()) {
-				statement.accept(this);
+			if (node.getStatements() != null) {
+				for (Statement statement : node.getStatements()) {
+					statement.accept(this);
+				}
 			}
 		}
 
@@ -94,13 +96,17 @@ public class WorthwhileFoldingRegionProvider extends DefaultFoldingRegionProvide
 		@Override
 		public void visit(final FunctionDeclaration node) {
 			this.getReturnValue().add(node);
-			node.getBody().accept(this);
+			if (node.getBody() != null) {
+				node.getBody().accept(this);
+			}
 		}
 
 		@Override
 		public void visit(final Loop node) {
 			this.getReturnValue().add(node);
-			node.getBody().accept(this);
+			if (node.getBody() != null) {
+				node.getBody().accept(this);
+			}
 		}
 
 		@Override

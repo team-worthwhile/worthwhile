@@ -219,7 +219,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			                AstNodeCloneHelper.clone(conditional.getCondition()),
 			                trueBlockPrecondition.getExpression());
 			Proof conditionalPrecondition = trueBlockPrecondition.clone();
-			conditionalPrecondition.setExpression(AstNodeCloneHelper.clone(conditionImpliesBlockPrecondition));
+			conditionalPrecondition.setExpression(AstNodeCloneHelper
+			                .clone(conditionImpliesBlockPrecondition));
 			preconditionList.add(conditionalPrecondition);
 		}
 

@@ -24,14 +24,16 @@ public class StatementInterpreterError extends InterpreterError {
 	/**
 	 * Sets the name of the error as it appears in the UI
 	 */
-	public StatementInterpreterError() {
+	public StatementInterpreterError(Statement statement) {
+		this.statement = statement;
 		this.name = "Statement interpreter error";
 	}
 	
 	/**
 	 * Sets the name of the error as it appears in the UI
 	 */
-	public StatementInterpreterError(String name) {
+	public StatementInterpreterError(Statement statement, String name) {
+		this.statement = statement;
 		this.name = name;
 	}
 

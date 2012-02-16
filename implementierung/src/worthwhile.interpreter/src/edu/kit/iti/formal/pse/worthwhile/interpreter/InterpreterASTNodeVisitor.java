@@ -242,12 +242,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * the statement which is currently executed
+	 */
+	private Statement currentStatement;
+	
+	/**
 	 * Signals that a {@link Statement} will be executed.
 	 * 
 	 * @param statement
 	 *                the <code>Statement</code> that will be executed
 	 */
 	private void statementWillExecute(Statement statement) {
+		this.currentStatement = statement;
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
 			listener.statementWillExecute(statement);
 		}
@@ -650,7 +656,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		division.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
-			expressionFailed(division, new DivisionByZeroInterpreterError());
+			expressionFailed(division, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
 			this.resultStack.push(new IntegerValue(left.getValue().divide(right.getValue())));
@@ -922,7 +928,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		modulus.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
-			expressionFailed(modulus, new DivisionByZeroInterpreterError());
+			expressionFailed(modulus, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
 			this.resultStack.push(new IntegerValue(left.getValue().mod(right.getValue())));
@@ -1013,7 +1019,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		}
 		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
-			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError());
+			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError(currentStatement));
 			return;
 		} else {
 			this.resultStack.push(new BooleanValue(validity.equals(Validity.VALID)));
@@ -1158,7 +1164,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (arrayValues.containsKey(index)) {
 				this.resultStack.push((Value) arrayValues.get(index));
 			} else {
-				expressionFailed(variableReference, new IllegalArrayAccessInterpreterError());
+				expressionFailed(variableReference, new IllegalArrayAccessInterpreterError(currentStatement));
 			}
 		}
 		this.expressionEvaluated(variableReference);

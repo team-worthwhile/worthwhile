@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
@@ -25,12 +25,12 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * The set of variables that is bound in the current visitor state.
 	 */
-	private Set<VariableDeclaration> boundVariables = new HashSet<VariableDeclaration>();
+	private Set<VariableDeclaration> boundVariables = new LinkedHashSet<VariableDeclaration>();
 
 	/**
 	 * The set of unbound variables that have to be declared.
 	 */
-	private Set<VariableDeclaration> unboundVariables = new HashSet<VariableDeclaration>();
+	private Set<VariableDeclaration> unboundVariables = new LinkedHashSet<VariableDeclaration>();
 
 	/**
 	 * @return the set of unbound variables in the visited {@link Expression}s

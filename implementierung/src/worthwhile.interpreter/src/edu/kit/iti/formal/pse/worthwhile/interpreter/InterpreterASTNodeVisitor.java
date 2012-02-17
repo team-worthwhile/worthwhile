@@ -1049,20 +1049,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementExecuted(returnStatement);
 	}
 
-/**
-	 * Pushes the return {@link Value] of a function onto the resultStack.
-	 * 
-	 * @param returnValueReference the ReturnValueReference to visit
-	 * 
-	 * @see
-	 * edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
-	 * .worthwhile.model.ast.ReturnValueReference)
-	 */
-	public void visit(ReturnValueReference returnValueReference) {
-		this.resultStack.push(this.getReturnValue());
-		this.expressionEvaluated(returnValueReference);
-	}
-
 	/**
 	 * subtracts the {@link IntegerValue} of the {@link expression} subtraction.right from the {@link IntegerValue}
 	 * of the {@link expression} subtraction.left and pushes the result on the resultStack.
@@ -1143,7 +1129,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Pushes the {@link Value} of the referenced variable onto the resultStack
+	 * Pushes the {@link Value} of the referenced variable or return {@link Value] of a function onto the resultStack
 	 * 
 	 * @param variableReference
 	 *                the VariableReference to visit
@@ -1152,16 +1138,24 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.VariableReference)
 	 */
 	public void visit(VariableReference variableReference) {
+		Value variableValue;
+		if (variableReference instanceof ReturnValueReference) {
+			variableValue = this.getReturnValue();
+		}
+		else {
+			variableValue = this.getSymbol(variableReference.getVariable());
+		}
 		if (variableReference.getIndex() == null) {
-			this.resultStack.push(this.getSymbol(variableReference.getVariable()));
+			this.resultStack.push(variableValue);
+			
 		} else {
 			// Evaluate the index expression
 			variableReference.getIndex().accept(this);
 			BigInteger index = this.popIntegerValue().getValue();
 
 			// Get the appropriate value from the array, or throw an error if the index is out of bounds.
-			CompositeValue<?> completeArray = (CompositeValue<?>) this.getSymbol(variableReference
-			                .getVariable());
+			CompositeValue<?> completeArray = (CompositeValue<?>) variableValue;
+			
 			Map<BigInteger, ?> arrayValues = completeArray.getSubValues();
 			if (arrayValues.containsKey(index)) {
 				this.resultStack.push((Value) arrayValues.get(index));

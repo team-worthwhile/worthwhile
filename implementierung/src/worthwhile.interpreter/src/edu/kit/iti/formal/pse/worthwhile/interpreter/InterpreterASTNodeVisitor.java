@@ -1041,6 +1041,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
+			this.functionReturned = true;
 		} catch (StatementException e) {
 			this.executionFailed(returnStatement, e.getError());
 			return;

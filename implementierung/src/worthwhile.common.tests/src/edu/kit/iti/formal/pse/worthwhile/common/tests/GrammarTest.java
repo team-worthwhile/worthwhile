@@ -35,5 +35,17 @@ public class GrammarTest {
 		TestASTProvider.getRootASTNode(testAST);
 		assertEquals(0, TestASTProvider.getErrorCount(testAST));
 	}
+	
+	/**
+	 * Tests that the spacing in conditional expressions is irrelevant.
+	 */
+	@Test
+	public final void testConditionalExpressionSpacing() {
+		String testAST = "if (false) { }\nelse { }\n"
+				+ "if (false) \n { \n } \n else \n { \n } \n"
+				+ "if (false) { \n } \n else { \n }\n";
+		
+		TestUtils.assertErrorCountEquals(0,  TestASTProvider.loadProgram(testAST));
+	}
 
 }

@@ -19,6 +19,6 @@ public class UnknownValidityInterpreterError extends StatementInterpreterError {
 	 *            the statement which produced the error
 	 */
 	public UnknownValidityInterpreterError(final Statement statement) {
-		super(statement, "Unknown-validity interpreter error");
+		super(statement, "Unknown validity");
 	}
 }

@@ -17,6 +17,6 @@ public class DivisionByZeroInterpreterError extends StatementInterpreterError {
 	 *            the statement which produced the error
 	 */
 	public DivisionByZeroInterpreterError(final Statement statement) {
-		super(statement, "Division-by-zero interpreter error");
+		super(statement, "Division by zero");
 	}
 }

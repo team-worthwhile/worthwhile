@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
@@ -1122,6 +1123,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
+			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE.createVariableDeclaration();
+			variableDeclaration.setName("_return");
+			//copy the return value into a new variable named "_return" just for the prover
+			this.setSymbol(variableDeclaration, this.resultStack.peek());
 			this.functionReturned = true;
 		} catch (StatementException e) {
 			this.executionFailed(returnStatement, e.getError());

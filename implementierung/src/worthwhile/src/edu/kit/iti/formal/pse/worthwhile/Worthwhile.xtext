@@ -76,7 +76,7 @@ Invariant returns Invariant:
 
 // An if statement specifies a conditional Expression.
 IfStatement returns Conditional:
-	'if' condition=Expression trueBlock=BracedBlock ('else' falseBlock=BracedBlock)?
+	'if' condition=Expression NL* trueBlock=BracedBlock (NL* 'else' NL* falseBlock=BracedBlock)?
 ;
 
 // A function declaration declares a function name, parameters, return type, and function body.

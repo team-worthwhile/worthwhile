@@ -299,14 +299,16 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				this.mode = DebugMode.STEP;
 			}
 		}
-		
+
 		this.currentNode = null;
 	}
 
 	@Override
 	public final void annotationFailed(final Annotation annotation) {
 		this.getDebugTarget().annotationFailed(annotation);
-		this.suspendExecution(DebugEvent.BREAKPOINT);
+		if (!DebugMode.RUN.equals(this.mode)) {
+			this.suspendExecution(DebugEvent.BREAKPOINT);
+		}
 	}
 
 	@Override

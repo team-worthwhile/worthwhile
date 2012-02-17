@@ -1,7 +1,5 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import org.eclipse.swt.internal.theme.Theme;
-
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
@@ -56,7 +54,7 @@ public interface IProverEventListener {
 	                final Expression formula, final ProverResult proverResult);
 
 	/**
-	 * Signals that the {@link Invariant} and {@link Theme} condition of a loop implying the block postcondition has
+	 * Signals that the {@link Invariant} and condition of a loop implying the block postcondition has
 	 * been verified.
 	 * 
 	 * @param program

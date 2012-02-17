@@ -1,0 +1,19 @@
+function Integer square_root(Integer radikant, Integer start)
+_ensures _return ⋅ _return > radikant - _return ∧ _return ⋅ _return < radikant + _return
+{
+	Integer rad := radikant
+	Integer x := start
+	Integer y
+	
+	while(x ≠ y) {
+		y := x
+		
+		x := (y + rad / y) / 2
+	}
+	
+	return x
+}
+
+//Be careful this test has still some errors, the function might not terminate.
+Integer a := square_root(226, 1)
+

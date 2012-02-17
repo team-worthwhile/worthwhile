@@ -1,0 +1,58 @@
+// A sample finite deterministic automaton
+
+// Simulates the automaton.
+//  - inputLength: The length of the input
+//  - input: The input itself
+//  - startingState: The number of the starting state
+//  - numCharacters: Number of characters in the input alphabet
+//  - transition: The transition function. Contains a block of size [numCharacters] for each state,
+//    where for each character the next state upon reading that character is specified.
+//
+// Returns a list of the states the automaton goes through.
+function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer startingState, Integer numCharacters, Integer[] transition)
+	_requires inputLength ≥ 0
+	_requires startingState ≥ 0
+	_requires ∀ Integer i1 : input[i1] ≥ 0
+	
+	_ensures _return[0] = startingState
+	_ensures ∀ Integer i2, 0 < i2 ∧ i2 ≤ inputLength : _return[i2] = transition[numCharacters ⋅ _return[i2-1] + input[i2-1]]
+{
+	Integer positionOnTape := 0
+	Integer currentState := startingState
+	Integer[] result := {currentState} 
+	
+	while (positionOnTape < inputLength)
+		_invariant positionOnTape ≤ inputLength
+		_invariant result[positionOnTape] = currentState
+	{
+		// Read current character
+		Integer currentCharacter := input[positionOnTape]
+		
+		// Determine next state and go into that state
+		currentState := transition[numCharacters ⋅ currentState + currentCharacter]
+		
+		// Advance input position
+		positionOnTape := positionOnTape + 1	
+		
+		// Write current state to result 
+		result[positionOnTape] := currentState
+	}
+	
+	return result
+}
+
+// Run an automaton that accepts exactly the words consisting of zero or more "1" 
+//  - Alphabet: {0, 1}
+//  - States: {0, 1}
+//  - Transition function:
+//
+//		q	0	1
+//	=============
+//		0	1	0
+//		1	1	1
+
+Integer[] res := runAutomaton(3, {1, 1, 1}, 0, 2, {1, 0, 1, 1})
+Boolean b := (res[3] = 0)
+
+//_assert ∀ Integer len, len ≥ 0 : ∀ Integer[] arrayInput, ∀ Integer j, 0 ≤ j ∧ j < len : arrayInput[j] = 1 : runAutomaton(len, arrayInput, 0, 2, {1, 0, 1, 1}) = true
+

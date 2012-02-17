@@ -21,6 +21,7 @@ PSE am KIT im WS 2011
    </configIni>
 
    <launcherArgs>
+      <vmArgs>-Xss2m -Dfile.encoding=UTF8</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 

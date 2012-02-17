@@ -16,7 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 public class InterpreterErrorTest {
 
-	@Test
+	@Test(expected=RuntimeException.class)
 	public void TestUnknownValidityInterpreterError() throws IOException {
 		Program program = TestASTProvider.getRootASTNode(TestUtils.loadTestProgram(this.getClass(), "fermat.ww"));
 		Interpreter interpreter = new Interpreter(program, new SpecificationChecker());

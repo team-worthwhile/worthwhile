@@ -3,15 +3,18 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.math.BigInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
@@ -45,10 +48,10 @@ public class InterpreterASTNodeVisitorTest {
 	 * @param actual
 	 *                the Value to be checked to be of integer type and equal <code>expected</code>
 	 */
-	private static void assertIntegerValueEquals(final Integer expected, final Value actual) {
+	private static void assertIntegerValueEquals(final BigInteger expected, final Value actual) {
 		Assert.assertNotNull(actual);
 		Assert.assertTrue(actual instanceof IntegerValue);
-		Assert.assertEquals(BigInteger.valueOf(expected), ((IntegerValue) actual).getValue());
+		Assert.assertEquals(expected, ((IntegerValue) actual).getValue());
 	}
 
 	/**
@@ -60,7 +63,7 @@ public class InterpreterASTNodeVisitorTest {
 	 * @param expected
 	 *                the <code>Integer</code> value the evaluated <code>expression</code> must equal
 	 */
-	private static void assertIntegerExpressionValueEquals(final String expression, final Integer expected) {
+	private static void assertIntegerExpressionValueEquals(final String expression, final BigInteger expected) {
 		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := "
 		                + expression + "\n"), new SpecificationChecker());
 		assertNotNull(interpreter);
@@ -72,6 +75,13 @@ public class InterpreterASTNodeVisitorTest {
 			}
 		});
 		interpreter.execute();
+	}
+
+	/**
+	 * @see InterpreterASTNodeVisitorTest#assertIntegerExpressionValueEquals(String, BigInteger)
+	 */
+	private static void assertIntegerExpressionValueEquals(final String expression, final Integer expected) {
+		assertIntegerExpressionValueEquals(expression, BigInteger.valueOf(expected));
 	}
 
 	/**
@@ -121,6 +131,18 @@ public class InterpreterASTNodeVisitorTest {
 	@Test
 	public void testInterpreterContexDivision() {
 		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("84 / 2", 42);
+	}
+
+	@Test
+	public void testInterpreterContextDivisionWithNegativeOperands() {
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("-1/-2", BigInteger.valueOf(-1)
+		                .divide(BigInteger.valueOf(-2)));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("-1/2", BigInteger.valueOf(-1)
+		                .divide(BigInteger.valueOf(2)));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("1/-2", BigInteger.valueOf(1)
+		                .divide(BigInteger.valueOf(-2)));
+		InterpreterASTNodeVisitorTest.assertIntegerExpressionValueEquals("1/2", BigInteger.valueOf(1)
+		                .divide(BigInteger.valueOf(2)));
 	}
 
 	@Test
@@ -176,17 +198,19 @@ public class InterpreterASTNodeVisitorTest {
 	@Test
 	public void testVisitReturnStatement() {
 		Interpreter interpreter = new Interpreter(
-		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n" +
-		                				"_ensures _return = 42\n" + 
-		                				"{\n" + 
-		                					"return 42\n" + 
-		                					"return 24\n" +
-		                				"}\n" + 
-		                				"{\n" + 
-		                				"Integer result := x(5)\n" + 
-		                				"_assert result = 42 \n" +
-		                				"}\n"), new SpecificationChecker());
+		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n"
+		                                + "_ensures _return = 42\n" + "{\n" + "return 42\n" + "return 24\n"
+		                                + "}\n" + "{\n" + "Integer result := x(5)\n" + "_assert result = 42 \n"
+		                                + "}\n"), new SpecificationChecker());
 
+		interpreter.execute();
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testIndexedReturnVariableReference() throws IOException {
+		Program program = TestASTProvider.getRootASTNode(TestUtils.loadTestProgram(this.getClass(), "indexed_returnvarref.ww"));
+		Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
 		interpreter.execute();
 		assertTrue(true);
 	}

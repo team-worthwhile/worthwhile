@@ -1,12 +1,17 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import static org.junit.Assert.assertEquals;
+import java.io.IOException;
+import java.math.BigInteger;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 public class InterpreterValueTest {
@@ -35,4 +40,25 @@ public class InterpreterValueTest {
 		assertEquals(true, listener.check);
 	}
 	
+	
+	@Test
+	public void testReturnStatmentExit() throws IOException {
+		// the testFunction should return after the first return statement, so it should return 20.
+		Program program = TestASTProvider.getRootASTNode("function Integer testFunction () {\n if (true) {\n return 20\n}\n return 10\n return 0\n }\n Integer a := testFunction()\n");
+		final Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
+		
+		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
+			@Override
+			public void statementExecuted(Statement statement) {
+				if (interpreter.getSymbol("a") != null) {
+					Assert.assertTrue(interpreter.getSymbol("a") instanceof IntegerValue);
+					Assert.assertEquals(new BigInteger("20"),
+							((IntegerValue) interpreter.getSymbol("a"))
+									.getValue());
+				}
+			}
+		});
+		interpreter.execute();
+		
+	}
 }

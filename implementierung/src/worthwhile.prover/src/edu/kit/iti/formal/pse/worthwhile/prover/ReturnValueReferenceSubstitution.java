@@ -1,7 +1,13 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  * Substitute {@link ReturnValueReference}s in an {@link Expression} with another {@link Expression}.
@@ -11,6 +17,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
  * 
  */
 class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
+	/**
+	 * The <code>Expression</code> <code>ReturnValueReferences</code> are substituted with.
+	 */
+	private final Expression substitute;
+
 	/**
 	 * Substitutes {@link ReturnValueReference}s with the given {@link Expression}.
 	 * 
@@ -39,11 +50,34 @@ class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	 *                the {@link Expression} {@link ReturnValueReference}s are substituted with
 	 */
 	ReturnValueReferenceSubstitution(final Expression substitute) {
-		super(substitute);
+		super(null);
+		this.substitute = substitute;
 	}
 
 	@Override
 	public void visit(final ReturnValueReference returnValueReference) {
+		final Expression index = returnValueReference.getIndex();
+		if (index != null) {
+			this.substitute.accept(new HierarchialASTNodeVisitor() {
+				@Override
+				public void visit(final ArrayFunction arrayFunction) {
+					final ArrayFunctionAccess substitute = AstNodeCreatorHelper
+					                .createArrayFunctionAccess(index, arrayFunction);
+					ReturnValueReferenceSubstitution.this.setSubstitute(substitute);
+				}
+
+				@Override
+				public void visit(final VariableReference variableReference) {
+					final VariableReference substitute = AstNodeCloneHelper
+					                .clone(variableReference);
+					substitute.setIndex(returnValueReference.getIndex());
+					ReturnValueReferenceSubstitution.this.setSubstitute(substitute);
+				}
+			});
+		} else {
+			this.setSubstitute(this.substitute);
+		}
+
 		this.setFound(true);
 	}
 }

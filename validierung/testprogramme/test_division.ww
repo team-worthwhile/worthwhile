@@ -1,6 +1,6 @@
-function division(a : Integer, b : Integer) : Integer {
-	c : Integer := b
-	d : Integer := 0
+function Integer division(Integer a, Integer b) {
+	Integer c := b
+	Integer d := 0
 	
 	if( b ≥ 0) {
 		while(c ≤ a) {

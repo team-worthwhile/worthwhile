@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 
 /**
  * Default listener for {@link Interpreter} events.
@@ -61,7 +62,8 @@ public abstract class AbstractExecutionEventListener {
 	 *                the invalid <code>Annotation</code>
 	 */
 	public void annotationFailed(final Annotation annotation) {
-		throw new RuntimeException(annotation.toString() + " is invalid.");
+		throw new RuntimeException(
+				AstNodeToStringHelper.toString(annotation) + " is invalid.");
 	}
 
 	/**

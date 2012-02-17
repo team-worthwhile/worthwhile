@@ -1,5 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.common.tests;
 
+import java.io.IOException;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -140,5 +142,15 @@ public final class WorthwhileTypesystemTest {
 		this.testTypeofEmptyArrayLiteralFunctionCall(
 		                "function Integer f(Integer[] a) {\nreturn 0\n}\nInteger v := f({ })\n",
 		                IntegerType.class);
+	}
+	
+	/**
+	 * Tests that an empty array literal cannot be assigned to a scalar variable.
+	 * @throws IOException when the test program fails to load
+	 */
+	@Test
+	public void testEmptyArrayLiteralToScalarAssignment() throws IOException {
+		String testProgram = TestUtils.loadTestProgram(this.getClass(), "test-validation-emptyarrayliteral.ww");
+		TestUtils.assertErrorCountEquals(4, TestASTProvider.loadProgram(testProgram));
 	}
 }

@@ -57,7 +57,7 @@ class ReplaceKeywordAutoEditStrategy implements IAutoEditStrategy {
 			int beginOfKeyword = command.offset - (keyword.length() - 1);
 
 			// Abort if we are currently in a single-line comment
-			String documentUntilNow = document.get(0, beginOfKeyword);
+			String documentUntilNow = document.get(0, command.offset);
 			int lastLineBreak = documentUntilNow.lastIndexOf("\n");
 			String currentLine = documentUntilNow.substring(lastLineBreak + 1);
 

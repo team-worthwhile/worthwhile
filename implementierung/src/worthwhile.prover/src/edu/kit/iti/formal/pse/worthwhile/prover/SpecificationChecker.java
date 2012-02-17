@@ -1,7 +1,9 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,22 +12,29 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
 
 /**
  * Facade class for the {@link edu.kit.iti.formal.pse.worthwhile.prover} package.
@@ -182,22 +191,47 @@ public class SpecificationChecker {
 		// TODO apply axiom list
 
 		Expression environmentExpression = AstNodeCreatorHelper.createTrueLiteral();
-		for (VariableDeclaration environmentVariable : environment.keySet()) {
+		for (final VariableDeclaration environmentVariable : environment.keySet()) {
 			// create a reference to the variable
 			VariableReference variableReference = AstNodeCreatorHelper
 			                .createVariableReference(environmentVariable);
 
 			Value variableValue = environment.get(environmentVariable);
 			// create the literal that epxresses the value of the symbol
-			Literal variableValueLiteral = null;
-			// TODO: array symbols
-			if (variableValue instanceof BooleanValue) {
-				variableValueLiteral = AstNodeCreatorHelper
-				                .createBooleanLiteral(((BooleanValue) variableValue).getValue());
-			} else if (variableValue instanceof IntegerValue) {
-				variableValueLiteral = AstNodeCreatorHelper
-				                .createIntegerLiteral(((IntegerValue) variableValue).getValue());
-			}
+			Literal variableValueLiteral = new ValueReturnVisitor<Literal>() {
+				@Override
+				public void visitBooleanValue(final BooleanValue value) {
+					this.setReturnValue(AstNodeCreatorHelper.createBooleanLiteral(value.getValue()));
+				}
+
+				@Override
+				public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
+					ArrayFunction arrayValue = null;
+
+					final Type baseType = ((ArrayType) environmentVariable.getType()).getBaseType();
+					if (baseType instanceof BooleanType) {
+						arrayValue = AstNodeCreatorHelper.createFalseArrayFunction();
+					} else if (baseType instanceof IntegerType) {
+						arrayValue = AstNodeCreatorHelper.createZeroArrayFunction();
+					}
+
+					for (Entry<BigInteger, T> entry : value.getSubValues().entrySet()) {
+						final Literal indexLiteral = AstNodeCreatorHelper
+						                .createIntegerLiteral(entry.getKey());
+						final Literal valueLiteral = this.apply(entry.getValue());
+						arrayValue = AstNodeCreatorHelper.createArrayFunction(indexLiteral,
+						                valueLiteral, arrayValue);
+					}
+
+					this.setReturnValue(arrayValue);
+				}
+
+				@Override
+				public void visitIntegerValue(final IntegerValue value) {
+					this.setReturnValue(AstNodeCreatorHelper.createIntegerLiteral(value.getValue()));
+
+				}
+			}.apply(variableValue);
 
 			// create the ref = literal expression
 			Equal equal = AstNodeCreatorHelper.createEqual(variableReference, variableValueLiteral);
@@ -288,7 +322,9 @@ public class SpecificationChecker {
 		// add assertions to check that the divisors are not zero
 		program.accept(new DivisionByZeroAssertionInserter());
 		program.accept(new ImplicitInitialValueInserter());
+		program.accept(new ArrayFunctionInserter());
 		program.accept(new FunctionCallSubstitution());
+
 		// generate formula from program
 		List<Proof> provableFormulas = this.transformer.transformProgram(program);
 		Validity programValidity = Validity.VALID;

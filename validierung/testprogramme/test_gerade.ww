@@ -1,13 +1,14 @@
-function even(x : Integer) : Boolean
-_ensures(((exists int k : 2 · k = x) and (\return = true)) or ((exists int k : 2*k - 1 = x) and (\return = false)))
+function Boolean even(Integer x)
+_ensures(((exists Integer k1 : 2 · k1 = x) ∧ (_return = true)) ∨ ((exists Integer k2 : 2*k2 - 1 = x) ∧ (_return = false)))
 {
-  temp : Integer := x % 2
+  Integer temp := x % 2
   if (temp = 0) {
     return true
   }
   if (temp = 1) {
     return false
   }
+  return false
 }
 
 /*

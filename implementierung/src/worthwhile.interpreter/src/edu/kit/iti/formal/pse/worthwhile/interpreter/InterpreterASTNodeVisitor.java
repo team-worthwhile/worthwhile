@@ -242,12 +242,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * the statement which is currently executed
+	 */
+	private Statement currentStatement;
+	
+	/**
 	 * Signals that a {@link Statement} will be executed.
 	 * 
 	 * @param statement
 	 *                the <code>Statement</code> that will be executed
 	 */
 	private void statementWillExecute(Statement statement) {
+		this.currentStatement = statement;
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
 			listener.statementWillExecute(statement);
 		}
@@ -650,7 +656,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		division.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
-			expressionFailed(division, new DivisionByZeroInterpreterError());
+			expressionFailed(division, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
 			this.resultStack.push(new IntegerValue(left.getValue().divide(right.getValue())));
@@ -901,6 +907,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.Minus)
 	 */
 	public void visit(Minus minus) {
+		minus.getOperand().accept(this);
 		this.resultStack.push(new IntegerValue(this.popIntegerValue().getValue().negate()));
 		this.expressionEvaluated(minus);
 	}
@@ -921,7 +928,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		modulus.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
-			expressionFailed(modulus, new DivisionByZeroInterpreterError());
+			expressionFailed(modulus, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
 			this.resultStack.push(new IntegerValue(left.getValue().mod(right.getValue())));
@@ -975,7 +982,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.Plus)
 	 */
 	public void visit(Plus plus) {
-		plus.accept(this);
+		plus.getOperand().accept(this);
 		this.expressionEvaluated(plus);
 	}
 
@@ -1012,7 +1019,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		}
 		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
-			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError());
+			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError(currentStatement));
+			this.resultStack.push(new BooleanValue(false));
 			return;
 		} else {
 			this.resultStack.push(new BooleanValue(validity.equals(Validity.VALID)));
@@ -1033,25 +1041,12 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
+			this.functionReturned = true;
 		} catch (StatementException e) {
 			this.executionFailed(returnStatement, e.getError());
 			return;
 		}
 		this.statementExecuted(returnStatement);
-	}
-
-/**
-	 * Pushes the return {@link Value] of a function onto the resultStack.
-	 * 
-	 * @param returnValueReference the ReturnValueReference to visit
-	 * 
-	 * @see
-	 * edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
-	 * .worthwhile.model.ast.ReturnValueReference)
-	 */
-	public void visit(ReturnValueReference returnValueReference) {
-		this.resultStack.push(this.getReturnValue());
-		this.expressionEvaluated(returnValueReference);
 	}
 
 	/**
@@ -1134,7 +1129,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Pushes the {@link Value} of the referenced variable onto the resultStack
+	 * Pushes the {@link Value} of the referenced variable or return {@link Value] of a function onto the resultStack
 	 * 
 	 * @param variableReference
 	 *                the VariableReference to visit
@@ -1143,21 +1138,29 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.VariableReference)
 	 */
 	public void visit(VariableReference variableReference) {
+		Value variableValue;
+		if (variableReference instanceof ReturnValueReference) {
+			variableValue = this.getReturnValue();
+		}
+		else {
+			variableValue = this.getSymbol(variableReference.getVariable());
+		}
 		if (variableReference.getIndex() == null) {
-			this.resultStack.push(this.getSymbol(variableReference.getVariable()));
+			this.resultStack.push(variableValue);
+			
 		} else {
 			// Evaluate the index expression
 			variableReference.getIndex().accept(this);
 			BigInteger index = this.popIntegerValue().getValue();
 
 			// Get the appropriate value from the array, or throw an error if the index is out of bounds.
-			CompositeValue<?> completeArray = (CompositeValue<?>) this.getSymbol(variableReference
-			                .getVariable());
+			CompositeValue<?> completeArray = (CompositeValue<?>) variableValue;
+			
 			Map<BigInteger, ?> arrayValues = completeArray.getSubValues();
 			if (arrayValues.containsKey(index)) {
 				this.resultStack.push((Value) arrayValues.get(index));
 			} else {
-				expressionFailed(variableReference, new IllegalArrayAccessInterpreterError());
+				expressionFailed(variableReference, new IllegalArrayAccessInterpreterError(currentStatement));
 			}
 		}
 		this.expressionEvaluated(variableReference);

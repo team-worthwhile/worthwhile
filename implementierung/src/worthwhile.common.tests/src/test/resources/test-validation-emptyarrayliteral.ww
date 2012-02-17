@@ -1,0 +1,15 @@
+function Integer a(Integer b) {
+	return 42
+}
+
+function Integer c(Boolean d) {
+	return 42
+}
+
+
+Integer i
+i := a({}) // An error should appear here.
+i := c({}) // An error should appear here.
+
+Integer j := {} // An error should appear here.
+Boolean k := {} // An error should appear here.

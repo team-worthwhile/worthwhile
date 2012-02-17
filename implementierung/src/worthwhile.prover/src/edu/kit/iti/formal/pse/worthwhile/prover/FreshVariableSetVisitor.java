@@ -3,6 +3,8 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
@@ -41,6 +43,27 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public final void visit(final Literal literal) {
 		// do nothing for Literals
+	}
+
+	@Override
+	public final void visit(final ArrayFunction arrayFunction) {
+		final Expression index = arrayFunction.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
+
+		arrayFunction.getValue().accept(this);
+
+		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();
+		if (chainedFunction != null) {
+			chainedFunction.accept(this);
+		}
+	}
+
+	@Override
+	public final void visit(final ArrayFunctionAccess arrayFunctionAccess) {
+		arrayFunctionAccess.getIndex().accept(this);
+		arrayFunctionAccess.getFunction().accept(this);
 	}
 
 	@Override

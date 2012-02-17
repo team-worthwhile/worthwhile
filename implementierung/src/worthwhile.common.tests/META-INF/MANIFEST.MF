@@ -6,7 +6,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .,
  junit.jar
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
- edu.kit.iti.formal.pse.worthwhile
+ edu.kit.iti.formal.pse.worthwhile,
+ de.itemis.xtext.typesystem.testing;bundle-version="1.0.0"
 Import-Package: edu.kit.iti.formal.pse.worthwhile,
  edu.kit.iti.formal.pse.worthwhile.model.ast,
  org.eclipse.emf.common.util,

@@ -15,7 +15,7 @@ public class InterpreterError {
 	 */
 	public String getDescription() {
 		// begin-user-code
-		return "not further specified " + this.getClass().getName();
+		return "not further specified Interpreter error";
 		// end-user-code
 	}
 }

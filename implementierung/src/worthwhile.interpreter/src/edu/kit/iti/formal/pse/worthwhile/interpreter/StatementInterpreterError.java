@@ -4,14 +4,38 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 
 /**
  * The Class StatementInterpreterError.
  */
 public class StatementInterpreterError extends InterpreterError {
 	
-	/** The statement. */
+	/**
+	 * The statement.
+	 */
 	private Statement statement;
+	
+	/**
+	 * The name of the error as shown in the UI
+	 */
+	private String name;
+	
+	/**
+	 * Sets the name of the error as it appears in the UI
+	 */
+	public StatementInterpreterError(Statement statement) {
+		this.statement = statement;
+		this.name = "Statement interpreter error";
+	}
+	
+	/**
+	 * Sets the name of the error as it appears in the UI
+	 */
+	public StatementInterpreterError(Statement statement, String name) {
+		this.statement = statement;
+		this.name = name;
+	}
 
 	/**
 	 * Gets the statement.
@@ -43,7 +67,7 @@ public class StatementInterpreterError extends InterpreterError {
 	@Override
 	public String getDescription() {
 		// begin-user-code
-		return this.getClass().getName() + " at statement: " + statement.toString();
+		return this.name + " at statement: " + AstNodeToStringHelper.toString(statement);
 		// end-user-code
 	}
 }

@@ -1,6 +1,5 @@
-function max(a : Integer, b : Integer) : Integer
-_ensures((\return ≥ a) and (\return ≥ b) and ((\return = a) or (\return = b)))
-_ensures((forall i in {a, b} : \return ≥ i) and (exists i in {a, b} : \return = i))
+function Integer max(Integer a, Integer b)
+_ensures((_return ≥ a) ∧ (_return ≥ b) ∧ ((_return = a) ∨ (_return = b)))
 {
   if (a > b) {
     return a
@@ -8,6 +7,7 @@ _ensures((forall i in {a, b} : \return ≥ i) and (exists i in {a, b} : \return 
   if (b ≥ a) {
     return b
   }
+  return b
 }
 
 /*

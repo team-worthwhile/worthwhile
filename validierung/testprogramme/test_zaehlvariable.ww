@@ -1,6 +1,7 @@
+function Integer zaehlvariable(Integer n)
 _requires n >= 0
-_ensures \return = n
-
+_ensures _return = n
+{
 Integer t
 t := 0
 
@@ -11,6 +12,7 @@ while t < n
 }
 
 return t
+}
 
 /*
 (declare-const n Int)

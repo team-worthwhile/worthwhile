@@ -1,14 +1,18 @@
 // EXPECTED:VALID
 function Integer division(Integer a, Integer b)
-_ensures _return = a / b
+_requires a >= 0
+_requires b > 0
+_ensures _return * b <= a
+_ensures _return * b > a - b
 {
     Integer c := b
     Integer d := 0
-    if b >= 0 {
-        while c <= a {
-            c := c + b
-            d := d + 1
-        }
+    while c <= a
+    _invariant c = d * b + b
+    _invariant d * b <= a
+    {
+        c := c + b
+        d := d + 1
     }
     return d
 }

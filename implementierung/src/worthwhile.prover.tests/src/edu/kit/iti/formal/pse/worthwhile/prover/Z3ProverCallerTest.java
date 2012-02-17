@@ -58,6 +58,8 @@ public final class Z3ProverCallerTest {
 	@Test
 	public void testIntegerArrayEquals() throws ProverCallerException {
 		Expression formula = TestASTProvider.parseFormulaString("{1, 2, 3} = {2 + 4 - 5, 2 * 1, 2 + 1}");
+		// translate ArrayLiterals occurring in the formula AST into ArrayFunctions
+		formula.accept(new ArrayFunctionInserter());
 		ProverResult result = this.prover.checkFormula(formula);
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
 	}
@@ -69,6 +71,8 @@ public final class Z3ProverCallerTest {
 	@Test
 	public void testBooleanArrayEquals() throws ProverCallerException {
 		Expression formula = TestASTProvider.parseFormulaString("{true, false} = { true || false, 5 + 1 = 3}");
+		// translate ArrayLiterals occurring in the formula AST into ArrayFunctions
+		formula.accept(new ArrayFunctionInserter());
 		ProverResult result = this.prover.checkFormula(formula);
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());
 	}

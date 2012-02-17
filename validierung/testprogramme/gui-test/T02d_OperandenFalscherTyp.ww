@@ -1,0 +1,66 @@
+Integer i01 := 1 + true
+
+Integer i02 := true + 1
+
+Integer i03 := 1 - true
+
+Integer i04 := true - 1
+
+Integer i05 := 1 ⋅ true
+
+Integer i06 := true ⋅ 1
+
+Integer i07 := 1 / true
+
+Integer i08 := true / 1
+
+Integer i09 := 1 % true
+
+Integer i10 := true % 1
+
+Integer i11 := -true
+
+Integer i12 := +true
+
+Boolean b01 := 2 ⇒ true
+
+Boolean b02 := true ⇒ 2
+
+Boolean b03 := 2 ⇔ true
+
+Boolean b04 := true ⇔ 2
+
+Boolean b05 := 2 ≥ true
+
+Boolean b06 := true ≥ 2
+
+Boolean b07 := 2 ≤ true
+
+Boolean b08 := true ≤ 2
+
+Boolean b09 := 2 < true
+
+Boolean b10 := true < 2
+
+Boolean b11 := 2 > true
+
+Boolean b12 := true > 2
+
+Boolean b13 := 2 = true
+
+Boolean b14 := true = 2
+
+Boolean b15 := 2 ∧ true
+
+Boolean b16 := true ∧ 2
+
+Boolean b17 := 2 ∨ true
+
+Boolean b18 := true ∨ 2
+
+Boolean b19 := 2 ≠ true
+
+Boolean b20 := true ≠ 2
+
+Boolean b21 := ¬2 
+ 

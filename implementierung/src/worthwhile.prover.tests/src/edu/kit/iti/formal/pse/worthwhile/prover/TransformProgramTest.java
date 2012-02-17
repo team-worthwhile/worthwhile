@@ -50,6 +50,7 @@ public final class TransformProgramTest {
 	private void testTransformProgram(final String program, final Expression expected) {
 		final Program p = this.getProgram(program);
 		p.accept(new ImplicitInitialValueInserter());
+		p.accept(new ArrayFunctionInserter());
 		final Expression actual = this.transformer.transformProgram(p);
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
@@ -107,6 +108,16 @@ public final class TransformProgramTest {
 		this.testTransformProgram(
 		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
 		                expected);
+
+		expected = this.getExpression("2 = 2 && (2 = 2 && ({ 2 } = { 2 } && true))");
+		this.testTransformProgram("Integer i := 0\n"
+		                + "Integer j := 0\n"
+		                + "Integer[] a\n"
+		                + "a[i] := 1\n"
+		                + "a[j] := 2\n"
+		                + "_assert a[i] = 2\n"
+		                + "_assert a[j] = 2\n"
+		                + "_assert a = { 2 }\n", expected);
 	}
 
 	/**
@@ -247,16 +258,60 @@ public final class TransformProgramTest {
 		testProgram.accept(new FunctionCallSubstitution());
 		final Expression actual = this.transformer.transformProgram(testProgram);
 
-		final Expression expected = this.getExpression("(forall Integer t : (t = 0 || t = 1) =>"
-		                + "(t = 0 && -1 = 1 || t = 1 && -1 = 0))"
-		                + "&& ((2 = 0 || 2 = 1)" + "&& (forall Integer _f0 :"
-		                + "((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
-		                + "(((2 = 0 || 2 = 1) && (forall Integer _f1 :"
-		                + "(((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) =>"
-		                + "((_f1 = -1) && (forall Integer _f1 : (forall Integer _f0 :"
-		                + "(_f0 = -1 && _f1 = -1) => _f1 = -1)) && (forall Integer _f1 :"
-		                + "(forall Integer _f0 :" + "(!(_f0 = -1) && _f1 = -1) => true)))))))))");
+		final Expression expected = this.getExpression(
+		                  "(forall Integer t : (t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
+		                + "&&"
+		                + "((2 = 0 || 2 = 1) &&"
+		                + " (forall Integer _f0 : ((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
+		                + "  ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "  &&"
+		                + "  (forall Integer _f0 :"
+		                + "   (_f0 = -1 && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "    => ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "   )"
+		                + "  )"
+		                + "  &&"
+		                + "  (forall Integer _f0 :"
+		                + "   (!(_f0 = -1) && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                + "    => true"
+		                + "   )"
+		                + "  )"
+		                + " )"
+		                + ")");
 
+		TransformProgramTest.assertASTNodeEqual(expected, actual);
+	}
+
+	/**
+	 * Tests the transformation of {@link FunctionCall}s in function contract {@link Precondition}s/
+	 * {@link Postcondition}s.
+	 */
+	@Test
+	public void contractFunctionCallRule() {
+		final Program testProgram = this.getProgram(
+		                  "function Integer fiver()\n"
+		                + "_ensures _return = 5\n"
+		                + "{\n"
+		                + "return 5\n"
+		                + "}\n"
+		                + "function Integer five()\n"
+		                + "_ensures _return = fiver()\n"
+		                + "{\n"
+		                + "return fiver()\n"
+		                + "}\n");
+		testProgram.accept(new FunctionCallSubstitution());
+		final Expression actual = this.transformer.transformProgram(testProgram);
+		
+		final Expression expected = this.getExpression(
+		                  "(true => 5 = 5)"
+		                + "&&"
+		                + "(true =>"
+		                + " (forall Integer _fiver1 : _fiver1 = 5 =>"
+		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)"
+		                + " )"
+		                + ")"
+		                + "&& true");
+		
 		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
 }

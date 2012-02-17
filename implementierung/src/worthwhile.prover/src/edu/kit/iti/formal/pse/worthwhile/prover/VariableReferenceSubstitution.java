@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 
 /**
  * Substitute {@link VariableReference}s in an {@link Expression} with another {@link Expression}.
@@ -46,6 +47,11 @@ class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	private VariableDeclaration variable;
 
 	/**
+	 * The {@link Expression} occurrences of {@link VariableReferenceSubstitution#variable} are substituted with.
+	 */
+	private Expression substitute;
+
+	/**
 	 * 
 	 * @param variable
 	 *                the {@link VariableDeclaration} the substituted {@link VariableReference}s have to be
@@ -55,13 +61,23 @@ class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	 *                substituted with
 	 */
 	VariableReferenceSubstitution(final VariableDeclaration variable, final Expression substitute) {
-		super(substitute);
+		super(null);
 		this.variable = variable;
+		this.substitute = substitute;
 	}
 
 	@Override
 	public void visit(final VariableReference variableReference) {
-		if (variableReference.getVariable() == this.variable) {
+		final VariableDeclaration referencedVariable = variableReference.getVariable();
+
+		if (referencedVariable == this.variable) {
+			final Expression index = variableReference.getIndex();
+			if (index != null) {
+				this.setSubstitute(AstNodeCreatorHelper.createArrayFunctionAccess(index,
+				                this.substitute));
+			} else {
+				this.setSubstitute(this.substitute);
+			}
 			this.setFound(true);
 		}
 	}

@@ -13,19 +13,20 @@ A Worthwhile program is a piece of code in a simple while programming language. 
 <b>Example:</b><br>
 <pre>
 //At first there may be axioms:
-_axiom(&#8704Integer x, &#8704Integer y : (x+y)&#8226;(x+y) = x&#8226;x + 2&#8226;x&#8226;y + y&#8226;y)
+_axiom &#8704;Integer x &#8704;Integer y : (x+y)&#8901;(x+y) = x&#8901;x + 2&#8901;x&#8901;y + y&#8901;y
 
 //Before the main block there may be function declarations like this:
 function Integer pow(Integer base, Integer exponent) {
 	Integer result := base
+	Integer exp := exponent
 
-	if(exponent = 0) {
+	if(exp = 0) {
 		return 1
 	}
 
-	while( exponent > 1) {
-		result := result &#8226; base
-		exponent := exponent - 1
+	while(exp > 1) {
+		result := result &#8901; base
+		exp := exp - 1
 	}
 
 	return base

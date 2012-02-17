@@ -28,14 +28,15 @@ function Integer pow(Integer base, Integer exponent)
 _requires(exponent &#8805; 0)
 {
 	Integer result := base
+	Integer exp := exponent
 
-	if(exponent = 0) {
+	if(exp = 0) {
 		return 1
 	}
 
-	while( exponent > 1) {
-		result := result &#8226; base
-		exponent := exponent - 1
+	while(exp > 1) {
+		result := result &#8901; base
+		exp := exp - 1
 	}
 
 	return base

@@ -13,7 +13,7 @@ public class InterpreterError {
 	 *
 	 * @return the description
 	 */
-	public String getDescription() {
+	public final String getDescription() {
 		// begin-user-code
 		return "not further specified Interpreter error";
 		// end-user-code

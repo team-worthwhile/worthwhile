@@ -37,7 +37,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param error
 	 *                an {@link InterpreterError} object that describes the error
 	 */
-	public void executionFailed(final Statement statement, final InterpreterError error) {
+	public final void executionFailed(final Statement statement, final InterpreterError error) {
 		throw new RuntimeException("Failed to execute " + statement.toString() + "; Got error "
 		                + error.toString());
 	}
@@ -61,7 +61,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param annotation
 	 *                the invalid <code>Annotation</code>
 	 */
-	public void annotationFailed(final Annotation annotation) {
+	public final void annotationFailed(final Annotation annotation) {
 		throw new RuntimeException(
 				AstNodeToStringHelper.toString(annotation) + " is invalid.");
 	}
@@ -92,7 +92,7 @@ public abstract class AbstractExecutionEventListener {
 	 * @param error
 	 *                an {@link InterpreterError} object that describes the error
 	 */
-	public void expressionFailed(final Expression expression, final InterpreterError error) {
+	public final void expressionFailed(final Expression expression, final InterpreterError error) {
 		throw new RuntimeException("Failed to execute " + expression.toString() + "; Got error "
 		                + error.toString());
 	}

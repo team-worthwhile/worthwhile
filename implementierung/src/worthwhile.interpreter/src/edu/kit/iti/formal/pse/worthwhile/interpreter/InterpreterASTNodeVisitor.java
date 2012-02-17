@@ -139,7 +139,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	private Stack<Value> resultStack = new Stack<Value>();
 
 	/**
-	 * Indicates whether the function handled by this visitor has returned
+	 * Indicates whether the function handled by this visitor has returned.
 	 */
 	private boolean functionReturned = false;
 
@@ -249,6 +249,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * Constructs a new {@link InterpreterASTNodeVisitor} with the given
 	 * {@link SpecificationChecker}.
+	 * 
+	 * @param specificationChecker
+	 *            the prover used to check formulas
 	 */
 	protected InterpreterASTNodeVisitor(
 			final SpecificationChecker specificationChecker) {
@@ -269,7 +272,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * the statement which is currently executed
+	 * the statement which is currently executed.
 	 */
 	private Statement currentStatement;
 
@@ -362,6 +365,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * 
 	 * @param expression
 	 *            the <code>Expression</code> that failed
+	 * @param error
+	 *            the error that was caused
 	 */
 	private void expressionFailed(final Expression expression,
 			final InterpreterError error) {
@@ -556,6 +561,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.visitAnnotation(assertion);
 	}
 
+	/**
+	 * @param assumption the Assumption to visit
+	 */
 	public void visit(final Assumption assumption) {
 		// TODO do this
 	}
@@ -596,6 +604,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementExecuted(assignment);
 	}
 
+	/**
+	 * @param axiom the Axiom to visit
+	 */
 	public void visit(final Axiom axiom) {
 		// TODO do this
 	}
@@ -777,7 +788,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * executes a function with a new InterpreterASTNodeVisitor
+	 * executes a function with a new InterpreterASTNodeVisitor.
 	 * 
 	 * @param functionCall
 	 *            the called function

@@ -15,27 +15,31 @@ import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 
 /**
  * The facade for the interpreter module.
+ * 
  * @author Chris
- *
+ * 
  */
 public class Interpreter {
 	/**
-	 * The {@link Set} of {@link AbstractExecutionEventListener}s that are notified during execution.
+	 * The {@link Set} of {@link AbstractExecutionEventListener}s that are
+	 * notified during execution.
 	 */
 	private Set<AbstractExecutionEventListener> executionEventHandlers = new HashSet<AbstractExecutionEventListener>();
 
 	/**
-	 * The {@link InterpreterASTNodeVisitor} that is executing the {@link program}, if any.
+	 * The {@link InterpreterASTNodeVisitor} that is executing the
+	 * {@link program}, if any.
 	 */
 	private InterpreterASTNodeVisitor executingVisitor;
 
 	/**
 	 * Gets the current node visitor.
-	 *
-	 * @return the currently executing {@link InterpreterASTNodeVisitor} and <code>null</code> if
-	 * {@link Interpreter#execute()} has not been called yet
+	 * 
+	 * @return the currently executing {@link InterpreterASTNodeVisitor} and
+	 *         <code>null</code> if {@link Interpreter#execute()} has not been
+	 *         called yet
 	 */
-	public InterpreterASTNodeVisitor getCurrentNodeVisitor() {
+	public final InterpreterASTNodeVisitor getCurrentNodeVisitor() {
 		if (this.executingVisitor != null) {
 			return this.executingVisitor.getExecutingVisitor();
 		} else {
@@ -51,19 +55,26 @@ public class Interpreter {
 	/**
 	 * @return the {@link Program} ran by this {@link Interpreter} instance.
 	 */
-	public Program getProgram() {
+	public final Program getProgram() {
 		return program;
 	}
 
+	/**
+	 * the prover used to check formulas.
+	 */
 	private SpecificationChecker specificationChecker;
 
 	/**
-	 * Constructs a new {@link Interpreter} with the given program and specification checker.
-	 *
-	 * @param program the program to execute
-	 * @param specificationChecker the specification checker to use to prove some expressions
+	 * Constructs a new {@link Interpreter} with the given program and
+	 * specification checker.
+	 * 
+	 * @param program
+	 *            the program to execute
+	 * @param specificationChecker
+	 *            the specification checker to use to prove some expressions
 	 */
-	public Interpreter(final Program program, final SpecificationChecker specificationChecker) {
+	public Interpreter(final Program program,
+			final SpecificationChecker specificationChecker) {
 		this.program = program;
 		this.specificationChecker = specificationChecker;
 	}
@@ -74,37 +85,44 @@ public class Interpreter {
 	 * @see Interpreter#Interpreter(Program)
 	 * @see Interpreter#setProgram(Program)
 	 */
-	public void execute() {
-		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);
-		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
+	public final void execute() {
+		this.executingVisitor = new InterpreterASTNodeVisitor(
+				this.specificationChecker);
+		this.executingVisitor
+				.setExecutionEventHandlers(this.executionEventHandlers);
 		this.program.accept(executingVisitor);
 	}
 
 	/**
 	 * Adds the execution event handler.
-	 *
-	 * @param handler the handler
+	 * 
+	 * @param handler
+	 *            the handler
 	 */
-	public void addExecutionEventHandler(AbstractExecutionEventListener handler) {
+	public final void addExecutionEventHandler(
+			final AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.add(handler);
 	}
 
 	/**
 	 * Removes the execution event handler.
-	 *
-	 * @param handler the handler
+	 * 
+	 * @param handler
+	 *            the handler
 	 */
-	public void removeExecutionEventHandler(AbstractExecutionEventListener handler) {
+	public final void removeExecutionEventHandler(
+			final AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.remove(handler);
 	}
 
 	/**
 	 * Evaluate expression.
-	 *
-	 * @param expression the expression
+	 * 
+	 * @param expression
+	 *            the expression
 	 * @return the "return"-value of the expression
 	 */
-	public Value evaluateExpression(Expression expression) {
+	public final Value evaluateExpression(final Expression expression) {
 		InterpreterASTNodeVisitor visitor = this.getCurrentNodeVisitor();
 
 		if (visitor != null) {
@@ -119,40 +137,44 @@ public class Interpreter {
 
 	/**
 	 * Gets a symbol.
-	 *
-	 * @param key the key
+	 * 
+	 * @param key
+	 *            the key
 	 * @return the symbol
 	 */
-	public Value getSymbol(VariableDeclaration key) {
+	public final Value getSymbol(final VariableDeclaration key) {
 		return this.getCurrentNodeVisitor().getSymbol(key);
 	}
 
 	/**
 	 * Get the value of a symbol by its name.
-	 *
-	 * @param key the name of the Symbol to look up the value for
+	 * 
+	 * @param key
+	 *            the name of the Symbol to look up the value for
 	 * @return the current value of the Symbol or null if no such symbol exists
 	 */
-	public Value getSymbol(String key) {
+	public final Value getSymbol(final String key) {
 		return this.getCurrentNodeVisitor().getSymbol(key);
 	}
 
 	/**
 	 * Sets a symbol.
-	 *
-	 * @param key the key
-	 * @param value the value
+	 * 
+	 * @param key
+	 *            the key
+	 * @param value
+	 *            the value
 	 */
-	public void setSymbol(VariableDeclaration key, Value value) {
+	public final void setSymbol(final VariableDeclaration key, final Value value) {
 		this.getCurrentNodeVisitor().setSymbol(key, value);
 	}
 
 	/**
 	 * Gets all symbols.
-	 *
+	 * 
 	 * @return all symbols as Map
 	 */
-	public Map<VariableDeclaration, Value> getAllSymbols() {
+	public final Map<VariableDeclaration, Value> getAllSymbols() {
 		return this.getCurrentNodeVisitor().getAllSymbols();
 	}
 }

@@ -19,7 +19,7 @@ public class StatementException extends RuntimeException {
 	 *
 	 * @return the error
 	 */
-	public InterpreterError getError() {
+	public final InterpreterError getError() {
 		return this.error;
 	}
 
@@ -28,7 +28,7 @@ public class StatementException extends RuntimeException {
 	 *
 	 * @param error the error
 	 */
-	public StatementException(InterpreterError error) {
+	public StatementException(final InterpreterError error) {
 		this.error = error;
 	}
 }

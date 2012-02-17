@@ -299,11 +299,14 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				this.mode = DebugMode.STEP;
 			}
 		}
+		
+		this.currentNode = null;
 	}
 
 	@Override
 	public final void annotationFailed(final Annotation annotation) {
 		this.getDebugTarget().annotationFailed(annotation);
+		this.suspendExecution(DebugEvent.BREAKPOINT);
 	}
 
 	@Override
@@ -426,7 +429,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 				try {
 					this.wait();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -435,7 +437,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		// If we arrive here we have received the resume event.
 		resumeExecution();
 
-		this.currentNode = null;
 		this.changedVariables = new HashSet<VariableDeclaration>();
 	}
 

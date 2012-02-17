@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -227,6 +228,11 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void statementWillExecute(final Statement statement) {
+		// We don’t care about blocks, skip them.
+		if (statement instanceof Block) {
+			return;
+		}
+
 		this.currentNode = statement;
 		this.stepOverNode = null;
 
@@ -269,6 +275,11 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void statementExecuted(final Statement statement) {
+		// We don’t care about blocks, skip them.
+		if (statement instanceof Block) {
+			return;
+		}
+
 		// Check if a variable was changed during this statement.
 		if (this.changedVariableCandidates.size() > 0) {
 			VariableValueInfo changedVariable = new VariableValueVisitor().apply(statement);

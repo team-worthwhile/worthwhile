@@ -5,6 +5,8 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 /**
  * The Class InterpreterError.
+ * 
+ * @nocheckstyle:designforextension
  */
 public class InterpreterError {
 	
@@ -13,7 +15,7 @@ public class InterpreterError {
 	 *
 	 * @return the description
 	 */
-	public final String getDescription() {
+	public String getDescription() {
 		// begin-user-code
 		return "not further specified Interpreter error";
 		// end-user-code

@@ -1,9 +1,10 @@
-# Eingabe: k, n ∈ N
-y : Integer := n
+// Eingabe: k, n ∈ N
+function Integer zahlendarstellung(Integer n, Integer k) {
+Integer y := n
 
-m : Integer
-r : Integer
-w : Integer := 0
+Integer m
+Integer r
+Integer w := 0
 
 if (n > 0) {
    m := 1 + [ log k, n ]
@@ -12,14 +13,17 @@ else {
    m := 1
 }
 
-i : Integer := 0
+Integer i := 0
 
 while (i ≤ m - 1)
 _invariant w + y · k^i = n
 {
-   r := y modulo k
+   r := y % k
    w := w + r · k^i
-   y := y div k
+   y := y / k
 
    i := i + 1
+}
+
+return w
 }

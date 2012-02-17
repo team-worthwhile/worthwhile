@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
@@ -149,6 +150,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	/**
 	 * generates a default boolean value.
+	 * 
 	 * @return a default boolean value
 	 */
 	private BooleanValue getDefaultBoolean() {
@@ -157,6 +159,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 	/**
 	 * generates a default integer value.
+	 * 
 	 * @return a default integer value
 	 */
 	private IntegerValue getDefaultInteger() {
@@ -471,6 +474,31 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * Evaluates an annotation.
+	 * 
+	 * @param annotation
+	 *            the Annotation to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Annotation)
+	 */
+	private void visitAnnotation(final Annotation annotation) {
+		statementWillExecute(annotation);
+		try {
+			annotation.getExpression().accept(this);
+			if (this.popBooleanValue().getValue()) {
+				annotationSucceeded(annotation);
+			} else {
+				annotationFailed(annotation);
+			}
+		} catch (StatementException e) {
+			this.executionFailed(annotation, e.getError());
+			return;
+		}
+		this.statementExecuted(annotation);
+	}
+
+	/**
 	 * adds the {@link IntegerValue}s of the {@link expression}s addition.left
 	 * and addition.right and pushes the result on the resultStack.
 	 * 
@@ -488,31 +516,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.resultStack.push(new IntegerValue(left.getValue().add(
 				right.getValue())));
 		this.expressionEvaluated(addition);
-	}
-
-	/**
-	 * Evaluates an annotation.
-	 * 
-	 * @param annotation
-	 *            the Annotation to visit
-	 * 
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
-	 *      .worthwhile.model.ast.Annotation)
-	 */
-	public void visit(final Annotation annotation) {
-		statementWillExecute(annotation);
-		try {
-			annotation.getExpression().accept(this);
-			if (this.popBooleanValue().getValue()) {
-				annotationSucceeded(annotation);
-			} else {
-				annotationFailed(annotation);
-			}
-		} catch (StatementException e) {
-			this.executionFailed(annotation, e.getError());
-			return;
-		}
-		this.statementExecuted(annotation);
 	}
 
 	/**
@@ -538,6 +541,23 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.resultStack.push(new CompositeValue<Value>(subValues));
 
 		this.expressionEvaluated(arrayLiteral);
+	}
+
+	/**
+	 * Evaluates an assertion.
+	 * 
+	 * @param assertion
+	 *            the Assertion to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Assertion)
+	 */
+	public void visit(final Assertion assertion) {
+		this.visitAnnotation(assertion);
+	}
+
+	public void visit(final Assumption assumption) {
+		// TODO do this
 	}
 
 	/**
@@ -574,6 +594,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			return;
 		}
 		this.statementExecuted(assignment);
+	}
+
+	public void visit(final Axiom axiom) {
+		// TODO do this
 	}
 
 	/**
@@ -893,6 +917,19 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * Evaluates an invariant.
+	 * 
+	 * @param invariant
+	 *            the Invariant to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Invariant)
+	 */
+	public void visit(final Invariant invariant) {
+		this.visitAnnotation(invariant);
+	}
+
+	/**
 	 * checks if the {@link IntegerValue} of the {@link expression} less.left is
 	 * less than the {@link IntegerValue} of the {@link expression} less.right
 	 * and pushes the result on the resultStack.
@@ -1063,6 +1100,32 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * Evaluates an postcondition.
+	 * 
+	 * @param postcondition
+	 *            the Postcondition to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Postcondition)
+	 */
+	public void visit(final Postcondition postcondition) {
+		this.visitAnnotation(postcondition);
+	}
+
+	/**
+	 * Evaluates an precondition.
+	 * 
+	 * @param precondition
+	 *            the Precondition to visit
+	 * 
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
+	 *      .worthwhile.model.ast.Precondition)
+	 */
+	public void visit(final Precondition precondition) {
+		this.visitAnnotation(precondition);
+	}
+
+	/**
 	 * Executes a program.
 	 * 
 	 * @param program
@@ -1123,9 +1186,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
-			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE.createVariableDeclaration();
+			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE
+					.createVariableDeclaration();
 			variableDeclaration.setName("_return");
-			//copy the return value into a new variable named "_return" just for the prover
+			// copy the return value into a new variable named "_return" just
+			// for the prover
 			this.setSymbol(variableDeclaration, this.resultStack.peek());
 			this.functionReturned = true;
 		} catch (StatementException e) {

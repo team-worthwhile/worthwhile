@@ -14,6 +14,7 @@ import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
@@ -211,6 +212,14 @@ public class InterpreterASTNodeVisitorTest {
 	public void testIndexedReturnVariableReference() throws IOException {
 		Program program = TestASTProvider.getRootASTNode(TestUtils.loadTestProgram(this.getClass(), "indexed_returnvarref.ww"));
 		Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
+		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
+
+			@Override
+                        public void annotationFailed(Annotation annotation) {
+	                        Assert.fail("Annotation failed although it shouldn’t have");
+                        }
+			
+		});
 		interpreter.execute();
 		assertTrue(true);
 	}

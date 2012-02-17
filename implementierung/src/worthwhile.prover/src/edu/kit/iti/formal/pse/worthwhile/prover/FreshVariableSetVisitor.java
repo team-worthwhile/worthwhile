@@ -104,6 +104,11 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public final void visit(final VariableReference v) {
+		final Expression index = v.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
+
 		if (!this.variableMap.containsKey(v.getVariable())) {
 			// if the VariableDeclaration was first seen, create a new one with the same name
 			VariableDeclaration newVariable = AstNodeCloneHelper.clone(v.getVariable());

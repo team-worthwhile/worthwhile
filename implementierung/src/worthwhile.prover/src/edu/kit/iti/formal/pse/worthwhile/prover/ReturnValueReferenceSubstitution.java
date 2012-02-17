@@ -56,6 +56,9 @@ class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
 
 	@Override
 	public void visit(final ReturnValueReference returnValueReference) {
+		// visit index before maybe inserting the return value here
+		super.visit(returnValueReference);
+
 		final Expression index = returnValueReference.getIndex();
 		if (index != null) {
 			this.substitute.accept(new HierarchialASTNodeVisitor() {

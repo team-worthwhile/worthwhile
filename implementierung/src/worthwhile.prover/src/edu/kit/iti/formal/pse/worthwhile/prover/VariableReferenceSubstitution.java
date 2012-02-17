@@ -68,6 +68,9 @@ class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
 
 	@Override
 	public void visit(final VariableReference variableReference) {
+		// visit index before maybe replacing the VariableReference
+		super.visit(variableReference);
+
 		final VariableDeclaration referencedVariable = variableReference.getVariable();
 
 		if (referencedVariable == this.variable) {

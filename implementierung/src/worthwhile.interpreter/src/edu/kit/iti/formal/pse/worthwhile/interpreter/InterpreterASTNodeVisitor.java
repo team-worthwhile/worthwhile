@@ -61,9 +61,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
@@ -1137,18 +1139,22 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
+			
+			// Put a new symbol named "_return" on the symbol stack to be used by the prover.
 			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE.createVariableDeclaration();
-			Value returnValue = this.resultStack.peek();
 			variableDeclaration.setName("_return");
-			if (returnValue instanceof BooleanValue) {
-				variableDeclaration.setType(AstFactory.eINSTANCE.createBooleanType());
-			} else if (returnValue instanceof IntegerValue) {
-				variableDeclaration.setType(AstFactory.eINSTANCE.createIntegerType());
-			} else if (returnValue instanceof CompositeValue) {
-				variableDeclaration.setType(AstFactory.eINSTANCE.createArrayType());
-			}
-			// copy the return value into a new variable named "_return" just
-			// for the prover
+			
+			// The type of this symbol is the function’s return type.
+			variableDeclaration.setType(new ASTNodeBottomUpVisitor<Type>() {
+
+				@Override
+                                public final void visit(final FunctionDeclaration node) {
+	                                this.setReturnValue(node.getReturnType());
+                                }
+				
+			}.apply(returnStatement));
+			
+			Value returnValue = this.resultStack.peek();
 			this.setSymbol(variableDeclaration, returnValue);
 			this.functionReturned = true;
 		} catch (StatementException e) {

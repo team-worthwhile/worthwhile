@@ -12,11 +12,11 @@
 function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer startingState, Integer numCharacters, Integer[] transition)
 	_requires inputLength ≥ 0
 	_requires startingState ≥ 0
-	_requires ∀ Integer i1, 0 ≤ i1 ∧ i1 < inputLength : input[i1] < numCharacters
-	_requires ∀ Integer i2 : input[i2] ≥ 0
+	_requires numCharacters > 0
+	_requires ∀ Integer i1, 0 ≤ i1 ∧ i1 < inputLength : 0 ≤ i1 ∧ input[i1] < numCharacters
 	
 	_ensures _return[0] = startingState
-	_ensures ∀ Integer i3, 0 < i3 ∧ i3 ≤ inputLength : _return[i3] = transition[numCharacters ⋅ _return[i3-1] + input[i3-1]]
+	_ensures ∀ Integer i2, 0 < i2 ∧ i2 ≤ inputLength : _return[i2] = transition[numCharacters ⋅ _return[i2-1] + input[i2-1]]
 {
 	// Initialize variables
 	Integer positionInInput := 0
@@ -56,8 +56,8 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 //		1	1	1
 
 // Test the automaton with an example
-Integer[] res := runAutomaton(3, {1, 1, 1}, 0, 2, {1, 0, 1, 1})
-Boolean b := (res[3] = 0)
+//Integer[] res := runAutomaton(3, {1, 1, 1}, 0, 2, {1, 0, 1, 1})
+//Boolean b := (res[3] = 0)
 
 // Assert that the automaton accepts all input consisting of zero or more "1"s 
-_assert ∀ Integer len, len ≥ 0 : ∀ Integer[] arrayInput, (∀ Integer j, 0 ≤ j ∧ j < len : arrayInput[j] = 1) : ∀ Integer[] r, r = runAutomaton(len, arrayInput, 0, 2, {1, 0, 1, 1}) : r[len] = 0
+// _assert ∀ Integer len, len ≥ 0 : (∀ Integer[] arrayInput, (∀ Integer j, 0 ≤ j ∧ j < len : arrayInput[j] = 1) : (∀ Integer[] r, r = runAutomaton(len, arrayInput, 0, 2, {1, 0, 1, 1}) : r[len] = 0))

@@ -182,9 +182,13 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 			arrayFunction.setValue(this.getSubstitute());
 		}
 
-		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();
+		final Expression chainedFunction = arrayFunction.getChainedFunction();
 		if (chainedFunction != null) {
 			chainedFunction.accept(this);
+			if (this.found) {
+				this.found = false;
+				arrayFunction.setChainedFunction(this.getSubstitute());
+			}
 		}
 	}
 

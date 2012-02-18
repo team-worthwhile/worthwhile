@@ -42,7 +42,7 @@ public class ArrayFunction extends Literal {
 	 * @generated
 	 * @ordered
 	 */
-	protected ArrayFunction chainedFunction;
+	protected Expression chainedFunction;
 
 	/**
 	 * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
@@ -90,15 +90,15 @@ public class ArrayFunction extends Literal {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Chained Function</em>' reference.
-	 * @see #setChainedFunction(ArrayFunction)
+	 * @see #setChainedFunction(Expression)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction_ChainedFunction()
 	 * @model
 	 * @generated
 	 */
-	public ArrayFunction getChainedFunction() {
+	public Expression getChainedFunction() {
 		if (chainedFunction != null && chainedFunction.eIsProxy()) {
 			InternalEObject oldChainedFunction = (InternalEObject) chainedFunction;
-			chainedFunction = (ArrayFunction) eResolveProxy(oldChainedFunction);
+			chainedFunction = (Expression) eResolveProxy(oldChainedFunction);
 			if (chainedFunction != oldChainedFunction) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
@@ -113,19 +113,20 @@ public class ArrayFunction extends Literal {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArrayFunction basicGetChainedFunction() {
+	public Expression basicGetChainedFunction() {
 		return chainedFunction;
 	}
 
 	/**
 	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getChainedFunction <em>Chained Function</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Chained Function</em>' reference.
 	 * @see #getChainedFunction()
 	 * @generated
 	 */
-	public void setChainedFunction(ArrayFunction newChainedFunction) {
-		ArrayFunction oldChainedFunction = chainedFunction;
+	public void setChainedFunction(Expression newChainedFunction) {
+		Expression oldChainedFunction = chainedFunction;
 		chainedFunction = newChainedFunction;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
@@ -255,18 +256,18 @@ public class ArrayFunction extends Literal {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-				if (resolve)
-					return getChainedFunction();
-				return basicGetChainedFunction();
-			case AstPackage.ARRAY_FUNCTION__INDEX:
-				if (resolve)
-					return getIndex();
-				return basicGetIndex();
-			case AstPackage.ARRAY_FUNCTION__VALUE:
-				if (resolve)
-					return getValue();
-				return basicGetValue();
+		case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
+			if (resolve)
+				return getChainedFunction();
+			return basicGetChainedFunction();
+		case AstPackage.ARRAY_FUNCTION__INDEX:
+			if (resolve)
+				return getIndex();
+			return basicGetIndex();
+		case AstPackage.ARRAY_FUNCTION__VALUE:
+			if (resolve)
+				return getValue();
+			return basicGetValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -278,15 +279,15 @@ public class ArrayFunction extends Literal {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-				setChainedFunction((ArrayFunction) newValue);
-				return;
-			case AstPackage.ARRAY_FUNCTION__INDEX:
-				setIndex((Expression) newValue);
-				return;
-			case AstPackage.ARRAY_FUNCTION__VALUE:
-				setValue((Expression) newValue);
-				return;
+		case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
+			setChainedFunction((Expression) newValue);
+			return;
+		case AstPackage.ARRAY_FUNCTION__INDEX:
+			setIndex((Expression) newValue);
+			return;
+		case AstPackage.ARRAY_FUNCTION__VALUE:
+			setValue((Expression) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -298,15 +299,15 @@ public class ArrayFunction extends Literal {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-				setChainedFunction((ArrayFunction) null);
-				return;
-			case AstPackage.ARRAY_FUNCTION__INDEX:
-				setIndex((Expression) null);
-				return;
-			case AstPackage.ARRAY_FUNCTION__VALUE:
-				setValue((Expression) null);
-				return;
+		case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
+			setChainedFunction((Expression) null);
+			return;
+		case AstPackage.ARRAY_FUNCTION__INDEX:
+			setIndex((Expression) null);
+			return;
+		case AstPackage.ARRAY_FUNCTION__VALUE:
+			setValue((Expression) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -318,12 +319,12 @@ public class ArrayFunction extends Literal {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-				return chainedFunction != null;
-			case AstPackage.ARRAY_FUNCTION__INDEX:
-				return index != null;
-			case AstPackage.ARRAY_FUNCTION__VALUE:
-				return value != null;
+		case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
+			return chainedFunction != null;
+		case AstPackage.ARRAY_FUNCTION__INDEX:
+			return index != null;
+		case AstPackage.ARRAY_FUNCTION__VALUE:
+			return value != null;
 		}
 		return super.eIsSet(featureID);
 	}

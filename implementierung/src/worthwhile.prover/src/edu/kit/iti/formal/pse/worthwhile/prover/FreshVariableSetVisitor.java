@@ -54,7 +54,7 @@ public class FreshVariableSetVisitor extends HierarchialASTNodeVisitor {
 
 		arrayFunction.getValue().accept(this);
 
-		final ArrayFunction chainedFunction = arrayFunction.getChainedFunction();
+		final Expression chainedFunction = arrayFunction.getChainedFunction();
 		if (chainedFunction != null) {
 			chainedFunction.accept(this);
 		}

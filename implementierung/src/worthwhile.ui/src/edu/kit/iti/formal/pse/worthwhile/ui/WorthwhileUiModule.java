@@ -2,6 +2,7 @@ package edu.kit.iti.formal.pse.worthwhile.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage;
@@ -12,6 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.ui.autoedit.WorthwhileAutoEditStrategyP
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileFoldingRegionProvider;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileHighlightingConfiguration;
+import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileSourceViewerConfiguration;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileTokenToAttributeIdMapper;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhileRootPreferencePage;
 
@@ -83,6 +85,15 @@ public class WorthwhileUiModule extends edu.kit.iti.formal.pse.worthwhile.ui.Abs
 	 */
 	public final Class<? extends LanguageRootPreferencePage> bindLanguageRootPreferencePage() {
 		return WorthwhileRootPreferencePage.class;
+	}
+
+	/**
+	 * Provides a source viewer configuration.
+	 * 
+	 * @return A source viewer configuration.
+	 */
+	public final Class<? extends XtextSourceViewerConfiguration> bindSourceViewerConfiguration() {
+		return WorthwhileSourceViewerConfiguration.class;
 	}
 
 }

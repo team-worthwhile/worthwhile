@@ -100,23 +100,20 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Sets the execution event handlers.
 	 * 
 	 * @param executionEventHandlers
-	 *            the executionEventHandlers to set
+	 *                the executionEventHandlers to set
 	 */
-	public void setExecutionEventHandlers(
-			final Set<AbstractExecutionEventListener> executionEventHandlers) {
+	public void setExecutionEventHandlers(final Set<AbstractExecutionEventListener> executionEventHandlers) {
 		// begin-user-code
 		this.executionEventHandlers = executionEventHandlers;
 		// end-user-code
 	}
 
 	/**
-	 * The {@link InterpreterASTNodeVisitor} that was created to execute a
-	 * function.
+	 * The {@link InterpreterASTNodeVisitor} that was created to execute a function.
 	 * 
-	 * <code>executingVisitor</code> is not <code>null</code> if and only if
-	 * this <code>InterpreterASTNodeVisitor</code> has instantiated another
-	 * <code>InterpreterASTNodeVisitor</code> and waits for that to finish the
-	 * execution of a {@link FunctionDeclaration}.
+	 * <code>executingVisitor</code> is not <code>null</code> if and only if this
+	 * <code>InterpreterASTNodeVisitor</code> has instantiated another <code>InterpreterASTNodeVisitor</code> and
+	 * waits for that to finish the execution of a {@link FunctionDeclaration}.
 	 */
 	private InterpreterASTNodeVisitor executingVisitor = null;
 
@@ -170,7 +167,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Gets the symbol.
 	 * 
 	 * @param key
-	 *            the key
+	 *                the key
 	 * @return the symbol
 	 */
 	protected Value getSymbol(final VariableDeclaration key) {
@@ -193,7 +190,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Get the value of a symbol by its name.
 	 * 
 	 * @param key
-	 *            the name of the Symbol to look up the value for
+	 *                the name of the Symbol to look up the value for
 	 * @return the current value of the Symbol or null if no such symbol exists
 	 */
 	protected Value getSymbol(final String key) {
@@ -210,9 +207,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Sets the symbol.
 	 * 
 	 * @param key
-	 *            the key
+	 *                the key
 	 * @param value
-	 *            the value
+	 *                the value
 	 */
 	protected void setSymbol(final VariableDeclaration key, final Value value) {
 		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take
@@ -239,7 +236,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	protected Map<VariableDeclaration, Value> getAllSymbols() {
 		Map<VariableDeclaration, Value> result = new LinkedHashMap<VariableDeclaration, Value>();
 		ListIterator<Map<VariableDeclaration, Value>> i = this.symbolStack
-				.listIterator(this.symbolStack.size());
+		                .listIterator(this.symbolStack.size());
 		while (i.hasPrevious()) {
 			result.putAll(i.previous());
 		}
@@ -247,23 +244,20 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Constructs a new {@link InterpreterASTNodeVisitor} with the given
-	 * {@link SpecificationChecker}.
+	 * Constructs a new {@link InterpreterASTNodeVisitor} with the given {@link SpecificationChecker}.
 	 * 
 	 * @param specificationChecker
-	 *            the prover used to check formulas
+	 *                the prover used to check formulas
 	 */
-	protected InterpreterASTNodeVisitor(
-			final SpecificationChecker specificationChecker) {
+	protected InterpreterASTNodeVisitor(final SpecificationChecker specificationChecker) {
 		this.specificationChecker = specificationChecker;
 	}
 
 	/**
-	 * Signals that a {@link Statement} has been executed by the
-	 * {@link Interpreter}.
+	 * Signals that a {@link Statement} has been executed by the {@link Interpreter}.
 	 * 
 	 * @param statement
-	 *            the <code>Statement</code> that was executed
+	 *                the <code>Statement</code> that was executed
 	 */
 	private void statementExecuted(final Statement statement) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
@@ -280,7 +274,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Signals that a {@link Statement} will be executed.
 	 * 
 	 * @param statement
-	 *            the <code>Statement</code> that will be executed
+	 *                the <code>Statement</code> that will be executed
 	 */
 	private void statementWillExecute(final Statement statement) {
 		this.currentStatement = statement;
@@ -293,20 +287,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Signals that the execution of a {@link Statement} failed.
 	 * 
 	 * @param statement
-	 *            the <code>Statement</code> that failed to execute
+	 *                the <code>Statement</code> that failed to execute
 	 * @param error
-	 *            an {@link InterpreterError} object that describes the error
+	 *                an {@link InterpreterError} object that describes the error
 	 */
-	private void executionFailed(final Statement statement,
-			final InterpreterError error) {
+	private void executionFailed(final Statement statement, final InterpreterError error) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
 			listener.executionFailed(statement, error);
 		}
 	}
 
 	/**
-	 * Signals the start of the execution of a
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
+	 * Signals the start of the execution of a {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program}.
 	 */
 	private void executionStarted() {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
@@ -328,7 +320,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Signals the execution of an {@link Annotation} that was not valid.
 	 * 
 	 * @param annotation
-	 *            the invalid <code>Annotation</code>
+	 *                the invalid <code>Annotation</code>
 	 */
 	private void annotationFailed(final Annotation annotation) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
@@ -340,7 +332,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Signals the execution of an {@link Annotation} that was valid.
 	 * 
 	 * @param annotation
-	 *            the valid <code>Annotation</code>
+	 *                the valid <code>Annotation</code>
 	 */
 	private void annotationSucceeded(final Annotation annotation) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
@@ -352,7 +344,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Signals the evaluation of a {@link Expression}.
 	 * 
 	 * @param expression
-	 *            the <code>Expression</code> that was evaluated
+	 *                the <code>Expression</code> that was evaluated
 	 */
 	private void expressionEvaluated(final Expression expression) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
@@ -364,20 +356,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Signals the failure of a {@link Expression}.
 	 * 
 	 * @param expression
-	 *            the <code>Expression</code> that failed
+	 *                the <code>Expression</code> that failed
 	 * @param error
-	 *            the error that was caused
+	 *                the error that was caused
 	 */
-	private void expressionFailed(final Expression expression,
-			final InterpreterError error) {
+	private void expressionFailed(final Expression expression, final InterpreterError error) {
 		for (AbstractExecutionEventListener listener : this.executionEventHandlers) {
 			listener.expressionFailed(expression, error);
 		}
 	}
 
 	/**
-	 * Returns the value generated by the last return statement ran in this
-	 * context.
+	 * Returns the value generated by the last return statement ran in this context.
 	 * 
 	 * @return the return value or null if none is available
 	 */
@@ -389,10 +379,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Adds a debug event handler to this context.
 	 * 
 	 * @param handler
-	 *            the handler
+	 *                the handler
 	 */
-	protected void addExecutionEventHandler(
-			final AbstractExecutionEventListener handler) {
+	protected void addExecutionEventHandler(final AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.add(handler);
 	}
 
@@ -400,23 +389,20 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Removes a debug event handler from this context.
 	 * 
 	 * @param handler
-	 *            the handler
+	 *                the handler
 	 */
-	protected void removeExecutionEventHandler(
-			final AbstractExecutionEventListener handler) {
+	protected void removeExecutionEventHandler(final AbstractExecutionEventListener handler) {
 		this.executionEventHandlers.remove(handler);
 	}
 
 	/**
 	 * Clones this visitor.
 	 * 
-	 * @return a new {@link InterpreterASTNodeVisitor} that contains an equal
-	 *         {@link symbolStack}
+	 * @return a new {@link InterpreterASTNodeVisitor} that contains an equal {@link symbolStack}
 	 */
 	@Override
 	protected InterpreterASTNodeVisitor clone() {
-		final InterpreterASTNodeVisitor clone = new InterpreterASTNodeVisitor(
-				this.specificationChecker);
+		final InterpreterASTNodeVisitor clone = new InterpreterASTNodeVisitor(this.specificationChecker);
 
 		// Values are immutable so that it is efficient to clone the array and
 		// not the elements
@@ -428,8 +414,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Pops a boolean value from the result stack. Fails the execution if there
-	 * is no boolean value on the stack.
+	 * Pops a boolean value from the result stack. Fails the execution if there is no boolean value on the stack.
 	 * 
 	 * @return the {@link BooleanValue} that is on top of the stack.
 	 */
@@ -438,15 +423,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (this.resultStack.peek() instanceof BooleanValue) {
 				return (BooleanValue) this.resultStack.pop();
 			} else {
-				throw new RuntimeException(
-						"result type error on resultStack: boolean expected");
+				throw new RuntimeException("result type error on resultStack: boolean expected");
 			}
 		}
 	}
 
 	/**
-	 * Pops an integer value from the result stack. Fails the execution if there
-	 * is no integer value on the stack.
+	 * Pops an integer value from the result stack. Fails the execution if there is no integer value on the stack.
 	 * 
 	 * @return the {@link IntegerValue} that is on top of the stack.
 	 */
@@ -455,15 +438,14 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (this.resultStack.peek() instanceof IntegerValue) {
 				return (IntegerValue) this.resultStack.pop();
 			} else {
-				throw new RuntimeException(
-						"result type error on resultStack: integer expected");
+				throw new RuntimeException("result type error on resultStack: integer expected");
 			}
 		}
 	}
 
 	/**
-	 * Pops a composite value from the result stack. Fails the execution if
-	 * there is no composite value on the stack.
+	 * Pops a composite value from the result stack. Fails the execution if there is no composite value on the
+	 * stack.
 	 * 
 	 * @return the {@link CompositeValue} that is on top of the stack.
 	 */
@@ -472,8 +454,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			if (this.resultStack.peek() instanceof IntegerValue) {
 				return (CompositeValue<?>) this.resultStack.pop();
 			} else {
-				throw new RuntimeException(
-						"result type error on resultStack: composite expected");
+				throw new RuntimeException("result type error on resultStack: composite expected");
 			}
 		}
 	}
@@ -482,7 +463,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Evaluates an annotation.
 	 * 
 	 * @param annotation
-	 *            the Annotation to visit
+	 *                the Annotation to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Annotation)
@@ -504,11 +485,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * adds the {@link IntegerValue}s of the {@link expression}s addition.left
-	 * and addition.right and pushes the result on the resultStack.
+	 * adds the {@link IntegerValue}s of the {@link expression}s addition.left and addition.right and pushes the
+	 * result on the resultStack.
 	 * 
 	 * @param addition
-	 *            the Addition to visit
+	 *                the Addition to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Addition)
@@ -518,8 +499,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		addition.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new IntegerValue(left.getValue().add(
-				right.getValue())));
+		this.resultStack.push(new IntegerValue(left.getValue().add(right.getValue())));
 		this.expressionEvaluated(addition);
 	}
 
@@ -527,7 +507,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Pushes an array-literal onto the resultStack.
 	 * 
 	 * @param arrayLiteral
-	 *            the ArrayLiteral to visit
+	 *                the ArrayLiteral to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.ArrayLiteral)
@@ -552,7 +532,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Evaluates an assertion.
 	 * 
 	 * @param assertion
-	 *            the Assertion to visit
+	 *                the Assertion to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Assertion)
@@ -562,7 +542,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * @param assumption the Assumption to visit
+	 * @param assumption
+	 *                the Assumption to visit
 	 */
 	public void visit(final Assumption assumption) {
 		// TODO do this
@@ -572,7 +553,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * assigns a new {@link Value} to a variable in the current symbol map.
 	 * 
 	 * @param assignment
-	 *            the Assignment to visit
+	 *                the Assignment to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Assignment)
@@ -590,11 +571,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				// create a new array with the new value and replace the old one
 				reference.getIndex().accept(this);
 				IntegerValue index = this.popIntegerValue();
-				CompositeValue<? extends Value> oldValue = (CompositeValue<?>) this
-						.getSymbol(reference.getVariable());
-				CompositeValue<? extends Value> newValue = oldValue
-						.replaceUntypedValue(index.getValue(),
-								this.resultStack.pop());
+				CompositeValue<? extends Value> oldValue = (CompositeValue<?>) this.getSymbol(reference
+				                .getVariable());
+				CompositeValue<? extends Value> newValue = oldValue.replaceUntypedValue(
+				                index.getValue(), this.resultStack.pop());
 				this.setSymbol(reference.getVariable(), newValue);
 			}
 		} catch (StatementException e) {
@@ -605,7 +585,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * @param axiom the Axiom to visit
+	 * @param axiom
+	 *                the Axiom to visit
 	 */
 	public void visit(final Axiom axiom) {
 		// TODO do this
@@ -615,7 +596,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * executes the statements of the block.
 	 * 
 	 * @param block
-	 *            the Block to visit
+	 *                the Block to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Block)
@@ -637,11 +618,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Pushes the {@link BooleanValue} of the booleanLiteral onto the
-	 * resultStack.
+	 * Pushes the {@link BooleanValue} of the booleanLiteral onto the resultStack.
 	 * 
 	 * @param booleanLiteral
-	 *            the BooleanLiteral to visit
+	 *                the BooleanLiteral to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.BooleanLiteral)
@@ -655,7 +635,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Visits one of two {@link Block}s depending on a condition.
 	 * 
 	 * @param conditional
-	 *            the Conditional to visit
+	 *                the Conditional to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Conditional)
@@ -679,12 +659,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * checks if the {@link Value}s of the {@link expression}s conjunction.left
-	 * and conjunction.right are both true and pushes the result on the
-	 * resultStack.
+	 * checks if the {@link Value}s of the {@link expression}s conjunction.left and conjunction.right are both true
+	 * and pushes the result on the resultStack.
 	 * 
 	 * @param conjunction
-	 *            the Conjunction to visit
+	 *                the Conjunction to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Conjunction)
@@ -694,18 +673,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		BooleanValue left = this.popBooleanValue();
 		conjunction.getRight().accept(this);
 		BooleanValue right = this.popBooleanValue();
-		this.resultStack.push(new BooleanValue(left.getValue()
-				&& right.getValue()));
+		this.resultStack.push(new BooleanValue(left.getValue() && right.getValue()));
 		this.expressionEvaluated(conjunction);
 	}
 
 	/**
-	 * checks if at least one the {@link Value}s of the {@link expression}s
-	 * disjunction.left and disjunction.right are both true and pushes the
-	 * result on the resultStack.
+	 * checks if at least one the {@link Value}s of the {@link expression}s disjunction.left and disjunction.right
+	 * are both true and pushes the result on the resultStack.
 	 * 
 	 * @param disjunction
-	 *            the Disjunction to visit
+	 *                the Disjunction to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Disjunction)
@@ -715,18 +692,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		BooleanValue left = this.popBooleanValue();
 		disjunction.getRight().accept(this);
 		BooleanValue right = this.popBooleanValue();
-		this.resultStack.push(new BooleanValue(left.getValue()
-				|| right.getValue()));
+		this.resultStack.push(new BooleanValue(left.getValue() || right.getValue()));
 		this.expressionEvaluated(disjunction);
 	}
 
 	/**
-	 * divides the {@link IntegerValue} of the {@link expression} division.left
-	 * by the {@link IntegerValue} of the {@link expression} division.right and
-	 * pushes the result on the resultStack.
+	 * divides the {@link IntegerValue} of the {@link expression} division.left by the {@link IntegerValue} of the
+	 * {@link expression} division.right and pushes the result on the resultStack.
 	 * 
 	 * @param division
-	 *            the Division to visit
+	 *                the Division to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Division)
@@ -737,22 +712,20 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		division.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
-			expressionFailed(division, new DivisionByZeroInterpreterError(
-					currentStatement));
+			expressionFailed(division, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
-			this.resultStack.push(new IntegerValue(left.getValue().divide(
-					right.getValue())));
+			this.resultStack.push(new IntegerValue(left.getValue().divide(right.getValue())));
 			this.expressionEvaluated(division);
 		}
 	}
 
 	/**
-	 * checks if the {@link Value}s of the {@link expression}s equal.left and
-	 * equal.right are equal and pushes the result on the resultStack.
+	 * checks if the {@link Value}s of the {@link expression}s equal.left and equal.right are equal and pushes the
+	 * result on the resultStack.
 	 * 
 	 * @param equal
-	 *            the Equal to visit
+	 *                the Equal to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Equal)
@@ -767,12 +740,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * compares the {@link BooleanValue}s of the {@link expression}s
-	 * equivalence.left and equivalence.right and pushes the result on the
-	 * resultStack.
+	 * compares the {@link BooleanValue}s of the {@link expression}s equivalence.left and equivalence.right and
+	 * pushes the result on the resultStack.
 	 * 
 	 * @param equivalence
-	 *            the Equivalence to visit
+	 *                the Equivalence to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Equivalence)
@@ -782,8 +754,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		BooleanValue left = this.popBooleanValue();
 		equivalence.getRight().accept(this);
 		BooleanValue right = this.popBooleanValue();
-		this.resultStack.push(new BooleanValue(left.getValue() == right
-				.getValue()));
+		this.resultStack.push(new BooleanValue(left.getValue() == right.getValue()));
 		this.expressionEvaluated(equivalence);
 	}
 
@@ -791,25 +762,22 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * executes a function with a new InterpreterASTNodeVisitor.
 	 * 
 	 * @param functionCall
-	 *            the called function
+	 *                the called function
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.FunctionCall)
 	 */
 	public void visit(final FunctionCall functionCall) {
-		this.executingVisitor = new InterpreterASTNodeVisitor(
-				this.specificationChecker);
-		this.executingVisitor
-				.setExecutionEventHandlers(this.executionEventHandlers);
+		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);
+		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		EList<Expression> actuals = functionCall.getActuals();
-		this.executingVisitor.symbolStack
-				.push(new HashMap<VariableDeclaration, Value>());
+		this.executingVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
 
 		// calculate the actual parameters
 		for (int i = 0; i < actuals.size(); i++) {
 			actuals.get(i).accept(this);
-			this.executingVisitor.setSymbol(functionCall.getFunction()
-					.getParameters().get(i), this.resultStack.pop());
+			this.executingVisitor.setSymbol(functionCall.getFunction().getParameters().get(i),
+			                this.resultStack.pop());
 		}
 		functionCall.getFunction().accept(this);
 
@@ -829,7 +797,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * handles preconditions, body and postconditions of a function.
 	 * 
 	 * @param functionDeclaration
-	 *            the FunctionDeclaration to visit
+	 *                the FunctionDeclaration to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.FunctionDeclaration)
@@ -841,19 +809,17 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 		functionDeclaration.getBody().accept(this.executingVisitor);
 
-		for (Postcondition postcondition : functionDeclaration
-				.getPostconditions()) {
+		for (Postcondition postcondition : functionDeclaration.getPostconditions()) {
 			postcondition.accept(this.executingVisitor);
 		}
 	}
 
 	/**
-	 * checks if the {@link IntegerValue} of the {@link expression} greater.left
-	 * is greater as the {@link IntegerValue} of the {@link expression}
-	 * greater.right and pushes the result on the resultStack.
+	 * checks if the {@link IntegerValue} of the {@link expression} greater.left is greater as the
+	 * {@link IntegerValue} of the {@link expression} greater.right and pushes the result on the resultStack.
 	 * 
 	 * @param greater
-	 *            the Greater to visit
+	 *                the Greater to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Greater)
@@ -863,19 +829,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		greater.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new BooleanValue((left.getValue().compareTo(
-				right.getValue()) == 1)));
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) == 1)));
 		this.expressionEvaluated(greater);
 	}
 
 	/**
-	 * checks if the {@link IntegerValue} of the {@link expression}
-	 * greaterOrEqual.left is greater or equal as the {@link IntegerValue} of
-	 * the {@link expression} greaterOrEqual.right and pushes the result on the
-	 * resultStack.
+	 * checks if the {@link IntegerValue} of the {@link expression} greaterOrEqual.left is greater or equal as the
+	 * {@link IntegerValue} of the {@link expression} greaterOrEqual.right and pushes the result on the resultStack.
 	 * 
 	 * @param greaterOrEqual
-	 *            the GreaterOrEqual to visit
+	 *                the GreaterOrEqual to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.GreaterOrEqual)
@@ -885,19 +848,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		greaterOrEqual.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new BooleanValue((left.getValue().compareTo(
-				right.getValue()) != -1)));
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) != -1)));
 		this.expressionEvaluated(greaterOrEqual);
 	}
 
 	/**
-	 * checks if the {@link BooleanValue} of the {@link expression}
-	 * implication.left implies the {@link IntegerValue} of the
-	 * {@link expression} implication.right and pushes the result on the
-	 * resultStack.
+	 * checks if the {@link BooleanValue} of the {@link expression} implication.left implies the
+	 * {@link IntegerValue} of the {@link expression} implication.right and pushes the result on the resultStack.
 	 * 
 	 * @param implication
-	 *            the Implication to visit
+	 *                the Implication to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Implication)
@@ -907,17 +867,15 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		BooleanValue left = this.popBooleanValue();
 		implication.getRight().accept(this);
 		BooleanValue right = this.popBooleanValue();
-		this.resultStack.push(new BooleanValue(!(left.getValue() && !right
-				.getValue())));
+		this.resultStack.push(new BooleanValue(!(left.getValue() && !right.getValue())));
 		this.expressionEvaluated(implication);
 	}
 
 	/**
-	 * Pushes the {@link IntegerValue} of the integerLiteral onto the
-	 * resultStack.
+	 * Pushes the {@link IntegerValue} of the integerLiteral onto the resultStack.
 	 * 
 	 * @param integerLiteral
-	 *            the IntegerLiteral to visit
+	 *                the IntegerLiteral to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.IntegerLiteral)
@@ -931,7 +889,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Evaluates an invariant.
 	 * 
 	 * @param invariant
-	 *            the Invariant to visit
+	 *                the Invariant to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Invariant)
@@ -941,12 +899,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * checks if the {@link IntegerValue} of the {@link expression} less.left is
-	 * less than the {@link IntegerValue} of the {@link expression} less.right
-	 * and pushes the result on the resultStack.
+	 * checks if the {@link IntegerValue} of the {@link expression} less.left is less than the {@link IntegerValue}
+	 * of the {@link expression} less.right and pushes the result on the resultStack.
 	 * 
 	 * @param less
-	 *            the Less to visit
+	 *                the Less to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Less)
@@ -956,19 +913,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		less.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new BooleanValue((left.getValue().compareTo(
-				right.getValue()) == -1)));
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) == -1)));
 		this.expressionEvaluated(less);
 	}
 
 	/**
-	 * checks if the {@link IntegerValue} of the {@link expression}
-	 * lessOrEqual.left is less or equal than the {@link IntegerValue} of the
-	 * {@link expression} lessOrEqual.right and pushes the result on the
-	 * resultStack.
+	 * checks if the {@link IntegerValue} of the {@link expression} lessOrEqual.left is less or equal than the
+	 * {@link IntegerValue} of the {@link expression} lessOrEqual.right and pushes the result on the resultStack.
 	 * 
 	 * @param lessOrEqual
-	 *            the LessOrEqual to visit
+	 *                the LessOrEqual to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.LessOrEqual)
@@ -978,8 +932,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		lessOrEqual.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new BooleanValue((left.getValue().compareTo(
-				right.getValue()) != 1)));
+		this.resultStack.push(new BooleanValue((left.getValue().compareTo(right.getValue()) != 1)));
 		this.expressionEvaluated(lessOrEqual);
 	}
 
@@ -987,7 +940,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Visit a {@link Block} as long as a condition is true.
 	 * 
 	 * @param loop
-	 *            the Loop to visit
+	 *                the Loop to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Loop)
@@ -1014,29 +967,27 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * negates the {@link IntegerValue} of the {@link expression} minus.operand
-	 * and pushes the result on the resultStack.
+	 * negates the {@link IntegerValue} of the {@link expression} minus.operand and pushes the result on the
+	 * resultStack.
 	 * 
 	 * @param minus
-	 *            the Minus to visit
+	 *                the Minus to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Minus)
 	 */
 	public void visit(final Minus minus) {
 		minus.getOperand().accept(this);
-		this.resultStack.push(new IntegerValue(this.popIntegerValue()
-				.getValue().negate()));
+		this.resultStack.push(new IntegerValue(this.popIntegerValue().getValue().negate()));
 		this.expressionEvaluated(minus);
 	}
 
 	/**
-	 * calculates the modulus of the {@link IntegerValue}s of the
-	 * {@link expression}s modulus.left and modulus.right and pushes the result
-	 * on the resultStack.
+	 * calculates the modulus of the {@link IntegerValue}s of the {@link expression}s modulus.left and modulus.right
+	 * and pushes the result on the resultStack.
 	 * 
 	 * @param modulus
-	 *            the Modulus to visit
+	 *                the Modulus to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Modulus)
@@ -1047,23 +998,20 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		modulus.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
-			expressionFailed(modulus, new DivisionByZeroInterpreterError(
-					currentStatement));
+			expressionFailed(modulus, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
-			this.resultStack.push(new IntegerValue(left.getValue().mod(
-					right.getValue())));
+			this.resultStack.push(new IntegerValue(left.getValue().mod(right.getValue())));
 			this.expressionEvaluated(modulus);
 		}
 	}
 
 	/**
-	 * multiplies the {@link IntegerValue}s of the {@link expression}s
-	 * multiplication.left and multiplication.right and pushes the result on the
-	 * resultStack.
+	 * multiplies the {@link IntegerValue}s of the {@link expression}s multiplication.left and multiplication.right
+	 * and pushes the result on the resultStack.
 	 * 
 	 * @param multiplication
-	 *            the Multiplication to visit
+	 *                the Multiplication to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Multiplication)
@@ -1073,34 +1021,32 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		multiplication.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new IntegerValue(left.getValue().multiply(
-				right.getValue())));
+		this.resultStack.push(new IntegerValue(left.getValue().multiply(right.getValue())));
 		this.expressionEvaluated(multiplication);
 	}
 
 	/**
-	 * negates the {@link BooleanValue} of the {@link expression}
-	 * negation.oparand and pushes the result on the resultStack.
+	 * negates the {@link BooleanValue} of the {@link expression} negation.oparand and pushes the result on the
+	 * resultStack.
 	 * 
 	 * @param negation
-	 *            the Negation to visit
+	 *                the Negation to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Negation)
 	 */
 	public void visit(final Negation negation) {
 		negation.getOperand().accept(this);
-		this.resultStack.push(new BooleanValue(!(this.popBooleanValue()
-				.getValue())));
+		this.resultStack.push(new BooleanValue(!(this.popBooleanValue().getValue())));
 		this.expressionEvaluated(negation);
 	}
 
 	/**
-	 * does nothing with the {@link IntegerValue} of the {@link expression}
-	 * plus.operand and pushes the result on the resultStack.
+	 * does nothing with the {@link IntegerValue} of the {@link expression} plus.operand and pushes the result on
+	 * the resultStack.
 	 * 
 	 * @param plus
-	 *            the Plus to visit
+	 *                the Plus to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Plus)
@@ -1114,7 +1060,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Evaluates an postcondition.
 	 * 
 	 * @param postcondition
-	 *            the Postcondition to visit
+	 *                the Postcondition to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Postcondition)
@@ -1127,7 +1073,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Evaluates an precondition.
 	 * 
 	 * @param precondition
-	 *            the Precondition to visit
+	 *                the Precondition to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Precondition)
@@ -1140,7 +1086,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Executes a program.
 	 * 
 	 * @param program
-	 *            the Program to visit
+	 *                the Program to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Program)
@@ -1155,40 +1101,34 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Evaluates a quantified expression and pushes the result onto the
-	 * resultStack.
+	 * Evaluates a quantified expression and pushes the result onto the resultStack.
 	 * 
 	 * @param quantifiedExpression
-	 *            the QuantifiedExpression to visit
+	 *                the QuantifiedExpression to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.QuantifiedExpression)
 	 */
 	public void visit(final QuantifiedExpression quantifiedExpression) {
 		if (this.specificationChecker == null) {
-			throw new IllegalArgumentException(
-					"No SpecificationChecker supplied");
+			throw new IllegalArgumentException("No SpecificationChecker supplied");
 		}
-		Validity validity = this.specificationChecker.checkFormula(
-				quantifiedExpression, this.getAllSymbols());
+		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
-			expressionFailed(quantifiedExpression,
-					new UnknownValidityInterpreterError(currentStatement));
+			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError(currentStatement));
 			this.resultStack.push(new BooleanValue(false));
 			return;
 		} else {
-			this.resultStack.push(new BooleanValue(validity
-					.equals(Validity.VALID)));
+			this.resultStack.push(new BooleanValue(validity.equals(Validity.VALID)));
 			this.expressionEvaluated(quantifiedExpression);
 		}
 	}
 
 	/**
-	 * Pushes the return-value onto the resultStack and terminate the execution
-	 * of this function.
+	 * Pushes the return-value onto the resultStack and terminate the execution of this function.
 	 * 
 	 * @param returnStatement
-	 *            the ReturnStatement to visit
+	 *                the ReturnStatement to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.ReturnStatement)
@@ -1197,12 +1137,19 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
-			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE
-					.createVariableDeclaration();
+			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE.createVariableDeclaration();
+			Value returnValue = this.resultStack.peek();
 			variableDeclaration.setName("_return");
+			if (returnValue instanceof BooleanValue) {
+				variableDeclaration.setType(AstFactory.eINSTANCE.createBooleanType());
+			} else if (returnValue instanceof IntegerValue) {
+				variableDeclaration.setType(AstFactory.eINSTANCE.createIntegerType());
+			} else if (returnValue instanceof CompositeValue) {
+				variableDeclaration.setType(AstFactory.eINSTANCE.createArrayType());
+			}
 			// copy the return value into a new variable named "_return" just
 			// for the prover
-			this.setSymbol(variableDeclaration, this.resultStack.peek());
+			this.setSymbol(variableDeclaration, returnValue);
 			this.functionReturned = true;
 		} catch (StatementException e) {
 			this.executionFailed(returnStatement, e.getError());
@@ -1212,12 +1159,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * subtracts the {@link IntegerValue} of the {@link expression}
-	 * subtraction.right from the {@link IntegerValue} of the {@link expression}
-	 * subtraction.left and pushes the result on the resultStack.
+	 * subtracts the {@link IntegerValue} of the {@link expression} subtraction.right from the {@link IntegerValue}
+	 * of the {@link expression} subtraction.left and pushes the result on the resultStack.
 	 * 
 	 * @param subtraction
-	 *            the subtraction to visit
+	 *                the subtraction to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Subtraction)
@@ -1227,17 +1173,16 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		IntegerValue left = this.popIntegerValue();
 		subtraction.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
-		this.resultStack.push(new IntegerValue(left.getValue().subtract(
-				right.getValue())));
+		this.resultStack.push(new IntegerValue(left.getValue().subtract(right.getValue())));
 		this.expressionEvaluated(subtraction);
 	}
 
 	/**
-	 * checks if the {@link Value}s of the {@link expression}s equal.left and
-	 * equal.right are unequal and pushes the result on the resultStack.
+	 * checks if the {@link Value}s of the {@link expression}s equal.left and equal.right are unequal and pushes the
+	 * result on the resultStack.
 	 * 
 	 * @param equal
-	 *            the Equal to visit
+	 *                the Equal to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Unequal)
@@ -1255,7 +1200,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * Adds a variable to the actual symbol map.
 	 * 
 	 * @param variableDeclaration
-	 *            the variableDeclaration to visit
+	 *                the variableDeclaration to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.VariableDeclaration)
@@ -1270,17 +1215,14 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			} else {
 				// ...or choose the respective default values
 				if (variableDeclaration.getType() instanceof ArrayType) {
-					final ArrayType arrayType = ((ArrayType) variableDeclaration
-							.getType());
+					final ArrayType arrayType = ((ArrayType) variableDeclaration.getType());
 
 					if (arrayType.getBaseType() instanceof BooleanType) {
-						this.setSymbol(variableDeclaration,
-								new CompositeValue<BooleanValue>(
-										new BooleanValue[0]));
+						this.setSymbol(variableDeclaration, new CompositeValue<BooleanValue>(
+						                new BooleanValue[0]));
 					} else {
-						this.setSymbol(variableDeclaration,
-								new CompositeValue<IntegerValue>(
-										new IntegerValue[0]));
+						this.setSymbol(variableDeclaration, new CompositeValue<IntegerValue>(
+						                new IntegerValue[0]));
 					}
 				} else if (variableDeclaration.getType() instanceof BooleanType) {
 					this.setSymbol(variableDeclaration, getDefaultBoolean());
@@ -1328,8 +1270,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				this.resultStack.push((Value) arrayValues.get(index));
 			} else {
 				// push the default value onto the result stack
-				if (((ArrayType) variableReference.getVariable().getType())
-						.getBaseType() instanceof BooleanType) {
+				if (((ArrayType) variableReference.getVariable().getType()).getBaseType() instanceof BooleanType) {
 					this.resultStack.push(getDefaultBoolean());
 				} else {
 					this.resultStack.push(getDefaultInteger());

@@ -88,7 +88,8 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			final VariableDeclaration parameter = parameters.next();
 			final Expression actual = actuals.next();
 			if (precondition != null) {
-				VariableReferenceSubstitution.substitute(precondition, parameter, actual);
+				precondition = VariableReferenceSubstitution
+				                .substitute(precondition, parameter, actual);
 			}
 		}
 
@@ -124,7 +125,8 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			final VariableDeclaration parameter = parameters.next();
 			final Expression actual = actuals.next();
 			if (postcondition != null) {
-				VariableReferenceSubstitution.substitute(postcondition, parameter, actual);
+				postcondition = VariableReferenceSubstitution.substitute(postcondition, parameter,
+				                actual);
 			}
 		}
 
@@ -143,7 +145,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 			for (final VariableDeclaration variable : returnVariables) {
 				final Expression precondition = getPrecondition(this.parameters.peek().get(variable));
-				final Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
+				Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
 
 				if (precondition != null) {
 					i.add(AstNodeCreatorHelper.createAssertion(precondition));
@@ -152,7 +154,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 				i.add(variable);
 
 				if (postcondition != null) {
-					ReturnValueReferenceSubstitution.substitute(postcondition,
+					postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
 					                AstNodeCreatorHelper.createVariableReference(variable));
 
 					i.add(AstNodeCreatorHelper.createAssumption(postcondition));
@@ -173,13 +175,13 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 		final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 		for (final VariableDeclaration variable : returnVariables) {
 			final Expression precondition = getPrecondition(this.parameters.peek().get(variable));
-			final Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
+			Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
 
 			Expression expression = annotation.getExpression();
 			annotation.setExpression(null);
 
 			if (postcondition != null) {
-				ReturnValueReferenceSubstitution.substitute(postcondition,
+				postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
 				                AstNodeCreatorHelper.createVariableReference(variable));
 
 				expression = AstNodeCreatorHelper.createImplication(postcondition, expression);

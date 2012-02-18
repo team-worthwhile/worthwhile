@@ -45,7 +45,6 @@
 						useFixedType( p.getForAllQuantifier(), p.getBooleanType() );
 						useFixedType( p.getExistsQuantifier(), p.getBooleanType() );
 						useFixedType( p.getQuantifiedExpression(), p.getBooleanType() );
-						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Parameter(), p.getBooleanType(), p.getIntegerType() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Expression(), p.getBooleanType() );
 						ensureFeatureType( p.getQuantifiedExpression(), p.getQuantifiedExpression_Condition(), p.getBooleanType() );
 

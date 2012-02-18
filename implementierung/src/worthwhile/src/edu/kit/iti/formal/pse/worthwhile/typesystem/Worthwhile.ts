@@ -41,7 +41,6 @@ section "Expressions"
 		typeof ExistsQuantifier -> BooleanType		
 		typeof QuantifiedExpression -> BooleanType {
 			
-			ensureType parameter :<=: BooleanType, IntegerType
 			ensureType expression :<=: BooleanType
 			ensureType condition :<=: BooleanType 
 			

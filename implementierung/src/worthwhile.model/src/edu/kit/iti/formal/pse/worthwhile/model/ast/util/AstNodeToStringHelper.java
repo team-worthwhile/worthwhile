@@ -21,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
@@ -39,6 +40,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
@@ -275,6 +277,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		this.buf.append("-");
 		minus.getOperand().accept(this);
 	}
+	
+	@Override
+        public void visit(final Plus plus) {
+		this.buf.append("+");
+		plus.getOperand().accept(this);
+        }
 
 	@Override
 	public void visit(final Program program) {
@@ -318,6 +326,11 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	public void visit(final Implication implication) {
 		this.appendBinaryExpression(implication, "⇒");
 	}
+	
+	@Override
+        public void visit(final Equivalence equivalence) {
+		this.appendBinaryExpression(equivalence, "⇔");
+        }
 
 	@Override
 	public void visit(final Negation negation) {

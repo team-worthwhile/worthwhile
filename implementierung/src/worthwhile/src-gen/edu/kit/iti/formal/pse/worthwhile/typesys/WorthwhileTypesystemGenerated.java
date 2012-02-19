@@ -63,39 +63,39 @@
 						useFixedType( p.getAddition(), p.getIntegerType() );
 						ensureFeatureType( p.getAddition(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getAddition(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both summands have to be an Integer or an expression which returns an integer", p.getAddition(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getAddition(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getSubtraction(), p.getIntegerType() );
 						ensureFeatureType( p.getSubtraction(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getSubtraction(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both minuend and subtrahend have to be an Integer or an expression which returns an integer", p.getSubtraction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getSubtraction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getMultiplication(), p.getIntegerType() );
 						ensureFeatureType( p.getMultiplication(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getMultiplication(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both factors have to be an Integer or an expression which returns an integer", p.getMultiplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getMultiplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getModulus(), p.getIntegerType() );
 						ensureFeatureType( p.getModulus(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getModulus(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both operands have to be be an Integer or an expression which returns an integer", p.getModulus(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getModulus(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getDivision(), p.getIntegerType() );
 						ensureFeatureType( p.getDivision(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getDivision(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both dividend and divisor have to be an Integer or an expression which returns an integer", p.getDivision(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getDivision(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getLessOrEqual(), p.getBooleanType() );
 						ensureFeatureType( p.getLessOrEqual(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getLessOrEqual(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both operands have to be be an Integer or an expression which returns an integer", p.getLessOrEqual(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getLessOrEqual(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getLess(), p.getBooleanType() );
 						ensureFeatureType( p.getLess(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getLess(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both operands have to be be an Integer or an expression which returns an integer", p.getLess(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getLess(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getGreater(), p.getBooleanType() );
 						ensureFeatureType( p.getGreater(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getGreater(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both operands have to be be an Integer or an expression which returns an integer", p.getGreater(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getGreater(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getGreaterOrEqual(), p.getBooleanType() );
 						ensureFeatureType( p.getGreaterOrEqual(), p.getBinaryExpression_Left(), p.getIntegerType() );
 						ensureFeatureType( p.getGreaterOrEqual(), p.getBinaryExpression_Right(), p.getIntegerType() );
-						ensureUnorderedCompatibility( "Both operands have to be be an Integer or an expression which returns an integer", p.getGreaterOrEqual(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getGreaterOrEqual(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 
 						// ----------------------------------------------------------------
 						// Section: Binary Expression with boolean operands
@@ -103,19 +103,19 @@
 						useFixedType( p.getDisjunction(), p.getBooleanType() );
 						ensureFeatureType( p.getDisjunction(), p.getBinaryExpression_Left(), p.getBooleanType() );
 						ensureFeatureType( p.getDisjunction(), p.getBinaryExpression_Right(), p.getBooleanType() );
-						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getDisjunction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getDisjunction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getConjunction(), p.getBooleanType() );
 						ensureFeatureType( p.getConjunction(), p.getBinaryExpression_Left(), p.getBooleanType() );
 						ensureFeatureType( p.getConjunction(), p.getBinaryExpression_Right(), p.getBooleanType() );
-						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getConjunction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getConjunction(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getEquivalence(), p.getBooleanType() );
 						ensureFeatureType( p.getEquivalence(), p.getBinaryExpression_Left(), p.getBooleanType() );
 						ensureFeatureType( p.getEquivalence(), p.getBinaryExpression_Right(), p.getBooleanType() );
-						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getEquivalence(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getEquivalence(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 						useFixedType( p.getImplication(), p.getBooleanType() );
 						ensureFeatureType( p.getImplication(), p.getBinaryExpression_Left(), p.getBooleanType() );
 						ensureFeatureType( p.getImplication(), p.getBinaryExpression_Right(), p.getBooleanType() );
-						ensureUnorderedCompatibility( "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean", p.getImplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureUnorderedCompatibility( p.getImplication(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
 
 						// ----------------------------------------------------------------
 						// Section: Binary Expression with boolean, integer or array operands

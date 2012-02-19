@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**
@@ -29,7 +30,7 @@ public class ProverEventListenerTest {
 		}
 
 		@Override
-		public void programVerified(final Program program, final Validity validity,
+		public void programVerified(final Program program, final Validity validity, final Expression formula,
 		                final ProverResult proverResult) {
 			this.programVerifiedCounter++;
 		}
@@ -45,9 +46,9 @@ public class ProverEventListenerTest {
 		 */
 		class TestDistributorCountingProverEventListener extends CountingProverEventListener {
 			@Override
-			public void programVerified(final Program program, final Validity validity,
+			public void programVerified(final Program program, final Validity validity, final Expression formula,
 			                final ProverResult proverResult) {
-				super.programVerified(program, validity, proverResult);
+				super.programVerified(program, validity, formula, proverResult);
 				Assert.assertEquals(Validity.VALID, validity);
 			}
 		}

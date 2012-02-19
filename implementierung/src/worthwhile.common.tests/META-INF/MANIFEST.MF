@@ -14,5 +14,7 @@ Import-Package: edu.kit.iti.formal.pse.worthwhile,
  org.eclipse.emf.ecore.resource,
  org.eclipse.xtext.resource,
  com.google.inject,
- org.junit
+ org.junit,
+ de.itemis.xtext.typesystem,
+ de.itemis.xtext.typesystem.trace
 Export-Package: edu.kit.iti.formal.pse.worthwhile.common.tests

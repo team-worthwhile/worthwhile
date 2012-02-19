@@ -309,8 +309,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			precondition.getExpression().accept(unboundVariableFinder);
 
 			for (final VariableDeclaration v : unboundVariableFinder.getUnboundVariables()) {
-				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(v,
-				                precondition.getExpression());
+				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(AstNodeCloneHelper.clone(v),
+						precondition.getExpression());
 				precondition.setExpression(forall);
 			}
 		}
@@ -501,7 +501,7 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		for (Proof postcondition : this.weakestPreconditionStack.pop()) {
 			Expression precondition;
 			if (initialValue == null) {
-				precondition = AstNodeCreatorHelper.createForAllQuantifier(variableDeclaration,
+				precondition = AstNodeCreatorHelper.createForAllQuantifier(AstNodeCloneHelper.clone(variableDeclaration),
 				                postcondition.getExpression());
 			} else {
 				precondition = VariableReferenceSubstitution.substitute(postcondition.getExpression(),

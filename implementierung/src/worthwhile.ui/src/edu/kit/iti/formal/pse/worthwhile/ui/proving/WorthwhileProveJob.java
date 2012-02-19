@@ -158,7 +158,8 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 	 */
 	private void markStatement(final ASTNode statement, final Validity validity, final String message) {
 		try {
-			IMarker marker = this.markerHelper.getMarkerAt(statement);
+			ASTNode statementToMark = this.getStatementToMark(statement);
+			IMarker marker = this.markerHelper.getMarkerAt(statementToMark);
 
 			// Mark the statement only if there is no marker or the validity gets worse.
 			if (marker != null) {
@@ -172,17 +173,32 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 
 			switch (validity) {
 				case VALID:
-					this.markerHelper.markSucceededStatement(statement, message);
+					this.markerHelper.markSucceededStatement(statementToMark, message);
 					break;
 				case INVALID:
 				case UNKNOWN:
-					this.markerHelper.markFailedStatement(statement, message);
+					this.markerHelper.markFailedStatement(statementToMark, message);
 					break;
 				default:
 					break;
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Gets the statement to be marked in the UI when the prover reports a verified assertion on this statement.
+	 * 
+	 * @param statement
+	 *                The statement that the prover marks as verified
+	 * @return The statement to be marked in the UI
+	 */
+	private ASTNode getStatementToMark(final ASTNode statement) {
+		if (statement instanceof Loop) {
+			return ((Loop) statement).getCondition();
+		} else {
+			return statement;
 		}
 	}
 }

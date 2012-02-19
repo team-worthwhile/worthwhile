@@ -56,7 +56,6 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 			proveJob.addJobChangeListener(new ProveJobFinishedListener());
 			proveJob.schedule();
 		}
-
 	}
 
 	/**
@@ -92,7 +91,9 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 					}
 
 					title = "Prove unsuccessful";
-					message += "\n\nAdditional prover output: " + status.getMessage();
+					message += "\n\nThe statements that could not be verified are marked in red. "
+					                + "Hover over the corresponding markers in the right-hand ruler to get "
+					                + "the details of why the proof failed.";
 				} else {
 					// Something went horribly wrong
 					title = "Prove error";

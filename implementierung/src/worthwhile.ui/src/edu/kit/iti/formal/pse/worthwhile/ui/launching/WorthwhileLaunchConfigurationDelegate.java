@@ -2,6 +2,7 @@ package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -13,6 +14,7 @@ import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -38,7 +40,7 @@ public abstract class WorthwhileLaunchConfigurationDelegate extends LaunchConfig
 	 */
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
-	
+
 	/**
 	 * The validator.
 	 */
@@ -61,26 +63,21 @@ public abstract class WorthwhileLaunchConfigurationDelegate extends LaunchConfig
 		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, true);
 		Resource resource = resourceSet.getResource(URI.createURI(file.getFullPath().toString()), true);
 
-		// Check if there are no parser or validator errors
-		if (!resource.getErrors().isEmpty()) {
-			StringBuilder errorStringBuilder = new StringBuilder("There are syntax errors in the source file:");
-			
-			for (Diagnostic diag : resource.getErrors()) {
-				errorStringBuilder.append("\nLine " + diag.getLine() + ": " + diag.getMessage());
+		// Validate the model (includes both syntax and validator errors)
+		List<Issue> errors = validator.validate(resource, CheckMode.ALL, null);
+		StringBuilder errorStringBuilder = new StringBuilder("There are errors in the source file:");
+		int errorCount = 0;
+
+		for (Issue issue : errors) {
+			if (issue.getSeverity().equals(Severity.ERROR)) {
+				errorCount++;
+				errorStringBuilder
+				                .append("\nLine " + issue.getLineNumber() + ": " + issue.getMessage());
 			}
-			
+		}
+
+		if (errorCount > 0) {
 			DebugHelper.throwError(errorStringBuilder.toString(), null);
-		} else {
-			List<Issue> validationErrors = validator.validate(resource, CheckMode.ALL, null);
-			if (validationErrors.size() > 0) {
-				StringBuilder errorStringBuilder = new StringBuilder("There are validation errors in the source file:");
-				
-				for (Issue issue : validationErrors) {
-					errorStringBuilder.append("\nLine " + issue.getLineNumber() + ": " + issue.getMessage());
-				}
-				
-				DebugHelper.throwError(errorStringBuilder.toString(), null);
-			}
 		}
 
 		return (Program) resource.getContents().get(0);

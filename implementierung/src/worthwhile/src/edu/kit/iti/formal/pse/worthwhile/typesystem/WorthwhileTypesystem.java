@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.typesystem;
 
-import java.util.Iterator;
-
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
@@ -81,13 +80,19 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 				@Override
 				public void visit(final Assignment assignment) {
 					// base type is the assigned variable's one
-					at.setBaseType(((ArrayType) ts.typeof(assignment.getVariable())).getBaseType());
+					if (assignment.getVariable().getVariable().getType() instanceof ArrayType) {
+						at.setBaseType(((ArrayType) ts.typeof(assignment.getVariable()))
+						                .getBaseType());
+					}
 				}
 
 				@Override
 				public void visit(final VariableDeclaration variableDeclaration) {
 					// base type is the initialized variable's one
-					at.setBaseType(((ArrayType) ts.typeof(variableDeclaration)).getBaseType());
+					if (variableDeclaration.getType() instanceof ArrayType) {
+						at.setBaseType(((ArrayType) ts.typeof(variableDeclaration))
+						                .getBaseType());
+					}
 				}
 
 				@Override
@@ -120,14 +125,15 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 				@Override
 				public void visit(final FunctionCall functionCall) {
 					// base type is the assigned parameter's one
-					final Iterator<VariableDeclaration> p = functionCall.getFunction()
-					                .getParameters().iterator();
-					final Iterator<Expression> a = functionCall.getActuals().iterator();
-					while (a.hasNext()) {
-						if (a.next() == element) {
-							at.setBaseType(((ArrayType) ts.typeof(p.next())).getBaseType());
-						} else {
-							p.next();
+					final EList<VariableDeclaration> parlist = functionCall.getFunction()
+					                .getParameters();
+					final EList<Expression> exprlist = functionCall.getActuals();
+
+					for (int i = 0; i < exprlist.size(); i++) {
+						if (exprlist.get(i) == element
+						                && parlist.get(i).getType() instanceof ArrayType) {
+							at.setBaseType(((ArrayType) ts.typeof(parlist.get(i)))
+							                .getBaseType());
 						}
 					}
 				}
@@ -161,8 +167,9 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 		};
 		Type type = visitor.apply(element);
 		trace.add(element, "returnValueReference");
-		
-		// Check if there is an array access on the return value reference. If yes, return the array's base type.
+
+		// Check if there is an array access on the return value reference. If yes, return the array's base
+		// type.
 		if (type instanceof ArrayType && element.getIndex() != null) {
 			return ((ArrayType) type).getBaseType();
 		} else {
@@ -196,6 +203,9 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 		if (isInstanceOf(type1, p.getArrayType(), trace) && isInstanceOf(type2, p.getArrayType(), trace)) {
 			ArrayType at1 = (ArrayType) type1;
 			ArrayType at2 = (ArrayType) type2;
+			if (at1.getBaseType() == null || at2.getBaseType() == null) {
+				return true;
+			}
 			return super.isSameType(at1, at1.getBaseType(), at2, at2.getBaseType(), trace);
 		}
 		return super.isSameType(element1, type1, element2, type2, trace);

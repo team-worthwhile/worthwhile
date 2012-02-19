@@ -209,6 +209,7 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 
 	@Override
 	public final void executionCompleted() {
+		this.mode = DebugMode.TERMINATED;
 		this.getDebugTarget().terminated();
 	}
 

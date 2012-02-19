@@ -170,7 +170,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	}
 
 	@Override
-	public void visit(QuantifiedExpression quantifiedExpression) {
+	public void visit(final QuantifiedExpression quantifiedExpression) {
 		final Expression condition = quantifiedExpression.getCondition();
 		if (condition != null) {
 			this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());

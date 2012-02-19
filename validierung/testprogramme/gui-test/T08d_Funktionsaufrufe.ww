@@ -1,0 +1,7 @@
+function Integer test()
+	_ensures _return = 42
+{
+	return 42
+}
+
+_assert test() = 42

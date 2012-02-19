@@ -1,0 +1,13 @@
+function Integer f(Integer p) {
+	return p ⋅ 42
+}
+
+Integer i := 0
+
+i := j
+i := j + j
+i := f(j)
+
+j := i
+j := f(i)
+j := f(j)

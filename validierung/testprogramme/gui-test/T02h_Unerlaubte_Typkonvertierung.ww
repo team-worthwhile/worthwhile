@@ -1,0 +1,34 @@
+Integer i
+Boolean b
+Integer[] iarray
+Boolean[] barray
+
+i := 0
+b := 0
+iarray := 0
+barray := 0
+
+i := true
+b := true
+iarray := true
+barray := true
+
+i := {0, 42}
+b := {0, 42}
+iarray := {0, 42}
+barray := {0, 42}
+
+i := {true, false}
+b := {true, false}
+iarray := {true, false}
+barray := {true, false}
+
+i := {true, 42}
+b := {true, 42}
+iarray := {true, 42}
+barray := {true, 42}
+
+i := {}
+b := {}
+iarray := {}
+barray := {}

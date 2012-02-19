@@ -1,0 +1,17 @@
+_axiom ∀ Integer i : i % 2 = 0 // don’t let your math professor see this!
+
+function Integer test(Integer p)
+	_requires p % 2 = 0
+	_ensures _return = p
+{
+	return (p/2)⋅2
+}
+
+function Boolean bla(Boolean q)
+	_ensures _return = false
+{
+	_assume q = true
+	return ¬q
+}
+
+_assert ∀ Integer j : test(j) = j

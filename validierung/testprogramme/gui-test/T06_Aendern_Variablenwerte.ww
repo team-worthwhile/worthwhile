@@ -1,0 +1,11 @@
+Integer i := 0
+Integer[] array := {0}
+
+while (i ≤ 10 ∧ array[i] = 0) {
+	array[i] := i
+	// when reaching this statement, one value is inserted into the array
+	// at position i+1. This should cause the loop to terminate.
+	i := i + 1
+}
+
+i := i - 10

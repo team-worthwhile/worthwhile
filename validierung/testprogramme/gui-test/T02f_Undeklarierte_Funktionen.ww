@@ -1,0 +1,16 @@
+function Integer f(Integer p) {
+	return 42
+}
+
+Integer i := 0
+
+i := f(i)
+i := f(f(i))
+
+i := g(i)
+i := g(f(i))
+i := f(g(i))
+
+Integer j := i()
+
+j := f(i())

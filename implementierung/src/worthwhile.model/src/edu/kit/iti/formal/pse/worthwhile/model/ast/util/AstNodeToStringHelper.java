@@ -125,20 +125,20 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	public void visit(final ArrayFunction arrayFunction) {
 		this.buf.append("{ ");
 
-		ArrayFunction next = arrayFunction;
-		do {
-			if (next.getIndex() != null) {
-				next.getIndex().accept(this);
-			} else {
-				this.buf.append("any");
-			}
+		if (arrayFunction.getIndex() != null) {
+			arrayFunction.getIndex().accept(this);
+		} else {
+			this.buf.append("any");
+		}
 
-			this.buf.append(" => ");
+		this.buf.append(" => ");
 
-			next.getValue().accept(this);
+		arrayFunction.getValue().accept(this);
 
-			next = next.getChainedFunction();
-		} while (next != null);
+		if (arrayFunction.getChainedFunction() != null) {
+			this.buf.append(", ");
+			arrayFunction.getChainedFunction().accept(this);
+		}
 
 		this.buf.append(" }");
 	}
@@ -373,7 +373,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		this.buf.append(" : ");
 		forAllQuantifier.getExpression().accept(this);
 	}
-	
+
 	@Override
 	public void visit(final ExistsQuantifier existsQuantifier) {
 		this.buf.append("∃ ");

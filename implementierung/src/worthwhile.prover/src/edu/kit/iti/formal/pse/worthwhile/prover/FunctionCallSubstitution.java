@@ -15,6 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
@@ -169,33 +170,66 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	}
 
 	@Override
+	public void visit(final QuantifiedExpression quantifiedExpression) {
+		final Expression condition = quantifiedExpression.getCondition();
+		if (condition != null) {
+			this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
+			condition.accept(this);
+
+			quantifiedExpression.setCondition(this.applyFunctionAnnotations(quantifiedExpression
+			                .getCondition()));
+
+			this.parameters.pop();
+		}
+
+		this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
+		quantifiedExpression.getExpression().accept(this);
+
+		quantifiedExpression.setExpression(this.applyFunctionAnnotations(quantifiedExpression.getExpression()));
+
+		this.parameters.pop();
+	}
+
+	@Override
 	public void visit(final Annotation annotation) {
 		this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
 		annotation.getExpression().accept(this);
+
+		annotation.setExpression(this.applyFunctionAnnotations(annotation.getExpression()));
+
+		this.parameters.pop();
+	}
+
+	/**
+	 * 
+	 * @param expression
+	 *                the {@link Expression} for which the current {@link FunctionCallSubstitution#parameters} have
+	 *                been calculated
+	 * @return a new <code>Expression</code> that implies <code>expression</code> when each function call's
+	 *         (retrieved from <code>parameters</code>) precondition is fulfilled and postcondition is assumed
+	 */
+	private Expression applyFunctionAnnotations(final Expression expression) {
+		Expression newExpression = expression;
+
 		final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 		for (final VariableDeclaration variable : returnVariables) {
 			final Expression precondition = getPrecondition(this.parameters.peek().get(variable));
 			Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
 
-			Expression expression = annotation.getExpression();
-			annotation.setExpression(null);
-
 			if (postcondition != null) {
 				postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
 				                AstNodeCreatorHelper.createVariableReference(variable));
 
-				expression = AstNodeCreatorHelper.createImplication(postcondition, expression);
+				newExpression = AstNodeCreatorHelper.createImplication(postcondition, newExpression);
 			}
 
-			expression = AstNodeCreatorHelper.createForAllQuantifier(variable, expression);
+			newExpression = AstNodeCreatorHelper.createForAllQuantifier(variable, newExpression);
 
 			if (precondition != null) {
-				expression = AstNodeCreatorHelper.createConjunction(precondition, expression);
+				newExpression = AstNodeCreatorHelper.createConjunction(precondition, newExpression);
 			}
-
-			annotation.setExpression(expression);
 		}
 
-		this.parameters.pop();
+		return newExpression;
 	}
 }

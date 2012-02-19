@@ -33,12 +33,14 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
@@ -156,16 +158,30 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	public void visit(final ArrayFunction arrayFunction) {
 		String arrayString;
 
-		if (arrayFunction.getIndex() == null && arrayFunction.getChainedFunction() == null) {
+		if (arrayFunction.getIndex() == null) {
 			final Expression value = arrayFunction.getValue();
 
-			(new WorthwhileTypesystem()).typeof(value).accept(this);
-			final String typeString = this.formulaCompileStack.pop();
+			arrayString = new ASTNodeReturnVisitor<String>() {
+				// array literal (ArrayFunction) or array reference
+				@Override
+				public void visit(final ArrayType arrayType) {
+					value.accept(SMTLIBStrategy.this);
+					this.setReturnValue(SMTLIBStrategy.this.formulaCompileStack.pop());
+				}
 
-			value.accept(this);
-			final String valueString = this.formulaCompileStack.pop();
+				// constant
+				@Override
+				public void visit(final PrimitiveType primitiveType) {
+					primitiveType.accept(SMTLIBStrategy.this);
+					final String typeString = SMTLIBStrategy.this.formulaCompileStack.pop();
 
-			arrayString = "((as const (Array Int " + typeString + ")) " + valueString + ")";
+					value.accept(SMTLIBStrategy.this);
+					final String valueString = SMTLIBStrategy.this.formulaCompileStack.pop();
+
+					this.setReturnValue("((as const (Array Int " + typeString + ")) " + valueString
+					                + ")");
+				}
+			}.apply((new WorthwhileTypesystem()).typeof(value));
 		} else {
 			arrayFunction.getChainedFunction().accept(this);
 			final String chainedArrayString = this.formulaCompileStack.pop();

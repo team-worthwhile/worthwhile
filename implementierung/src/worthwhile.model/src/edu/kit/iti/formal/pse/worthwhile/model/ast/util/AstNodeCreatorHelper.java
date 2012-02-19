@@ -143,7 +143,7 @@ public final class AstNodeCreatorHelper {
 	 *         <code>chainedFunction</code> else
 	 */
 	public static ArrayFunction createArrayFunction(final Expression index, final Expression value,
-	                final ArrayFunction chainedFunction) {
+	                final Expression chainedFunction) {
 		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();
 		arrayFunction.setIndex(index);
 		arrayFunction.setValue(value);

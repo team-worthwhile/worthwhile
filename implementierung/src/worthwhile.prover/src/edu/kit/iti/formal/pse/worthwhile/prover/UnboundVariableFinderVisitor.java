@@ -1,6 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
@@ -25,12 +25,12 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * The set of variables that is bound in the current visitor state.
 	 */
-	private Set<VariableDeclaration> boundVariables = new HashSet<VariableDeclaration>();
+	private Set<VariableDeclaration> boundVariables = new LinkedHashSet<VariableDeclaration>();
 
 	/**
 	 * The set of unbound variables that have to be declared.
 	 */
-	private Set<VariableDeclaration> unboundVariables = new HashSet<VariableDeclaration>();
+	private Set<VariableDeclaration> unboundVariables = new LinkedHashSet<VariableDeclaration>();
 
 	/**
 	 * @return the set of unbound variables in the visited {@link Expression}s
@@ -78,7 +78,9 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public final void visit(final QuantifiedExpression quantifiedExpression) {
-		// a quantifiedExpression binds a variable
+		// since QuantifiedExpression#parameters are bound in the respective QuantifiedExpression#expression we
+		// do not need to clone them, therefore add them temporarily to the variableMap so that
+		// visit(VariableReference) does not create a copy we cannot remove from the variableMap anymore
 		this.boundVariables.add(quantifiedExpression.getParameter());
 		if (quantifiedExpression.getCondition() != null) {
 			quantifiedExpression.getCondition().accept(this);

@@ -110,6 +110,43 @@ public class WorthwhileMarkerHelper {
 	}
 
 	/**
+	 * Gets the marker at the specified statement.
+	 * 
+	 * @param statement
+	 *                The statement whose marker to get.
+	 * @return The marker at this statement if there is one, {@code null} otherwise.
+	 * @throws CoreException
+	 *                 if getting the marker fails.
+	 */
+	public final IMarker getMarkerAt(final ASTNode statement) throws CoreException {
+		// Get the position of the node in the source file.
+		int line = NodeHelper.getLine(statement);
+		int start = NodeHelper.getOffset(statement);
+		int end = start + NodeHelper.getLength(statement);
+		
+		if (line == -1) {
+			return null;
+		}
+
+		// Get all markers in the source file.
+		IMarker[] markers = this.resource.findMarkers(null, true, IResource.DEPTH_ONE);
+
+		for (IMarker marker : markers) {
+			if (marker.getType().equals(MARKER_SUCCEEDED_STATEMENT)
+			                || marker.getType().equals(MARKER_FAILED_STATEMENT)) {
+				if (marker.getAttribute(IMarker.LINE_NUMBER).equals(line)) {
+					if ((Integer) marker.getAttribute(IMarker.CHAR_START) >= start
+					                && (Integer) marker.getAttribute(IMarker.CHAR_END) <= end) {
+						return marker;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+
+	/**
 	 * Creates a marker in the specified resource.
 	 * 
 	 * @param statement

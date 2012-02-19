@@ -57,31 +57,19 @@ public final class TestUtils {
 	public static void assertErrorCountEquals(final int expected, final Resource resource) {
 		Injector guiceInjector = new WorthwhileStandaloneSetup().createInjectorAndDoEMFRegistration();
 		IResourceValidator validator = guiceInjector.getInstance(IResourceValidator.class);
-		List<Issue> validationErrors = validator.validate(resource, CheckMode.ALL, null);
+		List<Issue> errors = validator.validate(resource, CheckMode.ALL, null);
+		StringBuilder errorStringBuilder = new StringBuilder("There are errors in the source file:");
+		int errorCount = 0;
 
-		int errorCount = resource.getErrors().size();
-
-		for (Issue issue : validationErrors) {
+		for (Issue issue : errors) {
 			if (issue.getSeverity().equals(Severity.ERROR)) {
 				errorCount++;
+				errorStringBuilder
+				                .append("\nLine " + issue.getLineNumber() + ": " + issue.getMessage());
 			}
 		}
-
+		
 		if (errorCount != expected) {
-			StringBuilder errorStringBuilder = new StringBuilder("expected <" + expected + ">, but found <"
-			                + resource.getErrors().size() + ">:");
-
-			for (Diagnostic diag : resource.getErrors()) {
-				errorStringBuilder.append("\nLine " + diag.getLine() + ": " + diag.getMessage());
-			}
-
-			for (Issue issue : validationErrors) {
-				if (issue.getSeverity().equals(Severity.ERROR)) {
-					errorStringBuilder.append("\nLine " + issue.getLineNumber() + ": "
-					                + issue.getMessage());
-				}
-			}
-
 			throw new AssertionError(errorStringBuilder.toString());
 		}
 	}

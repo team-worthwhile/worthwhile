@@ -1,14 +1,25 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.proving;
 
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.IProverEventListener;
 import edu.kit.iti.formal.pse.worthwhile.prover.ProverResult;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileConstants;
+import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 
 /**
  * A job for proving a program.
@@ -39,6 +50,11 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 	private Validity validity;
 
 	/**
+	 * The marker helper for marking verified and failed statements.
+	 */
+	private final WorthwhileMarkerHelper markerHelper;
+
+	/**
 	 * Creates a new instance of the {@link WorthwhileProveJob} class.
 	 * 
 	 * @param name
@@ -47,30 +63,142 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 	 *                The specification checker to use.
 	 * @param checkedProgram
 	 *                The program to check.
+	 * @param markerHelper
+	 *                The marker helper for marking verified and failed statements.
 	 */
-	public WorthwhileProveJob(final String name, final SpecificationChecker checker, final Program checkedProgram) {
+	public WorthwhileProveJob(final String name, final SpecificationChecker checker, final Program checkedProgram,
+	                final WorthwhileMarkerHelper markerHelper) {
 		super(name);
 		this.checker = checker;
 		this.checkedProgram = checkedProgram;
+		this.markerHelper = markerHelper;
 	}
 
 	@Override
 	protected final IStatus run(final IProgressMonitor monitor) {
+		// Clear all problem markers
+		this.markerHelper.clearMarkers();
+
 		this.checker.addProverEventListener(this);
-		checker.checkProgram(checkedProgram);
-		
+		checker.checkProgram(this.checkedProgram);
+
 		if (this.validity == null) {
 			this.validity = Validity.UNKNOWN;
 		}
-		
+
 		return new ProveResultStatus(this.proveResult, this.validity);
 	}
 
+	/**
+	 * Convenience method to generate a user-facing message describing a proof attempt.
+	 * 
+	 * @param validity
+	 *                the validity of the formula that was proven
+	 * @param formula
+	 *                the formula that was proven
+	 * @param proverResult
+	 *                the {@link ProverResult} returned by the prover
+	 * @return a human-readable tooltip message
+	 */
+	private static String getTooltipMessage(final Validity validity, final Expression formula,
+	                final ProverResult proverResult) {
+		String formulaString = AstNodeToStringHelper.toString(formula);
+		String tooltipString = formulaString
+		                + "\n\nProof attempt for the calculated formula resulted in Validity "
+		                + validity.toString() + "\n\n" + "Prover output was:\n" + proverResult.getOutput();
+		return tooltipString;
+	}
+
 	@Override
-	public final void programVerified(final Program program, final Validity validity,
+	public final void programVerified(final Program program, final Validity validity, final Expression formula,
 	                final ProverResult proverResult) {
 		this.proveResult = proverResult;
 		this.validity = validity;
 	}
 
+	@Override
+	public final void assertionVerified(final Assertion assertion, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(assertion, validity,
+		                "Verifying assertion:\n\n" + getTooltipMessage(validity, formula, proverResult));
+	}
+
+	@Override
+	public final void invariantValidAtEntryVerified(final Invariant invariant, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(invariant, validity, "Verifying that invariant holds at loop entry:\n\n"
+		                + getTooltipMessage(validity, formula, proverResult));
+	}
+
+	@Override
+	public final void invariantAndConditionImplyLoopPreconditionVerified(final Loop loop, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(loop, validity,
+		                "Verifying that invariant and loop condition imply the loop body’s postcondition:\n\n"
+		                                + getTooltipMessage(validity, formula, proverResult));
+	}
+
+	@Override
+	public final void postconditionValidVerified(final Postcondition postcondition, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
+		this.markStatement(postcondition, validity, "Verifying that the postcondition holds:\n\n"
+		                + getTooltipMessage(validity, formula, proverResult));
+	}
+
+	/**
+	 * Marks a statement as failed or succeeded. If the statement is already marked, it will only be re-marked if
+	 * the validity gets "worse", i.e. from VALID to INVALID/UNKNOWN.
+	 * 
+	 * @param statement
+	 *                The statement to mark
+	 * @param validity
+	 *                The validity of the statement
+	 * @param message
+	 *                An additional message.
+	 */
+	private void markStatement(final ASTNode statement, final Validity validity, final String message) {
+		try {
+			ASTNode statementToMark = this.getStatementToMark(statement);
+			IMarker marker = this.markerHelper.getMarkerAt(statementToMark);
+
+			// Mark the statement only if there is no marker or the validity gets worse.
+			if (marker != null) {
+				if (marker.getType().equals(WorthwhileConstants.MARKER_FAILED_STATEMENT)
+				                || validity.equals(Validity.VALID)) {
+					return;
+				} else {
+					marker.delete();
+				}
+			}
+
+			switch (validity) {
+				case VALID:
+					this.markerHelper.markSucceededStatement(statementToMark, message);
+					break;
+				case INVALID:
+				case UNKNOWN:
+					this.markerHelper.markFailedStatement(statementToMark, message);
+					break;
+				default:
+					break;
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Gets the statement to be marked in the UI when the prover reports a verified assertion on this statement.
+	 * 
+	 * @param statement
+	 *                The statement that the prover marks as verified
+	 * @return The statement to be marked in the UI
+	 */
+	private ASTNode getStatementToMark(final ASTNode statement) {
+		if (statement instanceof Loop) {
+			return ((Loop) statement).getCondition();
+		} else {
+			return statement;
+		}
+	}
 }

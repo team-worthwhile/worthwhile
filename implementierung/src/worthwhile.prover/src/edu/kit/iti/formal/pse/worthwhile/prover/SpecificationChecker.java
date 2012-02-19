@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.Callable;
@@ -16,13 +17,17 @@ import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -314,19 +319,60 @@ public class SpecificationChecker {
 	public final Validity checkProgram(final Program program) {
 		// TODO apply Worthwhile specific runtime assertions
 
-		// we don't want to pollute the o
-		Program modifiedProgram = AstNodeCloneHelper.clone(program);
 		// add assertions to check that the divisors are not zero
-		modifiedProgram.accept(new DivisionByZeroAssertionInserter());
-		modifiedProgram.accept(new ImplicitInitialValueInserter());
-		modifiedProgram.accept(new ArrayFunctionInserter());
-		modifiedProgram.accept(new FunctionCallSubstitution());
+		program.accept(new DivisionByZeroAssertionInserter());
+		program.accept(new ImplicitInitialValueInserter());
+		program.accept(new ArrayFunctionInserter());
+		program.accept(new FunctionCallSubstitution());
+
 		// generate formula from program
-		Expression formula = this.transformer.transformProgram(modifiedProgram);
-		// get the validity from the prover
-		Validity validity = this.getValidity(formula);
-		// fire the event listener
-		this.listener.programVerified(program, validity, this.getCheckResult());
-		return validity;
+		List<Proof> provableFormulas = this.transformer.transformProgram(program);
+		Validity programValidity = Validity.VALID;
+		for (Proof provable : provableFormulas) {
+			// get the validity from the prover
+			Validity validity = this.getValidity(provable.getExpression());
+
+			// downgrade the "overall validity" if needed
+			// if everything up to now was valid, allow downgrade to anything
+			if (programValidity == Validity.VALID) {
+				programValidity = validity;
+			}
+			// only allow downgrade from unknown to invalid, no upgrade to valid
+			if (programValidity == Validity.UNKNOWN && validity == Validity.INVALID) {
+				programValidity = validity;
+			}
+
+			// TODO: could this be made more object-oriented by using Proof subclasses?
+			// alert the event listeners of the Proof
+			if (provable.getImplication() != null) {
+				switch (provable.getImplication()) {
+				case ASSERTION_VALID:
+					this.listener.assertionVerified((Assertion) provable.getRelatedAstNodes()
+					                .get(0), validity, provable.getExpression(), this
+					                .getCheckResult());
+					break;
+				case INVARIANT_VALID_AT_ENTRY:
+					this.listener.invariantValidAtEntryVerified((Invariant) provable
+					                .getRelatedAstNodes().get(0), validity, provable
+					                .getExpression(), this.getCheckResult());
+					break;
+				case INVARIANT_AND_CONDITION_IMPLIES_LOOP_BODY_PRECONDITION:
+					this.listener.invariantAndConditionImplyLoopPreconditionVerified(
+					                (Loop) provable.getRelatedAstNodes().get(0), validity,
+					                provable.getExpression(), this.getCheckResult());
+					break;
+				case POSTCONDITION_VALID:
+					this.listener.postconditionValidVerified((Postcondition) provable
+					                .getRelatedAstNodes().get(0), validity, provable
+					                .getExpression(), this.getCheckResult());
+					break;
+				default:
+					throw new RuntimeException("Unhandled proof implication type");
+				}
+			}
+		}
+		// fire the event listener for the whole verification
+		this.listener.programVerified(program, programValidity, null, this.getCheckResult());
+		return programValidity;
 	}
 }

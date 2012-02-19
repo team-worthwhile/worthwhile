@@ -41,7 +41,6 @@ section "Expressions"
 		typeof ExistsQuantifier -> BooleanType		
 		typeof QuantifiedExpression -> BooleanType {
 			
-			ensureType parameter :<=: BooleanType, IntegerType
 			ensureType expression :<=: BooleanType
 			ensureType condition :<=: BooleanType 
 			
@@ -72,73 +71,73 @@ section "Binary Expression with integer operands"
 		typeof Addition -> IntegerType {
 			ensureType left :<=: IntegerType 
 		 	ensureType right :<=: IntegerType 
-		 	ensureCompatibility left :<=>: right "Both summands have to be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 typeof Subtraction -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both minuend and subtrahend have to be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 typeof Multiplication -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both factors have to be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 typeof Modulus -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 typeof Division -> IntegerType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both dividend and divisor have to be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		}
 			 //--and have return type BooleanType
 		 typeof LessOrEqual -> BooleanType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 
 		 typeof Less -> BooleanType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 	
 		 }
 		 typeof Greater -> BooleanType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 
 		 typeof GreaterOrEqual -> BooleanType {
 			ensureType left :<=: IntegerType
 		 	ensureType right :<=: IntegerType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be an Integer or an expression which returns an integer"
+		 	ensureCompatibility left :<=>: right 
 		 }
 section "Binary Expression with boolean operands"
 		 	
 		 typeof Disjunction -> BooleanType {
 			ensureType left :<=: BooleanType
 		 	ensureType right :<=: BooleanType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean"
+		 	ensureCompatibility left :<=>: right
 		 }
 		 typeof Conjunction -> BooleanType {
 			ensureType left :<=: BooleanType
 		 	ensureType right :<=: BooleanType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 typeof Equivalence -> BooleanType {
 			ensureType left :<=: BooleanType
 		 	ensureType right :<=: BooleanType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean"
+		 	ensureCompatibility left :<=>: right 
 		 }
 		 typeof Implication -> BooleanType {
 			ensureType left :<=: BooleanType
 		 	ensureType right :<=: BooleanType
-		 	ensureCompatibility left :<=>: right "Both operands have to be be a value of Boolean or an expression which returns an value of Boolean"
+		 	ensureCompatibility left :<=>: right 
 		 }
 section "Binary Expression with boolean, integer or array operands"
 

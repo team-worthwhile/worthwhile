@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
@@ -34,7 +35,8 @@ public class WorthwhileExecuteLaunchConfigurationDelegate extends WorthwhileLaun
 	public final void launch(final ILaunchConfiguration configuration, final String mode, final ILaunch launch,
 	                final IProgressMonitor monitor) throws CoreException {
 
-		Program program = this.getProgram(configuration);
+		IFile file = this.getFile(configuration);
+		Program program = this.getProgram(file);
 
 		if (program != null) {
 			// Create and run the prover, specification checker, and interpreter.

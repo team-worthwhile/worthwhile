@@ -25,7 +25,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
-import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
  * Performs semantic validation on a Worthwhile program.
@@ -125,7 +124,6 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	 */
 	@Check
 	public final void checkFunctionCallParameter(final FunctionCall functionCall) {
-
 		if (functionCall.getActuals().size() != functionCall.getFunction().getParameters().size()) {
 			error("The amount of parameters is incorrect. Expecting "
 			                + functionCall.getFunction().getParameters().size() + " parameters, but found "
@@ -136,9 +134,9 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 			EList<VariableDeclaration> parameters = functionCall.getFunction().getParameters();
 
 			for (int i = 0; i < actuals.size(); i++) {
-				if (!((WorthwhileTypesystem) ts).isSameType(functionCall,
-				                ts.typeof(actuals.get(i), trace), functionCall.getFunction(),
-				                ts.typeof(parameters.get(i), trace), trace)) {
+				if (!ts.isSameType(functionCall, ts.typeof(actuals.get(i), trace),
+				                functionCall.getFunction(), ts.typeof(parameters.get(i), trace), trace)) {
+
 					error("Expected parameter "
 					                + ts.typeString(ts.typeof(parameters.get(i), trace))
 					                + " , but found "
@@ -194,8 +192,8 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 							error("Element doesn't match type of the array. Expected parameter of type "
 							                + ts.typeString(ts.typeof(actuals.get(0), trace))
 							                + ", but found "
-							                + ts.typeString(ts.typeof(actuals.get(i), trace)) + ".",
-							                actuals.get(i), null, -1);
+							                + ts.typeString(ts.typeof(actuals.get(i), trace))
+							                + ".", actuals.get(i), null, -1);
 						}
 					}
 				}

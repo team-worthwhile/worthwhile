@@ -1,0 +1,76 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[nounderscore]{syntax}
+\usepackage{url}                % URLs
+\usepackage{tikz}               % for the grey border on the title page
+\usepackage{ziffer}				% to use commas as decimal separators in math mode
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{longtable, mdwtab}
+\usepackage[absolute,overlay]{textpos}
+
+\usepackage[a4paper,left=40mm,right=30mm,top=20mm,bottom=20mm,includeheadfoot]{geometry}
+\newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
+\parindent 0pt
+\usepackage[raiselinks=true,
+						bookmarks=true,
+						bookmarksopenlevel=1,
+						bookmarksopen=true,
+						bookmarksnumbered=true,
+						hyperindex=true,
+						plainpages=false,
+						pdfpagelabels=true,
+						pdfborder={0 0 0.5},
+						colorlinks=false,
+						linkbordercolor={0 0.61 0.50},
+						citebordercolor={0 0.61 0.50}]{hyperref}  %{0.57 0.74 0.57}
+
+\author{PSE-Projekt 4 Team 2}
+\title{Validierungsbericht zu Worthwhile}
+
+\setcounter{tocdepth}{1} % make TOC fit on one page
+
+\hyphenation{Worth-while}
+\hyphenation{Pro-gramm-in-halt}
+
+\newcommand{\reqtype}{}
+\newenvironment{reqlist}[1]{\begin{description} \renewcommand{\reqtype}{#1}}{\end{description}}
+\newcommand{\req}[3]{\item[\textbf{/\reqtype{}#1/}] #2 \\ #3}
+\newcommand{\see}[1]{#1}
+\renewcommand{\int}{\texttt{Integer}}
+\newcommand{\bool}{\texttt{Boolean}}
+
+\newcommand{\method}[1]{
+			\item[\texttt{\textbf{#1}}]
+            }
+\newcommand{\attr}[1]{\item[\texttt{\textbf{#1}}]}
+\newcommand{\type}[1]{\texttt{#1}}
+\newcommand{\literal}[1]{\item[\texttt{#1}]}
+\newcommand{\mlmethod}[1]{\method{\parbox{\textwidth}{#1}}}
+\newenvironment{rcases}{%
+  \left.\renewcommand*\lbrace.%
+  \begin{cases}}%
+{\end{cases}\right\rbrace}
+\graphicspath{{images/}}
+
+\begin{document}
+
+\include{titlepage}
+
+\tableofcontents
+\clearpage
+
+% \input{gui-tests}
+
+\clearpage
+\appendix
+
+\end{document}

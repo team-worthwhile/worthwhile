@@ -136,7 +136,7 @@ VariableDeclaration returns VariableDeclaration:
 
 // An assignment assigns a value to a variable.
 Assignment returns Assignment:
-	variable=VariableReference ':=' value=Expression
+	variable=VariableReference (':=' | '≔') value=Expression
 ;
 
 // An Expression is based on operator precedence. Each "level" of Expressions means one level of operator precedence,

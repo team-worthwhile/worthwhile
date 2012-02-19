@@ -168,7 +168,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Assignment assignment) {
 		assignment.getVariable().accept(this);
-		this.buf.append(" := ");
+		this.buf.append(" ≔ ");
 		assignment.getValue().accept(this);
 	}
 

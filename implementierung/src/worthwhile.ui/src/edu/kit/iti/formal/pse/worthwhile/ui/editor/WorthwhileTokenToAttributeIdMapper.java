@@ -15,7 +15,7 @@ public class WorthwhileTokenToAttributeIdMapper extends DefaultAntlrTokenToAttri
 	@Override
 	protected final String calculateId(final String tokenName, final int tokenType) {
 		// Tokens that should be deemed punctuation characters and not be highlighted
-		String[] additionalPunctuationTokens = { "¬", "∙", "÷", "⋅", "≤", "≥", "≠", "∧", "⇒", "∨", "⇔" };
+		String[] additionalPunctuationTokens = { "¬", "∙", "÷", "⋅", "≤", "≥", "≠", "∧", "⇒", "∨", "⇔", "≔" };
 
 		if ("RULE_BOOL".equals(tokenName)) {
 			// Provide our own ID for Boolean literals

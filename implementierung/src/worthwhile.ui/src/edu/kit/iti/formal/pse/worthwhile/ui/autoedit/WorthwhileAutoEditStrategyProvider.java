@@ -42,6 +42,7 @@ public class WorthwhileAutoEditStrategyProvider extends DefaultAutoEditStrategyP
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("!=", "≠"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("/=", "≠"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("=/", "≠"), IDocument.DEFAULT_CONTENT_TYPE);
+			acceptor.accept(new ReplaceKeywordAutoEditStrategy(":=", "≔"), IDocument.DEFAULT_CONTENT_TYPE);
 			acceptor.accept(new ReplaceKeywordAutoEditStrategy("*", "⋅"), IDocument.DEFAULT_CONTENT_TYPE);
 			// Revert the previous replacement when "/⋅" was entered since that is most likely the beginning
 			// of a block comment.

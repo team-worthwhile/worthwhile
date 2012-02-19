@@ -12,6 +12,7 @@ pflichtenheft.pdf
 entwurf.pdf
 presentation.pdf
 implementierung.pdf
+validierung.pdf
 # java stuff
 *.class
 bin/

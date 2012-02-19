@@ -39,6 +39,15 @@ public class ValidatorTest extends XTextTestCase {
 
 	}
 	
+	/**
+	 * Tests that undeclared functions are not checked for their parameter count.
+	 */
+	@Test
+	public final void testUndeclaredFunctionParameterCountCheck() {
+		String testProgram = "Integer i := g(1)\nInteger j := g()\n";
+		TestUtils.assertErrorCountEquals(2, TestASTProvider.loadProgram(testProgram));
+	}
+	
 	private void initialize(String parseText) {
 		XtextResource resource = (XtextResource) TestASTProvider.loadProgram(parseText);
 		

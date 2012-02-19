@@ -76,6 +76,9 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 
 	@Override
 	protected final IStatus run(final IProgressMonitor monitor) {
+		// Clear all problem markers
+		this.markerHelper.clearMarkers();
+
 		this.checker.addProverEventListener(this);
 		checker.checkProgram(this.checkedProgram);
 
@@ -152,12 +155,17 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 		try {
 			IMarker marker = this.markerHelper.getMarkerAt(statement);
 
-			// Mark the statement if there is no mark or the validity gets worse.
-			if (marker == null
-			                || (marker.getType().equals(WorthwhileConstants.MARKER_SUCCEEDED_STATEMENT) && !validity
-			                                .equals(Validity.VALID))) {
+			// Mark the statement only if there is no marker or the validity gets worse.
+			if (marker != null) {
+				if (marker.getType().equals(WorthwhileConstants.MARKER_FAILED_STATEMENT)
+				                || validity.equals(Validity.VALID)) {
+					return;
+				} else {
+					marker.delete();
+				}
+			}
 
-				switch (validity) {
+			switch (validity) {
 				case VALID:
 					this.markerHelper.markSucceededStatement(statement, message);
 					break;
@@ -167,12 +175,9 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 					break;
 				default:
 					break;
-				}
-
 			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

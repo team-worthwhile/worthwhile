@@ -9,6 +9,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
  * Default listener for {@link Interpreter} events.
  * 
  * @see AbstractExecutionEventEvent
+ * 
+ * @nocheckstyle:designforextension
  */
 public abstract class AbstractExecutionEventListener {
 	/**

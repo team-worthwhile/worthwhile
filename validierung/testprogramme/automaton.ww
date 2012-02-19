@@ -12,30 +12,33 @@
 function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer startingState, Integer numCharacters, Integer[] transition)
 	_requires inputLength ≥ 0
 	_requires startingState ≥ 0
-	_requires ∀ Integer i1 : input[i1] ≥ 0
+	_requires numCharacters > 0
+	_requires ∀ Integer i1, 0 ≤ i1 ∧ i1 < inputLength : 0 ≤ i1 ∧ input[i1] < numCharacters
 	
 	_ensures _return[0] = startingState
 	_ensures ∀ Integer i2, 0 < i2 ∧ i2 ≤ inputLength : _return[i2] = transition[numCharacters ⋅ _return[i2-1] + input[i2-1]]
 {
-	Integer positionOnTape := 0
+	// Initialize variables
+	Integer positionInInput := 0
 	Integer currentState := startingState
 	Integer[] result := {currentState} 
 	
-	while (positionOnTape < inputLength)
-		_invariant positionOnTape ≤ inputLength
-		_invariant result[positionOnTape] = currentState
+	// Read the input
+	while (positionInInput < inputLength)
+		_invariant positionInInput ≤ inputLength
+		_invariant result[positionInInput] = currentState
 	{
 		// Read current character
-		Integer currentCharacter := input[positionOnTape]
+		Integer currentCharacter := input[positionInInput]
 		
 		// Determine next state and go into that state
 		currentState := transition[numCharacters ⋅ currentState + currentCharacter]
 		
 		// Advance input position
-		positionOnTape := positionOnTape + 1	
+		positionInInput := positionInInput + 1	
 		
 		// Write current state to result 
-		result[positionOnTape] := currentState
+		result[positionInInput] := currentState
 	}
 	
 	return result
@@ -44,6 +47,7 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 // Run an automaton that accepts exactly the words consisting of zero or more "1" 
 //  - Alphabet: {0, 1}
 //  - States: {0, 1}
+//  - Final state: 0
 //  - Transition function:
 //
 //		q	0	1
@@ -51,8 +55,9 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 //		0	1	0
 //		1	1	1
 
-Integer[] res := runAutomaton(3, {1, 1, 1}, 0, 2, {1, 0, 1, 1})
-Boolean b := (res[3] = 0)
+// Test the automaton with an example
+//Integer[] res := runAutomaton(3, {1, 1, 1}, 0, 2, {1, 0, 1, 1})
+//Boolean b := (res[3] = 0)
 
-//_assert ∀ Integer len, len ≥ 0 : ∀ Integer[] arrayInput, ∀ Integer j, 0 ≤ j ∧ j < len : arrayInput[j] = 1 : runAutomaton(len, arrayInput, 0, 2, {1, 0, 1, 1}) = true
-
+// Assert that the automaton accepts all input consisting of zero or more "1"s 
+// _assert ∀ Integer len, len ≥ 0 : (∀ Integer[] arrayInput, (∀ Integer j, 0 ≤ j ∧ j < len : arrayInput[j] = 1) : (∀ Integer[] r, r = runAutomaton(len, arrayInput, 0, 2, {1, 0, 1, 1}) : r[len] = 0))

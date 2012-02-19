@@ -479,7 +479,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	protected final IStackFrame[] getStackFrames() throws DebugException {
 		return new IStackFrame[] { new WorthwhileStackFrame(this, this.thread,
-		                this.eventListener.getCurrentNode()) };
+		                this.eventListener.getCurrentNode()) };	
 	}
 
 	/**

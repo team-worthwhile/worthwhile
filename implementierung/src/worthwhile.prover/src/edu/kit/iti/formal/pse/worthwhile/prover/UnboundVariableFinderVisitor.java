@@ -91,6 +91,11 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 
 	@Override
 	public final void visit(final VariableReference variableReference) {
+		final Expression index = variableReference.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
+
 		variableReference.getVariable().accept(this);
 	}
 

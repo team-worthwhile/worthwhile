@@ -5,6 +5,8 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 /**
  * The Class InterpreterError.
+ * 
+ * @nocheckstyle:designforextension
  */
 public class InterpreterError {
 	

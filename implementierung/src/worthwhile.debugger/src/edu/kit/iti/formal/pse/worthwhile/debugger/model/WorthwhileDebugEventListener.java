@@ -234,7 +234,6 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		}
 
 		this.currentNode = statement;
-		this.stepOverNode = null;
 
 		boolean doSuspend = false;
 		int suspendReason = 0;
@@ -304,10 +303,10 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 		}
 
 		// Check if this is the statement we have stepped over. If yes, return to normal step mode.
-		// FIXME: Statement is visited twice when stepping over?!
 		if (DebugMode.STEP_OVER.equals(this.mode)) {
 			if (statement.equals(this.stepOverNode)) {
 				this.mode = DebugMode.STEP;
+				this.stepOverNode = null;
 			}
 		}
 

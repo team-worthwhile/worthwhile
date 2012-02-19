@@ -119,25 +119,30 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 	@Override
 	public final void assertionVerified(final Assertion assertion, final Validity validity,
 	                final Expression formula, final ProverResult proverResult) {
-		this.markStatement(assertion, validity, getTooltipMessage(validity, formula, proverResult));
+		this.markStatement(assertion, validity,
+		                "Verifying assertion:\n\n" + getTooltipMessage(validity, formula, proverResult));
 	}
 
 	@Override
 	public final void invariantValidAtEntryVerified(final Invariant invariant, final Validity validity,
 	                final Expression formula, final ProverResult proverResult) {
-		this.markStatement(invariant, validity, getTooltipMessage(validity, formula, proverResult));
+		this.markStatement(invariant, validity, "Verifying that invariant holds at loop entry:\n\n"
+		                + getTooltipMessage(validity, formula, proverResult));
 	}
 
 	@Override
 	public final void invariantAndConditionImplyLoopPreconditionVerified(final Loop loop, final Validity validity,
 	                final Expression formula, final ProverResult proverResult) {
-		this.markStatement(loop, validity, getTooltipMessage(validity, formula, proverResult));
+		this.markStatement(loop, validity,
+		                "Verifying that invariant and loop condition imply the loop body’s postcondition:\n\n"
+		                                + getTooltipMessage(validity, formula, proverResult));
 	}
 
 	@Override
 	public final void postconditionValidVerified(final Postcondition postcondition, final Validity validity,
 	                final Expression formula, final ProverResult proverResult) {
-		this.markStatement(postcondition, validity, getTooltipMessage(validity, formula, proverResult));
+		this.markStatement(postcondition, validity, "Verifying that the postcondition holds:\n\n"
+		                + getTooltipMessage(validity, formula, proverResult));
 	}
 
 	/**

@@ -142,7 +142,7 @@ Assignment returns Assignment:
 // An Expression is based on operator precedence. Each "level" of Expressions means one level of operator precedence,
 // where the last operation specified has the highest priority. In the same level, operators are evaluated from left to right.
 Expression returns Expression:
-	QuantifiedExpression | LogicalEquivalence
+	LogicalEquivalence
 ;
 
 // logical equivalence (lowest priority)
@@ -190,15 +190,16 @@ UnaryOperation returns Expression:
 	 Atomic | (({Plus} '+' | {Minus} '-' | {Negation} ('¬'|'!') ) operand=Atomic)
 ;
 
-// An atomic value in an Expression is either
-//  - a function call or
-//  - a number or
-//  - a Boolean literal or
+// An atomic value in an Expression is one of the following:
+//  - a function call
+//  - a number
+//  - a Boolean literal
 //  - an Array literal
-//  - a reference to a variable
-//  - a whole new Expression in parentheses.
+//  - a reference to a variable or return value
+//  - a whole new Expression in parentheses
+//  - a quantified expression
 Atomic returns Expression:
-	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | ArrayLiteral | VariableReference | ReturnValueReference | '(' Expression ')'
+	FunctionCall | {IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | ArrayLiteral | VariableReference | ReturnValueReference | '(' Expression ')' | QuantifiedExpression
 ;
 
 // An array literal is an enumeration of the array's values in curly brackets.

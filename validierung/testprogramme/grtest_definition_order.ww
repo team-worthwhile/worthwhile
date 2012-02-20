@@ -1,28 +1,25 @@
-a : Integer
-a : Integer := 2
+function Boolean e() { }
 
-b : Integer := 3
-b : Integer
+function Boolean f() { }
+
+function Boolean i() { }
+
+function Boolean j() { }
+
+function Boolean g() {
+   Integer h 
+}
+
+h := 6
+
+Integer a
+Integer a := 2
+
+Integer b := 3
+Integer b
 
 c := 4
-c : Integer
+Integer c
 
-d : Integer
+Integer d
 d := 5
-
-function e() : Boolean
-function e() : Boolean { }
-
-function f() : Boolean { }
-function f() : Boolean { }
-
-function i() : Boolean { }
-function i() : Boolean
-
-function j() : Boolean
-function j() : Boolean
-
-function g() : Boolean {
-   h : Integer
-   }
-   h := 6

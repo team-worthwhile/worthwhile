@@ -1,5 +1,5 @@
-function a () : Integer {
-   function b () : Integer {
+function Integer a () {
+   function Integer b () {
       return 0
    }
 

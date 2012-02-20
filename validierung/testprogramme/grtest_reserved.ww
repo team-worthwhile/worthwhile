@@ -1,15 +1,26 @@
 // Integer, Boolean, function and return are reserved keywords
 
-function function(return : Boolean) : Integer { }
-function return(function : Integer) : Boolean { }
+function Integer function(Boolean return) {
+	
+}
 
-function Integer(Boolean : Integer) : Integer { }
-function Boolean(Integer : Boolean) : Boolean { }
+function Boolean return(Integer function) {
+	
+}
 
-return : Integer
-function : Boolean
+function Integer Integer(Integer Boolean ) {
+	
+}
 
-Integer : Integer
-Integer : Boolean
-Boolean : Integer
-Boolean : Integer
+function Boolean Boolean(Boolean Integer)
+{
+	
+}
+
+Integer return 
+Boolean function 
+
+Integer Integer 
+Boolean Integer 
+Integer Boolean
+Integer Boolean 

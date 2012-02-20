@@ -2,22 +2,20 @@
 
 function Integer faculty(Integer fac)
 {
-	if (fac < 0)
-        {
+	Integer current := fac
+	
+	if (current < 0)
+    {
 	    return -1
-        }
-	if (fac = 0)
-        {
-	    return 1
-	}
+    }
 	else
-        {
+    {
 	    Integer res := 1
-	    while (fac > 0)
-            {
+	    while (current > 0)
+        {
 	       res := res * fac
-	       fac := fac - 1				
-            }
-	    return res
-       }
+	       current := current - 1				
+        }
+	return res
+	}
 }

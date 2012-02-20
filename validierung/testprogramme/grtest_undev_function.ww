@@ -1,37 +1,37 @@
 // functions
 
-function funktion1(a : Integer) : Integer {
-	return a
+function Integer funktion1(Integer a1) {
+	return a1
 }
 
-function funktion2(a : Integer) : Boolean {
-	return true
+function Boolean funktion2(Integer a2) {
+	return true 
 }
 
-function funktion3(a : Boolean) : Integer {
+function Integer funktion3(Boolean a3) {
 	return 1
 }
 
-function funktion4(a : Boolean) : Boolean {
+function Boolean funktion4(Boolean a) {
 	return a
 }
 
-function funktion5() : Integer{
+function Integer funktion5() {
 	return 0
 }
 
-function funktion6() : Boolean{
+function Boolean funktion6() {
 	return false
 }
 
 
 // main programm
 
-int_var : Integer := 4
-int_result : Integer
+Integer int_var := 4
+Integer int_result
 
-bool_var : Boolean := true
-bool_result : Boolean
+Boolean  bool_var := true
+Boolean bool_result
 
 // Wrong number of arguments
 int_result := funktion1()

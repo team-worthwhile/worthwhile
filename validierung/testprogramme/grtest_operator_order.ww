@@ -1,6 +1,6 @@
-a : Integer := 5
-b : Boolean := 10
-c : Integer := 2
+Integer a := 5
+Integer b := 10
+Integer c := 2
 
 a := b * (a + b / c + 10) // a = 200 
 b := (( a / 100 + 8)*(b % (c + 0 + 0 + 1)) - ( 42 - 21 * 2 )) // b = 10

@@ -6,6 +6,7 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
@@ -55,7 +56,7 @@ public class WorthwhileStackFrame extends WorthwhileDebugElement implements ISta
 	 * @return the name of the source file that is associated with this stack frame.
 	 */
 	public final String getSourceName() {
-		return this.getDebugTarget().getSourceName();
+		return DebugHelper.getSourceName(this.getDebugTarget().getLaunch());
 	}
 
 	@Override

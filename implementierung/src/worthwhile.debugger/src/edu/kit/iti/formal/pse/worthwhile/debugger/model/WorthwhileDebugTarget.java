@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
-import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
@@ -30,6 +29,7 @@ import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ui.internal.Workbench;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileLineBreakpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints.WorthwhileWatchpoint;
 import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugEventListener.DebugMode;
@@ -329,7 +329,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 
 	@Override
 	public final String getName() throws DebugException {
-		return this.getSourceName();
+		return DebugHelper.getSourceName(this.launch);
 	}
 
 	@Override
@@ -447,27 +447,6 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	protected final void terminated() {
 		DebugPlugin.getDefault().getBreakpointManager().removeBreakpointListener(this);
 		this.fireTerminateEvent();
-	}
-
-	/**
-	 * Returns the file name of the source file of the program that is executed.
-	 * 
-	 * @return The file name of the source file of the program that is executed.
-	 */
-	public final String getSourceName() {
-		try {
-			// Get the path from the launch configuration and return only the file name.
-			ILaunchConfiguration configuration = this.launch.getLaunchConfiguration();
-			if (configuration != null) {
-				Path path = new Path(configuration.getAttribute(ATTR_PATH, ""));
-				return path.lastSegment();
-			} else {
-				return "";
-			}
-		} catch (CoreException e) {
-			e.printStackTrace();
-			return "";
-		}
 	}
 
 	/**

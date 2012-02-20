@@ -1,13 +1,22 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.proving;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarkerDelta;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.model.IBreakpoint;
+import org.eclipse.debug.core.model.IDebugTarget;
+import org.eclipse.debug.core.model.IMemoryBlock;
+import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IThread;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -16,6 +25,8 @@ import org.eclipse.ui.internal.Workbench;
 
 import com.google.inject.Inject;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
+import edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
@@ -46,15 +57,19 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 		Program program = this.getProgram(file);
 
 		if (program != null) {
-			// Create and run the prover, specification checker, and interpreter.
+			// Create and run the prover and specification checker.
 			Z3Prover prover = new Z3Prover(
 			                preferenceStore.getString(WorthwhilePreferenceConstants.PROVER_PATH));
 
 			SpecificationChecker specChecker = new SpecificationChecker(prover);
 			specChecker.setTimeout(preferenceStore.getInt(WorthwhilePreferenceConstants.PROVER_TIMEOUT));
+
+			// Create a new DebugTarget which is necessary for marking the program as terminated.
 			final WorthwhileProveJob proveJob = new WorthwhileProveJob("Prove " + file.getName(),
 			                specChecker, program, new WorthwhileMarkerHelper(file));
-			proveJob.addJobChangeListener(new ProveJobFinishedListener());
+			final WorthwhileProveDebugTarget finishedListener = new WorthwhileProveDebugTarget(launch);
+			proveJob.addJobChangeListener(finishedListener);
+			launch.addDebugTarget(finishedListener);
 			proveJob.schedule();
 		}
 	}
@@ -65,7 +80,28 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 	 * @author Joachim
 	 * 
 	 */
-	private class ProveJobFinishedListener extends JobChangeAdapter {
+	private class WorthwhileProveDebugTarget extends JobChangeAdapter implements IDebugTarget {
+
+		/**
+		 * The launch object that was used to launch the program.
+		 */
+		private final ILaunch launch;
+
+		/**
+		 * Whether the debug target is terminated.
+		 */
+		private boolean isTerminated = false;
+
+		/**
+		 * Creates a new instance of the {@link WorthwhileProveDebugTarget} class.
+		 * 
+		 * @param launch
+		 *                The launch object that was used to launch the program.
+		 */
+		public WorthwhileProveDebugTarget(final ILaunch launch) {
+			super();
+			this.launch = launch;
+		}
 
 		@Override
 		public void done(final IJobChangeEvent event) {
@@ -122,6 +158,133 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 			}
 
 			Workbench.getInstance().getDisplay().asyncExec(dialogDisplayRunnable);
+
+			try {
+				this.terminate();
+			} catch (DebugException e) {
+				e.printStackTrace();
+			}
+		}
+
+		@Override
+		public IDebugTarget getDebugTarget() {
+			return this;
+		}
+
+		@Override
+		public ILaunch getLaunch() {
+			return this.launch;
+		}
+
+		@Override
+		public String getModelIdentifier() {
+			return WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+		}
+
+		@Override
+		public Object getAdapter(@SuppressWarnings("rawtypes") final Class adapter) {
+			return null;
+		}
+
+		@Override
+		public boolean canTerminate() {
+			return false;
+		}
+
+		@Override
+		public boolean isTerminated() {
+			return this.isTerminated;
+		}
+
+		@Override
+		public void terminate() throws DebugException {
+			this.isTerminated = true;
+			DebugPlugin.getDefault().fireDebugEventSet(
+			                new DebugEvent[] { new DebugEvent(this, DebugEvent.TERMINATE) });
+		}
+
+		@Override
+		public boolean canResume() {
+			return false;
+		}
+
+		@Override
+		public boolean canSuspend() {
+			return false;
+		}
+
+		@Override
+		public boolean isSuspended() {
+			return false;
+		}
+
+		@Override
+		public void resume() throws DebugException {
+		}
+
+		@Override
+		public void suspend() throws DebugException {
+		}
+
+		@Override
+		public void breakpointAdded(final IBreakpoint breakpoint) {
+		}
+
+		@Override
+		public void breakpointChanged(final IBreakpoint breakpoint, final IMarkerDelta delta) {
+		}
+
+		@Override
+		public void breakpointRemoved(final IBreakpoint breakpoint, final IMarkerDelta delta) {
+		}
+
+		@Override
+		public boolean canDisconnect() {
+			return false;
+		}
+
+		@Override
+		public void disconnect() throws DebugException {
+		}
+
+		@Override
+		public boolean isDisconnected() {
+			return false;
+		}
+
+		@Override
+		public IMemoryBlock getMemoryBlock(final long startAddress, final long length) throws DebugException {
+			return null;
+		}
+
+		@Override
+		public boolean supportsStorageRetrieval() {
+			return false;
+		}
+
+		@Override
+		public String getName() throws DebugException {
+			return "Prove " + DebugHelper.getSourceName(this.launch);
+		}
+
+		@Override
+		public IProcess getProcess() {
+			return null;
+		}
+
+		@Override
+		public IThread[] getThreads() throws DebugException {
+			return new IThread[0];
+		}
+
+		@Override
+		public boolean hasThreads() throws DebugException {
+			return false;
+		}
+
+		@Override
+		public boolean supportsBreakpoint(final IBreakpoint arg0) {
+			return false;
 		}
 	}
 }

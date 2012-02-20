@@ -4,7 +4,7 @@ Worthwhile is an application that makes proving simple programs accessible and f
 
 ## Z3
 
-[Z3](http://research.microsoft.com/en-us/um/redmond/projects/z3/) is a theorem prover developed by Microsoft Research. A recent build for Linux [is available on their website](http://research.microsoft.com/en-us/um/redmond/projects/z3/download.html). To be able to use Z3 from within Worthwhile, you should put the Z3 binary in your `$PATH` (named `z3`).
+[Z3](http://research.microsoft.com/en-us/um/redmond/projects/z3/) is a theorem prover developed by Microsoft Research. A recent build for Linux [is available on their website](http://research.microsoft.com/en-us/um/redmond/projects/z3/download.html). To be able to use Z3 from within Worthwhile, you can either put the Z3 binary in your `$PATH` (named `z3`) or enter the path manually in the Worthwhile preferences *(Window → Preferences → Worthwhile → Path to Z3 binary).*
 
 ## Building
 Worthwhile is built on the Eclipse Platform. Java SE 6, Eclipse 3.7.1 and Maven 3 or later are required to build the project.

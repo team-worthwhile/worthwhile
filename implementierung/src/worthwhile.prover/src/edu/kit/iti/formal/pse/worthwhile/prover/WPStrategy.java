@@ -457,6 +457,15 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		for (Axiom a : program.getAxioms()) {
 			a.accept(this);
 		}
+
+		// build a giant conjunction of all preconditions that implies the correctness of the whole program
+		Expression programConjunction = AstNodeCreatorHelper.createTrueLiteral();
+		for (Proof precondition : this.weakestPreconditionStack.peek()) {
+			programConjunction = AstNodeCreatorHelper.createConjunction(programConjunction,
+			                AstNodeCloneHelper.clone(precondition.getExpression()));
+		}
+		this.weakestPreconditionStack.peek().add(
+		                new Proof(programConjunction, ProofImplication.PROGRAM_CONFORM, program));
 	}
 
 	/**

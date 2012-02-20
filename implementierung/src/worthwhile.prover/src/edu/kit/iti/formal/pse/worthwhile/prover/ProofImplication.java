@@ -16,17 +16,22 @@ public enum ProofImplication {
 	ASSERTION_VALID,
 
 	/**
-	 * a function postcondition is correct
+	 * a function postcondition is correct.
 	 */
 	POSTCONDITION_VALID,
 
 	/**
-	 * a loop invariant is valid at the entry into a {@link Loop}
+	 * a loop invariant is valid at the entry into a {@link Loop}.
 	 */
 	INVARIANT_VALID_AT_ENTRY,
 
 	/**
 	 * loop {@link Invariant}s and condition imply the {@link Loop} body precondition.
 	 */
-	INVARIANT_AND_CONDITION_IMPLIES_LOOP_BODY_PRECONDITION
+	INVARIANT_AND_CONDITION_IMPLIES_LOOP_BODY_PRECONDITION,
+
+	/**
+	 * a program conforms to its specification.
+	 */
+	PROGRAM_CONFORM
 }

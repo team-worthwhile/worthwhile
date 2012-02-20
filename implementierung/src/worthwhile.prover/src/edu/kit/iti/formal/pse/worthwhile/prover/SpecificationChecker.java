@@ -327,20 +327,12 @@ public class SpecificationChecker {
 
 		// generate formula from program
 		List<Proof> provableFormulas = this.transformer.transformProgram(program);
-		Validity programValidity = Validity.VALID;
+		// remember the global program validity to return later
+		Validity programValidity = Validity.UNKNOWN;
+		ProverResult programProverResult = null;
 		for (Proof provable : provableFormulas) {
 			// get the validity from the prover
 			Validity validity = this.getValidity(provable.getExpression());
-
-			// downgrade the "overall validity" if needed
-			// if everything up to now was valid, allow downgrade to anything
-			if (programValidity == Validity.VALID) {
-				programValidity = validity;
-			}
-			// only allow downgrade from unknown to invalid, no upgrade to valid
-			if (programValidity == Validity.UNKNOWN && validity == Validity.INVALID) {
-				programValidity = validity;
-			}
 
 			// TODO: could this be made more object-oriented by using Proof subclasses?
 			// alert the event listeners of the Proof
@@ -366,13 +358,19 @@ public class SpecificationChecker {
 					                .getRelatedAstNodes().get(0), validity, provable
 					                .getExpression(), this.getCheckResult());
 					break;
+				case PROGRAM_CONFORM:
+					this.listener.programVerified((Program) provable.getRelatedAstNodes().get(0),
+					                validity, provable.getExpression(), this.getCheckResult());
+					programValidity = validity;
+					programProverResult = this.getCheckResult();
+					break;
 				default:
 					throw new RuntimeException("Unhandled proof implication type");
 				}
 			}
 		}
-		// fire the event listener for the whole verification
-		this.listener.programVerified(program, programValidity, null, this.getCheckResult());
+		// set the prover result for the whole program as the result to "return"
+		this.checkResult = programProverResult;
 		return programValidity;
 	}
 }

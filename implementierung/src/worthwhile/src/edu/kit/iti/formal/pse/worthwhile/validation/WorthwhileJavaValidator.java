@@ -124,6 +124,10 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	 */
 	@Check
 	public final void checkFunctionCallParameter(final FunctionCall functionCall) {
+		// if a undeclared function is called
+		if (functionCall.getFunction().getName() == null) {
+			return;
+		}
 		if (functionCall.getActuals().size() != functionCall.getFunction().getParameters().size()) {
 			error("The amount of parameters is incorrect. Expecting "
 			                + functionCall.getFunction().getParameters().size() + " parameters, but found "

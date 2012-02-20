@@ -302,15 +302,12 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			precondition.setExpression(AstNodeCreatorHelper.createImplication(
 			                AstNodeCloneHelper.clone(ensures), precondition.getExpression()));
 
-			// wrap all the preconditions in foralls because they have to be true for all parameters - only
-			// the function parameters should be unbound by now, everything else should have been wp'd
-			// already
-			final UnboundVariableFinderVisitor unboundVariableFinder = new UnboundVariableFinderVisitor();
-			precondition.getExpression().accept(unboundVariableFinder);
-
-			for (final VariableDeclaration v : unboundVariableFinder.getUnboundVariables()) {
-				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(AstNodeCloneHelper.clone(v),
-						precondition.getExpression());
+			// wrap all the preconditions in foralls because they have to be true for all parameters
+			final FreshVariableSetVisitor freshVariableSet = new FreshVariableSetVisitor();
+			precondition.getExpression().accept(freshVariableSet);
+			for (final VariableDeclaration v : freshVariableSet.getVariableMap().values()) {
+				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(v,
+				                precondition.getExpression());
 				precondition.setExpression(forall);
 			}
 		}
@@ -501,8 +498,11 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		for (Proof postcondition : this.weakestPreconditionStack.pop()) {
 			Expression precondition;
 			if (initialValue == null) {
-				precondition = AstNodeCreatorHelper.createForAllQuantifier(AstNodeCloneHelper.clone(variableDeclaration),
-				                postcondition.getExpression());
+				final VariableDeclaration parameter = AstNodeCloneHelper.clone(variableDeclaration);
+				Expression expression = postcondition.getExpression();
+				expression = VariableReferenceSubstitution.substitute(expression, variableDeclaration,
+				                AstNodeCreatorHelper.createVariableReference(parameter));
+				precondition = AstNodeCreatorHelper.createForAllQuantifier(parameter, expression);
 			} else {
 				precondition = VariableReferenceSubstitution.substitute(postcondition.getExpression(),
 				                variableDeclaration, AstNodeCloneHelper.clone(initialValue));

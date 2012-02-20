@@ -6,6 +6,9 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
@@ -47,12 +50,28 @@ public final class TransformProgramTest {
 		this.testTransformProgram(program, this.getExpression(expected));
 	}
 
+	/**
+	 * Parse the given program string, transform it using the calculus implemented by transformer and compare the
+	 * formula calculated to prove that the whole program conforms to the specification with the given expected
+	 * {@link Expression}.
+	 * 
+	 * @param program
+	 *                the program to parse and transform
+	 * @param expected
+	 *                the expected Expression to prove the whole program conform
+	 */
 	private void testTransformProgram(final String program, final Expression expected) {
 		final Program p = this.getProgram(program);
 		p.accept(new ImplicitInitialValueInserter());
 		p.accept(new ArrayFunctionInserter());
-		final Expression actual = this.transformer.transformProgram(p);
-		TransformProgramTest.assertASTNodeEqual(expected, actual);
+		p.accept(new FunctionCallSubstitution());
+		// find the expression expressing the validity of the whole program
+		for (Proof proof : this.transformer.transformProgram(p)) {
+			if (proof.getImplication() == ProofImplication.PROGRAM_CONFORM) {
+				TransformProgramTest.assertASTNodeEqual(expected, proof.getExpression());
+				return;
+			}
+		}
 	}
 
 	/**
@@ -110,14 +129,9 @@ public final class TransformProgramTest {
 		                expected);
 
 		expected = this.getExpression("2 = 2 && (2 = 2 && ({ 2 } = { 2 } && true))");
-		this.testTransformProgram("Integer i := 0\n"
-		                + "Integer j := 0\n"
-		                + "Integer[] a\n"
-		                + "a[i] := 1\n"
-		                + "a[j] := 2\n"
-		                + "_assert a[i] = 2\n"
-		                + "_assert a[j] = 2\n"
-		                + "_assert a = { 2 }\n", expected);
+		this.testTransformProgram("Integer i := 0\n" + "Integer j := 0\n" + "Integer[] a\n" + "a[i] := 1\n"
+		                + "a[j] := 2\n" + "_assert a[i] = 2\n" + "_assert a[j] = 2\n" + "_assert a = { 2 }\n",
+		                expected);
 	}
 
 	/**
@@ -125,13 +139,8 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void conditionalRule() {
-		Program p = this.getProgram("Integer x := 1\nif x = 1 {\nx := 0\n}\n_assert x = 0\n");
-		Expression result = this.transformer.transformProgram(p);
-
-		Expression expected = this.getExpression("(1 = 1 => (0 = 0 && true))"
-		                + "&& (!(1 = 1) => (1 = 0 && true))");
-
-		assertASTNodeEqual(expected, result);
+		this.testTransformProgram("Integer x := 1\nif x = 1 {\nx := 0\n}\n_assert x = 0\n",
+		                "(1 = 1 => (0 = 0 && true))" + "&& (!(1 = 1) => (1 = 0 && true))");
 	}
 
 	/**
@@ -139,12 +148,8 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void assumptionRule() {
-		Program p = this.getProgram("Integer x := 1\n_assume x = 0\n_assert x = 10\n");
-		Expression result = this.transformer.transformProgram(p);
-
-		Expression expected = this.getExpression("(1 = 0) => (1 = 10 && true)");
-
-		assertASTNodeEqual(expected, result);
+		this.testTransformProgram("Integer x := 1\n_assume x = 0\n_assert x = 10\n",
+		                "(1 = 0) => (1 = 10 && true)");
 	}
 
 	/**
@@ -152,13 +157,9 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void axiomRule() {
-		Program p = this.getProgram("_axiom forall Integer a forall Integer b : a * b = b * a\nInteger x := 2 * 3\n_assert x = 3 * 2\n");
-		Expression result = this.transformer.transformProgram(p);
-
-		Expression expected = this.getExpression("(forall Integer a forall Integer b : a * b = b * a)"
-		                + "=> (2 * 3 = 3 * 2 && true)");
-
-		assertASTNodeEqual(expected, result);
+		this.testTransformProgram(
+		                "_axiom forall Integer a forall Integer b : a * b = b * a\nInteger x := 2 * 3\n_assert x = 3 * 2\n",
+		                "(forall Integer a forall Integer b : a * b = b * a) => (2 * 3 = 3 * 2 && true)");
 	}
 
 	/**
@@ -167,25 +168,18 @@ public final class TransformProgramTest {
 	@Test
 	public void loopRule() {
 		// from http://wiki.pse.ndreke.de/test_zaehlvariable
-		Program p = this.getProgram("Integer n := 42\n"
-				+ "Integer t := 0\n"
-				+ "while t < n _invariant t <=n\n"
-				+ "{\n"
-				+ "    t := t + 1\n"
-				+ "}\n"
-				+ "_assert t = n\n");
-		Expression result = this.transformer.transformProgram(p);
+		String programString = "Integer n := 42\n" + "Integer t := 0\n" + "while t < n _invariant t <=n\n"
+		                + "{\n" + "    t := t + 1\n" + "}\n" + "_assert t = n\n";
 
 		String expectedResultString = "(((0 <= 42) "
-				// condition true implies weakest block precondition
-				+ "&& forall Integer n : forall Integer t : (((t < n) && (t <= n)) => "
-				+ "((t + 1) <= n))) "
-				// condition not true implies postcondition
-				+ "&& forall Integer n : forall Integer t : ((!(t < n) && (t <= n)) => "
-				+ "((t = n) && true)))";
-		String resultString = AstNodeToStringHelper.toString(result);
+		                // condition true implies weakest block precondition
+		                + "&& (forall Integer n1 : forall Integer t1 : (((t1 < n1) && (t1 <= n1)) => "
+		                + "((t1 + 1) <= n1)))) "
+		                // condition not true implies postcondition
+		                + "&& (forall Integer n2 : forall Integer t2 : ((!(t2 < n2) && (t2 <= n2)) => "
+		                + "((t2 = n2) && true))))";
 
-		Assert.assertEquals(expectedResultString, resultString);
+		this.testTransformProgram(programString, expectedResultString);
 	}
 
 	/**
@@ -193,16 +187,13 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void functionDeclarationRule() {
-		Program p = this.getProgram("function Integer max(Integer a, Integer b)\n"
+		this.testTransformProgram("function Integer max(Integer a, Integer b)\n"
 		                + "_ensures _return = a || _return = b\n_ensures _return >= a && _return >= b\n"
-		                + "{\nif (a > b) {\nreturn a\n}\nreturn b\n}\n");
-		Expression result = this.transformer.transformProgram(p);
+		                + "{\nif (a > b) {\nreturn a\n}\nreturn b\n}\n",
+		                "(forall Integer b : forall Integer a : true => "
+		                                + "(((a > b) => ((a = a || a = b) && (a >= a && a >= b))) "
+		                                + "&& (!(a > b) => ((b = a || b = b) && (b >= a && b >= b))))) && true");
 
-		Expression expected = this.getExpression("(forall Integer b : forall Integer a : true => "
-		                + "(((a > b) => ((a = a || a = b) && (a >= a && a >= b))) "
-		                + "&& (!(a > b) => ((b = a || b = b) && (b >= a && b >= b))))) && true");
-
-		TransformProgramTest.assertASTNodeEqual(expected, result);
 	}
 
 	/**
@@ -210,19 +201,12 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void variableDeclarationFunctionCallRule() {
-		final Program testProgram = this.getProgram("function Integer f(Integer t)\n"
-		                + "_requires t = 0 || t = 1\n"
+		this.testTransformProgram("function Integer f(Integer t)\n" + "_requires t = 0 || t = 1\n"
 		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
-		                + "    return -1\n" + "}\n" + "Integer v := f(2)\n");
-		testProgram.accept(new FunctionCallSubstitution());
-		final Expression actual = this.transformer.transformProgram(testProgram);
-
-		final Expression expected = this.getExpression("(forall Integer t :"
+		                + "    return -1\n" + "}\n" + "Integer v := f(2)\n", "(forall Integer t :"
 		                + "(t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
 		                + "&& ((2 = 0 || 2 = 1) && (forall Integer _f0 :"
 		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) => true)))");
-
-		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
 
 	/**
@@ -230,20 +214,13 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void conditionalFunctionCallRule() {
-		final Program testProgram = this.getProgram("function Integer f(Integer t)\n"
-		                + "_requires t = 0 || t = 1\n"
+		this.testTransformProgram("function Integer f(Integer t)\n" + "_requires t = 0 || t = 1\n"
 		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
-		                + "    return -1\n" + "}\n" + "if f(2) = -1 {\n}\n");
-		testProgram.accept(new FunctionCallSubstitution());
-		final Expression actual = this.transformer.transformProgram(testProgram);
-
-		final Expression expected = this.getExpression("(forall Integer t :"
+		                + "    return -1\n" + "}\n" + "if f(2) = -1 {\n}\n", "(forall Integer t :"
 		                + "(t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
 		                + "&& ((2 = 0 || 2 = 1) && (forall Integer _f0 :"
 		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0))"
 		                + "=> ((_f0 = -1 => true) && (!(_f0 = -1) => true)))))");
-
-		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
 
 	/**
@@ -251,35 +228,26 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void loopFunctionCallRule() {
-		final Program testProgram = this.getProgram("function Integer f(Integer t)\n"
-		                + "_requires t = 0 || t = 1\n"
-		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
-		                + "    return -1\n" + "}\n" + "while f(2) = -1\n_invariant f(2) = -1\n{\n}\n");
-		testProgram.accept(new FunctionCallSubstitution());
-		final Expression actual = this.transformer.transformProgram(testProgram);
-
-		final Expression expected = this.getExpression(
-		                  "(forall Integer t : (t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
-		                + "&&"
-		                + "((2 = 0 || 2 = 1) &&"
-		                + " (forall Integer _f0 : ((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
-		                + "  ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                + "  &&"
-		                + "  (forall Integer _f0 :"
-		                + "   (_f0 = -1 && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                + "    => ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                + "   )"
-		                + "  )"
-		                + "  &&"
-		                + "  (forall Integer _f0 :"
-		                + "   (!(_f0 = -1) && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                + "    => true"
-		                + "   )"
-		                + "  )"
-		                + " )"
-		                + ")");
-
-		TransformProgramTest.assertASTNodeEqual(expected, actual);
+		this.testTransformProgram(
+		                "function Integer f(Integer t)\n" + "_requires t = 0 || t = 1\n"
+		                                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
+		                                + "    return -1\n" + "}\n"
+		                                + "while f(2) = -1\n_invariant f(2) = -1\n{\n}\n",
+		                "(forall Integer t : (t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
+		                                + "&&"
+		                                + "((2 = 0 || 2 = 1) &&"
+		                                + " (forall Integer _f0 : ((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
+		                                + "  ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                                + "  &&"
+		                                + "  (forall Integer _f0 :"
+		                                + "   (_f0 = -1 && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                                + "    => ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                                + "   )"
+		                                + "  )"
+		                                + "  &&"
+		                                + "  (forall Integer _f0 :"
+		                                + "   (!(_f0 = -1) && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
+		                                + "    => true" + "   )" + "  )" + " )" + ")");
 	}
 
 	/**
@@ -288,30 +256,11 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void contractFunctionCallRule() {
-		final Program testProgram = this.getProgram(
-		                  "function Integer fiver()\n"
-		                + "_ensures _return = 5\n"
-		                + "{\n"
-		                + "return 5\n"
-		                + "}\n"
-		                + "function Integer five()\n"
-		                + "_ensures _return = fiver()\n"
-		                + "{\n"
-		                + "return fiver()\n"
-		                + "}\n");
-		testProgram.accept(new FunctionCallSubstitution());
-		final Expression actual = this.transformer.transformProgram(testProgram);
-		
-		final Expression expected = this.getExpression(
-		                  "(true => 5 = 5)"
-		                + "&&"
-		                + "(true =>"
+		this.testTransformProgram("function Integer fiver()\n" + "_ensures _return = 5\n" + "{\n"
+		                + "return 5\n" + "}\n" + "function Integer five()\n" + "_ensures _return = fiver()\n"
+		                + "{\n" + "return fiver()\n" + "}\n", "(true => 5 = 5)" + "&&" + "(true =>"
 		                + " (forall Integer _fiver1 : _fiver1 = 5 =>"
-		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)"
-		                + " )"
-		                + ")"
+		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)" + " )" + ")"
 		                + "&& true");
-		
-		TransformProgramTest.assertASTNodeEqual(expected, actual);
 	}
 }

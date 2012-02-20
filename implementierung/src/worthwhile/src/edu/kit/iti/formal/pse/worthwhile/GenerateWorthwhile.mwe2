@@ -56,6 +56,9 @@ Workflow {
 					classSplitting = true
 				}
 			}
+			
+			// generates a debuggable Antlr grammar that does not depend on Xtext
+			fragment = parser.antlr.DebugAntlrGeneratorFragment  { }
 
 			// the Ecore2Xtext specific terminal converter
 			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment {}

@@ -8,6 +8,7 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.SWT;
@@ -69,20 +70,24 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 		@Override
 		public void done(final IJobChangeEvent event) {
 			final IStatus status = event.getResult();
-
-			// Type of the dialog to show
-			int type;
-			// Title of the dialog
-			String title = "";
-			// Dialog message
-			String message = "";
+			Runnable dialogDisplayRunnable = null;
 
 			if (status.isOK()) {
-				type = MessageDialog.INFORMATION;
-				title = "Prove success";
-				message = "The program conforms to the specification.";
+				// Display custom dialog when the proof was successful.
+				dialogDisplayRunnable = new Runnable() {
+					public void run() {
+						Dialog dialog = new WorthwhileSuccessKidDialog(Workbench.getInstance()
+						                .getActiveWorkbenchWindow().getShell(),
+						                "Prove success",
+						                "The program conforms to the specification.");
+
+						dialog.open();
+					}
+				};
 			} else {
-				type = MessageDialog.ERROR;
+				String title;
+				String message;
+
 				if (status instanceof ProveResultStatus) {
 					if (Validity.INVALID.equals(((ProveResultStatus) status).getValidity())) {
 						message = "It cannot be proven that the program conforms to the specification.";
@@ -97,24 +102,26 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 				} else {
 					// Something went horribly wrong
 					title = "Prove error";
-					message += "There was an unexpected error invoking the prover:\n\n"
+					message = "There was an unexpected error invoking the prover:\n\n"
 					                + status.getMessage();
 				}
+
+				// Copy variable contents into new final variables, since the variables used in the
+				// inner Runnable class need to be final.
+				final String dialogTitle = title;
+				final String dialogMessage = message;
+
+				// Display a boring standard dialog.
+				dialogDisplayRunnable = new Runnable() {
+					public void run() {
+						MessageDialog.open(MessageDialog.ERROR, Workbench.getInstance()
+						                .getActiveWorkbenchWindow().getShell(), dialogTitle,
+						                dialogMessage, SWT.NONE);
+					}
+				};
 			}
 
-			// Copy variable contents into new final variables, since the variables used in the inner
-			// Runnable class need to be final.
-			final int dialogType = type;
-			final String dialogTitle = title;
-			final String dialogMessage = message;
-
-			Workbench.getInstance().getDisplay().asyncExec(new Runnable() {
-				public void run() {
-					MessageDialog.open(dialogType, Workbench.getInstance()
-					                .getActiveWorkbenchWindow().getShell(), dialogTitle,
-					                dialogMessage, SWT.NONE);
-				}
-			});
+			Workbench.getInstance().getDisplay().asyncExec(dialogDisplayRunnable);
 		}
 	}
 }

@@ -195,6 +195,10 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	@Override
 	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
 		arrayFunctionAccess.getFunction().accept(this);
+		if (this.found) {
+			this.found = false;
+			arrayFunctionAccess.setFunction(this.getSubstitute());
+		}
 
 		arrayFunctionAccess.getIndex().accept(this);
 		if (this.found) {

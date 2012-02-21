@@ -10,6 +10,20 @@
 <booleanAttribute key="clearConfig" value="false"/>
 <booleanAttribute key="clearws" value="false"/>
 <booleanAttribute key="clearwslog" value="false"/>
+<listAttribute key="com.mountainminds.eclemma.core.SCOPE_IDS">
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.model/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.interpreter/src\/main\/java"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.product/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.prover/src\/main\/java"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.expressions/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.expressions.ui/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.ui/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.debugger/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.interpreter/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile/src\/main\/java"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile.prover/src"/>
+<listEntry value="=edu.kit.iti.formal.pse.worthwhile/src"/>
+</listAttribute>
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/worthwhile.product"/>
 <booleanAttribute key="default" value="false"/>
 <booleanAttribute key="includeOptional" value="true"/>

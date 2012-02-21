@@ -223,7 +223,7 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 		};
 		// if the quantifiedExpression is not in an Annotation
 		if (visitor.apply((ASTNode) expression.eContainer()) == null) {
-			error("QuantifiedExpression may only be used in Annotations.", expression, null, -1);
+			error("Quantified expressions may only be used in Annotations.", expression, null, -1);
 		}
 
 	}
@@ -250,7 +250,7 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 			for (int i = 0; i < functionDeclaration.getParameters().size(); i++) {
 				if (functionDeclaration.getParameters().get(i).getName()
 				                .equals(assignment.getVariable().getVariable().getName())) {
-					error("Paramters of a function may not be changed.", assignment, null, -1);
+					error("Parameters of a function may not be changed.", assignment, null, -1);
 				}
 			}
 		}
@@ -265,17 +265,5 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	@Check
 	public final void checkTypesystemRules(final ASTNode node) {
 		ts.checkTypesystemConstraints(node, this);
-	}
-
-	/**
-	 * Check that function and variable name identifiers are unique.
-	 * 
-	 * @param node
-	 *                The AST node to check.
-	 */
-	@Check
-	public final void checkNamesAreUnique(final ASTNode node) {
-		NamesAreUniqueValidator val = new NamesAreUniqueValidator();
-		val.checkUniqueNamesInResourceOf(node);
 	}
 }

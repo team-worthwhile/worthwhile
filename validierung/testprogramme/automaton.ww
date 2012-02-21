@@ -38,6 +38,7 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 		
 		_invariant 0 ≤ positionInInput ∧ positionInInput ≤ inputLength
 		_invariant result[0] = startingState
+		_invariant result[positionInInput] = currentState
 		_invariant ∀ Integer i4, 0 < i4 ∧ i4 ≤ positionInInput : result[i4] = transition[numCharacters ⋅ result[i4-1] + input[i4-1]]
 	{
 		// Read current character

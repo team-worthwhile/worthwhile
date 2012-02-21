@@ -1,7 +1,7 @@
 /*
  * Some nonsense program.
  */
-_axiom false => true
+_axiom false ⇒ true
 
 // This is a function called func.
 function Integer func(Boolean adams)
@@ -10,14 +10,21 @@ function Integer func(Boolean adams)
 	_ensures (adams => (_return = 42)) && (!adams => (_return = 0))
 {
 	if (adams) {
-		return 42
+		return +42
 	} else {
-		return 0
+		return -0
 	}
 }
 
 Boolean b := false
 Integer i := 0
+
+Integer w
+Boolean x
+Integer[] ww
+Boolean[] xx
+
+_assert ∀ Integer y ∃ Boolean z : xx[y] ⇔ z
 
 Integer[] funcresults := {func(b), func(!b)}
 

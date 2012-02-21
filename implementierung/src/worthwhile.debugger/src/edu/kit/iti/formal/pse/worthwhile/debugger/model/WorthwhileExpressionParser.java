@@ -4,14 +4,18 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
+import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.Issue;
 
 import com.google.inject.Injector;
 
@@ -67,17 +71,30 @@ public class WorthwhileExpressionParser extends WorthwhileDebugElement {
 			return null;
 		}
 
+		// Validate the expression (includes both syntax and validator errors)
+		IResourceValidator validator = guiceInjector.getInstance(IResourceValidator.class);
+		List<Issue> errors = validator.validate(resource, CheckMode.ALL, null);
+		int errorCount = 0;
+
+		for (Issue issue : errors) {
+			if (issue.getSeverity().equals(Severity.ERROR)) {
+				errorCount++;
+			}
+		}
+
 		// Check whether there are errors in the expression string
-		if (resource.getErrors().isEmpty()) {
+		if (errorCount == 0) {
 			return ((ExpressionEvaluation) resource.getContents().get(0)).getExpression();
 		} else {
 			// Create a new list of the parse errors.
-			ExpressionParseError[] parseExceptions = new ExpressionParseError[resource.getErrors().size()];
+			ExpressionParseError[] parseExceptions = new ExpressionParseError[errorCount];
+			Integer i = 0;
 
-			for (int i = 0; i < resource.getErrors().size(); i++) {
-				Diagnostic diag = resource.getErrors().get(i);
-				parseExceptions[i] = new ExpressionParseError(new ParseException(diag.getMessage(),
-				                diag.getColumn()));
+			for (Issue issue : errors) {
+				if (issue.getSeverity().equals(Severity.ERROR)) {
+					parseExceptions[i++] = new ExpressionParseError(new ParseException(
+					                issue.getMessage(), issue.getOffset()));
+				}
 			}
 
 			throw new DebugException(new ExpressionEvaluationError(parseExceptions));
@@ -109,7 +126,7 @@ public class WorthwhileExpressionParser extends WorthwhileDebugElement {
 
 		@Override
 		public IStatus[] getChildren() {
-			return null;
+			return new IStatus[0];
 		}
 
 		@Override
@@ -194,7 +211,7 @@ public class WorthwhileExpressionParser extends WorthwhileDebugElement {
 
 		@Override
 		public String getMessage() {
-			return "Error evaluating the expression.";
+			return this.children[0].getMessage();
 		}
 
 		@Override

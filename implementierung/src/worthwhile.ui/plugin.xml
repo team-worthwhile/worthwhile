@@ -242,20 +242,6 @@
             style="push">
       </action>
    </editorContribution>
-   <editorContribution
-         id="edu.kit.iti.formal.pse.worthwhile.ui.toolbarActions"
-         targetID="edu.kit.iti.formal.pse.worthwhile.Worthwhile">
-      <action
-            class="edu.kit.iti.formal.pse.worthwhile.ui.actions.ProveActionDelegate"
-            icon="icons/run_prove.gif"
-            id="edu.kit.iti.formal.pse.worthwhile.ui.actions.prove"
-            label="Prove it!"
-            mode="FORCE_TEXT"
-            style="push"
-            toolbarPath="org.eclipse.debug.ui.launchActionSet/debug"
-            tooltip="Invoke the prover on this program">
-      </action>
-   </editorContribution>
 </extension>
 <extension
       id="edu.kit.iti.formal.pse.worthwhile.ui.contenttype"
@@ -282,7 +268,7 @@
             class="edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchShortcut"
             id="edu.kit.iti.formal.pse.worthwhile.debugger.launchShortcut"
             label="Worthwhile Program"
-            modes="run,debug">
+            modes="run,debug,prove">
          <contextualLaunch>
          	<enablement>
                <with
@@ -503,4 +489,33 @@
   		<initializer 
   			class="edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceInitializer" /> 
   	</extension>
+  	<extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="edu.kit.iti.formal.pse.worthwhile.ui.ProveActionSet"
+            label="Worthwhile Prove Actions"
+            visible="true">
+         <action
+               class="edu.kit.iti.formal.pse.worthwhile.ui.WorthwhileExecutableExtensionFactory:edu.kit.iti.formal.pse.worthwhile.ui.actions.ProveToolbarAction"
+               disabledIcon="icons/run_prove.gif"
+               hoverIcon="icons/run_prove.gif"
+               icon="icons/run_prove.gif"
+               id="edu.kit.iti.formal.pse.worthwhile.ui.actions.ProveDropDownAction"
+               label="Prove it!"
+               mode="FORCE_TEXT"
+               style="push"
+               toolbarPath="org.eclipse.debug.ui.launchActionSet/debug"
+               tooltip="Invoke the prover on the selection"/>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchGroups">
+      <launchGroup
+            bannerImage="icons/run_prove.gif"
+            id="edu.kit.iti.formal.pse.worthwhile.ui.launchGroup.prove"
+            image="icons/run_prove.gif"
+            label="Prove"
+            mode="prove"
+            title="Select or configure an application for proving"/>
+   </extension>
 </plugin>

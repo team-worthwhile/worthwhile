@@ -80,13 +80,6 @@ public class WorthwhileDebugElement extends PlatformObject implements IDebugElem
 	}
 
 	/**
-	 * Fires a <code>CREATE</code> event for this element.
-	 */
-	protected final void fireCreationEvent() {
-		fireEvent(new DebugEvent(this, DebugEvent.CREATE));
-	}
-
-	/**
 	 * Fires a <code>RESUME</code> event for this element with the given detail.
 	 * 
 	 * @param detail

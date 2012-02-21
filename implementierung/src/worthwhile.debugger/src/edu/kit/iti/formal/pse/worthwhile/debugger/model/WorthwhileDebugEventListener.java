@@ -415,8 +415,8 @@ public class WorthwhileDebugEventListener extends WorthwhileEventListener {
 					return false;
 				}
 			} catch (DebugException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				this.getDebugTarget().showInternalError("Breakpoint condition has error(s):\n" + e.getMessage());
+				return true;
 			}
 		}
 

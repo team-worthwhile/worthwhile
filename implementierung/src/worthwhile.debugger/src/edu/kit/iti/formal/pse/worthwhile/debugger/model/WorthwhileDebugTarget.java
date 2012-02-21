@@ -27,6 +27,9 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.internal.Workbench;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
@@ -458,7 +461,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	protected final IStackFrame[] getStackFrames() throws DebugException {
 		return new IStackFrame[] { new WorthwhileStackFrame(this, this.thread,
-		                this.eventListener.getCurrentNode()) };	
+		                this.eventListener.getCurrentNode()) };
 	}
 
 	/**
@@ -596,5 +599,26 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	public final Set<FunctionDeclaration> getFunctionDeclarations() {
 		return new HashSet<FunctionDeclaration>(this.interpreterRunner.getInterpreter().getProgram()
 		                .getFunctionDeclarations());
+	}
+
+	/**
+	 * Shows an error message about an internal error.
+	 * 
+	 * @param message
+	 *                The error message
+	 */
+	public final void showInternalError(final String message) {
+		final Display display = Workbench.getInstance().getDisplay();
+		display.asyncExec(new Runnable() {
+			public void run() {
+				if (display.isDisposed()) {
+					return;
+				}
+
+				Shell shell = Workbench.getInstance().getActiveWorkbenchWindow().getShell();
+				MessageDialog.open(MessageDialog.ERROR, shell, "Debugger Error", message, SWT.NONE);
+			}
+		});
+
 	}
 }

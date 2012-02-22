@@ -92,13 +92,13 @@ public class WorthwhileMarkerHover extends ProblemAnnotationHover implements IAn
 			buffer.append(XtextUIMessages.AbstractHover_MultipleMarkers);
 			final Iterator<String> e = messages.iterator();
 			while (e.hasNext()) {
-				splitInfo("- " + e.next() + "<br>", buffer);
+				splitInfo("- " + e.next() + "\n", buffer);
 			}
 			buffer.deleteCharAt(buffer.length() - 1);
 		} else if (messages.size() == 1) {
 			splitInfo(messages.iterator().next(), buffer);
 		}
-		return buffer.toString();
+		return buffer.toString().replace("\n", "<br>");
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class WorthwhileMarkerHover extends ProblemAnnotationHover implements IAn
 	private String splitInfo(final String message, final StringBuffer buffer) {
 		// Replace newlines by <br>. Don't use <br /> here, Eclipse does not understand that.
 		// Split message at <br> so that the splitting point is always seeked from the beginning of a line
-		String[] messages = message.replace("\n", "<br>").split("<br>");
+		String[] messages = message.split("\n");
 		List<String> splitMessages = new ArrayList<String>();
 
 		for (String msg : messages) {
@@ -123,7 +123,7 @@ public class WorthwhileMarkerHover extends ProblemAnnotationHover implements IAn
 			do {
 				pos = msg.indexOf(" ", MSG_WIDTH);
 				if (pos > -1) {
-					splitMessage += prefix + msg.substring(0, pos) + "<br>";
+					splitMessage += prefix + msg.substring(0, pos) + "\n";
 					msg = msg.substring(pos);
 					prefix = "  ";
 				} else {
@@ -135,7 +135,7 @@ public class WorthwhileMarkerHover extends ProblemAnnotationHover implements IAn
 		}
 
 		// Join previously split strings and return them
-		buffer.append(join(splitMessages, "<br>"));
+		buffer.append(join(splitMessages, "\n"));
 		return buffer.toString();
 	}
 

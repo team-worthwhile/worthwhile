@@ -9,4 +9,5 @@ Import-Package: edu.kit.iti.formal.pse.worthwhile.model
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
  edu.kit.iti.formal.pse.worthwhile,
  de.itemis.xtext.typesystem;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.7.0"
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.core.resources;bundle-version="3.7.100"

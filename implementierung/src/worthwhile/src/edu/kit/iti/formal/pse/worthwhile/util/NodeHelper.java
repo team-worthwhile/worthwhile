@@ -1,6 +1,10 @@
 package edu.kit.iti.formal.pse.worthwhile.util;
 
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.impl.HiddenLeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
@@ -62,12 +66,28 @@ public final class NodeHelper {
 	public static int getLength(final ASTNode node) {
 		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
 		if (actualNode != null) {
-			return actualNode.getLength();
+			int len = actualNode.getLength();
+			int subtractLen = 0;
+
+			// Subtract length of hidden nodes that appear at the end of a node. They seem not to be
+			// subtracted from the length although INode.getLength() claims
+			// "Returns the length of this node excluding hidden tokens."
+			for (INode child : actualNode.getChildren()) {
+				if (child instanceof HiddenLeafNode
+				                || (GrammarUtil.isTerminalRuleCall(child.getGrammarElement()) && ((RuleCallImpl) child
+				                                .getGrammarElement()).getRule().getName().equals("NL"))) {
+					subtractLen += child.getLength();
+				} else {
+					subtractLen = 0;
+				}
+			}
+
+			return len - subtractLen;
 		} else {
 			return -1;
 		}
 	}
-	
+
 	/**
 	 * Returns the text of an AST node.
 	 * 

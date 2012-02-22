@@ -35,7 +35,7 @@ public class Proof {
 	 * @param implication
 	 *                the "real world" implication of this proof.
 	 */
-	public Proof(Expression expression, ProofImplication implication) {
+	public Proof(final Expression expression, final ProofImplication implication) {
 		this.expression = expression;
 		this.implication = implication;
 	}
@@ -50,7 +50,7 @@ public class Proof {
 	 * @param relatedAstNode
 	 *                a single {@link ASTNode} related to this {@link Proof}
 	 */
-	public Proof(Expression expression, ProofImplication implication, ASTNode relatedAstNode) {
+	public Proof(final Expression expression, final ProofImplication implication, final ASTNode relatedAstNode) {
 		this(expression, implication);
 		this.relatedAstNodes.add(relatedAstNode);
 	}
@@ -58,7 +58,7 @@ public class Proof {
 	/**
 	 * @return the {@link ASTNode}s related to this {@link Proof} instance.
 	 */
-	public List<ASTNode> getRelatedAstNodes() {
+	public final List<ASTNode> getRelatedAstNodes() {
 		return relatedAstNodes;
 	}
 
@@ -68,21 +68,21 @@ public class Proof {
 	 * @param relatedAstNodes
 	 *                the related nodes to set
 	 */
-	public void setRelatedAstNodes(List<ASTNode> relatedAstNodes) {
+	public final void setRelatedAstNodes(final List<ASTNode> relatedAstNodes) {
 		this.relatedAstNodes = relatedAstNodes;
 	}
 
 	/**
 	 * @return the implication of this {@link Proof} instance
 	 */
-	public ProofImplication getImplication() {
+	public final ProofImplication getImplication() {
 		return implication;
 	}
 
 	/**
 	 * @return the {@link Expression} to be proven for this {@link Proof} instance.
 	 */
-	public Expression getExpression() {
+	public final Expression getExpression() {
 		return expression;
 	}
 
@@ -92,7 +92,7 @@ public class Proof {
 	 * @param expression
 	 *                the expression to set
 	 */
-	public void setExpression(Expression expression) {
+	public final void setExpression(final Expression expression) {
 		this.expression = expression;
 	}
 

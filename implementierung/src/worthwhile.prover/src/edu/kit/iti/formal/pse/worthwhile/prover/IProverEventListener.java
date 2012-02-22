@@ -22,6 +22,8 @@ public interface IProverEventListener {
 	 *                the program that has been verified
 	 * @param validity
 	 *                the validity of the program
+	 * @param formula
+	 *                the formula that was attempted to prove
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */
@@ -35,6 +37,8 @@ public interface IProverEventListener {
 	 *                the {@link Assertion} that has been verified
 	 * @param validity
 	 *                the validity of the {@link Assertion}
+	 * @param formula
+	 *                the formula that was attempted to prove
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */
@@ -48,6 +52,8 @@ public interface IProverEventListener {
 	 *                the {@link Invariant} that has been verified
 	 * @param validity
 	 *                the validity of the {@link Invariant}
+	 * @param formula
+	 *                the formula that was attempted to prove
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */
@@ -58,10 +64,12 @@ public interface IProverEventListener {
 	 * Signals that the {@link Invariant} and condition of a loop implying the block postcondition has been
 	 * verified.
 	 * 
-	 * @param program
-	 *                the invariant that has been verified
+	 * @param loop
+	 *                the loop for which this has been verified
 	 * @param validity
 	 *                the validity of the program
+	 * @param formula
+	 *                the formula that was attempted to prove
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */
@@ -105,6 +113,8 @@ public interface IProverEventListener {
 	 *                the {@link Postcondition} that has been verified
 	 * @param validity
 	 *                the validity of the program
+	 * @param formula
+	 *                the formula that was attempted to prove
 	 * @param proverResult
 	 *                the result returned by the prover
 	 */

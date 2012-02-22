@@ -22,32 +22,32 @@ public abstract class AbstractProverEventListener implements IProverEventListene
 	}
 
 	@Override
-	public void assertionVerified(Assertion assertion, Validity validity, final Expression formula,
-	                ProverResult proverResult) {
+	public void assertionVerified(final Assertion assertion, final Validity validity, final Expression formula,
+	                final ProverResult proverResult) {
 	}
 
 	@Override
-	public void invariantAndConditionImplyLoopPreconditionVerified(Loop loop, Validity validity,
-	                final Expression formula, ProverResult proverResult) {
+	public void invariantAndConditionImplyLoopPreconditionVerified(final Loop loop, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 	}
 
 	@Override
-	public void invariantValidAtEntryVerified(Invariant invariant, Validity validity, final Expression formula,
-	                ProverResult proverResult) {
+	public void invariantValidAtEntryVerified(final Invariant invariant, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 	}
 
 	@Override
-	public void postconditionValidVerified(Postcondition postcondition, Validity validity,
-	                final Expression formula, ProverResult proverResult) {
+	public void postconditionValidVerified(final Postcondition postcondition, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 	}
 
 	@Override
-	public void divisorNotZeroVerified(Expression divisor, Validity validity, Expression formula,
-	                ProverResult proverResult) {
+	public void divisorNotZeroVerified(final Expression divisor, final Validity validity, final Expression formula,
+	                final ProverResult proverResult) {
 	}
 
 	@Override
-	public void functionCallPreconditionValidVerified(FunctionCall functionCall, Validity validity,
-	                Expression formula, ProverResult proverResult) {
+	public void functionCallPreconditionValidVerified(final FunctionCall functionCall, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 	}
 }

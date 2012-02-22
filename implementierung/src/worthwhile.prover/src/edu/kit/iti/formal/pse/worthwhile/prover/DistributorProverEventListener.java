@@ -5,6 +5,7 @@ import java.util.Set;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -46,7 +47,7 @@ public class DistributorProverEventListener extends AbstractProverEventListener 
 	}
 
 	@Override
-	public final void programVerified(final Program program, final Validity validity, Expression formula,
+	public final void programVerified(final Program program, final Validity validity, final Expression formula,
 	                final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.programVerified(program, validity, formula, proverResult);
@@ -54,43 +55,48 @@ public class DistributorProverEventListener extends AbstractProverEventListener 
 	}
 
 	@Override
-	public void assertionVerified(Assertion assertion, Validity validity, Expression formula, ProverResult proverResult) {
+	public final void assertionVerified(final Assertion assertion, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.assertionVerified(assertion, validity, formula, proverResult);
 		}
 	}
 
 	@Override
-	public void divisorNotZeroVerified(Expression divisor, Validity validity, Expression formula, ProverResult proverResult) {
+	public final void divisorNotZeroVerified(final Expression divisor, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.divisorNotZeroVerified(divisor, validity, formula, proverResult);
 		}
 	}
 
 	@Override
-	public void functionCallPreconditionValidVerified(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall functionCall, Validity validity, Expression formula, ProverResult proverResult) {
+	public final void functionCallPreconditionValidVerified(final FunctionCall functionCall, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.functionCallPreconditionValidVerified(functionCall, validity, formula, proverResult);
 		}
 	}
 
 	@Override
-	public void invariantValidAtEntryVerified(Invariant invariant, Validity validity, Expression formula, ProverResult proverResult) {
+	public final void invariantValidAtEntryVerified(final Invariant invariant, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.invariantValidAtEntryVerified(invariant, validity, formula, proverResult);
 		}
 	}
 
 	@Override
-	public void invariantAndConditionImplyLoopPreconditionVerified(Loop loop, Validity validity, Expression formula,
-	                ProverResult proverResult) {
+	public final void invariantAndConditionImplyLoopPreconditionVerified(final Loop loop, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.invariantAndConditionImplyLoopPreconditionVerified(loop, validity, formula, proverResult);
 		}
 	}
 
 	@Override
-	public void postconditionValidVerified(Postcondition postcondition, Validity validity, Expression formula, ProverResult proverResult) {
+	public final void postconditionValidVerified(final Postcondition postcondition, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		for (IProverEventListener l : this.listeners) {
 			l.postconditionValidVerified(postcondition, validity, formula, proverResult);
 		}

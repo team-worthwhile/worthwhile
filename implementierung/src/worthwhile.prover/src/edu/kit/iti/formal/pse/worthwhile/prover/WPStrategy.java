@@ -12,8 +12,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
@@ -78,6 +80,21 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		this.weakestPreconditionStack.peek().add(
 		                new Proof(AstNodeCloneHelper.clone(assertion.getExpression()),
 		                                ProofImplication.ASSERTION_VALID, assertion));
+	}
+
+	@Override
+	public void visit(final DivisorNotZeroAssertion assertion) {
+		this.weakestPreconditionStack.peek().add(
+		                new Proof(AstNodeCloneHelper.clone(assertion.getExpression()),
+		                                ProofImplication.DIVISOR_NOT_ZERO, assertion.getGuardedNode()));
+	}
+
+	@Override
+	public void visit(final FunctionCallPreconditionAssertion assertion) {
+		this.weakestPreconditionStack.peek().add(
+		                new Proof(AstNodeCloneHelper.clone(assertion.getExpression()),
+		                                ProofImplication.FUNCTION_CALL_PRECONDITION_VALID, assertion
+		                                                .getGuardedNode()));
 	}
 
 	/**

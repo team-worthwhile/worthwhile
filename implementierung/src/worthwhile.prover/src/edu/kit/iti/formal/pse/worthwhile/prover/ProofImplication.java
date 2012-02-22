@@ -16,6 +16,16 @@ public enum ProofImplication {
 	ASSERTION_VALID,
 
 	/**
+	 * a divisor is not zero.
+	 */
+	DIVISOR_NOT_ZERO,
+
+	/**
+	 * the precondition of a function is valid prior to the function call.
+	 */
+	FUNCTION_CALL_PRECONDITION_VALID,
+
+	/**
 	 * a function postcondition is correct.
 	 */
 	POSTCONDITION_VALID,

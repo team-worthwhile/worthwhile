@@ -21,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
@@ -363,6 +364,16 @@ public class SpecificationChecker {
 					                validity, provable.getExpression(), this.getCheckResult());
 					programValidity = validity;
 					programProverResult = this.getCheckResult();
+					break;
+				case DIVISOR_NOT_ZERO:
+					this.listener.divisorNotZeroVerified((Expression) provable.getRelatedAstNodes()
+					                .get(0), validity, provable.getExpression(), this
+					                .getCheckResult());
+					break;
+				case FUNCTION_CALL_PRECONDITION_VALID:
+					this.listener.functionCallPreconditionValidVerified((FunctionCall) provable
+					                .getRelatedAstNodes().get(0), validity, provable
+					                .getExpression(), this.getCheckResult());
 					break;
 				default:
 					throw new RuntimeException("Unhandled proof implication type");

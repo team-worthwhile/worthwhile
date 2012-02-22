@@ -2,6 +2,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -38,5 +39,15 @@ public abstract class AbstractProverEventListener implements IProverEventListene
 	@Override
 	public void postconditionValidVerified(Postcondition postcondition, Validity validity,
 	                final Expression formula, ProverResult proverResult) {
+	}
+
+	@Override
+	public void divisorNotZeroVerified(Expression divisor, Validity validity, Expression formula,
+	                ProverResult proverResult) {
+	}
+
+	@Override
+	public void functionCallPreconditionValidVerified(FunctionCall functionCall, Validity validity,
+	                Expression formula, ProverResult proverResult) {
 	}
 }

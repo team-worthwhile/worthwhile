@@ -7,10 +7,12 @@ import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
@@ -63,7 +65,6 @@ public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {
 		this.foundDivisorsStack.push(new HashSet<Expression>());
 
 		for (int i = 0; i < block.getStatements().size(); i++) {
-			Expression divisorCheck = null;
 			Statement s = block.getStatements().get(i);
 			// find all divisors in the statement
 			s.accept(this);
@@ -74,24 +75,18 @@ public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {
 				Expression equalsZero = AstNodeCreatorHelper.createEqual(zero,
 				                AstNodeCloneHelper.clone(divisor));
 				Expression notEqualsZero = AstNodeCreatorHelper.createNegation(equalsZero);
-				// add it to the expression to be asserted conjuntively
-				if (divisorCheck == null) {
-					divisorCheck = notEqualsZero;
-				} else {
-					divisorCheck = AstNodeCreatorHelper.createConjunction(divisorCheck,
-					                notEqualsZero);
-				}
-			}
 
-			// if divisors were found, add the check expression as an assertion
-			if (divisorCheck != null) {
-				block.getStatements().add(i, AstNodeCreatorHelper.createAssertion(divisorCheck));
+				DivisorNotZeroAssertion assertion = AstFactory.init().createDivisorNotZeroAssertion();
+				assertion.setExpression(notEqualsZero);
+				assertion.setGuardedNode(divisor);
+				block.getStatements().add(i, assertion);
 				/*
 				 * advance the loop past the statement just read that is now at i + 1 because the
 				 * assertion was inserted at index i
 				 */
 				i++;
 			}
+
 			// clear the stack for the next statement
 			this.foundDivisorsStack.peek().clear();
 		}

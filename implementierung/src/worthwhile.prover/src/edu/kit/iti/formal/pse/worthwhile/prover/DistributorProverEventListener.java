@@ -58,7 +58,20 @@ public class DistributorProverEventListener extends AbstractProverEventListener 
 		for (IProverEventListener l : this.listeners) {
 			l.assertionVerified(assertion, validity, formula, proverResult);
 		}
+	}
 
+	@Override
+	public void divisorNotZeroVerified(Expression divisor, Validity validity, Expression formula, ProverResult proverResult) {
+		for (IProverEventListener l : this.listeners) {
+			l.divisorNotZeroVerified(divisor, validity, formula, proverResult);
+		}
+	}
+
+	@Override
+	public void functionCallPreconditionValidVerified(edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall functionCall, Validity validity, Expression formula, ProverResult proverResult) {
+		for (IProverEventListener l : this.listeners) {
+			l.functionCallPreconditionValidVerified(functionCall, validity, formula, proverResult);
+		}
 	}
 
 	@Override

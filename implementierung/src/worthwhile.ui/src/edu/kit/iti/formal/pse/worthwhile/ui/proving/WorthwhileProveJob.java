@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -145,6 +146,26 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 		                this.getStatementToMark(postcondition),
 		                validity,
 		                "Verifying that the postcondition holds:\n\n"
+		                                + getTooltipMessage(validity, formula, proverResult));
+	}
+
+	@Override
+	public void divisorNotZeroVerified(Expression divisor, Validity validity, Expression formula,
+	                ProverResult proverResult) {
+		this.markerHelper.markStatement(
+		                this.getStatementToMark(divisor),
+		                validity,
+		                "Verifying that the divisor " + AstNodeToStringHelper.toString(divisor)
+		                                + " is not equal to 0:\n\n"
+		                                + getTooltipMessage(validity, formula, proverResult));
+
+	}
+
+	@Override
+	public void functionCallPreconditionValidVerified(FunctionCall functionCall, Validity validity,
+	                Expression formula, ProverResult proverResult) {
+		this.markerHelper.markStatement(this.getStatementToMark(functionCall), validity,
+		                "Verifying that the function precondition holds before the function call:\n\n"
 		                                + getTooltipMessage(validity, formula, proverResult));
 	}
 

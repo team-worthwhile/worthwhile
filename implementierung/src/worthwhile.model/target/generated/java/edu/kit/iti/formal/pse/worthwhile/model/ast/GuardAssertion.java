@@ -6,6 +6,7 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -114,6 +115,17 @@ public class GuardAssertion extends Assertion {
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.GUARD_ASSERTION__GUARDED_NODE,
 			                oldGuardedNode, guardedNode));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model visitorType="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor" visitorRequired="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
+	 * @generated
+	 */
+	public void accept(IASTNodeVisitor visitor) {
+		visitor.visit(this);
 	}
 
 	/**

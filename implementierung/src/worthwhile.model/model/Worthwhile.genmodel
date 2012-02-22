@@ -101,9 +101,20 @@
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion">
                     <genFeatures notify="false" createChild="false" propertySortChoices="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion/guardedNode"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion/accept/visitor"/>
+                    </genOperations>
                   </genClasses>
-                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion"/>
-                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion"/>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
                   <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Annotation">
                     <genFeatures property="None" children="true" createChild="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/Annotation/expression"/>

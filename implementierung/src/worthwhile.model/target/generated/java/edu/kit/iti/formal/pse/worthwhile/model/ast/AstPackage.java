@@ -4158,12 +4158,21 @@ public class AstPackage extends EPackageImpl {
 		                GuardAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		op = addEOperation(guardAssertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(functionCallPreconditionAssertionEClass, FunctionCallPreconditionAssertion.class,
 		                "FunctionCallPreconditionAssertion", !IS_ABSTRACT, !IS_INTERFACE,
 		                IS_GENERATED_INSTANCE_CLASS);
 
+		op = addEOperation(functionCallPreconditionAssertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(divisorNotZeroAssertionEClass, DivisorNotZeroAssertion.class, "DivisorNotZeroAssertion",
 		                !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(divisorNotZeroAssertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(annotationEClass, Annotation.class, "Annotation", IS_ABSTRACT, !IS_INTERFACE,
 		                IS_GENERATED_INSTANCE_CLASS);

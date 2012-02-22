@@ -119,11 +119,31 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Represents an implicit assertion used to guard another node (e.g. a division to prevent division by zero)."/>
     </eAnnotations>
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="guardedNode" lowerBound="1"
         eType="#//ASTNode"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FunctionCallPreconditionAssertion" eSuperTypes="#//GuardAssertion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DivisorNotZeroAssertion" eSuperTypes="#//GuardAssertion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionCallPreconditionAssertion" eSuperTypes="#//GuardAssertion">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DivisorNotZeroAssertion" eSuperTypes="#//GuardAssertion">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation" abstract="true" eSuperTypes="#//Statement">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

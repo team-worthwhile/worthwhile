@@ -19,15 +19,18 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
@@ -104,6 +107,30 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(Assertion node);
+
+	/**
+	 * Visits an AST node of type Assertion.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(GuardAssertion node);
+
+	/**
+	 * Visits an AST node of type Assertion.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(DivisorNotZeroAssertion node);
+
+	/**
+	 * Visits an AST node of type Assertion.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(FunctionCallPreconditionAssertion node);
 
 	/**
 	 * Visits an AST node of type Assignment.

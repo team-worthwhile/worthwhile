@@ -19,15 +19,18 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Division;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
@@ -101,6 +104,21 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 	@Override
 	public void visit(final Assertion node) {
 		this.visit((Annotation) node);
+	}
+
+	@Override
+	public void visit(final GuardAssertion node) {
+		this.visit((Assertion) node);
+	}
+
+	@Override
+	public void visit(final DivisorNotZeroAssertion node) {
+		this.visit((GuardAssertion) node);
+	}
+
+	@Override
+	public void visit(final FunctionCallPreconditionAssertion node) {
+		this.visit((GuardAssertion) node);
 	}
 
 	@Override

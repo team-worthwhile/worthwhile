@@ -1,0 +1,13 @@
+// EXPECTED:VALID
+function Integer noop(Integer a)
+     _ensures _return = a
+{
+    return a
+
+    while (false)
+            _invariant true
+    {
+
+    }
+}
+

@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.debugmodel;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants.ID_WORTHWHILE_DEBUG_MODEL;
+import org.eclipse.debug.core.model.IWatchpoint;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -51,7 +52,8 @@ public class WorthwhileBreakpointAdapter implements IToggleBreakpointsTarget {
 			for (int i = 0; i < breakpoints.length; i++) {
 				IBreakpoint breakpoint = breakpoints[i];
 				if (resource.equals(breakpoint.getMarker().getResource())) {
-					if (((ILineBreakpoint) breakpoint).getLineNumber() == (lineNumber + 1)) {
+					if (breakpoint instanceof WorthwhileLineBreakpoint
+					                && ((ILineBreakpoint) breakpoint).getLineNumber() == (lineNumber + 1)) {
 						breakpoint.delete();
 						return;
 					}
@@ -99,7 +101,8 @@ public class WorthwhileBreakpointAdapter implements IToggleBreakpointsTarget {
 					                .getBreakpoints(ID_WORTHWHILE_DEBUG_MODEL);
 					for (int i = 0; i < breakpoints.length; i++) {
 						IBreakpoint breakpoint = breakpoints[i];
-						if (resource.equals(breakpoint.getMarker().getResource())) {
+						if (breakpoint instanceof IWatchpoint
+						                && resource.equals(breakpoint.getMarker().getResource())) {
 							if (((ILineBreakpoint) breakpoint).getLineNumber() == lineNumber) {
 								breakpoint.delete();
 								return;

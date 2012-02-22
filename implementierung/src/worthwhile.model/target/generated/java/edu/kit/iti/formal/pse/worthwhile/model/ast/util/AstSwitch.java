@@ -262,6 +262,40 @@ public class AstSwitch<T> extends Switch<T> {
 					result = defaultCase(theEObject);
 				return result;
 			}
+			case AstPackage.FUNCTION_CALL_PRECONDITION_ASSERTION: {
+				FunctionCallPreconditionAssertion functionCallPreconditionAssertion = (FunctionCallPreconditionAssertion) theEObject;
+				T result = caseFunctionCallPreconditionAssertion(functionCallPreconditionAssertion);
+				if (result == null)
+					result = caseGuardAssertion(functionCallPreconditionAssertion);
+				if (result == null)
+					result = caseAssertion(functionCallPreconditionAssertion);
+				if (result == null)
+					result = caseAnnotation(functionCallPreconditionAssertion);
+				if (result == null)
+					result = caseStatement(functionCallPreconditionAssertion);
+				if (result == null)
+					result = caseASTNode(functionCallPreconditionAssertion);
+				if (result == null)
+					result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.DIVISOR_NOT_ZERO_ASSERTION: {
+				DivisorNotZeroAssertion divisorNotZeroAssertion = (DivisorNotZeroAssertion) theEObject;
+				T result = caseDivisorNotZeroAssertion(divisorNotZeroAssertion);
+				if (result == null)
+					result = caseGuardAssertion(divisorNotZeroAssertion);
+				if (result == null)
+					result = caseAssertion(divisorNotZeroAssertion);
+				if (result == null)
+					result = caseAnnotation(divisorNotZeroAssertion);
+				if (result == null)
+					result = caseStatement(divisorNotZeroAssertion);
+				if (result == null)
+					result = caseASTNode(divisorNotZeroAssertion);
+				if (result == null)
+					result = defaultCase(theEObject);
+				return result;
+			}
 			case AstPackage.ANNOTATION: {
 				Annotation annotation = (Annotation) theEObject;
 				T result = caseAnnotation(annotation);
@@ -1017,6 +1051,36 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGuardAssertion(GuardAssertion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Call Precondition Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Call Precondition Assertion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFunctionCallPreconditionAssertion(FunctionCallPreconditionAssertion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Divisor Not Zero Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Divisor Not Zero Assertion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDivisorNotZeroAssertion(DivisorNotZeroAssertion object) {
 		return null;
 	}
 

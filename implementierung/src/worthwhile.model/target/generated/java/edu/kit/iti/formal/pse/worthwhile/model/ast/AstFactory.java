@@ -74,6 +74,10 @@ public class AstFactory extends EFactoryImpl {
 				return createAssertion();
 			case AstPackage.GUARD_ASSERTION:
 				return createGuardAssertion();
+			case AstPackage.FUNCTION_CALL_PRECONDITION_ASSERTION:
+				return createFunctionCallPreconditionAssertion();
+			case AstPackage.DIVISOR_NOT_ZERO_ASSERTION:
+				return createDivisorNotZeroAssertion();
 			case AstPackage.ASSIGNMENT:
 				return createAssignment();
 			case AstPackage.VARIABLE_DECLARATION:
@@ -217,6 +221,26 @@ public class AstFactory extends EFactoryImpl {
 	public GuardAssertion createGuardAssertion() {
 		GuardAssertion guardAssertion = new GuardAssertion();
 		return guardAssertion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionCallPreconditionAssertion createFunctionCallPreconditionAssertion() {
+		FunctionCallPreconditionAssertion functionCallPreconditionAssertion = new FunctionCallPreconditionAssertion();
+		return functionCallPreconditionAssertion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DivisorNotZeroAssertion createDivisorNotZeroAssertion() {
+		DivisorNotZeroAssertion divisorNotZeroAssertion = new DivisorNotZeroAssertion();
+		return divisorNotZeroAssertion;
 	}
 
 	/**

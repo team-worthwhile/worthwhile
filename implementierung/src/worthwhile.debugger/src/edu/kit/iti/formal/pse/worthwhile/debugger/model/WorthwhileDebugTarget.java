@@ -44,6 +44,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 
@@ -547,6 +548,24 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		}
 
 		return null;
+	}
+
+	/**
+	 * Returns the type of the variable with the specified name.
+	 * 
+	 * @param name
+	 *                The name of the variable.
+	 * @param name
+	 * @return The type of the variable, or {@code} null if the variable does not exist
+	 */
+	public final Type getVariableType(final String name) {
+		VariableDeclaration vardecl = this.getVariableDeclaration(name);
+		
+		if (vardecl != null) {
+			return vardecl.getType();
+		} else {
+			return null;
+		}
 	}
 
 	/**

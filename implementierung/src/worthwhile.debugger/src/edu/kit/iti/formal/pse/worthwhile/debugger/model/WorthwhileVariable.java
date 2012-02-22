@@ -6,6 +6,10 @@ import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueTypeVisitor;
 
 /**
  * Represents a variable in a suspended Worthwhile program.
@@ -60,8 +64,26 @@ public class WorthwhileVariable extends WorthwhileDebugElement implements IVaria
 
 	@Override
 	public final boolean verifyValue(final IValue value) throws DebugException {
-		// TODO Verify value
-		return true;
+		if (!(value instanceof WorthwhileValue)) {
+			return false;
+		}
+
+		// Retrieve types of current and designed value and accept if they are equal.
+		Type originalType = this.getDebugTarget().getVariableType(this.getName());
+		Type newType = new ValueTypeVisitor().apply(((WorthwhileValue) value).getValue());
+
+		if (originalType instanceof ArrayType) {
+			if (!(newType instanceof ArrayType)) {
+				return false;
+			} else {
+				ArrayType aOriginalType = (ArrayType) originalType;
+				ArrayType aNewType = (ArrayType) newType;
+				return (aOriginalType.getBaseType() == null || aNewType.getBaseType() == null || AstNodeEqualsHelper
+				                .equals(aOriginalType, aNewType));
+			}
+		} else {
+			return AstNodeEqualsHelper.equals(originalType, newType);
+		}
 	}
 
 	@Override

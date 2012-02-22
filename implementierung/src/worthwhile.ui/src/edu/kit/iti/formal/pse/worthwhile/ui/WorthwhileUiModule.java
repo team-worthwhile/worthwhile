@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.ui;
 
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
@@ -9,9 +10,11 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 
 import edu.kit.iti.formal.pse.worthwhile.ui.autoedit.WorthwhileAutoEditStrategyProvider;
+import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileCompositeHover;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileEditor;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileFoldingRegionProvider;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileHighlightingConfiguration;
+import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileMarkerHover;
 import edu.kit.iti.formal.pse.worthwhile.ui.editor.WorthwhileTokenToAttributeIdMapper;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhileRootPreferencePage;
 
@@ -83,6 +86,24 @@ public class WorthwhileUiModule extends edu.kit.iti.formal.pse.worthwhile.ui.Abs
 	 */
 	public final Class<? extends LanguageRootPreferencePage> bindLanguageRootPreferencePage() {
 		return WorthwhileRootPreferencePage.class;
+	}
+
+	/**
+	 * Provides a text hover.
+	 * 
+	 * @return A text hover.
+	 */
+	public final Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
+		return WorthwhileCompositeHover.class;
+	}
+
+	/**
+	 * Provides an annotation hover.
+	 * 
+	 * @return An annotation hover.
+	 */
+	public final Class<? extends IAnnotationHover> bindIAnnotationHover() {
+		return WorthwhileMarkerHover.class;
 	}
 
 }

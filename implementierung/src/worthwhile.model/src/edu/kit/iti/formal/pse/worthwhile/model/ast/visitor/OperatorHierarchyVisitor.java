@@ -42,7 +42,7 @@ public class OperatorHierarchyVisitor extends ASTNodeReturnVisitor<Integer> {
 	
 	@Override
 	public final void defaultOperation(final ASTNode node) {
-		this.setReturnValue(42);
+		this.setReturnValue(-42);
 	}
 
 	@Override
@@ -146,7 +146,7 @@ public class OperatorHierarchyVisitor extends ASTNodeReturnVisitor<Integer> {
         }
 	@Override
         public final void visit(final QuantifiedExpression node) {
-	       this.setReturnValue(8);
+	       this.setReturnValue(-41);
         }
 
 	@Override

@@ -21,9 +21,6 @@ public class WorthwhileFormatter extends AbstractDeclarativeFormatter {
 		WorthwhileGrammarAccess f = (WorthwhileGrammarAccess) getGrammarAccess();
 		for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("{", "}")) {
 			c.setIndentation(pair.getFirst(), pair.getSecond());
-			c.setLinewrap(1).after(pair.getFirst());
-			c.setLinewrap(1).before(pair.getSecond());
-			c.setLinewrap(1).after(pair.getSecond());
 			c.setNoSpace().before(pair.getFirst());
 			c.setNoSpace().between(pair.getFirst(), pair.getSecond());
 		}
@@ -34,7 +31,8 @@ public class WorthwhileFormatter extends AbstractDeclarativeFormatter {
 		for (Keyword comma : f.findKeywords(",")) {
 			c.setNoLinewrap().before(comma);
 			c.setNoSpace().before(comma);
-			c.setLinewrap().after(comma);
+			c.setSpace(" ").after(comma);
+			c.setNoLinewrap().after(comma);
 		}
 		c.setLinewrap(0, 1, 2).before(f.getSL_COMMENTRule());
 		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());

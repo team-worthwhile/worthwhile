@@ -2,18 +2,17 @@ package edu.kit.iti.formal.pse.worthwhile.ui.launching;
 
 import static edu.kit.iti.formal.pse.worthwhile.debugger.launching.WorthwhileLaunchConfigurationConstants.ATTR_PATH;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -93,11 +92,18 @@ public abstract class WorthwhileLaunchConfigurationDelegate extends LaunchConfig
 	 *                 if getting the file from the configuration fails.
 	 */
 	protected final IFile getFile(final ILaunchConfiguration configuration) throws CoreException {
-		String path = configuration.getAttribute(ATTR_PATH, "");
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(path));
+		IPath path = new Path(configuration.getAttribute(ATTR_PATH, ""));
+		
+		if (path.isEmpty()) {
+			DebugHelper.throwError("The specified source file cannot be found.", null);
+			return null;
+		}
+		
+		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
 
 		if (file == null) {
 			DebugHelper.throwError("The specified source file cannot be found.", null);
+			return null;
 		}
 
 		return file;

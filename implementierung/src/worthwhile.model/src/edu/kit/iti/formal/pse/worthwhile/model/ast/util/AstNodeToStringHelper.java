@@ -45,6 +45,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Plus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -52,7 +53,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.AssociativityVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.OperatorHierarchyVisitor;
 
 /**
  * Implements toString methods for {@link ASTNode}s.
@@ -92,6 +95,41 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	/**
+	 * Adds parentheses around an expression, if necessary.
+	 * 
+	 * @param parentNode
+	 *                The parent node of the current node
+	 * @param childNode
+	 *                The current node
+	 */
+	private void parenthesize(final ASTNode parentNode, final ASTNode childNode) {
+		OperatorHierarchyVisitor hierarchyVisitor = new OperatorHierarchyVisitor();
+		int currentPositionInHierarchy = hierarchyVisitor.apply(parentNode);
+		int childPositionInHierarchy = hierarchyVisitor.apply(childNode);
+		boolean needsParentheses = false;
+
+		if (childPositionInHierarchy < currentPositionInHierarchy) {
+			needsParentheses = true;
+		} else if (childPositionInHierarchy == currentPositionInHierarchy) {
+			// @formatter:off
+			needsParentheses = (parentNode instanceof BinaryExpression
+			                && childNode == ((BinaryExpression) parentNode).getRight()
+			                && !new AssociativityVisitor().apply(parentNode));
+			// @formatter:on
+		}
+
+		if (needsParentheses) {
+			this.buf.append("(");
+		}
+
+		childNode.accept(this);
+
+		if (needsParentheses) {
+			this.buf.append(")");
+		}
+	}
+
+	/**
 	 * Appends <code>`(' binaryExpression.left operatorString binaryExpression.right `)'</code> to the buffer.
 	 * 
 	 * @param binaryExpression
@@ -100,11 +138,9 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	 *                the <code>String</code> representation for the <code>binaryExpression</code>'s operator
 	 */
 	private void appendBinaryExpression(final BinaryExpression binaryExpression, final String operatorString) {
-		this.buf.append("(");
-		binaryExpression.getLeft().accept(this);
+		this.parenthesize(binaryExpression, binaryExpression.getLeft());
 		this.buf.append(" " + operatorString + " ");
-		binaryExpression.getRight().accept(this);
-		this.buf.append(")");
+		this.parenthesize(binaryExpression, binaryExpression.getRight());
 	}
 
 	@Override
@@ -371,34 +407,40 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		axiom.getExpression().accept(this);
 	}
 
-	@Override
-	public void visit(final ForAllQuantifier forAllQuantifier) {
-		this.buf.append("∀ ");
-		forAllQuantifier.getParameter().accept(this);
+	/**
+	 * Visits a quantified expression.
+	 * 
+	 * @param quantifiedExpression
+	 *                The quantified expression to visit
+	 * @param quantifier
+	 *                A string representation of the quantifier.
+	 */
+	private void visitQuantifiedExpression(final QuantifiedExpression quantifiedExpression, final String quantifier) {
+		this.buf.append(quantifier + " ");
+		quantifiedExpression.getParameter().accept(this);
 
-		Expression condition = forAllQuantifier.getCondition();
+		Expression condition = quantifiedExpression.getCondition();
 		if (condition != null) {
 			this.buf.append(", ");
 			condition.accept(this);
 		}
 
-		this.buf.append(" : ");
-		forAllQuantifier.getExpression().accept(this);
+		if (quantifiedExpression.getExpression() instanceof QuantifiedExpression) {
+			this.buf.append(" ");
+		} else {
+			this.buf.append(" : ");
+		}
+		quantifiedExpression.getExpression().accept(this);
+	}
+
+	@Override
+	public void visit(final ForAllQuantifier forAllQuantifier) {
+		this.visitQuantifiedExpression(forAllQuantifier, "∀");
 	}
 
 	@Override
 	public void visit(final ExistsQuantifier existsQuantifier) {
-		this.buf.append("∃ ");
-		existsQuantifier.getParameter().accept(this);
-
-		Expression condition = existsQuantifier.getCondition();
-		if (condition != null) {
-			this.buf.append(", ");
-			condition.accept(this);
-		}
-
-		this.buf.append(" : ");
-		existsQuantifier.getExpression().accept(this);
+		this.visitQuantifiedExpression(existsQuantifier, "∃");
 	}
 
 	@Override

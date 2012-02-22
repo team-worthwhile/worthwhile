@@ -289,12 +289,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		this.buf.append("-");
 		minus.getOperand().accept(this);
 	}
-	
+
 	@Override
-        public void visit(final Plus plus) {
+	public void visit(final Plus plus) {
 		this.buf.append("+");
 		plus.getOperand().accept(this);
-        }
+	}
 
 	@Override
 	public void visit(final Program program) {
@@ -338,11 +338,11 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	public void visit(final Implication implication) {
 		this.appendBinaryExpression(implication, "⇒");
 	}
-	
+
 	@Override
-        public void visit(final Equivalence equivalence) {
+	public void visit(final Equivalence equivalence) {
 		this.appendBinaryExpression(equivalence, "⇔");
-        }
+	}
 
 	@Override
 	public void visit(final Negation negation) {
@@ -354,12 +354,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	public void visit(final Multiplication multiplication) {
 		this.appendBinaryExpression(multiplication, "∙");
 	}
-	
+
 	@Override
 	public void visit(final Division division) {
 		this.appendBinaryExpression(division, "/");
 	}
-	
+
 	@Override
 	public void visit(final Modulus modulus) {
 		this.appendBinaryExpression(modulus, "%");

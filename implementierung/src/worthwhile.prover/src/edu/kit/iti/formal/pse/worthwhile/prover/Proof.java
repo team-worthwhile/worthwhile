@@ -11,7 +11,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
  * 
  * @author Leon Handreke
  */
-public class Proof {
+public class Proof implements Cloneable {
 	/**
 	 * "Real world" implication that this proof carries.
 	 */
@@ -96,7 +96,8 @@ public class Proof {
 		this.expression = expression;
 	}
 
-	public Proof clone() {
+	@Override
+	public final Proof clone() {
 		Proof newProof = new Proof(this.getExpression(), this.getImplication());
 		newProof.setRelatedAstNodes(this.getRelatedAstNodes());
 		return newProof;

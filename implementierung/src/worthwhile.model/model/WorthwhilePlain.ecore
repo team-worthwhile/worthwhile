@@ -115,6 +115,13 @@
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GuardAssertion" eSuperTypes="#//Assertion">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents an implicit assertion used to guard another node (e.g. a division to prevent division by zero)."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guardedNode" lowerBound="1"
+        eType="#//ASTNode"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Annotation" abstract="true" eSuperTypes="#//Statement">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -519,6 +526,31 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
         eType="#//Expression" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayFunction" eSuperTypes="#//Literal">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chainedFunction" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArrayFunctionAccess" eSuperTypes="#//Expression">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Expression"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionToExpressionMap" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"/>
+  </eClassifiers>
   <eSubpackages name="kit" nsURI="http://kit.edu" nsPrefix="edu.kit">
     <eSubpackages name="iti" nsURI="http://iti.kit.edu" nsPrefix="edu.kit.iti">
       <eSubpackages name="formal" nsURI="http://formal.iti.kit.edu" nsPrefix="edu.kit.iti.formal">
@@ -697,6 +729,9 @@
       </eOperations>
       <eOperations name="visit">
         <eParameters name="node" lowerBound="1" eType="#//VariableReference"/>
+      </eOperations>
+      <eOperations name="visit">
+        <eParameters name="node" lowerBound="1" eType="#//ArrayFunction"/>
       </eOperations>
     </eClassifiers>
   </eSubpackages>

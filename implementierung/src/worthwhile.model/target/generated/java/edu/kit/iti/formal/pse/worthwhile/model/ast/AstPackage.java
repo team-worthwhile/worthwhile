@@ -353,7 +353,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getStatement()
 	 * @generated
 	 */
-	public static final int STATEMENT = 52;
+	public static final int STATEMENT = 53;
 
 	/**
 	 * The number of structural features of the '<em>Statement</em>' class.
@@ -371,7 +371,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAnnotation()
 	 * @generated
 	 */
-	public static final int ANNOTATION = 12;
+	public static final int ANNOTATION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -419,13 +419,50 @@ public class AstPackage extends EPackageImpl {
 	public static final int ASSERTION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion <em>Guard Assertion</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGuardAssertion()
+	 * @generated
+	 */
+	public static final int GUARD_ASSERTION = 12;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_ASSERTION__EXPRESSION = ASSERTION__EXPRESSION;
+
+	/**
+	 * The feature id for the '<em><b>Guarded Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_ASSERTION__GUARDED_NODE = ASSERTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Guard Assertion</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_ASSERTION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment <em>Assignment</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssignment()
 	 * @generated
 	 */
-	public static final int ASSIGNMENT = 13;
+	public static final int ASSIGNMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -461,7 +498,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableDeclaration()
 	 * @generated
 	 */
-	public static final int VARIABLE_DECLARATION = 14;
+	public static final int VARIABLE_DECLARATION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -505,7 +542,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssumption()
 	 * @generated
 	 */
-	public static final int ASSUMPTION = 15;
+	public static final int ASSUMPTION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -532,7 +569,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAxiom()
 	 * @generated
 	 */
-	public static final int AXIOM = 16;
+	public static final int AXIOM = 17;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -559,7 +596,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBlock()
 	 * @generated
 	 */
-	public static final int BLOCK = 17;
+	public static final int BLOCK = 18;
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
@@ -586,7 +623,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBooleanLiteral()
 	 * @generated
 	 */
-	public static final int BOOLEAN_LITERAL = 18;
+	public static final int BOOLEAN_LITERAL = 19;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -612,7 +649,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBooleanType()
 	 * @generated
 	 */
-	public static final int BOOLEAN_TYPE = 19;
+	public static final int BOOLEAN_TYPE = 20;
 
 	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
@@ -630,7 +667,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getConditional()
 	 * @generated
 	 */
-	public static final int CONDITIONAL = 20;
+	public static final int CONDITIONAL = 21;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -675,7 +712,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getConjunction()
 	 * @generated
 	 */
-	public static final int CONJUNCTION = 21;
+	public static final int CONJUNCTION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -711,7 +748,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getDisjunction()
 	 * @generated
 	 */
-	public static final int DISJUNCTION = 22;
+	public static final int DISJUNCTION = 23;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -747,7 +784,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getDivision()
 	 * @generated
 	 */
-	public static final int DIVISION = 23;
+	public static final int DIVISION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -783,7 +820,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getEqual()
 	 * @generated
 	 */
-	public static final int EQUAL = 24;
+	public static final int EQUAL = 25;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -819,7 +856,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getEquivalence()
 	 * @generated
 	 */
-	public static final int EQUIVALENCE = 25;
+	public static final int EQUIVALENCE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -855,7 +892,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getQuantifiedExpression()
 	 * @generated
 	 */
-	public static final int QUANTIFIED_EXPRESSION = 27;
+	public static final int QUANTIFIED_EXPRESSION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -900,7 +937,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExistsQuantifier()
 	 * @generated
 	 */
-	public static final int EXISTS_QUANTIFIER = 26;
+	public static final int EXISTS_QUANTIFIER = 27;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -945,7 +982,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getForAllQuantifier()
 	 * @generated
 	 */
-	public static final int FOR_ALL_QUANTIFIER = 28;
+	public static final int FOR_ALL_QUANTIFIER = 29;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference.
@@ -990,7 +1027,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionCall()
 	 * @generated
 	 */
-	public static final int FUNCTION_CALL = 29;
+	public static final int FUNCTION_CALL = 30;
 
 	/**
 	 * The feature id for the '<em><b>Actuals</b></em>' containment reference list.
@@ -1025,7 +1062,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionDeclaration()
 	 * @generated
 	 */
-	public static final int FUNCTION_DECLARATION = 30;
+	public static final int FUNCTION_DECLARATION = 31;
 
 	/**
 	 * The feature id for the '<em><b>Preconditions</b></em>' containment reference list.
@@ -1096,7 +1133,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPrecondition()
 	 * @generated
 	 */
-	public static final int PRECONDITION = 31;
+	public static final int PRECONDITION = 32;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1123,7 +1160,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPostcondition()
 	 * @generated
 	 */
-	public static final int POSTCONDITION = 32;
+	public static final int POSTCONDITION = 33;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1150,7 +1187,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGreater()
 	 * @generated
 	 */
-	public static final int GREATER = 33;
+	public static final int GREATER = 34;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1186,7 +1223,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGreaterOrEqual()
 	 * @generated
 	 */
-	public static final int GREATER_OR_EQUAL = 34;
+	public static final int GREATER_OR_EQUAL = 35;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1222,7 +1259,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getImplication()
 	 * @generated
 	 */
-	public static final int IMPLICATION = 35;
+	public static final int IMPLICATION = 36;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1258,7 +1295,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getIntegerLiteral()
 	 * @generated
 	 */
-	public static final int INTEGER_LITERAL = 36;
+	public static final int INTEGER_LITERAL = 37;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1284,7 +1321,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getIntegerType()
 	 * @generated
 	 */
-	public static final int INTEGER_TYPE = 37;
+	public static final int INTEGER_TYPE = 38;
 
 	/**
 	 * The number of structural features of the '<em>Integer Type</em>' class.
@@ -1302,7 +1339,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getInvariant()
 	 * @generated
 	 */
-	public static final int INVARIANT = 38;
+	public static final int INVARIANT = 39;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1329,7 +1366,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLess()
 	 * @generated
 	 */
-	public static final int LESS = 39;
+	public static final int LESS = 40;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1364,7 +1401,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLessOrEqual()
 	 * @generated
 	 */
-	public static final int LESS_OR_EQUAL = 40;
+	public static final int LESS_OR_EQUAL = 41;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1400,7 +1437,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLoop()
 	 * @generated
 	 */
-	public static final int LOOP = 41;
+	public static final int LOOP = 42;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -1444,7 +1481,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSign()
 	 * @generated
 	 */
-	public static final int SIGN = 43;
+	public static final int SIGN = 44;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1470,7 +1507,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMinus()
 	 * @generated
 	 */
-	public static final int MINUS = 42;
+	public static final int MINUS = 43;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1497,7 +1534,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getModulus()
 	 * @generated
 	 */
-	public static final int MODULUS = 44;
+	public static final int MODULUS = 45;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1533,7 +1570,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMultiplication()
 	 * @generated
 	 */
-	public static final int MULTIPLICATION = 45;
+	public static final int MULTIPLICATION = 46;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1569,7 +1606,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getNegation()
 	 * @generated
 	 */
-	public static final int NEGATION = 46;
+	public static final int NEGATION = 47;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1596,7 +1633,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPlus()
 	 * @generated
 	 */
-	public static final int PLUS = 47;
+	public static final int PLUS = 48;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -1622,7 +1659,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnStatement()
 	 * @generated
 	 */
-	public static final int RETURN_STATEMENT = 48;
+	public static final int RETURN_STATEMENT = 49;
 
 	/**
 	 * The feature id for the '<em><b>Return Value</b></em>' containment reference.
@@ -1649,7 +1686,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSubtraction()
 	 * @generated
 	 */
-	public static final int SUBTRACTION = 49;
+	public static final int SUBTRACTION = 50;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1685,7 +1722,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getUnequal()
 	 * @generated
 	 */
-	public static final int UNEQUAL = 50;
+	public static final int UNEQUAL = 51;
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1721,7 +1758,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableReference()
 	 * @generated
 	 */
-	public static final int VARIABLE_REFERENCE = 51;
+	public static final int VARIABLE_REFERENCE = 52;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -1756,7 +1793,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnValueReference()
 	 * @generated
 	 */
-	public static final int RETURN_VALUE_REFERENCE = 53;
+	public static final int RETURN_VALUE_REFERENCE = 54;
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
@@ -1791,7 +1828,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionEvaluation()
 	 * @generated
 	 */
-	public static final int EXPRESSION_EVALUATION = 54;
+	public static final int EXPRESSION_EVALUATION = 55;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1818,7 +1855,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction()
 	 * @generated
 	 */
-	public static final int ARRAY_FUNCTION = 55;
+	public static final int ARRAY_FUNCTION = 56;
 
 	/**
 	 * The feature id for the '<em><b>Chained Function</b></em>' reference.
@@ -1864,7 +1901,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunctionAccess()
 	 * @generated
 	 */
-	public static final int ARRAY_FUNCTION_ACCESS = 56;
+	public static final int ARRAY_FUNCTION_ACCESS = 57;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' reference.
@@ -1900,7 +1937,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionToExpressionMap()
 	 * @generated
 	 */
-	public static final int EXPRESSION_TO_EXPRESSION_MAP = 57;
+	public static final int EXPRESSION_TO_EXPRESSION_MAP = 58;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference.
@@ -1998,6 +2035,13 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass assertionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass guardAssertionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2583,6 +2627,31 @@ public class AstPackage extends EPackageImpl {
 	 */
 	public EClass getAssertion() {
 		return assertionEClass;
+	}
+
+	/**
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion <em>Guard Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Guard Assertion</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion
+	 * @generated
+	 */
+	public EClass getGuardAssertion() {
+		return guardAssertionEClass;
+	}
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion#getGuardedNode <em>Guarded Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Guarded Node</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion#getGuardedNode()
+	 * @see #getGuardAssertion()
+	 * @generated
+	 */
+	public EReference getGuardAssertion_GuardedNode() {
+		return (EReference) guardAssertionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3643,6 +3712,9 @@ public class AstPackage extends EPackageImpl {
 
 		assertionEClass = createEClass(ASSERTION);
 
+		guardAssertionEClass = createEClass(GUARD_ASSERTION);
+		createEReference(guardAssertionEClass, GUARD_ASSERTION__GUARDED_NODE);
+
 		annotationEClass = createEClass(ANNOTATION);
 		createEReference(annotationEClass, ANNOTATION__EXPRESSION);
 
@@ -3818,6 +3890,7 @@ public class AstPackage extends EPackageImpl {
 		typeEClass.getESuperTypes().add(this.getASTNode());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		assertionEClass.getESuperTypes().add(this.getAnnotation());
+		guardAssertionEClass.getESuperTypes().add(this.getAssertion());
 		annotationEClass.getESuperTypes().add(this.getStatement());
 		assignmentEClass.getESuperTypes().add(this.getStatement());
 		variableDeclarationEClass.getESuperTypes().add(this.getStatement());
@@ -3960,6 +4033,12 @@ public class AstPackage extends EPackageImpl {
 
 		op = addEOperation(assertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(guardAssertionEClass, GuardAssertion.class, "GuardAssertion", !IS_ABSTRACT, !IS_INTERFACE,
+		                IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGuardAssertion_GuardedNode(), this.getASTNode(), null, "guardedNode", null, 1, 1,
+		                GuardAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(annotationEClass, Annotation.class, "Annotation", IS_ABSTRACT, !IS_INTERFACE,
 		                IS_GENERATED_INSTANCE_CLASS);
@@ -4303,9 +4382,9 @@ public class AstPackage extends EPackageImpl {
 
 		initEClass(arrayFunctionEClass, ArrayFunction.class, "ArrayFunction", !IS_ABSTRACT, !IS_INTERFACE,
 		                IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayFunction_ChainedFunction(), this.getArrayFunction(), null, "chainedFunction",
-		                null, 0, 1, ArrayFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
-		                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArrayFunction_ChainedFunction(), this.getExpression(), null, "chainedFunction", null,
+		                0, 1, ArrayFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getArrayFunction_Index(), this.getExpression(), null, "index", null, 0, 1,
 		                ArrayFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -4524,6 +4603,25 @@ public class AstPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EClass ASSERTION = eINSTANCE.getAssertion();
+
+		/**
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion <em>Guard Assertion</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGuardAssertion()
+		 * @generated
+		 */
+		public static final EClass GUARD_ASSERTION = eINSTANCE.getGuardAssertion();
+
+		/**
+		 * The meta object literal for the '<em><b>Guarded Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference GUARD_ASSERTION__GUARDED_NODE = eINSTANCE
+		                .getGuardAssertion_GuardedNode();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation <em>Annotation</em>}' class.

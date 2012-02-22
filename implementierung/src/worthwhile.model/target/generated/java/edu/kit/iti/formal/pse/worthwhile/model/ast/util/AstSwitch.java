@@ -247,6 +247,21 @@ public class AstSwitch<T> extends Switch<T> {
 					result = defaultCase(theEObject);
 				return result;
 			}
+			case AstPackage.GUARD_ASSERTION: {
+				GuardAssertion guardAssertion = (GuardAssertion) theEObject;
+				T result = caseGuardAssertion(guardAssertion);
+				if (result == null)
+					result = caseAssertion(guardAssertion);
+				if (result == null)
+					result = caseAnnotation(guardAssertion);
+				if (result == null)
+					result = caseStatement(guardAssertion);
+				if (result == null)
+					result = caseASTNode(guardAssertion);
+				if (result == null)
+					result = defaultCase(theEObject);
+				return result;
+			}
 			case AstPackage.ANNOTATION: {
 				Annotation annotation = (Annotation) theEObject;
 				T result = caseAnnotation(annotation);
@@ -987,6 +1002,21 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAssertion(Assertion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Guard Assertion</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Guard Assertion</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGuardAssertion(GuardAssertion object) {
 		return null;
 	}
 

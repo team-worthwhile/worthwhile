@@ -72,6 +72,8 @@ public class AstFactory extends EFactoryImpl {
 				return createArrayType();
 			case AstPackage.ASSERTION:
 				return createAssertion();
+			case AstPackage.GUARD_ASSERTION:
+				return createGuardAssertion();
 			case AstPackage.ASSIGNMENT:
 				return createAssignment();
 			case AstPackage.VARIABLE_DECLARATION:
@@ -205,6 +207,16 @@ public class AstFactory extends EFactoryImpl {
 	public Assertion createAssertion() {
 		Assertion assertion = new Assertion();
 		return assertion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GuardAssertion createGuardAssertion() {
+		GuardAssertion guardAssertion = new GuardAssertion();
+		return guardAssertion;
 	}
 
 	/**

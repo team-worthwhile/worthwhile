@@ -184,6 +184,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseGuardAssertion(GuardAssertion object) {
+			return createGuardAssertionAdapter();
+		}
+
+		@Override
 		public Adapter caseAnnotation(Annotation object) {
 			return createAnnotationAdapter();
 		}
@@ -587,6 +592,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAssertionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion <em>Guard Assertion</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion
+	 * @generated
+	 */
+	public Adapter createGuardAssertionAdapter() {
 		return null;
 	}
 

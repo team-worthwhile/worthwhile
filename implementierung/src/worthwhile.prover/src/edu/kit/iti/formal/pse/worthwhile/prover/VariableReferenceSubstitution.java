@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 
 /**
@@ -77,7 +78,7 @@ class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
 			final Expression index = variableReference.getIndex();
 			if (index != null) {
 				this.setSubstitute(AstNodeCreatorHelper.createArrayFunctionAccess(index,
-				                this.substitute));
+				                AstNodeCloneHelper.clone(this.substitute)));
 			} else {
 				this.setSubstitute(this.substitute);
 			}

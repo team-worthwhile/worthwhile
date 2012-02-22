@@ -1,5 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.math.BigInteger;
+
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
@@ -59,8 +61,18 @@ public final class ArrayFunctionInserter extends SubstitutionVisitor<ArrayFuncti
 			};
 		}.apply(((ArrayType) (new WorthwhileTypesystem()).typeof(arrayLiteral)).getBaseType());
 
-		ArrayFunctionInserter.this.setSubstitute(AstNodeCreatorHelper.createArrayFunction(
-		                arrayLiteral.getValues(), implicitArrayFunction));
+		ArrayFunction arrayFunction = implicitArrayFunction;
+
+		int index = -1;
+		for (final Expression v : arrayLiteral.getValues()) {
+			index++;
+			final Expression indexLiteral = AstNodeCreatorHelper.createIntegerLiteral(BigInteger
+			                .valueOf(index));
+			arrayFunction = AstNodeCreatorHelper.createArrayFunction(indexLiteral,
+			                AstNodeCloneHelper.clone(v), arrayFunction);
+		}
+
+		ArrayFunctionInserter.this.setSubstitute(arrayFunction);
 		ArrayFunctionInserter.this.setFound(true);
 	}
 }

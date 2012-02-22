@@ -15,4 +15,5 @@ Export-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
  edu.kit.iti.formal.pse.worthwhile.debugger.breakpoints,
  edu.kit.iti.formal.pse.worthwhile.debugger.launching,
  edu.kit.iti.formal.pse.worthwhile.debugger.model
-Import-Package: edu.kit.iti.formal.pse.worthwhile.debugger
+Import-Package: edu.kit.iti.formal.pse.worthwhile.debugger,
+ edu.kit.iti.formal.pse.worthwhile.prover

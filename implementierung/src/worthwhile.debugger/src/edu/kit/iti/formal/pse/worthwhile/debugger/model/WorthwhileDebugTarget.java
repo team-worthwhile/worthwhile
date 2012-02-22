@@ -47,6 +47,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
+import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+import edu.kit.iti.formal.pse.worthwhile.prover.WorthwhileProverMarkerHelper;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.
@@ -84,7 +86,12 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	/**
 	 * The marker helper.
 	 */
-	private WorthwhileMarkerHelper markerHelper;
+	private final WorthwhileMarkerHelper markerHelper;
+	
+	/**
+	 * The marker helper for annotations.
+	 */
+	private final WorthwhileProverMarkerHelper annotationMarkerHelper;
 
 	/**
 	 * Creates a new instance of the {@link WorthwhileDebugTarget} class.
@@ -105,6 +112,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		this.launch = launch;
 		this.thread = new WorthwhileThread(this);
 		this.markerHelper = new WorthwhileMarkerHelper(this.getLaunchedFile());
+		this.annotationMarkerHelper = new WorthwhileProverMarkerHelper(this.markerHelper);
 		this.expressionParser = new WorthwhileExpressionParser(this);
 
 		// Create a new event listener.
@@ -413,7 +421,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                The annotation that failed.
 	 */
 	public final void annotationFailed(final Annotation annotation) {
-		this.markerHelper.markFailedStatement(annotation, "Annotation failed");
+		this.annotationMarkerHelper.markStatement(annotation, Validity.INVALID, "Annotation failed");
 	}
 
 	/**
@@ -423,7 +431,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 *                The annotation that succeeded.
 	 */
 	public final void annotationSucceeded(final Annotation annotation) {
-		this.markerHelper.markSucceededStatement(annotation, "Annotation succeeded");
+		this.annotationMarkerHelper.markStatement(annotation, Validity.VALID, "Annotation succeeded");
 	}
 
 	/**

@@ -162,7 +162,7 @@ public class WorthwhileMarkerHelper {
 		// Do not include trailing whitespace to prevent the marker from running into the next line.
 		int line = NodeHelper.getLine(statement);
 		int offset = NodeHelper.getOffset(statement);
-		int length = trimRight(NodeHelper.getText(statement)).length();
+		int length = NodeHelper.getLength(statement); //trimRight(NodeHelper.getText(statement)).length();
 
 		// Create a new marker
 		IMarker marker = this.resource.createMarker(markerType);
@@ -171,19 +171,6 @@ public class WorthwhileMarkerHelper {
 		marker.setAttribute(IMarker.CHAR_END, offset + length);
 
 		return marker;
-	}
-
-	/**
-	 * Removes trailing whitespace from a string.
-	 * 
-	 * http://forums.devshed.com/java-help-9/how-to-remove-leading-white-spaces-from-a-string-579116.html
-	 * 
-	 * @param s
-	 *                The string
-	 * @return The right-trimmed string.
-	 */
-	private static String trimRight(final String s) {
-		return s.replaceAll("\\s+$", "");
 	}
 
 }

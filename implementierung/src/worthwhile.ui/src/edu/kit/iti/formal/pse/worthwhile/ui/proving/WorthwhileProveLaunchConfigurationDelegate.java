@@ -30,6 +30,7 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+import edu.kit.iti.formal.pse.worthwhile.prover.WorthwhileProverMarkerHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
@@ -66,7 +67,8 @@ public class WorthwhileProveLaunchConfigurationDelegate extends WorthwhileLaunch
 
 			// Create a new DebugTarget which is necessary for marking the program as terminated.
 			final WorthwhileProveJob proveJob = new WorthwhileProveJob("Prove " + file.getName(),
-			                specChecker, program, new WorthwhileMarkerHelper(file));
+			                specChecker, program, new WorthwhileProverMarkerHelper(
+			                                new WorthwhileMarkerHelper(file)));
 			final WorthwhileProveDebugTarget finishedListener = new WorthwhileProveDebugTarget(launch);
 			proveJob.addJobChangeListener(finishedListener);
 			launch.addDebugTarget(finishedListener);

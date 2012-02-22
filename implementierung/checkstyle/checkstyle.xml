@@ -123,4 +123,9 @@ Copied from: Sun Checks (Eclipse)  Slightly modified version of Sun Checks that 
     <property name="onCommentFormat" value="@checkstyle:linelength"/>
     <property name="checkFormat" value="LineLengthCheck"/>
   </module>
+  <module name="SuppressionCommentFilter">
+    <property name="offCommentFormat" value="@nocheckstyle:magicnumber"/>
+    <property name="onCommentFormat" value="@checkstyle:magicnumber"/>
+    <property name="checkFormat" value="MagicNumber"/>
+  </module>
 </module>

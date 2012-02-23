@@ -27,15 +27,6 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 	
 	// Read the input
 	while (positionInInput < inputLength)
-		// manually added invariants, workaround for #69
-		_invariant inputLength ≥ 0
-		_invariant startingState ≥ 0
-		_invariant numCharacters > 0
-		_invariant numStates > 0
-		_invariant ∀ Integer i3, 0 ≤ i3 ∧ i3 < inputLength : 0 ≤ input[i3] ∧ input[i3] < numCharacters
-		_invariant ∀ Integer j3, 0 ≤ j3 ∧ j3 < numCharacters ⋅ numStates : 0 ≤ transition[j3] ∧ transition[j3] < numStates
-		// end of manually added invariants
-		
 		_invariant 0 ≤ positionInInput ∧ positionInInput ≤ inputLength
 		_invariant result[0] = startingState
 		_invariant result[positionInInput] = currentState
@@ -48,7 +39,7 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 		currentState := transition[numCharacters ⋅ currentState + currentCharacter]
 		
 		// Advance input position
-		positionInInput := positionInInput + 1	
+		positionInInput := positionInInput + 1
 		
 		// Write current state to result 
 		result[positionInInput] := currentState
@@ -60,7 +51,7 @@ function Integer[] runAutomaton(Integer inputLength, Integer[] input, Integer st
 // Run an automaton that accepts exactly the words consisting of zero or more "1" 
 //  - Alphabet: {0, 1}
 //  - States: {0, 1}
-//  - Final state: 0
+//  - Accepting state: 0
 //  - Transition function:
 //
 //		q	0	1

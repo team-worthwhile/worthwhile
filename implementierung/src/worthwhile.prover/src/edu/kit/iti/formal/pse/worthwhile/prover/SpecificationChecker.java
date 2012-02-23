@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.math.BigInteger;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -180,6 +181,9 @@ public class SpecificationChecker {
 	}
 
 	/**
+	 * This is a convenience method for calling {@link SpecificationChecker#checkFormula(Expression, Map, List)}
+	 * with no axioms.
+	 * 
 	 * @param formula
 	 *                the {@link Expression} to check
 	 * @param environment
@@ -188,8 +192,22 @@ public class SpecificationChecker {
 	 */
 	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
 	public final Validity checkFormula(final Expression formula, final Map<VariableDeclaration, Value> environment) {
+		return this.checkFormula(formula, environment, Collections.EMPTY_LIST);
+	}
+
+	/**
+	 * @param formula
+	 *                the {@link Expression} to check
+	 * @param environment
+	 *                a list of variable to values mappings
+	 * @param axioms
+	 *                a list a of axioms
+	 * @return the {@link Validity} of <code>formula</code> when <code>environment</code> is applied and
+	 *         <code>axioms</code> are assumed
+	 */
+	public final Validity checkFormula(final Expression formula, final Map<VariableDeclaration, Value> environment,
+	                final List<Expression> axioms) {
 		// TODO apply Worthwhile specific runtime assertions
-		// TODO apply axiom list
 
 		Expression environmentExpression = AstNodeCreatorHelper.createTrueLiteral();
 		for (final VariableDeclaration environmentVariable : environment.keySet()) {
@@ -239,6 +257,14 @@ public class SpecificationChecker {
 
 			// conjunctively add the equals to the expression expressing the environment
 			environmentExpression = AstNodeCreatorHelper.createConjunction(environmentExpression, equal);
+		}
+
+		// assuming a value for a free variable is also an axiom since it cannot be proven, therefore just add
+		// the actual (also called axioms in the method's signature) axioms to the environmentExpression, but
+		// clone them first so that they do not get lost in their original context (like a source code AST)
+		for (final Expression a : axioms) {
+			environmentExpression = AstNodeCreatorHelper.createConjunction(environmentExpression,
+			                AstNodeCloneHelper.clone(a));
 		}
 
 		// create the environment => expression implication

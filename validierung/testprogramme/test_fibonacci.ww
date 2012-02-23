@@ -1,3 +1,20 @@
+// A function to sum two values in an array. This is really just there
+// to show we can handle function calls inside functions, too.
+function Integer array_sum(Integer[] array, Integer index1, Integer index2)
+	_ensures _return = array[index1] + array[index2]
+{
+	return array[index1] + array[index2]
+}
+
+// Calculates the Fibonacci sequence up to the (n+1)th number.
+// The Fibonacci sequence (F_n)_n is defined by
+//
+//	- F_0 = 0
+//  - F_1 = 1
+//  - F_n = F_(n-1) + F_(n-2)
+//
+// The postconditions guarantee that the resulting sequence meets these requirements.
+// Note that nothing is said about the resulting array's items outside the range [0..n]. 
 function Integer[] fibonacci(Integer n)
 	_requires n ≥ 0
 	
@@ -5,9 +22,15 @@ function Integer[] fibonacci(Integer n)
 	_ensures _return[1] = 1
 	_ensures ∀ Integer i1, 2 ≤ i1 ∧ i1 ≤ n : _return[i1] = _return[i1 - 1] + _return[i1 - 2]
 {
+	// The resulting array
 	Integer[] fib
+	
+	// Enter the seed values
 	fib[0] := 0
 	fib[1] := 1
+	
+	// We need this check because of the invariant i ≤ n+1
+	// (and also to show we can handle conditions, too!) 
 	if (n > 1) {
 		Integer i := 2
 		while (i ≤ n)
@@ -16,13 +39,15 @@ function Integer[] fibonacci(Integer n)
 			_invariant fib[1] = 1
 			_invariant ∀ Integer i2, 2 ≤ i2 ∧ i2 < i : fib[i2] ≥ 0 ∧ fib[i2] = fib[i2 - 1] + fib[i2 - 2]
 		{
-			fib[i] := fib[i - 1] + fib[i - 2]
+			fib[i] := array_sum(fib, i - 1, i - 2)
 			i := i + 1
 		}
 	}
+	
 	return fib
 }
 
+// Test the function with an example (e.g. with the interpreter)
 Integer[] actual := fibonacci(12)
 Integer[] expected := { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 }
 

@@ -150,8 +150,8 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 	}
 
 	@Override
-	public void divisorNotZeroVerified(Expression divisor, Validity validity, Expression formula,
-	                ProverResult proverResult) {
+	public final void divisorNotZeroVerified(final Expression divisor, final Validity validity,
+	                final Expression formula, final ProverResult proverResult) {
 		this.markerHelper.markStatement(
 		                this.getStatementToMark(divisor),
 		                validity,
@@ -162,8 +162,8 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 	}
 
 	@Override
-	public void functionCallPreconditionValidVerified(FunctionCall functionCall, Validity validity,
-	                Expression formula, ProverResult proverResult) {
+	public final void functionCallPreconditionValidVerified(final FunctionCall functionCall,
+	                final Validity validity, final Expression formula, final ProverResult proverResult) {
 		this.markerHelper.markStatement(this.getStatementToMark(functionCall), validity,
 		                "Verifying that the function precondition holds before the function call:\n\n"
 		                                + getTooltipMessage(validity, formula, proverResult));

@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
@@ -13,9 +14,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
@@ -297,6 +300,29 @@ public final class AstNodeCreatorHelper {
 	}
 
 	/**
+	 * @param expression
+	 *                the {@link Expression} the <code>guardedNode</code> is guarded with
+	 * @param guardedNode
+	 *                the {@link ASTNode} that is guarded with the given <code>expression</code>
+	 * @return a new {@link DivisorNotZeroAssertion} for the given <code>guardedNode</code>
+	 */
+	public static DivisorNotZeroAssertion createDivisorNotZeroAssertion(final Expression expression,
+	                final ASTNode guardedNode) {
+		final DivisorNotZeroAssertion divisorNotZeroAssertion = AstNodeCreatorHelper
+		                .createDivisorNotZeroAssertion();
+		divisorNotZeroAssertion.setExpression(expression);
+		divisorNotZeroAssertion.setGuardedNode(guardedNode);
+		return divisorNotZeroAssertion;
+	}
+
+	/**
+	 * @return a new {@link DivisorNotZeroAssertion}
+	 */
+	public static DivisorNotZeroAssertion createDivisorNotZeroAssertion() {
+		return AstNodeCreatorHelper.factory.createDivisorNotZeroAssertion();
+	}
+
+	/**
 	 * 
 	 * @param left
 	 *                the left {@link Equal} operand
@@ -309,6 +335,29 @@ public final class AstNodeCreatorHelper {
 		equal.setLeft(left);
 		equal.setRight(right);
 		return equal;
+	}
+
+	/**
+	 * @param expression
+	 *                the {@link Expression} the <code>guardedNode</code> is guarded with
+	 * @param guardedNode
+	 *                the {@link ASTNode} that is guarded with the given <code>expression</code>
+	 * @return a new {@link FunctionCallPreconditionAssertion} for the given <code>guardedNode</code>
+	 */
+	public static FunctionCallPreconditionAssertion createFunctionCallPreconditionAssertion(
+	                final Expression expression, final ASTNode guardedNode) {
+		FunctionCallPreconditionAssertion functionCallPreconditionAssertion = AstNodeCreatorHelper
+		                .createFunctionCallPreconditionAssertion();
+		functionCallPreconditionAssertion.setExpression(expression);
+		functionCallPreconditionAssertion.setGuardedNode(guardedNode);
+		return functionCallPreconditionAssertion;
+	}
+
+	/**
+	 * @return a new {@link FunctionCallPreconditionAssertion}
+	 */
+	public static FunctionCallPreconditionAssertion createFunctionCallPreconditionAssertion() {
+		return AstNodeCreatorHelper.factory.createFunctionCallPreconditionAssertion();
 	}
 
 	/**

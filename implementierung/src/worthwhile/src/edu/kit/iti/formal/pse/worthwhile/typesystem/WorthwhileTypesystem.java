@@ -16,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -83,6 +84,23 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 					if (assignment.getVariable().getVariable().getType() instanceof ArrayType) {
 						at.setBaseType(((ArrayType) ts.typeof(assignment.getVariable()))
 						                .getBaseType());
+					}
+				}
+
+				@Override
+				public void visit(final ReturnStatement returnStatement) {
+					// base type is the enclosing function's one, find it
+					final FunctionDeclaration function = new ASTNodeBottomUpVisitor<FunctionDeclaration>() {
+						public void visit(final FunctionDeclaration functionDeclaration) {
+							this.setReturnValue(functionDeclaration);
+						}
+					}.apply(element);
+
+					// there might be no FunctionDeclaration when the respective validator check was
+					// not run yet, nested FunctionDeclarations do not bother us because then the
+					// type cannot be correct (since not defined in the Worthwhile semantics) anyway
+					if (function != null && function.getReturnType() instanceof ArrayType) {
+						at.setBaseType(((ArrayType) ts.typeof(function)).getBaseType());
 					}
 				}
 

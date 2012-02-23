@@ -304,18 +304,14 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		                ProofImplication.POSTCONDITION_VALID, null));
 
 		// calculate wp(loop block, postcondition) for each of the postconditions in the list
-		for (Proof postcondition : postconditionList) {
-			List<Proof> singlePostconditionList = new ArrayList<Proof>();
-			singlePostconditionList.add(postcondition);
-			this.currentFunctionPostcondition = singlePostconditionList;
-			// push an empty postcondition because the correct postcondition will be pushed as soon as the
-			// first return statement is seen. The postcondition has to hold directly after the return
-			// statement only, so saying that "nothing" has to hold at the end of the function is correct
-			this.weakestPreconditionStack.add(new ArrayList<Proof>());
-			functionDeclaration.getBody().accept(this);
-			preconditionList.addAll(this.weakestPreconditionStack.pop());
-			this.currentFunctionPostcondition = null;
-		}
+		this.currentFunctionPostcondition = postconditionList;
+		// push an empty postcondition because the correct postcondition will be pushed as soon as the
+		// first return statement is seen. The postcondition has to hold directly after the return
+		// statement only, so saying that "nothing" has to hold at the end of the function is correct
+		this.weakestPreconditionStack.add(new ArrayList<Proof>());
+		functionDeclaration.getBody().accept(this);
+		preconditionList.addAll(this.weakestPreconditionStack.pop());
+		this.currentFunctionPostcondition = null;
 
 		for (Proof precondition : preconditionList) {
 			// build the weakest precondition for this function: preconditions => wp(body, postconditions)

@@ -342,7 +342,6 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	 */
 	@Override
 	public void visit(final Loop loop) {
-		FreshVariableSetVisitor refreshVisitor;
 		List<Proof> loopPreconditionList = new ArrayList<Proof>();
 
 		// add all the invariants to the list of weakest preconditions for the loop
@@ -373,28 +372,34 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		this.weakestPreconditionStack.push(onlyInvariantList);
 		loop.getBody().accept(this);
 
+		// find all the variables that were changed in the body
+		AssignedVariableFinderVisitor assignedVariableFinder = new AssignedVariableFinderVisitor();
+		loop.getBody().accept(assignedVariableFinder);
+
 		// the (condition and invariant) have to imply all the preconditions
 		List<Proof> bodyPreconditionList = this.weakestPreconditionStack.pop();
 		for (Proof bodyPrecondition : bodyPreconditionList) {
 			Implication conditionAndInvariantImpliesBodyPrecondition = AstNodeCreatorHelper
 			                .createImplication(AstNodeCloneHelper.clone(conditionAndInvariant),
 			                                AstNodeCloneHelper.clone(bodyPrecondition.getExpression()));
-			/*
-			 * the two implications have to be true for all values of all referenced variables because we
-			 * don't look inside the loop body. Therefore, we have to choose a fresh set of
-			 * VariableDeclarations and modify the expression so that it has to hold for all possible values
-			 * of these new variables
-			 */
-			refreshVisitor = new FreshVariableSetVisitor();
-			conditionAndInvariantImpliesBodyPrecondition.accept(refreshVisitor);
 
 			Expression forAllValuesConditionAndInvariantImpliesBodyPrecondition = conditionAndInvariantImpliesBodyPrecondition;
-			for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
+			// replace all the variables to be bound with new instances of VariableDeclaration and bind them
+			// with a forall quantifier
+			for (VariableDeclaration variableToBind : assignedVariableFinder.getAssignedVariables()) {
+				// replace the declaration with a new one as to not interfere with operations happening
+				// on the old one
+				VariableDeclaration newDeclaration = AstNodeCloneHelper.clone(variableToBind);
+				VariableDeclarationSubstitutionVisitor variableDeclarationSubstitutionVisitor = new VariableDeclarationSubstitutionVisitor(
+				                variableToBind, newDeclaration);
+				forAllValuesConditionAndInvariantImpliesBodyPrecondition.accept(variableDeclarationSubstitutionVisitor);
+				// bind the new variable
 				QuantifiedExpression forAllValuesOfNewDeclaration = AstNodeCreatorHelper
 				                .createForAllQuantifier(newDeclaration,
 				                                forAllValuesConditionAndInvariantImpliesBodyPrecondition);
 				forAllValuesConditionAndInvariantImpliesBodyPrecondition = forAllValuesOfNewDeclaration;
 			}
+
 			bodyPrecondition.setExpression(forAllValuesConditionAndInvariantImpliesBodyPrecondition);
 			loopPreconditionList.add(bodyPrecondition);
 		}
@@ -412,17 +417,16 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			Implication notConditionAndInvariantImpliesPostcondition = AstNodeCreatorHelper
 			                .createImplication(notConditionAndInvariant, loopPostcondition.getExpression());
 
-			/*
-			 * the two implications have to be true for all values of all referenced variables because we
-			 * don't look inside the loop body. Therefore, we have to choose a fresh set of
-			 * VariableDeclarations and modify the expression so that it has to hold for all possible values
-			 * of these new variables
-			 */
-			refreshVisitor = new FreshVariableSetVisitor();
-			notConditionAndInvariantImpliesPostcondition.accept(refreshVisitor);
-
+			// TODO: Figure out a nice way to eliminiate the copy-pasta in the variable binding code
 			Expression forAllValuesNotConditionAndInvariantImpliesPostcondition = notConditionAndInvariantImpliesPostcondition;
-			for (VariableDeclaration newDeclaration : refreshVisitor.getVariableMap().values()) {
+			for (VariableDeclaration variableToBind : assignedVariableFinder.getAssignedVariables()) {
+				// replace the declaration with a new one as to not interfere with operations happening
+				// on the old one
+				VariableDeclaration newDeclaration = AstNodeCloneHelper.clone(variableToBind);
+				VariableDeclarationSubstitutionVisitor variableDeclarationSubstitutionVisitor = new VariableDeclarationSubstitutionVisitor(
+				                variableToBind, newDeclaration);
+				forAllValuesNotConditionAndInvariantImpliesPostcondition.accept(variableDeclarationSubstitutionVisitor);
+				// bind the new variable
 				QuantifiedExpression forAllValuesOfNewDeclaration = AstNodeCreatorHelper
 				                .createForAllQuantifier(newDeclaration,
 				                                forAllValuesNotConditionAndInvariantImpliesPostcondition);

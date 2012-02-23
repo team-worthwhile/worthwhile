@@ -114,7 +114,9 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 			// @formatter:off
 			needsParentheses = (parentNode instanceof BinaryExpression
 			                && childNode == ((BinaryExpression) parentNode).getRight()
-			                && !new AssociativityVisitor().apply(parentNode));
+			                && !new AssociativityVisitor().apply(parentNode))
+				|| (parentNode instanceof QuantifiedExpression
+					&& childNode == ((QuantifiedExpression) parentNode).getCondition()); 
 			// @formatter:on
 		}
 
@@ -323,13 +325,13 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Minus minus) {
 		this.buf.append("-");
-		minus.getOperand().accept(this);
+		this.parenthesize(minus, minus.getOperand());
 	}
 
 	@Override
 	public void visit(final Plus plus) {
 		this.buf.append("+");
-		plus.getOperand().accept(this);
+		this.parenthesize(plus, plus.getOperand());
 	}
 
 	@Override
@@ -383,7 +385,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Negation negation) {
 		this.buf.append("¬");
-		negation.getOperand().accept(this);
+		this.parenthesize(negation, negation.getOperand());
 	}
 
 	@Override
@@ -422,7 +424,7 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 		Expression condition = quantifiedExpression.getCondition();
 		if (condition != null) {
 			this.buf.append(", ");
-			condition.accept(this);
+			this.parenthesize(quantifiedExpression, condition);
 		}
 
 		if (quantifiedExpression.getExpression() instanceof QuantifiedExpression) {

@@ -322,11 +322,14 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			precondition.setExpression(AstNodeCreatorHelper.createImplication(
 			                AstNodeCloneHelper.clone(ensures), precondition.getExpression()));
 
-			// wrap all the preconditions in foralls because they have to be true for all parameters
-			final FreshVariableSetVisitor freshVariableSet = new FreshVariableSetVisitor();
-			precondition.getExpression().accept(freshVariableSet);
-			for (final VariableDeclaration v : freshVariableSet.getVariableMap().values()) {
-				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(v,
+			// wrap all the preconditions in forall quantifiers because they have to be true for all
+			// parameters of the function
+			for (final VariableDeclaration variableToBind : functionDeclaration.getParameters()) {
+				VariableDeclaration newDeclaration = AstNodeCloneHelper.clone(variableToBind);
+				VariableDeclarationSubstitutionVisitor variableDeclarationSubstitutionVisitor = new VariableDeclarationSubstitutionVisitor(
+				                variableToBind, newDeclaration);
+				precondition.getExpression().accept(variableDeclarationSubstitutionVisitor);
+				ForAllQuantifier forall = AstNodeCreatorHelper.createForAllQuantifier(newDeclaration,
 				                precondition.getExpression());
 				precondition.setExpression(forall);
 			}

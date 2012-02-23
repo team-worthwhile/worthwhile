@@ -1,24 +1,29 @@
-function Integer fibonacci(Integer n) {
+function Integer[] fibonacci(Integer n)
+	_requires n ≥ 0
+	
+	_ensures _return[0] = 0
+	_ensures _return[1] = 1
+	_ensures ∀ Integer i1, 2 ≤ i1 ∧ i1 ≤ n : _return[i1] = _return[i1 - 1] + _return[i1 - 2]
+{
 	Integer[] fib
 	fib[0] := 0
 	fib[1] := 1
 	if (n > 1) {
 		Integer i := 2
-		while (i ≤ n) {
+		while (i ≤ n)
+			_invariant 2 ≤ i ∧ i ≤ n + 1
+			_invariant fib[0] = 0
+			_invariant fib[1] = 1
+			_invariant ∀ Integer i2, 2 ≤ i2 ∧ i2 < i : fib[i2] ≥ 0 ∧ fib[i2] = fib[i2 - 1] + fib[i2 - 2]
+		{
 			fib[i] := fib[i - 1] + fib[i - 2]
 			i := i + 1
 		}
 	}
-	return fib[n]
+	return fib
 }
 
-Integer[] actual
+Integer[] actual := fibonacci(12)
 Integer[] expected := { 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 }
 
-Integer j := 0
-while (j ≤ 12) {
-	actual[j] := fibonacci(j)
-	j := j + 1
-}
-
-_assert actual = expected
+_assert ∀ Integer k, 0 ≤ k ∧ k ≤ 12 : actual[k] = expected [k]

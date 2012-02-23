@@ -51,7 +51,9 @@ public class AssignedVariableFinderVisitor extends HierarchialASTNodeVisitor {
 	@Override
 	public final void visit(final Conditional conditional) {
 		conditional.getTrueBlock().accept(this);
-		conditional.getFalseBlock().accept(this);
+		if (conditional.getFalseBlock() != null) {
+			conditional.getFalseBlock().accept(this);
+		}
 	}
 
 	@Override

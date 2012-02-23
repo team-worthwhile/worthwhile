@@ -45,7 +45,7 @@ public class ArrayFunction extends Literal {
 	protected Expression chainedFunction;
 
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
+	 * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -55,7 +55,7 @@ public class ArrayFunction extends Literal {
 	protected Expression index;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getValue()
@@ -82,82 +82,84 @@ public class ArrayFunction extends Literal {
 	}
 
 	/**
-	 * Returns the value of the '<em><b>Chained Function</b></em>' reference.
+	 * Returns the value of the '<em><b>Chained Function</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Chained Function</em>' reference isn't clear, there really should be more of a
 	 * description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Chained Function</em>' reference.
+	 * @return the value of the '<em>Chained Function</em>' containment reference.
 	 * @see #setChainedFunction(Expression)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction_ChainedFunction()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	public Expression getChainedFunction() {
-		if (chainedFunction != null && chainedFunction.eIsProxy()) {
-			InternalEObject oldChainedFunction = (InternalEObject) chainedFunction;
-			chainedFunction = (Expression) eResolveProxy(oldChainedFunction);
-			if (chainedFunction != oldChainedFunction) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-					                AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION,
-					                oldChainedFunction, chainedFunction));
-			}
-		}
 		return chainedFunction;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Expression basicGetChainedFunction() {
-		return chainedFunction;
-	}
-
-	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getChainedFunction <em>Chained Function</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Chained Function</em>' reference.
+	 * @generated
+	 */
+	public NotificationChain basicSetChainedFunction(Expression newChainedFunction, NotificationChain msgs) {
+		Expression oldChainedFunction = chainedFunction;
+		chainedFunction = newChainedFunction;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+			                AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION, oldChainedFunction,
+			                newChainedFunction);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getChainedFunction <em>Chained Function</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Chained Function</em>' containment reference.
 	 * @see #getChainedFunction()
 	 * @generated
 	 */
 	public void setChainedFunction(Expression newChainedFunction) {
-		Expression oldChainedFunction = chainedFunction;
-		chainedFunction = newChainedFunction;
-		if (eNotificationRequired())
+		if (newChainedFunction != chainedFunction) {
+			NotificationChain msgs = null;
+			if (chainedFunction != null)
+				msgs = ((InternalEObject) chainedFunction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION, null, msgs);
+			if (newChainedFunction != null)
+				msgs = ((InternalEObject) newChainedFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION, null, msgs);
+			msgs = basicSetChainedFunction(newChainedFunction, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-			                AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION, oldChainedFunction,
-			                chainedFunction));
+			                AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION, newChainedFunction,
+			                newChainedFunction));
 	}
 
 	/**
-	 * Returns the value of the '<em><b>Index</b></em>' reference.
+	 * Returns the value of the '<em><b>Index</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Index</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index</em>' reference.
+	 * @return the value of the '<em>Index</em>' containment reference.
 	 * @see #setIndex(Expression)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction_Index()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	public Expression getIndex() {
-		if (index != null && index.eIsProxy()) {
-			InternalEObject oldIndex = (InternalEObject) index;
-			index = (Expression) eResolveProxy(oldIndex);
-			if (index != oldIndex) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-					                AstPackage.ARRAY_FUNCTION__INDEX, oldIndex, index));
-			}
-		}
 		return index;
 	}
 
@@ -166,50 +168,60 @@ public class ArrayFunction extends Literal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression basicGetIndex() {
-		return index;
+	public NotificationChain basicSetIndex(Expression newIndex, NotificationChain msgs) {
+		Expression oldIndex = index;
+		index = newIndex;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+			                AstPackage.ARRAY_FUNCTION__INDEX, oldIndex, newIndex);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getIndex <em>Index</em>}' reference.
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getIndex <em>Index</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index</em>' reference.
+	 * @param value the new value of the '<em>Index</em>' containment reference.
 	 * @see #getIndex()
 	 * @generated
 	 */
 	public void setIndex(Expression newIndex) {
-		Expression oldIndex = index;
-		index = newIndex;
-		if (eNotificationRequired())
+		if (newIndex != index) {
+			NotificationChain msgs = null;
+			if (index != null)
+				msgs = ((InternalEObject) index).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION__INDEX, null, msgs);
+			if (newIndex != null)
+				msgs = ((InternalEObject) newIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION__INDEX, null, msgs);
+			msgs = basicSetIndex(newIndex, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_FUNCTION__INDEX,
-			                oldIndex, index));
+			                newIndex, newIndex));
 	}
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' reference.
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' reference.
+	 * @return the value of the '<em>Value</em>' containment reference.
 	 * @see #setValue(Expression)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction_Value()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	public Expression getValue() {
-		if (value != null && value.eIsProxy()) {
-			InternalEObject oldValue = (InternalEObject) value;
-			value = (Expression) eResolveProxy(oldValue);
-			if (value != oldValue) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-					                AstPackage.ARRAY_FUNCTION__VALUE, oldValue, value));
-			}
-		}
 		return value;
 	}
 
@@ -218,24 +230,43 @@ public class ArrayFunction extends Literal {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression basicGetValue() {
-		return value;
+	public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs) {
+		Expression oldValue = value;
+		value = newValue;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+			                AstPackage.ARRAY_FUNCTION__VALUE, oldValue, newValue);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getValue <em>Value</em>}' reference.
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' reference.
+	 * @param value the new value of the '<em>Value</em>' containment reference.
 	 * @see #getValue()
 	 * @generated
 	 */
 	public void setValue(Expression newValue) {
-		Expression oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
+		if (newValue != value) {
+			NotificationChain msgs = null;
+			if (value != null)
+				msgs = ((InternalEObject) value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject) newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_FUNCTION__VALUE,
-			                oldValue, value));
+			                newValue, newValue));
 	}
 
 	/**
@@ -250,6 +281,24 @@ public class ArrayFunction extends Literal {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
+			return basicSetChainedFunction(null, msgs);
+		case AstPackage.ARRAY_FUNCTION__INDEX:
+			return basicSetIndex(null, msgs);
+		case AstPackage.ARRAY_FUNCTION__VALUE:
+			return basicSetValue(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -257,17 +306,11 @@ public class ArrayFunction extends Literal {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-				if (resolve)
 					return getChainedFunction();
-				return basicGetChainedFunction();
 			case AstPackage.ARRAY_FUNCTION__INDEX:
-				if (resolve)
 					return getIndex();
-				return basicGetIndex();
 			case AstPackage.ARRAY_FUNCTION__VALUE:
-				if (resolve)
 					return getValue();
-				return basicGetValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

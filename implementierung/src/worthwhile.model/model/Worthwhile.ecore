@@ -610,9 +610,12 @@
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="chainedFunction"
-                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
-                  <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
-                  <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
+                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
+                      containment="true"/>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
+                      containment="true"/>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
+                      containment="true"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ArrayFunctionAccess" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Expression">
                   <eOperations name="accept">
@@ -621,9 +624,11 @@
                     </eAnnotations>
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
-                  <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
+                      containment="true"/>
                   <eStructuralFeatures xsi:type="ecore:EReference" name="function"
-                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"/>
+                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
+                      containment="true"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="ExpressionToExpressionMap"
                     instanceClassName="java.util.Map$Entry">

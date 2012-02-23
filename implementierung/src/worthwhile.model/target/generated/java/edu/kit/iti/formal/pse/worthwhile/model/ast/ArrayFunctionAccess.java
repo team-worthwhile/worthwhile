@@ -10,6 +10,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -34,7 +35,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class ArrayFunctionAccess extends Expression {
 	/**
-	 * The cached value of the '{@link #getIndex() <em>Index</em>}' reference.
+	 * The cached value of the '{@link #getIndex() <em>Index</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getIndex()
@@ -44,7 +45,7 @@ public class ArrayFunctionAccess extends Expression {
 	protected Expression index;
 
 	/**
-	 * The cached value of the '{@link #getFunction() <em>Function</em>}' reference.
+	 * The cached value of the '{@link #getFunction() <em>Function</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFunction()
@@ -73,29 +74,20 @@ public class ArrayFunctionAccess extends Expression {
 	}
 
 	/**
-	 * Returns the value of the '<em><b>Index</b></em>' reference.
+	 * Returns the value of the '<em><b>Index</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Index</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Index</em>' reference.
+	 * @return the value of the '<em>Index</em>' containment reference.
 	 * @see #setIndex(Expression)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunctionAccess_Index()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	public Expression getIndex() {
-		if (index != null && index.eIsProxy()) {
-			InternalEObject oldIndex = (InternalEObject) index;
-			index = (Expression) eResolveProxy(oldIndex);
-			if (index != oldIndex) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-					                AstPackage.ARRAY_FUNCTION_ACCESS__INDEX, oldIndex, index));
-			}
-		}
 		return index;
 	}
 
@@ -104,51 +96,60 @@ public class ArrayFunctionAccess extends Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression basicGetIndex() {
-		return index;
+	public NotificationChain basicSetIndex(Expression newIndex, NotificationChain msgs) {
+		Expression oldIndex = index;
+		index = newIndex;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+			                AstPackage.ARRAY_FUNCTION_ACCESS__INDEX, oldIndex, newIndex);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getIndex <em>Index</em>}' reference.
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getIndex <em>Index</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Index</em>' reference.
+	 * @param value the new value of the '<em>Index</em>' containment reference.
 	 * @see #getIndex()
 	 * @generated
 	 */
 	public void setIndex(Expression newIndex) {
-		Expression oldIndex = index;
-		index = newIndex;
-		if (eNotificationRequired())
+		if (newIndex != index) {
+			NotificationChain msgs = null;
+			if (index != null)
+				msgs = ((InternalEObject) index).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION_ACCESS__INDEX, null, msgs);
+			if (newIndex != null)
+				msgs = ((InternalEObject) newIndex).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION_ACCESS__INDEX, null, msgs);
+			msgs = basicSetIndex(newIndex, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ARRAY_FUNCTION_ACCESS__INDEX,
-			                oldIndex, index));
+			                newIndex, newIndex));
 	}
 
 	/**
-	 * Returns the value of the '<em><b>Function</b></em>' reference.
+	 * Returns the value of the '<em><b>Function</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Function</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Function</em>' reference.
+	 * @return the value of the '<em>Function</em>' containment reference.
 	 * @see #setFunction(Expression)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunctionAccess_Function()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	public Expression getFunction() {
-		if (function != null && function.eIsProxy()) {
-			InternalEObject oldFunction = (InternalEObject) function;
-			function = (Expression) eResolveProxy(oldFunction);
-			if (function != oldFunction) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-					                AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION, oldFunction,
-					                function));
-			}
-		}
 		return function;
 	}
 
@@ -157,24 +158,43 @@ public class ArrayFunctionAccess extends Expression {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression basicGetFunction() {
-		return function;
+	public NotificationChain basicSetFunction(Expression newFunction, NotificationChain msgs) {
+		Expression oldFunction = function;
+		function = newFunction;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+			                AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION, oldFunction, newFunction);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getFunction <em>Function</em>}' reference.
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getFunction <em>Function</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Function</em>' reference.
+	 * @param value the new value of the '<em>Function</em>' containment reference.
 	 * @see #getFunction()
 	 * @generated
 	 */
 	public void setFunction(Expression newFunction) {
-		Expression oldFunction = function;
-		function = newFunction;
-		if (eNotificationRequired())
+		if (newFunction != function) {
+			NotificationChain msgs = null;
+			if (function != null)
+				msgs = ((InternalEObject) function).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION, null, msgs);
+			if (newFunction != null)
+				msgs = ((InternalEObject) newFunction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
+				                - AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION, null, msgs);
+			msgs = basicSetFunction(newFunction, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET,
-			                AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION, oldFunction, function));
+			                AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION, newFunction, newFunction));
 	}
 
 	/**
@@ -194,16 +214,28 @@ public class ArrayFunctionAccess extends Expression {
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+		case AstPackage.ARRAY_FUNCTION_ACCESS__INDEX:
+			return basicSetIndex(null, msgs);
+		case AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION:
+			return basicSetFunction(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AstPackage.ARRAY_FUNCTION_ACCESS__INDEX:
-				if (resolve)
 					return getIndex();
-				return basicGetIndex();
 			case AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION:
-				if (resolve)
 					return getFunction();
-				return basicGetFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

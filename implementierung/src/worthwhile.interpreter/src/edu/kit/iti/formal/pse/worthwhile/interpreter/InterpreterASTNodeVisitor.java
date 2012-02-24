@@ -93,9 +93,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return the executionEventHandlers
 	 */
 	public Set<AbstractExecutionEventListener> getExecutionEventHandlers() {
-		// begin-user-code
 		return this.executionEventHandlers;
-		// end-user-code
 	}
 
 	/**
@@ -105,9 +103,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *                the executionEventHandlers to set
 	 */
 	public void setExecutionEventHandlers(final Set<AbstractExecutionEventListener> executionEventHandlers) {
-		// begin-user-code
 		this.executionEventHandlers = executionEventHandlers;
-		// end-user-code
 	}
 
 	/**
@@ -173,13 +169,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * @return the symbol
 	 */
 	protected Value getSymbol(final VariableDeclaration key) {
-		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take
-			// the
-			// 'nice'
-			// variant
-			// here
-			// because
-			// I want to start at the top of the stack
+		for (int i = this.symbolStack.size() - 1; i >= 0; i--) {
+			// I won't take the 'nice' variant here because I want to start at the top of the stack
 			Value temp = this.symbolStack.get(i).get(key);
 			if (temp != null) {
 				return temp;
@@ -214,13 +205,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *                the value
 	 */
 	protected void setSymbol(final VariableDeclaration key, final Value value) {
-		for (int i = this.symbolStack.size() - 1; i >= 0; i--) { // I won't take
-			// the
-			// 'nice'
-			// variant
-			// here
-			// because
-			// I want to start at the top of the stack
+		for (int i = this.symbolStack.size() - 1; i >= 0; i--) {
+			// I won't take the 'nice' variant here because I want to start at the top of the stack
 			Map<VariableDeclaration, Value> temp = this.symbolStack.get(i);
 			if (temp.get(key) != null) {
 				temp.put(key, value);

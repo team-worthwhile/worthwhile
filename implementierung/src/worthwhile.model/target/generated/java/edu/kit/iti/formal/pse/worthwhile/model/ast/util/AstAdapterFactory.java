@@ -409,6 +409,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseSymbolReference(SymbolReference object) {
+			return createSymbolReferenceAdapter();
+		}
+
+		@Override
 		public Adapter caseExpressionEvaluation(ExpressionEvaluation object) {
 			return createExpressionEvaluationAdapter();
 		}
@@ -1199,6 +1204,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReturnValueReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference <em>Symbol Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference
+	 * @generated
+	 */
+	public Adapter createSymbolReferenceAdapter() {
 		return null;
 	}
 

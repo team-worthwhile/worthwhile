@@ -54,6 +54,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -507,6 +508,14 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(VariableDeclaration node);
+	
+	/**
+	 * Visits an AST node of type SymbolReference.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(SymbolReference node);
 
 	/**
 	 * Visits an AST node of type VariableReference.

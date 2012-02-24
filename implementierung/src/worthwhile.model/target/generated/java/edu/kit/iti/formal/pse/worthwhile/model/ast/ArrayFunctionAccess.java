@@ -216,10 +216,10 @@ public class ArrayFunctionAccess extends Expression {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AstPackage.ARRAY_FUNCTION_ACCESS__INDEX:
-			return basicSetIndex(null, msgs);
-		case AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION:
-			return basicSetFunction(null, msgs);
+			case AstPackage.ARRAY_FUNCTION_ACCESS__INDEX:
+				return basicSetIndex(null, msgs);
+			case AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION:
+				return basicSetFunction(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -233,9 +233,9 @@ public class ArrayFunctionAccess extends Expression {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AstPackage.ARRAY_FUNCTION_ACCESS__INDEX:
-					return getIndex();
+				return getIndex();
 			case AstPackage.ARRAY_FUNCTION_ACCESS__FUNCTION:
-					return getFunction();
+				return getFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

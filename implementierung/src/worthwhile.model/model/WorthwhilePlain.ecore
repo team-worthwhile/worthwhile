@@ -516,7 +516,7 @@
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableReference" eSuperTypes="#//SymbolReference">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="visitor.visit(this);"/>
@@ -525,8 +525,6 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
         lowerBound="1" eType="#//VariableDeclaration"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" eSuperTypes="#//ASTNode">
     <eOperations name="accept">
@@ -536,7 +534,15 @@
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReturnValueReference" eSuperTypes="#//Expression">
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnValueReference" eSuperTypes="#//SymbolReference">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SymbolReference" eSuperTypes="#//Expression">
     <eOperations name="accept">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="visitor.visit(this);"/>
@@ -557,9 +563,12 @@
       </eAnnotations>
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="chainedFunction" eType="#//Expression"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="chainedFunction" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArrayFunctionAccess" eSuperTypes="#//Expression">
     <eOperations name="accept">
@@ -568,8 +577,10 @@
       </eAnnotations>
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Expression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionToExpressionMap" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EReference" name="key" eType="#//Expression"/>
@@ -756,6 +767,9 @@
       </eOperations>
       <eOperations name="visit">
         <eParameters name="node" lowerBound="1" eType="#//ArrayFunction"/>
+      </eOperations>
+      <eOperations name="visit">
+        <eParameters name="node" lowerBound="1" eType="#//SymbolReference"/>
       </eOperations>
     </eClassifiers>
   </eSubpackages>

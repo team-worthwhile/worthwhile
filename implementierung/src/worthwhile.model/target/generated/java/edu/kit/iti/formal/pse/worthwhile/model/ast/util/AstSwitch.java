@@ -789,6 +789,8 @@ public class AstSwitch<T> extends Switch<T> {
 				VariableReference variableReference = (VariableReference) theEObject;
 				T result = caseVariableReference(variableReference);
 				if (result == null)
+					result = caseSymbolReference(variableReference);
+				if (result == null)
 					result = caseExpression(variableReference);
 				if (result == null)
 					result = caseASTNode(variableReference);
@@ -809,9 +811,22 @@ public class AstSwitch<T> extends Switch<T> {
 				ReturnValueReference returnValueReference = (ReturnValueReference) theEObject;
 				T result = caseReturnValueReference(returnValueReference);
 				if (result == null)
+					result = caseSymbolReference(returnValueReference);
+				if (result == null)
 					result = caseExpression(returnValueReference);
 				if (result == null)
 					result = caseASTNode(returnValueReference);
+				if (result == null)
+					result = defaultCase(theEObject);
+				return result;
+			}
+			case AstPackage.SYMBOL_REFERENCE: {
+				SymbolReference symbolReference = (SymbolReference) theEObject;
+				T result = caseSymbolReference(symbolReference);
+				if (result == null)
+					result = caseExpression(symbolReference);
+				if (result == null)
+					result = caseASTNode(symbolReference);
 				if (result == null)
 					result = defaultCase(theEObject);
 				return result;
@@ -1686,6 +1701,21 @@ public class AstSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReturnValueReference(ReturnValueReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Symbol Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSymbolReference(SymbolReference object) {
 		return null;
 	}
 

@@ -27,8 +27,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 
 /**
  * A visitor that returns a node's position in the operator hierarchy.
@@ -165,7 +165,7 @@ public class OperatorHierarchyVisitor extends ASTNodeReturnVisitor<Integer> {
         }
 
 	@Override
-        public final void visit(final VariableReference node) {
+        public final void visit(final SymbolReference node) {
 	        this.setReturnValue(8);
         }
 

@@ -288,12 +288,12 @@ public class ArrayFunction extends Literal {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-			return basicSetChainedFunction(null, msgs);
-		case AstPackage.ARRAY_FUNCTION__INDEX:
-			return basicSetIndex(null, msgs);
-		case AstPackage.ARRAY_FUNCTION__VALUE:
-			return basicSetValue(null, msgs);
+			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
+				return basicSetChainedFunction(null, msgs);
+			case AstPackage.ARRAY_FUNCTION__INDEX:
+				return basicSetIndex(null, msgs);
+			case AstPackage.ARRAY_FUNCTION__VALUE:
+				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -306,11 +306,11 @@ public class ArrayFunction extends Literal {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case AstPackage.ARRAY_FUNCTION__CHAINED_FUNCTION:
-					return getChainedFunction();
+				return getChainedFunction();
 			case AstPackage.ARRAY_FUNCTION__INDEX:
-					return getIndex();
+				return getIndex();
 			case AstPackage.ARRAY_FUNCTION__VALUE:
-					return getValue();
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

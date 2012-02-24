@@ -388,6 +388,9 @@ public class VisitorPackage extends EPackageImpl {
 
 		op = addEOperation(iastNodeVisitorEClass, null, "visit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theAstPackage.getArrayFunction(), "node", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(iastNodeVisitorEClass, null, "visit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theAstPackage.getSymbolReference(), "node", 1, 1, IS_UNIQUE, IS_ORDERED);
 	}
 
 } // VisitorPackage

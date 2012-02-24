@@ -9,6 +9,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
@@ -97,6 +98,14 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 		}
 
 		variableReference.getVariable().accept(this);
+	}
+
+	@Override
+	public final void visit(final ReturnValueReference returnValueReference) {
+		final Expression index = returnValueReference.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
 	}
 
 	@Override

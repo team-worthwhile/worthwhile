@@ -21,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -193,6 +194,14 @@ public class VariableDeclarationSubstitutionVisitor extends HierarchialASTNodeVi
 			variableReference.setVariable(substituteVariableDeclaration);
 		}
 		final Expression index = variableReference.getIndex();
+		if (index != null) {
+			index.accept(this);
+		}
+	}
+
+	@Override
+	public final void visit(final ReturnValueReference returnValueReference) {
+		final Expression index = returnValueReference.getIndex();
 		if (index != null) {
 			index.accept(this);
 		}

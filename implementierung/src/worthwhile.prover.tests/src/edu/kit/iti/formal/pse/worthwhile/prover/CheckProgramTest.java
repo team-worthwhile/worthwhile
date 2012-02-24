@@ -59,7 +59,7 @@ public class CheckProgramTest {
 		Pattern expectedValidityPattern = Pattern.compile("EXPECTED:(VALID|INVALID|UNKNOWN)");
 		String[] testPrograms = { "test-division", "test-faculty", "test-even", "test-max", "test-clone",
 		                "test-arrayindexassignment", "test-incrementfunction", "test-debuggerdemo",
-		                "smtlib-keywords", "test-qexpr-condition", "test-github-issue-93" };
+		                "smtlib-keywords", "test-qexpr-condition", "test-github-issue-93", "test-fibonacci" };
 
 		for (String fileName : testPrograms) {
 			// Load test program and look for EXPECTED:???

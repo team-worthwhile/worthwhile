@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
@@ -151,11 +150,10 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 				Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
 
 				if (precondition != null) {
-					FunctionCallPreconditionAssertion assertion = AstFactory.init()
-					                .createFunctionCallPreconditionAssertion();
-					assertion.setExpression(precondition);
 					// the function call is the node that is actually guarded
-					assertion.setGuardedNode(this.parameters.peek().get(variable));
+					FunctionCallPreconditionAssertion assertion;
+					assertion = AstNodeCreatorHelper.createFunctionCallPreconditionAssertion(
+					                precondition, this.parameters.peek().get(variable));
 					i.add(assertion);
 				}
 

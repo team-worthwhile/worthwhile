@@ -7,7 +7,6 @@ import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
@@ -76,9 +75,8 @@ public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {
 				                AstNodeCloneHelper.clone(divisor));
 				Expression notEqualsZero = AstNodeCreatorHelper.createNegation(equalsZero);
 
-				DivisorNotZeroAssertion assertion = AstFactory.init().createDivisorNotZeroAssertion();
-				assertion.setExpression(notEqualsZero);
-				assertion.setGuardedNode(divisor);
+				DivisorNotZeroAssertion assertion;
+				assertion = AstNodeCreatorHelper.createDivisorNotZeroAssertion(notEqualsZero, divisor);
 				block.getStatements().add(i, assertion);
 				/*
 				 * advance the loop past the statement just read that is now at i + 1 because the

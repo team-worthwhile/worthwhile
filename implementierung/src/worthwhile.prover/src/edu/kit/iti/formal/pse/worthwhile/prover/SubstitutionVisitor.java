@@ -21,11 +21,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
@@ -42,7 +41,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * <li>{@link HierarchialASTNodeVisitor#visit(FunctionCall)}</li>
  * <li>{@link HierarchialASTNodeVisitor#visit(QuantifiedExpression)}</li>
  * <li>{@link HierarchialASTNodeVisitor#visit(UnaryExpression)}</li>
- * <li>{@link HierarchialASTNodeVisitor#visit(VariableReference)} (for array index expressions)</li>
+ * <li>{@link HierarchialASTNodeVisitor#visit(SymbolReference)} (for array index expressions)</li>
  * </ul>
  * 
  * to traverse {@link Expression}s and substitute the respective child references when the visited children called
@@ -339,26 +338,13 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	}
 
 	@Override
-	public void visit(final VariableReference variableReference) {
-		final Expression index = variableReference.getIndex();
+	public void visit(final SymbolReference symbolReference) {
+		final Expression index = symbolReference.getIndex();
 		if (index != null) {
 			index.accept(this);
 
 			if (this.found) {
-				found = false;
-				variableReference.setIndex(this.getSubstitute());
-			}
-		}
-	}
-
-	@Override
-	public void visit(final ReturnValueReference returnValueReference) {
-		final Expression index = returnValueReference.getIndex();
-		if (index != null) {
-			index.accept(this);
-
-			if (this.found) {
-				returnValueReference.setIndex(this.getSubstitute());
+				symbolReference.setIndex(this.getSubstitute());
 			}
 		}
 	}

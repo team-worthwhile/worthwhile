@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
@@ -90,6 +91,11 @@ public abstract class ASTNodeVisitor implements IASTNodeVisitor {
 
 	@Override
 	public void visit(final Annotation node) {
+		this.defaultOperation(node);
+	}
+
+	@Override
+	public void visit(final FunctionAnnotation node) {
 		this.defaultOperation(node);
 	}
 

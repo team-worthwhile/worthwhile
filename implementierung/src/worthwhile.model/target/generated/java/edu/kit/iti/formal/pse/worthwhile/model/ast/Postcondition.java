@@ -18,7 +18,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
  * @model kind="class"
  * @generated
  */
-public class Postcondition extends Annotation {
+public class Postcondition extends FunctionAnnotation {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated

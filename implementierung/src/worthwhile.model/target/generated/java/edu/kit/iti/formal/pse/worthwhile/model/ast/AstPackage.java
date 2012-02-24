@@ -1201,6 +1201,34 @@ public class AstPackage extends EPackageImpl {
 	public static final int FUNCTION_DECLARATION_FEATURE_COUNT = AST_NODE_FEATURE_COUNT + 6;
 
 	/**
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation <em>Function Annotation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionAnnotation()
+	 * @generated
+	 */
+	public static final int FUNCTION_ANNOTATION = 61;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FUNCTION_ANNOTATION__EXPRESSION = ANNOTATION__EXPRESSION;
+
+	/**
+	 * The number of structural features of the '<em>Function Annotation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FUNCTION_ANNOTATION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition <em>Precondition</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition
@@ -1216,7 +1244,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRECONDITION__EXPRESSION = ANNOTATION__EXPRESSION;
+	public static final int PRECONDITION__EXPRESSION = FUNCTION_ANNOTATION__EXPRESSION;
 
 	/**
 	 * The number of structural features of the '<em>Precondition</em>' class.
@@ -1225,7 +1253,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PRECONDITION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
+	public static final int PRECONDITION_FEATURE_COUNT = FUNCTION_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition <em>Postcondition</em>}' class.
@@ -1243,7 +1271,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int POSTCONDITION__EXPRESSION = ANNOTATION__EXPRESSION;
+	public static final int POSTCONDITION__EXPRESSION = FUNCTION_ANNOTATION__EXPRESSION;
 
 	/**
 	 * The number of structural features of the '<em>Postcondition</em>' class.
@@ -1252,7 +1280,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int POSTCONDITION_FEATURE_COUNT = ANNOTATION_FEATURE_COUNT + 0;
+	public static final int POSTCONDITION_FEATURE_COUNT = FUNCTION_ANNOTATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Greater <em>Greater</em>}' class.
@@ -2407,6 +2435,13 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass expressionToExpressionMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass functionAnnotationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -3765,6 +3800,18 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation <em>Function Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Function Annotation</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation
+	 * @generated
+	 */
+	public EClass getFunctionAnnotation() {
+		return functionAnnotationEClass;
+	}
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the factory that creates the instances of the model.
@@ -3959,6 +4006,8 @@ public class AstPackage extends EPackageImpl {
 		expressionToExpressionMapEClass = createEClass(EXPRESSION_TO_EXPRESSION_MAP);
 		createEReference(expressionToExpressionMapEClass, EXPRESSION_TO_EXPRESSION_MAP__KEY);
 		createEReference(expressionToExpressionMapEClass, EXPRESSION_TO_EXPRESSION_MAP__VALUE);
+
+		functionAnnotationEClass = createEClass(FUNCTION_ANNOTATION);
 	}
 
 	/**
@@ -4028,8 +4077,8 @@ public class AstPackage extends EPackageImpl {
 		forAllQuantifierEClass.getESuperTypes().add(this.getQuantifiedExpression());
 		functionCallEClass.getESuperTypes().add(this.getExpression());
 		functionDeclarationEClass.getESuperTypes().add(this.getASTNode());
-		preconditionEClass.getESuperTypes().add(this.getAnnotation());
-		postconditionEClass.getESuperTypes().add(this.getAnnotation());
+		preconditionEClass.getESuperTypes().add(this.getFunctionAnnotation());
+		postconditionEClass.getESuperTypes().add(this.getFunctionAnnotation());
 		greaterEClass.getESuperTypes().add(this.getBinaryExpression());
 		greaterOrEqualEClass.getESuperTypes().add(this.getBinaryExpression());
 		implicationEClass.getESuperTypes().add(this.getBinaryExpression());
@@ -4054,6 +4103,7 @@ public class AstPackage extends EPackageImpl {
 		expressionEvaluationEClass.getESuperTypes().add(this.getASTNode());
 		arrayFunctionEClass.getESuperTypes().add(this.getLiteral());
 		arrayFunctionAccessEClass.getESuperTypes().add(this.getExpression());
+		functionAnnotationEClass.getESuperTypes().add(this.getAnnotation());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE,
@@ -4549,6 +4599,12 @@ public class AstPackage extends EPackageImpl {
 		initEReference(getExpressionToExpressionMap_Value(), this.getExpression(), null, "value", null, 0, 1,
 		                Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
 		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(functionAnnotationEClass, FunctionAnnotation.class, "FunctionAnnotation", IS_ABSTRACT,
+		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		op = addEOperation(functionAnnotationEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -5500,6 +5556,16 @@ public class AstPackage extends EPackageImpl {
 		 */
 		public static final EReference EXPRESSION_TO_EXPRESSION_MAP__VALUE = eINSTANCE
 		                .getExpressionToExpressionMap_Value();
+
+		/**
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation <em>Function Annotation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionAnnotation()
+		 * @generated
+		 */
+		public static final EClass FUNCTION_ANNOTATION = eINSTANCE.getFunctionAnnotation();
 
 	}
 

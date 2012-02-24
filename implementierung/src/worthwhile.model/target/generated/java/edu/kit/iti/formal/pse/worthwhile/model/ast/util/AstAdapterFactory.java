@@ -429,6 +429,11 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseFunctionAnnotation(FunctionAnnotation object) {
+			return createFunctionAnnotationAdapter();
+		}
+
+		@Override
 		public Adapter defaultCase(EObject object) {
 			return createEObjectAdapter();
 		}
@@ -1252,6 +1257,20 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionToExpressionMapAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation <em>Function Annotation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation
+	 * @generated
+	 */
+	public Adapter createFunctionAnnotationAdapter() {
 		return null;
 	}
 

@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
@@ -83,6 +84,14 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(Annotation node);
+
+	/**
+	 * Visits an AST node of type FunctionAnnotation.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(FunctionAnnotation node);
 
 	/**
 	 * Visits an AST node of type ArrayLiteral.

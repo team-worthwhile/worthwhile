@@ -415,6 +415,11 @@
                     <genFeatures notify="false" createChild="false" propertySortChoices="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionToExpressionMap/value"/>
                   </genClasses>
+                  <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionAnnotation">
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionAnnotation/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionAnnotation/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
                   <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
                       disposableProviderFactory="true" adapterFactory="false" literalsInterface="false"
                       contentTypeIdentifier="" ecorePackage="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor">

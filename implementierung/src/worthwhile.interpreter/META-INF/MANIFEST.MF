@@ -7,4 +7,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: edu.kit.iti.formal.pse.worthwhile.interpreter
 Import-Package: edu.kit.iti.formal.pse.worthwhile.model,
  edu.kit.iti.formal.pse.worthwhile.prover
-Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model
+Require-Bundle: edu.kit.iti.formal.pse.worthwhile.model,
+ edu.kit.iti.formal.pse.worthwhile

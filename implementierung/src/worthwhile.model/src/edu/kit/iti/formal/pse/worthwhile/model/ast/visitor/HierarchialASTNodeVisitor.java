@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
@@ -80,6 +81,11 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 	@Override
 	public void visit(final Annotation node) {
 		this.visit((Statement) node);
+	}
+
+	@Override
+	public void visit(final FunctionAnnotation node) {
+		this.visit((Annotation) node);
 	}
 
 	@Override
@@ -289,12 +295,12 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 
 	@Override
 	public void visit(final Postcondition node) {
-		this.visit((Annotation) node);
+		this.visit((FunctionAnnotation) node);
 	}
 
 	@Override
 	public void visit(final Precondition node) {
-		this.visit((Annotation) node);
+		this.visit((FunctionAnnotation) node);
 	}
 
 	@Override

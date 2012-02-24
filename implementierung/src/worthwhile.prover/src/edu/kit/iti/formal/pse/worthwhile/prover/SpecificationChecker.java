@@ -5,12 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
@@ -284,32 +278,9 @@ public class SpecificationChecker {
 	private Validity getValidity(final Expression formula) {
 		final Negation negation = AstNodeCreatorHelper.createNegation(formula);
 
-		// let prover check formula and initialize checkResult with the returned result
-		/**
-		 * Thread that detaches to execute the prover caller.
-		 * 
-		 * @author Leon Handreke
-		 */
-		class ProverCallerTask implements Callable<ProverResult> {
-			@Override
-			public ProverResult call() throws ProverCallerException {
-				return SpecificationChecker.this.prover.checkFormula(negation);
-			}
-		}
-		// run the prover caller
-		ExecutorService executor = Executors.newSingleThreadExecutor();
-		Future<ProverResult> resultFuture = executor.submit(new ProverCallerTask());
 		try {
-			this.checkResult = resultFuture.get(this.timeout, TimeUnit.SECONDS);
-		} catch (TimeoutException e) {
-			// timeout - result unknown
-			this.checkResult = new ProverResult("timeout") {
-				@Override
-				public FormulaSatisfiability getSatisfiability() {
-					return FormulaSatisfiability.UNKOWN;
-				}
-			};
-		} catch (Exception e) {
+			this.checkResult = this.prover.checkFormula(negation, this.timeout);
+		} catch (ProverCallerException e) {
 			this.checkResult = new ProverResult(e.getMessage()) {
 				@Override
 				public FormulaSatisfiability getSatisfiability() {
@@ -317,7 +288,6 @@ public class SpecificationChecker {
 				}
 			};
 		}
-		executor.shutdown();
 
 		// determine formula's validity based on negation's satisfiability, which is VALID only if the latter is
 		// UNSATISFIABLE and INVALID only if the latter is SATISFIABLE, UNKNOWN otherwise

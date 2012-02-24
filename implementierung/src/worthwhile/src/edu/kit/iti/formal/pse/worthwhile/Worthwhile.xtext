@@ -5,7 +5,7 @@ import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwh
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 // A program consists of a sequence of statements and/or function declarations.
-Program returns Program:
+Program returns Program  hidden(WS, ML_COMMENT, SL_COMMENT, LINEWRAP) :
 	{Program}
 	NL* // Newline at the beginning of the file is allowed.
 	((axioms+=Axiom | functionDeclarations+=FunctionDeclaration ) NL+)*
@@ -17,6 +17,9 @@ terminal WS : (' '|'\t')+;
 
 // A newline consists of at least one '\n'.
 terminal NL : ('\r' | '\n' | WS)* '\n' WS*;
+
+// A line wrap inside a statement
+terminal LINEWRAP : '\\' NL;
 
 // A single line comment includes everything from // to the next newline, but not the newline itself.
 terminal SL_COMMENT : 

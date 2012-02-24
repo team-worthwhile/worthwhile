@@ -49,24 +49,29 @@ abstract class StdProver implements ProverCaller {
 		this.proverCommand = command;
 	}
 
-	/**
-	 * Check an the given <code>Expression</code> for its validity.
-	 * 
-	 * @param formula
-	 *                the expression to check
-	 * @return the result returned by the prover
-	 * @throws ProverCallerException
-	 *                 if an error occurs while executing the prover binary
-	 */
 	@Override
-	public ProverResult checkFormula(final Expression formula) throws ProverCallerException {
+	public ProverResult checkFormula(final Expression formula, final int timeout) throws ProverCallerException {
 		String inputString = this.getCompiler().compileFormula(formula);
 		String outputString = "";
 		try {
 			// instantiate the prover
 			ProcessBuilder builder = new ProcessBuilder(this.proverCommand);
 			builder.redirectErrorStream(true);
-			Process proverProcess = builder.start();
+			final Process proverProcess = builder.start();
+
+			// thread that kills the prover after timeout
+			Thread killerThread = new Thread() {
+				public void run() {
+					try {
+						Thread.sleep(timeout * 1000);
+					} catch (InterruptedException e) {
+						proverProcess.destroy();
+					} finally {
+						proverProcess.destroy();
+					}
+				};
+			};
+			killerThread.start();
 
 			// get the streams that are used to communicate with the prover
 			BufferedReader stdout = new BufferedReader(
@@ -82,10 +87,22 @@ abstract class StdProver implements ProverCaller {
 			while ((line = stdout.readLine()) != null) {
 				outputString += line + "\n";
 			}
+
+			// TODO: Maybe make this heuristic better...
+			// if the prover returned nothing, assume timeout
+			if (outputString.equals("")) {
+				return new ProverResult("timeout") {
+					@Override
+					public FormulaSatisfiability getSatisfiability() {
+						return FormulaSatisfiability.UNKOWN;
+					}
+				};
+			}
 		} catch (IOException e) {
 			// normally the binary was simply not found
 			e.printStackTrace();
-			throw new ProverCallerException("Error executing the prover command line: " + this.proverCommand);
+			throw new ProverCallerException("Error executing the prover command line: "
+			                + this.proverCommand);
 		}
 		return this.getResult(outputString);
 	}

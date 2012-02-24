@@ -2,7 +2,7 @@
 
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 	<link rel="stylesheet" href="../css/book.css" type="text/css" />
 	<title>Statements</title>
 </head>
@@ -10,8 +10,14 @@
 <body>
 <h1>Statements</h1>
 <!--TODO-->
-Statements can be used in every block. Although not all statements are allowed in every block and some are essential for a block (see the respective help page). Every statement has to be in his own line, that means: One line, one statement.<br>
-In the following there is a list off all Statements:<br><br>
+<p>Statements can be used in every block, although not all statements are allowed in every block and some are essential for a block (see the respective help page).</p>
+<p>There can be at most one statement per line. If a statement needs to span multiple lines, all lines but the last have to end in a backslash, like this:
+	<pre>
+_ensures ∀ Integer i2, 0 < i2 ∧ i2 ≤ inputLength : \
+		_return[i2] = transition[numCharacters ⋅ _return[i2-1] + input[i2-1]]
+	</pre>
+</p>
+<p>The following there is a list off all Statements:</p>
 <ul>
 <li><a href="assignment.html">Assignment</a></li>
 <li><a href="variabledeclaration.html">Variable declaration</a></li>

@@ -11,9 +11,12 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 public interface ProverCaller {
 	/**
 	 * @param formula
-	 *            the {@link Expression} to be checked
+	 *                the {@link Expression} to be checked
+	 * @param timeout
+	 *                the timeout after which the prover caller should give up
 	 * @return some prover's satisfiability checking result for <code>formula</code>
-	 * @throws ProverCallerException when there is an error executing the prover
+	 * @throws ProverCallerException
+	 *                 when there is an error executing the prover
 	 */
-	ProverResult checkFormula(Expression formula) throws ProverCallerException;
+	ProverResult checkFormula(Expression formula, int timeout) throws ProverCallerException;
 }

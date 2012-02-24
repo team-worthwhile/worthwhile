@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
@@ -196,7 +196,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	}
 
 	@Override
-	public void visit(final Annotation annotation) {
+	public void visit(final FunctionAnnotation annotation) {
 		this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
 		annotation.getExpression().accept(this);
 

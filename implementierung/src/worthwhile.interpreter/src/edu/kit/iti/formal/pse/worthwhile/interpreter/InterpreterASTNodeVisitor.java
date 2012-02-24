@@ -44,6 +44,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
@@ -66,9 +67,11 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
  * The AST-visitor implementing the functionality of the interpreter module.
@@ -142,24 +145,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * A stack of symbol maps.
 	 */
 	private Stack<Map<VariableDeclaration, Value>> symbolStack = new Stack<Map<VariableDeclaration, Value>>();
-
-	/**
-	 * generates a default boolean value.
-	 * 
-	 * @return a default boolean value
-	 */
-	private BooleanValue getDefaultBoolean() {
-		return new BooleanValue(Boolean.FALSE);
-	}
-
-	/**
-	 * generates a default integer value.
-	 * 
-	 * @return a default integer value
-	 */
-	private IntegerValue getDefaultInteger() {
-		return new IntegerValue(BigInteger.ZERO);
-	}
 
 	/**
 	 * Gets the symbol.
@@ -1170,11 +1155,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * checks if the {@link Value}s of the {@link expression}s equal.left and equal.right are unequal and pushes the
-	 * result on the resultStack.
+	 * checks if the {@link Value}s of the {@link expression}s unequal.left and unequal.right are unequal and pushes
+	 * the result on the resultStack.
 	 * 
-	 * @param equal
-	 *                the Equal to visit
+	 * @param unequal
+	 *                the Unequal to visit
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.Unequal)
@@ -1205,22 +1190,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				variableDeclaration.getInitialValue().accept(this);
 				this.setSymbol(variableDeclaration, this.resultStack.pop());
 			} else {
-				// ...or choose the respective default values
-				if (variableDeclaration.getType() instanceof ArrayType) {
-					final ArrayType arrayType = ((ArrayType) variableDeclaration.getType());
-
-					if (arrayType.getBaseType() instanceof BooleanType) {
-						this.setSymbol(variableDeclaration, new CompositeValue<BooleanValue>(
-						                new BooleanValue[0]));
-					} else {
-						this.setSymbol(variableDeclaration, new CompositeValue<IntegerValue>(
-						                new IntegerValue[0]));
-					}
-				} else if (variableDeclaration.getType() instanceof BooleanType) {
-					this.setSymbol(variableDeclaration, getDefaultBoolean());
-				} else {
-					this.setSymbol(variableDeclaration, getDefaultInteger());
-				}
+				this.setSymbol(variableDeclaration,
+				                this.getDefaultValueForType(variableDeclaration.getType()));
 			}
 		} catch (StatementException e) {
 			this.executionFailed(variableDeclaration, e.getError());
@@ -1229,8 +1200,41 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementExecuted(variableDeclaration);
 	}
 
-/**
-	 * Pushes the {@link Value} of the referenced variable or return {@link Value] of a function onto the resultStack.
+	/**
+	 * Gets the default value for the given type.
+	 * 
+	 * @param type
+	 *                The type to get the default value for.
+	 * @return The default value for the given type.
+	 */
+	private Value getDefaultValueForType(final Type type) {
+		return (new ASTNodeReturnVisitor<Value>() {
+
+			@Override
+			public void visit(final ArrayType node) {
+				if (node.getBaseType() instanceof BooleanType) {
+					this.setReturnValue(new CompositeValue<BooleanValue>(new BooleanValue[0]));
+				} else if (node.getBaseType() instanceof IntegerType) {
+					this.setReturnValue(new CompositeValue<IntegerValue>(new IntegerValue[0]));
+				}
+			}
+
+			@Override
+			public void visit(final BooleanType node) {
+				this.setReturnValue(new BooleanValue(Boolean.FALSE));
+			}
+
+			@Override
+			public void visit(final IntegerType node) {
+				this.setReturnValue(new IntegerValue(BigInteger.ZERO));
+			}
+
+		}).apply(type);
+	}
+
+	/**
+	 * Pushes the {@link Value} of the referenced variable or return {@link Value} of a function onto the
+	 * resultStack.
 	 * 
 	 * @param variableReference
 	 *                the VariableReference to visit
@@ -1253,20 +1257,18 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			variableReference.getIndex().accept(this);
 			BigInteger index = this.popIntegerValue().getValue();
 
-			// Get the appropriate value from the array, or throw an error if
-			// the index is out of bounds.
+			// Get the appropriate value from the array, or get the default value
 			CompositeValue<?> completeArray = (CompositeValue<?>) variableValue;
 
 			Map<BigInteger, ?> arrayValues = completeArray.getSubValues();
 			if (arrayValues.containsKey(index)) {
 				this.resultStack.push((Value) arrayValues.get(index));
 			} else {
+				// FIXME
+				WorthwhileTypesystem ts = new WorthwhileTypesystem();
+
 				// push the default value onto the result stack
-				if (((ArrayType) variableReference.getVariable().getType()).getBaseType() instanceof BooleanType) {
-					this.resultStack.push(getDefaultBoolean());
-				} else {
-					this.resultStack.push(getDefaultInteger());
-				}
+				this.resultStack.push(this.getDefaultValueForType((Type) ts.typeof(variableReference)));
 			}
 		}
 		this.expressionEvaluated(variableReference);

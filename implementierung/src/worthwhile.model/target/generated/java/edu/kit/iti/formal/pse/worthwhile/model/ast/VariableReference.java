@@ -79,7 +79,7 @@ public class VariableReference extends Expression {
 	 * @return the value of the '<em>Variable</em>' reference.
 	 * @see #setVariable(VariableDeclaration)
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableReference_Variable()
-	 * @model ordered="false"
+	 * @model required="true" ordered="false"
 	 * @generated
 	 */
 	public VariableDeclaration getVariable() {

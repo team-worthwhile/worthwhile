@@ -1870,21 +1870,13 @@ public class AstPackage extends EPackageImpl {
 	public static final int RETURN_VALUE_REFERENCE = 56;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	public static final int RETURN_VALUE_REFERENCE__VARIABLE = VARIABLE_REFERENCE__VARIABLE;
-
-	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RETURN_VALUE_REFERENCE__INDEX = VARIABLE_REFERENCE__INDEX;
+	public static final int RETURN_VALUE_REFERENCE__INDEX = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Return Value Reference</em>' class.
@@ -1893,7 +1885,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RETURN_VALUE_REFERENCE_FEATURE_COUNT = VARIABLE_REFERENCE_FEATURE_COUNT + 0;
+	public static final int RETURN_VALUE_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.
@@ -3615,6 +3607,19 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference#getIndex <em>Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Index</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference#getIndex()
+	 * @see #getReturnValueReference()
+	 * @generated
+	 */
+	public EReference getReturnValueReference_Index() {
+		return (EReference) returnValueReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Expression Evaluation</em>'.
@@ -3943,6 +3948,7 @@ public class AstPackage extends EPackageImpl {
 		statementEClass = createEClass(STATEMENT);
 
 		returnValueReferenceEClass = createEClass(RETURN_VALUE_REFERENCE);
+		createEReference(returnValueReferenceEClass, RETURN_VALUE_REFERENCE__INDEX);
 
 		expressionEvaluationEClass = createEClass(EXPRESSION_EVALUATION);
 		createEReference(expressionEvaluationEClass, EXPRESSION_EVALUATION__EXPRESSION);
@@ -4050,7 +4056,7 @@ public class AstPackage extends EPackageImpl {
 		unequalEClass.getESuperTypes().add(this.getBinaryExpression());
 		variableReferenceEClass.getESuperTypes().add(this.getExpression());
 		statementEClass.getESuperTypes().add(this.getASTNode());
-		returnValueReferenceEClass.getESuperTypes().add(this.getVariableReference());
+		returnValueReferenceEClass.getESuperTypes().add(this.getExpression());
 		expressionEvaluationEClass.getESuperTypes().add(this.getASTNode());
 		arrayFunctionEClass.getESuperTypes().add(this.getLiteral());
 		arrayFunctionAccessEClass.getESuperTypes().add(this.getExpression());
@@ -4487,7 +4493,7 @@ public class AstPackage extends EPackageImpl {
 		initEClass(variableReferenceEClass, VariableReference.class, "VariableReference", !IS_ABSTRACT,
 		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableReference_Variable(), this.getVariableDeclaration(), null, "variable", null,
-		                0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		                1, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 		                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getVariableReference_Index(), this.getExpression(), null, "index", null, 0, 1,
 		                VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
@@ -4504,6 +4510,9 @@ public class AstPackage extends EPackageImpl {
 
 		initEClass(returnValueReferenceEClass, ReturnValueReference.class, "ReturnValueReference",
 		                !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReturnValueReference_Index(), this.getExpression(), null, "index", null, 0, 1,
+		                ReturnValueReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(returnValueReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -5394,6 +5403,15 @@ public class AstPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EClass RETURN_VALUE_REFERENCE = eINSTANCE.getReturnValueReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference RETURN_VALUE_REFERENCE__INDEX = eINSTANCE
+		                .getReturnValueReference_Index();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.

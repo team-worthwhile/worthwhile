@@ -1253,12 +1253,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.VariableReference)
 	 */
 	public void visit(final VariableReference variableReference) {
-		Value variableValue;
-		if (variableReference instanceof ReturnValueReference) {
-			variableValue = this.getReturnValue();
-		} else {
-			variableValue = this.getSymbol(variableReference.getVariable());
-		}
+		Value variableValue = this.getSymbol(variableReference.getVariable());
 		if (variableReference.getIndex() == null) {
 			this.resultStack.push(variableValue);
 

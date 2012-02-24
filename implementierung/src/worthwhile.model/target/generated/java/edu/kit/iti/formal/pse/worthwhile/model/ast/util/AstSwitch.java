@@ -809,8 +809,6 @@ public class AstSwitch<T> extends Switch<T> {
 				ReturnValueReference returnValueReference = (ReturnValueReference) theEObject;
 				T result = caseReturnValueReference(returnValueReference);
 				if (result == null)
-					result = caseVariableReference(returnValueReference);
-				if (result == null)
 					result = caseExpression(returnValueReference);
 				if (result == null)
 					result = caseASTNode(returnValueReference);

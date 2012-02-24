@@ -358,7 +358,7 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 
 	@Override
 	public void visit(final ReturnValueReference node) {
-		this.visit((VariableReference) node);
+		this.visit((Expression) node);
 	}
 
 }

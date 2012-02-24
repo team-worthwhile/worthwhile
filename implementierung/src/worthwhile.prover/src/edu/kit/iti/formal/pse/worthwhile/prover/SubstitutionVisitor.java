@@ -21,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -346,6 +347,18 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 			if (this.found) {
 				found = false;
 				variableReference.setIndex(this.getSubstitute());
+			}
+		}
+	}
+
+	@Override
+	public void visit(final ReturnValueReference returnValueReference) {
+		final Expression index = returnValueReference.getIndex();
+		if (index != null) {
+			index.accept(this);
+
+			if (this.found) {
+				returnValueReference.setIndex(this.getSubstitute());
 			}
 		}
 	}

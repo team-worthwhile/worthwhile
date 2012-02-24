@@ -280,7 +280,7 @@ public class SpecificationChecker {
 
 		try {
 			this.checkResult = this.prover.checkFormula(negation, this.timeout);
-		} catch (Exception e) {
+		} catch (ProverCallerException e) {
 			this.checkResult = new ProverResult(e.getMessage()) {
 				@Override
 				public FormulaSatisfiability getSatisfiability() {

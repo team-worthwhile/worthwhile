@@ -1110,21 +1110,21 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(returnStatement);
 		try {
 			returnStatement.getReturnValue().accept(this);
-			
+
 			// Put a new symbol named "_return" on the symbol stack to be used by the prover.
 			VariableDeclaration variableDeclaration = AstFactory.eINSTANCE.createVariableDeclaration();
 			variableDeclaration.setName("_return");
-			
+
 			// The type of this symbol is the function’s return type.
 			variableDeclaration.setType(new ASTNodeBottomUpVisitor<Type>() {
 
 				@Override
-                                public final void visit(final FunctionDeclaration node) {
-	                                this.setReturnValue(node.getReturnType());
-                                }
-				
+				public final void visit(final FunctionDeclaration node) {
+					this.setReturnValue(node.getReturnType());
+				}
+
 			}.apply(returnStatement));
-			
+
 			Value returnValue = this.resultStack.peek();
 			this.setSymbol(variableDeclaration, returnValue);
 			this.functionReturned = true;

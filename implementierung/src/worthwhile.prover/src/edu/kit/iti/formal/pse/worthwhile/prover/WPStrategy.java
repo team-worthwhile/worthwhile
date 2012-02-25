@@ -278,30 +278,34 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link FunctionDeclaration}.
 	 * 
+	 * If no {@link Precondition}s (or {@link Postcondition}s) are present <code>true</code> is implicitly inserted.
+	 * 
 	 * @param functionDeclaration
 	 *                the {@link FunctionDeclaration} to visit
 	 */
 	@Override
 	public void visit(final FunctionDeclaration functionDeclaration) {
 		// create a single conjuction containing all the ensures
-		Expression ensures = AstNodeCreatorHelper.createTrueLiteral();
-		for (Precondition e : functionDeclaration.getPreconditions()) {
-			ensures = AstNodeCreatorHelper.createConjunction(ensures,
-			                AstNodeCloneHelper.clone(e.getExpression()));
-		}
+		Expression ensures = AstNodeCreatorHelper.createConjunction(AstNodeCloneHelper
+		                .clone(functionDeclaration.getPreconditions()));
 
 		List<Proof> preconditionList = new ArrayList<Proof>();
 
 		// generate a list of Postcondition Proofs that have to be proven
+		final List<Postcondition> postconditions = functionDeclaration.getPostconditions();
 		List<Proof> postconditionList = new ArrayList<Proof>();
-		for (Postcondition functionPostcondition : functionDeclaration.getPostconditions()) {
-			Proof postconditionProof = new Proof(AstNodeCloneHelper.clone(functionPostcondition
-			                .getExpression()), ProofImplication.POSTCONDITION_VALID, functionPostcondition);
-			postconditionList.add(postconditionProof);
+		if (!postconditions.isEmpty()) {
+			for (Postcondition functionPostcondition : postconditions) {
+				Proof postconditionProof = new Proof(AstNodeCloneHelper.clone(functionPostcondition
+				                .getExpression()), ProofImplication.POSTCONDITION_VALID,
+				                functionPostcondition);
+				postconditionList.add(postconditionProof);
+			}
+		} else {
+			// just to be sure that there is anything to prove, add true as a required postcondition
+			postconditionList.add(new Proof(AstNodeCreatorHelper.createTrueLiteral(),
+			                ProofImplication.POSTCONDITION_VALID, null));
 		}
-		// just to be sure that there is anything to prove, add true as a required postcondition
-		postconditionList.add(new Proof(AstNodeCreatorHelper.createTrueLiteral(),
-		                ProofImplication.POSTCONDITION_VALID, null));
 
 		// calculate wp(loop block, postcondition) for each of the postconditions in the list
 		this.currentFunctionPostcondition = postconditionList;
@@ -336,6 +340,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * Visit a {@link Loop} to generate the weakest precondition.
 	 * 
+	 * If no {@link Invariant}s are present the invariant <code>true</code> is implicitly inserted.
+	 * 
 	 * @param loop
 	 *                the {@link Loop} to visit
 	 */
@@ -351,11 +357,8 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		}
 
 		// build a conjunction of all invariants
-		Expression invariant = AstNodeCreatorHelper.createTrueLiteral();
-		for (Invariant i : loop.getInvariants()) {
-			invariant = AstNodeCreatorHelper.createConjunction(invariant,
-			                AstNodeCloneHelper.clone(i.getExpression()));
-		}
+		Expression invariant = AstNodeCreatorHelper.createConjunction(AstNodeCloneHelper.clone(loop
+		                .getInvariants()));
 
 		// (condition and invariant) implies wp(body, invariant)
 		Conjunction conditionAndInvariant = AstNodeCreatorHelper.createConjunction(

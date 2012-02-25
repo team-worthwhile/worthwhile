@@ -2,9 +2,11 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
@@ -274,6 +276,34 @@ public final class AstNodeCreatorHelper {
 		final Negation negation = AstNodeCreatorHelper.factory.createNegation();
 		negation.setOperand(operand);
 		return negation;
+	}
+
+	/**
+	 * Creates a {@link Conjunction} from a list of {@link Annotation} {@link Expression}s.
+	 * 
+	 * If <code>annotations</code> is empty a {@link BooleanLiteral} with value <code>true</code> is returned and if
+	 * <code>annotations</code> consists of a single element the very same's <code>Expression</code> is returned.
+	 * 
+	 * @param annotations
+	 *                the <code>Annotation</code>s whose <code>Expression</code>s to put together by conjunction
+	 * @return a new <code>Conjunction</code> of the given <code>annotations</code>
+	 */
+	public static Expression createConjunction(final List<? extends Annotation> annotations) {
+		Expression conjunction;
+
+		if (annotations.isEmpty()) {
+			conjunction = AstNodeCreatorHelper.createTrueLiteral();
+		} else {
+			final Iterator<? extends Annotation> i = annotations.iterator();
+			// expressions is non empty, i has next
+			conjunction = i.next().getExpression();
+			while (i.hasNext()) {
+				conjunction = AstNodeCreatorHelper.createConjunction(conjunction, i.next()
+				                .getExpression());
+			}
+		}
+
+		return conjunction;
 	}
 
 	/**

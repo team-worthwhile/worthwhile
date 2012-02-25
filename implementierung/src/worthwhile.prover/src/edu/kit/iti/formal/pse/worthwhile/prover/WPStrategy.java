@@ -391,7 +391,9 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 			for (VariableDeclaration variableToBind : assignedVariableFinder.getAssignedVariables()) {
 				// replace the declaration with a new one as to not interfere with operations happening
 				// on the old one
-				VariableDeclaration newDeclaration = AstNodeCloneHelper.clone(variableToBind);
+				VariableDeclaration newDeclaration = AstNodeCreatorHelper.createVariableDeclaration(
+				                AstNodeCloneHelper.clone(variableToBind.getType()),
+				                variableToBind.getName());
 				VariableDeclarationSubstitutionVisitor variableDeclarationSubstitutionVisitor = new VariableDeclarationSubstitutionVisitor(
 				                variableToBind, newDeclaration);
 				forAllValuesConditionAndInvariantImpliesBodyPrecondition.accept(variableDeclarationSubstitutionVisitor);

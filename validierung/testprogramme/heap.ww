@@ -49,13 +49,13 @@ function Boolean heapCondition(Integer[] heap)
 		{
 			if result = true {
 				if heap[parent(i3)] > heap[i3] {
-					_assume ¬(∀ Integer i5, 2 ≤ i5 ∧ i5 ≤ i3 : heap[parent(i5)] ≤ heap[i5])
+					_assume ¬(∀ Integer i5, 2 ≤ i5 ∧ i5 ≤ i3 ∧ i5 ≤ heapsize(heap) : heap[parent(i5)] ≤ heap[i5])
 					result := false
 				} else {
-					_assume ∀ Integer i6, 2 ≤ i6 ∧ i6 ≤ i3 : heap[parent(i6)] ≤ heap[i6]
+					_assume ∀ Integer i6, 2 ≤ i6 ∧ i6 ≤ i3 ∧ i6 ≤ heapsize(heap) : heap[parent(i6)] ≤ heap[i6]
 				}
 			} else {
-				_assume ¬(∀ Integer i7, 2 ≤ i7 ∧ i7 ≤ i3 : heap[parent(i7)] ≤ heap[i7])
+				_assume ¬(∀ Integer i7, 2 ≤ i7 ∧ i7 ≤ i3 ∧ i7 ≤ heapsize(heap): heap[parent(i7)] ≤ heap[i7])
 			}
 			
 			i3 := i3 + 1
@@ -72,7 +72,7 @@ function Boolean heapCondition(Integer[] heap)
 // Inserts a key into a heap.
 // Ensures that the returned heap is 1 larger than the original heap
 // and contains the key just inserted.
-/*function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
+function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	_requires heapCondition(insertHeap)
 	
 	_ensures heapCondition(_return)
@@ -90,10 +90,16 @@ function Boolean heapCondition(Integer[] heap)
 	insertResult[currentInsertIndex] := insertKey
 	
 	// Restore heap condition
-	while currentInsertIndex > 1 ∧ insertHeap[currentInsertIndex] > insertHeap[parent(currentInsertIndex)]
-	
+	while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] > insertResult[parent(currentInsertIndex)]
+		_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult)
+		_invariant insertResult[currentInsertIndex] = insertKey
 	{
-				
+		Integer parentIndex := parent(currentInsertIndex)
+		
+		Integer tmp := insertResult[currentInsertIndex]
+		insertResult[currentInsertIndex] := insertResult[parentIndex]
+		insertResult[parentIndex] := tmp
 	}
+	
+	return insertResult
 }
-*/

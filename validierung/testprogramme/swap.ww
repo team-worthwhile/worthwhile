@@ -1,0 +1,14 @@
+// Swaps two elements in an array
+function Integer[] swap(Integer[] source, Integer index1, Integer index2)
+	_ensures ∀ Integer i1, i1 ≠ index1 ∧ i1 ≠ index2 : _return[i1] = source[i1]
+	_ensures _return[index1] = source[index2]
+	_ensures _return[index2] = source[index1]
+{
+	Integer[] result := source
+
+	Integer tmp := result[index1]
+	result[index1] := result[index2]
+	result[index2] := tmp
+	
+	return result
+}

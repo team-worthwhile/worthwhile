@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.editor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.text.ITextHover;
@@ -15,8 +16,9 @@ public class WorthwhileCompositeHover extends DefaultCompositeHover {
 
 	@Override
 	protected final List<ITextHover> createHovers() {
-		List<ITextHover> hovers = super.createHovers();
+		List<ITextHover> hovers = new ArrayList<ITextHover>();
 		hovers.add(new WorthwhileMarkerHover());
+		hovers.addAll(super.createHovers());
 		return hovers;
 	}
 

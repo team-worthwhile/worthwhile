@@ -200,6 +200,14 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 		this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
 		annotation.getExpression().accept(this);
 
+		// because we are overriding SubstitutionVisitor#visit(FunctionAnnotation) we also have to take care of
+		// substituting if needed. Not substituting here may become a problem if annotation.getExpression() is a
+		// FunctionCall that demands a substitution
+		if (this.getFound()) {
+			this.setFound(false);
+			annotation.setExpression(this.getSubstitute());
+		}
+
 		annotation.setExpression(this.applyFunctionAnnotations(annotation.getExpression()));
 
 		this.parameters.pop();

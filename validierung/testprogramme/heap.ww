@@ -1,0 +1,99 @@
+// -----------------
+// UTILITY FUNCTIONS
+// -----------------
+
+// Returns the parent index of an item in the heap.
+function Integer parent(Integer key1)
+	_ensures _return = key1 / 2
+{
+	return key1 / 2
+}
+
+// Returns the index of the left child of an item in the heap.
+function Integer left(Integer key2)
+	_ensures _return = 2 ⋅ key2
+{
+	return 2 ⋅ key2
+}
+
+// Returns the index of the right child of an item in the heap.
+function Integer right(Integer key3)
+	_ensures _return = 2 ⋅ key3 + 1
+{
+	return 2 ⋅ key3 + 1
+}
+
+// Returns the size of the given heap
+// (which is stored in the heap at index 0)
+function Integer heapsize(Integer[] heap1)
+	_requires heap1[0] ≥ 0
+	_ensures _return = heap1[0]
+{
+	return heap1[0]
+}
+
+// Checks that the given array fulfils the heap condition
+function Boolean heapCondition(Integer[] heap)
+	_requires heapsize(heap) ≥ 0
+	_ensures _return = ∀ Integer i1, 2 ≤ i1 ∧ i1 ≤ heapsize(heap) : heap[parent(i1)] ≤ heap[i1]
+{
+	Boolean result := true
+	
+	if (heapsize(heap) ≥ 2) {
+		Integer i3 := 2
+		result := (heap[parent(2)] ≤ heap[2])
+		
+		while i3 ≤ heapsize(heap)
+			_invariant 2 ≤ i3 ∧ i3 ≤ heapsize(heap) + 1
+			_invariant result = ∀ Integer i4, 2 ≤ i4 ∧ i4 ≤ i3 ∧ i4 ≤ heapsize(heap) : heap[parent(i4)] ≤ heap[i4]
+		{
+			if result = true {
+				if heap[parent(i3)] > heap[i3] {
+					_assume ¬(∀ Integer i5, 2 ≤ i5 ∧ i5 ≤ i3 : heap[parent(i5)] ≤ heap[i5])
+					result := false
+				} else {
+					_assume ∀ Integer i6, 2 ≤ i6 ∧ i6 ≤ i3 : heap[parent(i6)] ≤ heap[i6]
+				}
+			} else {
+				_assume ¬(∀ Integer i7, 2 ≤ i7 ∧ i7 ≤ i3 : heap[parent(i7)] ≤ heap[i7])
+			}
+			
+			i3 := i3 + 1
+		}
+	}
+	
+	return result
+}
+
+// -----------------
+// HEAP FUNCTIONS
+// -----------------
+
+// Inserts a key into a heap.
+// Ensures that the returned heap is 1 larger than the original heap
+// and contains the key just inserted.
+/*function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
+	_requires heapCondition(insertHeap)
+	
+	_ensures heapCondition(_return)
+	_ensures heapsize(_return) = heapsize(insertHeap) + 1
+	_ensures ∃ Integer i2, 1 ≤ i2 ∧ i2 ≤ heapsize(_return) : _return[i2] = insertKey
+{
+	Integer[] insertResult := insertHeap
+	
+	// Update heap size
+	insertResult[0] := insertHeap[0] + 1
+	Integer insertHeapSize := insertResult[0]
+	Integer currentInsertIndex := insertHeapSize
+
+	// Insert new item into heap
+	insertResult[currentInsertIndex] := insertKey
+	
+	// Restore heap condition
+	while currentInsertIndex > 1 ∧ insertHeap[currentInsertIndex] > insertHeap[parent(currentInsertIndex)]
+	
+	{
+				
+	}
+}
+*/

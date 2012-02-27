@@ -35,7 +35,7 @@
 						useTypeOfFeature( p.getAssignment(), p.getAssignment_Variable() );
 						ensureFeatureType( p.getAssignment(), p.getAssignment_Value(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( p.getAssignment(), p.getAssignment_Variable(), p.getAssignment_Value() );
-						ensureFeatureType( p.getVariableReference(), p.getVariableReference_Index(), p.getIntegerType() );
+						ensureFeatureType( p.getVariableReference(), p.getSymbolReference_Index(), p.getIntegerType() );
 
 						// ----------------------------------------------------------------
 						// Section: Expressions

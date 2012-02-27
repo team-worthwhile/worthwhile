@@ -154,6 +154,8 @@ public class AstFactory extends EFactoryImpl {
 				return createVariableReference();
 			case AstPackage.RETURN_VALUE_REFERENCE:
 				return createReturnValueReference();
+			case AstPackage.SYMBOL_REFERENCE:
+				return createSymbolReference();
 			case AstPackage.EXPRESSION_EVALUATION:
 				return createExpressionEvaluation();
 			case AstPackage.ARRAY_FUNCTION:
@@ -583,6 +585,16 @@ public class AstFactory extends EFactoryImpl {
 	public ReturnValueReference createReturnValueReference() {
 		ReturnValueReference returnValueReference = new ReturnValueReference();
 		return returnValueReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SymbolReference createSymbolReference() {
+		SymbolReference symbolReference = new SymbolReference();
+		return symbolReference;
 	}
 
 	/**

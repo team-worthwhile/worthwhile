@@ -1208,7 +1208,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionAnnotation()
 	 * @generated
 	 */
-	public static final int FUNCTION_ANNOTATION = 61;
+	public static final int FUNCTION_ANNOTATION = 62;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1854,6 +1854,34 @@ public class AstPackage extends EPackageImpl {
 	public static final int UNEQUAL_FEATURE_COUNT = BINARY_EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference <em>Symbol Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSymbolReference()
+	 * @generated
+	 */
+	public static final int SYMBOL_REFERENCE = 57;
+
+	/**
+	 * The feature id for the '<em><b>Index</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SYMBOL_REFERENCE__INDEX = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Symbol Reference</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SYMBOL_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference <em>Variable Reference</em>}' class.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference
@@ -1863,21 +1891,21 @@ public class AstPackage extends EPackageImpl {
 	public static final int VARIABLE_REFERENCE = 54;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	public static final int VARIABLE_REFERENCE__VARIABLE = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int VARIABLE_REFERENCE__INDEX = EXPRESSION_FEATURE_COUNT + 1;
+	public static final int VARIABLE_REFERENCE__INDEX = SYMBOL_REFERENCE__INDEX;
+
+	/**
+	 * The feature id for the '<em><b>Variable</b></em>' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_REFERENCE__VARIABLE = SYMBOL_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Reference</em>' class.
@@ -1886,7 +1914,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int VARIABLE_REFERENCE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	public static final int VARIABLE_REFERENCE_FEATURE_COUNT = SYMBOL_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference <em>Return Value Reference</em>}' class.
@@ -1898,21 +1926,13 @@ public class AstPackage extends EPackageImpl {
 	public static final int RETURN_VALUE_REFERENCE = 56;
 
 	/**
-	 * The feature id for the '<em><b>Variable</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	public static final int RETURN_VALUE_REFERENCE__VARIABLE = VARIABLE_REFERENCE__VARIABLE;
-
-	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RETURN_VALUE_REFERENCE__INDEX = VARIABLE_REFERENCE__INDEX;
+	public static final int RETURN_VALUE_REFERENCE__INDEX = SYMBOL_REFERENCE__INDEX;
 
 	/**
 	 * The number of structural features of the '<em>Return Value Reference</em>' class.
@@ -1921,7 +1941,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RETURN_VALUE_REFERENCE_FEATURE_COUNT = VARIABLE_REFERENCE_FEATURE_COUNT + 0;
+	public static final int RETURN_VALUE_REFERENCE_FEATURE_COUNT = SYMBOL_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.
@@ -1930,7 +1950,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionEvaluation()
 	 * @generated
 	 */
-	public static final int EXPRESSION_EVALUATION = 57;
+	public static final int EXPRESSION_EVALUATION = 58;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -1957,7 +1977,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction()
 	 * @generated
 	 */
-	public static final int ARRAY_FUNCTION = 58;
+	public static final int ARRAY_FUNCTION = 59;
 
 	/**
 	 * The feature id for the '<em><b>Chained Function</b></em>' containment reference.
@@ -2003,7 +2023,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunctionAccess()
 	 * @generated
 	 */
-	public static final int ARRAY_FUNCTION_ACCESS = 59;
+	public static final int ARRAY_FUNCTION_ACCESS = 60;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
@@ -2039,7 +2059,7 @@ public class AstPackage extends EPackageImpl {
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionToExpressionMap()
 	 * @generated
 	 */
-	public static final int EXPRESSION_TO_EXPRESSION_MAP = 60;
+	public static final int EXPRESSION_TO_EXPRESSION_MAP = 61;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference.
@@ -2410,6 +2430,13 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass returnValueReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass symbolReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -3614,20 +3641,6 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getIndex <em>Index</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Index</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getIndex()
-	 * @see #getVariableReference()
-	 * @generated
-	 */
-	public EReference getVariableReference_Index() {
-		return (EReference) variableReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Statement <em>Statement</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Statement</em>'.
@@ -3647,6 +3660,31 @@ public class AstPackage extends EPackageImpl {
 	 */
 	public EClass getReturnValueReference() {
 		return returnValueReferenceEClass;
+	}
+
+	/**
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference <em>Symbol Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Symbol Reference</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference
+	 * @generated
+	 */
+	public EClass getSymbolReference() {
+		return symbolReferenceEClass;
+	}
+
+	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference#getIndex <em>Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Index</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference#getIndex()
+	 * @see #getSymbolReference()
+	 * @generated
+	 */
+	public EReference getSymbolReference_Index() {
+		return (EReference) symbolReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3985,11 +4023,13 @@ public class AstPackage extends EPackageImpl {
 
 		variableReferenceEClass = createEClass(VARIABLE_REFERENCE);
 		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__VARIABLE);
-		createEReference(variableReferenceEClass, VARIABLE_REFERENCE__INDEX);
 
 		statementEClass = createEClass(STATEMENT);
 
 		returnValueReferenceEClass = createEClass(RETURN_VALUE_REFERENCE);
+
+		symbolReferenceEClass = createEClass(SYMBOL_REFERENCE);
+		createEReference(symbolReferenceEClass, SYMBOL_REFERENCE__INDEX);
 
 		expressionEvaluationEClass = createEClass(EXPRESSION_EVALUATION);
 		createEReference(expressionEvaluationEClass, EXPRESSION_EVALUATION__EXPRESSION);
@@ -4097,9 +4137,10 @@ public class AstPackage extends EPackageImpl {
 		returnStatementEClass.getESuperTypes().add(this.getStatement());
 		subtractionEClass.getESuperTypes().add(this.getBinaryExpression());
 		unequalEClass.getESuperTypes().add(this.getBinaryExpression());
-		variableReferenceEClass.getESuperTypes().add(this.getExpression());
+		variableReferenceEClass.getESuperTypes().add(this.getSymbolReference());
 		statementEClass.getESuperTypes().add(this.getASTNode());
-		returnValueReferenceEClass.getESuperTypes().add(this.getVariableReference());
+		returnValueReferenceEClass.getESuperTypes().add(this.getSymbolReference());
+		symbolReferenceEClass.getESuperTypes().add(this.getExpression());
 		expressionEvaluationEClass.getESuperTypes().add(this.getASTNode());
 		arrayFunctionEClass.getESuperTypes().add(this.getLiteral());
 		arrayFunctionAccessEClass.getESuperTypes().add(this.getExpression());
@@ -4537,11 +4578,8 @@ public class AstPackage extends EPackageImpl {
 		initEClass(variableReferenceEClass, VariableReference.class, "VariableReference", !IS_ABSTRACT,
 		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariableReference_Variable(), this.getVariableDeclaration(), null, "variable", null,
-		                0, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		                1, 1, VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
 		                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getVariableReference_Index(), this.getExpression(), null, "index", null, 0, 1,
-		                VariableReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(variableReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -4556,6 +4594,15 @@ public class AstPackage extends EPackageImpl {
 		                !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		op = addEOperation(returnValueReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(symbolReferenceEClass, SymbolReference.class, "SymbolReference", !IS_ABSTRACT,
+		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSymbolReference_Index(), this.getExpression(), null, "index", null, 0, 1,
+		                SymbolReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = addEOperation(symbolReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(expressionEvaluationEClass, ExpressionEvaluation.class, "ExpressionEvaluation",
@@ -5426,14 +5473,6 @@ public class AstPackage extends EPackageImpl {
 		public static final EReference VARIABLE_REFERENCE__VARIABLE = eINSTANCE.getVariableReference_Variable();
 
 		/**
-		 * The meta object literal for the '<em><b>Index</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		public static final EReference VARIABLE_REFERENCE__INDEX = eINSTANCE.getVariableReference_Index();
-
-		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Statement <em>Statement</em>}' class.
 		 * <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Statement
@@ -5450,6 +5489,24 @@ public class AstPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EClass RETURN_VALUE_REFERENCE = eINSTANCE.getReturnValueReference();
+
+		/**
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference <em>Symbol Reference</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSymbolReference()
+		 * @generated
+		 */
+		public static final EClass SYMBOL_REFERENCE = eINSTANCE.getSymbolReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference SYMBOL_REFERENCE__INDEX = eINSTANCE.getSymbolReference_Index();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.

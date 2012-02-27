@@ -55,6 +55,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -356,15 +357,21 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 	public void visit(final VariableDeclaration node) {
 		this.visit((Statement) node);
 	}
+	
+	@Override
+	public void visit(final SymbolReference node) {
+		this.visit((Expression) node);
+	}
+
 
 	@Override
 	public void visit(final VariableReference node) {
-		this.visit((Expression) node);
+		this.visit((SymbolReference) node);
 	}
 
 	@Override
 	public void visit(final ReturnValueReference node) {
-		this.visit((VariableReference) node);
+		this.visit((SymbolReference) node);
 	}
 
 }

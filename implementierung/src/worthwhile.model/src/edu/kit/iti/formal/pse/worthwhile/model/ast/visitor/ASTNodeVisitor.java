@@ -55,6 +55,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -371,6 +372,11 @@ public abstract class ASTNodeVisitor implements IASTNodeVisitor {
 
 	@Override
 	public void visit(final VariableDeclaration node) {
+		this.defaultOperation(node);
+	}
+	
+	@Override
+	public void visit(final SymbolReference node) {
 		this.defaultOperation(node);
 	}
 

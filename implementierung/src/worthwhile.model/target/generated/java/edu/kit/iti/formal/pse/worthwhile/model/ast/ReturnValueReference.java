@@ -8,7 +8,11 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '<em><b>Return Value Reference</b></em>'. <!--
@@ -19,7 +23,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
  * @model kind="class"
  * @generated
  */
-public class ReturnValueReference extends VariableReference {
+public class ReturnValueReference extends SymbolReference {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated

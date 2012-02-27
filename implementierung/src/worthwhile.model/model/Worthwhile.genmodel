@@ -364,8 +364,6 @@
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference">
                     <genFeatures notify="false" createChild="false" propertySortChoices="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/variable"/>
-                    <genFeatures property="None" children="true" createChild="true"
-                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/index"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/VariableReference/accept/visitor"/>
                     </genOperations>
@@ -378,6 +376,13 @@
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference">
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnValueReference/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/SymbolReference">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/SymbolReference/index"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/SymbolReference/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/SymbolReference/accept/visitor"/>
                     </genOperations>
                   </genClasses>
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionEvaluation">
@@ -580,6 +585,9 @@
                       </genOperations>
                       <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53">
                         <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.53/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.54">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.54/node"/>
                       </genOperations>
                     </genClasses>
                   </nestedGenPackages>

@@ -62,6 +62,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
@@ -1244,32 +1245,27 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Pushes the {@link Value} of the referenced variable or return {@link Value} of a function onto the
-	 * resultStack.
+	 * Pushes the {@link Value} of the referenced symbol reference onto the resultStack, taking indices into
+	 * account.
 	 * 
-	 * @param variableReference
-	 *                the VariableReference to visit
+	 * @param symbolReference
+	 *                the SymbolReference whose value to push
+	 * @param value
+	 *                The value of the symbol reference.
 	 * 
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor#visit(edu.kit.iti.formal.pse
 	 *      .worthwhile.model.ast.VariableReference)
 	 */
-	public void visit(final VariableReference variableReference) {
-		Value variableValue;
-		if (variableReference instanceof ReturnValueReference) {
-			variableValue = this.getReturnValue();
-		} else {
-			variableValue = this.getSymbol(variableReference.getVariable());
-		}
-		if (variableReference.getIndex() == null) {
-			this.resultStack.push(variableValue);
-
+	private void pushSymbolReference(final SymbolReference symbolReference, final Value value) {
+		if (symbolReference.getIndex() == null) {
+			this.resultStack.push(value);
 		} else {
 			// Evaluate the index expression
-			variableReference.getIndex().accept(this);
+			symbolReference.getIndex().accept(this);
 			BigInteger index = this.popIntegerValue().getValue();
 
 			// Get the appropriate value from the array, or get the default value
-			CompositeValue<?> completeArray = (CompositeValue<?>) variableValue;
+			CompositeValue<?> completeArray = (CompositeValue<?>) value;
 
 			Map<BigInteger, ?> arrayValues = completeArray.getSubValues();
 			if (arrayValues.containsKey(index)) {
@@ -1279,9 +1275,21 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				WorthwhileTypesystem ts = new WorthwhileTypesystem();
 
 				// push the default value onto the result stack
-				this.resultStack.push(this.getDefaultValueForType((Type) ts.typeof(variableReference)));
+				this.resultStack.push(this.getDefaultValueForType((Type) ts.typeof(symbolReference)));
 			}
 		}
+
+	}
+
+	@Override
+	public void visit(final VariableReference variableReference) {
+		this.pushSymbolReference(variableReference, this.getSymbol(variableReference.getVariable()));
 		this.expressionEvaluated(variableReference);
+	}
+
+	@Override
+	public void visit(final ReturnValueReference returnValueReference) {
+		this.pushSymbolReference(returnValueReference, this.getReturnValue());
+		this.expressionEvaluated(returnValueReference);
 	}
 }

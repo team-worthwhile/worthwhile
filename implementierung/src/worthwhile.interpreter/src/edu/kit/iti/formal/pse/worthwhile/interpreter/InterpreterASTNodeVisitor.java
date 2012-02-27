@@ -242,6 +242,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * the statement which is currently executed.
 	 */
 	private Statement currentStatement;
+	
+	/**
+	 * the statement which is currently executed.
+	 */
+	private Annotation currentAnnotation;
 
 	/**
 	 * Signals that a {@link Statement} will be executed.
@@ -443,6 +448,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	private void visitAnnotation(final Annotation annotation) {
 		this.statementWillExecute(annotation);
+		this.currentAnnotation = annotation;
 		try {
 			annotation.getExpression().accept(this);
 			if (this.popBooleanValue().getValue()) {
@@ -454,6 +460,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			this.executionFailed(annotation, e.getError());
 			return;
 		}
+		this.currentAnnotation = null;
 		this.statementExecuted(annotation);
 	}
 
@@ -1092,7 +1099,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		}
 		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
 		if (validity.equals(Validity.UNKNOWN)) {
-			expressionFailed(quantifiedExpression, new UnknownValidityInterpreterError(currentStatement));
+			annotationFailed(this.currentAnnotation);
 			this.resultStack.push(new BooleanValue(false));
 			return;
 		} else {

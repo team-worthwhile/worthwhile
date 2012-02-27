@@ -1,0 +1,61 @@
+// Swaps two elements in an array
+function Integer[] swap(Integer[] source, Integer index1, Integer index2)
+	_ensures ∀ Integer i2, i2 ≠ index1 ∧ i2 ≠ index2 : _return[i2] = source[i2]
+	_ensures _return[index1] = source[index2]
+	_ensures _return[index2] = source[index1]
+{
+	Integer[] res := source
+
+	Integer tmp := res[index1]
+	res[index1] := res[index2]
+	res[index2] := tmp
+	
+	return res
+}
+
+// Sorts the given array A of given length ascendingly using the BubbleSort algorithm
+// The array elements to sort are stored in A at positions [0..length-1].
+// This only ensures that the resulting array is sorted, not that the resulting
+// array is a permutation of the input array.
+function Integer[] bubbleSort(Integer[] A, Integer length)
+	_requires length ≥ 1
+	// Ensures that the resulting array is sorted
+	_ensures ∀ Integer i1 ∀ Integer j1, 0 ≤ i1 ∧ i1 ≤ j1 ∧ j1 < length : _return[i1] ≤ _return[j1]
+{
+	
+	Integer[] result := A
+	
+	Integer i := 0
+	
+	while i < length - 1 
+		_invariant 0 ≤ i ∧ i ≤ length - 1
+		// The array [1..i] is sorted
+		_invariant ∀ Integer i3 ∀ Integer j3, 0 ≤ i3 ∧ i3 < j3 ∧ j3 ≤ i : result[i3] ≤ result[j3]
+		// Any element in [i+1 .. length] is greater or equal to any element in [1..i-1]
+		_invariant ∀ Integer i6, i + 1 ≤ i6 ∧ i6 < length : ∀ Integer j6, 0 ≤ j6 ∧ j6 ≤ i - 1 : result[i6] ≥ result[j6]
+	{
+		Integer j := i + 1
+		
+		while j < length 
+			_invariant i + 1 ≤ j ∧ j ≤ length
+			
+			// The array [1..i] is (still) sorted
+			_invariant ∀ Integer i4 ∀ Integer j4, 0 ≤ i4 ∧ i4 < j4 ∧ j4 ≤ i : result[i4] ≤ result[j4]
+			// Any element in [i+1 .. length] is (still) greater or equal to any element in [1..i-1]
+			_invariant ∀ Integer i7, i + 1 ≤ i7 ∧ i7 < length : ∀ Integer j7, 0 ≤ j7 ∧ j7 ≤ i - 1 : result[i7] ≥ result[j7]
+			
+			// result[i] is the smallest of all elements we looked at in this loop
+			_invariant ∀ Integer i5, i + 1 ≤ i5 ∧ i5 < j : result[i] ≤ result[i5]
+		{	
+			if result[i] > result[j] {
+				result := swap(result, i, j)
+			}
+			
+			j := j + 1
+		}
+		
+		i := i + 1
+	}
+	
+	return result
+}

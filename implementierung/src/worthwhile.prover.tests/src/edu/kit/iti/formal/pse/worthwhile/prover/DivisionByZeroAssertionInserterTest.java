@@ -105,7 +105,7 @@ public class DivisionByZeroAssertionInserterTest {
 	 * @see DivisionByZeroAssertionInserterTest#testTestProgramValidity()
 	 */
 	public DivisionByZeroAssertionInserterTest(final Program testProgram, final Validity expectedValidity) {
-		this.checker = new SpecificationChecker();
+		this.checker = new SpecificationChecker(new Z3Prover(5000));
 
 		this.testProgram = testProgram;
 		this.expectedValidity = expectedValidity;

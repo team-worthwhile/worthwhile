@@ -13,7 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 /**
  * Implements a prover interface that uses stdin/stdout/stderr.
  */
-abstract class StdProver implements ProverCaller {
+abstract class StdProver extends TimeoutProverCaller {
 	/**
 	 * The compiler used to construct an input string from the Expression object to be checked for satisfiability.
 	 */
@@ -31,9 +31,11 @@ abstract class StdProver implements ProverCaller {
 	 *                the command line that is executed to call this prover
 	 * @param compiler
 	 *                the compiler to use to compile valid input for the prover
+	 * @param timeout
+	 *                the timeout after which to kill the prover
 	 */
-	protected StdProver(final String command, final FormulaCompiler compiler) {
-		this(Arrays.asList(command), compiler);
+	protected StdProver(final String command, final FormulaCompiler compiler, final int timeout) {
+		this(Arrays.asList(command), compiler, timeout);
 	}
 
 	/**
@@ -43,14 +45,17 @@ abstract class StdProver implements ProverCaller {
 	 *                the command line that is executed to call this prover
 	 * @param compiler
 	 *                the compiler to use to compile valid input for the prover
+	 * @param timeout
+	 *                the timeout after which to kill the prover
 	 */
-	protected StdProver(final List<String> command, final FormulaCompiler compiler) {
+	protected StdProver(final List<String> command, final FormulaCompiler compiler, final int timeout) {
+		super(timeout);
 		this.compiler = compiler;
 		this.proverCommand = command;
 	}
 
 	@Override
-	public ProverResult checkFormula(final Expression formula, final int timeout) throws ProverCallerException {
+	public ProverResult checkFormula(final Expression formula) throws ProverCallerException {
 		String inputString = this.getCompiler().compileFormula(formula);
 		String outputString = "";
 		try {
@@ -58,20 +63,14 @@ abstract class StdProver implements ProverCaller {
 			ProcessBuilder builder = new ProcessBuilder(this.proverCommand);
 			builder.redirectErrorStream(true);
 			final Process proverProcess = builder.start();
-
-			// thread that kills the prover after timeout
-			Thread killerThread = new Thread() {
+			// schedule cleanup after timeout
+			this.addCleanupTask(new Runnable() {
+				@Override
 				public void run() {
-					try {
-						Thread.sleep(timeout * 1000);
-					} catch (InterruptedException e) {
-						proverProcess.destroy();
-					} finally {
-						proverProcess.destroy();
-					}
-				};
-			};
-			killerThread.start();
+					proverProcess.destroy();
+				}
+			});
+			this.scheduleProverCallerTimeout();
 
 			// get the streams that are used to communicate with the prover
 			BufferedReader stdout = new BufferedReader(
@@ -84,6 +83,7 @@ abstract class StdProver implements ProverCaller {
 
 			// read all the output from the prover process
 			String line;
+			// this is where the function blocks until the prover quits or the timeout is reached
 			while ((line = stdout.readLine()) != null) {
 				outputString += line + "\n";
 			}

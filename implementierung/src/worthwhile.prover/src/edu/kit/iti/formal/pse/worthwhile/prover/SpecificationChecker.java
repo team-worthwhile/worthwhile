@@ -37,32 +37,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
  */
 public class SpecificationChecker {
 	/**
-	 * Time delta in seconds after which a prover call times out.
-	 * 
-	 * Defaults to zero.
-	 */
-	private Integer timeout = 1;
-
-	/**
-	 * @return the timeout
-	 */
-	public final Integer getTimeout() {
-		return this.timeout;
-	}
-
-	/**
-	 * @param timeout
-	 *                the timeout to set, minimum 1
-	 */
-	public final void setTimeout(final Integer timeout) {
-		if (timeout > 0) {
-			this.timeout = timeout;
-		} else {
-			this.timeout = 1;
-		}
-	}
-
-	/**
 	 * The {@link ProverCaller} that is called for checking the satisfiability of formulae.
 	 * 
 	 * Defaults to {@link Z3Prover} instance.
@@ -141,26 +115,6 @@ public class SpecificationChecker {
 	 */
 	public final boolean removeProverEventListener(final IProverEventListener listener) {
 		return this.listener.removeProverEventListener(listener);
-	}
-
-	/**
-	 * Uses {@link WPStrategy} as {@link SpecificationChecker#transformer} and {@link Z3Prover} with the default
-	 * command line as {@link SpecificationChecker#prover}.
-	 */
-	public SpecificationChecker() {
-		this.transformer = new WPStrategy();
-		this.prover = new Z3Prover();
-	}
-
-	/**
-	 * Uses {@link Z3Prover} with the default command line as {@link SpecificationChecker#prover}.
-	 * 
-	 * @param transformer
-	 *                Is called to transform {@link Program}s into formulae.
-	 */
-	public SpecificationChecker(final FormulaGenerator transformer) {
-		this.transformer = transformer;
-		this.prover = new Z3Prover();
 	}
 
 	/**
@@ -279,7 +233,7 @@ public class SpecificationChecker {
 		final Negation negation = AstNodeCreatorHelper.createNegation(formula);
 
 		try {
-			this.checkResult = this.prover.checkFormula(negation, this.timeout);
+			this.checkResult = this.prover.checkFormula(negation);
 		} catch (ProverCallerException e) {
 			this.checkResult = new ProverResult(e.getMessage()) {
 				@Override

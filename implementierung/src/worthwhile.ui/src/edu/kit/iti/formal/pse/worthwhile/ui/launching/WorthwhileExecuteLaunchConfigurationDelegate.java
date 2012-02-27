@@ -41,10 +41,10 @@ public class WorthwhileExecuteLaunchConfigurationDelegate extends WorthwhileLaun
 		if (program != null) {
 			// Create and run the prover, specification checker, and interpreter.
 			Z3Prover prover = new Z3Prover(
-			                preferenceStore.getString(WorthwhilePreferenceConstants.PROVER_PATH));
+			                preferenceStore.getString(WorthwhilePreferenceConstants.PROVER_PATH),
+			                preferenceStore.getInt(WorthwhilePreferenceConstants.PROVER_TIMEOUT) * 1000);
 
 			SpecificationChecker specChecker = new SpecificationChecker(prover);
-			specChecker.setTimeout(preferenceStore.getInt(WorthwhilePreferenceConstants.PROVER_TIMEOUT));
 
 			Interpreter interpreter = new Interpreter(program, specChecker);
 

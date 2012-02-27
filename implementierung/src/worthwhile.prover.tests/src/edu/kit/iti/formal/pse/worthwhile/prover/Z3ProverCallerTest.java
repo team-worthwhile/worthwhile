@@ -23,7 +23,8 @@ public final class Z3ProverCallerTest {
 	 */
 	@Before
 	public void instantiateProverCaller() {
-		this.prover = new Z3Prover();
+		// 5 seconds sounds like a reasonable timeout
+		this.prover = new Z3Prover(5000);
 	}
 
 	/**
@@ -39,7 +40,7 @@ public final class Z3ProverCallerTest {
 		Expression formula = TestASTProvider
 		                .parseFormulaString("((!false || ((9 % 4) = 1)) && true) && ((3 + 3) = 6)");
 		Assert.assertNotNull(formula);
-		ProverCaller caller = new Z3Prover();
+		ProverCaller caller = new Z3Prover(5000);
 		result = caller.checkFormula(formula);
 		// the formula is pretty easy and should be satisfiable
 		Assert.assertEquals(FormulaSatisfiability.SATISFIABLE, result.getSatisfiability());

@@ -123,7 +123,7 @@ public final class CheckFormulaTest {
 	 */
 	@Before
 	public void initChecker() {
-		checker = new SpecificationChecker();
+		checker = new SpecificationChecker(new Z3Prover(5000));
 	}
 
 	/**

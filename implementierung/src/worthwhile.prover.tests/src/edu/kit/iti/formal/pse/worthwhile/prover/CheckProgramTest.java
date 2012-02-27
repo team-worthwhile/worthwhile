@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Matcher;
@@ -11,8 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
-import java.text.ParseException;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
@@ -90,7 +89,7 @@ public class CheckProgramTest {
 	 *                 if test program cannot be loaded
 	 */
 	public CheckProgramTest(final Program testProgram, final Validity expectedValidity) throws IOException {
-		this.checker = new SpecificationChecker();
+		this.checker = new SpecificationChecker(new Z3Prover(5000));
 
 		this.testProgram = testProgram;
 		this.expectedValidity = expectedValidity;

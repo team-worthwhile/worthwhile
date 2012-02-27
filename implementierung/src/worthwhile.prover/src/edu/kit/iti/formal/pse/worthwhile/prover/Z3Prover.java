@@ -11,10 +11,13 @@ public class Z3Prover extends StdProver {
 	 * Construct a new prover caller with the default Z3 command line.
 	 * 
 	 * The default Z3 command line is <code>z3 -in -smt2 -nw -m</code>.
+	 * 
+	 * @param timeout
+	 *                the timeout after which to kill the prover
 	 */
-	public Z3Prover() {
+	public Z3Prover(final int timeout) {
 		/* we will assume that z3 is in the PATH */
-		this("z3");
+		this("z3", timeout);
 	}
 
 	/**
@@ -23,9 +26,12 @@ public class Z3Prover extends StdProver {
 	 * @param binary
 	 *                the path that is executed to run the Z3 prover with the default parameters
 	 *                <code>-in -smt2 -nw -m</code>
+	 * @param timeout
+	 *                the timeout after which to kill the prover
+	 * 
 	 */
-	public Z3Prover(final String binary) {
-		this(Arrays.asList(binary, "-in", "-smt2", "-nw", "-m"));
+	public Z3Prover(final String binary, final int timeout) {
+		this(Arrays.asList(binary, "-in", "-smt2", "-nw", "-m"), timeout);
 	}
 
 	/**
@@ -33,10 +39,12 @@ public class Z3Prover extends StdProver {
 	 * 
 	 * @param command
 	 *                the command line that is executed to run the Z3 prover binary
+	 * @param timeout
+	 *                the timeout after which to kill the prover
 	 */
-	public Z3Prover(final List<String> command) {
+	public Z3Prover(final List<String> command, final int timeout) {
 		/* we will use SMTLib as the input format */
-		super(command, new SMTLIBStrategy());
+		super(command, new SMTLIBStrategy(), timeout);
 	}
 
 	@Override

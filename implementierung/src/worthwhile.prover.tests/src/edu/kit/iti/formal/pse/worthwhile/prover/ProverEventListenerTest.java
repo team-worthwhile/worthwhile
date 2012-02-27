@@ -55,7 +55,7 @@ public class ProverEventListenerTest {
 		TestDistributorCountingProverEventListener firstListener = new TestDistributorCountingProverEventListener();
 		TestDistributorCountingProverEventListener secondListener = new TestDistributorCountingProverEventListener();
 
-		SpecificationChecker checker = new SpecificationChecker();
+		SpecificationChecker checker = new SpecificationChecker(new Z3Prover(5000));
 		checker.addProverEventListener(firstListener);
 		checker.addProverEventListener(secondListener);
 

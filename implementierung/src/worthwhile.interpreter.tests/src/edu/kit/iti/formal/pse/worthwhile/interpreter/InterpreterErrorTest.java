@@ -13,13 +13,14 @@ import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 
 public class InterpreterErrorTest {
 
 	@Test(expected=RuntimeException.class)
 	public void TestUnknownValidityInterpreterError() throws IOException {
 		Program program = TestASTProvider.getRootASTNode(TestUtils.loadTestProgram(this.getClass(), "fermat.ww"));
-		Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
+		Interpreter interpreter = new Interpreter(program, new SpecificationChecker(new Z3Prover(9001)));
 		
 		WorthwhileTestExecutionListener listener = new WorthwhileTestExecutionListener() {
 			@Override

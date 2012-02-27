@@ -18,6 +18,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 
 /**
  * @author matthias and stefan
@@ -66,7 +67,7 @@ public class InterpreterASTNodeVisitorTest {
 	 */
 	private static void assertIntegerExpressionValueEquals(final String expression, final BigInteger expected) {
 		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Integer a := "
-		                + expression + "\n"), new SpecificationChecker());
+		                + expression + "\n"), new SpecificationChecker(new Z3Prover(9001)));
 		assertNotNull(interpreter);
 		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 			@Override
@@ -96,7 +97,7 @@ public class InterpreterASTNodeVisitorTest {
 	 */
 	private static void assertBooleanExpressionValueEquals(final String expression, final Boolean expected) {
 		final Interpreter interpreter = new Interpreter(TestASTProvider.getRootASTNode("Boolean a := "
-		                + expression + "\n"), new SpecificationChecker());
+		                + expression + "\n"), new SpecificationChecker(new Z3Prover(9001)));
 		assertNotNull(interpreter);
 		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 			@Override
@@ -110,7 +111,7 @@ public class InterpreterASTNodeVisitorTest {
 
 	@Test
 	public void test() {
-		InterpreterASTNodeVisitor v = new InterpreterASTNodeVisitor(new SpecificationChecker());
+		InterpreterASTNodeVisitor v = new InterpreterASTNodeVisitor(new SpecificationChecker(new Z3Prover(9001)));
 		assertNotNull(v);
 	}
 
@@ -202,7 +203,7 @@ public class InterpreterASTNodeVisitorTest {
 		                TestASTProvider.getRootASTNode("function Integer x(Integer p)\n"
 		                                + "_ensures _return = 42\n" + "{\n" + "return 42\n" + "return 24\n"
 		                                + "}\n" + "{\n" + "Integer result := x(5)\n" + "_assert result = 42 \n"
-		                                + "}\n"), new SpecificationChecker());
+		                                + "}\n"), new SpecificationChecker(new Z3Prover(9001)));
 
 		interpreter.execute();
 		assertTrue(true);
@@ -211,7 +212,7 @@ public class InterpreterASTNodeVisitorTest {
 	@Test
 	public void testIndexedReturnVariableReference() throws IOException {
 		Program program = TestASTProvider.getRootASTNode(TestUtils.loadTestProgram(this.getClass(), "indexed_returnvarref.ww"));
-		Interpreter interpreter = new Interpreter(program, new SpecificationChecker());
+		Interpreter interpreter = new Interpreter(program, new SpecificationChecker(new Z3Prover(9001)));
 		interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 
 			@Override

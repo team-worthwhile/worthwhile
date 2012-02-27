@@ -20,6 +20,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 
 /**
  * Tests {@link Interpreter#evaluateExpression(edu.kit.iti.formal.pse.worthwhile.model.ast.Expression).
@@ -65,7 +66,7 @@ public final class EvaluateExpressionTest {
 	 *                before execution
 	 */
 	private void interpretTestProgramWithListener(final AbstractExecutionEventListener listener) {
-		this.interpreter = new Interpreter(this.testProgram, new SpecificationChecker());
+		this.interpreter = new Interpreter(this.testProgram, new SpecificationChecker(new Z3Prover(9001)));
 		this.interpreter.addExecutionEventHandler(listener);
 		this.interpreter.execute();
 	}

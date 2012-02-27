@@ -12,6 +12,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
+import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 
 public class DefaultValueTest {
 
@@ -49,7 +50,7 @@ public class DefaultValueTest {
 
 	private void setup(String type) {
 		Program program = TestASTProvider.getRootASTNode(type + " a\n");
-		this.interpreter = new Interpreter(program, new SpecificationChecker());
+		this.interpreter = new Interpreter(program, new SpecificationChecker(new Z3Prover(9001)));
 	}
 
 	@Test

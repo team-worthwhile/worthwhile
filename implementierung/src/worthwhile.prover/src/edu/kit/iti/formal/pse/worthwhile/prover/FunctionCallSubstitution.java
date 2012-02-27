@@ -181,6 +181,14 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
 			condition.accept(this);
 
+			// because we are overriding SubstitutionVisitor#visit(QuantifiedExpression) we also have to
+			// take care of substituting if needed. Not substituting here may become a problem if
+			// condition is a FunctionCall that demands a substitution
+			if (this.getFound()) {
+				quantifiedExpression.setCondition(this.getSubstitute());
+				this.setFound(false);
+			}
+
 			quantifiedExpression.setCondition(this.applyFunctionAnnotations(quantifiedExpression
 			                .getCondition()));
 
@@ -189,6 +197,14 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 		this.parameters.push(new LinkedHashMap<VariableDeclaration, FunctionCall>());
 		quantifiedExpression.getExpression().accept(this);
+
+		// because we are overriding SubstitutionVisitor#visit(QuantifiedExpression) we also have to
+		// take care of substituting if needed. Not substituting here may become a problem if
+		// quantifiedExpression.getExpression() is a FunctionCall that demands a substitution
+		if (this.getFound()) {
+			quantifiedExpression.setExpression(this.getSubstitute());
+			this.setFound(false);
+		}
 
 		quantifiedExpression.setExpression(this.applyFunctionAnnotations(quantifiedExpression.getExpression()));
 

@@ -345,6 +345,7 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 
 			if (this.found) {
 				symbolReference.setIndex(this.getSubstitute());
+				this.found = false;
 			}
 		}
 	}

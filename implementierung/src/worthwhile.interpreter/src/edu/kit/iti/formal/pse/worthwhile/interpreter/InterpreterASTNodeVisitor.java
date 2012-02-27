@@ -442,7 +442,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.Annotation)
 	 */
 	private void visitAnnotation(final Annotation annotation) {
-		statementWillExecute(annotation);
+		this.statementWillExecute(annotation);
 		try {
 			annotation.getExpression().accept(this);
 			if (this.popBooleanValue().getValue()) {
@@ -519,7 +519,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *                the Assumption to visit
 	 */
 	public void visit(final Assumption assumption) {
+		this.statementWillExecute(assumption);
 		// TODO do this
+		this.statementExecuted(assumption);
 	}
 
 	/**
@@ -562,7 +564,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *                the Axiom to visit
 	 */
 	public void visit(final Axiom axiom) {
+		this.statementWillExecute(axiom);
 		// TODO do this
+		this.statementExecuted(axiom);
 	}
 
 	/**

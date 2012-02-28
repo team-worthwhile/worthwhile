@@ -67,6 +67,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
@@ -1128,14 +1129,14 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			variableDeclaration.setName("_return");
 
 			// The type of this symbol is the function’s return type.
-			variableDeclaration.setType(new ASTNodeBottomUpVisitor<Type>() {
+			variableDeclaration.setType(AstNodeCloneHelper.clone(new ASTNodeBottomUpVisitor<Type>() {
 
 				@Override
 				public final void visit(final FunctionDeclaration node) {
 					this.setReturnValue(node.getReturnType());
 				}
 
-			}.apply(returnStatement));
+			}.apply(returnStatement)));
 
 			Value returnValue = this.resultStack.peek();
 			this.setSymbol(variableDeclaration, returnValue);

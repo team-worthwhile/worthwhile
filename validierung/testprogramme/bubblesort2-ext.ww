@@ -36,21 +36,26 @@ function Integer[] bubbleSort(Integer[] A, Integer length)
 	
 	// perm is a permutation
     _ensures ∀ Integer i12, 0 ≤ i12 ∧ i12 < length : 0 ≤ _return[length + i12] ∧ _return[length + i12] < length
-    _ensures ∀ Integer i13 ∀ Integer j13, 0 ≤ i13 ∧ i13 < j13 ∧ j13 < length : _return[length + i13] != _return[length + j13]
+    _ensures ∀ Integer i13 ∀ Integer j13, 0 ≤ i13 ∧ i13 < j13 ∧ j13 < length : _return[length + i13] ≠ _return[length + j13]
 	// the current array is that permutation of the input array
     _ensures ∀ Integer i14, 0 ≤ i14 ∧ i14 < length : _return[i14] = A[_return[length + i14]]
 {
 	
 	Integer[] result := A
 	
+	_assert ∀ Integer i8d, 0 ≤ i8d ∧ i8d < length : result[i8d] = A[i8d]
+	
 	// Initialize permutation
 	Integer k := 0
 	
 	while (k < length)
-		_invariant k ≤ length
-		_invariant ∀ Integer i8, length ≤ i8 ∧ i8 < k : result[length + i8] = k
+		_invariant 0 ≤ k ∧ k ≤ length
+		_invariant ∀ Integer i8, 0 ≤ i8 ∧ i8 < k : result[length + i8] = i8		
+		// _invariant ∀ Integer i8b, 0 ≤ i8b ∧ i8b < k : result[i8b] = result[result[length + i8b]] // scheitert
+		_invariant ∀ Integer i8c, 0 ≤ i8c ∧ i8c < length : result[i8c] = A[i8c]
 	{
 		result[length + k] := k
+		k := k + 1
 	}
 	
 	Integer i := 0
@@ -63,10 +68,10 @@ function Integer[] bubbleSort(Integer[] A, Integer length)
 		_invariant ∀ Integer i6, i + 1 ≤ i6 ∧ i6 < length : ∀ Integer j6, 0 ≤ j6 ∧ j6 ≤ i - 1 : result[i6] ≥ result[j6]
 		
 		// perm is a permutation
-    	_invariant ∀ Integer i11, 0 ≤ i11 ∧ i11 < length : 0 ≤ result[length + i11] ∧ result[length + i11] < length
-    	_invariant ∀ Integer i9 ∀ Integer j9, 0 ≤ i9 ∧ i9 < j9 ∧ j9 < length : result[length + i9] != result[length + j9]
+    	//_invariant ∀ Integer i11, 0 ≤ i11 ∧ i11 < length : 0 ≤ result[length + i11] ∧ result[length + i11] < length
+    	//_invariant ∀ Integer i9 ∀ Integer j9, 0 ≤ i9 ∧ i9 < j9 ∧ j9 < length : result[length + i9] != result[length + j9]
 	    // the current array is that permutation of the input array
-    	_invariant ∀ Integer i10, 0 ≤ i10 ∧ i10 < length : result[i10] = A[result[length + i10]]
+    	//_invariant ∀ Integer i10, 0 ≤ i10 ∧ i10 < length : result[i10] = A[result[length + i10]]
 	{
 		Integer j := i + 1
 		

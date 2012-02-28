@@ -17,6 +17,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
@@ -30,6 +31,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ValueReturnVisitor;
 
 /**
@@ -215,9 +217,43 @@ public class SpecificationChecker {
 			                AstNodeCloneHelper.clone(a));
 		}
 
+		// try to find the return value (a variable named "_return") in the environment and create a
+		// VariableReference to it
+		VariableReference returnVariableReference = null;
+		for (final VariableDeclaration environmentVariable : environment.keySet()) {
+			if (environmentVariable.getName().equals("_return")) {
+				returnVariableReference = AstNodeCreatorHelper
+				                .createVariableReference(environmentVariable);
+			}
+		}
+
+		// if no variable named "_return" could be found in the given environment the formula will not be
+		// changed and SMTLIBStrategy will not be able to handle the formula so introduce a new (free) variable
+		if (returnVariableReference == null) {
+			// assume that the formula is contained in a FunctionDeclaration hierarchy, because the
+			// Worthwhile grammar allows ReturnValueReferences only in Postconditions, to determine the
+			// return value's type
+			final Type type = new ASTNodeBottomUpVisitor<Type>() {
+				@Override
+				public final void visit(final FunctionDeclaration node) {
+					this.setReturnValue(node.getReturnType());
+				}
+			}.apply(formula);
+
+			final VariableDeclaration returnVariable = AstNodeCreatorHelper.createVariableDeclaration(
+			                AstNodeCloneHelper.clone(type), "_return");
+
+			returnVariableReference = AstNodeCreatorHelper.createVariableReference(returnVariable);
+		}
+
+		// replace all instances of ReturnValueReference with a reference to either the "_return" variable in
+		// the environment or the free "_return" variable created in case the environment did not specify one
+		final Expression returnVariableReferenceInsertedFormula = ReturnValueReferenceSubstitution.substitute(
+		                AstNodeCloneHelper.clone(formula), returnVariableReference);
+
 		// create the environment => expression implication
 		Implication environmentImpliesFormula = AstNodeCreatorHelper.createImplication(environmentExpression,
-		                AstNodeCloneHelper.clone(formula));
+		                returnVariableReferenceInsertedFormula);
 		return this.checkProgram(AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper
 		                .createAssertion(environmentImpliesFormula)));
 	}

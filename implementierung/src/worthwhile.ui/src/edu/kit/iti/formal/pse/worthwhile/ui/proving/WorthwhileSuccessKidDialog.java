@@ -79,11 +79,6 @@ public final class WorthwhileSuccessKidDialog extends Dialog {
 	}
 
 	@Override
-	protected Point getInitialSize() {
-		return new Point(INITIAL_WIDTH, INITIAL_HEIGHT);
-	}
-
-	@Override
 	protected void configureShell(final Shell newShell) {
 		super.configureShell(newShell);
 		newShell.setText(this.dialogTitle);

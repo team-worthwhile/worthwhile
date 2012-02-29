@@ -102,29 +102,41 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void assignmentRule() {
-		this.testTransformProgram("Integer x := 1\n_assert x = 1\n", "1 = 1 && true");
+		this.testTransformProgram("Integer x := 1\n_assert x = 1\n", "true && 1 = 1");
 
-		this.testTransformProgram("Integer x := 1\nx := 0\n_assert x = 1\n", "0 = 1 && true");
+		this.testTransformProgram("Integer x := 1\nx := 0\n_assert x = 1\n", "true && 0 = 1");
 
 		this.testTransformProgram(
 		                "function Boolean f() {\nBoolean fx\n_assert fx = false\nreturn fx\n}\nBoolean x\n_assert x = false\n",
-		                "(true => (false = false && true)) && (false = false && true)");
+		                "(true => true)"
+		                + "&& (true => false = false)"
+		                + "&& true"
+		                + "&& (false = false)");
 
 		this.testTransformProgram(
 		                "function Integer f() {\nInteger fx\n_assert fx = 0\nreturn fx\n}\nInteger x\n_assert x = 0\n",
-		                "(true => (0 = 0 && true)) && (0 = 0 && true)");
+		                "(true => true)"
+		                + "&& (true => 0 = 0)"
+		                + "&& true"
+		                + "&& 0 = 0");
 
 		this.testTransformProgram(
 		                "function Boolean[] f() {\nBoolean[] fx\n_assert fx = { }\nreturn fx\n}\nBoolean[] x\n_assert x = { }\n",
-		                "(true => ({ } = { } && true)) && ({ } = { } && true)");
+		                "(true => true)"
+		                + "&& (true => { } = { })"
+		                + "&& true"
+		                + "&& { } = { }");
 
 		this.testTransformProgram(
 		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
-		                "(true => ({ } = { } && true)) && ({ } = { } && true)");
+		                "(true => true)"
+		                + "&& (true => { } = { })"
+		                + "&& true"
+		                + "&& { } = { }");
 
 		this.testTransformProgram("Integer i := 0\n" + "Integer j := 0\n" + "Integer[] a\n" + "a[i] := 1\n"
 		                + "a[j] := 2\n" + "_assert a[i] = 2\n" + "_assert a[j] = 2\n" + "_assert a = { 2 }\n",
-		                "2 = 2 && (2 = 2 && ({ 2 } = { 2 } && true))");
+		                "true && ({ 2 } = { 2 } && (2 = 2 && 2 = 2))");
 	}
 
 	/**
@@ -133,7 +145,10 @@ public final class TransformProgramTest {
 	@Test
 	public void conditionalRule() {
 		this.testTransformProgram("Integer x := 1\nif x = 1 {\nx := 0\n}\n_assert x = 0\n",
-		                "(1 = 1 => (0 = 0 && true))" + "&& (!(1 = 1) => (1 = 0 && true))");
+		                "(1 = 1 => true)"
+		                + "&& (1 = 1 => 0 = 0)"
+		                + "&& (!(1 = 1) => true)"
+		                + "&& (!(1 = 1) => 1 = 0)");
 	}
 
 	/**
@@ -142,7 +157,8 @@ public final class TransformProgramTest {
 	@Test
 	public void assumptionRule() {
 		this.testTransformProgram("Integer x := 1\n_assume x = 0\n_assert x = 10\n",
-		                "(1 = 0) => (1 = 10 && true)");
+		                "(1 = 0 => true)"
+		                + "&& (1 = 0 => 1 = 10)");
 	}
 
 	/**
@@ -152,7 +168,8 @@ public final class TransformProgramTest {
 	public void axiomRule() {
 		this.testTransformProgram(
 		                "_axiom forall Integer a forall Integer b : a * b = b * a\nInteger x := 2 * 3\n_assert x = 3 * 2\n",
-		                "(forall Integer a forall Integer b : a * b = b * a) => (2 * 3 = 3 * 2 && true)");
+		                "((forall Integer a forall Integer b : a * b = b * a) => true)"
+		                + "&& ((forall Integer a forall Integer b : a * b = b * a) => 2 * 3 = 3 * 2)");
 	}
 
 	/**
@@ -164,13 +181,12 @@ public final class TransformProgramTest {
 		String programString = "Integer n := 42\n" + "Integer t := 0\n" + "while t < n _invariant t <=n\n"
 		                + "{\n" + "    t := t + 1\n" + "}\n" + "_assert t = n\n";
 
-		String expectedResultString = "(((0 <= 42) "
+		String expectedResultString = "0 <= 42 "
 		                // condition true implies weakest block precondition
-		                + "&& (forall Integer n1 : forall Integer t1 : (((t1 < n1) && (t1 <= n1)) => "
-		                + "((t1 + 1) <= n1)))) "
+		                + "&& (forall Integer t : t < 42 && t <= 42 => t + 1 <= 42) "
 		                // condition not true implies postcondition
-		                + "&& (forall Integer n2 : forall Integer t2 : ((!(t2 < n2) && (t2 <= n2)) => "
-		                + "((t2 = n2) && true))))";
+		                + "&& (forall Integer t : !(t < 42) && t <= 42 => true)"
+		                + "&& (forall Integer t : !(t < 42) && t <= 42 => t = 42)";
 
 		this.testTransformProgram(programString, expectedResultString);
 	}
@@ -183,9 +199,11 @@ public final class TransformProgramTest {
 		this.testTransformProgram("function Integer max(Integer a, Integer b)\n"
 		                + "_ensures _return = a || _return = b\n_ensures _return >= a && _return >= b\n"
 		                + "{\nif (a > b) {\nreturn a\n}\nreturn b\n}\n",
-		                "(forall Integer b : forall Integer a : true => "
-		                                + "(((a > b) => ((a = a || a = b) && (a >= a && a >= b))) "
-		                                + "&& (!(a > b) => ((b = a || b = b) && (b >= a && b >= b))))) && true");
+		                "(forall Integer b : forall Integer a : true => (a > b => a = a || a = b))"
+		                + "&& (forall Integer b : forall Integer a : true => (a > b => a >= a && a >= b)) "
+		                + "&& (forall Integer b : forall Integer a : true => (!(a > b) => b = a || b = b))"
+		                + "&& (forall Integer b : forall Integer a : true => (!(a > b) => b >= a && b >= b))"
+		                + "&& true");
 
 	}
 
@@ -196,10 +214,10 @@ public final class TransformProgramTest {
 	public void variableDeclarationFunctionCallRule() {
 		this.testTransformProgram("function Integer f(Integer t)\n" + "_requires t = 0 || t = 1\n"
 		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
-		                + "    return -1\n" + "}\n" + "Integer v := f(2)\n", "(forall Integer t :"
-		                + "(t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
-		                + "&& ((2 = 0 || 2 = 1) && (forall Integer _f0 :"
-		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) => true)))");
+		                + "    return -1\n" + "}\n" + "Integer v := f(2)\n",
+		                "(forall Integer t : t = 0 || t = 1 => t = 0 && -1 = 1 || t = 1 && -1 = 0)"
+		                + "&& (forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 => true)"
+		                + "&& (2 = 0 || 2 = 1)");
 	}
 
 	/**
@@ -209,11 +227,11 @@ public final class TransformProgramTest {
 	public void conditionalFunctionCallRule() {
 		this.testTransformProgram("function Integer f(Integer t)\n" + "_requires t = 0 || t = 1\n"
 		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
-		                + "    return -1\n" + "}\n" + "if f(2) = -1 {\n}\n", "(forall Integer t :"
-		                + "(t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
-		                + "&& ((2 = 0 || 2 = 1) && (forall Integer _f0 :"
-		                + "(((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0))"
-		                + "=> ((_f0 = -1 => true) && (!(_f0 = -1) => true)))))");
+		                + "    return -1\n" + "}\n" + "if f(2) = -1 {\n}\n",
+		                "(forall Integer t : t = 0 || t = 1 => t = 0 && -1 = 1 || t = 1 && -1 = 0)"
+		                + "&& (forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 => (_f0 = -1 => true))"
+		                + "&& (forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 => (!(_f0 = -1) => true))"
+		                + "&& (2 = 0 || 2 = 1)");
 	}
 
 	/**
@@ -228,19 +246,22 @@ public final class TransformProgramTest {
 		                                + "while f(2) = -1\n_invariant f(2) = -1\n{\n}\n",
 		                "(forall Integer t : (t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
 		                                + "&&"
-		                                + "((2 = 0 || 2 = 1) &&"
-		                                + " (forall Integer _f0 : ((2 = 0 && _f0 = 1) || (2 = 1 && _f0 = 0)) =>"
-		                                + "  ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                                + "  &&"
-		                                + "  (forall Integer _f0 :"
-		                                + "   (_f0 = -1 && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                                + "    => ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                                + "   )"
-		                                + "  )"
-		                                + "  &&"
-		                                + "  (forall Integer _f0 :"
-		                                + "   (!(_f0 = -1) && ((2 = 0 || 2 = 1) && (forall Integer _f1 : ((2 = 0 && _f1 = 1) || (2 = 1 && _f1 = 0)) => (_f1 = -1)))"
-		                                + "    => true" + "   )" + "  )" + " )" + ")");
+		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
+		                                + " (forall Integer _f1 : 2 = 0 && _f1 = 1 || 2 = 1 && _f1 = 0 =>"
+		                                + "  _f1 = -1))"
+		                                + "&&"
+		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
+		                                + " (forall Integer _f1 : 2 = 0 && _f1 = 1 || 2 = 1 && _f1 = 0 =>"
+		                                + "  (_f0 = -1 && _f1 = -1 => _f1 = -1)))"
+		                                + "&&"
+		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
+		                                + " (forall Integer _f1 : 2 = 0 && _f1 = 1 || 2 = 1 && _f1 = 0 =>"
+		                                + "  (!(_f0 = -1) && _f1 = -1 => true)))"
+		                                + "&&"
+		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
+		                                + " 2 = 0 || 2 = 1)"
+		                                + "&&"
+		                                + "(2 = 0 || 2 = 1)");
 	}
 
 	/**
@@ -251,9 +272,11 @@ public final class TransformProgramTest {
 	public void contractFunctionCallRule() {
 		this.testTransformProgram("function Integer fiver()\n" + "_ensures _return = 5\n" + "{\n"
 		                + "return 5\n" + "}\n" + "function Integer five()\n" + "_ensures _return = fiver()\n"
-		                + "{\n" + "return fiver()\n" + "}\n", "(true => 5 = 5)" + "&&" + "(true =>"
+		                + "{\n" + "return fiver()\n" + "}\n",
+		                "(true => 5 = 5)"
+		                + "&& (true =>"
 		                + " (forall Integer _fiver1 : _fiver1 = 5 =>"
-		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)" + " )" + ")"
+		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)))"
 		                + "&& true");
 	}
 }

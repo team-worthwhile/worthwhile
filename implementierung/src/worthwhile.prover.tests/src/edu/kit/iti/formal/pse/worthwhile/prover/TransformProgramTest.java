@@ -46,21 +46,21 @@ public final class TransformProgramTest {
 		return p;
 	}
 
-	private void testTransformProgram(final String program, final String expected) {
-		this.testTransformProgram(program, this.getExpression(expected));
-	}
-
 	/**
 	 * Parse the given program string, transform it using the calculus implemented by transformer and compare the
 	 * formula calculated to prove that the whole program conforms to the specification with the given expected
-	 * {@link Expression}.
+	 * expression.
+	 * 
+	 * <code>expected</code> is parsed before the resulting {@link Expression} is compared to the actual result
+	 * produced by the program transformer to be tested.
 	 * 
 	 * @param program
 	 *                the program to parse and transform
 	 * @param expected
-	 *                the expected Expression to prove the whole program conform
+	 *                the expected expression to parse and to prove the whole program conform
 	 */
-	private void testTransformProgram(final String program, final Expression expected) {
+	private void testTransformProgram(final String program, final String expected) {
+		final Expression e = this.getExpression(expected);
 		final Program p = this.getProgram(program);
 		p.accept(new ImplicitInitialValueInserter());
 		p.accept(new ArrayFunctionInserter());
@@ -68,7 +68,7 @@ public final class TransformProgramTest {
 		// find the expression expressing the validity of the whole program
 		for (Proof proof : this.transformer.transformProgram(p)) {
 			if (proof.getImplication() == ProofImplication.PROGRAM_CONFORM) {
-				TransformProgramTest.assertASTNodeEqual(expected, proof.getExpression());
+				TransformProgramTest.assertASTNodeEqual(e, proof.getExpression());
 				return;
 			}
 		}
@@ -102,36 +102,29 @@ public final class TransformProgramTest {
 	 */
 	@Test
 	public void assignmentRule() {
-		Expression expected;
-
 		this.testTransformProgram("Integer x := 1\n_assert x = 1\n", "1 = 1 && true");
 
 		this.testTransformProgram("Integer x := 1\nx := 0\n_assert x = 1\n", "0 = 1 && true");
 
-		expected = this.getExpression("(true => (false = false && true)) && (false = false && true)");
 		this.testTransformProgram(
 		                "function Boolean f() {\nBoolean fx\n_assert fx = false\nreturn fx\n}\nBoolean x\n_assert x = false\n",
-		                expected);
+		                "(true => (false = false && true)) && (false = false && true)");
 
-		expected = this.getExpression("(true => (0 = 0 && true)) && (0 = 0 && true)");
 		this.testTransformProgram(
 		                "function Integer f() {\nInteger fx\n_assert fx = 0\nreturn fx\n}\nInteger x\n_assert x = 0\n",
-		                expected);
+		                "(true => (0 = 0 && true)) && (0 = 0 && true)");
 
-		expected = this.getExpression("(true => ({ } = { } && true)) && ({ } = { } && true)");
 		this.testTransformProgram(
 		                "function Boolean[] f() {\nBoolean[] fx\n_assert fx = { }\nreturn fx\n}\nBoolean[] x\n_assert x = { }\n",
-		                expected);
+		                "(true => ({ } = { } && true)) && ({ } = { } && true)");
 
-		expected = this.getExpression("(true => ({ } = { } && true)) && ({ } = { } && true)");
 		this.testTransformProgram(
 		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
-		                expected);
+		                "(true => ({ } = { } && true)) && ({ } = { } && true)");
 
-		expected = this.getExpression("2 = 2 && (2 = 2 && ({ 2 } = { 2 } && true))");
 		this.testTransformProgram("Integer i := 0\n" + "Integer j := 0\n" + "Integer[] a\n" + "a[i] := 1\n"
 		                + "a[j] := 2\n" + "_assert a[i] = 2\n" + "_assert a[j] = 2\n" + "_assert a = { 2 }\n",
-		                expected);
+		                "2 = 2 && (2 = 2 && ({ 2 } = { 2 } && true))");
 	}
 
 	/**

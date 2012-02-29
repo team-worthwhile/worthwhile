@@ -2,6 +2,7 @@ package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
@@ -489,10 +490,12 @@ class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 		}
 
 		// build a giant conjunction of all preconditions that implies the correctness of the whole program
-		Expression programConjunction = AstNodeCreatorHelper.createTrueLiteral();
-		for (Proof precondition : this.weakestPreconditionStack.peek()) {
+		final Iterator<Proof> i = this.weakestPreconditionStack.peek().iterator();
+		// at least the initial precondition true for the main block is on the stack
+		Expression programConjunction = AstNodeCloneHelper.clone(i.next().getExpression());
+		while (i.hasNext()) {
 			programConjunction = AstNodeCreatorHelper.createConjunction(programConjunction,
-			                AstNodeCloneHelper.clone(precondition.getExpression()));
+			                AstNodeCloneHelper.clone(i.next().getExpression()));
 		}
 		this.weakestPreconditionStack.peek().add(
 		                new Proof(programConjunction, ProofImplication.PROGRAM_CONFORM, program));

@@ -21,6 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesys.WorthwhileTypesystemGenerated;
@@ -70,6 +71,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 	protected final EObject type(final ArrayLiteral element, final TypeCalculationTrace trace) {
 
 		final ArrayType at = AstFactory.eINSTANCE.createArrayType();
+		PrimitiveType baseType;
 		if (element.getValues().size() == 0) {
 			// used to determine the base types of variables (also parameters) the ArrayLiteral is assigned
 			// to or compared to (in Equal Expressions)
@@ -77,12 +79,12 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 
 			// derives the empty ArrayLiterals base type from the context (up in the AST an Assignment,
 			// VariableDeclaration, FunctionCall or Equal) it is used in
-			final ASTNodeBottomUpVisitor<Type> visitor = new ASTNodeBottomUpVisitor<Type>() {
+			final ASTNodeBottomUpVisitor<PrimitiveType> visitor = new ASTNodeBottomUpVisitor<PrimitiveType>() {
 				@Override
 				public void visit(final Assignment assignment) {
 					// base type is the assigned variable's one
 					if (assignment.getVariable().getVariable().getType() instanceof ArrayType) {
-						at.setBaseType(((ArrayType) ts.typeof(assignment.getVariable()))
+						this.setReturnValue(((ArrayType) ts.typeof(assignment.getVariable()))
 						                .getBaseType());
 					}
 				}
@@ -100,7 +102,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 					// not run yet, nested FunctionDeclarations do not bother us because then the
 					// type cannot be correct (since not defined in the Worthwhile semantics) anyway
 					if (function != null && function.getReturnType() instanceof ArrayType) {
-						at.setBaseType(((ArrayType) ts.typeof(function)).getBaseType());
+						this.setReturnValue(((ArrayType) ts.typeof(function)).getBaseType());
 					}
 				}
 
@@ -108,7 +110,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 				public void visit(final VariableDeclaration variableDeclaration) {
 					// base type is the initialized variable's one
 					if (variableDeclaration.getType() instanceof ArrayType) {
-						at.setBaseType(((ArrayType) ts.typeof(variableDeclaration))
+						this.setReturnValue(((ArrayType) ts.typeof(variableDeclaration))
 						                .getBaseType());
 					}
 				}
@@ -134,9 +136,9 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 					};
 
 					if (equal.getLeft() == element) {
-						at.setBaseType(visitor.apply(equal.getRight()));
+						this.setReturnValue(visitor.apply(equal.getRight()));
 					} else if (equal.getRight() == element) {
-						at.setBaseType(visitor.apply(equal.getLeft()));
+						this.setReturnValue(visitor.apply(equal.getLeft()));
 					}
 				}
 
@@ -150,17 +152,18 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 					for (int i = 0; i < exprlist.size(); i++) {
 						if (exprlist.get(i) == element
 						                && parlist.get(i).getType() instanceof ArrayType) {
-							at.setBaseType(((ArrayType) ts.typeof(parlist.get(i)))
+							this.setReturnValue(((ArrayType) ts.typeof(parlist.get(i)))
 							                .getBaseType());
 						}
 					}
 				}
 			};
-			element.accept(visitor);
+			baseType = visitor.apply(element);
 		} else {
-			at.setBaseType((PrimitiveType) typeof(element.getValues().get(0), trace));
+			baseType = (PrimitiveType) typeof(element.getValues().get(0), trace);
 
 		}
+		at.setBaseType(AstNodeCloneHelper.clone(baseType));
 		trace.add(element, "arrayType");
 		return at;
 	}

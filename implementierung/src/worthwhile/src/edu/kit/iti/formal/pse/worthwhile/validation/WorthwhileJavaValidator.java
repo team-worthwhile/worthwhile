@@ -209,44 +209,22 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 		} else {
 			EList<Expression> actuals = arrayLiteral.getValues();
 			TypeCalculationTrace trace = new TypeCalculationTrace();
-			ASTNodeReturnVisitor<ArrayType> rv = new ASTNodeReturnVisitor<ArrayType>() {
-				@Override
-				protected void defaultOperation(final ASTNode node) {
-					setReturnValue(null);
-				}
 
-				public void visit(final ArrayType arrayType) {
-					setReturnValue(arrayType);
-				}
-			};
 			if (actuals.size() != 0) {
-				ArrayType arrayType = rv.apply((ASTNode) (ts.typeof(
-						actuals.get(0), trace)));
-				// the first element may not be of type arrayType
-				if (arrayType != null) {
-					error("An array may not contain an other array.",
-							actuals.get(0), null, -1);
-					// check the rest of the array elements if they have the
-					// same type as the first
-				} else {
-					Type type = ((ArrayType) ts.typeof(arrayLiteral, trace))
-							.getBaseType();
-					for (int i = 0; i < actuals.size(); i++) {
-						if (!ts.isSameType(type, type, actuals.get(i),
-								ts.typeof(actuals.get(i), trace), trace)) {
-							error("Element doesn't match type of the array. Expected parameter of type "
-									+ ts.typeString(ts.typeof(actuals.get(0),
-											trace))
-									+ ", but found "
-									+ ts.typeString(ts.typeof(actuals.get(i),
-											trace)) + ".", actuals.get(i),
-									null, -1);
-						}
+				Type type = ((ArrayType) ts.typeof(arrayLiteral, trace))
+						.getBaseType();
+				for (int i = 0; i < actuals.size(); i++) {
+					if (!ts.isSameType(type, type, actuals.get(i),
+							ts.typeof(actuals.get(i), trace), trace)) {
+						error("Element doesn't match type of the array. Expected parameter of type "
+								+ ts.typeString(ts.typeof(actuals.get(0), trace))
+								+ ", but found "
+								+ ts.typeString(ts.typeof(actuals.get(i), trace))
+								+ ".", actuals.get(i), null, -1);
 					}
 				}
 			}
 		}
-
 	}
 
 	/**

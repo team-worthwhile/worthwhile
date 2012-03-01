@@ -15,6 +15,10 @@ import com.google.inject.Injector;
 import de.itemis.xtext.typesystem.testing.IssueCollection;
 import de.itemis.xtext.typesystem.testing.XTextTestCase;
 import edu.kit.iti.formal.pse.worthwhile.WorthwhileStandaloneSetup;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 
 /**
@@ -39,9 +43,41 @@ public class ValidatorTest extends XTextTestCase {
     }
 
     @Test
+    public void testReturnStatementOnlyFunction() {
+	String testProgram = "function Integer fun() {\n" + "return true\n" + "}\n" + "return true \n";
+	initialize(testProgram);
+	assertConstraints(allIssues.forType(ReturnStatement.class).sizeIs(2));
+    }
+
+    @Test
+    public void testReturnValueReferenceOnlyPostcondition() {
+	String testProgram = "function Integer fun()\n" + "_requires _return > 4\n" + "_ensures _return > 4\n" + "{\n"
+		+ "return 0\n" + "}\n";
+
+	initialize(testProgram);
+	assertConstraints(allIssues.forType(ReturnValueReference.class).sizeIs(1));
+    }
+
+    @Test
+    public void testFunctionDeclarationValidReturnStatement() {
+	String testProgram = "function Integer fun() {\n" + "if (true) { \n" + "return 4\n" + "}\n" + "}\n";
+	initialize(testProgram);
+	assertConstraints(allIssues.forType(FunctionDeclaration.class).sizeIs(1));
+    }
+
+    @Test
     public void testReturnValueRefwithIndex() {
-	String testProgram = "function Integer fun()\n" + "_ensures _return[0] = 5\n" + "{\n" + "return 0\n" + "}\n";
+	String testProgram = "function Integer fun()\n" + "_ensures _return[0] = 5\n" + "{\n" + "return 0\n" + "}\n"
+		+ "function Boolean[] fun2()\n" + "_ensures _return[0] = false\n" + "{\n" + "return {false}\n" + "}\n";
 	Assert.assertEquals(1, TestASTProvider.getErrorCount(testProgram));
+    }
+
+    @Test
+    public void testFunctionParametersNotModified() {
+	String testProgram = "function Integer fun(Integer a, Boolean b) {\n" + "a := 8\n" + "Boolean c := b\n"
+		+ "return 0\n" + "}\n";
+	initialize(testProgram);
+	assertConstraints(allIssues.forType(Assignment.class).sizeIs(1));
     }
 
     /**
@@ -51,6 +87,28 @@ public class ValidatorTest extends XTextTestCase {
     public final void testUndeclaredFunctionParameterCountCheck() {
 	String testProgram = "Integer i := g(1)\nInteger j := g()\n";
 	TestUtils.assertErrorCountEquals(2, TestASTProvider.loadProgram(testProgram));
+    }
+
+    @Test
+    public void testFunctionCallParameter() {
+	String testProgram = "function Integer fun(Integer a, Boolean b) {\n" + "return 4\n" + "}\n"
+		+ "Integer k := fun(5,true)\n" + "k := fun(true)\n" + "k := fun(true,true)\n";
+	initialize(testProgram);
+	assertConstraints(allIssues.sizeIs(2));
+    }
+
+    @Test
+    public void testQuantifiedExpressionOnlyAnnotation() {
+	String testProgram = "_assume forall Boolean a : a = true\n" + "Boolean d := forall Integer k : k > 0\n";
+	initialize(testProgram);
+	assertConstraints(allIssues.sizeIs(1));
+    }
+
+    @Test
+    public void testArrayLiteralnotInArrayLiteral() {
+	String testProgram = "Integer[] a := {{},5}\n" + "Boolean[] b := {true, {}}\n";
+	initialize(testProgram);
+	assertConstraints(allIssues.sizeIs(4));
     }
 
     private void initialize(String parseText) {

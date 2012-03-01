@@ -119,24 +119,6 @@ public final class TransformProgramTest {
 		                + "&& (true => 0 = 0)"
 		                + "&& true"
 		                + "&& 0 = 0");
-
-		this.testTransformProgram(
-		                "function Boolean[] f() {\nBoolean[] fx\n_assert fx = { }\nreturn fx\n}\nBoolean[] x\n_assert x = { }\n",
-		                "(true => true)"
-		                + "&& (true => { } = { })"
-		                + "&& true"
-		                + "&& { } = { }");
-
-		this.testTransformProgram(
-		                "function Integer[] f() {\nInteger[] fx\n_assert fx = { }\nreturn fx\n}\nInteger[] x\n_assert x = { }\n",
-		                "(true => true)"
-		                + "&& (true => { } = { })"
-		                + "&& true"
-		                + "&& { } = { }");
-
-		this.testTransformProgram("Integer i := 0\n" + "Integer j := 0\n" + "Integer[] a\n" + "a[i] := 1\n"
-		                + "a[j] := 2\n" + "_assert a[i] = 2\n" + "_assert a[j] = 2\n" + "_assert a = { 2 }\n",
-		                "true && ({ 2 } = { 2 } && (2 = 2 && 2 = 2))");
 	}
 
 	/**

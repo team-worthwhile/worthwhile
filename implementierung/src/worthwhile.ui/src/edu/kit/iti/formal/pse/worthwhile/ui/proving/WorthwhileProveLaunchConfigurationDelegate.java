@@ -27,10 +27,10 @@ import com.google.inject.Inject;
 
 import edu.kit.iti.formal.pse.worthwhile.debugger.DebugHelper;
 import edu.kit.iti.formal.pse.worthwhile.debugger.WorthwhileDebugConstants;
+import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileProverMarkerHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
-import edu.kit.iti.formal.pse.worthwhile.prover.WorthwhileProverMarkerHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;

@@ -46,9 +46,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
-import edu.kit.iti.formal.pse.worthwhile.prover.WorthwhileProverMarkerHelper;
+import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 
 /**
  * This debug target communicates between the Eclipse platform debugging functions and the Worthwhile interpreter.

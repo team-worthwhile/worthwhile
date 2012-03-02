@@ -1,9 +1,10 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.debugger.model;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
 import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileConstants;
 import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;
 

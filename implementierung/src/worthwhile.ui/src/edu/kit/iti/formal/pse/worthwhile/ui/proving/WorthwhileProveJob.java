@@ -4,6 +4,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
 
+import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileProverMarkerHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
@@ -17,7 +18,6 @@ import edu.kit.iti.formal.pse.worthwhile.prover.IProverEventListener;
 import edu.kit.iti.formal.pse.worthwhile.prover.ProverResult;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
-import edu.kit.iti.formal.pse.worthwhile.prover.WorthwhileProverMarkerHelper;
 
 /**
  * A job for proving a program.

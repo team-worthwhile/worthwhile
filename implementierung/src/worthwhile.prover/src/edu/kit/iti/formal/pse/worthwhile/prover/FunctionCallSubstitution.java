@@ -63,14 +63,16 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 	/**
 	 * 
-	 * @param call
-	 *                the {@link FunctionCall} the total precondition is calculated for
+	 * @param returnVariable
+	 *                the {@link VariableDeclaration} representing the {@link FunctionCall} the total precondition
+	 *                is calculated for
 	 * @return a <code>Conjunction</code> of the {@link FunctionDeclaration}'s {@link Precondition}
 	 *         {@link Expression}s that <code>call</code> references with the actuals inserted
 	 */
-	private Expression getPrecondition(final FunctionCall call) {
+	private Expression getPrecondition(final VariableDeclaration returnVariable) {
 		Expression precondition = null;
 
+		final FunctionCall call = this.parameters.peek().get(returnVariable);
 		final FunctionDeclaration function = call.getFunction();
 
 		final List<Precondition> preconditions = function.getPreconditions();
@@ -100,14 +102,16 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 	/**
 	 * 
-	 * @param call
-	 *                the {@link FunctionCall} the total postcondition is calculated for
+	 * @param returnVariable
+	 *                the {@link VariableDeclaration} representing the {@link FunctionCall}'s return value the total
+	 *                postcondition is calculated for
 	 * @return a <code>Conjunction</code> of the {@link FunctionDeclaration}'s {@link Postcondition}
 	 *         {@link Expression}s that <code>call</code> references with the actuals inserted
 	 */
-	private Expression getPostcondition(final FunctionCall call) {
+	private Expression getPostcondition(final VariableDeclaration returnVariable) {
 		Expression postcondition = null;
 
+		final FunctionCall call = this.parameters.peek().get(returnVariable);
 		final FunctionDeclaration function = call.getFunction();
 
 		final List<Postcondition> postconditions = function.getPostconditions();
@@ -118,6 +122,14 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 				postcondition = AstNodeCreatorHelper.createConjunction(postcondition,
 				                AstNodeCloneHelper.clone(p.next().getExpression()));
 			}
+		}
+
+		if (postcondition != null) {
+			// replace ReturnValueReferences referring to the called function in its Postcondition now, that
+			// is before inserting the actual parameters because they could contain the calling function's
+			// ReturnValueReferences, which are not to be replaced with the called function's return value
+			postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
+			                AstNodeCreatorHelper.createVariableReference(returnVariable));
 		}
 
 		// insert the actual Expressions into the FunctionCall parameters
@@ -146,8 +158,8 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			// add the VariableDeclarations directly before the Statement whose Expressions references them
 			final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 			for (final VariableDeclaration variable : returnVariables) {
-				final Expression precondition = getPrecondition(this.parameters.peek().get(variable));
-				Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
+				final Expression precondition = getPrecondition(variable);
+				Expression postcondition = getPostcondition(variable);
 
 				if (precondition != null) {
 					// the function call is the node that is actually guarded
@@ -160,9 +172,6 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 				i.add(variable);
 
 				if (postcondition != null) {
-					postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
-					                AstNodeCreatorHelper.createVariableReference(variable));
-
 					i.add(AstNodeCreatorHelper.createAssumption(postcondition));
 				}
 			}
@@ -242,13 +251,10 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 		final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 		for (final VariableDeclaration variable : returnVariables) {
-			final Expression precondition = getPrecondition(this.parameters.peek().get(variable));
-			Expression postcondition = getPostcondition(this.parameters.peek().get(variable));
+			final Expression precondition = getPrecondition(variable);
+			Expression postcondition = getPostcondition(variable);
 
 			if (postcondition != null) {
-				postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
-				                AstNodeCreatorHelper.createVariableReference(variable));
-
 				newExpression = AstNodeCreatorHelper.createImplication(postcondition, newExpression);
 			}
 

@@ -33,6 +33,8 @@ function Integer heapsize(Integer[] heap1)
 }
 
 // Checks that the given array fulfils the heap condition
+// The heap condition is defined as follows: Each element must be equal to or smaller
+// than any of its child elements. 
 function Boolean heapCondition(Integer[] heap)
 	_requires heapsize(heap) ≥ 0
 	_ensures _return = ∀ Integer i1, 2 ≤ i1 ∧ i1 ≤ heapsize(heap) : heap[parent(i1)] ≤ heap[i1]
@@ -41,21 +43,18 @@ function Boolean heapCondition(Integer[] heap)
 	
 	if (heapsize(heap) ≥ 2) {
 		Integer i3 := 2
-		result := (heap[parent(2)] ≤ heap[2])
 		
 		while i3 ≤ heapsize(heap)
 			_invariant 2 ≤ i3 ∧ i3 ≤ heapsize(heap) + 1
-			_invariant result = ∀ Integer i4, 2 ≤ i4 ∧ i4 ≤ i3 ∧ i4 ≤ heapsize(heap) : heap[parent(i4)] ≤ heap[i4]
+			
+			// The invariant is that the contents of "result" indicate whether the
+			// sub-array [1..i3-1] of the input fulfils the heap condition. 
+			_invariant result = ∀ Integer i4, 2 ≤ i4 ∧ i4 < i3 : heap[parent(i4)] ≤ heap[i4]
 		{
 			if result = true {
 				if heap[parent(i3)] > heap[i3] {
-					_assume ¬(∀ Integer i5, 2 ≤ i5 ∧ i5 ≤ i3 ∧ i5 ≤ heapsize(heap) : heap[parent(i5)] ≤ heap[i5])
 					result := false
-				} else {
-					_assume ∀ Integer i6, 2 ≤ i6 ∧ i6 ≤ i3 ∧ i6 ≤ heapsize(heap) : heap[parent(i6)] ≤ heap[i6]
 				}
-			} else {
-				_assume ¬(∀ Integer i7, 2 ≤ i7 ∧ i7 ≤ i3 ∧ i7 ≤ heapsize(heap): heap[parent(i7)] ≤ heap[i7])
 			}
 			
 			i3 := i3 + 1

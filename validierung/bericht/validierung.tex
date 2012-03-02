@@ -19,7 +19,8 @@
 
 \usepackage[a4paper,left=40mm,right=30mm,top=20mm,bottom=20mm,includeheadfoot]{geometry}
 \newcommand{\changefont}[3]{\fontfamily{#1} \fontseries{#2} \fontshape{#3} \selectfont}
-\parindent 0pt
+%\parindent 0pt
+%\setlength{\parskip}{12pt}
 \usepackage[raiselinks=true,
 						bookmarks=true,
 						bookmarksopenlevel=1,
@@ -68,7 +69,13 @@
 \tableofcontents
 \clearpage
 
+\input{ablauf}
+\input{tools}
+\input{coverage}
+\input{integration}
 \input{gui-tests}
+\input{profiling}
+\input{compatibility}
 
 \clearpage
 \appendix

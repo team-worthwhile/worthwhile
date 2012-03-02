@@ -1,0 +1,10 @@
+\section{Überdeckungstests}
+Zur Messung der Abdeckung des Codes durch die geschriebenen Testfälle wurde das Eclipse-Plugin EclEmma verwendet. Das Plugin hat gegenüber der Nutzung eines Programms auf der Kommandozeile den Vorteil, dass nicht durchlaufene Codezeilen in der Eclipse-Oberfläche markiert werden und so das schreiben neuer Testfälle, die die Abdeckung erhöhen, vereinfacht wird.
+
+Gemessen wurde die Abdeckung bei den Komponenten ``Beweiserschnittstelle'' und ``Interpreter''. Diese Module enthalten einen Großteil der automatisch testbaren Logik in Worthwhile und sind komplett von den Komponenten ``Benutzeroberfläche'' und ``Debugger'' entkoppelt, die durch manuell ausgeführte Testszenarien getestet wurden. Es wurde sowohl Anweisungs- als auch Zweigüberdeckung gemessen.
+
+\subsection{Beweiserschnittstelle}
+In der Komponente "Beweiserschnittstelle" wurde eine Anweisungsüberdeckung von 89,1\% und eine Zweigüberdeckung von 81,9\% erreicht. Dabei wurde in \texttt{WPStrategy}, der Komponente, die das weakest"-precondition Kalkül implementiert sogar eine Zweigabdeckung von 93,8\% erreicht. Durch die Verwendung des Visitor"-Entwurfsmusters wurden viele Fallunterscheidungen vermieden und damit das Testen in dieser Komponente stark vereinfacht.
+
+\subsection{Interpreter}
+In der Komponente "Interpreter" wurde eine Anweisungsüberdeckung von 76,7\% und eine Zweigüberdeckung von 66,9\% erreicht. Durch die vielfältige Auswahl von Testprogrammen wird dabei die Behandlung fast jedes Syntaxelementes mindestens einmal durchlaufen.

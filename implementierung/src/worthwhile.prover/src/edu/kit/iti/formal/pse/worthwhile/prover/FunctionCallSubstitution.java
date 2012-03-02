@@ -122,23 +122,19 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 				postcondition = AstNodeCreatorHelper.createConjunction(postcondition,
 				                AstNodeCloneHelper.clone(p.next().getExpression()));
 			}
-		}
 
-		if (postcondition != null) {
 			// replace ReturnValueReferences referring to the called function in its Postcondition now, that
 			// is before inserting the actual parameters because they could contain the calling function's
 			// ReturnValueReferences, which are not to be replaced with the called function's return value
 			postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
 			                AstNodeCreatorHelper.createVariableReference(returnVariable));
-		}
 
-		// insert the actual Expressions into the FunctionCall parameters
-		final Iterator<VariableDeclaration> parameters = function.getParameters().iterator();
-		final Iterator<Expression> actuals = call.getActuals().iterator();
-		while (parameters.hasNext()) {
-			final VariableDeclaration parameter = parameters.next();
-			final Expression actual = actuals.next();
-			if (postcondition != null) {
+			// insert the actual Expressions into the FunctionCall parameters
+			final Iterator<VariableDeclaration> parameters = function.getParameters().iterator();
+			final Iterator<Expression> actuals = call.getActuals().iterator();
+			while (parameters.hasNext()) {
+				final VariableDeclaration parameter = parameters.next();
+				final Expression actual = actuals.next();
 				postcondition = VariableReferenceSubstitution.substitute(postcondition, parameter,
 				                actual);
 			}

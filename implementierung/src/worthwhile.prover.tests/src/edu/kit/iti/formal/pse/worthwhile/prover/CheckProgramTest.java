@@ -57,7 +57,7 @@ public class CheckProgramTest {
 		Collection<Object[]> result = new ArrayList<Object[]>();
 		Pattern expectedValidityPattern = Pattern.compile("EXPECTED:(VALID|INVALID|UNKNOWN)");
 		String[] testPrograms = { "test-division", "test-faculty", "test-even", "test-max", "test-clone",
-		                "test-arrayindexassignment", "test-incrementfunction", "test-debuggerdemo",
+		                "test-arrayindexassignment", "test-incrementfunction", "DebuggerDemo",
 		                "smtlib-keywords", "test-qexpr-condition", "test-github-issue-93", "test-fibonacci",
 		                "bubblesort2", "multiplication" };
 

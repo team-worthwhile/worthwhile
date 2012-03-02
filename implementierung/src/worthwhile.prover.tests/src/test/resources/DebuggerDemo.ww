@@ -1,3 +1,4 @@
+// EXPECTED:VALID
 /*
  * Builds an array with specified length that contains the
  * values from 1 to length.

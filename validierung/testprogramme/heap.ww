@@ -75,7 +75,6 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	_requires heapsize(insertHeap) ≥ 0
 	_requires heapCondition(insertHeap)
 	
-	// TODO: Fehler in SMTLIB-Formel!
 	_ensures heapCondition(_return)
 	_ensures heapsize(_return) = heapsize(insertHeap) + 1
 	_ensures ∃ Integer i2, 1 ≤ i2 ∧ i2 ≤ heapsize(_return) : _return[i2] = insertKey
@@ -85,16 +84,22 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	// Enlarge the heap by one
 	insertResult[0] := insertHeap[0] + 1
 	Integer insertHeapSize := insertResult[0]
-	Integer currentInsertIndex := insertHeapSize
+	Integer currentInsertIndex := insertHeapSize + 1
 
 	// Insert new item into heap
 	insertResult[currentInsertIndex] := insertKey
 	
 	// If the newly inserted item is not the only one in the heap, we need to restore the heap condition
-	if (currentInsertIndex > 1) {
+	if (currentInsertIndex > 1) {		
 		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] > insertResult[parent(currentInsertIndex)]
-			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult)
+			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult) + 1
 			_invariant insertResult[currentInsertIndex] = insertKey
+			
+			// TODO this does not work (program is not proven correct, with counterexample!),
+			// but the invariant below makes the program prove correct
+			//_invariant heapsize(insertResult) = heapsize(insertHeap) + 1 
+			_invariant insertResult[0] = insertHeap[0] + 1
+			
 			// _invariant ∀ Integer i5, i5 > currentInsertIndex ∧ i5 ≤ heapsize(insertResult) :  
 		{
 			Integer parentIndex := parent(currentInsertIndex)
@@ -111,7 +116,7 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 }
 
 // Removes the first element of the heap, restores heap order and decreases the heap size by one
-function Integer[] heapPop(Integer[] popHeap)
+/*function Integer[] heapPop(Integer[] popHeap)
 	_requires heapsize(popHeap) > 0
 	_requires heapCondition(popHeap)
 	
@@ -125,7 +130,7 @@ function Integer[] heapPop(Integer[] popHeap)
 	// TODO restore heap condition
 	
 	return popResult
-}
+}*/
 
 // -----------------
 // HEAP SORT
@@ -155,5 +160,9 @@ function Integer[] heapPop(Integer[] popHeap)
 	return sortResult
 }*/
 
-Boolean b := heapCondition({3, 0, 1, 2})
-b := b
+Integer[] testHeap := {3, 0, 1, 2}
+
+Boolean b := heapCondition(testHeap)
+testHeap := heapInsert(testHeap, -1)
+
+testHeap := testHeap

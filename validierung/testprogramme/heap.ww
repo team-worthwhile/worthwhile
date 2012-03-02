@@ -72,6 +72,7 @@ function Boolean heapCondition(Integer[] heap)
 // Ensures that the returned heap is 1 larger than the original heap
 // and contains the key just inserted.
 function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
+	_requires heapsize(insertHeap) ≥ 0
 	_requires heapCondition(insertHeap)
 	
 	_ensures heapCondition(_return)
@@ -80,7 +81,7 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 {
 	Integer[] insertResult := insertHeap
 	
-	// Update heap size
+	// Enlarge the heap by one
 	insertResult[0] := insertHeap[0] + 1
 	Integer insertHeapSize := insertResult[0]
 	Integer currentInsertIndex := insertHeapSize
@@ -88,17 +89,24 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	// Insert new item into heap
 	insertResult[currentInsertIndex] := insertKey
 	
-	// Restore heap condition
-	while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] > insertResult[parent(currentInsertIndex)]
-		_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult)
-		_invariant insertResult[currentInsertIndex] = insertKey
-	{
-		Integer parentIndex := parent(currentInsertIndex)
-		
-		Integer tmp := insertResult[currentInsertIndex]
-		insertResult[currentInsertIndex] := insertResult[parentIndex]
-		insertResult[parentIndex] := tmp
+	// If the newly inserted item is not the only one in the heap, we need to restore the heap condition
+	if (currentInsertIndex > 1) {
+		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] > insertResult[parent(currentInsertIndex)]
+			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult)
+			_invariant insertResult[currentInsertIndex] = insertKey
+		{
+			Integer parentIndex := parent(currentInsertIndex)
+			
+			Integer tmp := insertResult[currentInsertIndex]
+			insertResult[currentInsertIndex] := insertResult[parentIndex]
+			insertResult[parentIndex] := tmp
+			
+			currentInsertIndex := parentIndex
+		}
 	}
 	
 	return insertResult
 }
+
+Boolean b := heapCondition({3, 0, 1, 2})
+b := b

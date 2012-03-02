@@ -48,7 +48,7 @@ function Boolean heapCondition(Integer[] heap)
 			_invariant 2 ≤ i3 ∧ i3 ≤ heapsize(heap) + 1
 			
 			// The invariant is that the contents of "result" indicate whether the
-			// sub-array [1..i3-1] of the input fulfils the heap condition. 
+			// sub-array [1..i3-1] of the input fulfils the heap condition.
 			_invariant result = ∀ Integer i4, 2 ≤ i4 ∧ i4 < i3 : heap[parent(i4)] ≤ heap[i4]
 		{
 			if result = true {
@@ -75,6 +75,7 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	_requires heapsize(insertHeap) ≥ 0
 	_requires heapCondition(insertHeap)
 	
+	// TODO: Fehler in SMTLIB-Formel!
 	_ensures heapCondition(_return)
 	_ensures heapsize(_return) = heapsize(insertHeap) + 1
 	_ensures ∃ Integer i2, 1 ≤ i2 ∧ i2 ≤ heapsize(_return) : _return[i2] = insertKey
@@ -94,6 +95,7 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] > insertResult[parent(currentInsertIndex)]
 			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult)
 			_invariant insertResult[currentInsertIndex] = insertKey
+			// _invariant ∀ Integer i5, i5 > currentInsertIndex ∧ i5 ≤ heapsize(insertResult) :  
 		{
 			Integer parentIndex := parent(currentInsertIndex)
 			
@@ -107,6 +109,51 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	
 	return insertResult
 }
+
+// Removes the first element of the heap, restores heap order and decreases the heap size by one
+function Integer[] heapPop(Integer[] popHeap)
+	_requires heapsize(popHeap) > 0
+	_requires heapCondition(popHeap)
+	
+	_ensures heapsize(_return) = heapsize(popHeap) - 1
+	_ensures heapCondition(_return)
+{
+	Integer[] popResult := popHeap
+	popResult[1] := popResult[heapsize(popResult)]
+	popResult[0] := popResult[0] - 1
+	
+	// TODO restore heap condition
+	
+	return popResult
+}
+
+// -----------------
+// HEAP SORT
+// -----------------
+
+// Sorts an array using heap sort.
+/*function Integer[] heapSort(Integer[] sortInput, Integer length)
+	_requires length ≥ 0
+	_ensures ∀ Integer i5, 1 ≤ i5 ∧ i5 < length : _return[i5 - 1] ≤ _return[i5] 
+{
+	Integer[] sortResult
+	Integer[] tmpHeap := {0}
+	
+	Integer i := 0
+	while (i < length) {
+		tmpHeap := heapInsert(tmpHeap, sortInput[i])
+		i := i + 1
+	}
+	
+	i := 0
+	while (i < length) {
+		sortResult[i] := tmpHeap[1]
+		tmpHeap := heapPop(tmpHeap)
+		i := i + 1
+	}
+	
+	return sortResult
+}*/
 
 Boolean b := heapCondition({3, 0, 1, 2})
 b := b

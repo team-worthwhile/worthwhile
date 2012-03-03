@@ -2,6 +2,21 @@
 // UTILITY FUNCTIONS
 // -----------------
 
+// Swaps two elements in an array
+function Integer[] swap(Integer[] source, Integer index1, Integer index2)
+	_ensures ∀ Integer i8, i8 ≠ index1 ∧ i8 ≠ index2 : _return[i8] = source[i8]
+	_ensures _return[index1] = source[index2]
+	_ensures _return[index2] = source[index1]
+{
+	Integer[] res := source
+
+	Integer tmp1 := res[index1]
+	res[index1] := res[index2]
+	res[index2] := tmp1
+	
+	return res
+}
+
 // Returns the parent index of an item in the heap.
 function Integer parent(Integer key1)
 	_ensures _return = key1 / 2
@@ -84,30 +99,35 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	// Enlarge the heap by one
 	insertResult[0] := insertHeap[0] + 1
 	Integer insertHeapSize := insertResult[0]
-	Integer currentInsertIndex := insertHeapSize + 1
 
 	// Insert new item into heap
+	Integer currentInsertIndex := insertHeapSize
 	insertResult[currentInsertIndex] := insertKey
 	
 	// If the newly inserted item is not the only one in the heap, we need to restore the heap condition
+	// This is done by "sifting up" the inserted element until it is no longer smaller than its parent element.
 	if (currentInsertIndex > 1) {		
-		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] > insertResult[parent(currentInsertIndex)]
-			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ heapsize(insertResult) + 1
-			_invariant insertResult[currentInsertIndex] = insertKey
+		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] < insertResult[/*parent(currentInsertIndex)*/ currentInsertIndex / 2]
+			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ /*heapsize(insertResult)*/insertResult[0] + 1
 			
 			// TODO this does not work (program is not proven correct, with counterexample!),
 			// but the invariant below makes the program prove correct
 			//_invariant heapsize(insertResult) = heapsize(insertHeap) + 1 
 			_invariant insertResult[0] = insertHeap[0] + 1
 			
-			// _invariant ∀ Integer i5, i5 > currentInsertIndex ∧ i5 ≤ heapsize(insertResult) :  
+			// Invariant: The heap condition is fulfilled on all elements but the one we are currently sifting up.
+			// We need the second invariant because an array like this:
+			//
+			//        8
+			//     (6)  9
+			//    6   7
+			//
+			// , where (6) is the inserted element, clearly fulfils the first invariant, but this could not have been a heap before.			
+			_invariant ∀ Integer i5, 2 ≤ i5 ∧ i5 ≤ /*heapsize(insertResult)*/insertResult[0] ∧ i5 ≠ currentInsertIndex : insertResult[/*parent(i5)*/i5/2] ≤ insertResult[i5]
+			_invariant ∀ Integer i5a, 4 ≤ i5a ∧ i5a ≤ /*heapsize(insertResult)*/insertResult[0] ∧ i5a ≠ currentInsertIndex : insertResult[/*parent(i5)*/i5a/4] ≤ insertResult[i5a] 
 		{
 			Integer parentIndex := parent(currentInsertIndex)
-			
-			Integer tmp := insertResult[currentInsertIndex]
-			insertResult[currentInsertIndex] := insertResult[parentIndex]
-			insertResult[parentIndex] := tmp
-			
+			insertResult := swap(insertResult, currentInsertIndex, parentIndex)
 			currentInsertIndex := parentIndex
 		}
 	}

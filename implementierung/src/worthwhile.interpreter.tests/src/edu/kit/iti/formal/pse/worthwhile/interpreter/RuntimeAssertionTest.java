@@ -100,7 +100,14 @@ public final class RuntimeAssertionTest {
 		                                true },
 		                new Object[] {
 		                                "function Boolean fun() {\n_assert 0 = 1\nreturn true\n}\n_assume false\nBoolean v := fun()\n",
-		                                false });
+		                                false },
+		                new Object[] { "_assume false\n_assert ∀ Integer i : 1 = 0\n", true },
+		                new Object[] {
+		                                "if (true) {\nBoolean c := false\n_assume c\n}\n_assert ∀ Integer i : 1 = 0\n",
+		                                true },
+		                new Object[] {
+		                                "Boolean c := false\n_assume c\nc := true\n_assert ∀ Integer i : 1 = 0\n",
+		                                true });
 	}
 
 	/**

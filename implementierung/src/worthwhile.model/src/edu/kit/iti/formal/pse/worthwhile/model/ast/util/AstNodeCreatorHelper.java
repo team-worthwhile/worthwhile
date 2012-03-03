@@ -1,10 +1,15 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
+import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
+import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
+import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
@@ -23,12 +28,14 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
 /**
  * Provides convenience methods for the creation of several {@link ASTNode}s.
@@ -447,6 +454,52 @@ public final class AstNodeCreatorHelper {
 		forAllQuantifier.setParameter(parameter);
 		forAllQuantifier.setExpression(expression);
 		return forAllQuantifier;
+	}
+
+	/**
+	 * @param value
+	 *                the {@link Value} to be represented by a {@link Literal}
+	 * @return a <code>Literal</code> representing the given <code>value</code>
+	 */
+	public static Literal createLiteral(final Value value) {
+		return new IValueVisitor() {
+			/**
+			 * A {@link Literal} representing the {@link Value} this visitor is applied to.
+			 */
+			private Literal literal = null;
+
+			/**
+			 * 
+			 * @param value
+			 *                the {@link Value} this visitor is applied to
+			 * @return a {@link Literal} representing the given <code>value</code>
+			 */
+			private Literal apply(final Value value) {
+				value.accept(this);
+				return this.literal;
+			}
+
+			@Override
+			public void visitIntegerValue(final IntegerValue value) {
+				this.literal = AstNodeCreatorHelper.createIntegerLiteral(value.getValue());
+			}
+
+			@Override
+			public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
+				final List<Literal> subValues = new ArrayList<Literal>();
+				for (final Value v : value.getSubValues().values()) {
+					v.accept(this);
+					subValues.add(this.literal);
+				}
+				this.literal = AstNodeCreatorHelper.createArrayLiteral(subValues);
+			}
+
+			@Override
+			public void visitBooleanValue(final BooleanValue value) {
+				this.literal = AstNodeCreatorHelper.createBooleanLiteral(value.getValue());
+
+			}
+		}.apply(value);
 	}
 
 	/**

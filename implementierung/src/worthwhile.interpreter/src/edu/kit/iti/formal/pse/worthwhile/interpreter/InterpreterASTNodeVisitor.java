@@ -534,7 +534,14 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void visit(final Assumption assumption) {
 		this.statementWillExecute(assumption);
-		this.assumptions.add(assumption.getExpression());
+
+		// resolve symbols (by replacing them with their current values) now because their values may change or
+		// they may even not exist anymore when this assumption is applied, which usually happens during
+		// assertion evaluations
+		Expression a = AstNodeCloneHelper.clone(assumption.getExpression());
+		a = SymbolReferenceResolver.apply(a, this);
+		this.assumptions.add(a);
+
 		this.statementExecuted(assumption);
 	}
 

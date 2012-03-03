@@ -4,6 +4,7 @@
 package edu.kit.iti.formal.pse.worthwhile.interpreter;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -149,6 +150,26 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	private Stack<Map<VariableDeclaration, Value>> symbolStack = new Stack<Map<VariableDeclaration, Value>>();
 
 	/**
+	 * A set of Expressions of Assumptions.
+	 */
+	private List<Expression> assumptions = new ArrayList<Expression>();
+
+	/**
+	 * A set of Expressions of Axioms.
+	 */
+	private List<Expression> axioms = new ArrayList<Expression>();
+
+	/**
+	 * sets the Axioms.
+	 * 
+	 * @param axioms
+	 *                the Axioms to set
+	 */
+	public void setAxioms(List<Expression> axioms) {
+		this.axioms = axioms;
+	}
+
+	/**
 	 * Gets the symbol.
 	 * 
 	 * @param key
@@ -244,7 +265,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 * the statement which is currently executed.
 	 */
 	private Statement currentStatement;
-	
+
 	/**
 	 * the statement which is currently executed.
 	 */
@@ -424,22 +445,6 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	/**
-	 * Pops a composite value from the result stack. Fails the execution if there is no composite value on the
-	 * stack.
-	 * 
-	 * @return the {@link CompositeValue} that is on top of the stack.
-	 */
-	private CompositeValue<?> popCompositeValue() {
-		synchronized (this.resultStack) {
-			if (this.resultStack.peek() instanceof IntegerValue) {
-				return (CompositeValue<?>) this.resultStack.pop();
-			} else {
-				throw new RuntimeException("result type error on resultStack: composite expected");
-			}
-		}
-	}
-
-	/**
 	 * Evaluates an annotation.
 	 * 
 	 * @param annotation
@@ -529,7 +534,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void visit(final Assumption assumption) {
 		this.statementWillExecute(assumption);
-		// TODO do this
+		this.assumptions.add(assumption.getExpression());
 		this.statementExecuted(assumption);
 	}
 
@@ -574,7 +579,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void visit(final Axiom axiom) {
 		this.statementWillExecute(axiom);
-		// TODO do this
+		this.axioms.add(axiom.getExpression());
 		this.statementExecuted(axiom);
 	}
 
@@ -756,6 +761,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(final FunctionCall functionCall) {
 		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);
 		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
+		this.executingVisitor.setAxioms(this.axioms);
 		EList<Expression> actuals = functionCall.getActuals();
 		this.executingVisitor.symbolStack.push(new HashMap<VariableDeclaration, Value>());
 
@@ -1099,7 +1105,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		if (this.specificationChecker == null) {
 			throw new IllegalArgumentException("No SpecificationChecker supplied");
 		}
-		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols());
+		List<Expression> axiomsAndAssumptions = new ArrayList<Expression>();
+		axiomsAndAssumptions.addAll(this.assumptions);
+		axiomsAndAssumptions.addAll(this.axioms);
+		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols(),
+		                axiomsAndAssumptions);
 		if (validity.equals(Validity.UNKNOWN)) {
 			annotationFailed(this.currentAnnotation);
 			this.resultStack.push(new BooleanValue(false));

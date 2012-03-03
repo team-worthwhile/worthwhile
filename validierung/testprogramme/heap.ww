@@ -116,7 +116,8 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 			_invariant insertResult[0] = insertHeap[0] + 1
 			
 			// Invariant: The heap condition is fulfilled on all elements but the one we are currently sifting up.
-			// We need the second invariant because an array like this:
+			// The second invariant states that not only the the parent element, but also the grandparent element of
+			// an element is smaller than the element itself. We need this second invariant because an array like this:
 			//
 			//        8
 			//     (6)  9

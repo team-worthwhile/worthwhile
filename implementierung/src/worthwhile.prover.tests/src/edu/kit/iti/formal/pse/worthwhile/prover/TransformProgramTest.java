@@ -198,7 +198,7 @@ public final class TransformProgramTest {
 		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
 		                + "    return -1\n" + "}\n" + "Integer v := f(2)\n",
 		                "(forall Integer t : t = 0 || t = 1 => t = 0 && -1 = 1 || t = 1 && -1 = 0)"
-		                + "&& (forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 => true)"
+		                + "&& (forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 => true)"
 		                + "&& (2 = 0 || 2 = 1)");
 	}
 
@@ -211,8 +211,8 @@ public final class TransformProgramTest {
 		                + "_ensures (t = 0 && _return = 1) || (t = 1 && _return = 0)\n" + "{\n"
 		                + "    return -1\n" + "}\n" + "if f(2) = -1 {\n}\n",
 		                "(forall Integer t : t = 0 || t = 1 => t = 0 && -1 = 1 || t = 1 && -1 = 0)"
-		                + "&& (forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 => (_f0 = -1 => true))"
-		                + "&& (forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 => (!(_f0 = -1) => true))"
+		                + "&& (forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 => ($f$0 = -1 => true))"
+		                + "&& (forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 => (!($f$0 = -1) => true))"
 		                + "&& (2 = 0 || 2 = 1)");
 	}
 
@@ -228,19 +228,19 @@ public final class TransformProgramTest {
 		                                + "while f(2) = -1\n_invariant f(2) = -1\n{\n}\n",
 		                "(forall Integer t : (t = 0 || t = 1) => (t = 0 && -1 = 1 || t = 1 && -1 = 0))"
 		                                + "&&"
-		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
-		                                + " (forall Integer _f1 : 2 = 0 && _f1 = 1 || 2 = 1 && _f1 = 0 =>"
-		                                + "  _f1 = -1))"
+		                                + "(forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 =>"
+		                                + " (forall Integer $f$1 : 2 = 0 && $f$1 = 1 || 2 = 1 && $f$1 = 0 =>"
+		                                + "  $f$1 = -1))"
 		                                + "&&"
-		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
-		                                + " (forall Integer _f1 : 2 = 0 && _f1 = 1 || 2 = 1 && _f1 = 0 =>"
-		                                + "  (_f0 = -1 && _f1 = -1 => _f1 = -1)))"
+		                                + "(forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 =>"
+		                                + " (forall Integer $f$1 : 2 = 0 && $f$1 = 1 || 2 = 1 && $f$1 = 0 =>"
+		                                + "  ($f$0 = -1 && $f$1 = -1 => $f$1 = -1)))"
 		                                + "&&"
-		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
-		                                + " (forall Integer _f1 : 2 = 0 && _f1 = 1 || 2 = 1 && _f1 = 0 =>"
-		                                + "  (!(_f0 = -1) && _f1 = -1 => true)))"
+		                                + "(forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 =>"
+		                                + " (forall Integer $f$1 : 2 = 0 && $f$1 = 1 || 2 = 1 && $f$1 = 0 =>"
+		                                + "  (!($f$0 = -1) && $f$1 = -1 => true)))"
 		                                + "&&"
-		                                + "(forall Integer _f0 : 2 = 0 && _f0 = 1 || 2 = 1 && _f0 = 0 =>"
+		                                + "(forall Integer $f$0 : 2 = 0 && $f$0 = 1 || 2 = 1 && $f$0 = 0 =>"
 		                                + " 2 = 0 || 2 = 1)"
 		                                + "&&"
 		                                + "(2 = 0 || 2 = 1)");
@@ -257,8 +257,8 @@ public final class TransformProgramTest {
 		                + "{\n" + "return fiver()\n" + "}\n",
 		                "(true => 5 = 5)"
 		                + "&& (true =>"
-		                + " (forall Integer _fiver1 : _fiver1 = 5 =>"
-		                + "  (forall Integer _fiver0 : _fiver0 = 5 => _fiver1 = _fiver0)))"
+		                + " (forall Integer $fiver$1 : $fiver$1 = 5 =>"
+		                + "  (forall Integer $fiver$0 : $fiver$0 = 5 => $fiver$1 = $fiver$0)))"
 		                + "&& true");
 	}
 }

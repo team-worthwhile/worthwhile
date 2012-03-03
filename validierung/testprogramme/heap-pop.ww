@@ -1,0 +1,139 @@
+// -----------------
+// UTILITY FUNCTIONS
+// -----------------
+
+// Swaps two elements in an array
+function Integer[] swap(Integer[] source, Integer index1, Integer index2)
+	_ensures ∀ Integer i8, i8 ≠ index1 ∧ i8 ≠ index2 : _return[i8] = source[i8]
+	_ensures _return[index1] = source[index2]
+	_ensures _return[index2] = source[index1]
+{
+	Integer[] res := source
+
+	Integer tmp1 := res[index1]
+	res[index1] := res[index2]
+	res[index2] := tmp1
+	
+	return res
+}
+
+// Returns the parent index of an item in the heap.
+function Integer parent(Integer key1)
+	_ensures _return = key1 / 2
+{
+	return key1 / 2
+}
+
+// Returns the index of the left child of an item in the heap.
+function Integer left(Integer key2)
+	_ensures _return = 2 ⋅ key2
+{
+	return 2 ⋅ key2
+}
+
+// Returns the index of the right child of an item in the heap.
+function Integer right(Integer key3)
+	_ensures _return = 2 ⋅ key3 + 1
+{
+	return 2 ⋅ key3 + 1
+}
+
+// Returns the size of the given heap
+// (which is stored in the heap at index 0)
+function Integer heapsize(Integer[] heap1)
+	_requires heap1[0] ≥ 0
+	_ensures _return = heap1[0]
+{
+	return heap1[0]
+}
+
+// -----------------
+// HEAP FUNCTIONS
+// -----------------
+
+// Checks that the given array fulfils the heap condition
+// The heap condition is defined as follows: Each element must be equal to or smaller
+// than any of its child elements. 
+function Boolean heapCondition(Integer[] heap)
+	_requires heapsize(heap) ≥ 0
+	_ensures _return = ∀ Integer i1, 2 ≤ i1 ∧ i1 ≤ heapsize(heap) : heap[parent(i1)] ≤ heap[i1]
+{
+	Boolean result := true
+	
+	if (heapsize(heap) ≥ 2) {
+		Integer i3 := 2
+		
+		while i3 ≤ heapsize(heap)
+			_invariant 2 ≤ i3 ∧ i3 ≤ heapsize(heap) + 1
+			
+			// The invariant is that the contents of "result" indicate whether the
+			// sub-array [1..i3-1] of the input fulfils the heap condition.
+			_invariant result = ∀ Integer i4, 2 ≤ i4 ∧ i4 < i3 : heap[parent(i4)] ≤ heap[i4]
+		{
+			if result = true {
+				if heap[parent(i3)] > heap[i3] {
+					result := false
+				}
+			}
+			
+			i3 := i3 + 1
+		}
+	}
+	
+	return result
+}
+
+// Removes the first element of the heap, restores heap order and decreases the heap size by one
+function Integer[] heapPop(Integer[] popHeap)
+	_requires heapsize(popHeap) > 0
+	_requires heapCondition(popHeap)
+	
+	_ensures /*heapsize(_return) = heapsize(popHeap) - 1*/ _return[0] = popHeap[0] - 1
+	_ensures heapCondition(_return)
+	
+	// Ensure that the remaining elements still occur in the resulting heap
+	_ensures ∀ Integer i9, 2 ≤ i9 ∧ i9 ≤ popHeap[0] : ∃ Integer j9, 1 ≤ j9 ∧ j9 ≤ _return[0] : _return[j9] = popHeap[i9]
+{
+	// Overwrite the first element of the heap with the last and adjust the heap size.
+	Integer[] popResult := popHeap
+	popResult[1] := popResult[heapsize(popResult)]
+	popResult[0] := popHeap[0] - 1
+	
+	// This makes the postcondition true. TODO: Do we need this after the loop is fixed?
+	_assert ∀ Integer i99, 2 ≤ i99 ∧ i99 ≤ popHeap[0] : ∃ Integer j99, 1 ≤ j99 ∧ j99 ≤ popResult[0] : popResult[j99] = popHeap[i99]
+	
+	// If the heap is not empty, we need to restore the heap condition.
+	if (heapsize(popResult) > 0) {
+		Integer currentElementIndex := 1
+		
+		Integer largest := currentElementIndex
+			
+		if (2 ⋅ currentElementIndex ≤ popResult[0] ∧ popResult[2 ⋅ currentElementIndex] < popResult[currentElementIndex]) {
+			largest := 2 ⋅ currentElementIndex
+		}
+			
+		if (2 ⋅ currentElementIndex + 1 ≤ popResult[0] ∧ popResult[2 ⋅ currentElementIndex + 1] < popResult[currentElementIndex]) {
+			largest := 2 ⋅ currentElementIndex + 1
+		}
+		
+		// Sift down the element until either
+		while largest ≠ currentElementIndex
+			_invariant currentElementIndex ≥ 1 ∧ currentElementIndex ≤ popResult[0]
+			_invariant popResult[0] = popHeap[0] - 1
+			_invariant ∀ Integer i9a, 2 ≤ i9a ∧ i9a ≤ popHeap[0] : ∃ Integer j9a, 1 ≤ j9a ∧ j9a ≤ popResult[0] : popResult[j9a] = popHeap[i9a]
+		{
+			popResult := swap(popResult, largest, currentElementIndex)
+			currentElementIndex := largest
+			
+			if (2 ⋅ currentElementIndex ≤ popResult[0] ∧ popResult[2 ⋅ currentElementIndex] < popResult[currentElementIndex]) {
+				largest := 2 ⋅ currentElementIndex
+			}
+			
+			if (2 ⋅ currentElementIndex + 1 ≤ popResult[0] ∧ popResult[2 ⋅ currentElementIndex + 1] < popResult[currentElementIndex]) {
+				largest := 2 ⋅ currentElementIndex + 1
+			}
+		}	
+	}
+	
+	return popResult
+}

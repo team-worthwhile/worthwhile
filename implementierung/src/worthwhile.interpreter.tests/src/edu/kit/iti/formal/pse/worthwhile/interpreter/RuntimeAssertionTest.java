@@ -94,6 +94,7 @@ public final class RuntimeAssertionTest {
 		                new Object[] { "if (false) {\n_assume false\n}\n_assert 0 = 1\n", false },
 		                new Object[] { "if (false) {\n_assume true \n}\n_assert 0 = 1\n", false },
 		                new Object[] { "if (true)  {\nBoolean c := false\n_assume c\n}\n_assert 0 = 1\n", true },
+		                new Object[] { "Boolean c := false\n_assume c\nc := true\n_assert 0 = 1\n", true },
 		                new Object[] {
 		                                "Boolean c := true\nwhile (c) {\nc := false\n_assume c\n}\n_assert 0 = 1\n",
 		                                true },

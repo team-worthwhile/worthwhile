@@ -81,7 +81,7 @@ public final class AstNodeCreatorHelper {
 	 *                the array element {@link Expression}s
 	 * @return an {@link ArrayLiteral} whose first elements are initialized with the given <code>values</code>
 	 */
-	public static ArrayLiteral createArrayLiteral(final List<Expression> values) {
+	public static ArrayLiteral createArrayLiteral(final List<? extends Expression> values) {
 		final ArrayLiteral arrayLiteral = AstNodeCreatorHelper.createArrayLiteral();
 		arrayLiteral.getValues().addAll(values);
 		return arrayLiteral;
@@ -94,7 +94,7 @@ public final class AstNodeCreatorHelper {
 	 *                the value {@link Expression}s the new {@link ArrayFunction} is to be initialized with
 	 * @return a new <code>ArrayFunction</code> initialized with the given <code>values</code>
 	 */
-	public static ArrayFunction createFalseArrayFunction(final List<Expression> values) {
+	public static ArrayFunction createFalseArrayFunction(final List<? extends Expression> values) {
 		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createFalseArrayFunction();
 		return AstNodeCreatorHelper.createArrayFunction(values, arrayFunction);
 	}
@@ -106,7 +106,7 @@ public final class AstNodeCreatorHelper {
 	 *                the value {@link Expression}s the new {@link ArrayFunction} is to be initialized with
 	 * @return a new <code>ArrayFunction</code> initialized with the given <code>values</code>
 	 */
-	public static ArrayFunction createZeroArrayFunction(final List<Expression> values) {
+	public static ArrayFunction createZeroArrayFunction(final List<? extends Expression> values) {
 		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createZeroArrayFunction();
 		return AstNodeCreatorHelper.createArrayFunction(values, arrayFunction);
 	}
@@ -120,7 +120,7 @@ public final class AstNodeCreatorHelper {
 	 * @return a new {@link ArrayFunction} that represents the assignment of <code>values</code> to
 	 *         <code>chainedFunction</code>
 	 */
-	public static ArrayFunction createArrayFunction(final List<Expression> values,
+	public static ArrayFunction createArrayFunction(final List<? extends Expression> values,
 	                final ArrayFunction chainedFunction) {
 		ArrayFunction arrayFunction = chainedFunction;
 
@@ -467,7 +467,7 @@ public final class AstNodeCreatorHelper {
 	 *                the {@link Program} statements
 	 * @return a <code>Program</code> whose main {@link Block} consists of the given <code>statements</code>
 	 */
-	public static Program createProgram(final List<Statement> statements) {
+	public static Program createProgram(final List<? extends Statement> statements) {
 		return AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper.createBlock(statements));
 	}
 
@@ -487,7 +487,7 @@ public final class AstNodeCreatorHelper {
 	 *                the {@link Block} statements
 	 * @return a <code>Block</code> that consists of the given <code>statements</code>
 	 */
-	public static Block createBlock(final List<Statement> statements) {
+	public static Block createBlock(final List<? extends Statement> statements) {
 		final Block block = AstNodeCreatorHelper.factory.createBlock();
 		block.getStatements().addAll(statements);
 		return block;

@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
 import java.util.ListIterator;
 
@@ -26,7 +26,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  * Substitutes a child reference with some {@link Expression} in the parent {@link ASTNode} when indicated so by the
@@ -55,7 +54,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVis
  * @author fabian
  * 
  */
-class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisitor {
+public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisitor {
 	/**
 	 * The {@link Expression} children are substituted with when {@link SubstitutionVisitor#found} was set.
 	 */
@@ -71,14 +70,14 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	 * @param substitute
 	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
 	 */
-	SubstitutionVisitor(final T substitute) {
+	public SubstitutionVisitor(final T substitute) {
 		this.substitute = substitute;
 	}
 
 	/**
 	 * @return the found
 	 */
-	final Boolean getFound() {
+	public final Boolean getFound() {
 		return this.found;
 	}
 
@@ -86,7 +85,7 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	 * @param found
 	 *                the found to set
 	 */
-	final void setFound(final Boolean found) {
+	protected final void setFound(final Boolean found) {
 		this.found = found;
 	}
 
@@ -97,7 +96,7 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	 *                <code>substitute</code> itself should be returned
 	 * @return the <code>substitute</code>
 	 */
-	final T getSubstitute(final boolean cloned) {
+	public final T getSubstitute(final boolean cloned) {
 		if (cloned) {
 			return AstNodeCloneHelper.clone(this.substitute);
 		} else {
@@ -108,7 +107,7 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	/**
 	 * @return a clone of the {@link SubstitutionVisitor#substitute}
 	 */
-	final T getSubstitute() {
+	public final T getSubstitute() {
 		return this.getSubstitute(true);
 	}
 
@@ -117,7 +116,7 @@ class SubstitutionVisitor<T extends Expression> extends HierarchialASTNodeVisito
 	 * @param substitute
 	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
 	 */
-	final void setSubstitute(final T substitute) {
+	protected final void setSubstitute(final T substitute) {
 		this.substitute = substitute;
 	}
 

@@ -8,6 +8,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
 
 /**
  * Substitute {@link ReturnValueReference}s in an {@link Expression} with another {@link Expression}.

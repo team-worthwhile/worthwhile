@@ -6,6 +6,7 @@ import org.junit.Test;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
 
 /**
  * Test the correct functionality of {@link SubstitutionVisitor}.

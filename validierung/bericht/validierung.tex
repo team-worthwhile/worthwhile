@@ -60,6 +60,12 @@
   \left.\renewcommand*\lbrace.%
   \begin{cases}}%
 {\end{cases}\right\rbrace}
+\newcommand{\guitest}[5]{\subsubsection{#1}\begin{description}
+	\item[Beschreibung] #2
+	\item[Erwartetes Ergebnis] #3
+	\item[Tatsächliches Ergebnis] #4
+	\item[Gefundene Fehler/Anmerkungen] #5
+\end{description}}
 \graphicspath{{images/}}
 
 \begin{document}

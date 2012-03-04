@@ -1,12 +1,19 @@
 \section{Profiling- und Performance-Tests}
+
 Um einen Überblick über den Zeitaufwand der einzelnen Worthwhile-Komponenten zu gewinnen sowie zeitliche Hotspots zu identifizieren, wurden Profiling-Tests mit Unterstützung von VisualVM durchgeführt. Hierbei wurden einzelne, meist komplexere, Testprogramme aus der GUI gestartet und untersucht, um einen Eindruck von Worthwhile unter möglichst realen Bedingungen zu erlangen.
 
 \subsection{Parser}
 
+Das Parsen eines Programms ist abhängig von der Anzahl der vorkommenden Sprachkonstrukte. Beispielsweiße dauerte das Parsen des Programms bubblesort2.ww 111 ms. Eine eindeutige Aussage über die Dauer eines Parsevorgangs lässt sich schwer treffen, da die Anzahl sowie die Verschachtelungstiefe der Sprachkonstrukte eine große Rolle spielt. Jedoch benötigen die einzelne Sprachkonstrukte eine Bearbeitungszeit von Bruchteilen von Millisekunden bis hin zu wenigen Millisekunden. Im Testprogramm bubblesort2.ww stellte sich die Funktionsdeklaration mit 5,56 ms als am zeitaufwendigsten heraus.
+
 \subsection{Interpreter}
 
+Der Zeitbedarf für das Interpretieren ist genauso wie das Parsen abhängig von der Anzahl der Sprachkonstrukte. Jedoch muss hier nicht die Anzahl der vorkommenden sondern die der auszuführenden Elemente berücksichtigt werden. Deshalb lässt sich auch hier nicht eindeutig sagen wie viel Zeit ein Programm in der Ausführung benötigt, da insbesondere ein Prorgamm unter Umständen nie terminiert. Das Sortieren eines Arrays mit zehn Elementen mittels bubblesort2.ww benötigte etwa 18 Sekunden. Diese relativ hohe Zeit ist auf die ständig auftretenden Beweiseraufrufe zurück zu führen, welche annähernd 100 \% der Zeit ausmachten. Das Sortieren ohne die Beweiseraufrufe dauerte ca. 26 ms.
+
 \subsection{Prover}
+
 Das Überprüfen eines Testprogramms dauerte im Schnitt etwa 2 Sekunden. Am Beispiel der Testprogramme \texttt{test\_fibonacci.ww} und \texttt{bubblesort2.ww} lag die Beweiszeit bei 1865 ms bzw. 1895 ms. Da vor dem Beweisen ein Parsen des Codes und Typsystemüberprüfungen nötig sind, fallen etwa 100 bis 200 ms auf diese Aufgaben zurück. Die Transformation des Codes im wp-Kalkül benötigte für \texttt{bubblesort2.ww} 142 ms und für \texttt{test\_fibonacci.ww} 36 ms. Das Umwandeln einer einzelnen Annotation ins SMTLIB-Format betrug bei beiden Tests wenige Millisekunden (im Schnitt etwa 4 ms). Da jedoch die Annotationen einzeln umgewandelt und überprüft werden, liegt die Gesamtzeit der Umwandlungen ins SMTLIB-Format deutlich höher. Das Testprogramm \texttt{bubblesort2.ww} enthielt 13 und \texttt{test\_fibonacci.ww} 11 zu überprüfende Annotationen. Somit liegt der Zeitbedarf für das Umwandeln aller Annotation bei etwa 50 ms. Ebenso wird jede Annotation anschließend mittels externem Beweiser überprüft. Einzelne Annotationen zu beweisen, dauerte etwa 15 bis 17 ms und demnach lag der Gesamtzeitaufwand des Beweisers für das gesamte Programm bei 220 ms für \texttt{bubblesort2.ww} und bei 170 ms für \texttt{test\_fibonacci.ww}. Nach Überprüfung weiterer Testprogramme ergibt sich somit ein ungefährer Überblick über den anteiligen Zeitaufwand der Prover-Komponenten in Tabelle~\ref{zeitaufwandprover}.
+
 \begin{table}[h]
 \centering
 \caption{Ungefährer Zeitaufwand der Prover-Komponenten}

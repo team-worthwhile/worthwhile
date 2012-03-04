@@ -1,11 +1,10 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
 
 /**
  * Substitute {@link VariableReference}s in an {@link Expression} with another {@link Expression}.
@@ -14,7 +13,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
  * @author fabian
  * 
  */
-class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
+public class VariableReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	/**
 	 * Substitutes occurrences of a {@link VariableDeclaration} in an {@link Expression} with another
 	 * <code>Expression</code>.

@@ -32,6 +32,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ReturnValueReferenceSubstitution;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VariableDeclarationSubstitutionVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VariableReferenceSubstitution;
 
 /**
  * Applies the Weakest Precondition calculus to a {@link Program}.

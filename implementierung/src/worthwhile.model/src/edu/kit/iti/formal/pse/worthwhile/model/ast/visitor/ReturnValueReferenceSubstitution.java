@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
@@ -7,8 +7,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
 
 /**
  * Substitute {@link ReturnValueReference}s in an {@link Expression} with another {@link Expression}.
@@ -17,7 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
  * @author fabian
  * 
  */
-class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
+public class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	/**
 	 * The <code>Expression</code> <code>ReturnValueReferences</code> are substituted with.
 	 */

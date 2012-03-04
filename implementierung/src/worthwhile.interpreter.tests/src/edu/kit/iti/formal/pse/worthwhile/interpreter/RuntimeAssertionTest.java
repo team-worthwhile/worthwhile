@@ -89,6 +89,7 @@ public final class RuntimeAssertionTest {
 	public static Collection<Object[]> testParameters() {
 		return Arrays.asList(
 		                new Object[] { "_assume false\n_assert 0 = 1\n", true },
+		                new Object[] { "_assume false\n_assume true\n_assert 0 = 1\n", true },
 		                new Object[] { "if (true)  {\n_assume false\n}\n_assert 0 = 1\n", true },
 		                new Object[] { "if (true)  {\n_assume true \n}\n_assert 0 = 1\n", false },
 		                new Object[] { "if (false) {\n_assume false\n}\n_assert 0 = 1\n", false },

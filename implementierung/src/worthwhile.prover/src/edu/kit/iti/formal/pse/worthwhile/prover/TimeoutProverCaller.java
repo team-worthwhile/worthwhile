@@ -42,15 +42,23 @@ public abstract class TimeoutProverCaller implements ProverCaller {
 	 *                the cleanup task to add
 	 */
 	public final void addCleanupTask(final Runnable cleanupTask) {
-		this.cleanupTasks.add(cleanupTask);
+		// see runCleanupTasks for information on another thread that may tries to access cleanupTasks while we
+		// are modifying it
+		synchronized (this.cleanupTasks) {
+			this.cleanupTasks.add(cleanupTask);
+		}
 	}
 
 	/**
 	 * Run all scheduled cleanup tasks.
 	 */
 	private void runCleanupTasks() {
-		for (Runnable task : this.cleanupTasks) {
-			task.run();
+		// runCleanupTasks is called from a thread, which is created in scheduleProverCallerTimeout, separate
+		// from the thread that created this and usually calls addCleanupTask, which modifies cleanupTasks
+		synchronized (this.cleanupTasks) {
+			for (Runnable task : this.cleanupTasks) {
+				task.run();
+			}
 		}
 	}
 

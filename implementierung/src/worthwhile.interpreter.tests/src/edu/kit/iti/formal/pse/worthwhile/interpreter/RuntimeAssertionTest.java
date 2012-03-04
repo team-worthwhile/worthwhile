@@ -3,8 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.interpreter;
 import java.util.Arrays;
 import java.util.Collection;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

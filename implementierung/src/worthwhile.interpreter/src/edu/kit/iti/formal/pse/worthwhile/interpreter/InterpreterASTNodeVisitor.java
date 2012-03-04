@@ -159,6 +159,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	private List<Expression> axioms = new ArrayList<Expression>();
 
+	private boolean allAntescendants = false;
+
 	/**
 	 * sets the Axioms.
 	 * 
@@ -167,6 +169,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void setAxioms(List<Expression> axioms) {
 		this.axioms = axioms;
+		for (Expression axiom : this.axioms) {
+			if (this.evaluateQuantifiedExpression(axiom).equals(Validity.VALID)) {
+				this.allAntescendants = true;
+			}
+		}
 	}
 
 	/**
@@ -456,19 +463,35 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	private void visitAnnotation(final Annotation annotation) {
 		this.statementWillExecute(annotation);
 		this.currentAnnotation = annotation;
-		try {
-			annotation.getExpression().accept(this);
-			if (this.popBooleanValue().getValue()) {
-				annotationSucceeded(annotation);
-			} else {
-				annotationFailed(annotation);
+		// check first if there are antescendants and if they are all false
+		if ((!this.allAntescendants) && (this.axioms.size() + this.assumptions.size() > 0)) {
+			annotationSucceeded(annotation);
+		} else {
+			try {
+				annotation.getExpression().accept(this);
+				if (this.popBooleanValue().getValue()) {
+					annotationSucceeded(annotation);
+				} else {
+					annotationFailed(annotation);
+				}
+			} catch (StatementException e) {
+				this.executionFailed(annotation, e.getError());
+				return;
 			}
-		} catch (StatementException e) {
-			this.executionFailed(annotation, e.getError());
-			return;
 		}
 		this.currentAnnotation = null;
 		this.statementExecuted(annotation);
+	}
+
+	private Validity evaluateQuantifiedExpression(Expression quantifiedExpression) {
+		if (this.specificationChecker == null) {
+			throw new IllegalArgumentException("No SpecificationChecker supplied");
+		}
+		List<Expression> axiomsAndAssumptions = new ArrayList<Expression>();
+		axiomsAndAssumptions.addAll(this.assumptions);
+		axiomsAndAssumptions.addAll(this.axioms);
+		return this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols(),
+		                axiomsAndAssumptions);
 	}
 
 	/**
@@ -534,14 +557,15 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void visit(final Assumption assumption) {
 		this.statementWillExecute(assumption);
-
 		// resolve symbols (by replacing them with their current values) now because their values may change or
 		// they may even not exist anymore when this assumption is applied, which usually happens during
 		// assertion evaluations
-		Expression a = AstNodeCloneHelper.clone(assumption.getExpression());
-		a = SymbolReferenceResolver.apply(a, this);
-		this.assumptions.add(a);
-
+		Expression expression = AstNodeCloneHelper.clone(assumption.getExpression());
+		expression = SymbolReferenceResolver.apply(expression, this);	
+		if (this.evaluateQuantifiedExpression(expression).equals(Validity.VALID)) {
+			this.allAntescendants = true;
+		}
+		this.assumptions.add(expression);
 		this.statementExecuted(assumption);
 	}
 
@@ -586,7 +610,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	public void visit(final Axiom axiom) {
 		this.statementWillExecute(axiom);
-		this.axioms.add(axiom.getExpression());
+		Expression expression = axiom.getExpression();
+		if (this.evaluateQuantifiedExpression(expression).equals(Validity.VALID)) {
+			this.allAntescendants = true;
+		}
+		this.axioms.add(expression);
 		this.statementExecuted(axiom);
 	}
 
@@ -1109,14 +1137,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.QuantifiedExpression)
 	 */
 	public void visit(final QuantifiedExpression quantifiedExpression) {
-		if (this.specificationChecker == null) {
-			throw new IllegalArgumentException("No SpecificationChecker supplied");
-		}
-		List<Expression> axiomsAndAssumptions = new ArrayList<Expression>();
-		axiomsAndAssumptions.addAll(this.assumptions);
-		axiomsAndAssumptions.addAll(this.axioms);
-		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols(),
-		                axiomsAndAssumptions);
+		Validity validity = this.evaluateQuantifiedExpression(quantifiedExpression);
 		if (validity.equals(Validity.UNKNOWN)) {
 			annotationFailed(this.currentAnnotation);
 			this.resultStack.push(new BooleanValue(false));

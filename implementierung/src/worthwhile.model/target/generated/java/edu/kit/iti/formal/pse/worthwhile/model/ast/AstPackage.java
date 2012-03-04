@@ -438,22 +438,13 @@ public class AstPackage extends EPackageImpl {
 	public static final int GUARD_ASSERTION__EXPRESSION = ASSERTION__EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Guarded Node</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	public static final int GUARD_ASSERTION__GUARDED_NODE = ASSERTION_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Guard Assertion</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int GUARD_ASSERTION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 1;
+	public static final int GUARD_ASSERTION_FEATURE_COUNT = ASSERTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion <em>Function Call Precondition Assertion</em>}' class.
@@ -481,7 +472,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FUNCTION_CALL_PRECONDITION_ASSERTION__GUARDED_NODE = GUARD_ASSERTION__GUARDED_NODE;
+	public static final int FUNCTION_CALL_PRECONDITION_ASSERTION__GUARDED_NODE = GUARD_ASSERTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Function Call Precondition Assertion</em>' class.
@@ -490,7 +481,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FUNCTION_CALL_PRECONDITION_ASSERTION_FEATURE_COUNT = GUARD_ASSERTION_FEATURE_COUNT + 0;
+	public static final int FUNCTION_CALL_PRECONDITION_ASSERTION_FEATURE_COUNT = GUARD_ASSERTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion <em>Divisor Not Zero Assertion</em>}' class.
@@ -518,7 +509,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIVISOR_NOT_ZERO_ASSERTION__GUARDED_NODE = GUARD_ASSERTION__GUARDED_NODE;
+	public static final int DIVISOR_NOT_ZERO_ASSERTION__GUARDED_NODE = GUARD_ASSERTION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Divisor Not Zero Assertion</em>' class.
@@ -527,7 +518,7 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DIVISOR_NOT_ZERO_ASSERTION_FEATURE_COUNT = GUARD_ASSERTION_FEATURE_COUNT + 0;
+	public static final int DIVISOR_NOT_ZERO_ASSERTION_FEATURE_COUNT = GUARD_ASSERTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment <em>Assignment</em>}' class.
@@ -2801,19 +2792,6 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion#getGuardedNode <em>Guarded Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Guarded Node</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GuardAssertion#getGuardedNode()
-	 * @see #getGuardAssertion()
-	 * @generated
-	 */
-	public EReference getGuardAssertion_GuardedNode() {
-		return (EReference) guardAssertionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion <em>Function Call Precondition Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2826,6 +2804,19 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion#getGuardedNode <em>Guarded Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Guarded Node</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion#getGuardedNode()
+	 * @see #getFunctionCallPreconditionAssertion()
+	 * @generated
+	 */
+	public EReference getFunctionCallPreconditionAssertion_GuardedNode() {
+		return (EReference) functionCallPreconditionAssertionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion <em>Divisor Not Zero Assertion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2835,6 +2826,19 @@ public class AstPackage extends EPackageImpl {
 	 */
 	public EClass getDivisorNotZeroAssertion() {
 		return divisorNotZeroAssertionEClass;
+	}
+
+	/**
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion#getGuardedNode <em>Guarded Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Guarded Node</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion#getGuardedNode()
+	 * @see #getDivisorNotZeroAssertion()
+	 * @generated
+	 */
+	public EReference getDivisorNotZeroAssertion_GuardedNode() {
+		return (EReference) divisorNotZeroAssertionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -3932,11 +3936,13 @@ public class AstPackage extends EPackageImpl {
 		assertionEClass = createEClass(ASSERTION);
 
 		guardAssertionEClass = createEClass(GUARD_ASSERTION);
-		createEReference(guardAssertionEClass, GUARD_ASSERTION__GUARDED_NODE);
 
 		functionCallPreconditionAssertionEClass = createEClass(FUNCTION_CALL_PRECONDITION_ASSERTION);
+		createEReference(functionCallPreconditionAssertionEClass,
+		                FUNCTION_CALL_PRECONDITION_ASSERTION__GUARDED_NODE);
 
 		divisorNotZeroAssertionEClass = createEClass(DIVISOR_NOT_ZERO_ASSERTION);
+		createEReference(divisorNotZeroAssertionEClass, DIVISOR_NOT_ZERO_ASSERTION__GUARDED_NODE);
 
 		annotationEClass = createEClass(ANNOTATION);
 		createEReference(annotationEClass, ANNOTATION__EXPRESSION);
@@ -4268,9 +4274,6 @@ public class AstPackage extends EPackageImpl {
 
 		initEClass(guardAssertionEClass, GuardAssertion.class, "GuardAssertion", !IS_ABSTRACT, !IS_INTERFACE,
 		                IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getGuardAssertion_GuardedNode(), this.getASTNode(), null, "guardedNode", null, 1, 1,
-		                GuardAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
-		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(guardAssertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -4278,12 +4281,19 @@ public class AstPackage extends EPackageImpl {
 		initEClass(functionCallPreconditionAssertionEClass, FunctionCallPreconditionAssertion.class,
 		                "FunctionCallPreconditionAssertion", !IS_ABSTRACT, !IS_INTERFACE,
 		                IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFunctionCallPreconditionAssertion_GuardedNode(), this.getFunctionCall(), null,
+		                "guardedNode", null, 1, 1, FunctionCallPreconditionAssertion.class, !IS_TRANSIENT,
+		                !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+		                IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(functionCallPreconditionAssertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(divisorNotZeroAssertionEClass, DivisorNotZeroAssertion.class, "DivisorNotZeroAssertion",
 		                !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDivisorNotZeroAssertion_GuardedNode(), this.getExpression(), null, "guardedNode",
+		                null, 1, 1, DivisorNotZeroAssertion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(divisorNotZeroAssertionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -4878,15 +4888,6 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass GUARD_ASSERTION = eINSTANCE.getGuardAssertion();
 
 		/**
-		 * The meta object literal for the '<em><b>Guarded Node</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		public static final EReference GUARD_ASSERTION__GUARDED_NODE = eINSTANCE
-		                .getGuardAssertion_GuardedNode();
-
-		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion <em>Function Call Precondition Assertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4898,6 +4899,15 @@ public class AstPackage extends EPackageImpl {
 		                .getFunctionCallPreconditionAssertion();
 
 		/**
+		 * The meta object literal for the '<em><b>Guarded Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference FUNCTION_CALL_PRECONDITION_ASSERTION__GUARDED_NODE = eINSTANCE
+		                .getFunctionCallPreconditionAssertion_GuardedNode();
+
+		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion <em>Divisor Not Zero Assertion</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4906,6 +4916,15 @@ public class AstPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EClass DIVISOR_NOT_ZERO_ASSERTION = eINSTANCE.getDivisorNotZeroAssertion();
+
+		/**
+		 * The meta object literal for the '<em><b>Guarded Node</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference DIVISOR_NOT_ZERO_ASSERTION__GUARDED_NODE = eINSTANCE
+		                .getDivisorNotZeroAssertion_GuardedNode();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation <em>Annotation</em>}' class.

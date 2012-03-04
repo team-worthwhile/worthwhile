@@ -99,18 +99,20 @@
                     </genOperations>
                   </genClasses>
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion">
-                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion/guardedNode"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/GuardAssertion/accept/visitor"/>
                     </genOperations>
                   </genClasses>
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion">
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion/guardedNode"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionCallPreconditionAssertion/accept/visitor"/>
                     </genOperations>
                   </genClasses>
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion">
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion/guardedNode"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/DivisorNotZeroAssertion/accept/visitor"/>
                     </genOperations>

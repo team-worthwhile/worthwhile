@@ -25,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
@@ -344,7 +345,7 @@ public final class AstNodeCreatorHelper {
 	 * @return a new {@link DivisorNotZeroAssertion} for the given <code>guardedNode</code>
 	 */
 	public static DivisorNotZeroAssertion createDivisorNotZeroAssertion(final Expression expression,
-	                final ASTNode guardedNode) {
+	                final Expression guardedNode) {
 		final DivisorNotZeroAssertion divisorNotZeroAssertion = AstNodeCreatorHelper
 		                .createDivisorNotZeroAssertion();
 		divisorNotZeroAssertion.setExpression(expression);
@@ -382,7 +383,7 @@ public final class AstNodeCreatorHelper {
 	 * @return a new {@link FunctionCallPreconditionAssertion} for the given <code>guardedNode</code>
 	 */
 	public static FunctionCallPreconditionAssertion createFunctionCallPreconditionAssertion(
-	                final Expression expression, final ASTNode guardedNode) {
+	                final Expression expression, final FunctionCall guardedNode) {
 		FunctionCallPreconditionAssertion functionCallPreconditionAssertion = AstNodeCreatorHelper
 		                .createFunctionCallPreconditionAssertion();
 		functionCallPreconditionAssertion.setExpression(expression);

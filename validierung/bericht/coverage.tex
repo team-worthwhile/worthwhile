@@ -1,10 +1,20 @@
 \section{Überdeckungstests}
 Zur Messung der Abdeckung des Codes durch die geschriebenen Testfälle wurde das Eclipse-Plugin EclEmma verwendet. Das Plugin hat gegenüber der Nutzung eines Programms auf der Kommandozeile den Vorteil, dass nicht durchlaufene Codezeilen in der Eclipse-Oberfläche markiert werden und so das Schreiben neuer Testfälle, die die Abdeckung erhöhen, vereinfacht wird.
 
-Gemessen wurde die Abdeckung bei den Komponenten ``Beweiserschnittstelle'' und ``Interpreter''. Diese Module enthalten einen Großteil der automatisch testbaren Logik in Worthwhile und sind komplett von den Komponenten ``Benutzeroberfläche'' und ``Debugger'' entkoppelt, die durch manuell ausgeführte Testszenarien getestet wurden. Es wurde sowohl Anweisungs- als auch Zweigüberdeckung gemessen.
+Gemessen wurde die Abdeckung bei den Komponenten "`Beweiserschnittstelle"' und "`Interpreter"'. Diese Module enthalten einen Großteil der automatisch testbaren Logik in Worthwhile und sind komplett von den Komponenten "`Benutzeroberfläche"' und "`Debugger"' entkoppelt, die durch manuell ausgeführte Testszenarien getestet wurden. Es wurde sowohl Anweisungs- als auch Zweigüberdeckung gemessen.
+
+Zusätzlich wurde auch die Überdeckung bei den manuellen GUI-Tests gemessen. Die zusammengefassten Überdeckungswerte der manuellen und der automatischen Testüberdeckung sind in Klammern angegeben.
 
 \subsection{Beweiserschnittstelle}
-In der Komponente ``Beweiserschnittstelle'' wurde eine Anweisungsüberdeckung von 89,1\% und eine Zweigüberdeckung von 81,9\% erreicht. Dabei wurde in \texttt{WPStrategy}, der Komponente, die den weakest"=precondition-Kalkül implementiert, sogar eine Zweigabdeckung von 93,8\% erreicht. Durch die Verwendung des Visitor"=Entwurfsmusters wurden viele Fallunterscheidungen vermieden und damit das Testen in dieser Komponente stark vereinfacht.
+In der Komponente "`Beweiserschnittstelle"' wurde eine Anweisungsüberdeckung von 75,4\% (78,1\%) und eine Zweigüberdeckung von 81,9\% (88,3\%) erreicht. Dabei wurde in \texttt{WPStrategy}, der Komponente, die den Weakest"=Precondition-Kalkül implementiert, sogar eine Zweigabdeckung von 93,8\% (100,0\%) erreicht. Durch die Verwendung des Visitor"=Entwurfsmusters wurden viele Fallunterscheidungen vermieden und damit das Testen in dieser Komponente stark vereinfacht.
 
 \subsection{Interpreter}
-In der Komponente ``Interpreter'' wurde eine Anweisungsüberdeckung von 76,7\% und eine Zweigüberdeckung von 66,9\% erreicht. Durch die vielfältige Auswahl von Testprogrammen wird dabei die Behandlung fast jedes Syntaxelementes mindestens einmal durchlaufen.
+In der Komponente "`Interpreter"' wurde eine Anweisungsüberdeckung von 78,8\% (88,5\%) und eine Zweigüberdeckung von 69,4\% (86,6\%) erreicht. Durch die vielfältige Auswahl von Testprogrammen wird dabei die Behandlung fast jedes Syntaxelementes mindestens einmal durchlaufen.
+
+\subsection{Debugger}
+
+Der Debugger wurde nur innerhalb der GUI-Tests getestet. Dort wurde eine Anweisungsüberdeckung von 86,8\% und eine Zweigüberdeckung von 76,8\% erreicht. Bedingt durch das Eclipse-Debugmodell werden viele allgemein gehaltene Interfaces implementiert, deren Funktionalität im Rahmen der Tests nicht voll ausgenutzt wird (beispielsweise das Abrufen des rohen Speicherinhalts im Debugger).
+
+\subsection{GUI}
+
+Bei den manuellen GUI-Tests erreichte die Komponente eine Anweisungsüberdeckung von 89,9\% und eine Zweigüberdeckung von 69,8\%. Die geringe Zweigüberdeckung resultiert vor allem aus dem Abfangen sehr seltener und schwer zu testender Fehlerbedingungen.

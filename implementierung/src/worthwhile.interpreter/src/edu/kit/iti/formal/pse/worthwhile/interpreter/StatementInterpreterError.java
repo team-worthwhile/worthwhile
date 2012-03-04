@@ -52,9 +52,7 @@ public class StatementInterpreterError extends InterpreterError {
 	 * @return the statement
 	 */
 	public final Statement getStatement() {
-		// begin-user-code
 		return statement;
-		// end-user-code
 	}
 
 	/**
@@ -64,9 +62,7 @@ public class StatementInterpreterError extends InterpreterError {
 	 *            the statement to set
 	 */
 	public final void setStatement(final Statement statement) {
-		// begin-user-code
 		this.statement = statement;
-		// end-user-code
 	}
 
 	/**
@@ -76,9 +72,7 @@ public class StatementInterpreterError extends InterpreterError {
 	 */
 	@Override
 	public final String getDescription() {
-		// begin-user-code
 		return this.name + " at statement: "
 				+ AstNodeToStringHelper.toString(statement);
-		// end-user-code
 	}
 }

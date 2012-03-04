@@ -529,8 +529,8 @@ public class AstSwitch<T> extends Switch<T> {
 				Precondition precondition = (Precondition) theEObject;
 				T result = casePrecondition(precondition);
 				if (result == null)
-				result = caseFunctionAnnotation(precondition);
-			if (result == null)
+					result = caseFunctionAnnotation(precondition);
+				if (result == null)
 					result = caseAnnotation(precondition);
 				if (result == null)
 					result = caseStatement(precondition);
@@ -544,8 +544,8 @@ public class AstSwitch<T> extends Switch<T> {
 				Postcondition postcondition = (Postcondition) theEObject;
 				T result = casePostcondition(postcondition);
 				if (result == null)
-				result = caseFunctionAnnotation(postcondition);
-			if (result == null)
+					result = caseFunctionAnnotation(postcondition);
+				if (result == null)
 					result = caseAnnotation(postcondition);
 				if (result == null)
 					result = caseStatement(postcondition);
@@ -876,19 +876,19 @@ public class AstSwitch<T> extends Switch<T> {
 					result = defaultCase(theEObject);
 				return result;
 			}
-		case AstPackage.FUNCTION_ANNOTATION: {
-			FunctionAnnotation functionAnnotation = (FunctionAnnotation) theEObject;
-			T result = caseFunctionAnnotation(functionAnnotation);
-			if (result == null)
-				result = caseAnnotation(functionAnnotation);
-			if (result == null)
-				result = caseStatement(functionAnnotation);
-			if (result == null)
-				result = caseASTNode(functionAnnotation);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
+			case AstPackage.FUNCTION_ANNOTATION: {
+				FunctionAnnotation functionAnnotation = (FunctionAnnotation) theEObject;
+				T result = caseFunctionAnnotation(functionAnnotation);
+				if (result == null)
+					result = caseAnnotation(functionAnnotation);
+				if (result == null)
+					result = caseStatement(functionAnnotation);
+				if (result == null)
+					result = caseASTNode(functionAnnotation);
+				if (result == null)
+					result = defaultCase(theEObject);
+				return result;
+			}
 			default:
 				return defaultCase(theEObject);
 		}

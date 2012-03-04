@@ -541,6 +541,8 @@
       </eAnnotations>
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" ordered="false"
+        lowerBound="1" eType="#//FunctionDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SymbolReference" eSuperTypes="#//Expression">
     <eOperations name="accept">

@@ -1935,13 +1935,22 @@ public class AstPackage extends EPackageImpl {
 	public static final int RETURN_VALUE_REFERENCE__INDEX = SYMBOL_REFERENCE__INDEX;
 
 	/**
+	 * The feature id for the '<em><b>Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RETURN_VALUE_REFERENCE__FUNCTION = SYMBOL_REFERENCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Return Value Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RETURN_VALUE_REFERENCE_FEATURE_COUNT = SYMBOL_REFERENCE_FEATURE_COUNT + 0;
+	public static final int RETURN_VALUE_REFERENCE_FEATURE_COUNT = SYMBOL_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.
@@ -3663,6 +3672,19 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference#getFunction <em>Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Function</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference#getFunction()
+	 * @see #getReturnValueReference()
+	 * @generated
+	 */
+	public EReference getReturnValueReference_Function() {
+		return (EReference) returnValueReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference <em>Symbol Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4027,6 +4049,7 @@ public class AstPackage extends EPackageImpl {
 		statementEClass = createEClass(STATEMENT);
 
 		returnValueReferenceEClass = createEClass(RETURN_VALUE_REFERENCE);
+		createEReference(returnValueReferenceEClass, RETURN_VALUE_REFERENCE__FUNCTION);
 
 		symbolReferenceEClass = createEClass(SYMBOL_REFERENCE);
 		createEReference(symbolReferenceEClass, SYMBOL_REFERENCE__INDEX);
@@ -4592,6 +4615,9 @@ public class AstPackage extends EPackageImpl {
 
 		initEClass(returnValueReferenceEClass, ReturnValueReference.class, "ReturnValueReference",
 		                !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReturnValueReference_Function(), this.getFunctionDeclaration(), null, "function",
+		                null, 1, 1, ReturnValueReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+		                !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		op = addEOperation(returnValueReferenceEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -5489,6 +5515,15 @@ public class AstPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EClass RETURN_VALUE_REFERENCE = eINSTANCE.getReturnValueReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Function</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference RETURN_VALUE_REFERENCE__FUNCTION = eINSTANCE
+		                .getReturnValueReference_Function();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference <em>Symbol Reference</em>}' class.

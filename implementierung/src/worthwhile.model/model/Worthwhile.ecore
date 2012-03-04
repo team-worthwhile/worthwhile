@@ -593,6 +593,8 @@
                     </eAnnotations>
                     <eParameters name="visitor" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor"/>
                   </eOperations>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="function"
+                      ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="SymbolReference" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/Expression">
                   <eOperations name="accept">

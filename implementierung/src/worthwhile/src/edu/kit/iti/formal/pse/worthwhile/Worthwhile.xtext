@@ -42,6 +42,12 @@ terminal BOOL returns ecore::EBoolean:
 	'true' | 'false'
 ;
 
+// The keyword for a ReturnValueReference gets a special terminal rule because we cannot use "_return" directly
+// in the ReturnValueReference rule due to https://bugs.eclipse.org/bugs/show_bug.cgi?format=multiple&id=318482
+terminal RETURN_VALUE_REFERENCE:
+	"_return"
+;
+
 // An axiom is declared at the top level in the program and is valid for all annotations.
 Axiom returns Axiom:
 	'_axiom' expression=Expression
@@ -216,6 +222,7 @@ VariableReference returns VariableReference:
 ;
 
 // A special variable reference is needed to point to the return value of a function.
+// We also want a cross-reference to the function and abuse the "_return" keyword for that.
 ReturnValueReference returns ReturnValueReference:
-	{ReturnValueReference} "_return" ('[' index=Expression ']')?
+	{ReturnValueReference} function=[FunctionDeclaration|RETURN_VALUE_REFERENCE] ('[' index=Expression ']')?
 ;

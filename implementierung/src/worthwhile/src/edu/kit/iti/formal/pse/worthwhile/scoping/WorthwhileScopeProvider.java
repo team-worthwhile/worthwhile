@@ -12,8 +12,10 @@ import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
 
 /**
  * This class contains the custom scoping description.
@@ -62,6 +64,35 @@ public class WorthwhileScopeProvider extends AbstractDeclarativeScopeProvider {
 
 		for (VariableDeclaration vardec : scopeFinder.getVariableDeclarations()) {
 			descriptions.add(EObjectDescription.create(vardec.getName(), vardec));
+		}
+
+		return new SimpleScope(IScope.NULLSCOPE, descriptions);
+	}
+
+	/**
+	 * Provides the scope for a function declaration reference of a ReturnValueReference.
+	 * 
+	 * @param context
+	 *                The return value reference to provide the scope for.
+	 * @param reference
+	 *                The corresponding EReference in the Ecore model.
+	 * @return A scope which contains the function declaration..
+	 */
+	public final IScope scope_ReturnValueReference_function(final ReturnValueReference context,
+	                final EReference reference) {
+		List<IEObjectDescription> descriptions = new ArrayList<IEObjectDescription>();
+
+		FunctionDeclaration funcdec = new ASTNodeBottomUpVisitor<FunctionDeclaration>() {
+
+			@Override
+			public void visit(final FunctionDeclaration node) {
+				this.setReturnValue(node);
+			}
+
+		} .apply(context);
+		
+		if (funcdec != null) {
+			descriptions.add(EObjectDescription.create("_return", funcdec));
 		}
 
 		return new SimpleScope(IScope.NULLSCOPE, descriptions);

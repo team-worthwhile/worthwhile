@@ -1,27 +1,27 @@
-\section{Profiling- und Performancetests}
-Um einen Überblick über den Zeitaufwand der einzelnen Programmkomponenten zu gewinnen sowie zeitliche HotSpots zu identifizieren, wurden Profiling Tests mittels VisualVM vorgenommen. Hierbei wurden einzelne meist komplexere Testprogramme aus der GUI gestartet und untersucht um einen Eindruck des Programms unter möglichst realen Bedingungen zu erlangen.
+\section{Profiling- und Performance-Tests}
+Um einen Überblick über den Zeitaufwand der einzelnen Worthwhile-Komponenten zu gewinnen sowie zeitliche Hotspots zu identifizieren, wurden Profiling-Tests mit Unterstützung von VisualVM durchgeführt. Hierbei wurden einzelne, meist komplexere, Testprogramme aus der GUI gestartet und untersucht, um einen Eindruck von Worthwhile unter möglichst realen Bedingungen zu erlangen.
 
 \subsection{Parser}
 
 \subsection{Interpreter}
 
 \subsection{Prover}
-Das Überprüfen eines Testprogramms dauerte im Schnitt etwa 2 Sekunden. Am Beispiel der Testprogramme test\_fibonacci.ww und bubblesort2.ww lag die Beweiszeit bei 1865 ms bzw. 1895 ms. Da vor dem Beweisen ein Parsen des Codes und Typsystemüberprüfungen nötig sind fallen etwa 100 bis 200 ms auf diese Aufgaben zurück. Die Transformation des Codes in das wp-Kalkül benötigte für bubblesort2.ww 142 ms und für test\_fibonacci.ww 36 ms. Das Umwandeln einer einzelnen Annotation ins SMTLIB Format betrug bei beiden Tests wenige Millisekunden (im Schnitt etwa 4 ms). Da jedoch die Annotationen einzeln umgewandelt und überprüft werden liegt die Gesamtzeit der Umwandlungen ins SMTLIB Format deutlich höher. Das Testprogramm bubblesort2.ww enthielt 13 und test\_fibonacci.ww 11 zu überprüfende Annotationen. Somit liegt der Zeitbedarf für das Umwandeln aller Annotation bei etwa 50 ms. Ebenso wird jede Annotation anschließend mittels externem Beweiser überprüft. Einzelne Annotationen zu beweisen dauerte etwa 15 bis 17 ms und demnach lag der Gesamtzeitaufwand des Beweisers für das gesamte Programm bei 220 ms für bubblesort2.ww und bei 170 ms für test\_fibonacci.ww. Nach Überprüfung weiterer Testprogramme ergibt sich somit ein ungefährer Überblick über den anteiligen Zeitaufwand der Prover Komponenten:
+Das Überprüfen eines Testprogramms dauerte im Schnitt etwa 2 Sekunden. Am Beispiel der Testprogramme \texttt{test\_fibonacci.ww} und \texttt{bubblesort2.ww} lag die Beweiszeit bei 1865 ms bzw. 1895 ms. Da vor dem Beweisen ein Parsen des Codes und Typsystemüberprüfungen nötig sind, fallen etwa 100 bis 200 ms auf diese Aufgaben zurück. Die Transformation des Codes im wp-Kalkül benötigte für \texttt{bubblesort2.ww} 142 ms und für \texttt{test\_fibonacci.ww} 36 ms. Das Umwandeln einer einzelnen Annotation ins SMTLIB-Format betrug bei beiden Tests wenige Millisekunden (im Schnitt etwa 4 ms). Da jedoch die Annotationen einzeln umgewandelt und überprüft werden, liegt die Gesamtzeit der Umwandlungen ins SMTLIB-Format deutlich höher. Das Testprogramm \texttt{bubblesort2.ww} enthielt 13 und \texttt{test\_fibonacci.ww} 11 zu überprüfende Annotationen. Somit liegt der Zeitbedarf für das Umwandeln aller Annotation bei etwa 50 ms. Ebenso wird jede Annotation anschließend mittels externem Beweiser überprüft. Einzelne Annotationen zu beweisen, dauerte etwa 15 bis 17 ms und demnach lag der Gesamtzeitaufwand des Beweisers für das gesamte Programm bei 220 ms für \texttt{bubblesort2.ww} und bei 170 ms für \texttt{test\_fibonacci.ww}. Nach Überprüfung weiterer Testprogramme ergibt sich somit ein ungefährer Überblick über den anteiligen Zeitaufwand der Prover-Komponenten in Tabelle~\ref{zeitaufwandprover}.
 \begin{table}[h]
 \centering
-\caption{Ungefährer Zeitaufwand der Proverkomponenten}
+\caption{Ungefährer Zeitaufwand der Prover-Komponenten}
 \label{zeitaufwandprover}
 \begin{tabular}{|l|l|}
 \hline
 \textbf{Komponente} & \textbf{Zeitaufwand} \\
 \hline
-Parser + Typsystem & 10\% \\
+Parser und Typsystem & 10\% \\
 \hline
 wp-Kalkül & 8\% \\
 \hline
-SMTLIB Erstellung & 4\% \\
+SMTLIB-Formatierung & 4\% \\
 \hline
-Z3 & 15\% \\
+Beweiser (Z3) & 15\% \\
 \hline
 \end{tabular}
 \end{table}

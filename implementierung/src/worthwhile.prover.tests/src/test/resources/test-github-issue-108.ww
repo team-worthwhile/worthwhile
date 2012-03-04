@@ -1,0 +1,20 @@
+// EXPECTED:VALID
+// 
+// ERROR: first(_return) was resolved to _return = _return[0] and this
+// to first = first[0] where first represents the value returned by
+// first(_return) when called from test, resulting in a SMTLIB error
+// because first has scalar type
+
+function Boolean first(Boolean[] i)
+    _ensures _return = i[0]
+{
+    return i[0]
+}
+
+function Boolean[] test(Boolean[] j)
+    _ensures first(_return)
+{
+    Boolean[] result := j
+    result[0] := true
+    return result
+}

@@ -59,7 +59,7 @@ public class CheckProgramTest {
 		String[] testPrograms = { "test-division", "test-faculty", "test-even", "test-max", "test-clone",
 		                "test-arrayindexassignment", "test-incrementfunction", "DebuggerDemo",
 		                "smtlib-keywords", "test-qexpr-condition", "test-github-issue-93", "test-fibonacci",
-		                "bubblesort2", "multiplication" };
+		                "bubblesort2", "multiplication", "test-github-issue-108" };
 
 		for (String fileName : testPrograms) {
 			// Load test program and look for EXPECTED:???

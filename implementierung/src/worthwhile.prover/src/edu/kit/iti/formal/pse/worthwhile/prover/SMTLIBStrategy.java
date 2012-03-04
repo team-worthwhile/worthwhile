@@ -42,6 +42,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.UnboundVariableFinderVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**

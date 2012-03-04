@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -9,7 +9,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  * Visitor to find {@link VariableDeclaration}s which have been assigned a new value.

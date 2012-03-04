@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -13,7 +13,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 
 /**
  * A visitor to find variables that are unbound and have to be declared.

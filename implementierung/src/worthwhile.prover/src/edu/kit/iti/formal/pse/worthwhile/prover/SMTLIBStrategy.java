@@ -129,17 +129,22 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 	 * @param quantifierString
 	 *                the {@link String} that defines <code>quantifier</code> in
 	 *                <code>(quantifier (param) (expr))</code>
+	 * @param constraintFunction
+	 *                the {@link String} that defines <code>function</code> in
+	 *                <code>(quantifier (param) (function condition expr))</code>
 	 */
-	private void pushQuantifier(final QuantifiedExpression quantifiedExpression, final String quantifierString) {
+	private void pushQuantifier(final QuantifiedExpression quantifiedExpression, final String quantifierString,
+	                final String constraintFunction) {
 		quantifiedExpression.getExpression().accept(this);
 
 		String expression;
 		Expression condition = quantifiedExpression.getCondition();
 		if (condition != null) {
 			quantifiedExpression.getCondition().accept(this);
-			// condition is a constraint on the type domain elements and compiled into an implication
-			expression = "(=> " + this.formulaCompileStack.pop() + " " + this.formulaCompileStack.pop()
-			                + ")";
+			// condition is a constraint on the type domain elements and compiled into an implication or
+			// conjunction
+			expression = "(" + constraintFunction + " " + this.formulaCompileStack.pop() + " "
+			                + this.formulaCompileStack.pop() + ")";
 		} else {
 			expression = this.formulaCompileStack.pop();
 		}
@@ -268,12 +273,12 @@ class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompile
 
 	@Override
 	public void visit(final ExistsQuantifier existsQuantifier) {
-		this.pushQuantifier(existsQuantifier, "exists");
+		this.pushQuantifier(existsQuantifier, "exists", "and");
 	}
 
 	@Override
 	public void visit(final ForAllQuantifier forAllQuantifier) {
-		this.pushQuantifier(forAllQuantifier, "forall");
+		this.pushQuantifier(forAllQuantifier, "forall", "=>");
 	}
 
 	@Override

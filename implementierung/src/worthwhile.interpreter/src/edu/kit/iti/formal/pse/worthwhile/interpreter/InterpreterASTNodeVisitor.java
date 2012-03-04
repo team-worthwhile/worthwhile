@@ -166,7 +166,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 */
 	private List<Expression> axioms = new ArrayList<Expression>();
 
-	private boolean allAntescendants = false;
+	/**
+	 * a conjunction of all axioms and assumptions and true
+	 */
+	private boolean allAntescendants = true;
 
 	/**
 	 * sets the Axioms.
@@ -177,8 +180,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void setAxioms(List<Expression> axioms) {
 		this.axioms = axioms;
 		for (Expression axiom : this.axioms) {
-			if (this.evaluateQuantifiedExpression(axiom).equals(Validity.VALID)) {
-				this.allAntescendants = true;
+			if (this.evaluateQuantifiedExpression(axiom).equals(Validity.INVALID)) {
+				this.allAntescendants = false;
 			}
 		}
 	}
@@ -573,9 +576,9 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		// they may even not exist anymore when this assumption is applied, which usually happens during
 		// assertion evaluations
 		Expression expression = AstNodeCloneHelper.clone(assumption.getExpression());
-		expression = SymbolReferenceResolver.apply(expression, this);
-		if (this.evaluateQuantifiedExpression(expression).equals(Validity.VALID)) {
-			this.allAntescendants = true;
+		expression = SymbolReferenceResolver.apply(expression, this);	
+		if (this.evaluateQuantifiedExpression(expression).equals(Validity.INVALID)) {
+			this.allAntescendants = false;
 		}
 		this.assumptions.add(expression);
 		this.statementExecuted(assumption);
@@ -623,8 +626,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	public void visit(final Axiom axiom) {
 		this.statementWillExecute(axiom);
 		Expression expression = axiom.getExpression();
-		if (this.evaluateQuantifiedExpression(expression).equals(Validity.VALID)) {
-			this.allAntescendants = true;
+		if (this.evaluateQuantifiedExpression(expression).equals(Validity.INVALID)) {
+			this.allAntescendants = false;
 		}
 		this.axioms.add(expression);
 		this.statementExecuted(axiom);

@@ -136,6 +136,11 @@ public final class CheckFormulaTest {
 	 * <li>Integer x and y set and equal</li>
 	 * <li>Integer x and y set and unequal</li>
 	 * </ul>
+	 * 
+	 * @param x
+	 *                the environment variable <code>x</code>
+	 * @param y
+	 *                the environment variable <code>y</code>
 	 */
 	public void initEnvs(final VariableDeclaration x, final VariableDeclaration y) {
 		emptyEnv = new HashMap<VariableDeclaration, Value>();

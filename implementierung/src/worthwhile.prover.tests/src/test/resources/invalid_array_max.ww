@@ -1,0 +1,24 @@
+// EXPECTED:INVALID
+function Integer invalid_array_max(Integer[] array, Integer length)
+_requires length >= 1
+_ensures forall Integer i, 1 <= i && i <= length : _return >= array[i]
+_ensures exists Integer j, 1 <= j && j <= length : _return = array[j]
+{
+	// ensures that _max is really big in the beginning
+	Integer _max := array[1] + 9000
+
+	Integer n := 2
+	while (n <= length)
+	_invariant forall Integer l, 1 <= l && l < n : _max >= array[l]
+	_invariant exists Integer m, 1 <= m && m < n : _max = array[m]
+	_invariant 2 <= n && n <= length + 1
+	{
+		if (array[n] > _max) {
+			_max := array[n]
+		}
+
+		n := n + 1
+	}
+
+	return _max
+}

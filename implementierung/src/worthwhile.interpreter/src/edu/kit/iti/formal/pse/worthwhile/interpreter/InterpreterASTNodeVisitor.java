@@ -83,6 +83,13 @@ import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
  * 
  */
 class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
+
+	/**
+	 * The result that is pushed onto the stack after a division by zero to allow the interpreter to exit
+	 * gracefully.
+	 */
+	private static final int DIVISION_BY_ZERO_RESULT = -9999;
+
 	/**
 	 * The specification checker.
 	 */
@@ -566,7 +573,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		// they may even not exist anymore when this assumption is applied, which usually happens during
 		// assertion evaluations
 		Expression expression = AstNodeCloneHelper.clone(assumption.getExpression());
-		expression = SymbolReferenceResolver.apply(expression, this);	
+		expression = SymbolReferenceResolver.apply(expression, this);
 		if (this.evaluateQuantifiedExpression(expression).equals(Validity.VALID)) {
 			this.allAntescendants = true;
 		}
@@ -743,6 +750,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		division.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
+			this.resultStack.push(new IntegerValue(BigInteger.valueOf(DIVISION_BY_ZERO_RESULT)));
 			expressionFailed(division, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {
@@ -1030,6 +1038,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		modulus.getRight().accept(this);
 		IntegerValue right = this.popIntegerValue();
 		if (right.getValue().equals(BigInteger.ZERO)) {
+			this.resultStack.push(new IntegerValue(BigInteger.valueOf(DIVISION_BY_ZERO_RESULT)));
 			expressionFailed(modulus, new DivisionByZeroInterpreterError(currentStatement));
 			return;
 		} else {

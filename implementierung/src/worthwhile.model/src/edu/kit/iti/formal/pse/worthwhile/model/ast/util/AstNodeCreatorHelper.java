@@ -341,7 +341,7 @@ public final class AstNodeCreatorHelper {
 	 * @param expression
 	 *                the {@link Expression} the <code>guardedNode</code> is guarded with
 	 * @param guardedNode
-	 *                the {@link ASTNode} that is guarded with the given <code>expression</code>
+	 *                the {@link Expression} that is guarded with the given <code>expression</code>
 	 * @return a new {@link DivisorNotZeroAssertion} for the given <code>guardedNode</code>
 	 */
 	public static DivisorNotZeroAssertion createDivisorNotZeroAssertion(final Expression expression,
@@ -379,7 +379,7 @@ public final class AstNodeCreatorHelper {
 	 * @param expression
 	 *                the {@link Expression} the <code>guardedNode</code> is guarded with
 	 * @param guardedNode
-	 *                the {@link ASTNode} that is guarded with the given <code>expression</code>
+	 *                the {@link FunctionCall} that is guarded with the given <code>expression</code>
 	 * @return a new {@link FunctionCallPreconditionAssertion} for the given <code>guardedNode</code>
 	 */
 	public static FunctionCallPreconditionAssertion createFunctionCallPreconditionAssertion(

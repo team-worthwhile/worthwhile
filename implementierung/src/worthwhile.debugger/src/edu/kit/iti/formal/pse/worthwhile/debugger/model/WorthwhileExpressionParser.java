@@ -97,7 +97,7 @@ public class WorthwhileExpressionParser extends WorthwhileDebugElement {
 				}
 			}
 
-			throw new DebugException(new ExpressionEvaluationError(parseExceptions));
+			throw new DebugException(new WorthwhileExpressionEvaluationError(parseExceptions));
 		}
 	}
 
@@ -167,76 +167,6 @@ public class WorthwhileExpressionParser extends WorthwhileDebugElement {
 		@Override
 		public boolean matches(final int severityMask) {
 			return (severityMask | IStatus.ERROR) > 0;
-		}
-
-	}
-
-	/**
-	 * Indicates an error that occured when trying to evaluate an expression.
-	 * 
-	 * @author Joachim
-	 * 
-	 */
-	private class ExpressionEvaluationError implements IStatus {
-
-		/**
-		 * The underlying exceptions causing the evaluation to fail.
-		 */
-		private final IStatus[] children;
-
-		/**
-		 * Creates a new instance of the {@link ExpressionEvaluationError} class.
-		 * 
-		 * @param children
-		 *                The underlying problems causing the evaluation to fail.
-		 */
-		public ExpressionEvaluationError(final IStatus[] children) {
-			this.children = children;
-		}
-
-		@Override
-		public IStatus[] getChildren() {
-			return this.children;
-		}
-
-		@Override
-		public int getCode() {
-			return 42;
-		}
-
-		@Override
-		public Throwable getException() {
-			return null;
-		}
-
-		@Override
-		public String getMessage() {
-			return this.children[0].getMessage();
-		}
-
-		@Override
-		public String getPlugin() {
-			return WorthwhileDebugConstants.PLUGIN_ID;
-		}
-
-		@Override
-		public int getSeverity() {
-			return IStatus.ERROR;
-		}
-
-		@Override
-		public boolean isMultiStatus() {
-			return true;
-		}
-
-		@Override
-		public boolean isOK() {
-			return false;
-		}
-
-		@Override
-		public boolean matches(final int severityMask) {
-			return (severityMask & IStatus.ERROR) > 0;
 		}
 
 	}

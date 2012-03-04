@@ -60,33 +60,33 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	/**
 	 * The (only) thread a program execution consists of.
 	 */
-	private WorthwhileThread thread;
+	private final WorthwhileThread thread;
 
 	/**
 	 * The launch object that belongs to the execution of this program.
 	 */
-	private ILaunch launch;
+	private final ILaunch launch;
 
 	/**
 	 * The event listener that manages the debug events from the interpreter.
 	 */
-	private WorthwhileDebugEventListener eventListener;
+	private final WorthwhileDebugEventListener eventListener;
 
 	/**
 	 * The runner which runs the interpreter.
 	 */
-	private InterpreterRunner interpreterRunner;
+	private final InterpreterRunner interpreterRunner;
 
 	/**
 	 * The expression parser.
 	 */
-	private WorthwhileExpressionParser expressionParser;
+	private final WorthwhileExpressionParser expressionParser;
 
 	/**
 	 * The marker helper.
 	 */
 	private final WorthwhileMarkerHelper markerHelper;
-	
+
 	/**
 	 * The marker helper for annotations.
 	 */
@@ -567,7 +567,7 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 	 */
 	public final Type getVariableType(final String name) {
 		VariableDeclaration vardecl = this.getVariableDeclaration(name);
-		
+
 		if (vardecl != null) {
 			return vardecl.getType();
 		} else {
@@ -588,7 +588,27 @@ public class WorthwhileDebugTarget extends WorthwhileDebugElement implements IDe
 		Expression expression = this.expressionParser.parseExpressionString(expressionText);
 
 		if (expression != null) {
-			return this.interpreterRunner.getInterpreter().evaluateExpression(expression);
+			WorthwhileEvaluationEventListener evaluationListener = new WorthwhileEvaluationEventListener(
+			                this);
+
+			// Remove default event listener and listen with the evaluation event listener instead.
+			this.interpreterRunner.getInterpreter().removeExecutionEventHandler(this.eventListener);
+			this.interpreterRunner.getInterpreter().addExecutionEventHandler(evaluationListener);
+
+			// Evaluate the expression
+			Value result = this.interpreterRunner.getInterpreter().evaluateExpression(expression);
+
+			// Restore event listeners
+			this.interpreterRunner.getInterpreter().removeExecutionEventHandler(evaluationListener);
+			this.interpreterRunner.getInterpreter().addExecutionEventHandler(this.eventListener);
+
+			// Check if any error occurred while evaluation the expression.
+			InterpreterError error = evaluationListener.getError();
+			if (error != null) {
+				throw new DebugException(new WorthwhileInterpreterErrorStatus(error));
+			} else {
+				return result;
+			}
 		} else {
 			return null;
 		}

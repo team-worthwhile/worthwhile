@@ -418,6 +418,11 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			clone.symbolStack.push(new HashMap<VariableDeclaration, Value>(m));
 		}
 
+		// Clone the execution event handlers
+		for (final AbstractExecutionEventListener handler : this.executionEventHandlers) {
+			clone.addExecutionEventHandler(handler);
+		}
+
 		return clone;
 	}
 

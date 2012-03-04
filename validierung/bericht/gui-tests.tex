@@ -6,9 +6,9 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 \guitest{Ausführen eines Programms mit Syntaxfehlern}{Aufruf des Ausführungsbefehls bei einem Programm, das einen beliebigen Syntaxfehler enthält.}{Fehlermeldung, Datei wird nicht ausgeführt}{OK}{--}
 \guitest{Ausführen eines Programms mit Validierungsfehlern}{Aufruf des Ausführungsbefehls bei einem Programm, das einen beliebigen Validierungsfehler enthält.}{Fehlermeldung, Datei wird nicht ausgeführt}{OK}{--}
 \guitest{Ausführen eines Programms aus dem Editor heraus}{Fokus auf Editorfenster setzen, Aufruf des Ausführungsbefehls}{Interpreter bzw. Specification Checker startet und führt die Datei aus, die im aktiven Editorfenster geöffnet ist.}{OK}{--}
-\guitest{Ausführen eines Programms aus dem Projektexplorer heraus}{Fokus auf Projektexplorer setzen, Markieren einer Datei im Projektexplorer und Aufruf des Ausführungsbefehls}{Interpreter bzw. Specification Checker startet und führt die Datei aus, die im Projektexplorer markiert ist.}{(OK)}{Bug \#85: "`Prove it"' does not launch selection -- behoben}
+\guitest{Ausführen eines Programms aus dem Projektexplorer heraus}{Fokus auf Projektexplorer setzen, Markieren einer Datei im Projektexplorer und Aufruf des Ausführungsbefehls}{Interpreter bzw. Specification Checker startet und führt die Datei aus, die im Projektexplorer markiert ist.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/85}{Bug \#85}: ``Prove it'' does not launch selection -- behoben}
 \guitest{Ausführen einer Launch Configuration}{Erstellen einer neuen Launch Configuration unter \texttt{Run $\rightarrow$ Run configurations}, Setzen des Dateinamens auf eine existierende Datei und Klick auf "`Run"'}{Interpreter startet und führt die eingegebene Datei aus}{OK}{--}
-\guitest{Ausführen einer Launch Configuration mit nicht existierender Datei}{Erstellen einer neuen Launch Configuration unter \texttt{Run $\rightarrow$ Run configurations}, Setzen des Dateinamens auf eine nicht existierende Datei oder den leeren String und Klick auf "`Run"'}{Fehlermeldung, Interpreter startet nicht}{(OK)}{Bug \#86: IllegalArgumentException when launching configuration with empty file name -- behoben}
+\guitest{Ausführen einer Launch Configuration mit nicht existierender Datei}{Erstellen einer neuen Launch Configuration unter \texttt{Run $\rightarrow$ Run configurations}, Setzen des Dateinamens auf eine nicht existierende Datei oder den leeren String und Klick auf "`Run"'}{Fehlermeldung, Interpreter startet nicht}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/86}{Bug \#86}: IllegalArgumentException when launching configuration with empty file name -- behoben}
 
 \subsection{Setzen von Breakpoints in Editor und Debugger}
 
@@ -28,7 +28,7 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 
 \subsection{Watchpoints}
 
-\guitest{Watchpoints setzen und entfernen}{Watchpoints setzen und entfernen durch Platzieren des Cursors im Editorfenster und Auswahl von \texttt{Run $\rightarrow$ Toggle Watchpoint}}{Wenn sich der Cursor nicht über einer Variablendeklaration befindet: Fehlermeldung. Ansonsten: Setzen bzw, Entfernen eines Watchpoints mit Anzeige im Lineal des Editors und in der Breakpoint-Übersicht.}{(OK)}{Bug \#87: "Toggle watchpoint" causes line breakpoint to disappear and vice versa -- behoben}
+\guitest{Watchpoints setzen und entfernen}{Watchpoints setzen und entfernen durch Platzieren des Cursors im Editorfenster und Auswahl von \texttt{Run $\rightarrow$ Toggle Watchpoint}}{Wenn sich der Cursor nicht über einer Variablendeklaration befindet: Fehlermeldung. Ansonsten: Setzen bzw, Entfernen eines Watchpoints mit Anzeige im Lineal des Editors und in der Breakpoint-Übersicht.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/87}{Bug \#87}: ``Toggle watchpoint'' causes line breakpoint to disappear and vice versa -- behoben}
 
 \guitest{Aktivieren und Deaktivieren von Watchpoints}{Aktivieren und Deaktivieren eines Watchpoints in seinem Kontextmenü in der Breakpoint-Übersicht}{Watchpoint wird korrekt deaktiviert und im Debugger nicht beachtet, Watchpoint-Icon wird bei deaktiviertem Watchpoint ausgegraut angezeigt.}{OK}{--}
 
@@ -60,7 +60,7 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 
 \subsection{Formatierer}
 
-\guitest{Formatieren eines Dokuments}{Öffnen eines Dokuments, das alle Syntaxelemente enthält und Aufruf des Formatierers über den entsprechenden Befehl}{Die Datei wird formatiert, wobei die syntaktische Korrektheit erhalten bleibt. Mehrfaches Formatieren ändert die Datei nicht mehr.}{(OK)}{Bug \#88: Formatter breaks syntactic correctness and modifies the program iteratively -- behoben}
+\guitest{Formatieren eines Dokuments}{Öffnen eines Dokuments, das alle Syntaxelemente enthält und Aufruf des Formatierers über den entsprechenden Befehl}{Die Datei wird formatiert, wobei die syntaktische Korrektheit erhalten bleibt. Mehrfaches Formatieren ändert die Datei nicht mehr.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/88}{Bug \#88}: Formatter breaks syntactic correctness and modifies the program iteratively -- behoben}
 
 \subsection{Dateiverwaltung}
 
@@ -82,7 +82,7 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 	\item Mit Syntaxfehler in Bedingung
 	\item Mit Semantikfehler in Bedingung
 	\item Mit Funktionsaufruf in Bedingung
-\end{enumerate}}{Korrektes Anhalten, wenn die Bedingung erfüllt ist. Fehlermeldung bei Erreichen des Breakpoints, wenn ein Syntax- oder Semantikfehler vorliegt. Korrekte Evaluation des Funktionsaufrufes, wobei in der Funktion gesetzte Breakpoints ignoriert werden.}{(OK)}{Bug \#89: UnsupportedOperationException on breakpoint with condition – behoben}
+\end{enumerate}}{Korrektes Anhalten, wenn die Bedingung erfüllt ist. Fehlermeldung bei Erreichen des Breakpoints, wenn ein Syntax- oder Semantikfehler vorliegt. Korrekte Evaluation des Funktionsaufrufes, wobei in der Funktion gesetzte Breakpoints ignoriert werden.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/89}{Bug \#89}: UnsupportedOperationException on breakpoint with condition – behoben}
 
 \guitest{Breakpoints setzen, entfernen, deaktivieren und aktivieren während der  Ausführung}{Debuggen eines Programms, dabei Setzen und Entfernen, Aktivieren und Deaktivieren von Breakpoints und Watchpoints während der Ausführung des Programms}{An deaktivierten und entfernten Breakpoints/Watchpoints wird nicht angehalten. An neu gesetzten und aktivierten Breakpoints/Watchpoints wird angehalten}{OK}{--}
 
@@ -93,7 +93,7 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 \guitest{Anzeige des Wertes von Arrays}{Debuggen und Pausieren eines  Programms, dann Aufruf der Variablenliste}{Die Werte von Arrays werden gemäß ihrem Typ angezeigt. Durch Aufklappen der Liste können die einzelnen Werte betrachtet werden.}{OK}{--}
 \guitest{Ändern des Wertes von Arrays}{Debuggen und Pausieren eines  Programms, dann Aufruf der Variablenliste. Eingabe eines neuen (gültigen) Wertes für eine Arrayvariable}{Der Variableninhalt wird geändert, der Interpreter übernimmt bei der weiteren Ausführung den neuen Wert der Variablen}{OK}{--}
 \guitest{Werteänderung mit Funktionsaufruf}{Debuggen und Pausieren eines  Programms, dann Aufruf der Variablenliste. Eingabe eines Funktionsaufrufs als neuen Wert}{Der Wert der Variablen wird auf den Rückgabewert der aufgerufenen Funktion gesetzt}{OK}{--}
-\guitest{Werteänderung mit ungültigem Wertetyp}{Debuggen und Pausieren eines  Programms, dann Aufruf der Variablenliste. Eingabe eines neuen Wertes, der nicht dem Wertetyp der Variablen entspricht, oder Eingabe einer leeren Zeichenkette als neuen Wert}{Fehlermeldung, der Variableninhalt wird nicht geändert}{(OK)}{Bug \#90: Debugger allows setting variable value to wrong type -- behoben}
+\guitest{Werteänderung mit ungültigem Wertetyp}{Debuggen und Pausieren eines  Programms, dann Aufruf der Variablenliste. Eingabe eines neuen Wertes, der nicht dem Wertetyp der Variablen entspricht, oder Eingabe einer leeren Zeichenkette als neuen Wert}{Fehlermeldung, der Variableninhalt wird nicht geändert}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/90}{Bug \#90}: Debugger allows setting variable value to wrong type -- behoben}
 
 \subsection{Debugger: Ausdrucksauswertung}
 
@@ -104,7 +104,7 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 	\item Ausdruck mit Semantikfehler
 	\item \texttt{1/0} als Ausdruck
 	\item Ausdruck mit Array als Rückgabetyp
-\end{enumerate}}{Korrekte Auswertung der gültigen Ausdrücke, Anzeige einer Fehlermeldungen bei ungültigen oder nicht auswertbaren Ausdrücken}{(OK)}{Bug \#91: Watch expressions are not validated –  behoben \\ Bug \#113: EmptyStackException when evaluating 1/0 as expression}
+\end{enumerate}}{Korrekte Auswertung der gültigen Ausdrücke, Anzeige einer Fehlermeldungen bei ungültigen oder nicht auswertbaren Ausdrücken}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/91}{Bug \#91}: Watch expressions are not validated –  behoben \\ href{https://github.com/team-worthwhile/worthwhile/issues/113}{Bug \#113}: EmptyStackException when evaluating 1/0 as expression}
 
 \subsection{Debugger-Funktionen}
 
@@ -128,7 +128,7 @@ Für die Ergebnisse der im Pflichtenheft festgelegten und im Zuge der Validierun
 	\item Eine ungültige Annotation
 	\item Eine Annotation mit unbekanntem Gültigkeitswert
 \end{enumerate}}{Die gültige Annotation wird grün markiert, die beiden anderen rot. Der Interpreter hält außerdem bei den rot markierten Annotationen an.}{OK}{--}
-\guitest{Fehler bei Aufruf des Beweisers}{Einstellung eines ungültigen Beweiserpfades in den Einstellungen und Debuggen eines Programms, das eine Annotation enthält.}{Annotation wird rot markiert, Interpreter stoppt und gibt eine Fehlermeldung aus.}{(OK)}{Bug \#58: Interpreter throws ugly error message when prover is missing}
+\guitest{Fehler bei Aufruf des Beweisers}{Einstellung eines ungültigen Beweiserpfades in den Einstellungen und Debuggen eines Programms, das eine Annotation enthält.}{Annotation wird rot markiert, Interpreter stoppt und gibt eine Fehlermeldung aus.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/58}{Bug \#58}: Interpreter throws ugly error message when prover is missing}
 \guitest{Division durch Null}{Es wird ein Programm ausgeführt, das den Ausdruck \texttt{1/0} oder \texttt{1\%0} enthält.}{Fehlermeldung und Programmabbruch}{OK}{--}
 
 \begin{landscape}

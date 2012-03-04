@@ -89,9 +89,13 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	 * @return a String representing <code>node</code>
 	 */
 	public static String toString(final ASTNode node) {
-		AstNodeToStringHelper.singleton.buf = new StringBuffer();
-		node.accept(AstNodeToStringHelper.singleton);
-		return AstNodeToStringHelper.singleton.buf.toString();
+		if (node != null) {
+			AstNodeToStringHelper.singleton.buf = new StringBuffer();
+			node.accept(AstNodeToStringHelper.singleton);
+			return AstNodeToStringHelper.singleton.buf.toString();
+		} else {
+			return "";
+		}
 	}
 
 	/**

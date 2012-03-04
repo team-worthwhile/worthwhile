@@ -374,4 +374,13 @@ public final class CheckFormulaTest {
 		Expression expression = this.getExpression("{1, 2, 3} = {1, 2, 3}");
 		assertEnvIndependentEquals(expression, Validity.VALID);
 	}
+	
+	/**
+	 * Test if two empty arrays compare equal.
+	 */
+	@Test
+	public void testEmptyArrayLiteralEquals() {
+		Expression expression = this.getExpression("{} = {}");
+		assertEnvIndependentEquals(expression, Validity.VALID);
+	}
 }

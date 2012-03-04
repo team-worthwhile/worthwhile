@@ -17,7 +17,7 @@ public class SpecificationCheckerTest {
 	 * Test the handling of an invalid given prover path in {@link SpecificationChecker}.
 	 */
 	@Test
-        public final void testInvalidProverPath() {
+	public final void testInvalidProverPath() {
 		// instantiate a prover with an invalid path
 		Z3Prover prover = new Z3Prover("/this/path/should/be/invalid", 5000);
 		SpecificationChecker checker = new SpecificationChecker(prover);
@@ -27,6 +27,21 @@ public class SpecificationCheckerTest {
 		Assert.assertEquals(Validity.UNKNOWN, checker.checkProgram(p));
 		Assert.assertEquals(FormulaSatisfiability.UNKOWN, checker.getCheckResult().getSatisfiability());
 		// we can't really test for any output since it is not defined by SpecificationChecker
+	}
+
+	/**
+	 * Tests that the validity UNKNOWN is returned for an unprovable formula.
+	 */
+	@Test
+	public final void testUnknownValidity() {
+		Z3Prover prover = new Z3Prover(9001);
+		SpecificationChecker checker = new SpecificationChecker(prover);
+
+		// Try to disprove Fermat's last theorem … even Z3 cannot do that
+		Program p = TestASTProvider
+		                .getRootASTNode("_assert ∀ Integer i ∀ Integer j ∀ Integer k, i > 0 ∧ j > 0 ∧ k > 0 : i ⋅ i ⋅ i + j * j * j ≠ k * k * k\n");
+		// if the prover could not be invoked, we know nothing about the validity of the formula
+		Assert.assertEquals(Validity.UNKNOWN, checker.checkProgram(p));
 	}
 
 	/**

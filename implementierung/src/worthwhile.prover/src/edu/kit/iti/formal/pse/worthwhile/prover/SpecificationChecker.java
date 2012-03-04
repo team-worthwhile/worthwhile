@@ -158,8 +158,6 @@ public class SpecificationChecker {
 	 */
 	public final Validity checkFormula(final Expression formula, final Map<VariableDeclaration, Value> environment,
 	                final List<Expression> axioms) {
-		// TODO apply Worthwhile specific runtime assertions
-
 		Expression environmentExpression = AstNodeCreatorHelper.createTrueLiteral();
 		for (final VariableDeclaration environmentVariable : environment.keySet()) {
 			// create a reference to the variable
@@ -305,8 +303,6 @@ public class SpecificationChecker {
 	 * @return the {@link Validity} of <code>program</code>
 	 */
 	public final Validity checkProgram(final Program program) {
-		// TODO apply Worthwhile specific runtime assertions
-
 		// add assertions to check that the divisors are not zero
 		program.accept(new DivisionByZeroAssertionInserter());
 		program.accept(new ImplicitInitialValueInserter());

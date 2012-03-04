@@ -26,7 +26,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
  * 
  */
 @RunWith(Parameterized.class)
-public class CheckProgramTest {
+public final class CheckProgramTest {
 
 	/**
 	 * The {@link SpecificationChecker} to be tested.

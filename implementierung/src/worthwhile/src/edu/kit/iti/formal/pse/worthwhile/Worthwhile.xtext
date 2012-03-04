@@ -37,6 +37,11 @@ terminal INT returns ecore::EInt:
 	'%%% DONT USE THIS ANYMORE %%%'
 ;
 
+// Override the ID terminal rule to also allow the $ character in IDs. 
+terminal ID :
+	'ˆ'?('a'..'z'|'A'..'Z'|'_'|'$')('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'$')*
+;
+
 // BOOL matches a boolean value. 
 terminal BOOL returns ecore::EBoolean:
 	'true' | 'false'

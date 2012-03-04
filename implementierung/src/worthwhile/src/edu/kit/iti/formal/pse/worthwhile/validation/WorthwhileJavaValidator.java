@@ -43,6 +43,11 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	public static final String RETURN_STATEMENT_ONLY_IN_FUNCTION = "ReturnStatementOnlyInFunction";
 
 	/**
+	 * Error code for "No valid Worthwhile identifier".
+	 */
+	public static final String INVALID_IDENTIFIER = "InvalidIdentifier";
+
+	/**
 	 * The language typesystem.
 	 */
 	@Inject
@@ -296,5 +301,35 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 	@Check
 	public final void checkTypesystemRules(final ASTNode node) {
 		ts.checkTypesystemConstraints(node, this);
+	}
+
+	/**
+	 * Checks that a function declaration's name is a valid Worthwhile identifier, i.e. does not contain the special
+	 * character "$" that is allowed in the grammar, but reserved for the prover.
+	 * 
+	 * @param node
+	 *                The function declaration to be checked.
+	 */
+	@Check
+	public final void checkValidFunctionIdentifier(final FunctionDeclaration node) {
+		if (node.getName() != null && node.getName().contains("$")) {
+			error("Function name is not a valid Worthwhile identifier.", node,
+			                AstPackage.eINSTANCE.getFunctionDeclaration_Name(), INVALID_IDENTIFIER);
+		}
+	}
+
+	/**
+	 * Checks that a variable name is a valid Worthwhile identifier, i.e. does not contain the special character "$"
+	 * that is allowed in the grammar, but reserved for the prover.
+	 * 
+	 * @param node
+	 *                The function declaration to be checked.
+	 */
+	@Check
+	public final void checkValidVariableIdentifier(final VariableDeclaration node) {
+		if (node.getName() != null && node.getName().contains("$")) {
+			error("Variable name is not a valid Worthwhile identifier.", node,
+			                AstPackage.eINSTANCE.getVariableDeclaration_Name(), INVALID_IDENTIFIER);
+		}
 	}
 }

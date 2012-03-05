@@ -14,11 +14,11 @@ Bei der Modifikation des Formelgenerators wurde jedoch darauf geachtet, die Grun
 
 \subsection{Änderungen am AST}
 
-Gegenüber dem Entwurf wurden am AST einige kleinere Änderungen vorgenommen: So wurde die gemeinsame Oberklasse \texttt{FunctionAnnotation} für \texttt{Precondition} und \texttt{Postcondition} eingeführt. Ebenso wurde die gemeinsame Oberklasse \texttt{SymbolReference} für \texttt{VariableReference}  und \texttt{ReturnValueReference} eingeführt. Diese Änderungen dienen vor allem der Vermeidung von Codeduplizierung.
+Gegenüber dem Entwurf wurden am AST einige kleinere Änderungen vorgenommen: So wurde die gemeinsame Oberklasse \texttt{FunctionAnnotation} für \texttt{Precondition} und \texttt{Postcondition} eingeführt. Ebenso wurde die gemeinsame Oberklasse \texttt{SymbolReference} für \texttt{VariableReference}  und \texttt{ReturnValueReference} eingeführt. Diese Änderungen dienen vor allem der Vermeidung von Codeduplizierung in den Visitor"=Implementierungen von Interpreter und Beweiserschnittstelle.
 
 Um die Erstellung der SMTLIB-Formel zu vereinfachen, wurde in \texttt{ReturnValueReference} ein Verweis auf die Funktion, deren Rückgabewert referenziert wird, hinzugefügt.
 
-Für die "`Partial Proofs"' wurden zwei neue spezifische Unterklassen von \texttt{Assertion} eingeführt: \texttt{DivisorNotZeroAssertion} und \texttt{FunctionCallPreconditionValidAssertion} mit der gemeinsamen Oberklasse \texttt{GuardAssertion}. Diese Assertions sind im Code implizit und werden vom Beweiser eingefügt. Deshalb müssen sie gegenüber den normalen Assertions zusätzlich die Information tragen, auf welchen Teil des Codes sie sich beziehen.
+Für die "`Partial Proofs"' wurden zwei neue spezifische Unterklassen von \texttt{Assertion} eingeführt: \texttt{DivisorNotZeroAssertion} und \texttt{FunctionCallPreconditionValidAssertion} mit der gemeinsamen Oberklasse \texttt{GuardAssertion}. Diese Assertions sind in Worthwhile"=Programmcodes implizit und werden vom Beweiser eingefügt. Deshalb müssen sie gegenüber den normalen Assertions zusätzlich die Information tragen, auf welchen Teil des Codes sie sich beziehen, d.\,h. welcher \texttt{Expression} sie einen Wert ungleich Null und welchem \texttt{FunctionCall} sie valide Parameter zusichern.
 
 \subsection{Änderungen an der Grammatik}
 

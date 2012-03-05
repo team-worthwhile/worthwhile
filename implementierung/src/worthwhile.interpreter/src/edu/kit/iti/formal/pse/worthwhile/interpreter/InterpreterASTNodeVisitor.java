@@ -169,7 +169,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	/**
 	 * a conjunction of all axioms and assumptions and true
 	 */
-	private boolean allAntescendants = true;
+	private boolean allAxiomsAssumptionsTrue = true;
 
 	/**
 	 * sets the Axioms.
@@ -181,7 +181,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.axioms = axioms;
 		for (Expression axiom : this.axioms) {
 			if (this.evaluateQuantifiedExpression(axiom).equals(Validity.INVALID)) {
-				this.allAntescendants = false;
+				this.allAxiomsAssumptionsTrue = false;
 			}
 		}
 	}
@@ -479,7 +479,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(annotation);
 		this.currentAnnotation = annotation;
 		// check first if there are antescendants and if they are all false
-		if ((!this.allAntescendants) && (this.axioms.size() + this.assumptions.size() > 0)) {
+		if ((!this.allAxiomsAssumptionsTrue) && (this.axioms.size() + this.assumptions.size() > 0)) {
 			annotationSucceeded(annotation);
 		} else {
 			try {
@@ -578,7 +578,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		Expression expression = AstNodeCloneHelper.clone(assumption.getExpression());
 		expression = SymbolReferenceResolver.apply(expression, this);	
 		if (this.evaluateQuantifiedExpression(expression).equals(Validity.INVALID)) {
-			this.allAntescendants = false;
+			this.allAxiomsAssumptionsTrue = false;
 		}
 		this.assumptions.add(expression);
 		this.statementExecuted(assumption);
@@ -627,7 +627,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		this.statementWillExecute(axiom);
 		Expression expression = axiom.getExpression();
 		if (this.evaluateQuantifiedExpression(expression).equals(Validity.INVALID)) {
-			this.allAntescendants = false;
+			this.allAxiomsAssumptionsTrue = false;
 		}
 		this.axioms.add(expression);
 		this.statementExecuted(axiom);

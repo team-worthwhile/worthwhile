@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
@@ -54,6 +55,25 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			trace.add(element, "variableReference");
 			return typeof(element.getVariable().getType(), trace);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * The {@link ArrayFunction}'s type is an {@link ArrayType} with the <code>element</code>'s <code>value</code>'s
+	 * {@link Type} set as <code>baseType</code>.
+	 */
+	@Override
+	protected final EObject type(final ArrayFunction element, final TypeCalculationTrace trace) {
+		final ArrayType arrayType = AstFactory.eINSTANCE.createArrayType();
+
+		// the point with ArrayFunctions is that their completely defined so that value is always set
+		PrimitiveType baseType = (PrimitiveType) this.typeof(element.getValue(), trace);
+		arrayType.setBaseType(AstNodeCloneHelper.clone(baseType));
+
+		trace.add(element, "arrayFunction");
+
+		return arrayType;
 	}
 
 	/**

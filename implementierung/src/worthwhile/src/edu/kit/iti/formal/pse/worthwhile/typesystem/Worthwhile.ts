@@ -15,6 +15,7 @@ section "Literals"
 		typeof Literal -> abstract
 		typeof BooleanLiteral -> BooleanType
 		typeof IntegerLiteral -> IntegerType
+		typeof ArrayFunction -> javacode
 		typeof ArrayLiteral -> javacode
  
 	

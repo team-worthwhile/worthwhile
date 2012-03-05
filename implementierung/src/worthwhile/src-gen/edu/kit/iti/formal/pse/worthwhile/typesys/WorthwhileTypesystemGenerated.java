@@ -158,6 +158,7 @@
 				}
 			}
 
+			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction element, TypeCalculationTrace trace );
 			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral element, TypeCalculationTrace trace );
 			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference element, TypeCalculationTrace trace );
 			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference element, TypeCalculationTrace trace );

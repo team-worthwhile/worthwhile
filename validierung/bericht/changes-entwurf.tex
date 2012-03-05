@@ -11,3 +11,19 @@ Nicht zuletzt wurde zur Behebung eines Fehlers, der den aufgerufenen Beweiser ni
 Um das Finden von Fehlern im Formelgenerator zu vereinfachen sowie den Beweisprozess für den Nutzer greifbarer zu machen, wurde die Möglichkeit der Generierung von Formeln geschaffen, die nur die Spezifikationskonformität eines Teils eines Programms beweisen. Dabei haben sich für die Schnittstellen zwischen der Beweiserschnittstelle und der GUI einige Änderungen ergeben. So werden zur Rückmeldung des Fortschritts des Beweises und der Ergebnisse von "`Teilbeweisen"' ähnlich wie im Interpreter Event-Listener gemäß des Observer-Entwurfsmusters verwendet. Durch diese Schnittstelle werden der GUI auch nähere Informationen bezüglich der Bedeutung der geführten Teilbeweise übergeben, die dem Nutzer in Form von Tooltips und farbig markierten Codepassagen angezeigt werden.
 
 Bei der Modifikation des Formelgenerators wurde jedoch darauf geachtet, die Grundsatzentscheidungen, die im Entwurf gefällt wurden, nicht zu verletzen. So gibt es in \texttt{WPStrategy} weiterhin die Möglichkeit, eine einzige Formel generieren zu lassen, die die Spezifikationskonformität des ganzen Programms impliziert. Außerdem gibt \texttt{SpecificationChecker} nach einem Beweisvorgang weiterhin einen \texttt{Validity}-Wert zurück, der sich auf die Korrektheit des gesamten übergebenen Programms bezieht.
+
+\subsection{Änderungen am AST}
+
+Gegenüber dem Entwurf wurden am AST einige kleinere Änderungen vorgenommen: So wurde die gemeinsame Oberklasse \texttt{FunctionAnnotation} für \texttt{Precondition} und \texttt{Postcondition} eingeführt. Ebenso wurde die gemeinsame Oberklasse \texttt{SymbolReference} für \texttt{VariableReference}  und \texttt{ReturnValueReference} eingeführt. Diese Änderungen dienen vor allem der Vermeidung von Codeduplizierung.
+
+Um die Erstellung der SMTLIB-Formel zu vereinfachen, wurde in \texttt{ReturnValueReference} ein Verweis auf die Funktion, deren Rückgabewert referenziert wird, hinzugefügt.
+
+Für die "`Partial Proofs"' wurden zwei neue spezifische Unterklassen von \texttt{Assertion} eingeführt: \texttt{DivisorNotZeroAssertion} und \texttt{FunctionCallPreconditionValidAssertion} mit der gemeinsamen Oberklasse \texttt{GuardAssertion}. Diese Assertions sind im Code implizit und werden vom Beweiser eingefügt. Deshalb müssen sie gegenüber den normalen Assertions zusätzlich die Information tragen, auf welchen Teil des Codes sie sich beziehen.
+
+\subsection{Änderungen an der Grammatik}
+
+Um Namenskonflikte mit existierenden Funktions- und Variablennamen in der generierten SMTLIB-Formel zu vermeiden, wurde in der Grammatik zusätzlich das Zeichen \texttt{\$} für Identifier eingefügt, das nur im Beweiser verwendet werden kann.
+
+Die quantifizierten Ausdrücke wurden in die Operatorhierarchie eingepflegt und besitzen dort nun die höchste Priorität (auf einer Ebene mit Klammerausdrücken und \texttt{[]}).
+
+Auf ausdrücklichen Wunsch der Betreuer hin wurde außerdem die Möglichkeit geschaffen, Zeilenumbrüche in Anweisungen einzufügen. Dies geschieht wie in Shell-Skripten, indem am Ende der ersten Zeile ein Backslash steht.

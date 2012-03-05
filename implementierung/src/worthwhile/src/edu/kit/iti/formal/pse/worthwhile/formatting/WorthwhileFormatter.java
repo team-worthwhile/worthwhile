@@ -43,5 +43,7 @@ public class WorthwhileFormatter extends AbstractDeclarativeFormatter {
 		                f.getArrayLiteralAccess().getRightCurlyBracketKeyword_3());
 		c.setNoSpace().after(f.getArrayLiteralAccess().getLeftCurlyBracketKeyword_1());
 		c.setNoSpace().before(f.getArrayLiteralAccess().getRightCurlyBracketKeyword_3());
+		
+		c.setAutoLinewrap(Integer.MAX_VALUE);
 	}
 }

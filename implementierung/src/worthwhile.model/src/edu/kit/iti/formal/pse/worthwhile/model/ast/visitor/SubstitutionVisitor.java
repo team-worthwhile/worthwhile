@@ -67,12 +67,31 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	private Boolean found = false;
 
 	/**
+	 * Indicates whether a clone of the {@link SubstitutionVisitor#substitute} or the <code>substitute</code> itself
+	 * should be returned by {@link SubstitutionVisitor#getSubstitute()}.
+	 */
+	private boolean clone;
+
+	/**
 	 * 
 	 * @param substitute
-	 *                the {@link Expression} found child <code>ASTNode</code>s are substituted with
+	 *                the {@link Expression} found child <code>ASTNode</code>s are substituted with (cloned before
+	 *                every substitution)
 	 */
 	public SubstitutionVisitor(final T substitute) {
+		this(substitute, true);
+	}
+
+	/**
+	 * @param substitute
+	 *                the {@link Expression} found child <code>ASTNode</code>s are substituted with
+	 * @param clone
+	 *                whether a clone of the {@link SubstitutionVisitor#substitute} or the <code>substitute</code>
+	 *                itself should be returned by {@link SubstitutionVisitor#getSubstitute()}
+	 */
+	protected SubstitutionVisitor(final T substitute, final boolean clone) {
 		this.substitute = substitute;
+		this.clone = clone;
 	}
 
 	/**
@@ -91,6 +110,23 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	}
 
 	/**
+	 * @param clone
+	 *                whether a clone of the {@link SubstitutionVisitor#substitute} or the <code>substitute</code>
+	 *                itself should be returned by {@link SubstitutionVisitor#getSubstitute()}
+	 */
+	protected final void setClone(final boolean clone) {
+		this.clone = clone;
+	}
+
+	/**
+	 * @return whether a clone of the {@link SubstitutionVisitor#substitute} or the <code>substitute</code> itself
+	 *         should be returned by {@link SubstitutionVisitor#getSubstitute()}
+	 */
+	protected final boolean getClone() {
+		return this.clone;
+	}
+
+	/**
 	 * 
 	 * @param cloned
 	 *                indicates whether a clone of the {@link SubstitutionVisitor#substitute} or the
@@ -106,10 +142,11 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	}
 
 	/**
-	 * @return a clone of the {@link SubstitutionVisitor#substitute}
+	 * @return the {@link SubstitutionVisitor#substitute}
+	 * @see SubstitutionVisitor#getClone()
 	 */
 	public final T getSubstitute() {
-		return this.getSubstitute(true);
+		return this.getSubstitute(this.clone);
 	}
 
 	/**

@@ -104,6 +104,7 @@ public final class CheckProgramTest {
 	 */
 	@Test
 	public void testTestProgramValidity() {
-		Assert.assertEquals(this.expectedValidity, this.checker.checkProgram(this.testProgram));
+		final Validity actual = this.checker.checkProgram(this.testProgram);
+		Assert.assertEquals(this.checker.getCheckResult().getOutput(), this.expectedValidity, actual);
 	}
 }

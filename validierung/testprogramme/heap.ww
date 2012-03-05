@@ -47,6 +47,10 @@ function Integer heapsize(Integer[] heap1)
 	return heap1[0]
 }
 
+// -----------------
+// HEAP FUNCTIONS
+// -----------------
+
 // Checks that the given array fulfils the heap condition
 // The heap condition is defined as follows: Each element must be equal to or smaller
 // than any of its child elements. 
@@ -79,10 +83,6 @@ function Boolean heapCondition(Integer[] heap)
 	return result
 }
 
-// -----------------
-// HEAP FUNCTIONS
-// -----------------
-
 // Inserts a key into a heap.
 // Ensures that the returned heap is 1 larger than the original heap
 // and contains the key just inserted.
@@ -109,6 +109,8 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	if (currentInsertIndex > 1) {		
 		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] < insertResult[/*parent(currentInsertIndex)*/ currentInsertIndex / 2]
 			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ /*heapsize(insertResult)*/insertResult[0] + 1
+			_invariant ∃ Integer i2a, 1 ≤ i2a ∧ i2a ≤ heapsize(insertResult) : insertResult[i2a] = insertKey
+			_invariant insertResult[currentInsertIndex] = insertKey
 			
 			// TODO this does not work (program is not proven correct, with counterexample!),
 			// but the invariant below makes the program prove correct
@@ -135,23 +137,6 @@ function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
 	
 	return insertResult
 }
-
-// Removes the first element of the heap, restores heap order and decreases the heap size by one
-/*function Integer[] heapPop(Integer[] popHeap)
-	_requires heapsize(popHeap) > 0
-	_requires heapCondition(popHeap)
-	
-	_ensures heapsize(_return) = heapsize(popHeap) - 1
-	_ensures heapCondition(_return)
-{
-	Integer[] popResult := popHeap
-	popResult[1] := popResult[heapsize(popResult)]
-	popResult[0] := popResult[0] - 1
-	
-	// TODO restore heap condition
-	
-	return popResult
-}*/
 
 // -----------------
 // HEAP SORT

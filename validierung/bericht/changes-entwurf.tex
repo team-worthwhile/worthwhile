@@ -14,11 +14,11 @@ Bei der Modifikation des Formelgenerators wurde jedoch darauf geachtet, die Grun
 
 \subsection{Änderungen am AST}
 
-Gegenüber dem Entwurf wurden am AST einige kleinere Änderungen vorgenommen: So wurde die gemeinsame Oberklasse \texttt{FunctionAnnotation} für \texttt{Precondition} und \texttt{Postcondition} eingeführt. Ebenso wurde die gemeinsame Oberklasse \texttt{SymbolReference} für \texttt{VariableReference}  und \texttt{ReturnValueReference} eingeführt. Diese Änderungen dienen vor allem der Vermeidung von Codeduplizierung in den Visitor"=Implementierungen von Interpreter und Beweiserschnittstelle.
+Gegenüber dem Entwurf wurden am AST einige kleinere Änderungen vorgenommen: So wurde die gemeinsame Oberklasse \texttt{Function"-Annotation} für \texttt{Precondition} und \texttt{Postcondition} eingeführt. Ebenso wurde die gemeinsame Oberklasse \texttt{Symbol"-Reference} für \texttt{Variable"-Reference}  und \texttt{Return"-Value"-Reference} eingeführt. Diese Änderungen dienen vor allem der Vermeidung von Codeduplizierung in den Visitor"=Implementierungen von Interpreter und Beweiserschnittstelle.
 
-Um die Erstellung der SMTLIB-Formel zu vereinfachen, wurde in \texttt{ReturnValueReference} ein Verweis auf die Funktion, deren Rückgabewert referenziert wird, hinzugefügt.
+Um die Erstellung der SMTLIB-Formel zu vereinfachen, wurde in \texttt{Return"-Value"-Reference} ein Verweis auf die Funktion, deren Rückgabewert referenziert wird, hinzugefügt.
 
-Für die "`Partial Proofs"' wurden zwei neue spezifische Unterklassen von \texttt{Assertion} eingeführt: \texttt{DivisorNotZeroAssertion} und \texttt{FunctionCallPreconditionValidAssertion} mit der gemeinsamen Oberklasse \texttt{GuardAssertion}. Diese Assertions sind in Worthwhile"=Programmcodes implizit und werden vom Beweiser eingefügt. Deshalb müssen sie gegenüber den normalen Assertions zusätzlich die Information tragen, auf welchen Teil des Codes sie sich beziehen, d.\,h. welcher \texttt{Expression} sie einen Wert ungleich Null und welchem \texttt{FunctionCall} sie valide Parameter zusichern.
+Für die "`Partial Proofs"' wurden zwei neue spezifische Unterklassen von \texttt{Assertion} eingeführt: \texttt{Divisor"-Not"-Zero"-Assertion} und \texttt{Function"-Call"-Precondition"-Assertion} mit der gemeinsamen Oberklasse \texttt{Guard"-Assertion}. Diese Assertions sind in Worthwhile"=Programmcodes implizit und werden vom Beweiser eingefügt. Deshalb müssen sie gegenüber den normalen Assertions zusätzlich die Information tragen, auf welchen Teil des Codes sie sich beziehen, d.\,h. welcher \texttt{Expression} sie einen Wert ungleich Null und welchem \texttt{Function"-Call} sie valide Parameter zusichern.
 
 \subsection{Änderungen an der Grammatik}
 

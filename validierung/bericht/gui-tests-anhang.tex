@@ -103,7 +103,7 @@
 	\item Ausdruck mit Semantikfehler
 	\item \texttt{1/0} als Ausdruck
 	\item Ausdruck mit Array als Rückgabetyp
-\end{enumerate}}{Korrekte Auswertung der gültigen Ausdrücke, Anzeige einer Fehlermeldungen bei ungültigen oder nicht auswertbaren Ausdrücken}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/91}{Bug \#91}: Watch expressions are not validated –  behoben \\ \href{https://github.com/team-worthwhile/worthwhile/issues/113}{Bug \#113}: EmptyStackException when evaluating 1/0 as expression}
+\end{enumerate}}{Korrekte Auswertung der gültigen Ausdrücke, Anzeige einer Fehlermeldungen bei ungültigen oder nicht auswertbaren Ausdrücken}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/91}{Bug \#91}: Watch expressions are not validated –  behoben \\ \href{https://github.com/team-worthwhile/worthwhile/issues/113}{Bug \#113}: EmptyStackException when evaluating 1/0 as expression -- behoben}
 
 \subsection{Debugger-Funktionen}
 
@@ -127,5 +127,5 @@
 	\item Eine ungültige Annotation
 	\item Eine Annotation mit unbekanntem Gültigkeitswert
 \end{enumerate}}{Die gültige Annotation wird grün markiert, die beiden anderen rot. Der Interpreter hält außerdem bei den rot markierten Annotationen an.}{OK}{--}
-\guitest{Fehler bei Aufruf des Beweisers}{Einstellung eines ungültigen Beweiserpfades in den Einstellungen und Debuggen eines Programms, das eine Annotation enthält.}{Annotation wird rot markiert, Interpreter stoppt und gibt eine Fehlermeldung aus.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/58}{Bug \#58}: Interpreter throws ugly error message when prover is missing}
+\guitest{Fehler bei Aufruf des Beweisers}{Einstellung eines ungültigen Beweiserpfades in den Einstellungen und Debuggen eines Programms, das eine Annotation enthält.}{Annotation wird rot markiert, Interpreter stoppt und gibt eine Fehlermeldung aus.}{(OK)}{\href{https://github.com/team-worthwhile/worthwhile/issues/58}{Bug \#58}: Interpreter throws ugly error message when prover is missing -- behoben}
 \guitest{Division durch Null}{Es wird ein Programm ausgeführt, das den Ausdruck \texttt{1/0} oder \texttt{1\%0} enthält.}{Fehlermeldung und Programmabbruch}{OK}{--}

@@ -22,3 +22,6 @@ _ensures exists Integer j, 1 <= j && j <= length : _return = array[j]
 
 	return _max
 }
+
+Integer r := invalid_array_max({ 1, -1, 5000, 9000}, 4)
+_assert r = 9000

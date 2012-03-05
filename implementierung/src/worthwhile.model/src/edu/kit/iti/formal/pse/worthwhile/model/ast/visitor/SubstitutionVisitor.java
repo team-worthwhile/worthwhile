@@ -28,8 +28,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 
 /**
- * Substitutes a child reference with some {@link Expression} in the parent <code>ASTNode</code> when indicated so by the
- * child.
+ * Substitutes a child reference with some {@link Expression} in the parent <code>ASTNode</code> when indicated so by
+ * the child.
  * 
  * Implements all {@link Statement} visit methods as well as
  * 
@@ -61,7 +61,8 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	private T substitute;
 
 	/**
-	 * Indicates whether a matching child has been found and has to be substituted in the parent <code>ASTNode</code>.
+	 * Indicates whether a matching child has been found and has to be substituted in the parent
+	 * <code>ASTNode</code>.
 	 */
 	private Boolean found = false;
 

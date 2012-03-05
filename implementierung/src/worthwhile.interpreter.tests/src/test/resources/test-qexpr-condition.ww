@@ -1,0 +1,9 @@
+// EXPECTED:VALID
+function Integer test(Integer i)
+	_requires i ≥ 0
+	_ensures _return = 42
+{
+	return 42
+}
+
+_assert ∀ Integer j, j ≥ 0 : test(j) = 42

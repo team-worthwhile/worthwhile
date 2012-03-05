@@ -1,0 +1,190 @@
+// EXPECTED:VALID
+// -----------------
+// UTILITY FUNCTIONS
+// -----------------
+
+// Swaps two elements in an array
+function Integer[] swap(Integer[] source, Integer index1, Integer index2)
+	_ensures ∀ Integer i8, i8 ≠ index1 ∧ i8 ≠ index2 : _return[i8] = source[i8]
+	_ensures _return[index1] = source[index2]
+	_ensures _return[index2] = source[index1]
+{
+	Integer[] res := source
+
+	Integer tmp1 := res[index1]
+	res[index1] := res[index2]
+	res[index2] := tmp1
+	
+	return res
+}
+
+// Returns the parent index of an item in the heap.
+function Integer parent(Integer key1)
+	_ensures _return = key1 / 2
+{
+	return key1 / 2
+}
+
+// Returns the index of the left child of an item in the heap.
+function Integer left(Integer key2)
+	_ensures _return = 2 ⋅ key2
+{
+	return 2 ⋅ key2
+}
+
+// Returns the index of the right child of an item in the heap.
+function Integer right(Integer key3)
+	_ensures _return = 2 ⋅ key3 + 1
+{
+	return 2 ⋅ key3 + 1
+}
+
+// Returns the size of the given heap
+// (which is stored in the heap at index 0)
+function Integer heapsize(Integer[] heap1)
+	_requires heap1[0] ≥ 0
+	_ensures _return = heap1[0]
+{
+	return heap1[0]
+}
+
+// Checks that the given array fulfils the heap condition
+// The heap condition is defined as follows: Each element must be equal to or smaller
+// than any of its child elements. 
+function Boolean heapCondition(Integer[] heap)
+	_requires heapsize(heap) ≥ 0
+	_ensures _return = ∀ Integer i1, 2 ≤ i1 ∧ i1 ≤ heapsize(heap) : heap[parent(i1)] ≤ heap[i1]
+{
+	Boolean result := true
+	
+	if (heapsize(heap) ≥ 2) {
+		Integer i3 := 2
+		
+		while i3 ≤ heapsize(heap)
+			_invariant 2 ≤ i3 ∧ i3 ≤ heapsize(heap) + 1
+			
+			// The invariant is that the contents of "result" indicate whether the
+			// sub-array [1..i3-1] of the input fulfils the heap condition.
+			_invariant result = ∀ Integer i4, 2 ≤ i4 ∧ i4 < i3 : heap[parent(i4)] ≤ heap[i4]
+		{
+			if result = true {
+				if heap[parent(i3)] > heap[i3] {
+					result := false
+				}
+			}
+			
+			i3 := i3 + 1
+		}
+	}
+	
+	return result
+}
+
+// -----------------
+// HEAP FUNCTIONS
+// -----------------
+
+// Inserts a key into a heap.
+// Ensures that the returned heap is 1 larger than the original heap
+// and contains the key just inserted.
+function Integer[] heapInsert(Integer[] insertHeap, Integer insertKey)
+	_requires heapsize(insertHeap) ≥ 0
+	_requires heapCondition(insertHeap)
+	
+	_ensures heapCondition(_return)
+	_ensures heapsize(_return) = heapsize(insertHeap) + 1
+	_ensures ∃ Integer i2, 1 ≤ i2 ∧ i2 ≤ heapsize(_return) : _return[i2] = insertKey
+{
+	Integer[] insertResult := insertHeap
+	
+	// Enlarge the heap by one
+	insertResult[0] := insertHeap[0] + 1
+	Integer insertHeapSize := insertResult[0]
+
+	// Insert new item into heap
+	Integer currentInsertIndex := insertHeapSize
+	insertResult[currentInsertIndex] := insertKey
+	
+	// If the newly inserted item is not the only one in the heap, we need to restore the heap condition
+	// This is done by "sifting up" the inserted element until it is no longer smaller than its parent element.
+	if (currentInsertIndex > 1) {		
+		while currentInsertIndex > 1 ∧ insertResult[currentInsertIndex] < insertResult[/*parent(currentInsertIndex)*/ currentInsertIndex / 2]
+			_invariant currentInsertIndex ≥ 1 ∧ currentInsertIndex ≤ /*heapsize(insertResult)*/insertResult[0] + 1
+			
+			// TODO this does not work (program is not proven correct, with counterexample!),
+			// but the invariant below makes the program prove correct
+			//_invariant heapsize(insertResult) = heapsize(insertHeap) + 1 
+			_invariant insertResult[0] = insertHeap[0] + 1
+			
+			// Invariant: The heap condition is fulfilled on all elements but the one we are currently sifting up.
+			// The second invariant states that not only the the parent element, but also the grandparent element of
+			// an element is smaller than the element itself. We need this second invariant because an array like this:
+			//
+			//        8
+			//     (6)  9
+			//    6   7
+			//
+			// , where (6) is the inserted element, clearly fulfils the first invariant, but this could not have been a heap before.			
+			_invariant ∀ Integer i5, 2 ≤ i5 ∧ i5 ≤ /*heapsize(insertResult)*/insertResult[0] ∧ i5 ≠ currentInsertIndex : insertResult[/*parent(i5)*/i5/2] ≤ insertResult[i5]
+			_invariant ∀ Integer i5a, 4 ≤ i5a ∧ i5a ≤ /*heapsize(insertResult)*/insertResult[0] ∧ i5a ≠ currentInsertIndex : insertResult[/*parent(i5)*/i5a/4] ≤ insertResult[i5a] 
+		{
+			Integer parentIndex := parent(currentInsertIndex)
+			insertResult := swap(insertResult, currentInsertIndex, parentIndex)
+			currentInsertIndex := parentIndex
+		}
+	}
+	
+	return insertResult
+}
+
+// Removes the first element of the heap, restores heap order and decreases the heap size by one
+/*function Integer[] heapPop(Integer[] popHeap)
+	_requires heapsize(popHeap) > 0
+	_requires heapCondition(popHeap)
+	
+	_ensures heapsize(_return) = heapsize(popHeap) - 1
+	_ensures heapCondition(_return)
+{
+	Integer[] popResult := popHeap
+	popResult[1] := popResult[heapsize(popResult)]
+	popResult[0] := popResult[0] - 1
+	
+	// TODO restore heap condition
+	
+	return popResult
+}*/
+
+// -----------------
+// HEAP SORT
+// -----------------
+
+// Sorts an array using heap sort.
+/*function Integer[] heapSort(Integer[] sortInput, Integer length)
+	_requires length ≥ 0
+	_ensures ∀ Integer i5, 1 ≤ i5 ∧ i5 < length : _return[i5 - 1] ≤ _return[i5] 
+{
+	Integer[] sortResult
+	Integer[] tmpHeap := {0}
+	
+	Integer i := 0
+	while (i < length) {
+		tmpHeap := heapInsert(tmpHeap, sortInput[i])
+		i := i + 1
+	}
+	
+	i := 0
+	while (i < length) {
+		sortResult[i] := tmpHeap[1]
+		tmpHeap := heapPop(tmpHeap)
+		i := i + 1
+	}
+	
+	return sortResult
+}*/
+
+Integer[] testHeap := {3, 0, 1, 2}
+
+Boolean b := heapCondition(testHeap)
+testHeap := heapInsert(testHeap, -1)
+
+testHeap := testHeap

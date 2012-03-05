@@ -1,0 +1,28 @@
+// calculate the sum from 1 to n
+function Integer gauss_sum (Integer n) {
+	
+	if (n < 1)	 {
+		return 1 - 2
+	} else {
+		Integer sum := 0
+		Integer i := n
+		while (i > 0) {
+			sum := sum + i
+			i := i - 1
+		}
+		return sum
+		Integer cd := 3
+		
+	}
+}
+
+Integer n1 := 10
+
+Integer summe := gauss_sum(n1)
+Integer b := n1 * (n1 + 1) / 2
+
+_assert (gauss_sum(n1) = n1 * ( n1 + 1 ) / 2)
+//_assert forall Integer k , (k > 0) : gauss_sum(k) = k * ( k + 1 ) / 2
+
+n1 := 0
+

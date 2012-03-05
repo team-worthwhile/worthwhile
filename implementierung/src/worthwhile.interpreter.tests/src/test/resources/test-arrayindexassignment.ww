@@ -1,0 +1,35 @@
+// EXPECTED:VALID
+function Boolean[] f()
+_ensures _return = { }
+{
+	Boolean[] fx
+	_assert fx = { }
+	return fx
+}
+
+function Integer[] g()
+_ensures _return = { }
+{
+	Integer[] gx
+	_assert gx = { }
+	return gx
+}
+
+Integer[] x
+_assert x = { }
+
+Boolean[] y
+_assert y = { }
+
+Integer i := 0
+Integer j := 0
+Integer[] b
+b[i] := 1
+b[j] := 2
+_assert b[i] = 2
+_assert b[j] = 2
+_assert b = { 2 }
+
+Integer[] a := {1, 2, 3}
+a[0] := 42
+_assert a[0] = 42 && a[1] = 2 && a[2] = 3

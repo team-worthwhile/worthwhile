@@ -1,0 +1,22 @@
+// EXPECTED:VALID
+Integer x
+Integer y
+Integer z := 0
+Integer oldX := x
+Integer oldY := y
+
+while (y != 0)
+  _invariant y >= 0 && oldX * oldY = x * y + z
+{
+      if (y % 2 = 1) {
+          z := x + z
+          y := y / 2
+          x := 2 * x
+      }
+
+      if (y % 2 = 0) {
+          y := y / 2
+          x := 2 * x
+      }
+}
+_assert z = oldX * oldY

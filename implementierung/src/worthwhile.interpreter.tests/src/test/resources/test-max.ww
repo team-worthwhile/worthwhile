@@ -1,0 +1,12 @@
+// EXPECTED:VALID
+function Integer max(Integer a, Integer b)
+_ensures _return >= a && _return >= b && (_return = a || _return = b)
+{
+    if a > b {
+        return a
+    }
+    if b >= a {
+        return b
+    }
+    return b
+}

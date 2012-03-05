@@ -1,0 +1,16 @@
+// EXPECTED:INVALID
+function Integer inc(Integer n)
+_ensures _return = n + 1
+{
+	return n + 1
+}
+
+Integer _inc0 := 0
+
+while (_inc0 < 10)
+_invariant _inc0 < 10
+{
+	_inc0 := inc(_inc0)
+}
+
+_assert _inc0 = 10

@@ -28,7 +28,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 
 /**
- * Substitutes a child reference with some {@link Expression} in the parent {@link ASTNode} when indicated so by the
+ * Substitutes a child reference with some {@link Expression} in the parent <code>ASTNode</code> when indicated so by the
  * child.
  * 
  * Implements all {@link Statement} visit methods as well as
@@ -61,14 +61,14 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	private T substitute;
 
 	/**
-	 * Indicates whether a matching child has been found and has to be substituted in the parent {@link ASTNode}.
+	 * Indicates whether a matching child has been found and has to be substituted in the parent <code>ASTNode</code>.
 	 */
 	private Boolean found = false;
 
 	/**
 	 * 
 	 * @param substitute
-	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
+	 *                the {@link Expression} found child <code>ASTNode</code>s are substituted with
 	 */
 	public SubstitutionVisitor(final T substitute) {
 		this.substitute = substitute;
@@ -114,7 +114,7 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	/**
 	 * 
 	 * @param substitute
-	 *                the {@link Expression} found child {@link ASTNode}s are substituted with
+	 *                the {@link Expression} found child <code>ASTNode</code>s are substituted with
 	 */
 	protected final void setSubstitute(final T substitute) {
 		this.substitute = substitute;

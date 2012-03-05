@@ -151,7 +151,7 @@ public class SpecificationChecker {
 	 */
 	// TODO we need error reporting, return UNKNOWN for now in case of ProverCallerException
 	public final Validity checkFormula(final Expression formula, final Map<VariableDeclaration, Value> environment) {
-		return this.checkFormula(formula, environment, Collections.EMPTY_LIST);
+		return this.checkFormula(formula, environment, Collections.<Expression> emptyList());
 	}
 
 	/**

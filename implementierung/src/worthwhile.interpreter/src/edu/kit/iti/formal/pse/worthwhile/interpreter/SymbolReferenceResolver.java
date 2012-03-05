@@ -52,7 +52,8 @@ public class SymbolReferenceResolver extends SubstitutionVisitor<Literal> {
 	 *                applied to
 	 */
 	SymbolReferenceResolver(final InterpreterASTNodeVisitor interpreterState) {
-		super(null);
+		// it is not necessary to clone the substitutes we set because they are not contained anywhere
+		super(null, false);
 		this.interpreterState = interpreterState;
 	}
 

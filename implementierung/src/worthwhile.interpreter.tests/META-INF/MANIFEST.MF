@@ -5,5 +5,6 @@ Bundle-Version: 0.1
 Fragment-Host: edu.kit.iti.formal.pse.worthwhile.interpreter
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.junit, org.junit.runner, org.junit.runners,
- edu.kit.iti.formal.pse.worthwhile.common.tests
+ edu.kit.iti.formal.pse.worthwhile.common.tests,
+ edu.kit.iti.formal.pse.worthwhile.prover.caller
 Require-Bundle: edu.kit.iti.formal.pse.worthwhile.common.tests

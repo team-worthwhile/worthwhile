@@ -9,6 +9,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.FormulaCompiler;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.SMTLIBStrategy;
 
 /**
  * Test SMTLIBStrategy for proper compilation of formulas to SMTLIB syntax.

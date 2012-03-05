@@ -20,7 +20,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
-import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 
 /**
  * Tests {@link Interpreter#evaluateExpression(edu.kit.iti.formal.pse.worthwhile.model.ast.Expression).

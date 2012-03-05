@@ -21,7 +21,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
-import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 
 public class InterpreterExecutionEventListenerTest {
 

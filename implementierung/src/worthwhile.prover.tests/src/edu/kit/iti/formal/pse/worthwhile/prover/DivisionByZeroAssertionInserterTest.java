@@ -11,6 +11,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 
 /**
  * Test for {@link DivisionByZeroAssertionInserter} which ensures that Divisions by zero cause the proof to fail.

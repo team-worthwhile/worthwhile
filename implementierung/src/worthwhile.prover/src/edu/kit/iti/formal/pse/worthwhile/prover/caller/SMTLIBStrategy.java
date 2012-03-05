@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
 import java.math.BigInteger;
 import java.util.Stack;
@@ -47,7 +47,7 @@ import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 /**
  * @author Leon Handreke, fabian
  */
-class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
+public class SMTLIBStrategy extends HierarchialASTNodeVisitor implements FormulaCompiler {
 
 	/**
 	 * Stack to pass compiled formula elements up to caller.

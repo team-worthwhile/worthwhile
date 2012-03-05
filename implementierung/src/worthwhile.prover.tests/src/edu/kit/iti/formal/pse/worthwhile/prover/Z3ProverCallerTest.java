@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.FormulaSatisfiability;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverCaller;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverCallerException;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverResult;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 
 /**
  * Test the prover caller and result parser for the prover Z3.

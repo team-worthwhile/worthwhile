@@ -31,7 +31,7 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileProverMarkerHe
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
-import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.launching.WorthwhileLaunchConfigurationDelegate;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
 import edu.kit.iti.formal.pse.worthwhile.util.WorthwhileMarkerHelper;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 

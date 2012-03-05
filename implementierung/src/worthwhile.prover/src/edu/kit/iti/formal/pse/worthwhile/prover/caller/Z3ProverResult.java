@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
 /**
  * Represents a prover result returned by the Z3 Prover.

@@ -14,7 +14,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
-import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 
 public class InterpreterValueTest {
 

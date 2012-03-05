@@ -14,7 +14,7 @@ import edu.kit.iti.formal.pse.worthwhile.debugger.model.WorthwhileDebugTarget;
 import edu.kit.iti.formal.pse.worthwhile.interpreter.Interpreter;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
-import edu.kit.iti.formal.pse.worthwhile.prover.Z3Prover;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 import edu.kit.iti.formal.pse.worthwhile.ui.preferences.WorthwhilePreferenceConstants;
 
 /**

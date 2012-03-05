@@ -2,8 +2,8 @@ package edu.kit.iti.formal.pse.worthwhile.ui.proving;
 
 import org.eclipse.core.runtime.IStatus;
 
-import edu.kit.iti.formal.pse.worthwhile.prover.ProverResult;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverResult;
 
 /**
  * A status representing the validity of a checked program.

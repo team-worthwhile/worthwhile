@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
 /**
  * Expresses the satisfiability of a formula. A formula is satisfiable if there exists an interpretation of the formula

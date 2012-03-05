@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.transformer;
 
 import java.util.ArrayList;
 import java.util.List;

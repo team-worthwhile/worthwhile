@@ -5,6 +5,9 @@ import org.junit.Test;
 
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.FormulaSatisfiability;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
+import edu.kit.iti.formal.pse.worthwhile.prover.transformer.WPStrategy;
 
 /**
  * Test the correct behaviour of methods in {@link SpecificationChecker}.

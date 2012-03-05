@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.transformer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +40,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VariableReferenceSubs
 /**
  * Applies the Weakest Precondition calculus to a {@link Program}.
  */
-class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
+public class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGenerator {
 	/**
 	 * The stack of weakest preconditions that implies the correctness of the remainder {@link Block}.
 	 */

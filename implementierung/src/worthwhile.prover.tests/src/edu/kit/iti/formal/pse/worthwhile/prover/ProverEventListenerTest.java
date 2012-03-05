@@ -8,6 +8,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverResult;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.Z3Prover;
 
 /**
  * Test the functionality of the event listener mechanism in {@link SpecificationChecker}.

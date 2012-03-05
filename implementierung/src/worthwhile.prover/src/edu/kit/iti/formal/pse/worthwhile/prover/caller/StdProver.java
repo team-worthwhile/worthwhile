@@ -1,4 +1,4 @@
-package edu.kit.iti.formal.pse.worthwhile.prover;
+package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

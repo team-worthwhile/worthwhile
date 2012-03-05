@@ -15,9 +15,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
 import edu.kit.iti.formal.pse.worthwhile.prover.IProverEventListener;
-import edu.kit.iti.formal.pse.worthwhile.prover.ProverResult;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
+import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverResult;
 
 /**
  * A job for proving a program.

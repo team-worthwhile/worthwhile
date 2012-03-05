@@ -12,6 +12,10 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeEqualsHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeToStringHelper;
+import edu.kit.iti.formal.pse.worthwhile.prover.transformer.FormulaGenerator;
+import edu.kit.iti.formal.pse.worthwhile.prover.transformer.Proof;
+import edu.kit.iti.formal.pse.worthwhile.prover.transformer.ProofImplication;
+import edu.kit.iti.formal.pse.worthwhile.prover.transformer.WPStrategy;
 
 /**
  * JUnit TestCases for {@link WPStrategy#transformProgram}.

@@ -1,6 +1,10 @@
 \section{Änderungen gegenüber dem Entwurf}
 
-Während der Validierungsphase haben sich gegenüber der im Entwurf festgelegten Architektur nur kleine Änderungen ergeben. So wurden einige Interfaces verändert, um kleinere Versehen in der Entwurfsphase zu korrigieren. Außerdem wurden einige Klassen, die in der Implementationsphase in den Paketen \texttt{prover} und \texttt{interpreter} angelegt wurden, in das gemeinsam genutzte Paket \texttt{model} verschoben. Dabei wurde stets darauf geachtet, keine für den Interpreter oder die Beweiserschnittstelle spezifische Funktionalität in dieses Modul zu verschieben.
+Während der Validierungsphase haben sich gegenüber der im Entwurf festgelegten Architektur nur kleine Änderungen ergeben. So wurden einige Interfaces verändert, um kleinere Versehen in der Entwurfsphase zu korrigieren.
+
+Außerdem wurden einige Klassen, die in der Implementationsphase in den Paketen \texttt{prover} und \texttt{interpreter} angelegt wurden, in das gemeinsam genutzte Paket \texttt{model} verschoben. Bei den verschobenen Klassen handelt es sich um Visitor"=Implementierungen, die bestimmte Syntaxelemente in einem Abstract"=Syntax"=Tree suchen oder ersetzen, und es wurde stets darauf geachtet, keine für den Interpreter oder die Beweiserschnittstelle spezifische Funktionalität in dieses Modul zu verschieben.
+
+Nicht zuletzt wurde zur Behebung eines Fehlers, der den aufgerufenen Beweiser nicht vorzeitig beenden lies, die Timeout"=Funktionalität der Beweiserschnittstelle aus der Fassade in die speziellen Beweiseraufrufe verschoben. Diese Änderung am Entwurf hängt stark mit der Verwaltung von Prozessen in der Java"=Virtual"=Machine und dem Betriebssystem zusammen, was für einen sauberen Entwurf vernachlässigt werden konnte.
 
 \subsection{"`Partial Proofs"'}
 

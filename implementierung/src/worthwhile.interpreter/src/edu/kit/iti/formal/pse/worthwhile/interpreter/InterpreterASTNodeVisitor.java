@@ -506,7 +506,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			BooleanLiteral conjunction = AstNodeCreatorHelper.createBooleanLiteral(this.assumptionsTrue
 			                && this.axiomsTrue);
 			Implication implication = AstNodeCreatorHelper.createImplication(conjunction,
-			                annotation.getExpression());
+			                AstNodeCloneHelper.clone(annotation.getExpression()));
 			implication.accept(this);
 		}
 		if (this.popBooleanValue().getValue()) {

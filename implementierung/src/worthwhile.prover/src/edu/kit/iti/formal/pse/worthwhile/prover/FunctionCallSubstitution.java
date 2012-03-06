@@ -52,6 +52,9 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 	@Override
 	public void visit(final FunctionCall functionCall) {
+		// visit actuals, which are Expressions and could contain FunctionCalls themselves
+		super.visit(functionCall);
+
 		final FunctionDeclaration function = functionCall.getFunction();
 		// FIXME: these could be legal identifiers in Worthwhile or illegal in some prover input language
 		final String name = new String("$" + function.getName() + "$" + index++);

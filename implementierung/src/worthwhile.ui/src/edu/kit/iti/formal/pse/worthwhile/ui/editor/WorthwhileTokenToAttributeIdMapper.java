@@ -26,6 +26,9 @@ public class WorthwhileTokenToAttributeIdMapper extends DefaultAntlrTokenToAttri
 		} else if ("RULE_RETURN_VALUE_REFERENCE".equals(tokenName)) {
 			// "_return" is a keyword although it is not recognized as such. 
 			return WorthwhileHighlightingConfiguration.KEYWORD_ID;
+		} else if ("RULE_RETURN_STATEMENT".equals(tokenName)) {
+			// "return" is a keyword although it is not recognized as such
+			return WorthwhileHighlightingConfiguration.KEYWORD_ID;
 		} else if (tokenName.length() >= 3 // filter out the quotes arount the token name
 		                && Arrays.asList(additionalPunctuationTokens).contains(
 		                                tokenName.substring(1, tokenName.length() - 1))) {

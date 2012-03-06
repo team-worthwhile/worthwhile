@@ -1185,7 +1185,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 		List<Expression> axiomsAndAssumptions = new ArrayList<Expression>();
 		axiomsAndAssumptions.addAll(this.assumptions);
 		axiomsAndAssumptions.addAll(this.axioms);
-		Validity validity = this.specificationChecker.checkFormula(quantifiedExpression, this.getAllSymbols(),
+		// clone the Expression first because the symbols may have a different value at the next visit
+		Expression formula = AstNodeCloneHelper.clone(quantifiedExpression);
+		formula = SymbolReferenceResolver.apply(formula, this);
+		Validity validity = this.specificationChecker.checkFormula(formula, this.getAllSymbols(),
 		                axiomsAndAssumptions);
 		if (validity.equals(Validity.UNKNOWN)) {
 			annotationFailed(this.currentAnnotation);

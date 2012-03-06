@@ -59,6 +59,9 @@ public class SymbolReferenceResolver extends SubstitutionVisitor<Literal> {
 
 	@Override
 	public final void visit(final ReturnValueReference returnValueReference) {
+		// do not forget to visit index
+		super.visit(returnValueReference);
+
 		// when the InterpreterASTNodeVisitor is evaluating an Expression that contains ReturnValueReferences it
 		// must have set a return value
 		final Value value = this.interpreterState.getReturnValue();
@@ -69,6 +72,9 @@ public class SymbolReferenceResolver extends SubstitutionVisitor<Literal> {
 
 	@Override
 	public final void visit(final VariableReference variableReference) {
+		// do not forget to visit index
+		super.visit(variableReference);
+
 		final Value value = this.interpreterState.getSymbol(variableReference.getVariable());
 
 		// since VariableReferences can refer to variables bound by a quantifier we do not require the state to

@@ -1,0 +1,11 @@
+// EXPECTED:VALID
+function Integer id(Integer p)
+_ensures _return = p
+{
+	return p
+}
+
+_assert id(0) = 0
+_assert id(id(0)) = 0
+_assert forall Integer i : id(i) = i
+_assert forall Integer j : id(id(j)) = id(j)

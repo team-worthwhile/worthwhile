@@ -501,6 +501,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue" ordered="false"
         lowerBound="1" eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//FunctionDeclaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//BinaryExpression">
     <eOperations name="accept">

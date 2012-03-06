@@ -41,6 +41,16 @@ public class ReturnStatement extends Statement {
 	protected Expression returnValue;
 
 	/**
+	 * The cached value of the '{@link #getFunction() <em>Function</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFunction()
+	 * @generated
+	 * @ordered
+	 */
+	protected FunctionDeclaration function;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -118,6 +128,58 @@ public class ReturnStatement extends Statement {
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Function</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Function</em>' reference.
+	 * @see #setFunction(FunctionDeclaration)
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnStatement_Function()
+	 * @model
+	 * @generated
+	 */
+	public FunctionDeclaration getFunction() {
+		if (function != null && function.eIsProxy()) {
+			InternalEObject oldFunction = (InternalEObject) function;
+			function = (FunctionDeclaration) eResolveProxy(oldFunction);
+			if (function != oldFunction) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+					                AstPackage.RETURN_STATEMENT__FUNCTION, oldFunction, function));
+			}
+		}
+		return function;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FunctionDeclaration basicGetFunction() {
+		return function;
+	}
+
+	/**
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getFunction <em>Function</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Function</em>' reference.
+	 * @see #getFunction()
+	 * @generated
+	 */
+	public void setFunction(FunctionDeclaration newFunction) {
+		FunctionDeclaration oldFunction = function;
+		function = newFunction;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.RETURN_STATEMENT__FUNCTION,
+			                oldFunction, function));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @model visitorType="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor" visitorRequired="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
@@ -150,6 +212,10 @@ public class ReturnStatement extends Statement {
 		switch (featureID) {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				return getReturnValue();
+		case AstPackage.RETURN_STATEMENT__FUNCTION:
+			if (resolve)
+				return getFunction();
+			return basicGetFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -164,6 +230,9 @@ public class ReturnStatement extends Statement {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				setReturnValue((Expression) newValue);
 				return;
+		case AstPackage.RETURN_STATEMENT__FUNCTION:
+			setFunction((FunctionDeclaration) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -178,6 +247,9 @@ public class ReturnStatement extends Statement {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				setReturnValue((Expression) null);
 				return;
+		case AstPackage.RETURN_STATEMENT__FUNCTION:
+			setFunction((FunctionDeclaration) null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -191,6 +263,8 @@ public class ReturnStatement extends Statement {
 		switch (featureID) {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				return returnValue != null;
+		case AstPackage.RETURN_STATEMENT__FUNCTION:
+			return function != null;
 		}
 		return super.eIsSet(featureID);
 	}

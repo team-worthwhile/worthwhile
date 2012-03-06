@@ -48,6 +48,10 @@ terminal RETURN_VALUE_REFERENCE:
 	"_return"
 ;
 
+terminal RETURN_STATEMENT:
+	"return"
+;
+
 // An axiom is declared at the top level in the program and is valid for all annotations.
 Axiom returns Axiom:
 	'_axiom' expression=Expression
@@ -70,7 +74,7 @@ Statement returns Statement:
 
 // A return statement returns a value from a function.
 ReturnStatement returns ReturnStatement:
-	'return' returnValue=Expression
+	function=[FunctionDeclaration|RETURN_STATEMENT] returnValue=Expression
 ;
 
 // A while statement specifies a while loop.

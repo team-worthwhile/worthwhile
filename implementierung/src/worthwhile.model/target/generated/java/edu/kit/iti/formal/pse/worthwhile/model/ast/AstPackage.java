@@ -1764,13 +1764,22 @@ public class AstPackage extends EPackageImpl {
 	public static final int RETURN_STATEMENT__RETURN_VALUE = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Function</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RETURN_STATEMENT__FUNCTION = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Return Statement</em>' class.
 	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+	public static final int RETURN_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}' class.
@@ -3607,6 +3616,19 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getFunction <em>Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Function</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getFunction()
+	 * @see #getReturnStatement()
+	 * @generated
+	 */
+	public EReference getReturnStatement_Function() {
+		return (EReference) returnStatementEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}'.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Subtraction</em>'.
@@ -4044,6 +4066,7 @@ public class AstPackage extends EPackageImpl {
 
 		returnStatementEClass = createEClass(RETURN_STATEMENT);
 		createEReference(returnStatementEClass, RETURN_STATEMENT__RETURN_VALUE);
+		createEReference(returnStatementEClass, RETURN_STATEMENT__FUNCTION);
 
 		subtractionEClass = createEClass(SUBTRACTION);
 
@@ -4592,6 +4615,9 @@ public class AstPackage extends EPackageImpl {
 		initEReference(getReturnStatement_ReturnValue(), this.getExpression(), null, "returnValue", null, 1, 1,
 		                ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getReturnStatement_Function(), this.getFunctionDeclaration(), null, "function", null, 0,
+		                1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE,
+		                IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(returnStatementEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
@@ -5481,6 +5507,14 @@ public class AstPackage extends EPackageImpl {
 		 */
 		public static final EReference RETURN_STATEMENT__RETURN_VALUE = eINSTANCE
 		                .getReturnStatement_ReturnValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Function</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference RETURN_STATEMENT__FUNCTION = eINSTANCE.getReturnStatement_Function();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}' class.

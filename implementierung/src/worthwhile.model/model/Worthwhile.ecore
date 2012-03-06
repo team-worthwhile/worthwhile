@@ -551,6 +551,8 @@
                   <eStructuralFeatures xsi:type="ecore:EReference" name="returnValue"
                       ordered="false" lowerBound="1" eType="#//kit/iti/formal/pse/worthwhile/model/ast/Expression"
                       containment="true"/>
+                  <eStructuralFeatures xsi:type="ecore:EReference" name="function"
+                      eType="#//kit/iti/formal/pse/worthwhile/model/ast/FunctionDeclaration"/>
                 </eClassifiers>
                 <eClassifiers xsi:type="ecore:EClass" name="Subtraction" eSuperTypes="#//kit/iti/formal/pse/worthwhile/model/ast/BinaryExpression">
                   <eOperations name="accept">

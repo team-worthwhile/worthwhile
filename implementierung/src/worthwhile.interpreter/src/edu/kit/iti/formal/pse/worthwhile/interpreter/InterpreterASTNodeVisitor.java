@@ -833,6 +833,10 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 	 *      .worthwhile.model.ast.FunctionCall)
 	 */
 	public void visit(final FunctionCall functionCall) {
+		// save currently executing visitor, for when this is a FunctionCall within a FunctionCall, to reset it
+		// as soon as the now to be created one will have finished its execution - is usually null
+		final InterpreterASTNodeVisitor oldExecutingVisitor = this.executingVisitor;
+
 		this.executingVisitor = new InterpreterASTNodeVisitor(this.specificationChecker);
 		this.executingVisitor.setExecutionEventHandlers(this.executionEventHandlers);
 		this.executingVisitor.setAxioms(this.axioms, this.foundQEInAxioms, this.axiomsTrue);
@@ -853,7 +857,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 
 		// get execution control back from the function visitor that just
 		// returned
-		this.executingVisitor = null;
+		this.executingVisitor = oldExecutingVisitor;
 
 		this.expressionEvaluated(functionCall);
 

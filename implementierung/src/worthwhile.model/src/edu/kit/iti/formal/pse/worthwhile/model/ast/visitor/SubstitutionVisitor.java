@@ -3,8 +3,8 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 import java.util.ListIterator;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
@@ -230,17 +230,17 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 	}
 
 	@Override
-	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
-		arrayFunctionAccess.getFunction().accept(this);
+	public void visit(final ArrayAccess arrayAccess) {
+		arrayAccess.getArray().accept(this);
 		if (this.found) {
 			this.found = false;
-			arrayFunctionAccess.setFunction(this.getSubstitute());
+			arrayAccess.setArray(this.getSubstitute());
 		}
 
-		arrayFunctionAccess.getIndex().accept(this);
+		arrayAccess.getIndex().accept(this);
 		if (this.found) {
 			this.found = false;
-			arrayFunctionAccess.setIndex(this.getSubstitute());
+			arrayAccess.setIndex(this.getSubstitute());
 		}
 	}
 

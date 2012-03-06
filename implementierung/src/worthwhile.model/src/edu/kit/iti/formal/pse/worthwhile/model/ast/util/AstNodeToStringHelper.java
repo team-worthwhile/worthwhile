@@ -5,8 +5,8 @@ import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -187,12 +187,12 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
-		arrayFunctionAccess.getFunction().accept(this);
+	public void visit(final ArrayAccess arrayAccess) {
+		arrayAccess.getArray().accept(this);
 
-		if (arrayFunctionAccess.getIndex() != null) {
+		if (arrayAccess.getIndex() != null) {
 			this.buf.append("[");
-			arrayFunctionAccess.getIndex().accept(this);
+			arrayAccess.getIndex().accept(this);
 			this.buf.append("]");
 		}
 	}

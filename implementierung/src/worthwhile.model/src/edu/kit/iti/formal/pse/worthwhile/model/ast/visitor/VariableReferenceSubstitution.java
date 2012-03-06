@@ -77,7 +77,7 @@ public class VariableReferenceSubstitution extends SubstitutionVisitor<Expressio
 		if (referencedVariable == this.variable) {
 			final Expression index = variableReference.getIndex();
 			if (index != null) {
-				this.setSubstitute(AstNodeCreatorHelper.createArrayFunctionAccess(index,
+				this.setSubstitute(AstNodeCreatorHelper.createArrayAccess(index,
 				                AstNodeCloneHelper.clone(this.substitute)));
 			} else {
 				this.setSubstitute(this.substitute);

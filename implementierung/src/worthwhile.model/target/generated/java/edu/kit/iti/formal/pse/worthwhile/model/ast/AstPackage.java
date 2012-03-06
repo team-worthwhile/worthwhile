@@ -2025,14 +2025,14 @@ public class AstPackage extends EPackageImpl {
 	public static final int ARRAY_FUNCTION_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess <em>Array Function Access</em>}' class.
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess <em>Array Access</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunctionAccess()
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayAccess()
 	 * @generated
 	 */
-	public static final int ARRAY_FUNCTION_ACCESS = 60;
+	public static final int ARRAY_ACCESS = 60;
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
@@ -2041,25 +2041,25 @@ public class AstPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ARRAY_FUNCTION_ACCESS__INDEX = EXPRESSION_FEATURE_COUNT + 0;
+	public static final int ARRAY_ACCESS__INDEX = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Function</b></em>' containment reference.
+	 * The feature id for the '<em><b>Array</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ARRAY_FUNCTION_ACCESS__FUNCTION = EXPRESSION_FEATURE_COUNT + 1;
+	public static final int ARRAY_ACCESS__ARRAY = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Array Function Access</em>' class.
+	 * The number of structural features of the '<em>Array Access</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int ARRAY_FUNCTION_ACCESS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+	public static final int ARRAY_ACCESS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionToExpressionMap <em>Expression To Expression Map</em>}' class.
@@ -2464,7 +2464,7 @@ public class AstPackage extends EPackageImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass arrayFunctionAccessEClass = null;
+	private EClass arrayAccessEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -3808,41 +3808,41 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess <em>Array Function Access</em>}'.
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess <em>Array Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Array Function Access</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess
+	 * @return the meta object for class '<em>Array Access</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess
 	 * @generated
 	 */
-	public EClass getArrayFunctionAccess() {
-		return arrayFunctionAccessEClass;
+	public EClass getArrayAccess() {
+		return arrayAccessEClass;
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getIndex <em>Index</em>}'.
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess#getIndex <em>Index</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Index</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getIndex()
-	 * @see #getArrayFunctionAccess()
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess#getIndex()
+	 * @see #getArrayAccess()
 	 * @generated
 	 */
-	public EReference getArrayFunctionAccess_Index() {
-		return (EReference) arrayFunctionAccessEClass.getEStructuralFeatures().get(0);
+	public EReference getArrayAccess_Index() {
+		return (EReference) arrayAccessEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getFunction <em>Function</em>}'.
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess#getArray <em>Array</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Function</em>'.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess#getFunction()
-	 * @see #getArrayFunctionAccess()
+	 * @return the meta object for the containment reference '<em>Array</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess#getArray()
+	 * @see #getArrayAccess()
 	 * @generated
 	 */
-	public EReference getArrayFunctionAccess_Function() {
-		return (EReference) arrayFunctionAccessEClass.getEStructuralFeatures().get(1);
+	public EReference getArrayAccess_Array() {
+		return (EReference) arrayAccessEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -4091,9 +4091,9 @@ public class AstPackage extends EPackageImpl {
 		createEReference(arrayFunctionEClass, ARRAY_FUNCTION__INDEX);
 		createEReference(arrayFunctionEClass, ARRAY_FUNCTION__VALUE);
 
-		arrayFunctionAccessEClass = createEClass(ARRAY_FUNCTION_ACCESS);
-		createEReference(arrayFunctionAccessEClass, ARRAY_FUNCTION_ACCESS__INDEX);
-		createEReference(arrayFunctionAccessEClass, ARRAY_FUNCTION_ACCESS__FUNCTION);
+		arrayAccessEClass = createEClass(ARRAY_ACCESS);
+		createEReference(arrayAccessEClass, ARRAY_ACCESS__INDEX);
+		createEReference(arrayAccessEClass, ARRAY_ACCESS__ARRAY);
 
 		expressionToExpressionMapEClass = createEClass(EXPRESSION_TO_EXPRESSION_MAP);
 		createEReference(expressionToExpressionMapEClass, EXPRESSION_TO_EXPRESSION_MAP__KEY);
@@ -4195,7 +4195,7 @@ public class AstPackage extends EPackageImpl {
 		symbolReferenceEClass.getESuperTypes().add(this.getExpression());
 		expressionEvaluationEClass.getESuperTypes().add(this.getASTNode());
 		arrayFunctionEClass.getESuperTypes().add(this.getLiteral());
-		arrayFunctionAccessEClass.getESuperTypes().add(this.getExpression());
+		arrayAccessEClass.getESuperTypes().add(this.getExpression());
 		functionAnnotationEClass.getESuperTypes().add(this.getAnnotation());
 
 		// Initialize classes and features; add operations and parameters
@@ -4688,16 +4688,16 @@ public class AstPackage extends EPackageImpl {
 		op = addEOperation(arrayFunctionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(arrayFunctionAccessEClass, ArrayFunctionAccess.class, "ArrayFunctionAccess", !IS_ABSTRACT,
-		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayFunctionAccess_Index(), this.getExpression(), null, "index", null, 0, 1,
-		                ArrayFunctionAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		initEClass(arrayAccessEClass, ArrayAccess.class, "ArrayAccess", !IS_ABSTRACT, !IS_INTERFACE,
+		                IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getArrayAccess_Index(), this.getExpression(), null, "index", null, 1, 1,
+		                ArrayAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getArrayFunctionAccess_Function(), this.getExpression(), null, "function", null, 0, 1,
-		                ArrayFunctionAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		initEReference(getArrayAccess_Array(), this.getExpression(), null, "array", null, 1, 1,
+		                ArrayAccess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		op = addEOperation(arrayFunctionAccessEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = addEOperation(arrayAccessEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(expressionToExpressionMapEClass, Map.Entry.class, "ExpressionToExpressionMap", !IS_ABSTRACT,
@@ -5649,14 +5649,14 @@ public class AstPackage extends EPackageImpl {
 		public static final EReference ARRAY_FUNCTION__VALUE = eINSTANCE.getArrayFunction_Value();
 
 		/**
-		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess <em>Array Function Access</em>}' class.
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess <em>Array Access</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess
-		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunctionAccess()
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayAccess()
 		 * @generated
 		 */
-		public static final EClass ARRAY_FUNCTION_ACCESS = eINSTANCE.getArrayFunctionAccess();
+		public static final EClass ARRAY_ACCESS = eINSTANCE.getArrayAccess();
 
 		/**
 		 * The meta object literal for the '<em><b>Index</b></em>' containment reference feature.
@@ -5664,16 +5664,15 @@ public class AstPackage extends EPackageImpl {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference ARRAY_FUNCTION_ACCESS__INDEX = eINSTANCE.getArrayFunctionAccess_Index();
+		public static final EReference ARRAY_ACCESS__INDEX = eINSTANCE.getArrayAccess_Index();
 
 		/**
-		 * The meta object literal for the '<em><b>Function</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Array</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		public static final EReference ARRAY_FUNCTION_ACCESS__FUNCTION = eINSTANCE
-		                .getArrayFunctionAccess_Function();
+		public static final EReference ARRAY_ACCESS__ARRAY = eINSTANCE.getArrayAccess_Array();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionToExpressionMap <em>Expression To Expression Map</em>}' class.

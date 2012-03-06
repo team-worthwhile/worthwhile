@@ -3,8 +3,8 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
@@ -94,7 +94,7 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 	}
 
 	@Override
-	public void visit(final ArrayFunctionAccess node) {
+	public void visit(final ArrayAccess node) {
 		this.visit((Expression) node);
 	}
 

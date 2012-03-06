@@ -160,8 +160,8 @@ public class AstFactory extends EFactoryImpl {
 				return createExpressionEvaluation();
 			case AstPackage.ARRAY_FUNCTION:
 				return createArrayFunction();
-			case AstPackage.ARRAY_FUNCTION_ACCESS:
-				return createArrayFunctionAccess();
+		case AstPackage.ARRAY_ACCESS:
+			return createArrayAccess();
 			case AstPackage.EXPRESSION_TO_EXPRESSION_MAP:
 				return (EObject) createExpressionToExpressionMap();
 			default:
@@ -620,9 +620,9 @@ public class AstFactory extends EFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArrayFunctionAccess createArrayFunctionAccess() {
-		ArrayFunctionAccess arrayFunctionAccess = new ArrayFunctionAccess();
-		return arrayFunctionAccess;
+	public ArrayAccess createArrayAccess() {
+		ArrayAccess arrayAccess = new ArrayAccess();
+		return arrayAccess;
 	}
 
 	/**

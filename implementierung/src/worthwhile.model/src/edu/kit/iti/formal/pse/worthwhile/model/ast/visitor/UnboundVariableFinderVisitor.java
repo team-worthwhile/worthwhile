@@ -3,8 +3,8 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
@@ -55,9 +55,9 @@ public class UnboundVariableFinderVisitor extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public final void visit(final ArrayFunctionAccess arrayFunctionAccess) {
-		arrayFunctionAccess.getFunction().accept(this);
-		arrayFunctionAccess.getIndex().accept(this);
+	public final void visit(final ArrayAccess arrayAccess) {
+		arrayAccess.getArray().accept(this);
+		arrayAccess.getIndex().accept(this);
 	}
 
 	@Override

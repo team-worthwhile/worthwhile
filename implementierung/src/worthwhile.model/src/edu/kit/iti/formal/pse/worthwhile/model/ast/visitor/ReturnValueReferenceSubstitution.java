@@ -1,7 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
@@ -63,8 +63,8 @@ public class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expres
 			this.substitute.accept(new HierarchialASTNodeVisitor() {
 				@Override
 				public void visit(final ArrayFunction arrayFunction) {
-					final ArrayFunctionAccess substitute = AstNodeCreatorHelper
-					                .createArrayFunctionAccess(index, arrayFunction);
+					final ArrayAccess substitute = AstNodeCreatorHelper.createArrayAccess(index,
+					                arrayFunction);
 					ReturnValueReferenceSubstitution.this.setSubstitute(substitute);
 				}
 

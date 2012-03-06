@@ -5,8 +5,8 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
@@ -56,7 +56,7 @@ public class OperatorHierarchyVisitor extends ASTNodeReturnVisitor<Integer> {
         }
 
 	@Override
-        public final void visit(final ArrayFunctionAccess node) {
+        public final void visit(final ArrayAccess node) {
 	        this.setReturnValue(8);
         }
 

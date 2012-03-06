@@ -857,13 +857,13 @@ public class AstSwitch<T> extends Switch<T> {
 					result = defaultCase(theEObject);
 				return result;
 			}
-			case AstPackage.ARRAY_FUNCTION_ACCESS: {
-				ArrayFunctionAccess arrayFunctionAccess = (ArrayFunctionAccess) theEObject;
-				T result = caseArrayFunctionAccess(arrayFunctionAccess);
+		case AstPackage.ARRAY_ACCESS: {
+			ArrayAccess arrayAccess = (ArrayAccess) theEObject;
+			T result = caseArrayAccess(arrayAccess);
 				if (result == null)
-					result = caseExpression(arrayFunctionAccess);
-				if (result == null)
-					result = caseASTNode(arrayFunctionAccess);
+				result = caseExpression(arrayAccess);
+			if (result == null)
+				result = caseASTNode(arrayAccess);
 				if (result == null)
 					result = defaultCase(theEObject);
 				return result;
@@ -1767,17 +1767,17 @@ public class AstSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Array Function Access</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Array Access</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Array Function Access</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Array Access</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArrayFunctionAccess(ArrayFunctionAccess object) {
+	public T caseArrayAccess(ArrayAccess object) {
 		return null;
 	}
 

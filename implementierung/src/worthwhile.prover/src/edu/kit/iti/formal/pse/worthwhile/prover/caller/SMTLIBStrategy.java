@@ -4,8 +4,8 @@ import java.math.BigInteger;
 import java.util.Stack;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -204,10 +204,10 @@ public class SMTLIBStrategy extends HierarchialASTNodeVisitor implements Formula
 	}
 
 	@Override
-	public void visit(final ArrayFunctionAccess arrayFunctionAccess) {
-		arrayFunctionAccess.getIndex().accept(this);
+	public void visit(final ArrayAccess arrayAccess) {
+		arrayAccess.getIndex().accept(this);
 		final String indexString = this.formulaCompileStack.pop();
-		arrayFunctionAccess.getFunction().accept(this);
+		arrayAccess.getArray().accept(this);
 		final String functionString = this.formulaCompileStack.pop();
 		this.formulaCompileStack.push("(select " + functionString + " " + indexString + ")");
 	}

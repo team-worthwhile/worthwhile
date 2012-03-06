@@ -424,8 +424,8 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseArrayFunctionAccess(ArrayFunctionAccess object) {
-			return createArrayFunctionAccessAdapter();
+		public Adapter caseArrayAccess(ArrayAccess object) {
+			return createArrayAccessAdapter();
 		}
 
 		@Override
@@ -1253,16 +1253,16 @@ public class AstAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess <em>Array Function Access</em>}'.
+	 * Creates a new adapter for an object of class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess <em>Array Access</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess
 	 * @generated
 	 */
-	public Adapter createArrayFunctionAccessAdapter() {
+	public Adapter createArrayAccessAdapter() {
 		return null;
 	}
 

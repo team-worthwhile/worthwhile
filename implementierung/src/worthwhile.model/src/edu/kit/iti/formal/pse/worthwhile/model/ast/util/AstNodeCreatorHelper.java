@@ -12,8 +12,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.IntegerValue;
 import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunctionAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -197,25 +197,25 @@ public final class AstNodeCreatorHelper {
 	/**
 	 * 
 	 * @param index
-	 *                the {@link Expression} for which <code>arrayFunction</code> is evaluated
-	 * @param arrayFunction
+	 *                the {@link Expression} for which <code>array</code> is evaluated
+	 * @param array
 	 *                the <code>Expression</code> to be evaluated at <code>index</code>
-	 * @return a new {@link ArrayFunctionAccess} that evaluates <code>arrayFunction</code> at <code>index</code>
+	 * @return a new {@link ArrayAccess} that evaluates <code>array</code> at <code>index</code>
 	 */
-	public static ArrayFunctionAccess createArrayFunctionAccess(final Expression index,
-	                final Expression arrayFunction) {
-		final ArrayFunctionAccess arrayFunctionAccess = AstNodeCreatorHelper.createArrayFunctionAccess();
-		arrayFunctionAccess.setIndex(index);
-		arrayFunctionAccess.setFunction(arrayFunction);
-		return arrayFunctionAccess;
+	public static ArrayAccess createArrayAccess(final Expression index,
+	                final Expression array) {
+		final ArrayAccess arrayAccess = AstNodeCreatorHelper.createArrayAccess();
+		arrayAccess.setIndex(index);
+		arrayAccess.setArray(array);
+		return arrayAccess;
 	}
 
 	/**
-	 * @return a new uninitialized {@link ArrayFunctionAccess}
+	 * @return a new uninitialized {@link ArrayAccess}
 	 * @return
 	 */
-	public static ArrayFunctionAccess createArrayFunctionAccess() {
-		return AstNodeCreatorHelper.factory.createArrayFunctionAccess();
+	public static ArrayAccess createArrayAccess() {
+		return AstNodeCreatorHelper.factory.createArrayAccess();
 	}
 
 	/**

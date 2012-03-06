@@ -523,7 +523,8 @@ public class WPStrategy extends HierarchialASTNodeVisitor implements FormulaGene
 			Proof substitutedPostcondition = postcondition.clone();
 			substitutedPostcondition.setExpression(AstNodeCloneHelper.clone(postcondition.getExpression()));
 			substitutedPostcondition.setExpression(ReturnValueReferenceSubstitution.substitute(
-			                substitutedPostcondition.getExpression(), returnValue));
+			                returnStatement.getFunction(), substitutedPostcondition.getExpression(),
+			                returnValue));
 			preconditionList.add(substitutedPostcondition);
 		}
 

@@ -145,7 +145,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			// replace ReturnValueReferences referring to the called function in its Postcondition now, that
 			// is before inserting the actual parameters because they could contain the calling function's
 			// ReturnValueReferences, which are not to be replaced with the called function's return value
-			postcondition = ReturnValueReferenceSubstitution.substitute(postcondition,
+			postcondition = ReturnValueReferenceSubstitution.substitute(function, postcondition,
 			                AstNodeCreatorHelper.createVariableReference(returnVariable));
 
 			// insert the actual Expressions into the FunctionCall parameters

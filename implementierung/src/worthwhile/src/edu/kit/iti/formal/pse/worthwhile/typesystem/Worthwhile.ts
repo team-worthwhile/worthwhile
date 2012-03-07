@@ -152,6 +152,11 @@ section "Binary Expression with boolean, integer or array operands"
 		 	ensureType right :<=: BooleanType, IntegerType, ArrayType
 		 	ensureCompatibility left :<=>: right "Both operands have to be be of the same type"
 		 }
+		typeof ArrayAccess -> javacode {
+			ensureType array :<=: ArrayType
+			ensureType index :<=: IntegerType
+		}
+
 section "Unary Expression"
 
 		typeof Negation -> BooleanType {

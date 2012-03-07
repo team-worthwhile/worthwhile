@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EObject;
 
 import de.itemis.xtext.typesystem.trace.TypeCalculationTrace;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
@@ -55,6 +56,18 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 			trace.add(element, "variableReference");
 			return typeof(element.getVariable().getType(), trace);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * The {@link ArrayAccess}'s type is the <code>array</code>'s <code>baseType</code>.
+	 */
+	@Override
+	protected final EObject type(final ArrayAccess element, final TypeCalculationTrace trace) {
+		trace.add(element, "arrayAccess");
+
+		return ((ArrayType) this.typeof(element.getArray())).getBaseType();
 	}
 
 	/**

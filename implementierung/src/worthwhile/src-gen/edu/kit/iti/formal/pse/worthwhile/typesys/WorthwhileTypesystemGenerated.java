@@ -128,6 +128,8 @@
 						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Left(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureFeatureType( p.getUnequal(), p.getBinaryExpression_Right(), p.getBooleanType(), p.getIntegerType(), p.getArrayType() );
 						ensureUnorderedCompatibility( "Both operands have to be be of the same type", p.getUnequal(), p.getBinaryExpression_Left(), p.getBinaryExpression_Right() );
+						ensureFeatureType( p.getArrayAccess(), p.getArrayAccess_Array(), p.getArrayType() );
+						ensureFeatureType( p.getArrayAccess(), p.getArrayAccess_Index(), p.getIntegerType() );
 
 						// ----------------------------------------------------------------
 						// Section: Unary Expression
@@ -162,5 +164,6 @@
 			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral element, TypeCalculationTrace trace );
 			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference element, TypeCalculationTrace trace );
 			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference element, TypeCalculationTrace trace );
+			protected abstract EObject type( edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess element, TypeCalculationTrace trace );
 
 		}

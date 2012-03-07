@@ -582,9 +582,9 @@
       </eAnnotations>
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="index" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="index" lowerBound="1" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="array" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="array" lowerBound="1" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExpressionToExpressionMap" instanceClassName="java.util.Map$Entry">

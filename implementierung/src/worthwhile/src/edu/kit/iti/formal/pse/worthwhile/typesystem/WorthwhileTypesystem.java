@@ -117,8 +117,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 				public void visit(final Assignment assignment) {
 					// base type is the assigned variable's one
 					if (assignment.getVariable().getVariable().getType() instanceof ArrayType) {
-						this.setReturnValue(((ArrayType) ts.typeof(assignment.getVariable()))
-						                .getBaseType());
+						ts.typeof(assignment.getVariable()).accept(this);
 					}
 				}
 
@@ -135,7 +134,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 					// not run yet, nested FunctionDeclarations do not bother us because then the
 					// type cannot be correct (since not defined in the Worthwhile semantics) anyway
 					if (function != null && function.getReturnType() instanceof ArrayType) {
-						this.setReturnValue(((ArrayType) ts.typeof(function)).getBaseType());
+						ts.typeof(function).accept(this);
 					}
 				}
 
@@ -143,8 +142,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 				public void visit(final VariableDeclaration variableDeclaration) {
 					// base type is the initialized variable's one
 					if (variableDeclaration.getType() instanceof ArrayType) {
-						this.setReturnValue(((ArrayType) ts.typeof(variableDeclaration))
-						                .getBaseType());
+						ts.typeof(variableDeclaration).accept(this);
 					}
 				}
 
@@ -152,7 +150,7 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 				public void visit(final Equal equal) {
 					// base type is the compared to ArrayLiteral's, ArrayType variable's one or
 					// BooleanType by convention when both operands are empty ArrayLiterals
-					final ASTNodeReturnVisitor<PrimitiveType> visitor = new ASTNodeReturnVisitor<PrimitiveType>() {
+					final ASTNodeReturnVisitor<Type> visitor = new ASTNodeReturnVisitor<Type>() {
 						public void visit(final ArrayLiteral arrayLiteral) {
 							if (arrayLiteral.getValues().size() == 0) {
 								this.setReturnValue(AstFactory.eINSTANCE
@@ -163,15 +161,14 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 						};
 
 						public void visit(final Expression expression) {
-							this.setReturnValue(((ArrayType) ts.typeof(expression))
-							                .getBaseType());
+							this.setReturnValue(ts.typeof(expression));
 						};
 					};
 
 					if (equal.getLeft().eContains(element)) {
-						this.setReturnValue(visitor.apply(equal.getRight()));
+						visitor.apply(equal.getRight()).accept(this);
 					} else if (equal.getRight().eContains(element)) {
-						this.setReturnValue(visitor.apply(equal.getLeft()));
+						visitor.apply(equal.getLeft()).accept(this);
 					}
 				}
 
@@ -185,10 +182,19 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 					for (int i = 0; i < exprlist.size(); i++) {
 						if (exprlist.get(i) == element
 						                && parlist.get(i).getType() instanceof ArrayType) {
-							this.setReturnValue(((ArrayType) ts.typeof(parlist.get(i)))
-							                .getBaseType());
+							ts.typeof(parlist.get(i)).accept(this);
 						}
 					}
+				}
+
+				@Override
+				public void visit(final ArrayType arrayType) {
+					this.setReturnValue(arrayType.getBaseType());
+				}
+
+				@Override
+				public void visit(final PrimitiveType primitiveType) {
+					this.setReturnValue(primitiveType);
 				}
 			};
 			baseType = visitor.apply(element);

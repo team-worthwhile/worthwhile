@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,6 +25,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ReturnValueReferenceSubstitution;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VariableReferenceSubstitution;
+import edu.kit.iti.formal.pse.worthwhile.util.NodeHelper;
 
 /**
  * @author fabian
@@ -44,12 +46,6 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	 */
 	private Stack<Map<VariableDeclaration, FunctionCall>> parameters = new Stack<Map<VariableDeclaration, FunctionCall>>();
 
-	/**
-	 * Primitive to uniquely identify the newly created {@link VariableDeclaration}s that hold the function return
-	 * values (uniquely among themselves).
-	 */
-	private int index = 0;
-
 	@Override
 	public void visit(final FunctionCall functionCall) {
 		// visit actuals, which are Expressions and could contain FunctionCalls themselves
@@ -57,7 +53,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 		final FunctionDeclaration function = functionCall.getFunction();
 		// FIXME: these could be legal identifiers in Worthwhile or illegal in some prover input language
-		final String name = new String("$" + function.getName() + "$" + index++);
+		final String name = this.getReturnVariableName(functionCall);
 		final VariableDeclaration variable = AstNodeCreatorHelper.createVariableDeclaration(
 		                AstNodeCloneHelper.clone(function.getReturnType()), name);
 
@@ -65,6 +61,24 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 
 		super.setFound(true);
 		super.setSubstitute(AstNodeCreatorHelper.createVariableReference(variable));
+	}
+	
+	/**
+	 * Gets the name to use for a function call's return variable.
+	 * 
+	 * @param functionCall
+	 *                The function call whose return variable to get
+	 * @return A unique variable name for that function call's return variable
+	 */
+	private String getReturnVariableName(FunctionCall functionCall) {
+		// Prepend a "$" character to denote a function call
+		String name = "$" + functionCall.getFunction().getName();
+
+		// Append location of function call in the form @<line>@<column>
+		int line = NodeHelper.getLine(functionCall);
+		int offset = NodeHelper.getColumn(functionCall);
+
+		return name + "@" + line + "@" + offset;
 	}
 
 	/**

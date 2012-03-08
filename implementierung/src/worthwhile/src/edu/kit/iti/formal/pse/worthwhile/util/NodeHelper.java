@@ -1,5 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.util;
 
+import java.util.Iterator;
+
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.impl.RuleCallImpl;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -51,6 +53,36 @@ public final class NodeHelper {
 		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
 		if (actualNode != null) {
 			return actualNode.getOffset();
+		} else {
+			return -1;
+		}
+	}
+
+	/**
+	 * Returns the offset of a node in its line.
+	 * 
+	 * @param node
+	 *                The node to locate in the source file.
+	 * @return The offset of the node in its line
+	 */
+	public static int getColumn(final ASTNode node) {
+		final ICompositeNode actualNode = NodeModelUtils.findActualNodeFor(node);
+		if (actualNode != null) {
+			ICompositeNode root = actualNode.getRootNode();
+			String source = root.getText().substring(0, actualNode.getOffset());
+			String line; // The line in the source until before the node
+			int lastNL = source.lastIndexOf('\n');
+
+			if (lastNL == -1) {
+				line = source.substring(0, actualNode.getOffset());
+			} else {
+				line = source.substring(lastNL, actualNode.getOffset());
+			}
+			
+			// FIXME: In the editor, tabs are counted by how much spaces they are equivalent to. We don't
+			// have access to that number.
+			line = line.replace("\t", "    ");
+			return line.length();
 		} else {
 			return -1;
 		}

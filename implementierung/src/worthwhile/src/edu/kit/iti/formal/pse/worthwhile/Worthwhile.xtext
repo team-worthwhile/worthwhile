@@ -231,8 +231,8 @@ ReturnValueReference returns ReturnValueReference:
 	{ReturnValueReference} function=[FunctionDeclaration|RETURN_VALUE_REFERENCE] ('[' index=Expression ']')?
 ;
 
-// Override the ID terminal rule to also allow the $ character in IDs.
+// Override the ID terminal rule to also allow the $ and @ characters in IDs.
 // This has to be (?) at the end of the file, else the parser will parse things strangely, e.g. trying to parse "true" as identifier.   
 terminal ID :
-	'^'?('a'..'z'|'A'..'Z'|'_'|'$') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'$')*
+	'^'?('a'..'z'|'A'..'Z'|'_'|'$'|'@') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'$'|'@')*
 ;

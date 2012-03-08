@@ -16,7 +16,9 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.SubstitutionVisitor;
  * 
  * @author fabian
  */
-public class SymbolReferenceResolver extends SubstitutionVisitor<Literal> {
+// TODO: as soon as we are using ArrayAccess instead of VariableReference's index from the original AST on we can reset
+// the substitute generic type to Literal again
+public class SymbolReferenceResolver extends SubstitutionVisitor<Expression> {
 	/**
 	 * The execution state containing the {@link VariableDeclaration} to {@link Value} mapping that is used to
 	 * resolve the {@link SymbolReference}s that occur in {@link Expression}s this visitor is applied to.
@@ -66,7 +68,14 @@ public class SymbolReferenceResolver extends SubstitutionVisitor<Literal> {
 		// must have set a return value
 		final Value value = this.interpreterState.getReturnValue();
 
-		this.setSubstitute(AstNodeCreatorHelper.createLiteral(value));
+		Expression substitute = AstNodeCreatorHelper.createLiteral(value);
+
+		final Expression index = returnValueReference.getIndex();
+		if (index != null) {
+			substitute = AstNodeCreatorHelper.createArrayAccess(index, substitute);
+		}
+
+		this.setSubstitute(substitute);
 		this.setFound(true);
 	}
 
@@ -80,7 +89,14 @@ public class SymbolReferenceResolver extends SubstitutionVisitor<Literal> {
 		// since VariableReferences can refer to variables bound by a quantifier we do not require the state to
 		// contain a mapping for all of them
 		if (value != null) {
-			this.setSubstitute(AstNodeCreatorHelper.createLiteral(value));
+			Expression substitute = AstNodeCreatorHelper.createLiteral(value);
+
+			final Expression index = variableReference.getIndex();
+			if (index != null) {
+				substitute = AstNodeCreatorHelper.createArrayAccess(index, substitute);
+			}
+
+			this.setSubstitute(substitute);
 			this.setFound(true);
 		}
 	}

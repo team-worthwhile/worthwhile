@@ -168,9 +168,9 @@ public class WorthwhileTypesystem extends WorthwhileTypesystemGenerated {
 						};
 					};
 
-					if (equal.getLeft() == element) {
+					if (equal.getLeft().eContains(element)) {
 						this.setReturnValue(visitor.apply(equal.getRight()));
-					} else if (equal.getRight() == element) {
+					} else if (equal.getRight().eContains(element)) {
 						this.setReturnValue(visitor.apply(equal.getLeft()));
 					}
 				}

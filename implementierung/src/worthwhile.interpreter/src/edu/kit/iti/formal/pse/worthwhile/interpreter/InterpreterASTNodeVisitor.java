@@ -23,7 +23,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -31,7 +30,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction;
@@ -45,7 +43,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Greater;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
@@ -71,7 +68,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.HierarchialASTNodeVisitor;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
@@ -1293,45 +1289,13 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				this.setSymbol(variableDeclaration, this.resultStack.pop());
 			} else {
 				this.setSymbol(variableDeclaration,
-				                this.getDefaultValueForType(variableDeclaration.getType()));
+				                AstNodeCreatorHelper.createDefaultValue(variableDeclaration.getType()));
 			}
 		} catch (StatementException e) {
 			this.executionFailed(variableDeclaration, e.getError());
 			return;
 		}
 		this.statementExecuted(variableDeclaration);
-	}
-
-	/**
-	 * Gets the default value for the given type.
-	 * 
-	 * @param type
-	 *                The type to get the default value for.
-	 * @return The default value for the given type.
-	 */
-	private Value getDefaultValueForType(final Type type) {
-		return (new ASTNodeReturnVisitor<Value>() {
-
-			@Override
-			public void visit(final ArrayType node) {
-				if (node.getBaseType() instanceof BooleanType) {
-					this.setReturnValue(new CompositeValue<BooleanValue>(new BooleanValue[0]));
-				} else if (node.getBaseType() instanceof IntegerType) {
-					this.setReturnValue(new CompositeValue<IntegerValue>(new IntegerValue[0]));
-				}
-			}
-
-			@Override
-			public void visit(final BooleanType node) {
-				this.setReturnValue(new BooleanValue(Boolean.FALSE));
-			}
-
-			@Override
-			public void visit(final IntegerType node) {
-				this.setReturnValue(new IntegerValue(BigInteger.ZERO));
-			}
-
-		}).apply(type);
 	}
 
 	/**
@@ -1365,7 +1329,7 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 				WorthwhileTypesystem ts = new WorthwhileTypesystem();
 
 				// push the default value onto the result stack
-				this.resultStack.push(this.getDefaultValueForType((Type) ts.typeof(symbolReference)));
+				this.resultStack.push(AstNodeCreatorHelper.createDefaultValue((Type) ts.typeof(symbolReference)));
 			}
 		}
 

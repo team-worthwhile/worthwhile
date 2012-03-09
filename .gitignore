@@ -7,6 +7,7 @@
 *.toc
 *.make
 *.fls
+*.vrb
 # pdfs
 pflichtenheft.pdf
 entwurf.pdf

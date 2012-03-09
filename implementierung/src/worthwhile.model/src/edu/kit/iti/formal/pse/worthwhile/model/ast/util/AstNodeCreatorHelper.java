@@ -30,11 +30,14 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -43,6 +46,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VariableReferenceSubstitution;
 
 /**
  * Provides convenience methods for the creation of several {@link ASTNode}s.
@@ -710,5 +714,75 @@ public final class AstNodeCreatorHelper {
 		variableDeclaration.setType(type);
 		variableDeclaration.setName(name);
 		return variableDeclaration;
+	}
+
+	/**
+	 * @param call
+	 *                the {@link FunctionCall} the total precondition is calculated for
+	 * @return a <code>Conjunction</code> of the {@link FunctionDeclaration}'s {@link Precondition}
+	 *         {@link Expression}s that <code>call</code> references with the actuals inserted
+	 */
+	public static Expression createPreconditionConjunction(final FunctionCall call) {
+		Expression precondition = null;
+
+		final FunctionDeclaration function = call.getFunction();
+
+		final List<Precondition> preconditions = function.getPreconditions();
+		if (!preconditions.isEmpty()) {
+			final Iterator<Precondition> p = preconditions.iterator();
+			precondition = AstNodeCloneHelper.clone(p.next().getExpression());
+			while (p.hasNext()) {
+				precondition = AstNodeCreatorHelper.createConjunction(precondition,
+				                AstNodeCloneHelper.clone(p.next().getExpression()));
+			}
+		}
+
+		// insert the actual Expressions into the FunctionCall parameters
+		final Iterator<VariableDeclaration> parameters = function.getParameters().iterator();
+		final Iterator<Expression> actuals = call.getActuals().iterator();
+		while (parameters.hasNext()) {
+			final VariableDeclaration parameter = parameters.next();
+			final Expression actual = actuals.next();
+			if (precondition != null) {
+				precondition = VariableReferenceSubstitution
+				                .substitute(precondition, parameter, actual);
+			}
+		}
+
+		return precondition;
+	}
+
+	/**
+	 * @param call
+	 *                the {@link FunctionCall} the total postcondition is calculated for
+	 * @return a <code>Conjunction</code> of the {@link FunctionDeclaration}'s {@link Postcondition}
+	 *         {@link Expression}s that <code>call</code> references with the actuals inserted
+	 */
+	public static Expression createPostconditionConjunction(final FunctionCall call) {
+		Expression postcondition = null;
+
+		final FunctionDeclaration function = call.getFunction();
+
+		final List<Postcondition> postconditions = function.getPostconditions();
+		if (!postconditions.isEmpty()) {
+			final Iterator<Postcondition> p = postconditions.iterator();
+			postcondition = AstNodeCloneHelper.clone(p.next().getExpression());
+			while (p.hasNext()) {
+				postcondition = AstNodeCreatorHelper.createConjunction(postcondition,
+				                AstNodeCloneHelper.clone(p.next().getExpression()));
+			}
+
+			// insert the actual Expressions into the FunctionCall parameters
+			final Iterator<VariableDeclaration> parameters = function.getParameters().iterator();
+			final Iterator<Expression> actuals = call.getActuals().iterator();
+			while (parameters.hasNext()) {
+				final VariableDeclaration parameter = parameters.next();
+				final Expression actual = actuals.next();
+				postcondition = VariableReferenceSubstitution.substitute(postcondition, parameter,
+				                actual);
+			}
+		}
+
+		return postcondition;
 	}
 }

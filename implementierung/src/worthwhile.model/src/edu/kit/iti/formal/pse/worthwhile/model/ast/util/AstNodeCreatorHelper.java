@@ -20,6 +20,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Equal;
@@ -29,6 +30,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
@@ -261,6 +263,13 @@ public final class AstNodeCreatorHelper {
 	}
 
 	/**
+	 * @return a new {@link BooleanType} instance
+	 */
+	public static BooleanType createBooleanType() {
+		return AstNodeCreatorHelper.factory.createBooleanType();
+	}
+
+	/**
 	 * 
 	 * @param value
 	 *                the {@link BigInteger} value to be represented by the {@link IntegerLiteral}
@@ -425,6 +434,13 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static Implication createImplication() {
 		return AstNodeCreatorHelper.factory.createImplication();
+	}
+
+	/**
+	 * @return a new {@link IntegerType} instance
+	 */
+	public static IntegerType createIntegerType() {
+		return AstNodeCreatorHelper.factory.createIntegerType();
 	}
 
 	/**

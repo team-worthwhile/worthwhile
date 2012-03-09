@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import edu.kit.iti.formal.pse.worthwhile.model.BooleanValue;
 import edu.kit.iti.formal.pse.worthwhile.model.CompositeValue;
@@ -327,8 +328,10 @@ public final class AstNodeCreatorHelper {
 			public void visit(final BooleanType booleanType) {
 				// visit(ArrayType) brought us here
 				if (booleanType != type) {
-					this.setReturnValue(new CompositeValue<BooleanValue>(Collections
-					                .<BigInteger, BooleanValue> emptyMap()));
+					final Map<BigInteger, BooleanValue> map = Collections
+					                .<BigInteger, BooleanValue> emptyMap();
+					final PrimitiveType baseType = AstNodeCreatorHelper.createBooleanType();
+					this.setReturnValue(new CompositeValue<BooleanValue>(map, baseType));
 				} else {
 					this.setReturnValue(new BooleanValue(false));
 				}
@@ -338,8 +341,10 @@ public final class AstNodeCreatorHelper {
 			public void visit(final IntegerType integerType) {
 				// visit(ArrayType) brought us here
 				if (integerType != type) {
-					this.setReturnValue(new CompositeValue<IntegerValue>(Collections
-					                .<BigInteger, IntegerValue> emptyMap()));
+					final Map<BigInteger, IntegerValue> map = Collections
+					                .<BigInteger, IntegerValue> emptyMap();
+					final PrimitiveType baseType = AstNodeCreatorHelper.createIntegerType();
+					this.setReturnValue(new CompositeValue<IntegerValue>(map, baseType));
 				} else {
 					this.setReturnValue(new IntegerValue(BigInteger.ZERO));
 				}

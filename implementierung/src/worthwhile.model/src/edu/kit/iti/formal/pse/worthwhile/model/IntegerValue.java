@@ -2,6 +2,9 @@ package edu.kit.iti.formal.pse.worthwhile.model;
 
 import java.math.BigInteger;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
 /**
@@ -16,6 +19,11 @@ public class IntegerValue extends Value {
 	 * The value represented by this object.
 	 */
 	private final BigInteger value;
+
+	/**
+	 * The {@link IntegerValue}s' {@link Type} is a {@link IntegerType}.
+	 */
+	private final IntegerType type = AstNodeCreatorHelper.createIntegerType();
 
 	/**
 	 * Returns the value represented by this object.
@@ -59,4 +67,8 @@ public class IntegerValue extends Value {
 		return this.value.hashCode();
 	}
 
+	@Override
+	public final Type getType() {
+		return this.type;
+	}
 }

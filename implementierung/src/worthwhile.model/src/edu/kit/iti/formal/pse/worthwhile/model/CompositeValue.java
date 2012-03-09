@@ -4,6 +4,11 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCloneHelper;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
 /**
@@ -23,6 +28,11 @@ public class CompositeValue<T extends Value> extends Value {
 	private final Map<BigInteger, T> subValues;
 
 	/**
+	 * The {@link CompositeValue}s' {@link Type} is a {@link ArrayType}.
+	 */
+	private final ArrayType type;
+
+	/**
 	 * Returns the sub-values of this composite value.
 	 * 
 	 * @return The sub-values of this composite value.
@@ -36,9 +46,12 @@ public class CompositeValue<T extends Value> extends Value {
 	 * 
 	 * @param subValues
 	 *                The sub-values of this value.
+	 * @param baseType
+	 *                the sub-values' {@link PrimitiveType}
 	 */
-	public CompositeValue(final Map<BigInteger, T> subValues) {
+	public CompositeValue(final Map<BigInteger, T> subValues, final PrimitiveType baseType) {
 		this.subValues = subValues;
+		this.type = AstNodeCreatorHelper.createArrayType(baseType);
 	}
 
 	/**
@@ -46,17 +59,22 @@ public class CompositeValue<T extends Value> extends Value {
 	 * 
 	 * @param subValues
 	 *                The sub-values of this value.
+	 * @param baseType
+	 *                the sub-values' {@link PrimitiveType}
 	 */
-	public CompositeValue(final T[] subValues) {
+	public CompositeValue(final T[] subValues, final PrimitiveType baseType) {
 		this.subValues = new HashMap<BigInteger, T>();
 		for (int i = 0; i < subValues.length; i++) {
 			this.subValues.put(BigInteger.valueOf(i), subValues[i]);
 		}
+		this.type = AstNodeCreatorHelper.createArrayType(baseType);
 	}
 
 	/**
 	 * Returns a new instance of the {@link CompositeValue} class with the value at index i replaced by (or newly
 	 * set to) the specified value.
+	 * 
+	 * The new <code>CompositeValue</code>'s sub-values' {@link Type} is a clone of this one's.
 	 * 
 	 * @param index
 	 *                The index at which to set the new value.
@@ -77,7 +95,7 @@ public class CompositeValue<T extends Value> extends Value {
 		newValues.put(index, newValue);
 
 		// Return a new composite value.
-		return new CompositeValue<T>(newValues);
+		return new CompositeValue<T>(newValues, AstNodeCloneHelper.clone(this.type.getBaseType()));
 	}
 
 	/**
@@ -121,4 +139,8 @@ public class CompositeValue<T extends Value> extends Value {
 		return result;
 	}
 
+	@Override
+	public final Type getType() {
+		return this.type;
+	}
 }

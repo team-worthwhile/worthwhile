@@ -1,5 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
 /**
@@ -17,4 +18,8 @@ public abstract class Value {
 	 */
 	public abstract void accept(IValueVisitor visitor);
 
+	/**
+	 * @return the {@link Value}'s {@link Type}
+	 */
+	public abstract Type getType();
 }

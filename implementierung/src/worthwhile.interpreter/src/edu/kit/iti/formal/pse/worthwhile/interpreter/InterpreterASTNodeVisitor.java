@@ -23,6 +23,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.Value;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Addition;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
@@ -583,7 +584,8 @@ class InterpreterASTNodeVisitor extends HierarchialASTNodeVisitor {
 			subValues[i++] = this.resultStack.pop();
 		}
 
-		this.resultStack.push(new CompositeValue<Value>(subValues));
+		this.resultStack.push(new CompositeValue<Value>(subValues, ((ArrayType) new WorthwhileTypesystem()
+		                .typeof(arrayLiteral)).getBaseType()));
 
 		this.expressionEvaluated(arrayLiteral);
 	}

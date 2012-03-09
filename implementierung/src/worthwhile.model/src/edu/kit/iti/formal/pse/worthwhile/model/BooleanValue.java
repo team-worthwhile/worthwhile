@@ -1,5 +1,8 @@
 package edu.kit.iti.formal.pse.worthwhile.model;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
 /**
@@ -14,6 +17,11 @@ public class BooleanValue extends Value {
 	 * The value represented by this object.
 	 */
 	private final boolean value;
+
+	/**
+	 * The {@link BooleanValue}s' {@link Type} is a {@link BooleanType}.
+	 */
+	private final BooleanType type = AstNodeCreatorHelper.createBooleanType();
 
 	/**
 	 * Returns the value represented by this object.
@@ -53,4 +61,8 @@ public class BooleanValue extends Value {
 		return this.value ? 1 : 0;
 	}
 
+	@Override
+	public final Type getType() {
+		return this.type;
+	}
 }

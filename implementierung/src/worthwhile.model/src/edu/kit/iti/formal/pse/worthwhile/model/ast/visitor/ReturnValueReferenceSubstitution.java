@@ -11,13 +11,13 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 /**
  * Substitute {@link ReturnValueReference}s in an {@link Expression} with another {@link Expression}.
  * 
- * @see ReturnValueReferenceSubstitution#substitute(VariableDeclaration, Expression)
+ * @see ReturnValueReferenceSubstitution#substitute(Expression, Expression)
  * @author fabian
  * 
  */
 public class ReturnValueReferenceSubstitution extends SubstitutionVisitor<Expression> {
 	/**
-	 * The <code>Expression</code> <code>ReturnValueReferences</code> are substituted with.
+	 * The {@link Expression} {@link ReturnValueReference}s are substituted with.
 	 */
 	private final Expression substitute;
 

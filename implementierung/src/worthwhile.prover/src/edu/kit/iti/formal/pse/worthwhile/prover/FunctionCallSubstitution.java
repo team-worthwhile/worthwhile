@@ -1,6 +1,5 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -62,7 +61,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 		super.setFound(true);
 		super.setSubstitute(AstNodeCreatorHelper.createVariableReference(variable));
 	}
-	
+
 	/**
 	 * Gets the name to use for a function call's return variable.
 	 * 
@@ -70,7 +69,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	 *                The function call whose return variable to get
 	 * @return A unique variable name for that function call's return variable
 	 */
-	private String getReturnVariableName(FunctionCall functionCall) {
+	private String getReturnVariableName(final FunctionCall functionCall) {
 		// Prepend a "$" character to denote a function call
 		String name = "$" + functionCall.getFunction().getName();
 

@@ -29,6 +29,16 @@ _ensures(((exists Integer j : 2 * j = y) ∧ (_return = true)) ∨ ((exists Inte
     return result
 }
 
+function Boolean isEven(Integer l)
+_ensures _return = true <=> l % 2 = 0
+{
+    if (l / 2) * 2 = l {
+        return true
+    } else {
+        return false
+    }
+}
+
 Integer i := 3
 
 if even2(i + 1) {
@@ -38,3 +48,5 @@ if even2(i + 1) {
 }
 
 _assert ¬even2(i)
+
+_assert forall Integer lp : isEven(2 * lp)

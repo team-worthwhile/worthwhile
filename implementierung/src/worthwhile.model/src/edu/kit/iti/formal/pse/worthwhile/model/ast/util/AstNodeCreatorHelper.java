@@ -294,7 +294,8 @@ public final class AstNodeCreatorHelper {
 		return new ASTNodeReturnVisitor<Literal>() {
 			@Override
 			public void visit(final ArrayType arrayType) {
-				this.setReturnValue(AstNodeCreatorHelper.createArrayFunction(this.apply(arrayType)));
+				this.setReturnValue(AstNodeCreatorHelper.createArrayFunction(this.apply(arrayType
+				                .getBaseType())));
 			}
 
 			@Override

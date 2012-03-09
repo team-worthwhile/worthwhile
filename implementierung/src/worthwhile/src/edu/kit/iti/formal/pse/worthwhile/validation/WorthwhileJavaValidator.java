@@ -2,7 +2,6 @@ package edu.kit.iti.formal.pse.worthwhile.validation;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
-import org.eclipse.xtext.validation.NamesAreUniqueValidator;
 
 import com.google.inject.Inject;
 
@@ -24,7 +23,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeBottomUpVisitor;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.typesystem.WorthwhileTypesystem;
 
 /**
@@ -274,29 +272,29 @@ public class WorthwhileJavaValidator extends AbstractWorthwhileJavaValidator {
 
 	/**
 	 * Checks that a function declaration's name is a valid Worthwhile identifier, i.e. does not contain the special
-	 * character "$" that is allowed in the grammar, but reserved for the prover.
+	 * characters "$" or "@" that are allowed in the grammar, but reserved for the prover.
 	 * 
 	 * @param node
 	 *                The function declaration to be checked.
 	 */
 	@Check
 	public final void checkValidFunctionIdentifier(final FunctionDeclaration node) {
-		if (node.getName() != null && node.getName().contains("$")) {
+		if (node.getName() != null && (node.getName().contains("$") || node.getName().contains("@"))) {
 			error("Function name is not a valid Worthwhile identifier.", node,
 			                AstPackage.eINSTANCE.getFunctionDeclaration_Name(), INVALID_IDENTIFIER);
 		}
 	}
 
 	/**
-	 * Checks that a variable name is a valid Worthwhile identifier, i.e. does not contain the special character "$"
-	 * that is allowed in the grammar, but reserved for the prover.
+	 * Checks that a variable name is a valid Worthwhile identifier, i.e. does not contain the special characters
+	 * "$" or "@" that are allowed in the grammar, but reserved for the prover.
 	 * 
 	 * @param node
 	 *                The function declaration to be checked.
 	 */
 	@Check
 	public final void checkValidVariableIdentifier(final VariableDeclaration node) {
-		if (node.getName() != null && node.getName().contains("$")) {
+		if (node.getName() != null && (node.getName().contains("$") || node.getName().contains("@"))) {
 			error("Variable name is not a valid Worthwhile identifier.", node,
 			                AstPackage.eINSTANCE.getVariableDeclaration_Name(), INVALID_IDENTIFIER);
 		}

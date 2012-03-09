@@ -11,7 +11,7 @@
 \usenavigationsymbols
 
 \lstdefinelanguage{worthwhile}
-  {morekeywords={function,Boolean,Integer,_ensures,_return,return,_assert},
+  {morekeywords={function,Boolean,Integer,_ensures,_return,return,_assert,_requires,_invariant,while},
    morekeywords={[2]true,false},
       sensitive=true,
   morecomment=[l]{//},
@@ -237,6 +237,39 @@
 	
 			\setbeamercovered{transparent}
 
+\end{frame}
+
+\lstset{
+   basicstyle=\scriptsize\ttfamily
+}
+
+\begin{frame}[fragile]
+	\frametitle{Features der WHILE-Sprache}
+	
+	\begin{lstlisting}[frame=lines,mathescape=true]
+/* Checks that the given array fulfils the heap condition. */
+function Boolean heapCondition(Integer[] heap)
+    _requires heapsize(heap) $\geq$ 0
+    _ensures _return = $\forall$ Integer i1, 2 $\leq$ i1 $\wedge$ i1 $\leq$ heapsize(heap) : heap[parent(i1)] $\leq$ heap[i1]
+{
+    Boolean result := true
+    
+    if (heapsize(heap) $\geq$ 2) {
+        Integer i3 := 2
+        
+        while i3 $\leq$ heapsize(heap)
+            _invariant 2 $\geq$ i3 $\wedge$ i3 $\leq$ heapsize(heap) + 1
+            
+            // The invariant is that the contents of "result" indicate whether the
+            // sub-array [1..i3-1] of the input fulfils the heap condition.
+            _invariant result = $\forall$ Integer i4, 2 $\leq$ i4 $\wedge$ i4 < i3 : heap[parent(i4)] $\leq$ heap[i4]
+        {
+            if result = true {
+                if heap[parent(i3)] > heap[i3] {
+                    result := false
+                }
+            }
+    \end{lstlisting}
 \end{frame}
 
 \begin{frame}

@@ -92,8 +92,10 @@
 		{
 		    if (i / 2) $ \cdot $ 2 = i {
 		        return true
+		        
 		    } else {
 		        return false
+		        
 		    }
 		}
 	\end{lstlisting}
@@ -102,6 +104,7 @@
 	\begin{onlyenv}<2>
 	\begin{lstlisting}[frame=lines,mathescape=true]
 		function Boolean isEven(Integer i)
+		
 		{
 		    if (i / 2) $ \cdot $ 2 = i {
 		        return true
@@ -117,11 +120,14 @@
 	\begin{onlyenv}<3>
 	\begin{lstlisting}[frame=lines,mathescape=true]
 		function Boolean isEven(Integer i)
+		
 		{
 		    if (i / 2) $ \cdot $ 2 = i {
-		        _assert true = true $\Leftrightarrow $ i % 2 = 0
+		    
+		        _assert    true = true $\Leftrightarrow $ i % 2 = 0
 		    } else {
-		        _assert  false = true $\Leftrightarrow $ i % 2 = 0
+		    
+		        _assert   false = true $\Leftrightarrow $ i % 2 = 0
 		    }
 		}
 	\end{lstlisting}
@@ -130,13 +136,14 @@
 		\begin{onlyenv}<4>
 	\begin{lstlisting}[frame=lines,mathescape=true]
 		function Boolean isEven(Integer i)
+		
 		{
 		    if (i / 2) $ \cdot $ 2 = i {
 		        // hier gilt (i / 2) $ \cdot $ 2 = i
-		        _assert true = true $\Leftrightarrow $ i % 2 = 0
+		        _assert    true = true $\Leftrightarrow $ i % 2 = 0
 		    } else {
 		        // hier gilt $\neg$((i / 2) $ \cdot $ 2 = i)
-		        _assert  false = true $\Leftrightarrow $ i % 2 = 0
+		        _assert   false = true $\Leftrightarrow $ i % 2 = 0
 		    }
 		}
 	\end{lstlisting}
@@ -145,48 +152,39 @@
 		\begin{onlyenv}<5>
 	\begin{lstlisting}[frame=lines,mathescape=true]
 		function Boolean isEven(Integer i)
+		
 		{
-		    _assert (i / 2) $ \cdot $ 2 = i $\Rightarrow$
-		        	(true = true $\Leftrightarrow $ i % 2 = 0)
-		        	
-		    _assert $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
-		        	(false = true $\Leftrightarrow $ i % 2 = 0)
-		}
-	\end{lstlisting}
-	\end{onlyenv}
-	
-		\begin{onlyenv}<6>
-	\begin{lstlisting}[frame=lines,mathescape=true]
-		function Boolean isEven(Integer i)
-		{
-		    _assert (i / 2) $ \cdot $ 2 = i $\Rightarrow$
-		        	(true = true $\Leftrightarrow $ i % 2 = 0)
-		        	
-		        	$\wedge$
-		        	
+		    _assert
+		        (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+		                  (true = true $\Leftrightarrow $ i % 2 = 0)
+		    $\wedge$    	
 		        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
-		        	(false = true $\Leftrightarrow $ i % 2 = 0)
+		                 (false = true $\Leftrightarrow $ i % 2 = 0)
+		        	
 		}
 	\end{lstlisting}
 	\end{onlyenv}
 	
-		\begin{onlyenv}<7-8>
+	
+		\begin{onlyenv}<6-7>
 	\begin{lstlisting}[frame=lines,mathescape=true]
-	_assert $\forall$ i $\in \mathbb{N} :$
+	
 		        
-	        (i / 2) $ \cdot $ 2 = i $\Rightarrow$
-	        	(true = true $\Leftrightarrow $ i % 2 = 0)
-	        	
-	        	$\wedge$
-	        	
-	        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
-	        	(false = true $\Leftrightarrow $ i % 2 = 0)
+		_assert $\forall$ i $\in \mathbb{N} :$	  
+		    
+		        (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+		                  (true = true $\Leftrightarrow $ i % 2 = 0)
+		    $\wedge$    	
+		        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+		                 (false = true $\Leftrightarrow $ i % 2 = 0)
+		        	
+		
 	\end{lstlisting}
 	\end{onlyenv}
 	
 	\vspace{1cm}
 	
-	\only<8> {
+	\only<7> {
 		$\Rightarrow$ Diese Formel ist beweis- oder widerlegbar!
 	}
 \end{frame}

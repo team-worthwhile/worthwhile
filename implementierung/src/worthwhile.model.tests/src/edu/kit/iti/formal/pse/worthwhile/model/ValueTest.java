@@ -19,7 +19,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.util.AstNodeCreatorHelper;
 /**
  * @author matthias and stefan
  */
-public class ValueTest {
+public final class ValueTest {
 	/**
 	 * A {@link BooleanType} instance to be used when creating {@link CompositeValue}'s with boolean base type.
 	 */
@@ -55,21 +55,21 @@ public class ValueTest {
 	@Test
 	public void testGetIntegerArray() {
 		BigInteger[] array1 = new BigInteger[] { BigInteger.valueOf(0), BigInteger.valueOf(42) };
-		IntegerValue[] val_array1 = new IntegerValue[] { new IntegerValue(array1[0]),
+		IntegerValue[] valArray1 = new IntegerValue[] { new IntegerValue(array1[0]),
 		                new IntegerValue(array1[1]) };
-		Map<BigInteger, IntegerValue> valmap_array1 = convertToValueMap(val_array1);
-		CompositeValue<IntegerValue> value1 = new CompositeValue<IntegerValue>(val_array1, ValueTest.INTEGER_TYPE);
-		assertEquals(value1.getSubValues(), valmap_array1);
+		Map<BigInteger, IntegerValue> valmapArray1 = convertToValueMap(valArray1);
+		CompositeValue<IntegerValue> value1 = new CompositeValue<IntegerValue>(valArray1, ValueTest.INTEGER_TYPE);
+		assertEquals(value1.getSubValues(), valmapArray1);
 	}
 
 	@Test
 	public void testGetBooleanArray() {
 		Boolean[] array1 = new Boolean[] { false, true };
-		BooleanValue[] val_array1 = new BooleanValue[] { new BooleanValue(array1[0]),
+		BooleanValue[] valArray1 = new BooleanValue[] { new BooleanValue(array1[0]),
 		                new BooleanValue(array1[1]) };
-		Map<BigInteger, BooleanValue> valmap_array1 = convertToValueMap(val_array1);
-		CompositeValue<BooleanValue> value1 = new CompositeValue<BooleanValue>(val_array1, ValueTest.BOOLEAN_TYPE);
-		assertEquals(value1.getSubValues(), valmap_array1);
+		Map<BigInteger, BooleanValue> valmapArray1 = convertToValueMap(valArray1);
+		CompositeValue<BooleanValue> value1 = new CompositeValue<BooleanValue>(valArray1, ValueTest.BOOLEAN_TYPE);
+		assertEquals(value1.getSubValues(), valmapArray1);
 	}
 
 	@Test
@@ -100,28 +100,28 @@ public class ValueTest {
 		array1[3] = new BigInteger("4");
 		array2[3] = new BigInteger("4");
 
-		IntegerValue[] val_array1 = new IntegerValue[] { new IntegerValue(array1[0]),
+		IntegerValue[] valArray1 = new IntegerValue[] { new IntegerValue(array1[0]),
 		                new IntegerValue(array1[1]), new IntegerValue(array1[2]), new IntegerValue(array1[3]) };
-		IntegerValue[] val_array2 = new IntegerValue[] { new IntegerValue(array2[0]),
+		IntegerValue[] valArray2 = new IntegerValue[] { new IntegerValue(array2[0]),
 		                new IntegerValue(array2[1]), new IntegerValue(array2[2]), new IntegerValue(array2[3]) };
 		
-		CompositeValue<IntegerValue> value5 = new CompositeValue<IntegerValue>(val_array1, ValueTest.INTEGER_TYPE);
-		CompositeValue<IntegerValue> value6 = new CompositeValue<IntegerValue>(val_array2, ValueTest.INTEGER_TYPE);
+		CompositeValue<IntegerValue> value5 = new CompositeValue<IntegerValue>(valArray1, ValueTest.INTEGER_TYPE);
+		CompositeValue<IntegerValue> value6 = new CompositeValue<IntegerValue>(valArray2, ValueTest.INTEGER_TYPE);
 		assertNotSame(value5, value6);
 		assertEquals(value5, value6);
 		assertTrue(value5.equals(value6));
 		
-		val_array1[2] = new IntegerValue(new BigInteger("4"));
-		val_array2[2] = new IntegerValue(new BigInteger("5"));
-		value5 = new CompositeValue<IntegerValue>(val_array1, ValueTest.INTEGER_TYPE);
-		value6 = new CompositeValue<IntegerValue>(val_array2, ValueTest.INTEGER_TYPE);
+		valArray1[2] = new IntegerValue(new BigInteger("4"));
+		valArray2[2] = new IntegerValue(new BigInteger("5"));
+		value5 = new CompositeValue<IntegerValue>(valArray1, ValueTest.INTEGER_TYPE);
+		value6 = new CompositeValue<IntegerValue>(valArray2, ValueTest.INTEGER_TYPE);
 		
 		assertNotSame(value5, value6);
 		assertFalse(value5.equals(value6));
-		val_array1[2] = new IntegerValue(new BigInteger("4"));
-		val_array2[2] = new IntegerValue(new BigInteger("4"));
-		value5 = new CompositeValue<IntegerValue>(val_array1, ValueTest.INTEGER_TYPE);
-		value6 = new CompositeValue<IntegerValue>(val_array2, ValueTest.INTEGER_TYPE);
+		valArray1[2] = new IntegerValue(new BigInteger("4"));
+		valArray2[2] = new IntegerValue(new BigInteger("4"));
+		value5 = new CompositeValue<IntegerValue>(valArray1, ValueTest.INTEGER_TYPE);
+		value6 = new CompositeValue<IntegerValue>(valArray2, ValueTest.INTEGER_TYPE);
 		
 		assertNotSame(value5, value6);
 		assertEquals(value5, value6);
@@ -138,29 +138,29 @@ public class ValueTest {
 		array3[3] = false;
 		array4[3] = false;
 
-		BooleanValue[] val_array3 = new BooleanValue[] { new BooleanValue(array3[0]),
+		BooleanValue[] valArray3 = new BooleanValue[] { new BooleanValue(array3[0]),
 		                new BooleanValue(array3[1]), new BooleanValue(array3[2]), new BooleanValue(array3[3]) };
-		BooleanValue[] val_array4 = new BooleanValue[] { new BooleanValue(array4[0]),
+		BooleanValue[] valArray4 = new BooleanValue[] { new BooleanValue(array4[0]),
 		                new BooleanValue(array4[1]), new BooleanValue(array4[2]), new BooleanValue(array4[3]) };
 
-		CompositeValue<BooleanValue> value7 = new CompositeValue<BooleanValue>(val_array3, ValueTest.BOOLEAN_TYPE);
-		CompositeValue<BooleanValue> value8 = new CompositeValue<BooleanValue>(val_array4, ValueTest.BOOLEAN_TYPE);
+		CompositeValue<BooleanValue> value7 = new CompositeValue<BooleanValue>(valArray3, ValueTest.BOOLEAN_TYPE);
+		CompositeValue<BooleanValue> value8 = new CompositeValue<BooleanValue>(valArray4, ValueTest.BOOLEAN_TYPE);
 		assertNotSame(value7, value8);
 		assertEquals(value7, value8);
 		assertTrue(value7.equals(value8));
 		
-		val_array3[2] = new BooleanValue(true);
-		val_array4[2] = new BooleanValue(false);
-		value7 = new CompositeValue<BooleanValue>(val_array3, ValueTest.BOOLEAN_TYPE);
-		value8 = new CompositeValue<BooleanValue>(val_array4, ValueTest.BOOLEAN_TYPE);
+		valArray3[2] = new BooleanValue(true);
+		valArray4[2] = new BooleanValue(false);
+		value7 = new CompositeValue<BooleanValue>(valArray3, ValueTest.BOOLEAN_TYPE);
+		value8 = new CompositeValue<BooleanValue>(valArray4, ValueTest.BOOLEAN_TYPE);
 		
 		assertNotSame(value7, value8);
 		assertFalse(value7.equals(value8));
 
-		val_array3[2] = new BooleanValue(true);
-		val_array4[2] = new BooleanValue(true);
-		value7 = new CompositeValue<BooleanValue>(val_array3, ValueTest.BOOLEAN_TYPE);
-		value8 = new CompositeValue<BooleanValue>(val_array4, ValueTest.BOOLEAN_TYPE);
+		valArray3[2] = new BooleanValue(true);
+		valArray4[2] = new BooleanValue(true);
+		value7 = new CompositeValue<BooleanValue>(valArray3, ValueTest.BOOLEAN_TYPE);
+		value8 = new CompositeValue<BooleanValue>(valArray4, ValueTest.BOOLEAN_TYPE);
 		
 		assertNotSame(value7, value8);
 		assertEquals(value7, value8);

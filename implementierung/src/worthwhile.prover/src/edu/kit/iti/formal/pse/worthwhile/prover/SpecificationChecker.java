@@ -278,6 +278,8 @@ public class SpecificationChecker {
 		program.accept(new DivisionByZeroAssertionInserter());
 		program.accept(new ImplicitInitialValueInserter());
 		program.accept(new ArrayFunctionInserter());
+		program.accept(new FunctionCallPreconditionInserter());
+		program.accept(new MacroSubstitution());
 		program.accept(new FunctionCallSubstitution());
 
 		// generate formula from program

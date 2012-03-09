@@ -47,4 +47,18 @@ public abstract class ASTNodeReturnVisitor<R> extends HierarchialASTNodeVisitor 
 		return this.returnValue;
 	}
 
+	/**
+	 * Applies this visitor to the specified node and returns the return value. A default value can be specified.
+	 * 
+	 * @param node
+	 *                The node to visit.
+	 * @param defaultValue
+	 *                The default value to set.
+	 * @return The return value as computed by this visitor.
+	 */
+	public final R apply(final ASTNode node, final R defaultValue) {
+		this.setReturnValue(defaultValue);
+		return this.apply(node);
+	}
+
 }

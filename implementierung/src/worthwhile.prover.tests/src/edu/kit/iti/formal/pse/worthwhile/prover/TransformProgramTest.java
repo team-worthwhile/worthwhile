@@ -68,6 +68,8 @@ public final class TransformProgramTest {
 		final Program p = this.getProgram(program);
 		p.accept(new ImplicitInitialValueInserter());
 		p.accept(new ArrayFunctionInserter());
+		p.accept(new FunctionCallPreconditionInserter());
+		p.accept(new MacroSubstitution());
 		p.accept(new FunctionCallSubstitution());
 		// find the expression expressing the validity of the whole program
 		for (Proof proof : this.transformer.transformProgram(p)) {
@@ -244,8 +246,7 @@ public final class TransformProgramTest {
 		                                + " (forall Integer $f@8@12 : 2 = 0 && $f@8@12 = 1 || 2 = 1 && $f@8@12 = 0 =>"
 		                                + "  (!($f@7@7 = -1) && $f@8@12 = -1 => true)))"
 		                                + "&&"
-		                                + "(forall Integer $f@7@7 : 2 = 0 && $f@7@7 = 1 || 2 = 1 && $f@7@7 = 0 =>"
-		                                + " 2 = 0 || 2 = 1)"
+		                                + "(2 = 0 || 2 = 1)"
 		                                + "&&"
 		                                + "(2 = 0 || 2 = 1)");
 	}
@@ -260,9 +261,7 @@ public final class TransformProgramTest {
 		                + "return 5\n" + "}\n" + "function Integer five()\n" + "_ensures _return = fiver()\n"
 		                + "{\n" + "return fiver()\n" + "}\n",
 		                "(true => 5 = 5)"
-		                + "&& (true =>"
-		                + " (forall Integer $fiver@9@8 : $fiver@9@8 = 5 =>"
-		                + "  (forall Integer $fiver@7@20 : $fiver@7@20 = 5 => $fiver@9@8 = $fiver@7@20)))"
+		                + "&& (true => 5 = 5)"
 		                + "&& true");
 	}
 }

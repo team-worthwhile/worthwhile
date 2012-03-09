@@ -11,7 +11,6 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCallPreconditionAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
@@ -47,7 +46,6 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 		super.visit(functionCall);
 
 		final FunctionDeclaration function = functionCall.getFunction();
-		// FIXME: these could be legal identifiers in Worthwhile or illegal in some prover input language
 		final String name = this.getReturnVariableName(functionCall);
 		final VariableDeclaration variable = AstNodeCreatorHelper.createVariableDeclaration(
 		                AstNodeCloneHelper.clone(function.getReturnType()), name);
@@ -88,17 +86,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 			for (final VariableDeclaration variable : returnVariables) {
 				final FunctionCall call = this.parameters.peek().get(variable);
-				final Expression precondition = AstNodeCreatorHelper
-				                .createPreconditionConjunction(call);
 				Expression postcondition = AstNodeCreatorHelper.createPostconditionConjunction(call);
-
-				if (precondition != null) {
-					// the function call is the node that is actually guarded
-					FunctionCallPreconditionAssertion assertion;
-					assertion = AstNodeCreatorHelper.createFunctionCallPreconditionAssertion(
-					                precondition, this.parameters.peek().get(variable));
-					i.add(assertion);
-				}
 
 				i.add(variable);
 
@@ -179,7 +167,7 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 	 *                the {@link Expression} for which the current {@link FunctionCallSubstitution#parameters} have
 	 *                been calculated
 	 * @return a new <code>Expression</code> that implies <code>expression</code> when each function call's
-	 *         (retrieved from <code>parameters</code>) precondition is fulfilled and postcondition is assumed
+	 *         (retrieved from <code>parameters</code>) postcondition is assumed
 	 */
 	private Expression applyFunctionAnnotations(final Expression expression) {
 		Expression newExpression = expression;
@@ -187,7 +175,6 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 		final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
 		for (final VariableDeclaration variable : returnVariables) {
 			final FunctionCall call = this.parameters.peek().get(variable);
-			final Expression precondition = AstNodeCreatorHelper.createPreconditionConjunction(call);
 			Expression postcondition = AstNodeCreatorHelper.createPostconditionConjunction(call);
 
 			if (postcondition != null) {
@@ -198,10 +185,6 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 			}
 
 			newExpression = AstNodeCreatorHelper.createForAllQuantifier(variable, newExpression);
-
-			if (precondition != null) {
-				newExpression = AstNodeCreatorHelper.createConjunction(precondition, newExpression);
-			}
 		}
 
 		return newExpression;

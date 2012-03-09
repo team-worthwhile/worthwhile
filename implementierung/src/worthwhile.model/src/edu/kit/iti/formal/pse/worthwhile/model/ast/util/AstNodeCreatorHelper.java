@@ -214,8 +214,7 @@ public final class AstNodeCreatorHelper {
 	 *                the <code>Expression</code> to be evaluated at <code>index</code>
 	 * @return a new {@link ArrayAccess} that evaluates <code>array</code> at <code>index</code>
 	 */
-	public static ArrayAccess createArrayAccess(final Expression index,
-	                final Expression array) {
+	public static ArrayAccess createArrayAccess(final Expression index, final Expression array) {
 		final ArrayAccess arrayAccess = AstNodeCreatorHelper.createArrayAccess();
 		arrayAccess.setIndex(index);
 		arrayAccess.setArray(array);

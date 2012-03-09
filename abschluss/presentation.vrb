@@ -1,0 +1,22 @@
+\frametitle {Was machen wir?}
+
+\begin{itemize}
+\item \textbf{Programmverifikation:} Formaler Beweis, dass ein Programm seine Spezifikation erfüllt.
+\item Wichtig z.B. für sicherheitskritische Systeme
+\end{itemize}
+
+
+\begin{lstlisting}[frame=lines,mathescape=true]
+function Boolean isEven(Integer i)
+    _ensures _return = true $\Leftrightarrow $ i % 2 = 0
+{
+    if (i / 2) $ \cdot $ 2 = i {
+        return true
+    } else {
+        return false
+    }
+}
+\end{lstlisting}
+
+\begin{center}$\Rightarrow$ $$\mathtt{\forall i \in \mathbb{N} : (i / 2 \cdot 2 = i \Rightarrow i \% 2 = 0) \wedge (\neg(i / 2 \cdot 2 = i) \Rightarrow \neg(i \% 2 = 0))}$$\end{center}
+

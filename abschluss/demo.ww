@@ -1,0 +1,23 @@
+/**
+ * Multiplies two numbers.
+ */
+function Integer mult(Integer i1, Integer i2)
+	_requires i1 ≥ 0
+	_ensures _return = i1 ⋅ i2
+{
+	Integer result := 0
+	Integer i := 0
+	
+	while (i < i1)
+		_invariant i ≤ i1
+		_invariant result = i ⋅ i2
+	{
+		result := result + i2
+		i := i + 1
+	}
+	
+	return result
+}
+
+Integer test := mult(2, 42)
+_assert test = 84

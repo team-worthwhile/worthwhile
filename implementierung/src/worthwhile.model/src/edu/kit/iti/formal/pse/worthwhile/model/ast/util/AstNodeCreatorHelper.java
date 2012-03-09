@@ -3,6 +3,7 @@ package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayAccess;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory;
@@ -38,6 +40,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IValueVisitor;
 
 /**
@@ -267,6 +270,69 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static BooleanType createBooleanType() {
 		return AstNodeCreatorHelper.factory.createBooleanType();
+	}
+
+	/**
+	 * @param type
+	 *                a {@link Type} instance
+	 * @return a new {@link Literal} representing the <code>type</code>'s default value
+	 */
+	// FIXME: implement this logic directly in the Type classes
+	public static Literal createDefaultLiteral(final Type type) {
+		return new ASTNodeReturnVisitor<Literal>() {
+			@Override
+			public void visit(final ArrayType arrayType) {
+				this.setReturnValue(AstNodeCreatorHelper.createArrayFunction(this.apply(arrayType)));
+			}
+
+			@Override
+			public void visit(final BooleanType booleanType) {
+				this.setReturnValue(AstNodeCreatorHelper.createFalseLiteral());
+			}
+
+			@Override
+			public void visit(final IntegerType integerType) {
+				this.setReturnValue(AstNodeCreatorHelper.createZeroLiteral());
+
+			}
+		}.apply(type);
+	}
+
+	/**
+	 * @param type
+	 *                a {@link Type} instance
+	 * @return a new {@link Value} representing the <code>type</code>'s default value
+	 */
+	// FIXME: implement this logic directly in the Value classes
+	public static Value createDefaultValue(final Type type) {
+		return new ASTNodeReturnVisitor<Value>() {
+			@Override
+			public void visit(final ArrayType arrayType) {
+				arrayType.getBaseType().accept(this);
+			}
+
+			@Override
+			public void visit(final BooleanType booleanType) {
+				// visit(ArrayType) brought us here
+				if (booleanType != type) {
+					this.setReturnValue(new CompositeValue<BooleanValue>(Collections
+					                .<BigInteger, BooleanValue> emptyMap()));
+				} else {
+					this.setReturnValue(new BooleanValue(false));
+				}
+			}
+
+			@Override
+			public void visit(final IntegerType integerType) {
+				// visit(ArrayType) brought us here
+				if (integerType != type) {
+					this.setReturnValue(new CompositeValue<IntegerValue>(Collections
+					                .<BigInteger, IntegerValue> emptyMap()));
+				} else {
+					this.setReturnValue(new IntegerValue(BigInteger.ZERO));
+				}
+			}
+		}.apply(type);
 	}
 
 	/**

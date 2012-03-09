@@ -169,10 +169,7 @@ public final class AstNodeCreatorHelper {
 	 * @return a new implicitly all <code>false</code> <code>ArrayFunction</code>
 	 */
 	public static ArrayFunction createFalseArrayFunction() {
-		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();
-		arrayFunction.setIndex(null);
-		arrayFunction.setValue(AstNodeCreatorHelper.createFalseLiteral());
-		return arrayFunction;
+		return AstNodeCreatorHelper.createArrayFunction(AstNodeCreatorHelper.createFalseLiteral());
 	}
 
 	/**
@@ -180,9 +177,18 @@ public final class AstNodeCreatorHelper {
 	 * @return a new implicitly all <code>0</code> <code>ArrayFunction</code>
 	 */
 	public static ArrayFunction createZeroArrayFunction() {
+		return AstNodeCreatorHelper.createArrayFunction(AstNodeCreatorHelper.createZeroLiteral());
+	}
+
+	/**
+	 * @param value
+	 *                the new {@link ArrayFunction}'s constant value {@link Expression}
+	 * @return a new <code>ArrayFunction</code> with the given constant <code>value</code>
+	 */
+	public static ArrayFunction createArrayFunction(final Expression value) {
 		final ArrayFunction arrayFunction = AstNodeCreatorHelper.createArrayFunction();
 		arrayFunction.setIndex(null);
-		arrayFunction.setValue(AstNodeCreatorHelper.createZeroLiteral());
+		arrayFunction.setValue(value);
 		return arrayFunction;
 	}
 

@@ -1,7 +1,6 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast.util;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
@@ -592,12 +591,15 @@ public final class AstNodeCreatorHelper {
 
 			@Override
 			public <T extends Value> void visitCompositeValue(final CompositeValue<T> value) {
-				final List<Literal> subValues = new ArrayList<Literal>();
-				for (final Value v : value.getSubValues().values()) {
-					v.accept(this);
-					subValues.add(this.literal);
+				this.literal = AstNodeCreatorHelper.createDefaultLiteral(value.getType());
+				for (final Map.Entry<BigInteger, T> entry : value.getSubValues().entrySet()) {
+					final Literal indexLiteral = AstNodeCreatorHelper.createIntegerLiteral(entry
+					                .getKey());
+					final Literal valueLiteral = AstNodeCreatorHelper.createLiteral(entry
+					                .getValue());
+					this.literal = AstNodeCreatorHelper.createArrayFunction(indexLiteral,
+					                valueLiteral, this.literal);
 				}
-				this.literal = AstNodeCreatorHelper.createArrayLiteral(subValues);
 			}
 
 			@Override

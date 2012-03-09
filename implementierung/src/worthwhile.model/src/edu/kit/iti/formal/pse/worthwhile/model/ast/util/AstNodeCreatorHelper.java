@@ -35,6 +35,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
@@ -235,6 +236,17 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static ArrayLiteral createArrayLiteral() {
 		return AstNodeCreatorHelper.factory.createArrayLiteral();
+	}
+
+	/**
+	 * @param baseType
+	 *                the {@link PrimitiveType} to set as the new {@link ArrayType}'s base type
+	 * @return a new <code>ArrayType</code> with the given <code>baseType</code>
+	 */
+	public static ArrayType createArrayType(final PrimitiveType baseType) {
+		final ArrayType arrayType = AstNodeCreatorHelper.factory.createArrayType();
+		arrayType.setBaseType(baseType);
+		return arrayType;
 	}
 
 	/**

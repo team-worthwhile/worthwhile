@@ -1,11 +1,6 @@
-\frametitle {Was machen wir?}
+\frametitle {Beispiel}
 
-\begin{itemize}
-\item \textbf{Programmverifikation:} Formaler Beweis, dass ein Programm seine Spezifikation erfüllt.
-\item Wichtig z.B. für sicherheitskritische Systeme
-\end{itemize}
-
-
+\begin{onlyenv}<1>
 \begin{lstlisting}[frame=lines,mathescape=true]
 function Boolean isEven(Integer i)
     _ensures _return = true $\Leftrightarrow $ i % 2 = 0
@@ -17,6 +12,95 @@ function Boolean isEven(Integer i)
     }
 }
 \end{lstlisting}
+\end{onlyenv}
 
-\begin{center}$\Rightarrow$ $$\mathtt{\forall i \in \mathbb{N} : (i / 2 \cdot 2 = i \Rightarrow i \% 2 = 0) \wedge (\neg(i / 2 \cdot 2 = i) \Rightarrow \neg(i \% 2 = 0))}$$\end{center}
+\begin{onlyenv}<2>
+\begin{lstlisting}[frame=lines,mathescape=true]
+function Boolean isEven(Integer i)
+{
+    if (i / 2) $ \cdot $ 2 = i {
+        return true
+        _assert _return = true $\Leftrightarrow $ i % 2 = 0
+    } else {
+        return false
+        _assert _return = true $\Leftrightarrow $ i % 2 = 0
+    }
+}
+\end{lstlisting}
+\end{onlyenv}
 
+\begin{onlyenv}<3>
+\begin{lstlisting}[frame=lines,mathescape=true]
+function Boolean isEven(Integer i)
+{
+    if (i / 2) $ \cdot $ 2 = i {
+        _assert true = true $\Leftrightarrow $ i % 2 = 0
+    } else {
+        _assert  false = true $\Leftrightarrow $ i % 2 = 0
+    }
+}
+\end{lstlisting}
+\end{onlyenv}
+
+\begin{onlyenv}<4>
+\begin{lstlisting}[frame=lines,mathescape=true]
+function Boolean isEven(Integer i)
+{
+    if (i / 2) $ \cdot $ 2 = i {
+        // hier gilt (i / 2) $ \cdot $ 2 = i
+        _assert true = true $\Leftrightarrow $ i % 2 = 0
+    } else {
+        // hier gilt $\neg$((i / 2) $ \cdot $ 2 = i)
+        _assert  false = true $\Leftrightarrow $ i % 2 = 0
+    }
+}
+\end{lstlisting}
+\end{onlyenv}
+
+\begin{onlyenv}<5>
+\begin{lstlisting}[frame=lines,mathescape=true]
+function Boolean isEven(Integer i)
+{
+    _assert (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+         (true = true $\Leftrightarrow $ i % 2 = 0)
+
+    _assert $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+         (false = true $\Leftrightarrow $ i % 2 = 0)
+}
+\end{lstlisting}
+\end{onlyenv}
+
+\begin{onlyenv}<6>
+\begin{lstlisting}[frame=lines,mathescape=true]
+function Boolean isEven(Integer i)
+{
+    _assert (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+         (true = true $\Leftrightarrow $ i % 2 = 0)
+
+         $\wedge$
+
+        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+         (false = true $\Leftrightarrow $ i % 2 = 0)
+}
+\end{lstlisting}
+\end{onlyenv}
+
+\begin{onlyenv}<7-8>
+\begin{lstlisting}[frame=lines,mathescape=true]
+_assert $\forall$ i $\in \mathbb{N} :$
+
+        (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+         (true = true $\Leftrightarrow $ i % 2 = 0)
+
+         $\wedge$
+
+        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+         (false = true $\Leftrightarrow $ i % 2 = 0)
+\end{lstlisting}
+\end{onlyenv}
+
+\vspace{1cm}
+
+\only<8> {
+$\Rightarrow$ Diese Formel ist beweis- oder widerlegbar!
+}

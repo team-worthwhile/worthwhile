@@ -11,7 +11,7 @@
 \usenavigationsymbols
 
 \lstdefinelanguage{worthwhile}
-  {morekeywords={function,Boolean,Integer,_ensures,_return,return},
+  {morekeywords={function,Boolean,Integer,_ensures,_return,return,_assert},
    morekeywords={[2]true,false},
       sensitive=true,
   morecomment=[l]{//},
@@ -25,7 +25,7 @@
    keywordstyle=\bfseries\ttfamily\color{KITgreen},
    keywordstyle={[2]\bfseries\ttfamily\color{KITblue}},
    stringstyle=\color{green}\ttfamily,
-   commentstyle=\color{middlegray}\ttfamily,
+   commentstyle=\color{KITblack50}\ttfamily,
    emph={square}, 
    emphstyle=\color{blue}\texttt,
    emph={[2]root,base},
@@ -35,7 +35,7 @@
    tabsize=2,
    numbers=left,
    numberstyle=\scriptsize,
-   numberblanklines=false,
+   numberblanklines=true,
    stepnumber=1,
    numbersep=10pt,
    xleftmargin=15pt,
@@ -61,10 +61,31 @@
 	
 	\begin{itemize}
 		\item \textbf{Programmverifikation:} Formaler Beweis, dass ein Programm seine Spezifikation erfüllt.
-		\item Wichtig z.B. für sicherheitskritische Systeme
+		\item Wichtig z.~B. für sicherheitskritische Systeme
+		\item Unterstützt durch Software (Formel-Generierung, Beweistools)
 	\end{itemize}
 	
 		
+%	\begin{lstlisting}[frame=lines,mathescape=true]
+%		function Boolean isEven(Integer i)
+%		    _ensures _return = true $\Leftrightarrow $ i % 2 = 0
+%		{
+%		    if (i / 2) $ \cdot $ 2 = i {
+%		        return true
+%		    } else {
+%		        return false
+%		    }
+%		}
+%	\end{lstlisting}
+	
+	% \begin{center}$\Rightarrow$ $$\mathtt{\forall i \in \mathbb{N} : (i / 2 \cdot 2 = i \Rightarrow i \% 2 = 0) \wedge (\neg(i / 2 \cdot 2 = i) \Rightarrow \neg(i \% 2 = 0))}$$\end{center}
+	
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Beispiel}
+	
+	\begin{onlyenv}<1>
 	\begin{lstlisting}[frame=lines,mathescape=true]
 		function Boolean isEven(Integer i)
 		    _ensures _return = true $\Leftrightarrow $ i % 2 = 0
@@ -76,9 +97,98 @@
 		    }
 		}
 	\end{lstlisting}
+	\end{onlyenv}
 	
-	\begin{center}$\Rightarrow$ $$\mathtt{\forall i \in \mathbb{N} : (i / 2 \cdot 2 = i \Rightarrow i \% 2 = 0) \wedge (\neg(i / 2 \cdot 2 = i) \Rightarrow \neg(i \% 2 = 0))}$$\end{center}
+	\begin{onlyenv}<2>
+	\begin{lstlisting}[frame=lines,mathescape=true]
+		function Boolean isEven(Integer i)
+		{
+		    if (i / 2) $ \cdot $ 2 = i {
+		        return true
+		        _assert _return = true $\Leftrightarrow $ i % 2 = 0
+		    } else {
+		        return false
+		        _assert _return = true $\Leftrightarrow $ i % 2 = 0
+		    }
+		}
+	\end{lstlisting}
+	\end{onlyenv}
 	
+	\begin{onlyenv}<3>
+	\begin{lstlisting}[frame=lines,mathescape=true]
+		function Boolean isEven(Integer i)
+		{
+		    if (i / 2) $ \cdot $ 2 = i {
+		        _assert true = true $\Leftrightarrow $ i % 2 = 0
+		    } else {
+		        _assert  false = true $\Leftrightarrow $ i % 2 = 0
+		    }
+		}
+	\end{lstlisting}
+	\end{onlyenv}
+	
+		\begin{onlyenv}<4>
+	\begin{lstlisting}[frame=lines,mathescape=true]
+		function Boolean isEven(Integer i)
+		{
+		    if (i / 2) $ \cdot $ 2 = i {
+		        // hier gilt (i / 2) $ \cdot $ 2 = i
+		        _assert true = true $\Leftrightarrow $ i % 2 = 0
+		    } else {
+		        // hier gilt $\neg$((i / 2) $ \cdot $ 2 = i)
+		        _assert  false = true $\Leftrightarrow $ i % 2 = 0
+		    }
+		}
+	\end{lstlisting}
+	\end{onlyenv}
+	
+		\begin{onlyenv}<5>
+	\begin{lstlisting}[frame=lines,mathescape=true]
+		function Boolean isEven(Integer i)
+		{
+		    _assert (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+		        	(true = true $\Leftrightarrow $ i % 2 = 0)
+		        	
+		    _assert $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+		        	(false = true $\Leftrightarrow $ i % 2 = 0)
+		}
+	\end{lstlisting}
+	\end{onlyenv}
+	
+		\begin{onlyenv}<6>
+	\begin{lstlisting}[frame=lines,mathescape=true]
+		function Boolean isEven(Integer i)
+		{
+		    _assert (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+		        	(true = true $\Leftrightarrow $ i % 2 = 0)
+		        	
+		        	$\wedge$
+		        	
+		        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+		        	(false = true $\Leftrightarrow $ i % 2 = 0)
+		}
+	\end{lstlisting}
+	\end{onlyenv}
+	
+		\begin{onlyenv}<7-8>
+	\begin{lstlisting}[frame=lines,mathescape=true]
+	_assert $\forall$ i $\in \mathbb{N} :$
+		        
+	        (i / 2) $ \cdot $ 2 = i $\Rightarrow$
+	        	(true = true $\Leftrightarrow $ i % 2 = 0)
+	        	
+	        	$\wedge$
+	        	
+	        $\neg$((i / 2) $ \cdot $ 2 = i) $\Rightarrow$
+	        	(false = true $\Leftrightarrow $ i % 2 = 0)
+	\end{lstlisting}
+	\end{onlyenv}
+	
+	\vspace{1cm}
+	
+	\only<8> {
+		$\Rightarrow$ Diese Formel ist beweis- oder widerlegbar!
+	}
 \end{frame}
 
 \begin{frame}
@@ -93,6 +203,7 @@
 				\item Interpreter
 				\item Debugger
 			\end{itemize}
+			\item Verwendet eine WHILE-Sprache
 		\end{itemize}	
 		
 	\column{0.45 \textwidth}		
@@ -109,12 +220,15 @@
 		\begin{columns}[c]
 		\column{0.5 \textwidth}
 			\begin{itemize}
-			\item Schnittstelle für SMTLIB-kompatible Beweiser
+			\item Anbindung eines Formel-Beweisers
 			\begin{itemize}
-				\item Transformation eines Programms in verifizierbare Formel
-				\item Ausführen von Teilbeweisen (wo schlägt der Beweis fehl?)
+				\item Übersetzung eines Programms in verifizierbare Formel
+				\item Aufruf des Beweisers  \\ \scriptsize (Beweiser ist \textbf{externes} Tool) 
+				\item \normalsize Rückmeldung für Benutzer  \\ \scriptsize  Wo schlägt der Beweis fehl? 
 			\end{itemize}
 		\end{itemize}	
+		
+		\normalsize
 		
 	\column{0.45 \textwidth}		
 

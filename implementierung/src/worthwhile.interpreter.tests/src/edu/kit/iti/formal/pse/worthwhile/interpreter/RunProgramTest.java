@@ -16,6 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestASTProvider;
 import edu.kit.iti.formal.pse.worthwhile.common.tests.TestUtils;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
@@ -117,6 +118,11 @@ public final class RunProgramTest {
 		this.interpreter.addExecutionEventHandler(new AbstractExecutionEventListener() {
 			@Override
 			public void annotationFailed(final Annotation annotation) {
+				RunProgramTest.this.actualValidity = false;
+			}
+
+			@Override
+			public void expressionFailed(final Expression expression, final InterpreterError error) {
 				RunProgramTest.this.actualValidity = false;
 			}
 		});

@@ -48,4 +48,12 @@ public class GrammarTest {
 		TestUtils.assertErrorCountEquals(0,  TestASTProvider.loadProgram(testAST));
 	}
 
+	@Test
+	public void testReturnStatementOnlyFunction() {
+		String testProgram = "function Integer fun() {\n" + "return true\n" + "}\n" + "return true \n";
+		// FIXME: that the second `return' is not contained in a function declaration is reported twice by both
+		// the parser (at linking) and the validator
+		TestUtils.assertErrorCountEquals(3, TestASTProvider.loadProgram(testProgram));
+	}
+
 }

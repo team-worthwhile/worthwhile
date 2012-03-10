@@ -43,13 +43,6 @@ public class ValidatorTest extends XTextTestCase {
     }
 
     @Test
-    public void testReturnStatementOnlyFunction() {
-	String testProgram = "function Integer fun() {\n" + "return true\n" + "}\n" + "return true \n";
-	initialize(testProgram);
-	assertConstraints(allIssues.forType(ReturnStatement.class).sizeIs(2));
-    }
-
-    @Test
     public void testReturnValueReferenceOnlyPostcondition() {
 	String testProgram = "function Integer fun()\n" + "_requires _return > 4\n" + "_ensures _return > 4\n" + "{\n"
 		+ "return 0\n" + "}\n";

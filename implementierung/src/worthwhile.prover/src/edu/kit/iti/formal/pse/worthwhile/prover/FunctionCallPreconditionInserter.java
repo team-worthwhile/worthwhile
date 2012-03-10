@@ -65,7 +65,7 @@ public class FunctionCallPreconditionInserter extends SubstitutionVisitor<Expres
 				}
 			}
 
-			// clear the return variables set before moving on to the next statement
+			// clear the function calls set before moving on to the next statement
 			this.functionCalls.pop();
 
 			i.next();
@@ -78,15 +78,6 @@ public class FunctionCallPreconditionInserter extends SubstitutionVisitor<Expres
 		if (condition != null) {
 			this.functionCalls.push(new HashSet<FunctionCall>());
 			condition.accept(this);
-
-			// because we are overriding SubstitutionVisitor#visit(QuantifiedExpression) we also have to
-			// take care of substituting if needed. Not substituting here may become a problem if
-			// condition is a FunctionCall that demands a substitution
-			if (this.getFound()) {
-				quantifiedExpression.setCondition(this.getSubstitute());
-				this.setFound(false);
-			}
-
 			quantifiedExpression.setCondition(this.applyFunctionPreconditions(quantifiedExpression
 			                .getCondition()));
 
@@ -95,16 +86,6 @@ public class FunctionCallPreconditionInserter extends SubstitutionVisitor<Expres
 
 		this.functionCalls.push(new HashSet<FunctionCall>());
 		quantifiedExpression.getExpression().accept(this);
-
-		// because we are overriding SubstitutionVisitor#visit(QuantifiedExpression) we also have to
-		// take care of substituting if needed. Not substituting here may become a problem if
-		// quantifiedExpression.getExpression() is a FunctionCall that demands a substitution
-		// TODO: do we need this?
-		if (this.getFound()) {
-			quantifiedExpression.setExpression(this.getSubstitute());
-			this.setFound(false);
-		}
-
 		quantifiedExpression
 		                .setExpression(this.applyFunctionPreconditions(quantifiedExpression.getExpression()));
 
@@ -115,17 +96,7 @@ public class FunctionCallPreconditionInserter extends SubstitutionVisitor<Expres
 	public void visit(final FunctionAnnotation annotation) {
 		this.functionCalls.push(new HashSet<FunctionCall>());
 		annotation.getExpression().accept(this);
-
-		// because we are overriding SubstitutionVisitor#visit(FunctionAnnotation) we also have to take care of
-		// substituting if needed. Not substituting here may become a problem if annotation.getExpression() is a
-		// FunctionCall that demands a substitution
-		if (this.getFound()) {
-			this.setFound(false);
-			annotation.setExpression(this.getSubstitute());
-		}
-
 		annotation.setExpression(this.applyFunctionPreconditions(annotation.getExpression()));
-
 		this.functionCalls.pop();
 	}
 

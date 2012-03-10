@@ -15,6 +15,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.DivisorNotZeroAssertion;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
@@ -134,6 +135,19 @@ public class DivisionByZeroAssertionInserter extends HierarchialASTNodeVisitor {
 	@Override
 	public final void visit(final Loop loop) {
 		loop.getCondition().accept(this);
+
+		// add `divisor != zero` to the loop as invariant for all found divisors
+		for (final Expression divisor : this.foundDivisorsStack.peek()) {
+			final Invariant invariant = AstNodeCreatorHelper.createInvariant(AstNodeCreatorHelper
+			                .createUnequal(AstNodeCloneHelper.clone(divisor),
+			                                AstNodeCreatorHelper.createZeroLiteral()));
+
+			loop.getInvariants().add(invariant);
+		}
+
+		// clear list before `divisor != zero` would be added as assertion, too
+		this.foundDivisorsStack.peek().clear();
+
 		loop.getBody().accept(this);
 	}
 

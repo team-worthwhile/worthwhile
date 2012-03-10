@@ -49,4 +49,5 @@ if even2(i + 1) {
 
 _assert ¬even2(i)
 
-_assert forall Integer lp : isEven(2 * lp)
+_assert forall Integer lp1 : isEven(2 * lp1) && even(2 * lp1) && even2(2 * lp1)
+_assert forall Integer lp2 : !(isEven(2 * lp2 - 1) || even(2 * lp2 - 1) || even2(2 * lp2 - 1))

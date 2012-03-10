@@ -34,6 +34,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Implication;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Negation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition;
@@ -42,6 +43,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.ASTNodeReturnVisitor;
@@ -530,6 +532,25 @@ public final class AstNodeCreatorHelper {
 	}
 
 	/**
+	 * @param expression
+	 *                the {@link Expression} the {@link Invariant} specifies
+	 * @return a new <code>Invariant</code> with the given <code>expression</code>
+	 */
+	public static Invariant createInvariant(final Expression expression) {
+		final edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant invariant = AstNodeCreatorHelper
+		                .createInvariant();
+		invariant.setExpression(expression);
+		return invariant;
+	}
+
+	/**
+	 * @return a new {@link Invariant} with no {@link Expression} set
+	 */
+	public static Invariant createInvariant() {
+		return AstNodeCreatorHelper.factory.createInvariant();
+	}
+
+	/**
 	 * 
 	 * @param parameter
 	 *                the bound {@link VariableDeclaration}
@@ -644,6 +665,27 @@ public final class AstNodeCreatorHelper {
 	 */
 	public static Program createProgram(final Statement statement) {
 		return AstNodeCreatorHelper.createProgram(AstNodeCreatorHelper.createBlock(statement));
+	}
+
+	/**
+	 * @param left
+	 *                the new {@link Unequal}'s left operand {@link Expression}
+	 * @param right
+	 *                the new <code>Unequal</code>'s right operand <code>Expression</code>
+	 * @return a new <code>Unequal</code> with the given <code>left</code> and <code>right</code> operands set
+	 */
+	public static Unequal createUnequal(final Expression left, final Expression right) {
+		final Unequal unequal = AstNodeCreatorHelper.createUnequal();
+		unequal.setLeft(left);
+		unequal.setRight(right);
+		return unequal;
+	}
+
+	/**
+	 * @return a new {@link Unequal} with no operands set
+	 */
+	public static Unequal createUnequal() {
+		return AstNodeCreatorHelper.factory.createUnequal();
 	}
 
 	/**

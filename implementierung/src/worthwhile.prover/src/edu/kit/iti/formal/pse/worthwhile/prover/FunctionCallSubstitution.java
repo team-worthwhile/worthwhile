@@ -1,6 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover;
 
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -173,7 +174,15 @@ public final class FunctionCallSubstitution extends SubstitutionVisitor<Expressi
 		Expression newExpression = expression;
 
 		final Set<VariableDeclaration> returnVariables = this.parameters.peek().keySet();
-		for (final VariableDeclaration variable : returnVariables) {
+
+		// Apply the return value variables in the reversed order they are specified to achieve that the first
+		// variable is bound by the outer most quantifier. This is required since parameters are visited before
+		// the respective function call and may be referenced in the latter's precondition.
+		final ListIterator<VariableDeclaration> i = new LinkedList<VariableDeclaration>(returnVariables)
+		                .listIterator(returnVariables.size());
+		while (i.hasPrevious()) {
+			final VariableDeclaration variable = i.previous();
+
 			final FunctionCall call = this.parameters.peek().get(variable);
 			Expression postcondition = AstNodeCreatorHelper.createPostconditionConjunction(call);
 

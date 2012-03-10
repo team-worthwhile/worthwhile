@@ -1,0 +1,5 @@
+// EXPECTED:INVALID
+Integer y := 1
+while (y ÷ y = 1) {
+    y := 0
+}

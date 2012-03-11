@@ -1,0 +1,51 @@
+// EXPECTED:VALID
+function Integer min(Integer[] a, Integer l)
+_requires l > 0
+_ensures ∀ Integer i, 1 ≤ i ∧ i ≤ l : a[i] ≥ _return
+_ensures ∃ Integer j, 1 ≤ j ∧ j ≤ l : a[j] = _return
+{
+	Integer totalMin := a[1]
+
+	Integer n := 1
+	while n < l
+	_invariant 1 ≤ n ∧ n ≤ l
+	_invariant ∀ Integer i1, 1 ≤ i1 ∧ i1 ≤ n : a[i1] ≥ totalMin
+	_invariant ∃ Integer i5, 1 ≤ i5 ∧ i5 ≤ n : a[i5] = totalMin
+	{
+		n := n + 1
+
+		Boolean isPartMin := ¬(a[1] < a[n])
+
+		Integer m := 1
+		while m < n
+		_invariant 1 ≤ m ∧ m ≤ n
+		_invariant isPartMin ⇔ ∀ Integer i2, 1 ≤ i2 ∧ i2 ≤ m : a[i2] ≥ a[n]
+		{
+			m := m + 1
+
+			if a[m] < a[n] {
+				isPartMin := false
+			}
+		}
+
+		if isPartMin {
+			totalMin := a[n]
+		}
+	}
+
+	return totalMin
+}
+
+function Integer largerNumber(Integer number)
+_ensures _return ≥ number
+{
+	return number
+}
+
+_assert ∀ Integer[] a_ \
+        ∀ Integer a_l1 \
+        ∀ Integer a_l2, a_l2 ≥ a_l1 \
+        ∀ Integer a_i, 1 ≤ a_i ∧ a_i ≤ a_l1 : \
+            min(a_, largerNumber(a_l2)) ≤ a_[a_i]
+
+_assert min({1, 17, 20, 50, 50, 100, 2, 2, 3, 4, 5, 6, 17, 28, 11, 12, 0}, 15) = 2

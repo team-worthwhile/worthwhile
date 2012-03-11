@@ -61,7 +61,8 @@ public final class CheckProgramTest {
 		                "test-arrayindexassignment", "test-incrementfunction", "DebuggerDemo",
 		                "smtlib-keywords", "test-qexpr-condition", "test-github-issue-93", "test-fibonacci",
 		                "bubblesort2", "multiplication", "test-github-issue-108", "array_max",
-		                "invalid_array_max", "test-valid-functioncall", "test-divisionbyzero-loopcondition" };
+		                "invalid_array_max", "test-valid-functioncall", "test-divisionbyzero-loopcondition",
+		                "array_min" };
 
 		for (String fileName : testPrograms) {
 			// Load test program and look for EXPECTED:???

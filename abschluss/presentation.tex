@@ -255,7 +255,7 @@ function Boolean heapCondition(Integer[] heap)
 		\column{0.45 \textwidth}
 
 		\begin{figure}
-			\uncover<2-3>{\includegraphics[width=\textwidth]{screenshot1.png}}
+			\uncover<2->{\includegraphics[width=\textwidth]{screenshot1.png}}
 		\end{figure}
 
 	\end{columns}
@@ -265,21 +265,32 @@ function Boolean heapCondition(Integer[] heap)
 		\begin{itemize}
 			\uncover<4->{\item Beweiserschnittstelle
 				\begin{itemize}
-				\item Aufruf des Beweisers  \\ \scriptsize (Beweiser ist \textbf{externes} Tool)}
+				\item Aufruf des Beweisers  \\ {\scriptsize \vspace{-0.08cm} (Beweiser ist \textbf{externes} Tool)} \vspace{0.02cm}}
 						\uncover<5->{
-						\item \normalsize Rückmeldung für Benutzer  \\ \scriptsize  Wo schlägt der Beweis fehl?
-						}
+						\item Rückmeldung für Benutzer  \\ {\scriptsize \vspace{-0.08cm} Wo schlägt der Beweis fehl? \vspace{0.02cm}
+						}}
 				\end{itemize}
 		\end{itemize}
-		\normalsize
 
+		
+		
 		\column{0.45 \textwidth}
 
+\begin{onlyenv}<4>
 		\begin{figure}
-			\only<4>{\includegraphics[width=2.5cm]{z3.png}}
-			\only<5>{\includegraphics[width=\textwidth]{screenshot2.png}}
+			\includegraphics[width=\textwidth]{z3.png}
 		\end{figure}
-	\end{columns}
+		
+	\end{onlyenv}
+	
+			\begin{onlyenv}<5>
+
+		\begin{figure}
+			\includegraphics[width=\textwidth]{screenshot2.png}
+		\end{figure}
+	\end{onlyenv}
+	
+		\end{columns}
 
 	\setbeamercovered{transparent}
 

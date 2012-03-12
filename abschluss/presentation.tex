@@ -191,52 +191,14 @@
 
 \begin{frame}
 	\frametitle{Was ist Worthwhile?}
-	
+
 	\begin{columns}[c]
 		\column{0.5 \textwidth}
 			\begin{itemize}
-			\item Mächtige Entwicklungsumgebung
-			\begin{itemize}
-				\item Editor
-				\item Interpreter
-				\item Debugger
+			\item Eine WHILE-Sprache
 			\end{itemize}
-			\item Verwendet eine WHILE-Sprache
-		\end{itemize}	
-		
-	\column{0.45 \textwidth}		
-		
-			\begin{figure}
-				\includegraphics[width=\textwidth]{screenshot1.png}			
-			\end{figure}
-			
-	\end{columns}	
-
-		\setbeamercovered{invisible}	
-	\pause
-	
-		\begin{columns}[c]
-		\column{0.5 \textwidth}
-			\begin{itemize}
-			\item Anbindung eines Formel-Beweisers
-			\begin{itemize}
-				\item Übersetzung eines Programms in verifizierbare Formel
-				\item Aufruf des Beweisers  \\ \scriptsize (Beweiser ist \textbf{externes} Tool) 
-				\item \normalsize Rückmeldung für Benutzer  \\ \scriptsize  Wo schlägt der Beweis fehl? 
-			\end{itemize}
-		\end{itemize}	
-		
-		\normalsize
-		
-	\column{0.45 \textwidth}		
-
-		\uncover<2>{\begin{figure}
-				\includegraphics[width=\textwidth]{screenshot2.png}			
-			\end{figure}}
-	\end{columns}	
-	
-			\setbeamercovered{transparent}
-
+		\column{0.45 \textwidth}
+	\end{columns}
 \end{frame}
 
 \lstset{
@@ -271,6 +233,58 @@ function Boolean heapCondition(Integer[] heap)
             }
     \end{lstlisting}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Was ist Worthwhile?}
+
+	\setbeamercovered{invisible}
+	\begin{columns}[c]
+		\column{0.5 \textwidth}
+		\begin{itemize}
+			\item Eine WHILE-Sprache
+			\uncover<2->{\item Eine Entwicklungsumgebung
+					\begin{itemize}
+						\item Editor
+						\item Interpreter
+						\item Debugger
+					\end{itemize}
+				}
+			\uncover<3->{\item Ein Formelgenerator}
+		\end{itemize}
+
+		\column{0.45 \textwidth}
+
+		\begin{figure}
+			\uncover<2-3>{\includegraphics[width=\textwidth]{screenshot1.png}}
+		\end{figure}
+
+	\end{columns}
+
+	\begin{columns}[c]
+		\column{0.5 \textwidth}
+		\begin{itemize}
+			\uncover<4->{\item Beweiserschnittstelle
+				\begin{itemize}
+				\item Aufruf des Beweisers  \\ \scriptsize (Beweiser ist \textbf{externes} Tool)}
+						\uncover<5->{
+						\item \normalsize Rückmeldung für Benutzer  \\ \scriptsize  Wo schlägt der Beweis fehl?
+						}
+				\end{itemize}
+		\end{itemize}
+		\normalsize
+
+		\column{0.45 \textwidth}
+
+		\begin{figure}
+			\only<4>{\includegraphics[width=2.5cm]{z3.png}}
+			\only<5>{\includegraphics[width=\textwidth]{screenshot2.png}}
+		\end{figure}
+	\end{columns}
+
+	\setbeamercovered{transparent}
+
+\end{frame}
+
 
 \begin{frame}
 	\begin{center}

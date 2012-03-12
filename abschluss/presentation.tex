@@ -11,7 +11,7 @@
 \usenavigationsymbols
 
 \lstdefinelanguage{worthwhile}
-  {morekeywords={function,Boolean,Integer,_ensures,_return,return,_assert,_requires,_invariant,while},
+  {morekeywords={function,Boolean,Integer,_ensures,_return,return,_assert,_requires,_invariant,while,if},
    morekeywords={[2]true,false},
       sensitive=true,
   morecomment=[l]{//},
@@ -170,7 +170,7 @@
 	\begin{lstlisting}[frame=lines,mathescape=true]
 	
 		        
-		_assert $\forall$ i $\in \mathbb{N} :$	  
+		_assert $\forall$ i $\in \mathbb{Z} :$	  
 		    
 		        (i / 2) $ \cdot $ 2 = i $\Rightarrow$
 		                  (true = true $\Leftrightarrow $ i % 2 = 0)
@@ -224,10 +224,10 @@ function Boolean heapCondition(Integer[] heap)
             
             // The invariant is that the contents of "result" indicate whether the
             // sub-array [1..i3-1] of the input fulfils the heap condition.
-            _invariant result = $\forall$ Integer i4, 2 $\leq$ i4 $\wedge$ i4 < i3 : heap[parent(i4)] $\leq$ heap[i4]
+            _invariant result = $\forall$ Integer i4, 2 $\leq$ i4 $\wedge$ i4 $<$ i3 : heap[parent(i4)] $\leq$ heap[i4]
         {
             if result = true {
-                if heap[parent(i3)] > heap[i3] {
+                if heap[parent(i3)] $>$ heap[i3] {
                     result := false
                 }
             }

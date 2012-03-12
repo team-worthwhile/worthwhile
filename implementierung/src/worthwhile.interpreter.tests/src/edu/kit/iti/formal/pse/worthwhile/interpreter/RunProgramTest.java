@@ -72,7 +72,7 @@ public final class RunProgramTest {
 		                "smtlib-keywords", "test-qexpr-condition", "test-github-issue-93", "test-fibonacci",
 		                "bubblesort2", "multiplication", "test-github-issue-108", "array_max",
 		                "invalid_array_max", "test-valid-functioncall", "test-divisionbyzero-loopcondition",
-		                "array_min" };
+		                "array_min", "demo", "demo_invalid" };
 
 		for (final String fileName : testPrograms) {
 			// Load test program and look for EXPECTED:???

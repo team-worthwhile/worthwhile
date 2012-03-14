@@ -1,14 +1,20 @@
 _axiom x() + y() + z() = 42
 
-function Integer x() {
+function Integer x()
+	_ensures _return = x() + y() + z()
+{
 	return x() + y() + z()
 }
 
-function Integer y() {
+function Integer y()
+	_ensures _return = x() + y() + z()
+{
 	return x() + y() + z()
 }
 
-function Integer z() {
+function Integer z()
+	_ensures _return = x() + y() + z()
+{
 	return x() + y() + z()
 }
 

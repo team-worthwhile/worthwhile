@@ -1,12 +1,14 @@
 package edu.kit.iti.formal.pse.worthwhile.scoping;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
@@ -30,19 +32,25 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	/**
 	 * A list of the found variable declarations.
 	 */
-	private List<VariableDeclaration> variableDeclarations = new ArrayList<VariableDeclaration>();
+	private Set<VariableDeclaration> variableDeclarations = new HashSet<VariableDeclaration>();
 
 	/**
 	 * A list of the found function declarations.
 	 */
-	private List<FunctionDeclaration> functionDeclarations = new ArrayList<FunctionDeclaration>();
+	private Set<FunctionDeclaration> functionDeclarations = new HashSet<FunctionDeclaration>();
+
+	/**
+	 * Indicates whether the node we have to provide the scope for is in a function annotation. In that case, we
+	 * cannot allow cyclic or recursive function references.
+	 */
+	private boolean inFunctionAnnotation = false;
 
 	/**
 	 * Returns the list of found variable declarations.
 	 * 
 	 * @return the list of found variable declarations
 	 */
-	public final List<VariableDeclaration> getVariableDeclarations() {
+	public final Set<VariableDeclaration> getVariableDeclarations() {
 		return this.variableDeclarations;
 	}
 
@@ -51,7 +59,7 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	 * 
 	 * @return the list of found function declarations
 	 */
-	public final List<FunctionDeclaration> getFunctionDeclarations() {
+	public final Set<FunctionDeclaration> getFunctionDeclarations() {
 		return this.functionDeclarations;
 	}
 
@@ -138,14 +146,16 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 
 	@Override
 	public final void visit(final FunctionDeclaration node) {
-		// Direct ancestors cannot be called as a function.
-		if (!NodeHelper.isAncestor(node, this.node)) {
-			this.functionDeclarations.add(node);
-		} else {
-			// However, the parameters of the function are always visible in the function, but not outside
+		// The parameters of the function are always visible in the function, but not outside
+		if (NodeHelper.isAncestor(node, this.node)) {
 			for (VariableDeclaration param : node.getParameters()) {
 				this.variableDeclarations.add(param);
 			}
+		} else {
+			// The function can be called anywhere but in its own precondition or postcondition.
+			// Therefore, we ensure here that we are not providing the scope for an element in the function.
+			// If necessary, this function declaration is added later in visit(Program).
+			this.functionDeclarations.add(node);
 		}
 	}
 
@@ -159,6 +169,22 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 		// Direct ancestors are not allowed to provide a variable declaration
 		if (!NodeHelper.isAncestor(node, this.node)) {
 			this.variableDeclarations.add(node);
+		}
+	}
+
+	@Override
+	public final void visit(final FunctionAnnotation node) {
+		this.inFunctionAnnotation = true;
+	}
+
+	@Override
+	public final void visit(final Program node) {
+		// If we are not providing the scope for an element in a function annotation, we can add all function
+		// declarations of the program, not just the one preceding the element.
+		if (node.getFunctionDeclarations() != null && !this.inFunctionAnnotation) {
+			for (FunctionDeclaration funcdec : node.getFunctionDeclarations()) {
+				this.functionDeclarations.add(funcdec);
+			}
 		}
 	}
 

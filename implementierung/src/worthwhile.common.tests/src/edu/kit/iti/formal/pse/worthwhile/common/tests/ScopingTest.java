@@ -25,7 +25,7 @@ public class ScopingTest {
 
 		Collection<Diagnostic> errors = TestASTProvider.getParseErrors(testProgram);
 
-		Assert.assertEquals(9, errors.size());
+		Assert.assertEquals(6, errors.size());
 
 		for (Diagnostic diagnostic : errors) {
 			Assert.assertTrue(diagnostic instanceof XtextLinkingDiagnostic);

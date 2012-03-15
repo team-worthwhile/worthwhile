@@ -7,8 +7,9 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionAnnotation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
@@ -40,10 +41,10 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	private Set<FunctionDeclaration> functionDeclarations = new HashSet<FunctionDeclaration>();
 
 	/**
-	 * Indicates whether the node we have to provide the scope for is in a function annotation. In that case, we
-	 * cannot allow cyclic or recursive function references.
+	 * Indicates whether the node we have to provide the scope for is in an annotation (but not in an axiom). In
+	 * that case, we cannot allow cyclic or recursive function references.
 	 */
-	private boolean inFunctionAnnotation = false;
+	private boolean inAnnotation = false;
 
 	/**
 	 * Returns the list of found variable declarations.
@@ -173,15 +174,20 @@ public class ScopeFinder extends HierarchialASTNodeVisitor {
 	}
 
 	@Override
-	public final void visit(final FunctionAnnotation node) {
-		this.inFunctionAnnotation = true;
+	public final void visit(final Annotation node) {
+		this.inAnnotation = true;
+	}
+
+	@Override
+	public final void visit(final Axiom node) {
+		// do not set the inAnnotation property for axioms
 	}
 
 	@Override
 	public final void visit(final Program node) {
 		// If we are not providing the scope for an element in a function annotation, we can add all function
 		// declarations of the program, not just the one preceding the element.
-		if (node.getFunctionDeclarations() != null && !this.inFunctionAnnotation) {
+		if (node.getFunctionDeclarations() != null && !this.inAnnotation) {
 			for (FunctionDeclaration funcdec : node.getFunctionDeclarations()) {
 				this.functionDeclarations.add(funcdec);
 			}

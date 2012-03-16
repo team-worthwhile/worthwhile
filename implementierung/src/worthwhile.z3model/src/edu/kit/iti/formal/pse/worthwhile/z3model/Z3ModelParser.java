@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.util.List;
 
-import org.eclipse.debug.core.DebugException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.inject.Injector;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Expression;
-import edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 
 /**

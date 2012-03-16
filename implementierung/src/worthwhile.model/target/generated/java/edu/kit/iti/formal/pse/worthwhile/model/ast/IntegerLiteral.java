@@ -6,16 +6,20 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
+
 import java.math.BigInteger;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
-
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Integer Literal</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Integer Literal</b></em>'.
+ * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
@@ -31,8 +35,8 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
 public class IntegerLiteral extends Literal {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -41,8 +45,8 @@ public class IntegerLiteral extends Literal {
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -50,7 +54,8 @@ public class IntegerLiteral extends Literal {
 	protected BigInteger value = VALUE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected IntegerLiteral() {
@@ -58,7 +63,8 @@ public class IntegerLiteral extends Literal {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -70,8 +76,8 @@ public class IntegerLiteral extends Literal {
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' attribute isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Value</em>' attribute isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
@@ -86,7 +92,8 @@ public class IntegerLiteral extends Literal {
 
 	/**
 	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Value</em>' attribute.
 	 * @see #getValue()
 	 * @generated
@@ -100,18 +107,19 @@ public class IntegerLiteral extends Literal {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model visitorType="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor" visitorRequired="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
 	 * @generated
 	 */
-	@Override
 	public void accept(IASTNodeVisitor visitor) {
 		visitor.visit(this);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -124,7 +132,8 @@ public class IntegerLiteral extends Literal {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -138,7 +147,8 @@ public class IntegerLiteral extends Literal {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -152,7 +162,8 @@ public class IntegerLiteral extends Literal {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -165,7 +176,8 @@ public class IntegerLiteral extends Literal {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

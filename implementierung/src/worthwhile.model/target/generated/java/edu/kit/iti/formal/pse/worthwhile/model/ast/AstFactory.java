@@ -11,26 +11,32 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
 /**
- * <!-- begin-user-doc --> The <b>Factory</b> for the model. It provides a create method for each non-abstract class of
- * the model. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * The <b>Factory</b> for the model.
+ * It provides a create method for each non-abstract class of the model.
+ * <!-- end-user-doc -->
  * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage
  * @generated
  */
 public class AstFactory extends EFactoryImpl {
 	/**
 	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final AstFactory eINSTANCE = init();
 
 	/**
 	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static AstFactory init() {
@@ -48,7 +54,8 @@ public class AstFactory extends EFactoryImpl {
 
 	/**
 	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AstFactory() {
@@ -56,7 +63,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -160,10 +168,14 @@ public class AstFactory extends EFactoryImpl {
 				return createExpressionEvaluation();
 			case AstPackage.ARRAY_FUNCTION:
 				return createArrayFunction();
-		case AstPackage.ARRAY_ACCESS:
-			return createArrayAccess();
+			case AstPackage.ARRAY_ACCESS:
+				return createArrayAccess();
 			case AstPackage.EXPRESSION_TO_EXPRESSION_MAP:
 				return (EObject) createExpressionToExpressionMap();
+			case AstPackage.TERNARY_EXPRESSION:
+				return createTernaryExpression();
+			case AstPackage.LET_EXPRESSION:
+				return createLetExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName()
 				                + "' is not a valid classifier");
@@ -171,7 +183,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Program createProgram() {
@@ -180,7 +193,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Addition createAddition() {
@@ -189,7 +203,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ArrayLiteral createArrayLiteral() {
@@ -198,7 +213,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ArrayType createArrayType() {
@@ -207,7 +223,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Assertion createAssertion() {
@@ -246,7 +263,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Assignment createAssignment() {
@@ -255,7 +273,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public VariableDeclaration createVariableDeclaration() {
@@ -264,7 +283,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Assumption createAssumption() {
@@ -273,7 +293,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Axiom createAxiom() {
@@ -282,7 +303,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Block createBlock() {
@@ -291,7 +313,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public BooleanLiteral createBooleanLiteral() {
@@ -300,7 +323,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public BooleanType createBooleanType() {
@@ -309,7 +333,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Conditional createConditional() {
@@ -318,7 +343,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Conjunction createConjunction() {
@@ -327,7 +353,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Disjunction createDisjunction() {
@@ -336,7 +363,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Division createDivision() {
@@ -345,7 +373,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Equal createEqual() {
@@ -354,7 +383,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Equivalence createEquivalence() {
@@ -363,7 +393,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ExistsQuantifier createExistsQuantifier() {
@@ -372,7 +403,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ForAllQuantifier createForAllQuantifier() {
@@ -381,7 +413,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public FunctionCall createFunctionCall() {
@@ -390,7 +423,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public FunctionDeclaration createFunctionDeclaration() {
@@ -399,7 +433,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Precondition createPrecondition() {
@@ -408,7 +443,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Postcondition createPostcondition() {
@@ -417,7 +453,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Greater createGreater() {
@@ -426,7 +463,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public GreaterOrEqual createGreaterOrEqual() {
@@ -435,7 +473,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Implication createImplication() {
@@ -444,7 +483,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public IntegerLiteral createIntegerLiteral() {
@@ -453,7 +493,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public IntegerType createIntegerType() {
@@ -462,7 +503,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Invariant createInvariant() {
@@ -471,7 +513,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Less createLess() {
@@ -480,7 +523,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public LessOrEqual createLessOrEqual() {
@@ -489,7 +533,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Loop createLoop() {
@@ -498,7 +543,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Minus createMinus() {
@@ -507,7 +553,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Modulus createModulus() {
@@ -516,7 +563,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Multiplication createMultiplication() {
@@ -525,7 +573,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Negation createNegation() {
@@ -534,7 +583,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Plus createPlus() {
@@ -543,7 +593,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ReturnStatement createReturnStatement() {
@@ -552,7 +603,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Subtraction createSubtraction() {
@@ -561,7 +613,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Unequal createUnequal() {
@@ -570,7 +623,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public VariableReference createVariableReference() {
@@ -579,7 +633,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ReturnValueReference createReturnValueReference() {
@@ -598,7 +653,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ExpressionEvaluation createExpressionEvaluation() {
@@ -607,7 +663,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public ArrayFunction createArrayFunction() {
@@ -626,7 +683,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Map.Entry<Expression, Expression> createExpressionToExpressionMap() {
@@ -635,7 +693,28 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TernaryExpression createTernaryExpression() {
+		TernaryExpression ternaryExpression = new TernaryExpression();
+		return ternaryExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LetExpression createLetExpression() {
+		LetExpression letExpression = new LetExpression();
+		return letExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public AstPackage getAstPackage() {
@@ -643,7 +722,8 @@ public class AstFactory extends EFactoryImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @deprecated
 	 * @generated
 	 */
@@ -652,4 +732,4 @@ public class AstFactory extends EFactoryImpl {
 		return AstPackage.eINSTANCE;
 	}
 
-} // AstFactory
+} //AstFactory

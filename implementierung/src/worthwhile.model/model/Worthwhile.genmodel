@@ -349,6 +349,8 @@
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement">
                     <genFeatures property="None" children="true" createChild="true"
                         ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/returnValue"/>
+                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/function"/>
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ReturnStatement/accept/visitor"/>
                     </genOperations>
@@ -404,13 +406,13 @@
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunction/accept/visitor"/>
                     </genOperations>
                   </genClasses>
-                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunctionAccess">
-                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunctionAccess/index"/>
-                    <genFeatures notify="false" createChild="false" propertySortChoices="true"
-                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunctionAccess/function"/>
-                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunctionAccess/accept">
-                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayFunctionAccess/accept/visitor"/>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayAccess">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayAccess/index"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayAccess/array"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayAccess/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ArrayAccess/accept/visitor"/>
                     </genOperations>
                   </genClasses>
                   <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/ExpressionToExpressionMap">
@@ -422,6 +424,26 @@
                   <genClasses image="false" ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionAnnotation">
                     <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionAnnotation/accept">
                       <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/FunctionAnnotation/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/TernaryExpression">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/TernaryExpression/whenTrue"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/TernaryExpression/whenFalse"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/TernaryExpression/condition"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/TernaryExpression/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/TernaryExpression/accept/visitor"/>
+                    </genOperations>
+                  </genClasses>
+                  <genClasses ecoreClass="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LetExpression">
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LetExpression/parameters"/>
+                    <genFeatures property="None" children="true" createChild="true"
+                        ecoreFeature="ecore:EReference Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LetExpression/expression"/>
+                    <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LetExpression/accept">
+                      <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/LetExpression/accept/visitor"/>
                     </genOperations>
                   </genClasses>
                   <nestedGenPackages prefix="Visitor" basePackage="edu.kit.iti.formal.pse.worthwhile.model.ast"
@@ -592,6 +614,12 @@
                       </genOperations>
                       <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.54">
                         <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.54/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.55">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.55/node"/>
+                      </genOperations>
+                      <genOperations ecoreOperation="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.56">
+                        <genParameters ecoreParameter="Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast/visitor/IASTNodeVisitor/visit.56/node"/>
                       </genOperations>
                     </genClasses>
                   </nestedGenPackages>

@@ -38,6 +38,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
@@ -56,6 +57,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -557,5 +559,21 @@ public interface IASTNodeVisitor {
 	 *                The AST node to visit
 	 */
 	void visit(ArrayAccess node);
+	
+	/**
+	 * Visits an AST node of type TernaryExpression.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(TernaryExpression node);
+	
+	/**
+	 * Visits an AST node of type LetExpression.
+	 * 
+	 * @param node
+	 *                The AST node to visit
+	 */
+	void visit(LetExpression node);
 
 }

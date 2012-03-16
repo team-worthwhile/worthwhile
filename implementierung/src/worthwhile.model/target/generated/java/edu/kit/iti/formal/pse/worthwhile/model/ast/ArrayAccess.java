@@ -216,10 +216,10 @@ public class ArrayAccess extends Expression {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AstPackage.ARRAY_ACCESS__INDEX:
-			return basicSetIndex(null, msgs);
-		case AstPackage.ARRAY_ACCESS__ARRAY:
-			return basicSetArray(null, msgs);
+			case AstPackage.ARRAY_ACCESS__INDEX:
+				return basicSetIndex(null, msgs);
+			case AstPackage.ARRAY_ACCESS__ARRAY:
+				return basicSetArray(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -232,10 +232,10 @@ public class ArrayAccess extends Expression {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AstPackage.ARRAY_ACCESS__INDEX:
-			return getIndex();
-		case AstPackage.ARRAY_ACCESS__ARRAY:
-			return getArray();
+			case AstPackage.ARRAY_ACCESS__INDEX:
+				return getIndex();
+			case AstPackage.ARRAY_ACCESS__ARRAY:
+				return getArray();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -248,12 +248,12 @@ public class ArrayAccess extends Expression {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AstPackage.ARRAY_ACCESS__INDEX:
-			setIndex((Expression) newValue);
-			return;
-		case AstPackage.ARRAY_ACCESS__ARRAY:
-			setArray((Expression) newValue);
-			return;
+			case AstPackage.ARRAY_ACCESS__INDEX:
+				setIndex((Expression) newValue);
+				return;
+			case AstPackage.ARRAY_ACCESS__ARRAY:
+				setArray((Expression) newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -266,12 +266,12 @@ public class ArrayAccess extends Expression {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AstPackage.ARRAY_ACCESS__INDEX:
-			setIndex((Expression) null);
-			return;
-		case AstPackage.ARRAY_ACCESS__ARRAY:
-			setArray((Expression) null);
-			return;
+			case AstPackage.ARRAY_ACCESS__INDEX:
+				setIndex((Expression) null);
+				return;
+			case AstPackage.ARRAY_ACCESS__ARRAY:
+				setArray((Expression) null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -284,10 +284,10 @@ public class ArrayAccess extends Expression {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AstPackage.ARRAY_ACCESS__INDEX:
-			return index != null;
-		case AstPackage.ARRAY_ACCESS__ARRAY:
-			return array != null;
+			case AstPackage.ARRAY_ACCESS__INDEX:
+				return index != null;
+			case AstPackage.ARRAY_ACCESS__ARRAY:
+				return array != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -7,10 +7,13 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Minus</b></em>'. <!-- end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Minus</b></em>'.
+ * <!-- end-user-doc -->
  *
  *
  * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMinus()
@@ -19,7 +22,8 @@ import org.eclipse.emf.ecore.EClass;
  */
 public class Minus extends Sign {
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected Minus() {
@@ -27,7 +31,8 @@ public class Minus extends Sign {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

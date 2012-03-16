@@ -36,6 +36,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus;
@@ -50,6 +51,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference;
@@ -63,7 +65,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.OperatorHierarchyVisi
  * @author fabian
  * 
  */
-public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
+public class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	/**
 	 * A single instance of {@link ASTNodeToStringHelper}.
 	 */
@@ -75,9 +77,38 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	private StringBuffer buf;
 
 	/**
-	 * Private default constructor.
+	 * Returns the internal buffer.
+	 * 
+	 * @return the internal buffer.
 	 */
-	private AstNodeToStringHelper() {
+	protected final StringBuffer getBuffer() {
+		return buf;
+	}
+
+	/**
+	 * Sets the internal buffer.
+	 * 
+	 * @param buf
+	 *                The internal buffer to set.
+	 */
+	protected final void setBuffer(final StringBuffer buf) {
+		this.buf = buf;
+	}
+
+	/**
+	 * Appends the specified string to the output buffer.
+	 * 
+	 * @param str
+	 *                The string to append to the output buffer.
+	 */
+	protected final void append(final String str) {
+		this.buf.append(str);
+	}
+
+	/**
+	 * Protected default constructor.
+	 */
+	protected AstNodeToStringHelper() {
 		super();
 	}
 
@@ -120,7 +151,8 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 			                && childNode == ((BinaryExpression) parentNode).getRight()
 			                && !new AssociativityVisitor().apply(parentNode))
 				|| (parentNode instanceof QuantifiedExpression
-					&& childNode == ((QuantifiedExpression) parentNode).getCondition()); 
+					&& childNode == ((QuantifiedExpression) parentNode).getCondition())
+				|| (parentNode instanceof TernaryExpression); 
 			// @formatter:on
 		}
 
@@ -356,8 +388,10 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final VariableDeclaration variableDeclaration) {
-		variableDeclaration.getType().accept(this);
-		this.buf.append(" ");
+		if (variableDeclaration.getType() != null) {
+			variableDeclaration.getType().accept(this);
+			this.buf.append(" ");
+		}
 		this.buf.append(variableDeclaration.getName());
 
 		Expression initialValue = variableDeclaration.getInitialValue();
@@ -454,6 +488,8 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final FunctionDeclaration functionDeclaration) {
 		this.buf.append("function ");
+		functionDeclaration.getReturnType().accept(this);
+		this.buf.append(" ");
 		this.buf.append(functionDeclaration.getName());
 		this.buf.append("(");
 
@@ -530,5 +566,31 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	@Override
 	public void visit(final Disjunction disjunction) {
 		this.appendBinaryExpression(disjunction, "∨");
+	}
+
+	@Override
+	public void visit(final LetExpression letExpression) {
+		letExpression.getExpression().accept(this);
+
+		if (letExpression.getParameters() != null) {
+			this.buf.append(", where ");
+
+			for (int i = 0; i < letExpression.getParameters().size(); i++) {
+				letExpression.getParameters().get(i).accept(this);
+
+				if (i < letExpression.getParameters().size() - 1) {
+					this.buf.append(", ");
+				}
+			}
+		}
+	}
+
+	@Override
+	public void visit(final TernaryExpression ternaryExpression) {
+		ternaryExpression.getCondition().accept(this);
+		this.buf.append(" ? ");
+		this.parenthesize(ternaryExpression, ternaryExpression.getWhenTrue());
+		this.buf.append(" : ");
+		this.parenthesize(ternaryExpression, ternaryExpression.getWhenFalse());
 	}
 }

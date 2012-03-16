@@ -28,6 +28,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
 
 /**
@@ -167,6 +168,11 @@ public class OperatorHierarchyVisitor extends ASTNodeReturnVisitor<Integer> {
 	@Override
         public final void visit(final SymbolReference node) {
 	        this.setReturnValue(8);
+        }
+	
+	@Override
+        public final void visit(final TernaryExpression node) {
+	        this.setReturnValue(0);
         }
 
 }

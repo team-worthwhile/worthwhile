@@ -6,34 +6,38 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Return Statement</b></em>'. <!-- end-user-doc
- * -->
- * 
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Return Statement</b></em>'.
+ * <!-- end-user-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
- * <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue <em>Return Value</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue <em>Return Value</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getFunction <em>Function</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnStatement()
  * @model kind="class"
  * @generated
  */
 public class ReturnStatement extends Statement {
 	/**
-	 * The cached value of the '{@link #getReturnValue() <em>Return Value</em>}' containment reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getReturnValue() <em>Return Value</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getReturnValue()
 	 * @generated
 	 * @ordered
@@ -51,7 +55,8 @@ public class ReturnStatement extends Statement {
 	protected FunctionDeclaration function;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ReturnStatement() {
@@ -59,7 +64,8 @@ public class ReturnStatement extends Statement {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -71,8 +77,8 @@ public class ReturnStatement extends Statement {
 	 * Returns the value of the '<em><b>Return Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Return Value</em>' containment reference isn't clear, there really should be more
-	 * of a description here...
+	 * If the meaning of the '<em>Return Value</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Return Value</em>' containment reference.
@@ -86,7 +92,8 @@ public class ReturnStatement extends Statement {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public NotificationChain basicSetReturnValue(Expression newReturnValue, NotificationChain msgs) {
@@ -105,7 +112,8 @@ public class ReturnStatement extends Statement {
 
 	/**
 	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue <em>Return Value</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Return Value</em>' containment reference.
 	 * @see #getReturnValue()
 	 * @generated
@@ -180,18 +188,19 @@ public class ReturnStatement extends Statement {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @model visitorType="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor" visitorRequired="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='visitor.visit(this);'"
 	 * @generated
 	 */
-	@Override
 	public void accept(IASTNodeVisitor visitor) {
 		visitor.visit(this);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -204,7 +213,8 @@ public class ReturnStatement extends Statement {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -212,16 +222,17 @@ public class ReturnStatement extends Statement {
 		switch (featureID) {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				return getReturnValue();
-		case AstPackage.RETURN_STATEMENT__FUNCTION:
-			if (resolve)
-				return getFunction();
-			return basicGetFunction();
+			case AstPackage.RETURN_STATEMENT__FUNCTION:
+				if (resolve)
+					return getFunction();
+				return basicGetFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -230,15 +241,16 @@ public class ReturnStatement extends Statement {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				setReturnValue((Expression) newValue);
 				return;
-		case AstPackage.RETURN_STATEMENT__FUNCTION:
-			setFunction((FunctionDeclaration) newValue);
-			return;
+			case AstPackage.RETURN_STATEMENT__FUNCTION:
+				setFunction((FunctionDeclaration) newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -247,15 +259,16 @@ public class ReturnStatement extends Statement {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				setReturnValue((Expression) null);
 				return;
-		case AstPackage.RETURN_STATEMENT__FUNCTION:
-			setFunction((FunctionDeclaration) null);
-			return;
+			case AstPackage.RETURN_STATEMENT__FUNCTION:
+				setFunction((FunctionDeclaration) null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -263,8 +276,8 @@ public class ReturnStatement extends Statement {
 		switch (featureID) {
 			case AstPackage.RETURN_STATEMENT__RETURN_VALUE:
 				return returnValue != null;
-		case AstPackage.RETURN_STATEMENT__FUNCTION:
-			return function != null;
+			case AstPackage.RETURN_STATEMENT__FUNCTION:
+				return function != null;
 		}
 		return super.eIsSet(featureID);
 	}

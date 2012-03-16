@@ -38,6 +38,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Less;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Literal;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Loop;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Minus;
@@ -56,6 +57,7 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.Sign;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Statement;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.SymbolReference;
+import edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Type;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal;
@@ -372,6 +374,16 @@ public abstract class HierarchialASTNodeVisitor extends ASTNodeVisitor {
 	@Override
 	public void visit(final ReturnValueReference node) {
 		this.visit((SymbolReference) node);
+	}
+	
+	@Override
+	public void visit(final TernaryExpression node) {
+		this.visit((Expression) node);
+	}
+	
+	@Override
+	public void visit(final LetExpression node) {
+		this.visit((Expression) node);
 	}
 
 }

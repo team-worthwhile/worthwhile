@@ -175,8 +175,8 @@
       </eAnnotations>
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" lowerBound="1"
-        eType="#//Type" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" ordered="false" eType="#//Type"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" ordered="false"
         eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -600,6 +600,26 @@
       <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
     </eOperations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TernaryExpression" eSuperTypes="#//Expression">
+    <eOperations name="accept">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="visitor.visit(this);"/>
+      </eAnnotations>
+      <eParameters name="visitor" lowerBound="1" eType="#//visitor/IASTNodeVisitor"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whenTrue" ordered="false"
+        lowerBound="1" eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whenFalse" ordered="false"
+        lowerBound="1" eType="#//Expression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" ordered="false"
+        lowerBound="1" eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LetExpression" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" ordered="false"
+        upperBound="-1" eType="#//VariableDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" ordered="false"
+        lowerBound="1" eType="#//Expression" containment="true"/>
+  </eClassifiers>
   <eSubpackages name="kit" nsURI="http://kit.edu" nsPrefix="edu.kit">
     <eSubpackages name="iti" nsURI="http://iti.kit.edu" nsPrefix="edu.kit.iti">
       <eSubpackages name="formal" nsURI="http://formal.iti.kit.edu" nsPrefix="edu.kit.iti.formal">
@@ -784,6 +804,9 @@
       </eOperations>
       <eOperations name="visit">
         <eParameters name="node" lowerBound="1" eType="#//SymbolReference"/>
+      </eOperations>
+      <eOperations name="visit">
+        <eParameters name="node" lowerBound="1" eType="#//TernaryExpression"/>
       </eOperations>
     </eClassifiers>
   </eSubpackages>

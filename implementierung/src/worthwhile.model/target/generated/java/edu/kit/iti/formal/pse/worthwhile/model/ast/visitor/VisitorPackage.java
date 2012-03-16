@@ -6,20 +6,23 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast.visitor;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
-
 /**
- * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains accessors for the meta objects to represent
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
  * <ul>
- * <li>each class,</li>
- * <li>each feature of each class,</li>
- * <li>each enum,</li>
- * <li>and each data type</li>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
  * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorFactory
@@ -29,28 +32,32 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage;
 public class VisitorPackage extends EPackageImpl {
 	/**
 	 * The package name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String eNAME = "visitor";
 
 	/**
 	 * The package namespace URI.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String eNS_URI = "http:///visitor.ast.model.worthwhile.pse.formal.iti.kit.edu";
 
 	/**
 	 * The package namespace name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String eNS_PREFIX = "edu.kit.iti.formal.pse.worthwhile.model.ast.visitor";
 
 	/**
 	 * The singleton instance of the package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final VisitorPackage eINSTANCE = edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorPackage
@@ -58,7 +65,8 @@ public class VisitorPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor <em>IAST Node Visitor</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorPackage#getIASTNodeVisitor()
 	 * @generated
@@ -67,27 +75,30 @@ public class VisitorPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>IAST Node Visitor</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int IAST_NODE_VISITOR_FEATURE_COUNT = 0;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass iastNodeVisitorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package package URI value.
-	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
-	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorPackage#eNS_URI
 	 * @see #init()
@@ -98,20 +109,19 @@ public class VisitorPackage extends EPackageImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it
-	 * depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>
-	 * This method is used to initialize {@link VisitorPackage#eINSTANCE} when that field is accessed. Clients
-	 * should not invoke it directly. Instead, they should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <p>This method is used to initialize {@link VisitorPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -148,10 +158,9 @@ public class VisitorPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor <em>IAST Node Visitor</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor <em>IAST Node Visitor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>IAST Node Visitor</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor
 	 * @model instanceClass="edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor"
@@ -163,7 +172,8 @@ public class VisitorPackage extends EPackageImpl {
 
 	/**
 	 * Returns the factory that creates the instances of the model.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
@@ -172,7 +182,8 @@ public class VisitorPackage extends EPackageImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isCreated = false;
@@ -180,7 +191,8 @@ public class VisitorPackage extends EPackageImpl {
 	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -193,7 +205,8 @@ public class VisitorPackage extends EPackageImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -201,7 +214,8 @@ public class VisitorPackage extends EPackageImpl {
 	/**
 	 * Complete the initialization of the package and its meta-model.  This
 	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void initializePackageContents() {
@@ -391,6 +405,12 @@ public class VisitorPackage extends EPackageImpl {
 
 		op = addEOperation(iastNodeVisitorEClass, null, "visit", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theAstPackage.getSymbolReference(), "node", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(iastNodeVisitorEClass, null, "visit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theAstPackage.getTernaryExpression(), "node", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(iastNodeVisitorEClass, null, "visit", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theAstPackage.getLetExpression(), "node", 1, 1, IS_UNIQUE, IS_ORDERED);
 	}
 
-} // VisitorPackage
+} //VisitorPackage

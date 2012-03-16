@@ -7,32 +7,49 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.IASTNodeVisitor;
+import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Annotation</b></em>'.
+ * A representation of the model object '<em><b>Let Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression <em>Expression</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
- * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAnnotation()
- * @model kind="class" abstract="true"
+ * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLetExpression()
+ * @model kind="class"
  * @generated
  */
-public abstract class Annotation extends Statement {
+public class LetExpression extends Expression {
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<VariableDeclaration> parameters;
+
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -48,7 +65,7 @@ public abstract class Annotation extends Statement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected Annotation() {
+	protected LetExpression() {
 		super();
 	}
 
@@ -59,7 +76,29 @@ public abstract class Annotation extends Statement {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return AstPackage.Literals.ANNOTATION;
+		return AstPackage.Literals.LET_EXPRESSION;
+	}
+
+	/**
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLetExpression_Parameters()
+	 * @model containment="true" ordered="false"
+	 * @generated
+	 */
+	public EList<VariableDeclaration> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<VariableDeclaration>(VariableDeclaration.class, this,
+			                AstPackage.LET_EXPRESSION__PARAMETERS);
+		}
+		return parameters;
 	}
 
 	/**
@@ -72,7 +111,7 @@ public abstract class Annotation extends Statement {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
 	 * @see #setExpression(Expression)
-	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAnnotation_Expression()
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLetExpression_Expression()
 	 * @model containment="true" required="true" ordered="false"
 	 * @generated
 	 */
@@ -90,7 +129,7 @@ public abstract class Annotation extends Statement {
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-			                AstPackage.ANNOTATION__EXPRESSION, oldExpression, newExpression);
+			                AstPackage.LET_EXPRESSION__EXPRESSION, oldExpression, newExpression);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -100,7 +139,7 @@ public abstract class Annotation extends Statement {
 	}
 
 	/**
-	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getExpression <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Expression</em>' containment reference.
@@ -112,15 +151,15 @@ public abstract class Annotation extends Statement {
 			NotificationChain msgs = null;
 			if (expression != null)
 				msgs = ((InternalEObject) expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-				                - AstPackage.ANNOTATION__EXPRESSION, null, msgs);
+				                - AstPackage.LET_EXPRESSION__EXPRESSION, null, msgs);
 			if (newExpression != null)
 				msgs = ((InternalEObject) newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-				                - AstPackage.ANNOTATION__EXPRESSION, null, msgs);
+				                - AstPackage.LET_EXPRESSION__EXPRESSION, null, msgs);
 			msgs = basicSetExpression(newExpression, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.ANNOTATION__EXPRESSION,
+			eNotify(new ENotificationImpl(this, Notification.SET, AstPackage.LET_EXPRESSION__EXPRESSION,
 			                newExpression, newExpression));
 	}
 
@@ -143,7 +182,9 @@ public abstract class Annotation extends Statement {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AstPackage.ANNOTATION__EXPRESSION:
+			case AstPackage.LET_EXPRESSION__PARAMETERS:
+				return ((InternalEList<?>) getParameters()).basicRemove(otherEnd, msgs);
+			case AstPackage.LET_EXPRESSION__EXPRESSION:
 				return basicSetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -157,7 +198,9 @@ public abstract class Annotation extends Statement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AstPackage.ANNOTATION__EXPRESSION:
+			case AstPackage.LET_EXPRESSION__PARAMETERS:
+				return getParameters();
+			case AstPackage.LET_EXPRESSION__EXPRESSION:
 				return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -168,10 +211,15 @@ public abstract class Annotation extends Statement {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AstPackage.ANNOTATION__EXPRESSION:
+			case AstPackage.LET_EXPRESSION__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends VariableDeclaration>) newValue);
+				return;
+			case AstPackage.LET_EXPRESSION__EXPRESSION:
 				setExpression((Expression) newValue);
 				return;
 		}
@@ -186,7 +234,10 @@ public abstract class Annotation extends Statement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AstPackage.ANNOTATION__EXPRESSION:
+			case AstPackage.LET_EXPRESSION__PARAMETERS:
+				getParameters().clear();
+				return;
+			case AstPackage.LET_EXPRESSION__EXPRESSION:
 				setExpression((Expression) null);
 				return;
 		}
@@ -201,10 +252,12 @@ public abstract class Annotation extends Statement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AstPackage.ANNOTATION__EXPRESSION:
+			case AstPackage.LET_EXPRESSION__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case AstPackage.LET_EXPRESSION__EXPRESSION:
 				return expression != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-} // Annotation
+} // LetExpression

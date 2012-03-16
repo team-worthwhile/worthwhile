@@ -143,8 +143,8 @@ public class SymbolReference extends Expression {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case AstPackage.SYMBOL_REFERENCE__INDEX:
-			return basicSetIndex(null, msgs);
+			case AstPackage.SYMBOL_REFERENCE__INDEX:
+				return basicSetIndex(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -157,8 +157,8 @@ public class SymbolReference extends Expression {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case AstPackage.SYMBOL_REFERENCE__INDEX:
-			return getIndex();
+			case AstPackage.SYMBOL_REFERENCE__INDEX:
+				return getIndex();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -171,9 +171,9 @@ public class SymbolReference extends Expression {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case AstPackage.SYMBOL_REFERENCE__INDEX:
-			setIndex((Expression) newValue);
-			return;
+			case AstPackage.SYMBOL_REFERENCE__INDEX:
+				setIndex((Expression) newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -186,9 +186,9 @@ public class SymbolReference extends Expression {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case AstPackage.SYMBOL_REFERENCE__INDEX:
-			setIndex((Expression) null);
-			return;
+			case AstPackage.SYMBOL_REFERENCE__INDEX:
+				setIndex((Expression) null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -201,8 +201,8 @@ public class SymbolReference extends Expression {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case AstPackage.SYMBOL_REFERENCE__INDEX:
-			return index != null;
+			case AstPackage.SYMBOL_REFERENCE__INDEX:
+				return index != null;
 		}
 		return super.eIsSet(featureID);
 	}

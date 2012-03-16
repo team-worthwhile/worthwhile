@@ -7,17 +7,21 @@
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.common.util.BasicEMap;
 import org.eclipse.emf.common.util.EMap;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 /**
- * <!-- begin-user-doc --> A representation of the model object '<em><b>Expression To Expression Map</b></em>'. <!--
- * end-user-doc -->
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Expression To Expression Map</b></em>'.
+ * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
@@ -35,8 +39,8 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.Entry<Expression, Expression>, EObject {
 	/**
 	 * The cached value of the '{@link #getTypedKey() <em>Key</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTypedKey()
 	 * @generated
 	 * @ordered
@@ -45,8 +49,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 
 	/**
 	 * The cached value of the '{@link #getTypedValue() <em>Value</em>}' reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #getTypedValue()
 	 * @generated
 	 * @ordered
@@ -54,7 +58,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	protected Expression value;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected ExpressionToExpressionMap() {
@@ -62,7 +67,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -74,8 +80,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	 * Returns the value of the '<em><b>Key</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Key</em>' reference isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Key</em>' reference isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Key</em>' reference.
@@ -98,7 +104,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Expression basicGetTypedKey() {
@@ -107,8 +114,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 
 	/**
 	 * Sets the value of the '{@link java.util.Map.Entry#getTypedKey <em>Key</em>}' reference.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Key</em>' reference.
 	 * @see #getTypedKey()
 	 * @generated
@@ -125,8 +132,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	 * Returns the value of the '<em><b>Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' reference isn't clear, there really should be more of a description
-	 * here...
+	 * If the meaning of the '<em>Value</em>' reference isn't clear,
+	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' reference.
@@ -149,7 +156,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public Expression basicGetTypedValue() {
@@ -157,11 +165,10 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * Sets the value of the '{@link java.util.Map.Entry#getTypedValue <em>Value</em>}' reference. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @param value
-	 *                the new value of the '<em>Value</em>' reference.
+	 * Sets the value of the '{@link java.util.Map.Entry#getTypedValue <em>Value</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Value</em>' reference.
 	 * @see #getTypedValue()
 	 * @generated
 	 */
@@ -174,7 +181,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -193,7 +201,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -210,7 +219,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -227,7 +237,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -242,16 +253,17 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected int hash = -1;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public int getHash() {
 		if (hash == -1) {
 			Object theKey = getKey();
@@ -261,46 +273,46 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setHash(int hash) {
 		this.hash = hash;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Expression getKey() {
 		return getTypedKey();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public void setKey(Expression key) {
 		setTypedKey(key);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Expression getValue() {
 		return getTypedValue();
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public Expression setValue(Expression value) {
 		Expression oldValue = getValue();
 		setTypedValue(value);
@@ -308,7 +320,8 @@ public class ExpressionToExpressionMap extends EObjectImpl implements BasicEMap.
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")

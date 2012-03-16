@@ -6,6 +6,8 @@
  */
 package edu.kit.iti.formal.pse.worthwhile.model.ast;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorPackage;
+
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -13,17 +15,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorPackage;
-
 /**
- * <!-- begin-user-doc --> The <b>Package</b> for the model. It contains accessors for the meta objects to represent
+ * <!-- begin-user-doc -->
+ * The <b>Package</b> for the model.
+ * It contains accessors for the meta objects to represent
  * <ul>
- * <li>each class,</li>
- * <li>each feature of each class,</li>
- * <li>each enum,</li>
- * <li>and each data type</li>
+ *   <li>each class,</li>
+ *   <li>each feature of each class,</li>
+ *   <li>each enum,</li>
+ *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
  * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstFactory
@@ -33,35 +36,40 @@ import edu.kit.iti.formal.pse.worthwhile.model.ast.visitor.VisitorPackage;
 public class AstPackage extends EPackageImpl {
 	/**
 	 * The package name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String eNAME = "ast";
 
 	/**
 	 * The package namespace URI.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String eNS_URI = "http:///ast.model.worthwhile.pse.formal.iti.kit.edu";
 
 	/**
 	 * The package namespace name.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final String eNS_PREFIX = "edu.kit.iti.formal.pse.worthwhile.model.ast";
 
 	/**
 	 * The singleton instance of the package.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public static final AstPackage eINSTANCE = edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage.init();
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode <em>AST Node</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getASTNode()
 	 * @generated
@@ -69,9 +77,9 @@ public class AstPackage extends EPackageImpl {
 	public static final int AST_NODE = 1;
 
 	/**
-	 * The number of structural features of the '<em>AST Node</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>AST Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -79,7 +87,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program <em>Program</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getProgram()
 	 * @generated
@@ -87,9 +96,9 @@ public class AstPackage extends EPackageImpl {
 	public static final int PROGRAM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Function Declarations</b></em>' containment reference list. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The feature id for the '<em><b>Function Declarations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -97,8 +106,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Main Block</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -106,17 +115,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Axioms</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int PROGRAM__AXIOMS = AST_NODE_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Program</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Program</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -124,7 +133,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Expression <em>Expression</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Expression
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpression()
 	 * @generated
@@ -133,8 +143,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -142,7 +152,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression <em>Binary Expression</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBinaryExpression()
 	 * @generated
@@ -151,8 +162,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -160,8 +171,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -169,8 +180,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Binary Expression</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -178,7 +189,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Addition <em>Addition</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Addition
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAddition()
 	 * @generated
@@ -187,8 +199,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -196,17 +208,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int ADDITION__RIGHT = BINARY_EXPRESSION__RIGHT;
 
 	/**
-	 * The number of structural features of the '<em>Addition</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Addition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -214,7 +226,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression <em>Unary Expression</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getUnaryExpression()
 	 * @generated
@@ -223,8 +236,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -232,8 +245,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Unary Expression</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -241,7 +254,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Literal <em>Literal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Literal
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLiteral()
 	 * @generated
@@ -249,9 +263,9 @@ public class AstPackage extends EPackageImpl {
 	public static final int LITERAL = 7;
 
 	/**
-	 * The number of structural features of the '<em>Literal</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -259,7 +273,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral <em>Array Literal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayLiteral()
 	 * @generated
@@ -268,8 +283,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -277,8 +292,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Array Literal</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -286,7 +301,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Type <em>Type</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Type
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getType()
 	 * @generated
@@ -295,7 +311,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -303,7 +320,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType <em>Array Type</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayType()
 	 * @generated
@@ -312,8 +330,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Base Type</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -321,8 +339,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Array Type</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -330,7 +348,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType <em>Primitive Type</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPrimitiveType()
 	 * @generated
@@ -339,8 +358,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Primitive Type</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -348,7 +367,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Statement <em>Statement</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Statement
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getStatement()
 	 * @generated
@@ -357,8 +377,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Statement</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -366,7 +386,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation <em>Annotation</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAnnotation()
 	 * @generated
@@ -375,8 +396,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -384,8 +405,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Annotation</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -393,7 +414,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion <em>Assertion</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssertion()
 	 * @generated
@@ -402,8 +424,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -411,8 +433,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Assertion</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -522,7 +544,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment <em>Assignment</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssignment()
 	 * @generated
@@ -531,8 +554,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -540,8 +563,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -549,8 +572,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Assignment</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -558,7 +581,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration <em>Variable Declaration</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableDeclaration()
 	 * @generated
@@ -567,8 +591,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -576,8 +600,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -585,7 +609,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -593,8 +618,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Variable Declaration</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -602,7 +627,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption <em>Assumption</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssumption()
 	 * @generated
@@ -611,8 +637,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -620,8 +646,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Assumption</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -629,7 +655,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom <em>Axiom</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAxiom()
 	 * @generated
@@ -638,17 +665,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int AXIOM__EXPRESSION = ANNOTATION__EXPRESSION;
 
 	/**
-	 * The number of structural features of the '<em>Axiom</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Axiom</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -656,7 +683,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block <em>Block</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Block
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBlock()
 	 * @generated
@@ -665,17 +693,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int BLOCK__STATEMENTS = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Block</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Block</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -683,7 +711,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral <em>Boolean Literal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBooleanLiteral()
 	 * @generated
@@ -692,7 +721,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -700,8 +730,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Boolean Literal</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -709,7 +739,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType <em>Boolean Type</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBooleanType()
 	 * @generated
@@ -718,8 +749,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Boolean Type</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -727,7 +758,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional <em>Conditional</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getConditional()
 	 * @generated
@@ -736,8 +768,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -745,8 +777,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>True Block</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -754,8 +786,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>False Block</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -763,8 +795,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Conditional</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -772,7 +804,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction <em>Conjunction</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getConjunction()
 	 * @generated
@@ -781,8 +814,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -790,8 +823,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -799,8 +832,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Conjunction</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -808,7 +841,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction <em>Disjunction</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getDisjunction()
 	 * @generated
@@ -817,8 +851,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -826,8 +860,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -835,8 +869,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Disjunction</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -844,7 +878,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Division <em>Division</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Division
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getDivision()
 	 * @generated
@@ -853,8 +888,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -862,17 +897,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int DIVISION__RIGHT = BINARY_EXPRESSION__RIGHT;
 
 	/**
-	 * The number of structural features of the '<em>Division</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Division</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -880,7 +915,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equal <em>Equal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equal
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getEqual()
 	 * @generated
@@ -889,8 +925,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -898,17 +934,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int EQUAL__RIGHT = BINARY_EXPRESSION__RIGHT;
 
 	/**
-	 * The number of structural features of the '<em>Equal</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Equal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -916,7 +952,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence <em>Equivalence</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getEquivalence()
 	 * @generated
@@ -925,8 +962,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -934,8 +971,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -943,8 +980,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Equivalence</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -952,7 +989,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression <em>Quantified Expression</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getQuantifiedExpression()
 	 * @generated
@@ -961,8 +999,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -970,8 +1008,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -979,8 +1017,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -988,8 +1026,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Quantified Expression</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -997,7 +1035,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier <em>Exists Quantifier</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExistsQuantifier()
 	 * @generated
@@ -1006,8 +1045,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1015,8 +1054,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1024,8 +1063,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1033,8 +1072,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Exists Quantifier</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1042,7 +1081,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier <em>For All Quantifier</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getForAllQuantifier()
 	 * @generated
@@ -1051,8 +1091,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1060,8 +1100,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1069,8 +1109,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1078,8 +1118,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>For All Quantifier</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1087,7 +1127,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall <em>Function Call</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionCall()
 	 * @generated
@@ -1096,8 +1137,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Actuals</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1105,7 +1146,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Function</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1113,8 +1155,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Function Call</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1122,7 +1164,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration <em>Function Declaration</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionDeclaration()
 	 * @generated
@@ -1149,8 +1192,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1158,8 +1201,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1167,8 +1210,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1176,7 +1219,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1184,8 +1228,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Function Declaration</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1221,7 +1265,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition <em>Precondition</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPrecondition()
 	 * @generated
@@ -1230,8 +1275,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1239,8 +1284,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Precondition</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1248,7 +1293,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition <em>Postcondition</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPostcondition()
 	 * @generated
@@ -1257,8 +1303,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1266,8 +1312,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Postcondition</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1275,7 +1321,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Greater <em>Greater</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Greater
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGreater()
 	 * @generated
@@ -1284,8 +1331,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1293,17 +1340,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int GREATER__RIGHT = BINARY_EXPRESSION__RIGHT;
 
 	/**
-	 * The number of structural features of the '<em>Greater</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Greater</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1311,7 +1358,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual <em>Greater Or Equal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGreaterOrEqual()
 	 * @generated
@@ -1320,8 +1368,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1329,8 +1377,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1338,8 +1386,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Greater Or Equal</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1347,7 +1395,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Implication <em>Implication</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Implication
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getImplication()
 	 * @generated
@@ -1356,8 +1405,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1365,8 +1414,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1374,8 +1423,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Implication</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1383,7 +1432,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral <em>Integer Literal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getIntegerLiteral()
 	 * @generated
@@ -1392,7 +1442,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1400,8 +1451,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Integer Literal</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1409,7 +1460,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType <em>Integer Type</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getIntegerType()
 	 * @generated
@@ -1418,8 +1470,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Integer Type</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1427,7 +1479,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant <em>Invariant</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getInvariant()
 	 * @generated
@@ -1436,8 +1489,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1445,8 +1498,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Invariant</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1454,7 +1507,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Less <em>Less</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Less
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLess()
 	 * @generated
@@ -1463,8 +1517,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1472,8 +1526,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1481,7 +1535,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Less</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1489,7 +1544,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual <em>Less Or Equal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLessOrEqual()
 	 * @generated
@@ -1498,8 +1554,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1507,8 +1563,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1516,8 +1572,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Less Or Equal</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1525,7 +1581,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop <em>Loop</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLoop()
 	 * @generated
@@ -1534,8 +1591,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1543,8 +1600,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1552,8 +1609,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Invariants</b></em>' containment reference list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1561,7 +1618,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Loop</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1569,7 +1627,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Sign <em>Sign</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Sign
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSign()
 	 * @generated
@@ -1578,8 +1637,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1587,7 +1646,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Sign</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1595,7 +1655,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Minus <em>Minus</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Minus
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMinus()
 	 * @generated
@@ -1604,17 +1665,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int MINUS__OPERAND = SIGN__OPERAND;
 
 	/**
-	 * The number of structural features of the '<em>Minus</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Minus</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1622,7 +1683,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus <em>Modulus</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getModulus()
 	 * @generated
@@ -1631,8 +1693,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1640,17 +1702,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int MODULUS__RIGHT = BINARY_EXPRESSION__RIGHT;
 
 	/**
-	 * The number of structural features of the '<em>Modulus</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Modulus</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1658,7 +1720,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication <em>Multiplication</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMultiplication()
 	 * @generated
@@ -1667,8 +1730,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1676,8 +1739,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1685,8 +1748,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Multiplication</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1694,7 +1757,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Negation <em>Negation</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Negation
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getNegation()
 	 * @generated
@@ -1703,17 +1767,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int NEGATION__OPERAND = UNARY_EXPRESSION__OPERAND;
 
 	/**
-	 * The number of structural features of the '<em>Negation</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Negation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1721,7 +1785,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Plus <em>Plus</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Plus
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPlus()
 	 * @generated
@@ -1730,8 +1795,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1739,7 +1804,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Plus</em>' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1747,7 +1813,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement <em>Return Statement</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnStatement()
 	 * @generated
@@ -1756,8 +1823,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Return Value</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1774,8 +1841,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Return Statement</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1783,7 +1850,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSubtraction()
 	 * @generated
@@ -1792,8 +1860,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1801,8 +1869,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1810,8 +1878,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Subtraction</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1819,7 +1887,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal <em>Unequal</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getUnequal()
 	 * @generated
@@ -1828,8 +1897,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Left</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1837,17 +1906,17 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Right</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int UNEQUAL__RIGHT = BINARY_EXPRESSION__RIGHT;
 
 	/**
-	 * The number of structural features of the '<em>Unequal</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
+	 * The number of structural features of the '<em>Unequal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1883,7 +1952,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference <em>Variable Reference</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableReference()
 	 * @generated
@@ -1892,8 +1962,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1901,7 +1971,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1909,8 +1980,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Variable Reference</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1918,7 +1989,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference <em>Return Value Reference</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnValueReference()
 	 * @generated
@@ -1927,8 +1999,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Index</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1954,7 +2026,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionEvaluation()
 	 * @generated
@@ -1963,8 +2036,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1972,8 +2045,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Expression Evaluation</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -1981,7 +2054,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction <em>Array Function</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction()
 	 * @generated
@@ -1990,8 +2064,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Chained Function</b></em>' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -2017,8 +2091,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Array Function</em>' class.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -2063,7 +2137,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionToExpressionMap <em>Expression To Expression Map</em>}' class.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionToExpressionMap
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionToExpressionMap()
 	 * @generated
@@ -2072,7 +2147,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -2080,7 +2156,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
@@ -2088,81 +2165,176 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * The number of structural features of the '<em>Expression To Expression Map</em>' class.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
 	public static final int EXPRESSION_TO_EXPRESSION_MAP_FEATURE_COUNT = 2;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression <em>Ternary Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getTernaryExpression()
+	 * @generated
+	 */
+	public static final int TERNARY_EXPRESSION = 63;
+
+	/**
+	 * The feature id for the '<em><b>When True</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TERNARY_EXPRESSION__WHEN_TRUE = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>When False</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TERNARY_EXPRESSION__WHEN_FALSE = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TERNARY_EXPRESSION__CONDITION = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Ternary Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TERNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression <em>Let Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLetExpression()
+	 * @generated
+	 */
+	public static final int LET_EXPRESSION = 64;
+
+	/**
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LET_EXPRESSION__PARAMETERS = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LET_EXPRESSION__EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Let Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LET_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass programEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass astNodeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass additionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass binaryExpressionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass expressionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass unaryExpressionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass arrayLiteralEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass literalEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass arrayTypeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass typeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass primitiveTypeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass assertionEClass = null;
@@ -2189,253 +2361,295 @@ public class AstPackage extends EPackageImpl {
 	private EClass divisorNotZeroAssertionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass annotationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass assignmentEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass variableDeclarationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass assumptionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass axiomEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass blockEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass booleanLiteralEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass booleanTypeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass conditionalEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass conjunctionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass disjunctionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass divisionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass equalEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass equivalenceEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass existsQuantifierEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass quantifiedExpressionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass forAllQuantifierEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass functionCallEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass functionDeclarationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass preconditionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass postconditionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass greaterEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass greaterOrEqualEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass implicationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass integerLiteralEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass integerTypeEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass invariantEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass lessEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass lessOrEqualEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass loopEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass minusEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass signEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass modulusEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass multiplicationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass negationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass plusEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass returnStatementEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass subtractionEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass unequalEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass variableReferenceEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass statementEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass returnValueReferenceEClass = null;
@@ -2448,13 +2662,15 @@ public class AstPackage extends EPackageImpl {
 	private EClass symbolReferenceEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass expressionEvaluationEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass arrayFunctionEClass = null;
@@ -2467,7 +2683,8 @@ public class AstPackage extends EPackageImpl {
 	private EClass arrayAccessEClass = null;
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private EClass expressionToExpressionMapEClass = null;
@@ -2480,13 +2697,29 @@ public class AstPackage extends EPackageImpl {
 	private EClass functionAnnotationEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ternaryExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass letExpressionEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
-	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package package URI value.
-	 * <p>
-	 * Note: the correct way to create the package is via the static factory method {@link #init init()}, which also
-	 * performs initialization of the package, or returns the registered package, if one already exists. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
+	 * package URI value.
+	 * <p>Note: the correct way to create the package is via the static
+	 * factory method {@link #init init()}, which also performs
+	 * initialization of the package, or returns the registered package,
+	 * if one already exists.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#eNS_URI
 	 * @see #init()
@@ -2497,20 +2730,19 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private static boolean isInited = false;
 
 	/**
-	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it
-	 * depends.
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>
-	 * This method is used to initialize {@link AstPackage#eINSTANCE} when that field is accessed. Clients should
-	 * not invoke it directly. Instead, they should simply access that field to obtain the package. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * <p>This method is used to initialize {@link AstPackage#eINSTANCE} when that field is accessed.
+	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
 	 * @see #createPackageContents()
 	 * @see #initializePackageContents()
@@ -2549,7 +2781,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program <em>Program</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Program</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program
 	 * @generated
@@ -2560,7 +2793,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getFunctionDeclarations <em>Function Declarations</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Function Declarations</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getFunctionDeclarations()
 	 * @see #getProgram()
@@ -2571,10 +2805,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getMainBlock <em>Main Block</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getMainBlock <em>Main Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Main Block</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getMainBlock()
 	 * @see #getProgram()
@@ -2586,8 +2819,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getAxioms <em>Axioms</em>}'.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Axioms</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program#getAxioms()
 	 * @see #getProgram()
@@ -2599,7 +2832,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode <em>AST Node</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>AST Node</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode
 	 * @generated
@@ -2610,7 +2844,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Addition <em>Addition</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Addition</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Addition
 	 * @generated
@@ -2621,7 +2856,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression <em>Binary Expression</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Binary Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression
 	 * @generated
@@ -2631,10 +2867,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getLeft <em>Left</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getLeft <em>Left</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Left</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getLeft()
 	 * @see #getBinaryExpression()
@@ -2645,10 +2880,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getRight <em>Right</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getRight <em>Right</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Right</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression#getRight()
 	 * @see #getBinaryExpression()
@@ -2660,7 +2894,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Expression <em>Expression</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Expression
 	 * @generated
@@ -2671,7 +2906,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression <em>Unary Expression</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Unary Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression
 	 * @generated
@@ -2681,10 +2917,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression#getOperand <em>Operand</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression#getOperand <em>Operand</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Operand</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression#getOperand()
 	 * @see #getUnaryExpression()
@@ -2696,7 +2931,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral <em>Array Literal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Literal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral
 	 * @generated
@@ -2706,10 +2942,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral#getValues <em>Values</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Values</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral#getValues()
 	 * @see #getArrayLiteral()
@@ -2721,7 +2956,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Literal <em>Literal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Literal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Literal
 	 * @generated
@@ -2732,7 +2968,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType <em>Array Type</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType
 	 * @generated
@@ -2742,10 +2979,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getBaseType <em>Base Type</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getBaseType <em>Base Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Base Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType#getBaseType()
 	 * @see #getArrayType()
@@ -2757,7 +2993,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Type <em>Type</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Type
 	 * @generated
@@ -2768,7 +3005,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType <em>Primitive Type</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Primitive Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType
 	 * @generated
@@ -2779,7 +3017,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion <em>Assertion</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Assertion</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion
 	 * @generated
@@ -2852,7 +3091,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation <em>Annotation</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Annotation</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation
 	 * @generated
@@ -2862,10 +3102,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression <em>Expression</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation#getExpression()
 	 * @see #getAnnotation()
@@ -2877,7 +3116,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Assignment</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment
 	 * @generated
@@ -2888,8 +3128,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Value</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getValue()
 	 * @see #getAssignment()
@@ -2900,10 +3140,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getVariable <em>Variable</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Variable</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment#getVariable()
 	 * @see #getAssignment()
@@ -2915,7 +3154,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration <em>Variable Declaration</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable Declaration</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration
 	 * @generated
@@ -2925,10 +3165,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getType <em>Type</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getType()
 	 * @see #getVariableDeclaration()
@@ -2940,7 +3179,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getInitialValue <em>Initial Value</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Initial Value</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getInitialValue()
 	 * @see #getVariableDeclaration()
@@ -2951,10 +3191,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getName <em>Name</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration#getName()
 	 * @see #getVariableDeclaration()
@@ -2966,7 +3205,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption <em>Assumption</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Assumption</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption
 	 * @generated
@@ -2977,7 +3217,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom <em>Axiom</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Axiom</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom
 	 * @generated
@@ -2988,7 +3229,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block <em>Block</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Block</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Block
 	 * @generated
@@ -2998,10 +3240,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block#getStatements <em>Statements</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block#getStatements <em>Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Statements</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Block#getStatements()
 	 * @see #getBlock()
@@ -3013,7 +3254,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral <em>Boolean Literal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Boolean Literal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral
 	 * @generated
@@ -3023,10 +3265,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue <em>Value</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral#isValue()
 	 * @see #getBooleanLiteral()
@@ -3038,7 +3279,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType <em>Boolean Type</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Boolean Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType
 	 * @generated
@@ -3049,7 +3291,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional <em>Conditional</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Conditional</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional
 	 * @generated
@@ -3059,10 +3302,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getCondition <em>Condition</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getCondition()
 	 * @see #getConditional()
@@ -3073,10 +3315,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getTrueBlock <em>True Block</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getTrueBlock <em>True Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>True Block</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getTrueBlock()
 	 * @see #getConditional()
@@ -3087,10 +3328,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getFalseBlock <em>False Block</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getFalseBlock <em>False Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>False Block</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional#getFalseBlock()
 	 * @see #getConditional()
@@ -3102,7 +3342,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction <em>Conjunction</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Conjunction</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction
 	 * @generated
@@ -3113,7 +3354,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction <em>Disjunction</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Disjunction</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction
 	 * @generated
@@ -3124,7 +3366,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Division <em>Division</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Division</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Division
 	 * @generated
@@ -3135,7 +3378,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equal <em>Equal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Equal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equal
 	 * @generated
@@ -3146,7 +3390,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence <em>Equivalence</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Equivalence</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence
 	 * @generated
@@ -3157,7 +3402,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier <em>Exists Quantifier</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Exists Quantifier</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier
 	 * @generated
@@ -3168,7 +3414,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression <em>Quantified Expression</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Quantified Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression
 	 * @generated
@@ -3179,7 +3426,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getParameter <em>Parameter</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Parameter</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getParameter()
 	 * @see #getQuantifiedExpression()
@@ -3191,7 +3439,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getExpression <em>Expression</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getExpression()
 	 * @see #getQuantifiedExpression()
@@ -3203,7 +3452,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getCondition <em>Condition</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression#getCondition()
 	 * @see #getQuantifiedExpression()
@@ -3215,7 +3465,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier <em>For All Quantifier</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>For All Quantifier</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier
 	 * @generated
@@ -3226,7 +3477,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall <em>Function Call</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Function Call</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall
 	 * @generated
@@ -3236,10 +3488,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getActuals <em>Actuals</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getActuals <em>Actuals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Actuals</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getActuals()
 	 * @see #getFunctionCall()
@@ -3250,10 +3501,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getFunction <em>Function</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getFunction <em>Function</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Function</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall#getFunction()
 	 * @see #getFunctionCall()
@@ -3265,7 +3515,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration <em>Function Declaration</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Function Declaration</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration
 	 * @generated
@@ -3276,7 +3527,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPreconditions <em>Preconditions</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Preconditions</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPreconditions()
 	 * @see #getFunctionDeclaration()
@@ -3288,7 +3540,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPostconditions <em>Postconditions</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Postconditions</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getPostconditions()
 	 * @see #getFunctionDeclaration()
@@ -3300,7 +3553,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getParameters <em>Parameters</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getParameters()
 	 * @see #getFunctionDeclaration()
@@ -3311,10 +3565,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getBody <em>Body</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Body</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getBody()
 	 * @see #getFunctionDeclaration()
@@ -3326,7 +3579,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getReturnType <em>Return Type</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getReturnType()
 	 * @see #getFunctionDeclaration()
@@ -3337,10 +3591,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getName <em>Name</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration#getName()
 	 * @see #getFunctionDeclaration()
@@ -3352,7 +3605,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition <em>Precondition</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Precondition</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition
 	 * @generated
@@ -3363,7 +3617,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition <em>Postcondition</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Postcondition</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition
 	 * @generated
@@ -3374,7 +3629,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Greater <em>Greater</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Greater</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Greater
 	 * @generated
@@ -3385,7 +3641,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual <em>Greater Or Equal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Greater Or Equal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual
 	 * @generated
@@ -3396,7 +3653,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Implication <em>Implication</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Implication</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Implication
 	 * @generated
@@ -3407,7 +3665,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral <em>Integer Literal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer Literal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral
 	 * @generated
@@ -3417,10 +3676,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the attribute '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral#getValue <em>Value</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the attribute '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral#getValue()
 	 * @see #getIntegerLiteral()
@@ -3432,7 +3690,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType <em>Integer Type</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Integer Type</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType
 	 * @generated
@@ -3443,7 +3702,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant <em>Invariant</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Invariant</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant
 	 * @generated
@@ -3454,7 +3714,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Less <em>Less</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Less</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Less
 	 * @generated
@@ -3465,7 +3726,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual <em>Less Or Equal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Less Or Equal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual
 	 * @generated
@@ -3476,7 +3738,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop <em>Loop</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Loop</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop
 	 * @generated
@@ -3486,10 +3749,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getCondition <em>Condition</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Condition</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getCondition()
 	 * @see #getLoop()
@@ -3501,8 +3763,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Body</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getBody()
 	 * @see #getLoop()
@@ -3513,10 +3775,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getInvariants <em>Invariants</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getInvariants <em>Invariants</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Invariants</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop#getInvariants()
 	 * @see #getLoop()
@@ -3528,7 +3789,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Minus <em>Minus</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Minus</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Minus
 	 * @generated
@@ -3539,7 +3801,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Sign <em>Sign</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Sign</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Sign
 	 * @generated
@@ -3550,7 +3813,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus <em>Modulus</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Modulus</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus
 	 * @generated
@@ -3561,7 +3825,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication <em>Multiplication</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Multiplication</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication
 	 * @generated
@@ -3572,7 +3837,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Negation <em>Negation</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Negation</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Negation
 	 * @generated
@@ -3583,7 +3849,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Plus <em>Plus</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Plus</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Plus
 	 * @generated
@@ -3594,7 +3861,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement <em>Return Statement</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Return Statement</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement
 	 * @generated
@@ -3605,7 +3873,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue <em>Return Value</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Value</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement#getReturnValue()
 	 * @see #getReturnStatement()
@@ -3630,7 +3899,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Subtraction</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction
 	 * @generated
@@ -3641,7 +3911,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal <em>Unequal</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Unequal</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal
 	 * @generated
@@ -3652,7 +3923,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference <em>Variable Reference</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Variable Reference</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference
 	 * @generated
@@ -3662,10 +3934,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for the reference '
-	 * {@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getVariable <em>Variable</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for the reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getVariable <em>Variable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Variable</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference#getVariable()
 	 * @see #getVariableReference()
@@ -3677,7 +3948,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Statement</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Statement
 	 * @generated
@@ -3688,7 +3960,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference <em>Return Value Reference</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Return Value Reference</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference
 	 * @generated
@@ -3737,7 +4010,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Expression Evaluation</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation
 	 * @generated
@@ -3748,7 +4022,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation#getExpression <em>Expression</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation#getExpression()
 	 * @see #getExpressionEvaluation()
@@ -3760,7 +4035,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction <em>Array Function</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Array Function</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction
 	 * @generated
@@ -3771,7 +4047,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getChainedFunction <em>Chained Function</em>}'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Chained Function</em>'.
 	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction#getChainedFunction()
 	 * @see #getArrayFunction()
@@ -3846,9 +4123,9 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Expression To Expression Map</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>Expression To Expression Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Expression To Expression Map</em>'.
 	 * @see java.util.Map.Entry
 	 * @model keyType="edu.kit.iti.formal.pse.worthwhile.model.ast.Expression"
@@ -3874,8 +4151,8 @@ public class AstPackage extends EPackageImpl {
 
 	/**
 	 * Returns the meta object for the reference '{@link java.util.Map.Entry <em>Value</em>}'.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Value</em>'.
 	 * @see java.util.Map.Entry
 	 * @see #getExpressionToExpressionMap()
@@ -3898,8 +4175,98 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression <em>Ternary Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ternary Expression</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression
+	 * @generated
+	 */
+	public EClass getTernaryExpression() {
+		return ternaryExpressionEClass;
+	}
+
+	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression#getWhenTrue <em>When True</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>When True</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression#getWhenTrue()
+	 * @see #getTernaryExpression()
+	 * @generated
+	 */
+	public EReference getTernaryExpression_WhenTrue() {
+		return (EReference) ternaryExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression#getWhenFalse <em>When False</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>When False</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression#getWhenFalse()
+	 * @see #getTernaryExpression()
+	 * @generated
+	 */
+	public EReference getTernaryExpression_WhenFalse() {
+		return (EReference) ternaryExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression#getCondition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Condition</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression#getCondition()
+	 * @see #getTernaryExpression()
+	 * @generated
+	 */
+	public EReference getTernaryExpression_Condition() {
+		return (EReference) ternaryExpressionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * Returns the meta object for class '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression <em>Let Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Let Expression</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression
+	 * @generated
+	 */
+	public EClass getLetExpression() {
+		return letExpressionEClass;
+	}
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getParameters <em>Parameters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getParameters()
+	 * @see #getLetExpression()
+	 * @generated
+	 */
+	public EReference getLetExpression_Parameters() {
+		return (EReference) letExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * Returns the meta object for the containment reference '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression#getExpression()
+	 * @see #getLetExpression()
+	 * @generated
+	 */
+	public EReference getLetExpression_Expression() {
+		return (EReference) letExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
 	 * Returns the factory that creates the instances of the model.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @return the factory that creates the instances of the model.
 	 * @generated
 	 */
@@ -3908,7 +4275,8 @@ public class AstPackage extends EPackageImpl {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isCreated = false;
@@ -3916,7 +4284,8 @@ public class AstPackage extends EPackageImpl {
 	/**
 	 * Creates the meta-model objects for the package.  This method is
 	 * guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void createPackageContents() {
@@ -4100,10 +4469,20 @@ public class AstPackage extends EPackageImpl {
 		createEReference(expressionToExpressionMapEClass, EXPRESSION_TO_EXPRESSION_MAP__VALUE);
 
 		functionAnnotationEClass = createEClass(FUNCTION_ANNOTATION);
+
+		ternaryExpressionEClass = createEClass(TERNARY_EXPRESSION);
+		createEReference(ternaryExpressionEClass, TERNARY_EXPRESSION__WHEN_TRUE);
+		createEReference(ternaryExpressionEClass, TERNARY_EXPRESSION__WHEN_FALSE);
+		createEReference(ternaryExpressionEClass, TERNARY_EXPRESSION__CONDITION);
+
+		letExpressionEClass = createEClass(LET_EXPRESSION);
+		createEReference(letExpressionEClass, LET_EXPRESSION__PARAMETERS);
+		createEReference(letExpressionEClass, LET_EXPRESSION__EXPRESSION);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	private boolean isInitialized = false;
@@ -4111,7 +4490,8 @@ public class AstPackage extends EPackageImpl {
 	/**
 	 * Complete the initialization of the package and its meta-model.  This
 	 * method is guarded to have no affect on any invocation but its first.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void initializePackageContents() {
@@ -4197,6 +4577,8 @@ public class AstPackage extends EPackageImpl {
 		arrayFunctionEClass.getESuperTypes().add(this.getLiteral());
 		arrayAccessEClass.getESuperTypes().add(this.getExpression());
 		functionAnnotationEClass.getESuperTypes().add(this.getAnnotation());
+		ternaryExpressionEClass.getESuperTypes().add(this.getExpression());
+		letExpressionEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(programEClass, Program.class, "Program", !IS_ABSTRACT, !IS_INTERFACE,
@@ -4344,7 +4726,7 @@ public class AstPackage extends EPackageImpl {
 
 		initEClass(variableDeclarationEClass, VariableDeclaration.class, "VariableDeclaration", !IS_ABSTRACT,
 		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableDeclaration_Type(), this.getType(), null, "type", null, 1, 1,
+		initEReference(getVariableDeclaration_Type(), this.getType(), null, "type", null, 0, 1,
 		                VariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getVariableDeclaration_InitialValue(), this.getExpression(), null, "initialValue", null,
@@ -4715,17 +5097,45 @@ public class AstPackage extends EPackageImpl {
 		op = addEOperation(functionAnnotationEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEClass(ternaryExpressionEClass, TernaryExpression.class, "TernaryExpression", !IS_ABSTRACT,
+		                !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTernaryExpression_WhenTrue(), this.getExpression(), null, "whenTrue", null, 1, 1,
+		                TernaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTernaryExpression_WhenFalse(), this.getExpression(), null, "whenFalse", null, 1, 1,
+		                TernaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTernaryExpression_Condition(), this.getExpression(), null, "condition", null, 1, 1,
+		                TernaryExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		op = addEOperation(ternaryExpressionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(letExpressionEClass, LetExpression.class, "LetExpression", !IS_ABSTRACT, !IS_INTERFACE,
+		                IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLetExpression_Parameters(), this.getVariableDeclaration(), null, "parameters", null,
+		                0, -1, LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getLetExpression_Expression(), this.getExpression(), null, "expression", null, 1, 1,
+		                LetExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+		                !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		op = addEOperation(letExpressionEClass, null, "accept", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theVisitorPackage.getIASTNodeVisitor(), "visitor", 1, 1, IS_UNIQUE, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
 	}
 
 	/**
-	 * <!-- begin-user-doc --> Defines literals for the meta objects that represent
+	 * <!-- begin-user-doc -->
+	 * Defines literals for the meta objects that represent
 	 * <ul>
-	 * <li>each class,</li>
-	 * <li>each feature of each class,</li>
-	 * <li>each enum,</li>
-	 * <li>and each data type</li>
+	 *   <li>each class,</li>
+	 *   <li>each feature of each class,</li>
+	 *   <li>each enum,</li>
+	 *   <li>and each data type</li>
 	 * </ul>
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -4733,7 +5143,8 @@ public class AstPackage extends EPackageImpl {
 	public interface Literals {
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Program <em>Program</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Program
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getProgram()
 		 * @generated
@@ -4742,31 +5153,33 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '<em><b>Function Declarations</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference PROGRAM__FUNCTION_DECLARATIONS = eINSTANCE
 		                .getProgram_FunctionDeclarations();
 
 		/**
-		 * The meta object literal for the '<em><b>Main Block</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Main Block</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference PROGRAM__MAIN_BLOCK = eINSTANCE.getProgram_MainBlock();
 
 		/**
-		 * The meta object literal for the '<em><b>Axioms</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Axioms</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference PROGRAM__AXIOMS = eINSTANCE.getProgram_Axioms();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode <em>AST Node</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getASTNode()
 		 * @generated
@@ -4775,7 +5188,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Addition <em>Addition</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Addition
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAddition()
 		 * @generated
@@ -4784,7 +5198,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression <em>Binary Expression</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BinaryExpression
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBinaryExpression()
 		 * @generated
@@ -4792,24 +5207,25 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass BINARY_EXPRESSION = eINSTANCE.getBinaryExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference BINARY_EXPRESSION__LEFT = eINSTANCE.getBinaryExpression_Left();
 
 		/**
-		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference BINARY_EXPRESSION__RIGHT = eINSTANCE.getBinaryExpression_Right();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Expression <em>Expression</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Expression
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpression()
 		 * @generated
@@ -4818,7 +5234,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression <em>Unary Expression</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.UnaryExpression
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getUnaryExpression()
 		 * @generated
@@ -4826,16 +5243,17 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass UNARY_EXPRESSION = eINSTANCE.getUnaryExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Operand</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference UNARY_EXPRESSION__OPERAND = eINSTANCE.getUnaryExpression_Operand();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral <em>Array Literal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayLiteral
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayLiteral()
 		 * @generated
@@ -4843,16 +5261,17 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass ARRAY_LITERAL = eINSTANCE.getArrayLiteral();
 
 		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference ARRAY_LITERAL__VALUES = eINSTANCE.getArrayLiteral_Values();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Literal <em>Literal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Literal
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLiteral()
 		 * @generated
@@ -4861,7 +5280,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType <em>Array Type</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayType
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayType()
 		 * @generated
@@ -4869,16 +5289,17 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass ARRAY_TYPE = eINSTANCE.getArrayType();
 
 		/**
-		 * The meta object literal for the '<em><b>Base Type</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Base Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference ARRAY_TYPE__BASE_TYPE = eINSTANCE.getArrayType_BaseType();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Type <em>Type</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Type
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getType()
 		 * @generated
@@ -4887,7 +5308,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType <em>Primitive Type</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.PrimitiveType
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPrimitiveType()
 		 * @generated
@@ -4896,7 +5318,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion <em>Assertion</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assertion
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssertion()
 		 * @generated
@@ -4954,7 +5377,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation <em>Annotation</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Annotation
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAnnotation()
 		 * @generated
@@ -4962,16 +5386,17 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass ANNOTATION = eINSTANCE.getAnnotation();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference ANNOTATION__EXPRESSION = eINSTANCE.getAnnotation_Expression();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment <em>Assignment</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assignment
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssignment()
 		 * @generated
@@ -4979,24 +5404,25 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass ASSIGNMENT = eINSTANCE.getAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference ASSIGNMENT__VALUE = eINSTANCE.getAssignment_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Variable</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference ASSIGNMENT__VARIABLE = eINSTANCE.getAssignment_Variable();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration <em>Variable Declaration</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableDeclaration
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableDeclaration()
 		 * @generated
@@ -5004,17 +5430,17 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass VARIABLE_DECLARATION = eINSTANCE.getVariableDeclaration();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference VARIABLE_DECLARATION__TYPE = eINSTANCE.getVariableDeclaration_Type();
 
 		/**
-		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference VARIABLE_DECLARATION__INITIAL_VALUE = eINSTANCE
@@ -5030,7 +5456,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption <em>Assumption</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Assumption
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAssumption()
 		 * @generated
@@ -5039,7 +5466,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom <em>Axiom</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Axiom
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getAxiom()
 		 * @generated
@@ -5048,7 +5476,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Block <em>Block</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Block
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBlock()
 		 * @generated
@@ -5056,16 +5485,17 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass BLOCK = eINSTANCE.getBlock();
 
 		/**
-		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference BLOCK__STATEMENTS = eINSTANCE.getBlock_Statements();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral <em>Boolean Literal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanLiteral
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBooleanLiteral()
 		 * @generated
@@ -5082,7 +5512,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType <em>Boolean Type</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.BooleanType
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getBooleanType()
 		 * @generated
@@ -5091,7 +5522,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional <em>Conditional</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conditional
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getConditional()
 		 * @generated
@@ -5099,32 +5531,33 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass CONDITIONAL = eINSTANCE.getConditional();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference CONDITIONAL__CONDITION = eINSTANCE.getConditional_Condition();
 
 		/**
-		 * The meta object literal for the '<em><b>True Block</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>True Block</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference CONDITIONAL__TRUE_BLOCK = eINSTANCE.getConditional_TrueBlock();
 
 		/**
-		 * The meta object literal for the '<em><b>False Block</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>False Block</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference CONDITIONAL__FALSE_BLOCK = eINSTANCE.getConditional_FalseBlock();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction <em>Conjunction</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Conjunction
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getConjunction()
 		 * @generated
@@ -5133,7 +5566,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction <em>Disjunction</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Disjunction
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getDisjunction()
 		 * @generated
@@ -5142,7 +5576,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Division <em>Division</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Division
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getDivision()
 		 * @generated
@@ -5151,7 +5586,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equal <em>Equal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equal
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getEqual()
 		 * @generated
@@ -5160,7 +5596,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence <em>Equivalence</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Equivalence
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getEquivalence()
 		 * @generated
@@ -5169,7 +5606,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier <em>Exists Quantifier</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExistsQuantifier
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExistsQuantifier()
 		 * @generated
@@ -5178,7 +5616,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression <em>Quantified Expression</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.QuantifiedExpression
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getQuantifiedExpression()
 		 * @generated
@@ -5186,27 +5625,27 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass QUANTIFIED_EXPRESSION = eINSTANCE.getQuantifiedExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameter</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Parameter</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference QUANTIFIED_EXPRESSION__PARAMETER = eINSTANCE
 		                .getQuantifiedExpression_Parameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference QUANTIFIED_EXPRESSION__EXPRESSION = eINSTANCE
 		                .getQuantifiedExpression_Expression();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference QUANTIFIED_EXPRESSION__CONDITION = eINSTANCE
@@ -5214,7 +5653,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier <em>For All Quantifier</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ForAllQuantifier
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getForAllQuantifier()
 		 * @generated
@@ -5223,7 +5663,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall <em>Function Call</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionCall
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionCall()
 		 * @generated
@@ -5231,9 +5672,9 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass FUNCTION_CALL = eINSTANCE.getFunctionCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Actuals</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Actuals</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference FUNCTION_CALL__ACTUALS = eINSTANCE.getFunctionCall_Actuals();
@@ -5248,7 +5689,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration <em>Function Declaration</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.FunctionDeclaration
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getFunctionDeclaration()
 		 * @generated
@@ -5257,7 +5699,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '<em><b>Preconditions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference FUNCTION_DECLARATION__PRECONDITIONS = eINSTANCE
@@ -5265,33 +5708,34 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '<em><b>Postconditions</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference FUNCTION_DECLARATION__POSTCONDITIONS = eINSTANCE
 		                .getFunctionDeclaration_Postconditions();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference FUNCTION_DECLARATION__PARAMETERS = eINSTANCE
 		                .getFunctionDeclaration_Parameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference FUNCTION_DECLARATION__BODY = eINSTANCE.getFunctionDeclaration_Body();
 
 		/**
-		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference FUNCTION_DECLARATION__RETURN_TYPE = eINSTANCE
@@ -5307,7 +5751,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition <em>Precondition</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Precondition
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPrecondition()
 		 * @generated
@@ -5316,7 +5761,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition <em>Postcondition</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Postcondition
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPostcondition()
 		 * @generated
@@ -5325,7 +5771,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Greater <em>Greater</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Greater
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGreater()
 		 * @generated
@@ -5334,7 +5781,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual <em>Greater Or Equal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.GreaterOrEqual
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getGreaterOrEqual()
 		 * @generated
@@ -5343,7 +5791,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Implication <em>Implication</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Implication
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getImplication()
 		 * @generated
@@ -5352,7 +5801,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral <em>Integer Literal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerLiteral
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getIntegerLiteral()
 		 * @generated
@@ -5369,7 +5819,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType <em>Integer Type</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.IntegerType
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getIntegerType()
 		 * @generated
@@ -5378,7 +5829,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant <em>Invariant</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Invariant
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getInvariant()
 		 * @generated
@@ -5387,7 +5839,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Less <em>Less</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Less
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLess()
 		 * @generated
@@ -5396,7 +5849,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual <em>Less Or Equal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LessOrEqual
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLessOrEqual()
 		 * @generated
@@ -5405,7 +5859,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Loop <em>Loop</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Loop
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLoop()
 		 * @generated
@@ -5413,32 +5868,33 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass LOOP = eINSTANCE.getLoop();
 
 		/**
-		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference LOOP__CONDITION = eINSTANCE.getLoop_Condition();
 
 		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference LOOP__BODY = eINSTANCE.getLoop_Body();
 
 		/**
-		 * The meta object literal for the '<em><b>Invariants</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Invariants</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference LOOP__INVARIANTS = eINSTANCE.getLoop_Invariants();
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Minus <em>Minus</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Minus
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMinus()
 		 * @generated
@@ -5447,7 +5903,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Sign <em>Sign</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Sign
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSign()
 		 * @generated
@@ -5456,7 +5913,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus <em>Modulus</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Modulus
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getModulus()
 		 * @generated
@@ -5465,7 +5923,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication <em>Multiplication</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Multiplication
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getMultiplication()
 		 * @generated
@@ -5474,7 +5933,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Negation <em>Negation</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Negation
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getNegation()
 		 * @generated
@@ -5483,7 +5943,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Plus <em>Plus</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Plus
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getPlus()
 		 * @generated
@@ -5492,7 +5953,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement <em>Return Statement</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnStatement
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnStatement()
 		 * @generated
@@ -5500,9 +5962,9 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass RETURN_STATEMENT = eINSTANCE.getReturnStatement();
 
 		/**
-		 * The meta object literal for the '<em><b>Return Value</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Return Value</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference RETURN_STATEMENT__RETURN_VALUE = eINSTANCE
@@ -5518,7 +5980,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction <em>Subtraction</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Subtraction
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getSubtraction()
 		 * @generated
@@ -5527,7 +5990,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal <em>Unequal</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Unequal
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getUnequal()
 		 * @generated
@@ -5536,7 +6000,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference <em>Variable Reference</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.VariableReference
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getVariableReference()
 		 * @generated
@@ -5553,7 +6018,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.Statement <em>Statement</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.Statement
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getStatement()
 		 * @generated
@@ -5562,7 +6028,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference <em>Return Value Reference</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ReturnValueReference
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getReturnValueReference()
 		 * @generated
@@ -5598,7 +6065,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation <em>Expression Evaluation</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionEvaluation
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionEvaluation()
 		 * @generated
@@ -5606,9 +6074,9 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass EXPRESSION_EVALUATION = eINSTANCE.getExpressionEvaluation();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference EXPRESSION_EVALUATION__EXPRESSION = eINSTANCE
@@ -5616,7 +6084,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction <em>Array Function</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ArrayFunction
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getArrayFunction()
 		 * @generated
@@ -5624,9 +6093,9 @@ public class AstPackage extends EPackageImpl {
 		public static final EClass ARRAY_FUNCTION = eINSTANCE.getArrayFunction();
 
 		/**
-		 * The meta object literal for the '<em><b>Chained Function</b></em>' reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
+		 * The meta object literal for the '<em><b>Chained Function</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference ARRAY_FUNCTION__CHAINED_FUNCTION = eINSTANCE
@@ -5676,7 +6145,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionToExpressionMap <em>Expression To Expression Map</em>}' class.
-		 * <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.ExpressionToExpressionMap
 		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getExpressionToExpressionMap()
 		 * @generated
@@ -5685,8 +6155,8 @@ public class AstPackage extends EPackageImpl {
 
 		/**
 		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
-		 * <!-- begin-user-doc --> <!--
-		 * end-user-doc -->
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		public static final EReference EXPRESSION_TO_EXPRESSION_MAP__KEY = eINSTANCE
@@ -5711,6 +6181,69 @@ public class AstPackage extends EPackageImpl {
 		 */
 		public static final EClass FUNCTION_ANNOTATION = eINSTANCE.getFunctionAnnotation();
 
+		/**
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression <em>Ternary Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.TernaryExpression
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getTernaryExpression()
+		 * @generated
+		 */
+		public static final EClass TERNARY_EXPRESSION = eINSTANCE.getTernaryExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>When True</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference TERNARY_EXPRESSION__WHEN_TRUE = eINSTANCE
+		                .getTernaryExpression_WhenTrue();
+
+		/**
+		 * The meta object literal for the '<em><b>When False</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference TERNARY_EXPRESSION__WHEN_FALSE = eINSTANCE
+		                .getTernaryExpression_WhenFalse();
+
+		/**
+		 * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference TERNARY_EXPRESSION__CONDITION = eINSTANCE
+		                .getTernaryExpression_Condition();
+
+		/**
+		 * The meta object literal for the '{@link edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression <em>Let Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.LetExpression
+		 * @see edu.kit.iti.formal.pse.worthwhile.model.ast.AstPackage#getLetExpression()
+		 * @generated
+		 */
+		public static final EClass LET_EXPRESSION = eINSTANCE.getLetExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference LET_EXPRESSION__PARAMETERS = eINSTANCE.getLetExpression_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference LET_EXPRESSION__EXPRESSION = eINSTANCE.getLetExpression_Expression();
+
 	}
 
-} // AstPackage
+} //AstPackage

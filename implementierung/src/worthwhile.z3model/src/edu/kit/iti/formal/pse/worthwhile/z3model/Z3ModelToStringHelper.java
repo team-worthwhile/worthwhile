@@ -2,6 +2,8 @@ package edu.kit.iti.formal.pse.worthwhile.z3model;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.ASTNode;
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Block;
@@ -79,22 +81,39 @@ public class Z3ModelToStringHelper extends AstNodeToStringHelper {
 	 * @return A nice user-visible name.
 	 */
 	private final String getFunctionDeclarationDisplayName(final FunctionDeclaration functionDeclaration) {
-		String[] nameParts = this.getFunctionDeclarationNameParts(functionDeclaration);
+		String namePart = "";
+		String numberPart = "";
+
+		if (functionDeclaration.getName().startsWith("$")) {
+			// Function declaration references a function return value.
+			Matcher matcher = Pattern.compile("\\$([^@]+)@([0-9]+)@([0-9]+)!([0-9!]+)").matcher(
+			                functionDeclaration.getName());
+			if (matcher.find()) {
+				namePart = "<Call of " + matcher.group(1) + " at line " + matcher.group(2) + " column "
+				                + matcher.group(3) + ">";
+				numberPart = matcher.group(4);
+			}
+		} else {
+			String[] nameParts = this.getFunctionDeclarationNameParts(functionDeclaration);
+			namePart = nameParts[0];
+			numberPart = nameParts[1];
+		}
+
 		Program program = (Program) functionDeclaration.eContainer();
 
 		boolean showNumberPart = false;
 
 		for (FunctionDeclaration funcdec : program.getFunctionDeclarations()) {
 			if (funcdec != functionDeclaration
-			                && this.getFunctionDeclarationNameParts(funcdec)[0].equals(nameParts[0])) {
+			                && this.getFunctionDeclarationNameParts(funcdec)[0].equals(namePart)) {
 				showNumberPart = true;
 			}
 		}
 
 		if (showNumberPart) {
-			return nameParts[0] + "<" + nameParts[1] + ">";
+			return namePart + "<" + numberPart + ">";
 		} else {
-			return nameParts[0];
+			return namePart;
 		}
 	}
 

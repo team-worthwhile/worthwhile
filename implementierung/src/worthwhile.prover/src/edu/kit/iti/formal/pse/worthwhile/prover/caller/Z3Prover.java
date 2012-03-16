@@ -6,6 +6,7 @@ import java.util.List;
 
 import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
 import edu.kit.iti.formal.pse.worthwhile.z3model.Z3ModelParser;
+import edu.kit.iti.formal.pse.worthwhile.z3model.Z3ModelTransformer;
 
 /**
  * Caller for the Z3 Prover by Microsoft Research.
@@ -58,6 +59,7 @@ public class Z3Prover extends StdProver {
 			String modelString = output.substring(output.indexOf("(model"));
 			try {
 	                        Program program = Z3ModelParser.parseExpressionString(modelString);
+	                        program.accept(new Z3ModelTransformer());
 	                        return new Z3ProverResult(output, program);
                         } catch (ParseException e) {
 	                        e.printStackTrace();

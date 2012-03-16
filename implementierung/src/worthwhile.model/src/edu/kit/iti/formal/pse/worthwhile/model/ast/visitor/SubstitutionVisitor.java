@@ -164,7 +164,9 @@ public class SubstitutionVisitor<T extends Expression> extends HierarchialASTNod
 			f.accept(this);
 		}
 
-		program.getMainBlock().accept(this);
+		if (program.getMainBlock() != null) {
+			program.getMainBlock().accept(this);
+		}
 	}
 
 	@Override

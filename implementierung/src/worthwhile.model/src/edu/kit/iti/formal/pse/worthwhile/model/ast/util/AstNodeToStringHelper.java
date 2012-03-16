@@ -138,6 +138,10 @@ public class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 	 *                The current node
 	 */
 	private void parenthesize(final ASTNode parentNode, final ASTNode childNode) {
+		if (parentNode == null || childNode == null) {
+			return;
+		}
+
 		OperatorHierarchyVisitor hierarchyVisitor = new OperatorHierarchyVisitor();
 		int currentPositionInHierarchy = hierarchyVisitor.apply(parentNode);
 		int childPositionInHierarchy = hierarchyVisitor.apply(childNode);
@@ -220,7 +224,9 @@ public class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 
 	@Override
 	public void visit(final ArrayAccess arrayAccess) {
-		arrayAccess.getArray().accept(this);
+		if (arrayAccess.getArray() != null) {
+			arrayAccess.getArray().accept(this);
+		}
 
 		if (arrayAccess.getIndex() != null) {
 			this.buf.append("[");

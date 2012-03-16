@@ -349,7 +349,9 @@ public final class AstNodeToStringHelper extends HierarchialASTNodeVisitor {
 			f.accept(this);
 		}
 
-		program.getMainBlock().accept(this);
+		if (program.getMainBlock() != null) {
+			program.getMainBlock().accept(this);
+		}
 	}
 
 	@Override

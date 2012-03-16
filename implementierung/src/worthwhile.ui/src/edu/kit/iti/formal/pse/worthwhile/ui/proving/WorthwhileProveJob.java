@@ -1,5 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.ui.proving;
 
+import java.text.ParseException;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.jobs.Job;
@@ -18,6 +20,8 @@ import edu.kit.iti.formal.pse.worthwhile.prover.IProverEventListener;
 import edu.kit.iti.formal.pse.worthwhile.prover.SpecificationChecker;
 import edu.kit.iti.formal.pse.worthwhile.prover.Validity;
 import edu.kit.iti.formal.pse.worthwhile.prover.caller.ProverResult;
+import edu.kit.iti.formal.pse.worthwhile.z3model.Z3ModelParser;
+import edu.kit.iti.formal.pse.worthwhile.z3model.Z3ModelToStringHelper;
 
 /**
  * A job for proving a program.
@@ -104,6 +108,17 @@ public class WorthwhileProveJob extends Job implements IProverEventListener {
 		String tooltipString = formulaString
 		                + "\n\nProof attempt for the calculated formula resulted in Validity "
 		                + validity.toString() + "\n\n" + "Prover output was:\n" + proverResult.getOutput();
+		
+		if (proverResult.getOutput().contains("(model")) {
+			String modelString = proverResult.getOutput().substring(proverResult.getOutput().indexOf("(model"));
+			try {
+				Program program = Z3ModelParser.parseExpressionString(modelString);
+				tooltipString += "\n" + Z3ModelToStringHelper.toString(program);
+			} catch (ParseException e) {
+				tooltipString += "\nError parsing the model: " + e.getMessage(); 
+			}
+		}
+		
 		return tooltipString;
 	}
 

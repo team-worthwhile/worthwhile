@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: edu.kit.iti.formal.pse.worthwhile.z3model
+Bundle-Vendor: Team Worthwhile
+Bundle-Version: 0.1.0
+Bundle-SymbolicName: edu.kit.iti.formal.pse.worthwhile.z3model;singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
+ org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
+ org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional;visibility:=reexport,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe2.launch;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.antlr.runtime,
+ edu.kit.iti.formal.pse.worthwhile.model;bundle-version="0.1.0"
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .,junit-4.10.jar,hamcrest-core-1.1.jar,ant-antlr.jar,ant-apache-bcel.jar,ant-apache-bsf.jar,ant-apache-log4j.jar,ant-apache-oro.jar,ant-apache-regexp.jar,ant-apache-resolver.jar,ant-apache-xalan2.jar,ant-commons-logging.jar,ant-commons-net.jar,ant-jai.jar,ant-javamail.jar,ant-jdepend.jar,ant-jmf.jar,ant-jsch.jar,ant-junit.jar,ant-junit4.jar,ant-launcher.jar,ant-netrexx.jar,ant-swing.jar,ant-testutil.jar,ant.jar,jdi.jar,jdimodel.jar
+Export-Package: edu.kit.iti.formal.pse.worthwhile.z3model,
+ edu.kit.iti.formal.pse.worthwhile.z3model.services,
+ edu.kit.iti.formal.pse.worthwhile.z3model.parseTreeConstruction,
+ edu.kit.iti.formal.pse.worthwhile.z3model.parser.antlr,
+ edu.kit.iti.formal.pse.worthwhile.z3model.parser.antlr.internal,
+ edu.kit.iti.formal.pse.worthwhile.z3model.validation

@@ -1,0 +1,119 @@
+grammar edu.kit.iti.formal.pse.worthwhile.z3model.Z3Model with org.eclipse.xtext.common.Terminals
+
+import "platform:/resource/edu.kit.iti.formal.pse.worthwhile.model/model/Worthwhile.ecore#//kit/iti/formal/pse/worthwhile/model/ast"
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Program returns Program:
+	{Program} "(" "model"
+		(functionDeclarations+=FunctionDeclaration)*
+	")"
+;
+
+// A number can be any non-negative integer.
+terminal NUMBER returns ecore::EBigInteger:
+ 	('0'..'9')+
+;
+
+// We are using the terminal NUMBER instead of INT, so we have to redefine INT because it matches the same pattern as NUMBER.
+// Else the parser will throw an error.
+terminal INT returns ecore::EInt:
+	'%%% DONT USE THIS ANYMORE %%%'
+;
+
+// BOOL matches a boolean value. 
+terminal BOOL returns ecore::EBoolean:
+	'true' | 'false'
+;
+
+FunctionDeclaration returns FunctionDeclaration:
+	"(" "define-fun" name=ID "(" (parameters+=Parameter)* ")" returnType=Type body=Block ")"
+;
+
+Block returns Block:
+	(statements+=Statement)+
+;
+
+Statement returns Statement:
+	ReturnStatement
+;
+
+ReturnStatement returns ReturnStatement:
+	returnValue=Expression
+;
+
+Parameter returns VariableDeclaration:
+	"(" name=ID type=Type ")"
+;
+
+Type returns Type:
+	PrimitiveType | ArrayType
+;
+
+PrimitiveType returns PrimitiveType:
+	{IntegerType} 'Int' | {BooleanType} 'Bool'	
+;
+
+ArrayType returns ArrayType:
+	{ArrayType} "(" "Array" "Int" baseType=PrimitiveType ")"
+;
+
+Expression returns Expression:
+  Atomic | SExpression
+;
+	
+SExpression returns Expression:
+    "("
+    	(UnaryExpression | BinaryExpression | TernaryExpression )
+    ")"
+;
+
+UnaryExpression returns UnaryExpression:
+	({Plus} "+" | {Minus} "-" | {Negation} "!")
+	operand=Expression
+;
+
+BinaryExpression returns BinaryExpression:
+	({Equivalence} "iff" | {Implication} "=>"  
+		| {Disjunction} "or" | {Conjunction} "and" 
+		| {Equal} "=" | {Less} "<" | {LessOrEqual} "<=" | {GreaterOrEqual} ">=" | {Greater} ">" 
+		| {Addition} "+" | {Subtraction} "-" 
+		| {Multiplication} "*" | {Division} "/" | {Modulus} "%"
+	)
+	
+	left=Expression
+	right=Expression
+;
+
+TernaryExpression returns TernaryExpression:
+	"ite" condition=Expression whenTrue=Expression whenFalse=Expression
+;
+
+ArrayFunction returns FunctionCall:
+	"(" "_" "as-array" function=[FunctionDeclaration] ")"
+;
+
+LetExpression returns LetExpression:
+	"(" "let" "(" (parameters+=LetParameter)+ ")" expression=Expression ")"
+;
+
+LetParameter returns VariableDeclaration:
+	"(" name=ID initialValue=Expression ")"
+;
+
+Atomic returns Expression:
+	{IntegerLiteral} value=NUMBER | {BooleanLiteral} value=BOOL | VariableReference | FunctionCall | ArrayFunction | LetExpression
+;
+
+VariableReference:
+	variable=[VariableDeclaration]
+;
+
+FunctionCall:
+	"(" function=[FunctionDeclaration] (actuals+=Expression)* ")"
+;
+
+// Override the ID terminal rule to allow some special characters in IDs   
+terminal ID :
+	'^'?('a'..'z'|'A'..'Z'|'_'|'$'|'@'|'!') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'$'|'@'|'!')*
+;

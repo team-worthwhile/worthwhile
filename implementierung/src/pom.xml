@@ -11,8 +11,10 @@
         <module>worthwhile</module>
 	<module>worthwhile.expressions</module>
         <module>worthwhile.model</module>
+	<module>worthwhile.z3model</module>
 	<module>worthwhile.ui</module>
         <module>worthwhile.expressions.ui</module>
+	<module>worthwhile.z3model.ui</module>
         <module>worthwhile.debugger</module>
         <module>worthwhile.interpreter</module>
         <module>worthwhile.prover</module>
@@ -113,6 +115,9 @@
 			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/expressions/WorthwhileExpressions.xmi</sourceInclude>
 			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/expressions/parser/antlr/internal/InternalWorthwhileExpressions.tokens</sourceInclude>
 			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/expressions/parser/antlr/internal/InternalWorthwhileExpressions.g</sourceInclude>
+			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/z3model/Z3Model.xmi</sourceInclude>
+			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/z3model/parser/antlr/internal/InternalZ3Model.tokens</sourceInclude>
+			<sourceInclude>edu/kit/iti/formal/pse/worthwhile/z3model/parser/antlr/internal/InternalZ3Model.g</sourceInclude>
                     </sourceIncludes>
                 </configuration>
             </plugin>

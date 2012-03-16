@@ -58,6 +58,8 @@ PSE am KIT im WS 2011
       <plugin id="edu.kit.iti.formal.pse.worthwhile.product"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.prover"/>
       <plugin id="edu.kit.iti.formal.pse.worthwhile.ui"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.z3model"/>
+      <plugin id="edu.kit.iti.formal.pse.worthwhile.z3model.ui"/>
       <plugin id="javax.servlet"/>
       <plugin id="javax.servlet.jsp"/>
       <plugin id="org.antlr.runtime"/>

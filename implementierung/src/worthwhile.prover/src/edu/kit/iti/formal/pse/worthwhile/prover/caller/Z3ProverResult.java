@@ -1,5 +1,7 @@
 package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+
 /**
  * Represents a prover result returned by the Z3 Prover.
  */
@@ -13,6 +15,18 @@ public class Z3ProverResult extends ProverResult {
 	 */
 	protected Z3ProverResult(final String output) {
 		super(output);
+	}
+
+	/**
+	 * Construct a new {@link Z3ProverResult} from the given prover output.
+	 * 
+	 * @param output
+	 *                the output to interpret as a result
+	 * @param model
+	 *                The generated model.
+	 */
+	protected Z3ProverResult(final String output, final Program model) {
+		super(output, model);
 	}
 
 	@Override

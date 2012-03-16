@@ -1,7 +1,11 @@
 package edu.kit.iti.formal.pse.worthwhile.prover.caller;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
+
+import edu.kit.iti.formal.pse.worthwhile.model.ast.Program;
+import edu.kit.iti.formal.pse.worthwhile.z3model.Z3ModelParser;
 
 /**
  * Caller for the Z3 Prover by Microsoft Research.
@@ -49,6 +53,18 @@ public class Z3Prover extends StdProver {
 
 	@Override
 	public final ProverResult getResult(final String output) {
-		return new Z3ProverResult(output);
+		// Get the generated model from the output, if available
+		if (output.contains("(model")) {
+			String modelString = output.substring(output.indexOf("(model"));
+			try {
+	                        Program program = Z3ModelParser.parseExpressionString(modelString);
+	                        return new Z3ProverResult(output, program);
+                        } catch (ParseException e) {
+	                        e.printStackTrace();
+	                        return new Z3ProverResult(output);
+                        }
+		} else {
+			return new Z3ProverResult(output);
+		}
 	}
 }
